@@ -69,7 +69,7 @@ p { margin: 0; }
 .emo { font-family: var(--f-emoji); font-size: 1.05em; line-height: 1; }
 
 .flag { display: inline-flex; flex: 0 0 auto; border-radius: 4px; overflow: hidden; box-shadow: 0 0 0 1px var(--line); vertical-align: middle; }
-.flag svg { display: block; width: 100%; height: 100%; }
+.flag svg, .flag img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
 header.top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; }
 header.top h1 { font-size: clamp(34px, 5vw, 52px); font-weight: 800; letter-spacing: -.02em; }
@@ -238,6 +238,9 @@ button, select { font: inherit; color: var(--ink); }
 .hist-none { grid-column: 1 / -1; font-size: 13px; color: var(--muted); }
 .wrap { grid-template-columns: minmax(0, 1fr); }
 .pickers select { max-width: min(220px, 40vw); text-overflow: ellipsis; }
+.ar-dia { display: grid; gap: 8px; }
+.ar-dia h3 { font-size: 17px; font-weight: 700; }
+.gob-ley { display: inline-flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 4px; }
 .pend { font-size: 15px; color: var(--muted); padding: 12px 14px; background: var(--bg); border-radius: 10px; }
 .note { font-size: 13px; color: var(--muted); max-width: 80ch; }
 footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
@@ -277,6 +280,11 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
           <button class="btn" id="vCA" aria-pressed="false" type="button">Centroamérica</button>
           <button class="btn" id="vCB" aria-pressed="false" type="button">Caribe</button>
           <button class="btn" id="vSA" aria-pressed="true" type="button">Sudamérica</button>
+          <button class="btn" id="vEU" aria-pressed="false" type="button">Europa</button>
+          <button class="btn" id="vME" aria-pressed="false" type="button">Medio Oriente</button>
+          <button class="btn" id="vAS" aria-pressed="false" type="button">Asia</button>
+          <button class="btn" id="vAF" aria-pressed="false" type="button">África</button>
+          <button class="btn" id="vOC" aria-pressed="false" type="button">Oceanía</button>
         </div>
       </div>
     </div>
@@ -331,7 +339,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
    ===================================================================== */
 
 /* Se completan cuando terminan de cargar los archivos (ver arrancar()) */
-let DATOS = null, CURADO = null;
+let DATOS = null, CURADO = null, ARGENTINA = null;  /* argentina.json: riesgo país y dólar */
 let ANIO, ANIOS, YEARS, MUNDO = {};
 const PAISES = {};     /* ficha armada de cada país, por código ISO3 ("ARG") */
 const HIST = {};       /* series históricas de cada país */
@@ -343,7 +351,7 @@ const IDEO = {
   cen: { t: "Centro", c: "--cen" },
   cder: { t: "Centroderecha", c: "--cder" },
   der: { t: "Derecha", c: "--der" },
-  ind: { t: "Independiente / técnico", c: "--ind" }
+  ind: { t: "Monarquía, militar o sin partido", c: "--ind" }
 };
 
 /* ---------- ARMAR LAS FICHAS A PARTIR DE LOS DOS ARCHIVOS ---------- */
@@ -384,6 +392,7 @@ function armarPais(iso, d) {
     h.marcas[ind] = Object.fromEntries(Object.entries(porTipo).map(([t, ys]) => [t, aRangos(ys)]));
     if (aj) h.marcas[ind].ajuste = { etiqueta: aj.etiqueta || "Ajuste", nota: aj.nota || "" };
   });
+  h.gobiernos = cur.gobiernos || null;   /* [desde, hasta, nombre, ideología] */
   HIST[iso] = h;
 
   const p = {
@@ -411,68 +420,9 @@ function prepararDatos() {
   Object.entries(DATOS.paises).forEach(([iso, d]) => armarPais(iso, d));
 }
 
-/* Banderas dibujadas a mano en SVG (las de emoji no se ven en Windows) */
-function star(cx, cy, R, r) {
-  const p = [];
-  for (let i = 0; i < 10; i++) {
-    const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r : R;
-    p.push((cx + rr * Math.cos(a)).toFixed(2) + "," + (cy + rr * Math.sin(a)).toFixed(2));
-  }
-  return p.join(" ");
-}
-const FLAGS = {
-  "ARG": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#74ACDF"/><rect y="6.67" width="30" height="6.67" fill="#FFFFFF"/><circle cx="15" cy="10" r="2.3" fill="#F6B40E" stroke="#85340A" stroke-width=".35"/></svg>`,
-  "BRA": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#009C3B"/><path d="M15 2.2 L27.6 10 L15 17.8 L2.4 10 Z" fill="#FFDF00"/><circle cx="15" cy="10" r="4.5" fill="#002776"/><path d="M10.6 9.1 Q15.2 8.1 19.4 11.2" stroke="#FFFFFF" stroke-width=".8" fill="none"/></svg>`,
-  "CHL": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#D52B1E"/><rect width="30" height="10" fill="#FFFFFF"/><rect width="10" height="10" fill="#0039A6"/><polygon points="${star(5, 5.2, 2.9, 1.15)}" fill="#FFFFFF"/></svg>`
-  ,"CHN": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#DE2910"/><polygon points="${star(5, 5, 3, 1.15)}" fill="#FFDE00"/><polygon points="${star(10, 2, .9, .35)}" fill="#FFDE00"/><polygon points="${star(12, 4, .9, .35)}" fill="#FFDE00"/><polygon points="${star(12, 7, .9, .35)}" fill="#FFDE00"/><polygon points="${star(10, 9, .9, .35)}" fill="#FFDE00"/></svg>`,
-  "USA": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FFFFFF"/>${[0,2,4,6,8,10,12].map(i => `<rect y="${i * 20 / 13}" width="30" height="${20 / 13}" fill="#B22234"/>`).join("")}<rect width="12.5" height="10.77" fill="#3C3B6E"/></svg>`,
-  "IND": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FFFFFF"/><rect width="30" height="6.67" fill="#FF9933"/><rect y="13.33" width="30" height="6.67" fill="#138808"/><circle cx="15" cy="10" r="2.6" fill="none" stroke="#000080" stroke-width=".6"/></svg>`,
-  "JPN": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FFFFFF"/><circle cx="15" cy="10" r="6" fill="#BC002D"/></svg>`,
-  "KOR": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FFFFFF"/><path d="M10 10 A5 5 0 0 1 20 10 Z" fill="#CD2E3A"/><path d="M10 10 A5 5 0 0 0 20 10 Z" fill="#0047A0"/><circle cx="12.5" cy="10" r="2.5" fill="#CD2E3A"/><circle cx="17.5" cy="10" r="2.5" fill="#0047A0"/></svg>`,
-  "DEU": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="6.67" fill="#000000"/><rect y="6.67" width="30" height="6.67" fill="#DD0000"/><rect y="13.33" width="30" height="6.67" fill="#FFCE00"/></svg>`,
-  "NLD": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="6.67" fill="#AE1C28"/><rect y="6.67" width="30" height="6.67" fill="#FFFFFF"/><rect y="13.33" width="30" height="6.67" fill="#21468B"/></svg>`,
-  "ESP": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/></svg>`,
-  "URY": `<svg viewBox="0 0 27 18" aria-hidden="true"><rect width="27" height="18" fill="#FFFFFF"/>${[1,3,5,7].map(i => `<rect y="${i * 2}" width="27" height="2" fill="#0038A8"/>`).join("")}<rect width="10" height="10" fill="#FFFFFF"/><circle cx="5" cy="5" r="3" fill="#FCD116" stroke="#7B3F00" stroke-width=".3"/><circle cx="5" cy="5" r="1.8" fill="#FCD116" stroke="#7B3F00" stroke-width=".25"/></svg>`,
-  "PRY": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="6.67" fill="#D52B1E"/><rect y="6.67" width="30" height="6.67" fill="#FFFFFF"/><rect y="13.33" width="30" height="6.67" fill="#0038A8"/><circle cx="15" cy="10" r="1.8" fill="none" stroke="#0038A8" stroke-width=".4"/></svg>`
-  ,"BOL": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="6.67" fill="#D52B1E"/><rect y="6.67" width="30" height="6.67" fill="#F9E300"/><rect y="13.33" width="30" height="6.67" fill="#007934"/></svg>`,
-  "PER": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#D91023"/><rect x="10" width="10" height="20" fill="#FFFFFF"/></svg>`,
-  "COL": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="10" fill="#FCD116"/><rect y="10" width="30" height="5" fill="#003893"/><rect y="15" width="30" height="5" fill="#CE1126"/></svg>`,
-  "ECU": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="10" fill="#FFDD00"/><rect y="10" width="30" height="5" fill="#034EA2"/><rect y="15" width="30" height="5" fill="#ED1C24"/><ellipse cx="15" cy="10" rx="2.4" ry="3" fill="#6E8B3D" stroke="#8B5A2B" stroke-width=".4"/></svg>`,
-  "VEN": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="6.67" fill="#FFCC00"/><rect y="6.67" width="30" height="6.67" fill="#00247D"/><rect y="13.33" width="30" height="6.67" fill="#CF142B"/>${[0,1,2,3,4,5,6,7].map(i => { const a = Math.PI * (0.88 - i * 0.108); return `<polygon points="${star(15 + 4.6 * Math.cos(a), 12.4 - 4.6 * Math.sin(a), .75, .3)}" fill="#FFFFFF"/>`; }).join("")}</svg>`,
-  "GUY": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#009E49"/><path d="M0 0 L30 10 L0 20 Z" fill="#FFFFFF"/><path d="M0 .9 L27.4 10 L0 19.1 Z" fill="#FCD116"/><path d="M0 0 L15 10 L0 20 Z" fill="#000000"/><path d="M0 1.3 L13 10 L0 18.7 Z" fill="#CE1126"/></svg>`,
-  "SUR": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#377E3F"/><rect y="4" width="30" height="12" fill="#FFFFFF"/><rect y="5.6" width="30" height="8.8" fill="#B40A2D"/><polygon points="${star(15, 10.3, 3.4, 1.35)}" fill="#ECC81D"/></svg>`,
-  "CHE": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#DA291C"/><rect x="13.2" y="4.5" width="3.6" height="11" fill="#FFFFFF"/><rect x="9.5" y="8.2" width="11" height="3.6" fill="#FFFFFF"/></svg>`,
-  "ARE": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="6.67" fill="#00732F"/><rect y="6.67" width="30" height="6.67" fill="#FFFFFF"/><rect y="13.33" width="30" height="6.67" fill="#000000"/><rect width="7.5" height="20" fill="#FF0000"/></svg>`
-  ,"GTM": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#4997D0"/><rect x="10" width="10" height="20" fill="#FFFFFF"/><circle cx="15" cy="10" r="2.6" fill="none" stroke="#6C8E3E" stroke-width=".9"/></svg>`,
-  "BLZ": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#CE1126"/><rect y="1.6" width="30" height="16.8" fill="#003F87"/><circle cx="15" cy="10" r="5.4" fill="#FFFFFF"/><circle cx="15" cy="10" r="4.4" fill="none" stroke="#2E7D32" stroke-width=".9"/></svg>`,
-  "HND": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#00BCE4"/><rect y="6.67" width="30" height="6.67" fill="#FFFFFF"/>${[[15,10],[11,8.4],[11,11.6],[19,8.4],[19,11.6]].map(([x, y]) => `<polygon points="${star(x, y, .95, .38)}" fill="#00BCE4"/>`).join("")}</svg>`,
-  "SLV": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#0F47AF"/><rect y="6.67" width="30" height="6.67" fill="#FFFFFF"/><circle cx="15" cy="10" r="2.2" fill="none" stroke="#C9A227" stroke-width=".7"/></svg>`,
-  "NIC": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#0067C6"/><rect y="6.67" width="30" height="6.67" fill="#FFFFFF"/><path d="M15 8 L17.2 11.6 L12.8 11.6 Z" fill="none" stroke="#3E8E41" stroke-width=".55"/></svg>`,
-  "CRI": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#002B7F"/><rect y="3.33" width="30" height="13.33" fill="#FFFFFF"/><rect y="6.67" width="30" height="6.67" fill="#CE1126"/></svg>`,
-  "PAN": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FFFFFF"/><rect x="15" width="15" height="10" fill="#DA121A"/><rect y="10" width="15" height="10" fill="#072357"/><polygon points="${star(7.5, 5, 2.4, .95)}" fill="#072357"/><polygon points="${star(22.5, 15, 2.4, .95)}" fill="#DA121A"/></svg>`,
-  "MEX": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FFFFFF"/><rect width="10" height="20" fill="#006847"/><rect x="20" width="10" height="20" fill="#CE1126"/><ellipse cx="15" cy="10" rx="2.2" ry="2.6" fill="#8C5A2B"/><path d="M12.6 11.4 Q15 14 17.4 11.4" stroke="#3E8E41" stroke-width=".6" fill="none"/></svg>`,
-  "CAN": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FFFFFF"/><rect width="7.5" height="20" fill="#D52B1E"/><rect x="22.5" width="7.5" height="20" fill="#D52B1E"/><path d="M15 4.2 L16 6.3 L17.3 5.6 L16.8 8.8 L18.6 7.4 L19.1 8.6 L20.6 8.3 L20 10.2 L20.8 10.7 L17.6 13.2 L18 14.4 L15.3 14 L15.3 16 L14.7 16 L14.7 14 L12 14.4 L12.4 13.2 L9.2 10.7 L10 10.2 L9.4 8.3 L10.9 8.6 L11.4 7.4 L13.2 8.8 L12.7 5.6 L14 6.3 Z" fill="#D52B1E"/></svg>`,
-  "GBR": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#012169"/><path d="M0 0 L30 20 M30 0 L0 20" stroke="#FFFFFF" stroke-width="4"/><path d="M0 0 L30 20 M30 0 L0 20" stroke="#C8102E" stroke-width="1.4"/><path d="M15 0 V20 M0 10 H30" stroke="#FFFFFF" stroke-width="6"/><path d="M15 0 V20 M0 10 H30" stroke="#C8102E" stroke-width="3.4"/></svg>`
-  ,"CUB": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#002A8F"/><rect y="4" width="30" height="4" fill="#FFFFFF"/><rect y="12" width="30" height="4" fill="#FFFFFF"/><path d="M0 0 L17.3 10 L0 20 Z" fill="#CF142B"/><polygon points="${star(5.8, 10, 2.6, 1)}" fill="#FFFFFF"/></svg>`,
-  "DOM": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FFFFFF"/><rect width="13" height="8" fill="#002D62"/><rect x="17" width="13" height="8" fill="#CE1126"/><rect y="12" width="13" height="8" fill="#CE1126"/><rect x="17" y="12" width="13" height="8" fill="#002D62"/><circle cx="15" cy="10" r="1.3" fill="#2E7D32"/></svg>`,
-  "HTI": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="10" fill="#00209F"/><rect y="10" width="30" height="10" fill="#D21034"/><rect x="11.5" y="7" width="7" height="6" fill="#FFFFFF"/><circle cx="15" cy="10" r="1.6" fill="#2E7D32"/></svg>`,
-  "JAM": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#009B3A"/><path d="M0 0 L15 10 L0 20 Z M30 0 L15 10 L30 20 Z" fill="#000000"/><path d="M0 0 L30 20 M30 0 L0 20" stroke="#FED100" stroke-width="2.6"/></svg>`,
-  "TTO": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#CE1126"/><path d="M3 0 L30 18 L30 20 L27 20 L0 2 L0 0 Z" fill="#FFFFFF"/><path d="M6 0 L30 16 L30 20 L24 20 L0 4 L0 0 Z" fill="#000000"/></svg>`,
-  "BHS": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#00778B"/><rect y="6.67" width="30" height="6.67" fill="#FFC72C"/><path d="M0 0 L12 10 L0 20 Z" fill="#000000"/></svg>`,
-  "BRB": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#00267F"/><rect x="10" width="10" height="20" fill="#FFC726"/><path d="M15 5 V15 M12 6 Q12 10 15 10.5 Q18 10 18 6" stroke="#000000" stroke-width="1" fill="none"/></svg>`,
-  "LCA": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#66CCFF"/><path d="M15 3 L20 17 L10 17 Z" fill="#FFFFFF"/><path d="M15 5 L19 17 L11 17 Z" fill="#000000"/><path d="M15 10 L17.5 17 L12.5 17 Z" fill="#FCD116"/></svg>`,
-  "VCT": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FCD116"/><rect width="7.5" height="20" fill="#002674"/><rect x="22.5" width="7.5" height="20" fill="#009E60"/><path d="M12.5 7 l1.3 2 l-1.3 2 l-1.3 -2 Z M17.5 7 l1.3 2 l-1.3 2 l-1.3 -2 Z M15 10.5 l1.3 2 l-1.3 2 l-1.3 -2 Z" fill="#009E60"/></svg>`,
-  "GRD": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#CE1126"/><rect x="2.5" y="2.5" width="25" height="15" fill="#FCD116"/><path d="M2.5 2.5 L15 10 L2.5 17.5 Z M27.5 2.5 L15 10 L27.5 17.5 Z" fill="#007A5E"/><circle cx="15" cy="10" r="2.6" fill="#CE1126"/><polygon points="${star(15, 10.1, 1.6, .65)}" fill="#FCD116"/></svg>`,
-  "ATG": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#CE1126"/><path d="M0 0 L30 0 L15 20 Z" fill="#000000"/><path d="M6.6 8.8 L23.4 8.8 L19.3 14.3 L10.7 14.3 Z" fill="#0072C6"/><path d="M10.7 14.3 L19.3 14.3 L15 20 Z" fill="#FFFFFF"/><circle cx="15" cy="8.8" r="3" fill="#FCD116"/><rect x="6" y="8.8" width="18" height="0.01" fill="#FCD116"/><path d="M6.6 8.8 L23.4 8.8 L23 9.3 L7 9.3 Z" fill="#0072C6"/></svg>`,
-  "DMA": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#006B3F"/><rect x="12" width="6" height="20" fill="#FCD116"/><rect x="14" width="2" height="20" fill="#000000"/><rect x="16" width="2" height="20" fill="#FFFFFF"/><rect y="7" width="30" height="6" fill="#FCD116"/><rect y="9" width="30" height="2" fill="#000000"/><rect y="11" width="30" height="2" fill="#FFFFFF"/><circle cx="15" cy="10" r="4" fill="#D41C30"/></svg>`,
-  "KNA": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#CE1126"/><path d="M0 0 L30 0 L0 20 Z" fill="#009E49"/><path d="M0 16 L24 0 L30 0 L30 4 L6 20 L0 20 Z" fill="#FCD116"/><path d="M0 18.5 L27.8 0 L30 0 L30 1.5 L2.2 20 L0 20 Z" fill="#000000"/><polygon points="${star(11, 12, 1.5, .6)}" fill="#FFFFFF"/><polygon points="${star(19, 7, 1.5, .6)}" fill="#FFFFFF"/></svg>`,
-  "FRA": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FFFFFF"/><rect width="10" height="20" fill="#002395"/><rect x="20" width="10" height="20" fill="#ED2939"/></svg>`,
-  "RUS": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="6.67" fill="#FFFFFF"/><rect y="6.67" width="30" height="6.67" fill="#0039A6"/><rect y="13.33" width="30" height="6.67" fill="#D52B1E"/></svg>`
-
-
-
-};
-const flag = k => FLAGS[k] ? `<span class="flag">${FLAGS[k]}</span>` : "";
+/* Banderas: archivos SVG de la carpeta banderas/ (librería flag-icons, licencia MIT) */
+const flagInner = k => PAISES[k] && PAISES[k].iso2 && PAISES[k].iso2 !== "JG" ? `<img src="banderas/${PAISES[k].iso2.toLowerCase()}.svg" alt="" loading="lazy" onerror="this.parentNode.remove()">` : "";
+const flag = k => { const f = flagInner(k); return f ? `<span class="flag">${f}</span>` : ""; };
 const nombreEs = k => PAISES[k] ? PAISES[k].nombre : k;
 
 const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
@@ -504,8 +454,8 @@ let charts = { sparks: [] };
 const svg = d3.select("#map");
 const tip = document.getElementById("tip");
 let features = null, projection, pathGen, gRoot, zoom, W = 0, H = 0;
-const CAJAS = { mundo: [[-170, 80], [180, -57]], sa: [[-84, 13], [-32, -56]], ca: [[-93, 19], [-76, 6.5]], na: [[-168, 72], [-52, 13]], cb: [[-86, 27.5], [-59, 10]] };
-const VBTN = { mundo: "vWorld", sa: "vSA", ca: "vCA", na: "vNA", cb: "vCB" };
+const CAJAS = { mundo: [[-170, 80], [180, -57]], sa: [[-84, 13], [-32, -56]], ca: [[-93, 19], [-76, 6.5]], na: [[-168, 72], [-52, 13]], cb: [[-86, 27.5], [-59, 10]], eu: [[-25, 71.5], [45, 34]], me: [[25, 42.5], [63.5, 12]], as: [[45, 55], [150, -11]], af: [[-20, 37.5], [55, -35]], oc: [[110, 12], [180, -48]] };
+const VBTN = { mundo: "vWorld", sa: "vSA", ca: "vCA", na: "vNA", cb: "vCB", eu: "vEU", me: "vME", as: "vAS", af: "vAF", oc: "vOC" };
 let vistaActual = "sa";
 const iso = f => f.properties.iso;
 
@@ -600,6 +550,11 @@ document.getElementById("vSA").onclick = () => setVista("sa");
 document.getElementById("vCA").onclick = () => setVista("ca");
 document.getElementById("vNA").onclick = () => setVista("na");
 document.getElementById("vCB").onclick = () => setVista("cb");
+document.getElementById("vEU").onclick = () => setVista("eu");
+document.getElementById("vME").onclick = () => setVista("me");
+document.getElementById("vAS").onclick = () => setVista("as");
+document.getElementById("vAF").onclick = () => setVista("af");
+document.getElementById("vOC").onclick = () => setVista("oc");
 document.getElementById("vRelief").onclick = e => {
   const on = e.currentTarget.getAttribute("aria-pressed") !== "true";
   e.currentTarget.setAttribute("aria-pressed", on);
@@ -661,10 +616,38 @@ function zonas(k, ind) {
   if (m.aj) zona(m.aj, m.ajuste ? m.ajuste.etiqueta : "Ajuste", acc);
   return out;
 }
+/* ---------- GOBIERNOS SOBRE LOS GRÁFICOS ----------
+   Cada gobierno de curado.json ([desde, hasta, nombre, ideología]) se pinta como una
+   franja de fondo del color de su ideología. */
+const anioDe = cat => { const [y, m] = String(cat).split("-").map(Number); return m ? y + (m - 1) / 12 : y + .5; };
+/* En curado.json las fechas de cada gobierno pueden ser un año (2015) o año y mes ("2015-12") */
+const tGob = v => typeof v === "number" ? v + .5 : anioDe(v);
+function gobiernoEn(k, cat) {
+  const g = HIST[k] && HIST[k].gobiernos; if (!g) return null;
+  const t = anioDe(cat);
+  return g.find((x, i) => t >= tGob(x[0]) && (t < tGob(x[1]) || i === g.length - 1)) || null;
+}
+function franjasGobierno(k, cats) {
+  const g = HIST[k] && HIST[k].gobiernos; if (!g || !cats.length) return [];
+  const idx = t => { const i = cats.findIndex(c => anioDe(c) >= t); return i < 0 ? cats.length - 1 : i; };
+  const t0 = anioDe(cats[0]), t1 = anioDe(cats[cats.length - 1]);
+  return g.filter((x, i) => tGob(x[0]) <= t1 && (tGob(x[1]) >= t0 || i === g.length - 1)).map((x, i, arr) => {
+    const a = idx(Math.max(tGob(x[0]), t0)), b = x === arr[arr.length - 1] ? cats.length - 1 : idx(Math.min(tGob(x[1]), t1));
+    const anios = anioDe(cats[b]) - anioDe(cats[a]);
+    return [{ name: anios >= 8 ? x[2].split(" (")[0] : "", xAxis: cats[a], itemStyle: { color: css(IDEO[x[3]].c), opacity: .17 } }, { xAxis: cats[b] }];
+  });
+}
+const lineaGobierno = (k, cat) => { const g = gobiernoEn(k, cat); return g ? `<br><span style="color:${css("--muted")}">Gobierno: ${g[2]} (${IDEO[g[3]].t.toLowerCase()})</span>` : ""; };
+function leyendaGobiernos(k) {
+  const g = HIST[k] && HIST[k].gobiernos; if (!g) return "";
+  const usadas = Object.keys(IDEO).filter(c => g.some(x => x[3] === c));
+  return ` <span class="gob-ley">Las franjas de fondo muestran quién gobernaba: ${usadas.map(c => `<span class="ipill" style="--ic: var(${IDEO[c].c})">${IDEO[c].t}</span>`).join(" ")}</span>`;
+}
+
 function histChart(el, k, ind) {
   const c = echarts.init(el);
   const ink = css("--ink"), muted = css("--muted"), line = css("--line"), acc = css("--accent");
-  const years = histYears(k, ind), data = HIST[k][ind][1];
+  const years = histYears(k, ind), data = HIST[k][ind][1], cats = years.map(String);
   const ax = { color: muted, fontFamily: "IBM Plex Mono, monospace", fontSize: 11 };
   let series;
   if (ind === "crec" || ind === "cc") {
@@ -672,13 +655,14 @@ function histChart(el, k, ind) {
   } else {
     series = [{ type: "line", data: ind === "infl" ? data.map(v => v > 0 ? v : null) : data, symbol: "none", lineStyle: { color: acc, width: 2 }, areaStyle: ind === "pib" || ind === "deuda" ? { color: acc, opacity: .1 } : undefined }];
   }
-  const z = zonas(k, ind);
-  if (z.length) series[0].markArea = { silent: true, label: { show: true, color: muted, fontSize: 10, position: "insideTop" }, data: z };
+  /* Si hay gobiernos cargados, el fondo muestra quién gobernaba; si no, de qué fuente sale cada tramo */
+  const fr = franjasGobierno(k, cats), z = fr.length ? fr : zonas(k, ind);
+  if (z.length) series[0].markArea = { silent: true, label: { show: true, color: muted, fontSize: fr.length ? 9 : 10, position: "insideTop" }, data: z };
   c.setOption({
     grid: { left: ind === "infl" ? 62 : 46, right: 12, top: 14, bottom: 58 },
     tooltip: { trigger: "axis", backgroundColor: css("--surface"), borderColor: line, textStyle: { color: ink },
-      formatter: ps => `<b>${ps[0].name}</b><br>` + (ps[0].value == null ? "sin dato" : ind === "pib" ? `US$ ${nf(ps[0].value, 1)} mil millones` : `${nf(ps[0].value, 1)}%${ind === "deuda" || ind === "cc" ? " del PBI" : ""}`) },
-    xAxis: { type: "category", data: years.map(String), axisLine: { lineStyle: { color: line } }, axisTick: { show: false }, axisLabel: ax },
+      formatter: ps => `<b>${ps[0].name}</b><br>` + (ps[0].value == null ? "sin dato" : ind === "pib" ? `US$ ${nf(ps[0].value, 1)} mil millones` : `${nf(ps[0].value, 1)}%${ind === "deuda" || ind === "cc" ? " del PBI" : ""}`) + lineaGobierno(k, ps[0].name) },
+    xAxis: { type: "category", data: cats, axisLine: { lineStyle: { color: line } }, axisTick: { show: false }, axisLabel: ax },
     yAxis: { type: ind === "infl" ? "log" : "value", logBase: 10, splitLine: { lineStyle: { color: line, type: "dashed" } },
       axisLabel: Object.assign({}, ax, { formatter: v => nf(v) }) },
     dataZoom: [
@@ -689,6 +673,88 @@ function histChart(el, k, ind) {
   });
   charts.sparks.push(c);
 }
+
+/* ---------- ARGENTINA AL DÍA: riesgo país y dólar (argentina.json) ---------- */
+/* Promedio simple de una serie dentro de cada gobierno: devuelve [{desde, hasta, gob, prom}] (índices de cats) */
+function promediosGobierno(k, cats, vals) {
+  const grupos = [];
+  cats.forEach((c, i) => {
+    const g = gobiernoEn(k, c), ult = grupos[grupos.length - 1];
+    if (!g) return;
+    if (ult && ult.gob === g) { ult.hasta = i; if (vals[i] != null) { ult.suma += vals[i]; ult.n++; } }
+    else grupos.push({ desde: i, hasta: i, gob: g, suma: vals[i] ?? 0, n: vals[i] != null ? 1 : 0 });
+  });
+  return grupos.filter(x => x.n).map(x => ({ desde: x.desde, hasta: x.hasta, gob: x.gob, prom: x.suma / x.n }));
+}
+
+function arChart(el, tipo) {
+  const c = echarts.init(el);
+  const ink = css("--ink"), muted = css("--muted"), line = css("--line"), acc = css("--accent");
+  const ax = { color: muted, fontFamily: "IBM Plex Mono, monospace", fontSize: 11 };
+  let cats, series, yAxis, fmt;
+  if (tipo === "rp") {
+    const m = ARGENTINA.riesgo_pais.mensual;
+    cats = m.map(x => x[0]);
+    series = [{ name: "Riesgo país", type: "line", data: m.map(x => x[1]), symbol: "none", lineStyle: { color: acc, width: 2 }, areaStyle: { color: acc, opacity: .1 } }];
+    yAxis = { type: "value" };
+    const proms = promediosGobierno("ARG", cats, m.map(x => x[1]));
+    series[0].markLine = {
+      silent: true, symbol: "none",
+      lineStyle: { color: ink, type: "dashed", width: 1.5, opacity: .8 },
+      label: { show: true, position: "middle", formatter: d => d.data.etiqueta, color: ink, fontSize: 10, fontFamily: "IBM Plex Mono, monospace", backgroundColor: css("--surface"), padding: [1, 3], borderRadius: 3 },
+      data: proms.map(x => [{ coord: [cats[x.desde], x.prom], etiqueta: x.hasta - x.desde >= 30 ? nf(x.prom) : "" }, { coord: [cats[x.hasta], x.prom] }])
+    };
+    fmt = ps => { const pr = proms.find(x => ps[0].dataIndex >= x.desde && ps[0].dataIndex <= x.hasta);
+      return `${nf(ps[0].value)} puntos` + (pr ? `<br><span style="color:${css("--muted")}">Promedio de este gobierno: ${nf(pr.prom)} puntos</span>` : ""); };
+  } else {
+    const m = ARGENTINA.dolar.mensual;
+    cats = m.map(x => x[0]);
+    series = [
+      { name: "Blue", type: "line", data: m.map(x => x[1]), symbol: "none", lineStyle: { color: acc, width: 2 }, itemStyle: { color: acc } },
+      { name: "Oficial", type: "line", data: m.map(x => x[2]), symbol: "none", lineStyle: { color: css("--b"), width: 2 }, itemStyle: { color: css("--b") } }
+    ];
+    yAxis = { type: "log", logBase: 10 };
+    fmt = ps => ps.map(p => `${p.marker}${p.seriesName}: $${nf(p.value, 0)}`).join("<br>") + `<br>Brecha: ${nf(m[ps[0].dataIndex][3], 0)}%`;
+  }
+  const fr = franjasGobierno("ARG", cats);
+  if (fr.length) series[0].markArea = { silent: true, label: { show: true, color: muted, fontSize: 9, position: "insideTop" }, data: fr };
+  c.setOption({
+    grid: { left: 54, right: 12, top: tipo === "rp" ? 14 : 34, bottom: 58 },
+    legend: tipo === "rp" ? undefined : { top: 0, left: 0, textStyle: { color: ink, fontSize: 12 }, itemWidth: 14 },
+    tooltip: { trigger: "axis", backgroundColor: css("--surface"), borderColor: line, textStyle: { color: ink },
+      formatter: ps => `<b>${ps[0].name}</b><br>` + fmt(ps) + lineaGobierno("ARG", ps[0].name) },
+    xAxis: { type: "category", data: cats, axisLine: { lineStyle: { color: line } }, axisTick: { show: false }, axisLabel: Object.assign({}, ax, { formatter: v => v.slice(0, 4) }) },
+    yAxis: Object.assign(yAxis, { splitLine: { lineStyle: { color: line, type: "dashed" } }, axisLabel: Object.assign({}, ax, { formatter: v => nf(v) }) }),
+    dataZoom: [{ type: "inside" }, { type: "slider", height: 18, bottom: 10, borderColor: line, handleStyle: { color: acc }, textStyle: { color: muted, fontSize: 10 } }],
+    series
+  });
+  charts.sparks.push(c);
+}
+function bloqueArgentina() {
+  if (seleccion !== "ARG" || !ARGENTINA) return "";
+  const rp = ARGENTINA.riesgo_pais.ultimo, usd = ARGENTINA.dolar.ultimo;
+  const fecha = f => f.split("-").reverse().join("/");
+  const caja = (id, notaTxt) => `<div class="hist"><div class="hist-foot"><span></span>
+      <button class="hbtn" type="button" data-h="${id}" aria-expanded="false">Ver serie histórica</button></div>
+      <div class="histbox" id="hb-${id}" hidden><div class="histchart" id="hc-${id}"></div><p class="note">${notaTxt}${leyendaGobiernos("ARG")}</p></div></div>`;
+  return `<div class="ar-dia">
+    <h3>Argentina al día</h3>
+    <div class="metrics">
+      <div class="metric">
+        <span class="lbl">Riesgo país</span><span class="val">${nf(rp.valor)} puntos <small class="ytag">${fecha(rp.fecha)}</small></span>
+        <p class="exp">Cuánto más interés que EE.UU. le piden los inversores a la Argentina para prestarle. ${nf(rp.valor)} puntos son ${nf(rp.valor / 100, 2)} puntos porcentuales más por año.</p>
+        ${caja("rp", "Promedio de cada mes, desde 1999. Es el índice EMBI de JP Morgan: llegó a casi 7.000 puntos en la crisis de 2002. La línea punteada marca el promedio de cada gobierno. Describe lo que pasó durante cada mandato, no cuánto se debió a sus decisiones: también pesan la herencia recibida y el contexto internacional.")}
+      </div>
+      <div class="metric">
+        <span class="lbl">Dólar blue</span><span class="val">$${nf(usd.blue)} <small class="ytag">${fecha(usd.fecha)}</small></span>
+        <p class="exp">El dólar oficial está a $${nf(usd.oficial)}. La brecha, o sea cuánto más caro está el blue, es de ${nf(usd.brecha, 1)}%.</p>
+        ${caja("usd", "Precio de venta, promedio de cada mes, desde 2011. Escala logarítmica. La brecha se disparó con los cepos cambiarios (2011–2015 y 2019–2025).")}
+      </div>
+    </div>
+    <p class="note">Fuente: ArgentinaDatos (argentinadatos.com), proyecto abierto y no oficial. Se actualiza todos los días.</p>
+  </div>`;
+}
+
 /* Nota al pie de cada gráfico: explica de dónde sale cada tramo */
 function notaFuentes(k, ind) {
   const h = HIST[k], m = h.marcas[ind] || {};
@@ -706,7 +772,7 @@ function histBlock(ind) {
     <div class="spark" id="sp-${ind}" aria-hidden="true"></div>
     <div class="hist-foot"><span>${HIST[seleccion][ind][0]} → ${HIST[seleccion][ind][0] + HIST[seleccion][ind][1].length - 1}</span>
       <button class="hbtn" type="button" data-h="${ind}" aria-expanded="false">Ver serie histórica</button></div>
-    <div class="histbox" id="hb-${ind}" hidden><div class="histchart" id="hc-${ind}"></div><p class="note">${HNOTAS[ind]}${notaFuentes(seleccion, ind)}</p></div>
+    <div class="histbox" id="hb-${ind}" hidden><div class="histchart" id="hc-${ind}"></div><p class="note">${HNOTAS[ind]}${HIST[seleccion].gobiernos ? notaFuentes(seleccion, ind).replace(/La zona (gris|naranja) \(([^)]*)\)/g, "Los años $2") + leyendaGobiernos(seleccion) : notaFuentes(seleccion, ind)}</p></div>
   </div>`;
 }
 
@@ -732,7 +798,7 @@ function politica(k) {
       <span class="pol-meta">Próxima elección: <b>${p.proxima}</b></span>
     </div>
     ${p.nota ? `<p class="pol-nota">${p.nota}</p>` : ""}
-    <h4>Últimas presidencias</h4>
+    ${p.historia.length ? `<h4>Últimas presidencias</h4>` : ""}
     <ol class="pol-list">${p.historia.map(([y, n, c]) => `<li><span class="pol-y">${y}</span><span class="pol-n">${n}</span><span class="pol-p">${ideoPill(c)}</span></li>`).join("")}</ol>
     <p class="note">La ubicación en izquierda, centro o derecha es aproximada: sigue cómo suelen clasificar a cada gobierno la prensa y la ciencia política, y siempre es discutible.</p>
   </div>`;
@@ -804,6 +870,7 @@ function renderPanel() {
         ${histBlock("cc")}
       </div>
     </div>
+    ${bloqueArgentina()}
     ${d.actividades ? `<div class="acts">
       <h3>A qué se dedica</h3>
       <div class="chips">${d.actividades.map(([e, t]) => `<span class="chip"><span class="emo" aria-hidden="true">${e}</span>${t}</span>`).join("")}</div>
@@ -831,7 +898,7 @@ function renderPanel() {
     b.setAttribute("aria-expanded", abrir);
     b.textContent = abrir ? "Ocultar serie" : "Ver serie histórica";
     const el = document.getElementById("hc-" + ind);
-    if (abrir && !el.dataset.done) { el.dataset.done = "1"; histChart(el, seleccion, ind); }
+    if (abrir && !el.dataset.done) { el.dataset.done = "1"; if (ind === "rp" || ind === "usd") arChart(el, ind); else histChart(el, seleccion, ind); }
   });
   document.getElementById("goCmp").onclick = () => {
     compA = seleccion;
@@ -912,12 +979,14 @@ function frases(A, B) {
 function renderVersus() {
   document.getElementById("selA").value = compA;
   document.getElementById("selB").value = compB;
-  document.getElementById("flagA").innerHTML = FLAGS[compA] || "";
-  document.getElementById("flagB").innerHTML = FLAGS[compB] || "";
-  document.getElementById("flagA").hidden = !FLAGS[compA];
-  document.getElementById("flagB").hidden = !FLAGS[compB];
+  document.getElementById("flagA").innerHTML = flagInner(compA);
+  document.getElementById("flagB").innerHTML = flagInner(compB);
+  document.getElementById("flagA").hidden = !flagInner(compA);
+  document.getElementById("flagB").hidden = !flagInner(compB);
   const a = PAISES[compA], b = PAISES[compB];
-  document.getElementById("frases").innerHTML = frases(compA, compB).map(f => `<li>${f}</li>`).join("");
+  const fr = frases(compA, compB);
+  document.getElementById("frases").innerHTML = fr.length ? fr.map(f => `<li>${f}</li>`).join("")
+    : `<li>No hay datos suficientes para comparar ${a.nombre} y ${b.nombre}: uno de los dos casi no publica estadísticas.</li>`;
   let html = `<div class="duel-head"><span class="ha">${a.nombre}${flag(compA)}</span><span class="hmid"></span><span class="hb">${flag(compB)}${b.nombre}</span></div>`;
   METRICAS.forEach(m => {
     const va = m.get(a), vb = m.get(b);
@@ -997,9 +1066,9 @@ function textoFuentes() {
 function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); } }
 
 const leer = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: error ${r.status}`); return r.json(); });
-Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json")])
-  .then(([datos, curado, topo]) => {
-    DATOS = datos; CURADO = curado;
+Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null)])
+  .then(([datos, curado, topo, argentina]) => {
+    DATOS = datos; CURADO = curado; ARGENTINA = argentina;
     prepararDatos();
     armarMetricas();
     const n = Object.keys(PAISES).length, m = Object.values(PAISES).filter(p => p.curada).length;
