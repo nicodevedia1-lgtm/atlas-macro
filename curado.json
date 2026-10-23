@@ -392,6 +392,10 @@
           ["2010–2018", "Juan Manuel Santos", "cder"],
           ["2002–2010", "Álvaro Uribe", "der"]
         ]
+      },
+      "crisis": {
+        "tipo": "conflicto",
+        "texto": "Guerrillas y grupos armados ligados al narcotráfico se disputan varias regiones."
       }
     },
     "ECU": {
@@ -439,6 +443,10 @@
           ["2007–2017", "Rafael Correa", "izq"],
           ["2005–2007", "Alfredo Palacio", "ind"]
         ]
+      },
+      "crisis": {
+        "tipo": "conflicto",
+        "texto": "El gobierno declaró en 2024 un 'conflicto armado interno' contra las bandas del crimen organizado."
       }
     },
     "VEN": {
@@ -495,6 +503,10 @@
           "etiqueta": "BCV",
           "nota": "La zona naranja (2017–2025) son cifras del Banco Central de Venezuela, de diciembre a diciembre, porque no hay datos del Banco Mundial. En 2025 el BCV volvió a publicar después de dos años sin datos."
         }
+      },
+      "crisis": {
+        "tipo": "crisis",
+        "texto": "Crisis política desde la captura de Maduro por EE.UU. en enero de 2026. Elecciones sin fecha."
       }
     },
     "GUY": {
@@ -1120,6 +1132,10 @@
       },
       "notas": {
         "crec": "El Banco Mundial no publica la inflación de Cuba ni su PBI en dólares desde 2020: las cifras oficiales cubanas son difíciles de comparar por el sistema de tipos de cambio múltiples."
+      },
+      "crisis": {
+        "tipo": "crisis",
+        "texto": "La peor crisis económica en décadas: apagones, escasez y emigración masiva."
       }
     },
     "DOM": {
@@ -1212,6 +1228,10 @@
           ["2017–2021", "Jovenel Moïse", "cder"],
           ["2011–2016", "Michel Martelly", "cder"]
         ]
+      },
+      "crisis": {
+        "tipo": "conflicto",
+        "texto": "Bandas armadas controlan gran parte de la capital y hay más de un millón de desplazados."
       }
     },
     "JAM": {
@@ -3571,17 +3591,17 @@
         "compra": [["ROU", 25], ["CHN", 11], ["UKR", 8], ["TUR", 7], ["DEU", 7]]
       },
       "politica": {
-        "lider": "Alexandru Munteanu",
+        "lider": "Vasile Tofan",
         "cargo": "Primer ministro",
         "ideo": "cder",
-        "desde": "noviembre de 2025",
+        "desde": "julio de 2026",
         "proxima": "2029",
-        "nota": "Es independiente y gobierna con el partido proeuropeo PAS, que ganó las elecciones de septiembre de 2025. La presidenta es Maia Sandu, reelegida en 2024.",
+        "nota": "Empresario e inversor, propuesto por la presidenta Maia Sandu para acelerar el ingreso a la Unión Europea. Gobierna con el partido proeuropeo PAS, que ganó las elecciones de septiembre de 2025.",
         "historia": [
+          ["2025–2026", "Alexandru Munteanu", "cder"],
           ["2023–2025", "Dorin Recean", "cder"],
           ["2021–2023", "Natalia Gavrilița", "cder"],
-          ["2019–2020", "Ion Chicu", "izq"],
-          ["2019", "Maia Sandu", "cder"]
+          ["2019–2020", "Ion Chicu", "izq"]
         ]
       }
     },
@@ -3630,6 +3650,10 @@
           ["2010–2014", "Víktor Yanukóvich", "cder"],
           ["2005–2010", "Víktor Yúshchenko", "cder"]
         ]
+      },
+      "crisis": {
+        "tipo": "guerra",
+        "texto": "Invadida por Rusia desde febrero de 2022. La guerra sigue en el este y el sur del país."
       }
     },
     "BLR": {
@@ -3718,6 +3742,10 @@
           ["2000–2008", "Vladímir Putin", "der"],
           ["1991–1999", "Borís Yeltsin", "cder"]
         ]
+      },
+      "crisis": {
+        "tipo": "guerra",
+        "texto": "En guerra con Ucrania desde que la invadió en febrero de 2022. Tiene fuertes sanciones de Occidente."
       }
     },
     "CHN": {
@@ -4323,6 +4351,10 @@
           ["2016–2018", "Htin Kyaw", "cizq"],
           ["2011–2016", "Thein Sein", "der"]
         ]
+      },
+      "crisis": {
+        "tipo": "guerra",
+        "texto": "Guerra civil desde el golpe militar de 2021, entre el ejército y milicias étnicas y prodemocracia."
       }
     },
     "KHM": {
@@ -4594,6 +4626,10 @@
           ["2018–2022", "Imran Khan", "cen"],
           ["2017–2018", "Shahid Khaqan Abbasi", "cder"]
         ]
+      },
+      "crisis": {
+        "tipo": "conflicto",
+        "texto": "Insurgencias armadas en Baluchistán y en el noroeste, y tensión militar con India."
       }
     },
     "BGD": {
@@ -4874,6 +4910,10 @@
           ["2001–2014", "Hamid Karzai", "cen"],
           ["1996–2001", "Mohammad Omar (talibanes)", "der"]
         ]
+      },
+      "crisis": {
+        "tipo": "crisis",
+        "texto": "Gobierno talibán desde 2021, con grave crisis humanitaria y fuertes restricciones a las mujeres."
       }
     },
     "KAZ": {
@@ -5321,6 +5361,10 @@
         "proxima": "Presidenciales en 2028",
         "nota": "Es hijo de Alí Jamenei, que murió en un ataque de EE.UU. e Israel sobre Teherán al comienzo de la guerra, en febrero de 2026. En Irán el líder supremo tiene más poder que el presidente, que es Masoud Pezeshkian, reformista. Los datos de comercio son estimaciones.",
         "historia": [["1989–2026", "Alí Jamenei", "der"], ["1979–1989", "Ruhollah Jomeini", "der"]]
+      },
+      "crisis": {
+        "tipo": "guerra",
+        "texto": "En guerra con EE.UU. e Israel desde el 28 de febrero de 2026. EE.UU. bloquea sus puertos y hay ataques en el estrecho de Ormuz."
       }
     },
     "IRQ": {
@@ -5673,6 +5717,10 @@
         "proxima": "No hay fecha",
         "nota": "Encabeza el gobierno reconocido por la ONU. El norte, con la capital Saná, está en manos de los hutíes. En enero de 2026 el consejo expulsó a Aidarus al Zubaidi, líder de los separatistas del sur. Los datos de comercio son estimaciones.",
         "historia": [["2012–2022", "Abd Rabbuh Mansur Hadi", "ind"], ["1990–2012", "Alí Abdalá Saleh", "ind"]]
+      },
+      "crisis": {
+        "tipo": "guerra",
+        "texto": "Guerra civil desde 2014 entre los hutíes, que controlan el norte, y el gobierno reconocido."
       }
     },
     "ISR": {
@@ -5720,6 +5768,10 @@
           ["2009–2021", "Benjamín Netanyahu", "der"],
           ["2006–2009", "Ehud Olmert", "cen"]
         ]
+      },
+      "crisis": {
+        "tipo": "guerra",
+        "texto": "En guerra desde octubre de 2023: Gaza, Líbano y, desde febrero de 2026, Irán."
       }
     },
     "PSE": {
@@ -5762,6 +5814,10 @@
         "proxima": "Sin fecha",
         "nota": "Su mandato vencía en 2009, pero no hubo elecciones desde entonces. La Autoridad Palestina administra partes de Cisjordania; Gaza estuvo gobernada por Hamás desde 2007. Más de 150 países reconocen al Estado de Palestina, entre ellos la Argentina. Los datos son de Cisjordania y Gaza juntas.",
         "historia": [["1994–2004", "Yasser Arafat", "cizq"]]
+      },
+      "crisis": {
+        "tipo": "guerra",
+        "texto": "Gaza quedó destruida por la guerra entre Israel y Hamás iniciada en 2023. Rige un alto el fuego frágil desde octubre de 2025."
       }
     },
     "JOR": {
@@ -5855,6 +5911,10 @@
           ["2016–2020", "Saad Hariri", "cder"],
           ["2014–2016", "Tammam Salam", "cder"]
         ]
+      },
+      "crisis": {
+        "tipo": "guerra",
+        "texto": "Sufrió nuevos ataques de Israel en 2026, que llevaron a postergar las elecciones."
       }
     },
     "SYR": {
@@ -5897,6 +5957,10 @@
         "proxima": "Transición de cinco años",
         "nota": "Lideró la ofensiva islamista que derrocó a Asad. Promete un gobierno inclusivo, pero hubo matanzas de minorías alauitas y drusas en 2025. En 2026 se formó un parlamento de transición, en parte designado por él. Los datos son estimaciones.",
         "historia": [["2000–2024", "Bashar al Asad", "izq"], ["1971–2000", "Hafez al Asad", "izq"]]
+      },
+      "crisis": {
+        "tipo": "crisis",
+        "texto": "Transición tras la caída de Asad en diciembre de 2024, con episodios de violencia contra minorías."
       }
     },
     "EGY": {
@@ -5990,6 +6054,10 @@
           ["2011–2012", "Mustafa Abdul Jalil (transición)", "ind"],
           ["1969–2011", "Muamar el Gadafi", "izq"]
         ]
+      },
+      "crisis": {
+        "tipo": "crisis",
+        "texto": "Dividida desde 2011 entre un gobierno en Trípoli y el mariscal Haftar en el este."
       }
     },
     "TUN": {
@@ -6225,6 +6293,10 @@
           ["2012–2013", "Dioncounda Traoré (interino)", "cizq"],
           ["2002–2012", "Amadou Toumani Touré", "ind"]
         ]
+      },
+      "crisis": {
+        "tipo": "militar",
+        "texto": "Gobierno militar desde 2020, en medio de una insurgencia yihadista que en 2025 bloqueó el combustible de la capital."
       }
     },
     "NER": {
@@ -6272,6 +6344,10 @@
           ["2010–2011", "Junta militar", "ind"],
           ["1999–2010", "Mamadou Tandja", "cder"]
         ]
+      },
+      "crisis": {
+        "tipo": "militar",
+        "texto": "Gobierno militar desde el golpe de 2023. Sobrevivió a un intento de golpe en agosto de 2026."
       }
     },
     "BFA": {
@@ -6319,6 +6395,10 @@
           ["2014–2015", "Michel Kafando (transición)", "ind"],
           ["1987–2014", "Blaise Compaoré", "cder"]
         ]
+      },
+      "crisis": {
+        "tipo": "militar",
+        "texto": "Gobierno militar desde 2022. Los yihadistas controlan buena parte del territorio."
       }
     },
     "TCD": {
@@ -6501,6 +6581,10 @@
           ["2012–2014", "Manuel Serifo Nhamadjo (transición)", "ind"],
           ["2009–2012", "Malam Bacai Sanhá", "cizq"]
         ]
+      },
+      "crisis": {
+        "tipo": "militar",
+        "texto": "Gobierno militar desde el golpe de noviembre de 2025. Prometió elecciones para diciembre de 2026."
       }
     },
     "GIN": {
@@ -6876,6 +6960,10 @@
           ["2007–2010", "Umaru Musa Yar'Adua", "cizq"],
           ["1999–2007", "Olusegun Obasanjo", "cizq"]
         ]
+      },
+      "crisis": {
+        "tipo": "conflicto",
+        "texto": "Insurgencia yihadista en el noreste y bandas armadas en el noroeste."
       }
     },
     "CPV": {
@@ -6965,6 +7053,10 @@
         "proxima": "2032",
         "nota": "Tiene 93 años y gobierna desde 1982. Fue reelegido en octubre de 2025 en unas elecciones muy cuestionadas, seguidas de protestas reprimidas.",
         "historia": [["1960–1982", "Ahmadou Ahidjo", "cder"]]
+      },
+      "crisis": {
+        "tipo": "conflicto",
+        "texto": "Conflicto en las regiones anglófonas desde 2017 y ataques de Boko Haram en el norte."
       }
     },
     "CAF": {
@@ -7012,6 +7104,10 @@
           ["2003–2013", "François Bozizé", "cder"],
           ["1993–2003", "Ange-Félix Patassé", "cizq"]
         ]
+      },
+      "crisis": {
+        "tipo": "conflicto",
+        "texto": "Grupos armados controlan partes del país desde 2013."
       }
     },
     "GAB": {
@@ -7188,6 +7284,10 @@
           ["1997–2001", "Laurent-Désiré Kabila", "izq"],
           ["1965–1997", "Mobutu Sese Seko", "der"]
         ]
+      },
+      "crisis": {
+        "tipo": "conflicto",
+        "texto": "Conflicto armado en el este: el grupo M23, apoyado por Ruanda, tomó Goma y Bukavu en 2025."
       }
     },
     "STP": {
@@ -7282,6 +7382,10 @@
           ["1985–1986", "Abdel Rahman Swar al Dahab", "ind"],
           ["1969–1985", "Gaafar Nimeiry", "izq"]
         ]
+      },
+      "crisis": {
+        "tipo": "guerra",
+        "texto": "Guerra civil entre el ejército y las RSF desde abril de 2023. La ONU la considera la peor crisis humanitaria del mundo."
       }
     },
     "SSD": {
@@ -7324,6 +7428,10 @@
         "proxima": "Diciembre de 2026 (probablemente postergadas)",
         "nota": "Es el único presidente que tuvo el país. Su rival y vicepresidente, Riek Machar, está siendo juzgado por traición desde 2025, lo que hizo temer una vuelta a la guerra civil de 2013-2018. Los datos de comercio son estimaciones.",
         "historia": []
+      },
+      "crisis": {
+        "tipo": "conflicto",
+        "texto": "El juicio al vicepresidente Machar hace temer una vuelta a la guerra civil."
       }
     },
     "ETH": {
@@ -7371,6 +7479,10 @@
           ["1991–1995", "Meles Zenawi (presidente de transición)", "izq"],
           ["1987–1991", "Mengistu Haile Mariam", "izq"]
         ]
+      },
+      "crisis": {
+        "tipo": "conflicto",
+        "texto": "Conflictos armados regionales, sobre todo en Amhara, y tensión con Eritrea."
       }
     },
     "ERI": {
@@ -7502,6 +7614,10 @@
           ["2009–2012", "Sharif Sheikh Ahmed", "der"],
           ["2004–2008", "Abdullahi Yusuf Ahmed", "ind"]
         ]
+      },
+      "crisis": {
+        "tipo": "conflicto",
+        "texto": "El grupo yihadista Al Shabab controla zonas rurales y comete atentados."
       }
     },
     "KEN": {
@@ -7919,6 +8035,10 @@
           ["1986–2005", "Joaquim Chissano", "izq"],
           ["1975–1986", "Samora Machel", "izq"]
         ]
+      },
+      "crisis": {
+        "tipo": "conflicto",
+        "texto": "Insurgencia yihadista en Cabo Delgado desde 2017, donde están las grandes reservas de gas."
       }
     },
     "ZWE": {
@@ -8238,6 +8358,10 @@
           ["2009–2014", "Andry Rajoelina (transición)", "cder"],
           ["2002–2009", "Marc Ravalomanana", "cder"]
         ]
+      },
+      "crisis": {
+        "tipo": "militar",
+        "texto": "Gobierno militar desde octubre de 2025, tras protestas juveniles. Prometió elecciones para 2027."
       }
     },
     "MUS": {

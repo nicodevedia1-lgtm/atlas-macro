@@ -102,7 +102,7 @@ header.top .lede { color: var(--muted); max-width: 52ch; }
 .tip .flag { width: 27px; height: 18px; border-radius: 3px; }
 .maploading { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: 14px; pointer-events: none; }
 .mapbar { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; padding: 10px 14px; border-top: 1px solid var(--line); background: var(--surface); }
-.modes { display: flex; gap: 6px; width: 100%; }
+.modes { display: flex; flex-wrap: wrap; gap: 6px; width: 100%; }
 .ideo-filter button { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 3px 10px; font-size: 13px; cursor: pointer; }
 .ideo-filter button i { margin: 0; }
 .ideo-filter button[aria-pressed="true"] { border-color: var(--ink); font-weight: 700; }
@@ -241,6 +241,24 @@ button, select { font: inherit; color: var(--ink); }
 .ar-dia { display: grid; gap: 8px; }
 .ar-dia h3 { font-size: 17px; font-weight: 700; }
 .gob-ley { display: inline-flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 4px; }
+.agenda { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; }
+@media (max-width: 860px) { .agenda { grid-template-columns: minmax(0, 1fr); } }
+.agenda > div { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.agenda h2 { font-size: 24px; font-weight: 800; }
+#agConf { max-height: 620px; overflow-y: auto; }
+.ag-list { list-style: none; margin: 0; padding: 0; display: grid; }
+.ag-list li { display: grid; grid-template-columns: 5.6em 24px minmax(0, 1fr); gap: 2px 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+.ag-list .flag { width: 24px; height: 16px; border-radius: 3px; }
+.ag-list .ag-f { font-family: var(--f-data); font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.ag-list small { grid-column: 3; color: var(--muted); font-size: 13px; }
+.ag-list .ag-t { grid-column: 1 / 2; }
+.crisis-box { display: grid; gap: 4px; padding: 12px 14px; border-radius: 10px; background: var(--bg); border-left: 4px solid var(--ic); font-size: 14.5px; }
+.crisis-box b { font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--ic); }
+.news { display: grid; gap: 8px; }
+.news h3 { font-size: 17px; font-weight: 700; }
+.news-btn { justify-self: start; padding: 9px 14px; border: 1px solid var(--line); border-radius: 12px; color: var(--ink); text-decoration: none; font-weight: 600; font-size: 14.5px; }
+.news-btn:hover { border-color: var(--accent); color: var(--accent); }
+.pol-elec { font-size: 14px; }
 .pend { font-size: 15px; color: var(--muted); padding: 12px 14px; background: var(--bg); border-radius: 10px; }
 .note { font-size: 13px; color: var(--muted); max-width: 80ch; }
 footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
@@ -265,6 +283,8 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
         <div class="modes" role="group" aria-label="Qué muestra el mapa">
           <button class="btn" id="mFichas" aria-pressed="true" type="button">Fichas</button>
           <button class="btn" id="mGob" aria-pressed="false" type="button">Quién gobierna</button>
+          <button class="btn" id="mElec" aria-pressed="false" type="button">Elecciones</button>
+          <button class="btn" id="mConf" aria-pressed="false" type="button">Conflictos</button>
         </div>
         <div class="legend" id="legFichas">
           <span><i style="background:var(--accent)"></i>País elegido</span>
@@ -273,6 +293,8 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
           <span><i style="background:#9EC476"></i>Solo datos macro</span>
         </div>
         <div class="legend ideo-filter" id="legGob" hidden></div>
+        <div class="legend" id="legElec" hidden></div>
+        <div class="legend" id="legConf" hidden></div>
         <div class="views">
           <button class="btn" id="vRelief" aria-pressed="true" type="button">Relieve</button>
           <button class="btn" id="vWorld" aria-pressed="false" type="button">Mundo</button>
@@ -289,6 +311,11 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
       </div>
     </div>
     <aside class="panel" id="panel" aria-live="polite"></aside>
+  </section>
+
+  <section class="agenda" id="agenda" hidden>
+    <div><div class="eyebrow">Agenda</div><h2>Próximas elecciones</h2><ol class="ag-list" id="agElec"></ol><p class="note" id="agElecNota"></p></div>
+    <div><div class="eyebrow">Mundo</div><h2>Conflictos y crisis</h2><ul class="ag-list" id="agConf"></ul><p class="note">Lista escrita a mano, actualizada a octubre de 2026.</p></div>
   </section>
 
   <section class="versus" id="versus">
@@ -339,7 +366,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
    ===================================================================== */
 
 /* Se completan cuando terminan de cargar los archivos (ver arrancar()) */
-let DATOS = null, CURADO = null, ARGENTINA = null;  /* argentina.json: riesgo país y dólar */
+let DATOS = null, CURADO = null, ARGENTINA = null, NOTICIAS = null;  /* argentina.json: riesgo país y dólar */
 let ANIO, ANIOS, YEARS, MUNDO = {};
 const PAISES = {};     /* ficha armada de cada país, por código ISO3 ("ARG") */
 const HIST = {};       /* series históricas de cada país */
@@ -459,6 +486,78 @@ const VBTN = { mundo: "vWorld", sa: "vSA", ca: "vCA", na: "vNA", cb: "vCB", eu: 
 let vistaActual = "sa";
 const iso = f => f.properties.iso;
 
+/* ---------- NOTICIAS, ELECCIONES Y CONFLICTOS ---------- */
+const CRISIS = {
+  guerra: { t: "Guerra", corto: "Guerra", c: "--bad" },
+  conflicto: { t: "Conflicto armado", corto: "Conflicto", c: "--warn" },
+  militar: { t: "Gobierno militar", corto: "Militar", c: "--ind" },
+  crisis: { t: "Crisis política o humanitaria", corto: "Crisis", c: "--b" }
+};
+const crisisDe = k => CURADO && CURADO.paises[k] && CURADO.paises[k].crisis;
+const hoyISO = () => new Date().toISOString().slice(0, 10);
+const MESES = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+function fechaElec(e) {
+  const [y, m, d] = e.fecha.split("-").map(Number);
+  return e.precision >= 11 ? `${d} de ${MESES[m - 1]} de ${y}` : e.precision === 10 ? `${MESES[m - 1]} de ${y}` : String(y);
+}
+const fechaCorta = e => { const [y, m, d] = e.fecha.split("-"); return e.precision >= 11 ? `${d}/${m}/${y}` : e.precision === 10 ? `${m}/${y}` : y; };
+const proximasElecciones = () => {
+  if (!NOTICIAS) return [];
+  const vistas = new Set();   // una sola elección por país y fecha
+  return NOTICIAS.elecciones.filter(e => {
+    const clave = e.iso + e.fecha;
+    if (e.fecha < hoyISO() || !PAISES[e.iso] || vistas.has(clave)) return false;
+    vistas.add(clave); return true;
+  }).map(e => /^Q\d+$/.test(e.nombre) ? { ...e, nombre: "Elecciones" } : e);
+};
+const eleccionDe = k => proximasElecciones().find(e => e.iso === k) || null;
+function colorModo(k) {
+  if (modo === "gob") return POLITICA[k] ? `var(${IDEO[POLITICA[k].ideo].c})` : null;
+  if (modo === "conf") { const c = crisisDe(k); return c ? `var(${CRISIS[c.tipo].c})` : null; }
+  if (modo === "elec") { const e = eleccionDe(k); if (!e) return null;
+    const dias = (new Date(e.fecha) - new Date(hoyISO())) / 864e5;
+    return dias <= 60 ? "var(--accent)" : dias <= 180 ? "var(--accent-soft)" : "color-mix(in srgb, var(--accent-soft) 45%, transparent)"; }
+  return null;
+}
+function renderAgenda() {
+  const prox = proximasElecciones(), sec = document.getElementById("agenda");
+  const conf = Object.keys(CURADO.paises).filter(k => CURADO.paises[k].crisis && PAISES[k]);
+  sec.hidden = !prox.length && !conf.length;
+  document.getElementById("agElec").innerHTML = prox.length ? prox.slice(0, 12).map(e =>
+    `<li><span class="ag-f">${fechaCorta(e)}</span>${flag(e.iso) || "<span></span>"}<span><button class="plink" type="button" data-pais="${e.iso}">${PAISES[e.iso].nombre}</button></span><small>${e.nombre}</small></li>`).join("")
+    : `<li><span></span><span></span><span>Todavía no hay datos de elecciones.</span></li>`;
+  document.getElementById("agElecNota").textContent = NOTICIAS ? `Fuente: Wikidata. Se actualiza todos los días. ${prox.length > 12 ? `Hay ${prox.length} elecciones en los próximos 12 meses; mirá el mapa en modo "Elecciones" para verlas todas.` : ""}` : "";
+  const orden = Object.keys(CRISIS);
+  document.getElementById("agConf").innerHTML = conf.sort((a, b) => orden.indexOf(CURADO.paises[a].crisis.tipo) - orden.indexOf(CURADO.paises[b].crisis.tipo)).map(k => {
+    const c = CURADO.paises[k].crisis;
+    return `<li><span class="ipill" style="--ic: var(${CRISIS[c.tipo].c})">${CRISIS[c.tipo].corto}</span>${flag(k) || "<span></span>"}<span><button class="plink" type="button" data-pais="${k}">${PAISES[k] ? PAISES[k].nombre : k}</button></span><small>${c.texto}</small></li>`;
+  }).join("");
+  sec.querySelectorAll(".plink").forEach(b => b.onclick = () => { elegir(b.dataset.pais); document.getElementById("mapcard").scrollIntoView({ behavior: reduced() ? "auto" : "smooth" }); });
+}
+function renderLegElec() {
+  const n = proximasElecciones().length;
+  document.getElementById("legElec").innerHTML = NOTICIAS
+    ? `<span><i style="background:var(--accent)"></i>En menos de 2 meses</span><span><i style="background:var(--accent-soft)"></i>En 2 a 6 meses</span><span><i style="background:color-mix(in srgb, var(--accent-soft) 45%, transparent)"></i>En 6 a 12 meses</span><span>${n} elecciones · fuente: Wikidata</span>`
+    : `<span>Todavía no hay datos de elecciones.</span>`;
+}
+function renderLegConf() {
+  const cuenta = t => Object.values(CURADO.paises).filter(p => p.crisis && p.crisis.tipo === t).length;
+  document.getElementById("legConf").innerHTML = Object.keys(CRISIS).map(t => `<span><i style="background:var(${CRISIS[t].c})"></i>${CRISIS[t].t} · ${cuenta(t)}</span>`).join("");
+}
+function bloqueCrisis(k) {
+  const c = crisisDe(k); if (!c) return "";
+  return `<div class="crisis-box" style="--ic: var(${CRISIS[c.tipo].c})"><b>${CRISIS[c.tipo].t}</b><span>${c.texto}</span></div>`;
+}
+function bloqueNoticias(k) {
+  const p = PAISES[k]; if (!p) return "";
+  // Busca en Google Noticias las notas de economía y política de la última semana
+  const q = `"${p.nombre}" (economía OR inflación OR gobierno OR elecciones) when:7d`;
+  const url = "https://news.google.com/search?hl=es-419&gl=AR&ceid=AR:es-419&q=" + encodeURIComponent(q);
+  return `<div class="news"><h3>Noticias</h3>
+    <a class="news-btn" href="${url}" target="_blank" rel="noopener">Ver noticias de economía y política de ${p.nombre} <span aria-hidden="true">↗</span></a>
+    <p class="note">Abre Google Noticias con las notas de los últimos 7 días.</p></div>`;
+}
+
 function paintMap() {
   if (!gRoot) return;
   gRoot.selectAll("path.c").attr("class", f => {
@@ -470,8 +569,8 @@ function paintMap() {
     return c;
   });
   gRoot.selectAll("path.c")
-    .attr("data-ideo", f => POLITICA[iso(f)] ? POLITICA[iso(f)].ideo : null)
-    .style("--ic", f => POLITICA[iso(f)] ? `var(${IDEO[POLITICA[iso(f)].ideo].c})` : null)
+    .attr("data-ideo", f => colorModo(iso(f)) ? "1" : null)
+    .style("--ic", f => colorModo(iso(f)))
     .classed("dim", f => modo === "gob" && filtroIdeo && (!POLITICA[iso(f)] || POLITICA[iso(f)].ideo !== filtroIdeo));
   gRoot.selectAll("path.c.sel").raise();
 }
@@ -495,7 +594,9 @@ function buildMap() {
     .on("pointermove", (e, f) => {
       if (e.pointerType !== "mouse") return;
       const k = iso(f), p = PAISES[k];
-      const sub = modo === "gob" && POLITICA[k] ? `${POLITICA[k].lider} · ${IDEO[POLITICA[k].ideo].t}`
+      const el = modo === "elec" && eleccionDe(k), cr = modo === "conf" && crisisDe(k);
+      const sub = el ? `Elecciones: ${fechaElec(el)}` : cr ? CRISIS[cr.tipo].t
+        : modo === "gob" && POLITICA[k] ? `${POLITICA[k].lider} · ${IDEO[POLITICA[k].ideo].t}`
         : !p ? "Sin datos" : p.curada ? "Ficha completa · tocá para ver" : "Datos macro · tocá para ver";
       tip.innerHTML = `${flag(k)}<div><b>${p ? p.nombre : f.properties.name}</b><small>${sub}</small></div>`;
       const r = document.getElementById("mapcard").getBoundingClientRect();
@@ -522,16 +623,22 @@ function renderLegGob() {
 }
 function setModo(m) {
   modo = m;
-  document.getElementById("mFichas").setAttribute("aria-pressed", m === "fichas");
-  document.getElementById("mGob").setAttribute("aria-pressed", m === "gob");
-  document.getElementById("map").classList.toggle("gob", m === "gob");
-  document.getElementById("legFichas").hidden = m === "gob";
+  const botones = { fichas: "mFichas", gob: "mGob", elec: "mElec", conf: "mConf" };
+  Object.entries(botones).forEach(([k, id]) => document.getElementById(id).setAttribute("aria-pressed", m === k));
+  document.getElementById("map").classList.toggle("gob", m !== "fichas");   /* modos que pintan cada país */
+  document.getElementById("legFichas").hidden = m !== "fichas";
   document.getElementById("legGob").hidden = m !== "gob";
+  document.getElementById("legElec").hidden = m !== "elec";
+  document.getElementById("legConf").hidden = m !== "conf";
   if (m === "gob") renderLegGob();
+  if (m === "elec") renderLegElec();
+  if (m === "conf") renderLegConf();
   paintMap();
 }
 document.getElementById("mFichas").onclick = () => setModo("fichas");
 document.getElementById("mGob").onclick = () => setModo("gob");
+document.getElementById("mElec").onclick = () => setModo("elec");
+document.getElementById("mConf").onclick = () => setModo("conf");
 function irA(nombre, instant) {
   if (!projection) return;
   const [[lo0, la0], [lo1, la1]] = CAJAS[nombre];
@@ -796,6 +903,7 @@ function politica(k) {
       <strong>${p.lider}</strong>
       <span class="pol-meta">${ideoPill(p.ideo)} desde ${p.desde}</span>
       <span class="pol-meta">Próxima elección: <b>${p.proxima}</b></span>
+      ${eleccionDe(k) ? `<span class="pol-meta pol-elec">Según Wikidata: <b>${eleccionDe(k).nombre}</b>, ${fechaElec(eleccionDe(k))}</span>` : ""}
     </div>
     ${p.nota ? `<p class="pol-nota">${p.nota}</p>` : ""}
     ${p.historia.length ? `<h4>Últimas presidencias</h4>` : ""}
@@ -829,6 +937,7 @@ function renderPanel() {
       </div>
     </div>
     <div class="meta">${d.capital ? `<span>Capital <b>${d.capital}</b></span>` : ""}${d.poblacion != null ? `<span>Población <b>${d.poblacion >= 1 ? nf(d.poblacion, 1) + " millones" : nf(d.poblacion * 1e6) + " habitantes"}</b>${anioTag(d, "poblacion")}</span>` : ""}</div>
+    ${bloqueCrisis(seleccion)}
     ${d.curada ? `<p class="resumen">${d.resumen}</p>` : `<p class="pend">Por ahora esta ficha tiene solo los datos macro. El resumen, el comercio y la política se van sumando de a una región.</p>`}
     <div class="metrics">
       <div class="metric">
@@ -887,6 +996,7 @@ function renderPanel() {
         <div><h4>A quién le compra</h4>${socios(d.socios.compra)}</div>
       </div>
     </div>` : ""}
+    ${bloqueNoticias(seleccion)}
     ${politica(seleccion)}
     <button class="go" id="goCmp" type="button">Comparar ${d.nombre} con otro país</button>
   `;
@@ -1066,10 +1176,11 @@ function textoFuentes() {
 function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); } }
 
 const leer = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: error ${r.status}`); return r.json(); });
-Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null)])
-  .then(([datos, curado, topo, argentina]) => {
-    DATOS = datos; CURADO = curado; ARGENTINA = argentina;
+Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null)])
+  .then(([datos, curado, topo, argentina, noticias]) => {
+    DATOS = datos; CURADO = curado; ARGENTINA = argentina; NOTICIAS = noticias;
     prepararDatos();
+    renderAgenda();
     armarMetricas();
     const n = Object.keys(PAISES).length, m = Object.values(PAISES).filter(p => p.curada).length;
     document.getElementById("conteo").textContent = `${n} países con datos · ${m} con ficha completa`;
