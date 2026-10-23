@@ -5,7 +5,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600;700&display=swap">
 <style>
-/* Layout: sala de mapas — planisferio con relieve a la izquierda, ficha del país a la derecha, "cara a cara" a todo el ancho debajo */
+/* Layout: sala de mapas — planisferio con relieve a la izquierda, ficha del país a la derecha, "comparación" a todo el ancho debajo (se abre desde el menú) */
 :root {
   --bg: #ECEFF2;
   --surface: #FFFFFF;
@@ -71,10 +71,50 @@ p { margin: 0; }
 .flag { display: inline-flex; flex: 0 0 auto; border-radius: 4px; overflow: hidden; box-shadow: 0 0 0 1px var(--line); vertical-align: middle; }
 .flag svg, .flag img { display: block; width: 100%; height: 100%; object-fit: cover; }
 
-header.top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; }
-header.top h1 { font-size: clamp(34px, 5vw, 52px); font-weight: 800; letter-spacing: -.02em; }
+/* Barra superior fija */
+.topbar { position: sticky; top: 0; z-index: 30; display: flex; align-items: center; gap: 12px;
+  padding: 10px max(16px, env(safe-area-inset-right, 0px)) 10px max(16px, env(safe-area-inset-left, 0px));
+  background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+.burger { flex: none; width: 40px; height: 40px; display: grid; place-content: center; gap: 4px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); cursor: pointer; }
+.burger span { display: block; width: 18px; height: 2px; border-radius: 2px; background: var(--ink); }
+.burger:hover { border-color: var(--accent); }
+.logo { font-family: var(--f-display); font-weight: 800; font-size: 21px; letter-spacing: -.01em; color: var(--ink); text-decoration: none; white-space: nowrap; }
+.logo span { color: var(--accent); }
+.search { position: relative; flex: 1 1 auto; max-width: 380px; margin-left: auto; }
+.search input { width: 100%; padding: 9px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); font: inherit; font-size: 15px; }
+.search input:focus { outline: none; border-color: var(--accent); }
+.droplist { position: absolute; top: calc(100% + 6px); left: 0; right: 0; z-index: 30; list-style: none; margin: 0; padding: 6px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,.14); max-height: 340px; overflow-y: auto; }
+.droplist li[role="option"] { display: flex; align-items: center; gap: 10px; width: 100%; padding: 8px 10px; border-radius: 8px; color: var(--ink); font-size: 15px; cursor: pointer; }
+.droplist li[role="option"]:hover, .droplist li[aria-selected="true"] { background: var(--bg); }
+.droplist .flag { width: 24px; height: 16px; border-radius: 3px; flex: none; }
+.droplist small { margin-left: auto; color: var(--muted); font-size: 12.5px; text-align: right; }
+.droplist .vacio { padding: 8px 10px; color: var(--muted); font-size: 14px; }
+@media (max-width: 480px) { .topbar .logo { font-size: 18px; } }
+
+/* Panel lateral */
+.nav-fondo { position: fixed; inset: 0; z-index: 40; background: rgba(10, 16, 28, .38); }
+.nav { position: fixed; top: 0; bottom: 0; left: 0; z-index: 50; width: min(320px, 86vw); display: flex; flex-direction: column; gap: 6px;
+  padding: 14px 12px 18px; background: var(--surface); border-right: 1px solid var(--line); box-shadow: 8px 0 30px rgba(0,0,0,.12);
+  transform: translateX(-102%); transition: transform .25s ease; overflow-y: auto; }
+.nav.abierto { transform: none; }
+.nav-head { display: flex; align-items: center; justify-content: space-between; padding: 4px 8px 10px; }
+.nav-cerrar { width: 36px; height: 36px; border: 0; border-radius: 8px; background: none; color: var(--muted); font-size: 18px; cursor: pointer; }
+.nav-cerrar:hover { background: var(--bg); color: var(--ink); }
+.nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.nav a { display: flex; align-items: center; gap: 12px; padding: 11px 12px; border-radius: 10px; color: var(--ink); text-decoration: none; font-weight: 650; font-size: 16px; border-left: 3px solid transparent; }
+.nav a small { display: block; font-weight: 400; font-size: 13px; color: var(--muted); }
+.nav a:hover { background: var(--bg); }
+.nav a[aria-current="page"] { background: var(--bg); border-left-color: var(--accent); }
+.nav-ico { font-family: var(--f-emoji); font-size: 20px; width: 26px; text-align: center; }
+.nav-pie { margin-top: auto; padding: 12px; font-family: var(--f-data); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+
+/* Páginas */
+.pagina { display: grid; gap: 24px; min-width: 0; }
+header.top { display: grid; gap: 8px; }
+header.top h1 { font-size: clamp(32px, 5vw, 50px); font-weight: 800; letter-spacing: -.02em; }
 header.top h1 span { color: var(--accent); }
-header.top .lede { color: var(--muted); max-width: 52ch; }
+header.top .lede { color: var(--muted); max-width: 64ch; }
 
 .atlas { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 20px; align-items: start; }
 @media (max-width: 960px) { .atlas { grid-template-columns: minmax(0, 1fr); } }
@@ -158,7 +198,17 @@ button, select { font: inherit; color: var(--ink); }
 .partners .pbar i { display: block; height: 100%; background: var(--accent); border-radius: 4px; }
 .partners .ppct { font-family: var(--f-data); font-size: 13px; text-align: right; font-variant-numeric: tabular-nums; }
 .plink { border: 0; background: none; padding: 0; text-align: left; font-size: inherit; color: var(--ink); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; cursor: pointer; }
-.pol { display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 18px; }
+.pol { display: grid; gap: 10px; }
+details.sec { border-top: 1px solid var(--line); }
+details.sec summary { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 0; cursor: pointer; list-style: none;
+  font-family: var(--f-display); font-size: 18px; font-weight: 750; }
+details.sec summary::-webkit-details-marker { display: none; }
+details.sec summary:hover { color: var(--accent); }
+.sec-flecha { width: 10px; height: 10px; border-right: 2px solid var(--muted); border-bottom: 2px solid var(--muted); transform: rotate(45deg); transition: transform .2s; margin-right: 4px; flex: none; }
+details.sec[open] .sec-flecha { transform: rotate(225deg); }
+.sec-body { display: grid; gap: 16px; padding-bottom: 18px; }
+.sec-body > .metrics { border-top: 0; }
+.gob-aprox { flex-basis: 100%; }
 .pol h3 { font-size: 17px; font-weight: 700; }
 .pol h4 { font-family: var(--f-body); font-size: 14px; font-weight: 700; color: var(--muted); margin: 4px 0 0; }
 .pol-now { display: grid; gap: 2px; padding: 14px 16px; background: var(--bg); border-radius: 10px; }
@@ -241,11 +291,21 @@ button, select { font: inherit; color: var(--ink); }
 .ar-dia { display: grid; gap: 8px; }
 .ar-dia h3 { font-size: 17px; font-weight: 700; }
 .gob-ley { display: inline-flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 4px; }
-.agenda { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; }
-@media (max-width: 860px) { .agenda { grid-template-columns: minmax(0, 1fr); } }
-.agenda > div { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; display: grid; gap: 10px; align-content: start; min-width: 0; }
-.agenda h2 { font-size: 24px; font-weight: 800; }
-#agConf { max-height: 620px; overflow-y: auto; }
+.lista-pag { display: grid; gap: 18px; }
+.grupo { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 22px 8px; display: grid; gap: 4px; min-width: 0; }
+.grupo h2 { font-size: 20px; font-weight: 800; }
+.grupo h2 small { font-family: var(--f-data); font-size: 12px; font-weight: 400; color: var(--muted); margin-left: 8px; }
+.grupo .ag-list li:last-child { border-bottom: 0; }
+.ag-gob { grid-column: 3; display: flex; flex-wrap: wrap; align-items: center; gap: 4px 8px; font-size: 13px; color: var(--muted); }
+.ag-pronto { font-family: var(--f-data); font-size: 11.5px; color: var(--accent); margin-left: 6px; }
+.conf-filtros { display: flex; flex-wrap: wrap; gap: 8px; }
+.conf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 340px), 1fr)); gap: 14px; }
+.conf-card { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--ic); border-radius: 12px; padding: 14px 16px; display: grid; gap: 6px; align-content: start; }
+.conf-card .cc-top { display: flex; align-items: center; gap: 10px; }
+.conf-card .flag { width: 30px; height: 20px; }
+.conf-card .plink { font-weight: 700; font-size: 16px; }
+.conf-card .ipill { margin-left: auto; }
+.conf-card p { font-size: 14.5px; color: var(--muted); }
 .ag-list { list-style: none; margin: 0; padding: 0; display: grid; }
 .ag-list li { display: grid; grid-template-columns: 5.6em 24px minmax(0, 1fr); gap: 2px 10px; align-items: center; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; }
 .ag-list .flag { width: 24px; height: 16px; border-radius: 3px; }
@@ -265,13 +325,36 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
 </style>
 
+<header class="topbar">
+  <button class="burger" id="menuBtn" type="button" aria-expanded="false" aria-controls="nav" aria-label="Abrir el menú">
+    <span></span><span></span><span></span>
+  </button>
+  <a class="logo" href="#inicio">Atlas <span>Macro</span></a>
+  <div class="search">
+    <input type="search" id="buscar" placeholder="Buscar un país…" autocomplete="off" spellcheck="false"
+           role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="buscarLista" aria-label="Buscar un país">
+    <ul class="droplist" id="buscarLista" role="listbox" hidden></ul>
+  </div>
+</header>
+
+<div class="nav-fondo" id="navFondo" hidden></div>
+<nav class="nav" id="nav" aria-label="Secciones" aria-hidden="true">
+  <div class="nav-head"><span class="logo">Atlas <span>Macro</span></span>
+    <button class="nav-cerrar" id="navCerrar" type="button" aria-label="Cerrar el menú">✕</button></div>
+  <ul>
+    <li><a href="#inicio" data-pag="inicio"><span class="nav-ico" aria-hidden="true">🗺️</span><span>Mapa y fichas<small>Tocá un país y mirá su economía</small></span></a></li>
+    <li><a href="#comparacion" data-pag="comparacion"><span class="nav-ico" aria-hidden="true">⚖️</span><span>Comparación<small>Dos países frente a frente</small></span></a></li>
+    <li><a href="#elecciones" data-pag="elecciones"><span class="nav-ico" aria-hidden="true">🗳️</span><span>Próximas elecciones<small>Los próximos 12 meses</small></span></a></li>
+    <li><a href="#conflictos" data-pag="conflictos"><span class="nav-ico" aria-hidden="true">⚠️</span><span>Conflictos y crisis<small>Guerras, golpes y crisis</small></span></a></li>
+  </ul>
+  <p class="nav-pie" id="conteo">Cargando datos…</p>
+</nav>
+
 <div class="wrap">
+  <div class="pagina" id="pag-inicio">
   <header class="top">
-    <div>
-      <div class="eyebrow" id="conteo">Cargando datos…</div>
-      <h1>Atlas <span>Macro</span></h1>
-    </div>
-    <p class="lede">Tocá un país en el mapa y mirá cómo le va a su economía, explicado en simple. Abajo podés enfrentar dos países cara a cara.</p>
+    <h1>Atlas <span>Macro</span></h1>
+    <p class="lede">Tocá un país en el mapa o buscalo arriba, y mirá cómo le va a su economía, explicado en simple. En el menú <span aria-hidden="true">☰</span> tenés la comparación entre países, las próximas elecciones y los conflictos del mundo.</p>
   </header>
 
   <section class="atlas">
@@ -288,7 +371,6 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
         </div>
         <div class="legend" id="legFichas">
           <span><i style="background:var(--accent)"></i>País elegido</span>
-          <span><i style="background:var(--b)"></i>Comparando con</span>
           <span><i style="background:var(--accent-soft)"></i>Ficha completa</span>
           <span><i style="background:#9EC476"></i>Solo datos macro</span>
         </div>
@@ -313,15 +395,34 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <aside class="panel" id="panel" aria-live="polite"></aside>
   </section>
 
-  <section class="agenda" id="agenda" hidden>
-    <div><div class="eyebrow">Agenda</div><h2>Próximas elecciones</h2><ol class="ag-list" id="agElec"></ol><p class="note" id="agElecNota"></p></div>
-    <div><div class="eyebrow">Mundo</div><h2>Conflictos y crisis</h2><ul class="ag-list" id="agConf"></ul><p class="note">Lista escrita a mano, actualizada a octubre de 2026.</p></div>
-  </section>
+  </div>
 
+  <div class="pagina" id="pag-elecciones" hidden>
+    <header class="top">
+      <div class="eyebrow">Agenda</div>
+      <h1>Próximas elecciones</h1>
+      <p class="lede" id="elecLede">Las elecciones nacionales de los próximos 12 meses en todo el mundo.</p>
+    </header>
+    <div class="lista-pag" id="agElec"></div>
+    <p class="note" id="agElecNota"></p>
+  </div>
+
+  <div class="pagina" id="pag-conflictos" hidden>
+    <header class="top">
+      <div class="eyebrow">Mundo</div>
+      <h1>Conflictos y crisis</h1>
+      <p class="lede">Países en guerra, con conflictos armados internos, gobernados por militares o en crisis política o humanitaria.</p>
+    </header>
+    <div class="conf-filtros" id="confFiltros" role="group" aria-label="Filtrar por tipo"></div>
+    <div class="lista-pag" id="agConf"></div>
+    <p class="note">Lista escrita a mano, actualizada a octubre de 2026. Para ver los conflictos en el mapa, elegí el modo "Conflictos" arriba del planisferio.</p>
+  </div>
+
+  <div class="pagina" id="pag-comparacion" hidden>
   <section class="versus" id="versus">
     <div class="vs-head">
       <div>
-        <div class="eyebrow">Cara a cara</div>
+        <div class="eyebrow">Comparación</div>
         <h2>¿Quién está mejor?</h2>
       </div>
       <div class="pickers">
@@ -347,6 +448,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
       <p class="note" id="tlNote"></p>
     </div>
   </section>
+  </div>
 
   <footer>
     <p id="fuentes">Cargando fuentes…</p>
@@ -366,7 +468,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
    ===================================================================== */
 
 /* Se completan cuando terminan de cargar los archivos (ver arrancar()) */
-let DATOS = null, CURADO = null, ARGENTINA = null, NOTICIAS = null;  /* argentina.json: riesgo país y dólar */
+let DATOS = null, CURADO = null, ARGENTINA = null, NOTICIAS = null, RIESGO = null;  /* argentina.json: riesgo país y dólar · riesgo.json: riesgo país de Latinoamérica */
 let ANIO, ANIOS, YEARS, MUNDO = {};
 const PAISES = {};     /* ficha armada de cada país, por código ISO3 ("ARG") */
 const HIST = {};       /* series históricas de cada país */
@@ -394,6 +496,28 @@ const aSerie = m => { const ys = Object.keys(m).map(Number); if (!ys.length) ret
 const aRangos = ys => ys.sort((a, b) => a - b).reduce((r, y) => { if (r.length && y === r[r.length - 1][1] + 1) r[r.length - 1][1] = y; else r.push([y, y]); return r; }, []);
 const ultimo = s => { if (!s) return null; for (let i = s[1].length - 1; i >= 0; i--) if (s[1][i] != null) return { y: s[0] + i, v: s[1][i] }; return null; };
 
+/* Arma la lista de gobiernos de un país a partir de "politica" en curado.json:
+   historia: [["2015–2019", "Mauricio Macri", "cder"], ...] (del más nuevo al más viejo)
+   actual:   lider, ideo y desde ("diciembre de 2023") */
+function gobiernosAprox(pol) {
+  if (!pol || !pol.historia) return null;
+  const lista = pol.historia.slice().reverse().map(([anios, nombre, ideo]) => {
+    const ys = anios.match(/\d{4}/g).map(Number);
+    return [ys[0], ys[ys.length - 1], nombre, ideo];
+  });
+  const m = pol.desde.match(/^(?:([a-záéíóú]+) de )?(\d{4})/i);
+  if (m) {
+    const mes = m[1] ? MESES.indexOf(m[1].toLowerCase()) + 1 : 0;
+    lista.push([mes ? `${m[2]}-${String(mes).padStart(2, "0")}` : +m[2], ANIO + 2, pol.lider, pol.ideo]);
+  }
+  // Cada gobierno termina cuando empieza el siguiente (si se superponen o hay un hueco de menos de un año)
+  for (let i = 0; i < lista.length - 1; i++) {
+    const fin = tGob(lista[i][1]), ini = tGob(lista[i + 1][0]);
+    if (ini <= fin + 1) lista[i][1] = lista[i + 1][0];
+  }
+  return lista.filter(g => IDEO[g[3]]).length ? lista.filter(g => IDEO[g[3]]) : null;
+}
+
 function armarPais(iso, d) {
   const cur = CURADO.paises[iso] || {};
   const h = { notas: cur.notas || {}, marcas: {} };
@@ -419,7 +543,10 @@ function armarPais(iso, d) {
     h.marcas[ind] = Object.fromEntries(Object.entries(porTipo).map(([t, ys]) => [t, aRangos(ys)]));
     if (aj) h.marcas[ind].ajuste = { etiqueta: aj.etiqueta || "Ajuste", nota: aj.nota || "" };
   });
-  h.gobiernos = cur.gobiernos || null;   /* [desde, hasta, nombre, ideología] */
+  /* [desde, hasta, nombre, ideología]. Argentina los tiene escritos a mano con el mes exacto;
+     el resto se arma solo, de forma aproximada, con los últimos gobiernos de la ficha. */
+  h.gobiernos = cur.gobiernos || gobiernosAprox(cur.politica);
+  h.gobAprox = !cur.gobiernos && !!h.gobiernos;
   HIST[iso] = h;
 
   const p = {
@@ -519,20 +646,48 @@ function colorModo(k) {
     return dias <= 60 ? "var(--accent)" : dias <= 180 ? "var(--accent-soft)" : "color-mix(in srgb, var(--accent-soft) 45%, transparent)"; }
   return null;
 }
-function renderAgenda() {
-  const prox = proximasElecciones(), sec = document.getElementById("agenda");
+/* Al tocar un país en una lista: vuelve al mapa y abre su ficha */
+function irAPaisDesdeLista(k) {
+  history.pushState(null, "", "#inicio");
+  mostrarPagina("inicio");
+  elegir(k); irAPais(k);
+}
+const mesTitulo = f => { const [y, m] = f.split("-").map(Number); return `${MESES[m - 1][0].toUpperCase() + MESES[m - 1].slice(1)} de ${y}`; };
+function renderElecciones() {
+  const prox = proximasElecciones(), cont = document.getElementById("agElec");
+  if (!prox.length) { cont.innerHTML = `<p class="note">Todavía no hay datos de elecciones.</p>`; return; }
+  // Agrupamos por mes; las que solo tienen el año van al final
+  const grupos = new Map();
+  prox.filter(e => e.precision >= 10).forEach(e => { const t = mesTitulo(e.fecha); if (!grupos.has(t)) grupos.set(t, []); grupos.get(t).push(e); });
+  const soloAnio = prox.filter(e => e.precision < 10);
+  if (soloAnio.length) grupos.set("Todavía sin fecha exacta", soloAnio);
+  const hoy = new Date(hoyISO());
+  cont.innerHTML = [...grupos].map(([titulo, lista]) => `<section class="grupo"><h2>${titulo}<small>${lista.length} ${lista.length === 1 ? "elección" : "elecciones"}</small></h2>
+    <ul class="ag-list">${lista.map(e => {
+      const dias = Math.round((new Date(e.fecha) - hoy) / 864e5), pol = POLITICA[e.iso];
+      const pronto = e.precision >= 11 && dias <= 30 ? `<span class="ag-pronto">${dias === 0 ? "hoy" : dias === 1 ? "mañana" : `en ${dias} días`}</span>` : "";
+      return `<li><span class="ag-f">${fechaCorta(e)}</span>${flag(e.iso) || "<span></span>"}<span><button class="plink" type="button" data-pais="${e.iso}">${PAISES[e.iso].nombre}</button>${pronto}</span>
+        <small>${e.nombre}</small>${pol ? `<span class="ag-gob">Hoy gobierna ${pol.lider} ${ideoPill(pol.ideo)}</span>` : ""}</li>`;
+    }).join("")}</ul></section>`).join("");
+  document.getElementById("elecLede").textContent = `Las ${prox.length} elecciones nacionales previstas en los próximos 12 meses en todo el mundo. Tocá un país para ver su ficha.`;
+  document.getElementById("agElecNota").textContent = "Fuente: Wikidata, una base de datos abierta y colaborativa. Se actualiza todos los días; las fechas pueden cambiar.";
+  cont.querySelectorAll(".plink").forEach(b => b.onclick = () => irAPaisDesdeLista(b.dataset.pais));
+}
+let filtroConf = "todos";
+function renderConflictos() {
   const conf = Object.keys(CURADO.paises).filter(k => CURADO.paises[k].crisis && PAISES[k]);
-  sec.hidden = !prox.length && !conf.length;
-  document.getElementById("agElec").innerHTML = prox.length ? prox.slice(0, 12).map(e =>
-    `<li><span class="ag-f">${fechaCorta(e)}</span>${flag(e.iso) || "<span></span>"}<span><button class="plink" type="button" data-pais="${e.iso}">${PAISES[e.iso].nombre}</button></span><small>${e.nombre}</small></li>`).join("")
-    : `<li><span></span><span></span><span>Todavía no hay datos de elecciones.</span></li>`;
-  document.getElementById("agElecNota").textContent = NOTICIAS ? `Fuente: Wikidata. Se actualiza todos los días. ${prox.length > 12 ? `Hay ${prox.length} elecciones en los próximos 12 meses; mirá el mapa en modo "Elecciones" para verlas todas.` : ""}` : "";
   const orden = Object.keys(CRISIS);
-  document.getElementById("agConf").innerHTML = conf.sort((a, b) => orden.indexOf(CURADO.paises[a].crisis.tipo) - orden.indexOf(CURADO.paises[b].crisis.tipo)).map(k => {
-    const c = CURADO.paises[k].crisis;
-    return `<li><span class="ipill" style="--ic: var(${CRISIS[c.tipo].c})">${CRISIS[c.tipo].corto}</span>${flag(k) || "<span></span>"}<span><button class="plink" type="button" data-pais="${k}">${PAISES[k] ? PAISES[k].nombre : k}</button></span><small>${c.texto}</small></li>`;
-  }).join("");
-  sec.querySelectorAll(".plink").forEach(b => b.onclick = () => { elegir(b.dataset.pais); document.getElementById("mapcard").scrollIntoView({ behavior: reduced() ? "auto" : "smooth" }); });
+  const cuenta = t => conf.filter(k => CURADO.paises[k].crisis.tipo === t).length;
+  document.getElementById("confFiltros").innerHTML = [["todos", `Todos · ${conf.length}`], ...orden.map(t => [t, `${CRISIS[t].t} · ${cuenta(t)}`])]
+    .map(([t, txt]) => `<button class="btn" type="button" data-t="${t}" aria-pressed="${filtroConf === t}">${txt}</button>`).join("");
+  document.querySelectorAll("#confFiltros .btn").forEach(b => b.onclick = () => { filtroConf = b.dataset.t; renderConflictos(); });
+  const lista = conf.filter(k => filtroConf === "todos" || CURADO.paises[k].crisis.tipo === filtroConf)
+    .sort((a, b) => orden.indexOf(CURADO.paises[a].crisis.tipo) - orden.indexOf(CURADO.paises[b].crisis.tipo) || PAISES[a].nombre.localeCompare(PAISES[b].nombre, "es"));
+  const cont = document.getElementById("agConf");
+  cont.innerHTML = `<div class="conf-grid">${lista.map(k => { const c = CURADO.paises[k].crisis; return `<article class="conf-card" style="--ic: var(${CRISIS[c.tipo].c})">
+      <div class="cc-top">${flag(k)}<button class="plink" type="button" data-pais="${k}">${PAISES[k].nombre}</button><span class="ipill">${CRISIS[c.tipo].corto}</span></div>
+      <p>${c.texto}</p></article>`; }).join("")}</div>`;
+  cont.querySelectorAll(".plink").forEach(b => b.onclick = () => irAPaisDesdeLista(b.dataset.pais));
 }
 function renderLegElec() {
   const n = proximasElecciones().length;
@@ -553,7 +708,7 @@ function bloqueNoticias(k) {
   // Busca en Google Noticias las notas de economía y política de la última semana
   const q = `"${p.nombre}" (economía OR inflación OR gobierno OR elecciones) when:7d`;
   const url = "https://news.google.com/search?hl=es-419&gl=AR&ceid=AR:es-419&q=" + encodeURIComponent(q);
-  return `<div class="news"><h3>Noticias</h3>
+  return `<div class="news">
     <a class="news-btn" href="${url}" target="_blank" rel="noopener">Ver noticias de economía y política de ${p.nombre} <span aria-hidden="true">↗</span></a>
     <p class="note">Abre Google Noticias con las notas de los últimos 7 días.</p></div>`;
 }
@@ -565,7 +720,7 @@ function paintMap() {
     let c = "c";
     if (PAISES[k] && PAISES[k].curada) c += " has";
     if (k && k === seleccion && !sinDatos) c += " sel";
-    else if (k && k === compB) c += " cmp";
+    else if (k && k === compB && versusAbierto()) c += " cmp";
     return c;
   });
   gRoot.selectAll("path.c")
@@ -668,6 +823,121 @@ document.getElementById("vRelief").onclick = e => {
   document.getElementById("map").classList.toggle("flat", !on);
 };
 
+/* ---------- BUSCADOR, MENÚ Y COMPARACIÓN ---------- */
+const sinTildes = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+/* ---------- PÁGINAS Y PANEL LATERAL ----------
+   Cada sección es una "página": #inicio, #comparacion, #elecciones, #conflictos.
+   Se cambia con el link (la dirección cambia, así funciona el botón "atrás" del navegador). */
+const PAGINAS = ["inicio", "comparacion", "elecciones", "conflictos"];
+let paginaActual = "inicio";
+const versusAbierto = () => paginaActual === "comparacion";
+function mostrarPagina(nombre) {
+  if (!PAGINAS.includes(nombre)) nombre = "inicio";
+  const cambio = nombre !== paginaActual;
+  paginaActual = nombre;
+  PAGINAS.forEach(p => document.getElementById("pag-" + p).hidden = p !== nombre);
+  document.querySelectorAll("#nav a[data-pag]").forEach(a => a.setAttribute("aria-current", a.dataset.pag === nombre ? "page" : "false"));
+  cerrarNav();
+  if (nombre === "comparacion") { renderVersus(); drawTL(); tl.resize(); }
+  if (nombre === "inicio") {
+    // si la ventana cambió de tamaño mientras el mapa estaba oculto, lo rearmamos
+    const r = document.getElementById("map").getBoundingClientRect();
+    if (features && (Math.abs(r.width - W) > 2 || Math.abs(r.height - H) > 2)) buildMap();
+    charts.sparks.forEach(c => c.resize());
+  }
+  if (cambio) window.scrollTo(0, 0);
+}
+function abrirNav() {
+  const nav = document.getElementById("nav");
+  nav.classList.add("abierto"); nav.inert = false; nav.setAttribute("aria-hidden", "false");
+  document.getElementById("navFondo").hidden = false;
+  document.getElementById("menuBtn").setAttribute("aria-expanded", "true");
+  (nav.querySelector('a[aria-current="page"]') || nav.querySelector("a")).focus();
+}
+function cerrarNav() {
+  const nav = document.getElementById("nav");
+  if (!nav.classList.contains("abierto")) return;
+  nav.classList.remove("abierto"); nav.inert = true; nav.setAttribute("aria-hidden", "true");
+  document.getElementById("navFondo").hidden = true;
+  document.getElementById("menuBtn").setAttribute("aria-expanded", "false");
+  document.getElementById("menuBtn").focus();
+}
+function armarNav() {
+  document.getElementById("nav").inert = true;
+  document.getElementById("menuBtn").onclick = abrirNav;
+  document.getElementById("navCerrar").onclick = cerrarNav;
+  document.getElementById("navFondo").onclick = cerrarNav;
+  document.addEventListener("keydown", e => { if (e.key === "Escape") cerrarNav(); });
+  // tocar el link de la página en la que ya estás solo cierra el panel
+  document.querySelectorAll("#nav a[data-pag]").forEach(a => a.addEventListener("click", () => { if (a.dataset.pag === paginaActual) cerrarNav(); }));
+  window.addEventListener("hashchange", () => mostrarPagina(location.hash.slice(1)));
+}
+
+// Acerca el mapa al país elegido (si es muy grande o cruza el mapa, muestra el mundo)
+function irAPais(k) {
+  if (!projection || !features) return;
+  const f = features.find(x => iso(x) === k);
+  if (!f) return;
+  const [[x0, y0], [x1, y1]] = pathGen.bounds(f);
+  const ancho = Math.max(x1 - x0, W * 0.06), alto = Math.max(y1 - y0, H * 0.06);   // países chiquitos: no acercar de más
+  const z = Math.max(1, Math.min(8, 0.35 / Math.max(ancho / W, alto / H)));
+  const t = d3.zoomIdentity.translate(W / 2 - z * (x0 + x1) / 2, H / 2 - z * (y0 + y1) / 2).scale(z);
+  (reduced() ? svg : svg.transition().duration(700)).call(zoom.transform, t);
+  Object.values(VBTN).forEach(id => document.getElementById(id).setAttribute("aria-pressed", false));
+}
+
+function armarBuscador() {
+  const input = document.getElementById("buscar"), lista = document.getElementById("buscarLista");
+  // Otros nombres con los que la gente busca algunos países
+  const APODOS = { USA: "eeuu ee.uu. usa estados unidos de america", GBR: "inglaterra uk gran bretana escocia gales", NLD: "holanda",
+    KOR: "corea del sur", PRK: "corea del norte", ARE: "emiratos dubai", CZE: "republica checa", MMR: "birmania", CIV: "cote d'ivoire",
+    SWZ: "suazilandia", MKD: "macedonia", TUR: "turkiye", COD: "congo kinshasa", COG: "congo brazzaville", RUS: "rusia" };
+  const capital = k => ((CURADO.paises[k] && CURADO.paises[k].capital) || "").replace(/\s*\(.*\)/, "");
+  const todos = Object.keys(PAISES).map(k => ({ k, n: sinTildes(PAISES[k].nombre), c: sinTildes(capital(k)), a: sinTildes(APODOS[k] || "") }));
+  let resultados = [], activo = -1;
+
+  function buscar(texto) {
+    const q = sinTildes(texto.trim());
+    if (!q) return [];
+    // Primero los que empiezan con lo escrito, después los que lo contienen, después por capital
+    const puntaje = p => p.n.startsWith(q) ? 0 : p.n.split(/[\s-]/).some(w => w.startsWith(q)) ? 1 : p.n.includes(q) ? 2 : p.c.startsWith(q) ? 3 : p.a && p.a.split(" ").some(w => w.startsWith(q)) || (q.length > 3 && p.a.includes(q)) ? 3 : q.length === 3 && p.k === q.toUpperCase() ? 4 : 9;
+    return todos.map(p => [puntaje(p), p]).filter(([s]) => s < 9)
+      .sort((a, b) => a[0] - b[0] || a[1].n.localeCompare(b[1].n)).slice(0, 8).map(([, p]) => p.k);
+  }
+  function mostrar() {
+    resultados = buscar(input.value); activo = resultados.length ? 0 : -1;
+    if (!input.value.trim()) { cerrar(); return; }
+    lista.innerHTML = resultados.length
+      ? resultados.map((k, i) => `<li role="option" id="bo-${k}" data-k="${k}" aria-selected="${i === activo}">${flag(k) || ""}<span>${PAISES[k].nombre}</span>${capital(k) ? `<small>${capital(k)}</small>` : ""}</li>`).join("")
+      : `<li class="vacio">No encontré ningún país con ese nombre.</li>`;
+    lista.hidden = false; input.setAttribute("aria-expanded", true);
+    marcar();
+  }
+  function marcar() {
+    lista.querySelectorAll("li[role=option]").forEach((li, i) => li.setAttribute("aria-selected", i === activo));
+    const li = lista.querySelector('li[aria-selected="true"]');
+    if (li) { li.scrollIntoView({ block: "nearest" }); input.setAttribute("aria-activedescendant", li.id); }
+  }
+  function cerrar() { lista.hidden = true; input.setAttribute("aria-expanded", false); input.removeAttribute("aria-activedescendant"); }
+  function ir(k) {
+    input.value = ""; cerrar(); input.blur();
+    if (paginaActual !== "inicio") { history.pushState(null, "", "#inicio"); mostrarPagina("inicio"); }
+    elegir(k); irAPais(k);
+    document.getElementById("mapcard").scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "nearest" });
+  }
+  input.addEventListener("input", mostrar);
+  input.addEventListener("focus", () => { if (input.value.trim()) mostrar(); });
+  input.addEventListener("keydown", e => {
+    if (e.key === "ArrowDown" && resultados.length) { e.preventDefault(); activo = (activo + 1) % resultados.length; marcar(); }
+    else if (e.key === "ArrowUp" && resultados.length) { e.preventDefault(); activo = (activo - 1 + resultados.length) % resultados.length; marcar(); }
+    else if (e.key === "Enter" && activo >= 0) { e.preventDefault(); ir(resultados[activo]); }
+    else if (e.key === "Escape") { input.value = ""; cerrar(); }
+  });
+  lista.addEventListener("mousedown", e => e.preventDefault());     // que no se pierda el foco antes del click
+  lista.addEventListener("click", e => { const li = e.target.closest("li[data-k]"); if (li) ir(li.dataset.k); });
+  document.addEventListener("click", e => { if (!e.target.closest(".search")) cerrar(); });
+}
+
 function elegir(k, nombreMapa) {
   if (!PAISES[k]) { sinDatos = nombreMapa || k; renderPanel(); paintMap(); return; }
   sinDatos = null;
@@ -748,7 +1018,8 @@ const lineaGobierno = (k, cat) => { const g = gobiernoEn(k, cat); return g ? `<b
 function leyendaGobiernos(k) {
   const g = HIST[k] && HIST[k].gobiernos; if (!g) return "";
   const usadas = Object.keys(IDEO).filter(c => g.some(x => x[3] === c));
-  return ` <span class="gob-ley">Las franjas de fondo muestran quién gobernaba: ${usadas.map(c => `<span class="ipill" style="--ic: var(${IDEO[c].c})">${IDEO[c].t}</span>`).join(" ")}</span>`;
+  const aprox = HIST[k].gobAprox ? `<span class="gob-aprox">Son aproximadas: arrancan en ${anioDe(g[0][0]) | 0}, el año del primer gobierno que figura en la ficha, y los cambios de gobierno se marcan por año, no por mes exacto.</span>` : "";
+  return ` <span class="gob-ley">Las franjas de fondo muestran quién gobernaba: ${usadas.map(c => `<span class="ipill" style="--ic: var(${IDEO[c].c})">${IDEO[c].t}</span>`).join(" ")}${aprox}</span>`;
 }
 
 function histChart(el, k, ind) {
@@ -794,17 +1065,22 @@ function promediosGobierno(k, cats, vals) {
   return grupos.filter(x => x.n).map(x => ({ desde: x.desde, hasta: x.hasta, gob: x.gob, prom: x.suma / x.n }));
 }
 
-function arChart(el, tipo) {
+function arChart(el, tipo, k = "ARG") {
   const c = echarts.init(el);
   const ink = css("--ink"), muted = css("--muted"), line = css("--line"), acc = css("--accent");
   const ax = { color: muted, fontFamily: "IBM Plex Mono, monospace", fontSize: 11 };
   let cats, series, yAxis, fmt;
   if (tipo === "rp") {
-    const m = ARGENTINA.riesgo_pais.mensual;
+    const m = k === "ARG" ? ARGENTINA.riesgo_pais.mensual : RIESGO.paises[k].mensual;
     cats = m.map(x => x[0]);
-    series = [{ name: "Riesgo país", type: "line", data: m.map(x => x[1]), symbol: "none", lineStyle: { color: acc, width: 2 }, areaStyle: { color: acc, opacity: .1 } }];
-    yAxis = { type: "value" };
-    const proms = promediosGobierno("ARG", cats, m.map(x => x[1]));
+    series = [{ name: PAISES[k].nombre, type: "line", data: m.map(x => x[1]), symbol: "none", lineStyle: { color: acc, width: 2 }, itemStyle: { color: acc }, areaStyle: { color: acc, opacity: .1 } }];
+    /* Línea de referencia: promedio de Latinoamérica (si está riesgo.json) */
+    if (RIESGO && RIESGO.latam) {
+      const lat = Object.fromEntries(RIESGO.latam);
+      series.push({ name: "Promedio Latinoamérica", type: "line", data: cats.map(c => lat[c] ?? null), symbol: "none", lineStyle: { color: muted, width: 1.5, type: "dotted" }, itemStyle: { color: muted } });
+    }
+    yAxis = { type: k === "VEN" ? "log" : "value", logBase: 10 };
+    const proms = promediosGobierno(k, cats, m.map(x => x[1]));
     series[0].markLine = {
       silent: true, symbol: "none",
       lineStyle: { color: ink, type: "dashed", width: 1.5, opacity: .8 },
@@ -812,7 +1088,7 @@ function arChart(el, tipo) {
       data: proms.map(x => [{ coord: [cats[x.desde], x.prom], etiqueta: x.hasta - x.desde >= 30 ? nf(x.prom) : "" }, { coord: [cats[x.hasta], x.prom] }])
     };
     fmt = ps => { const pr = proms.find(x => ps[0].dataIndex >= x.desde && ps[0].dataIndex <= x.hasta);
-      return `${nf(ps[0].value)} puntos` + (pr ? `<br><span style="color:${css("--muted")}">Promedio de este gobierno: ${nf(pr.prom)} puntos</span>` : ""); };
+      return ps.filter(p => p.value != null).map(p => `${p.marker}${p.seriesName}: ${nf(p.value)} puntos`).join("<br>") + (pr ? `<br><span style="color:${css("--muted")}">Promedio de este gobierno: ${nf(pr.prom)} puntos</span>` : ""); };
   } else {
     const m = ARGENTINA.dolar.mensual;
     cats = m.map(x => x[0]);
@@ -823,13 +1099,13 @@ function arChart(el, tipo) {
     yAxis = { type: "log", logBase: 10 };
     fmt = ps => ps.map(p => `${p.marker}${p.seriesName}: $${nf(p.value, 0)}`).join("<br>") + `<br>Brecha: ${nf(m[ps[0].dataIndex][3], 0)}%`;
   }
-  const fr = franjasGobierno("ARG", cats);
+  const fr = franjasGobierno(k, cats);
   if (fr.length) series[0].markArea = { silent: true, label: { show: true, color: muted, fontSize: 9, position: "insideTop" }, data: fr };
   c.setOption({
-    grid: { left: 54, right: 12, top: tipo === "rp" ? 14 : 34, bottom: 58 },
-    legend: tipo === "rp" ? undefined : { top: 0, left: 0, textStyle: { color: ink, fontSize: 12 }, itemWidth: 14 },
+    grid: { left: 54, right: 12, top: series.length > 1 ? 34 : 14, bottom: 58 },
+    legend: series.length > 1 ? { top: 0, left: 0, textStyle: { color: ink, fontSize: 12 }, itemWidth: 14 } : undefined,
     tooltip: { trigger: "axis", backgroundColor: css("--surface"), borderColor: line, textStyle: { color: ink },
-      formatter: ps => `<b>${ps[0].name}</b><br>` + fmt(ps) + lineaGobierno("ARG", ps[0].name) },
+      formatter: ps => `<b>${ps[0].name}</b><br>` + fmt(ps) + lineaGobierno(k, ps[0].name) },
     xAxis: { type: "category", data: cats, axisLine: { lineStyle: { color: line } }, axisTick: { show: false }, axisLabel: Object.assign({}, ax, { formatter: v => v.slice(0, 4) }) },
     yAxis: Object.assign(yAxis, { splitLine: { lineStyle: { color: line, type: "dashed" } }, axisLabel: Object.assign({}, ax, { formatter: v => nf(v) }) }),
     dataZoom: [{ type: "inside" }, { type: "slider", height: 18, bottom: 10, borderColor: line, handleStyle: { color: acc }, textStyle: { color: muted, fontSize: 10 } }],
@@ -845,7 +1121,6 @@ function bloqueArgentina() {
       <button class="hbtn" type="button" data-h="${id}" aria-expanded="false">Ver serie histórica</button></div>
       <div class="histbox" id="hb-${id}" hidden><div class="histchart" id="hc-${id}"></div><p class="note">${notaTxt}${leyendaGobiernos("ARG")}</p></div></div>`;
   return `<div class="ar-dia">
-    <h3>Argentina al día</h3>
     <div class="metrics">
       <div class="metric">
         <span class="lbl">Riesgo país</span><span class="val">${nf(rp.valor)} puntos <small class="ytag">${fecha(rp.fecha)}</small></span>
@@ -860,6 +1135,24 @@ function bloqueArgentina() {
     </div>
     <p class="note">Fuente: ArgentinaDatos (argentinadatos.com), proyecto abierto y no oficial. Se actualiza todos los días.</p>
   </div>`;
+}
+
+/* Riesgo país de otros países de Latinoamérica (riesgo.json) */
+function bloqueRiesgo(k) {
+  const r = RIESGO && RIESGO.paises[k];
+  if (!r) return "";
+  const [y, m] = r.ultimo.mes.split("-").map(Number);
+  const lat = RIESGO.latam.length ? RIESGO.latam[RIESGO.latam.length - 1][1] : null;
+  const desde = r.mensual[0][0].slice(0, 4);
+  return `<div class="metrics"><div class="metric">
+    <span class="lbl">Riesgo país</span><span class="val">${nf(r.ultimo.valor)} puntos <small class="ytag">${MESES[m - 1]} ${y}</small></span>
+    <p class="exp">Cuánto más interés que EE.UU. le piden los inversores a ${PAISES[k].nombre} para prestarle. ${nf(r.ultimo.valor)} puntos son ${nf(r.ultimo.valor / 100, 2)} puntos porcentuales más por año.${lat != null ? ` El promedio de Latinoamérica está en ${nf(lat)} puntos.` : ""}</p>
+    <div class="hist"><div class="hist-foot"><span>${desde} → ${y}</span>
+      <button class="hbtn" type="button" data-h="rp" aria-expanded="false">Ver serie histórica</button></div>
+      <div class="histbox" id="hb-rp" hidden><div class="histchart" id="hc-rp"></div>
+      <p class="note">Promedio de cada mes${k === "VEN" ? ", en escala logarítmica porque los bonos de Venezuela están en default desde 2017" : ""}. La línea punteada gris es el promedio de Latinoamérica y las rayas son el promedio de cada gobierno: describen lo que pasó durante cada mandato, no cuánto se debió a sus decisiones.${leyendaGobiernos(k)}</p></div></div>
+  </div></div>
+  <p class="note">Fuente: Banco Central de Reserva del Perú (índice EMBIG, con datos de Reuters). Se actualiza una vez por mes.</p>`;
 }
 
 /* Nota al pie de cada gráfico: explica de dónde sale cada tramo */
@@ -897,7 +1190,6 @@ function politica(k) {
   const p = POLITICA[k];
   if (!p) return "";
   return `<div class="pol">
-    <h3>Política</h3>
     <div class="pol-now">
       <span class="eyebrow">${p.cargo}</span>
       <strong>${p.lider}</strong>
@@ -914,6 +1206,11 @@ function politica(k) {
 const anioTag = (d, ind) => d.u && d.u[ind] && d.u[ind].y !== ANIO ? ` <small class="ytag">dato ${d.u[ind].y}</small>` : "";
 const uv = (d, ind) => d.u && d.u[ind] ? d.u[ind].v : null;
 const lista = arr => `<ul class="items">${arr.map(([e, t]) => `<li><span class="emo" aria-hidden="true">${e}</span><span>${t}</span></li>`).join("")}</ul>`;
+
+/* Secciones desplegables de la ficha. Se recuerda cuáles abriste al cambiar de país. */
+const SECC_ABIERTAS = new Set(["ind"]);
+const sec = (id, titulo, html) => html ? `<details class="sec" data-sec="${id}"${SECC_ABIERTAS.has(id) ? " open" : ""}>
+  <summary><span>${titulo}</span><span class="sec-flecha" aria-hidden="true"></span></summary><div class="sec-body">${html}</div></details>` : "";
 
 function renderPanel() {
   charts.sparks.forEach(c => c.dispose()); charts.sparks = [];
@@ -939,7 +1236,7 @@ function renderPanel() {
     <div class="meta">${d.capital ? `<span>Capital <b>${d.capital}</b></span>` : ""}${d.poblacion != null ? `<span>Población <b>${d.poblacion >= 1 ? nf(d.poblacion, 1) + " millones" : nf(d.poblacion * 1e6) + " habitantes"}</b>${anioTag(d, "poblacion")}</span>` : ""}</div>
     ${bloqueCrisis(seleccion)}
     ${d.curada ? `<p class="resumen">${d.resumen}</p>` : `<p class="pend">Por ahora esta ficha tiene solo los datos macro. El resumen, el comercio y la política se van sumando de a una región.</p>`}
-    <div class="metrics">
+    ${sec("ind", "Indicadores económicos", `<div class="metrics">
       <div class="metric">
         <span class="lbl">PBI</span><span class="val">${pibTxt(uv(d, "pib"))}${anioTag(d, "pib")}</span>
         <p class="exp">Todo lo que produce el país en un año, medido en dólares.</p>
@@ -978,29 +1275,32 @@ function renderPanel() {
         <div class="ctx">${semaforo("cc", d.cc)}</div>
         ${histBlock("cc")}
       </div>
-    </div>
-    ${bloqueArgentina()}
-    ${d.actividades ? `<div class="acts">
-      <h3>A qué se dedica</h3>
+    </div>`)}
+    ${seleccion === "ARG" ? sec("rp", "Argentina al día: riesgo país y dólar", bloqueArgentina()) : sec("rp", "Riesgo país", bloqueRiesgo(seleccion))}
+    ${sec("act", "A qué se dedica", d.actividades ? `<div class="acts">
       <div class="chips">${d.actividades.map(([e, t]) => `<span class="chip"><span class="emo" aria-hidden="true">${e}</span>${t}</span>`).join("")}</div>
-    </div>` : ""}
-    ${d.expo && d.impo ? `<div class="trade">
+    </div>` : "")}
+    ${sec("com", "Comercio y socios", (d.expo && d.impo ? `<div class="trade">
       <div><h3>Qué le vende al mundo</h3><p class="hint">De mayor a menor</p>${lista(d.expo)}</div>
       <div><h3>Qué le compra</h3><p class="hint">De mayor a menor</p>${lista(d.impo)}</div>
-    </div>` : ""}
-    ${d.socios ? `<div class="socios">
-      <h3>Socios comerciales</h3>
+    </div>` : "") + (d.socios ? `<div class="socios">
+      <h4>Socios comerciales</h4>
       <p class="hint">Parte de lo que vende o compra que va a cada país, aprox.</p>
       <div class="trade">
         <div><h4>A quién le vende</h4>${socios(d.socios.vende)}</div>
         <div><h4>A quién le compra</h4>${socios(d.socios.compra)}</div>
       </div>
-    </div>` : ""}
-    ${bloqueNoticias(seleccion)}
-    ${politica(seleccion)}
+    </div>` : ""))}
+    ${sec("pol", "Política", politica(seleccion))}
+    ${sec("not", "Noticias", bloqueNoticias(seleccion))}
     <button class="go" id="goCmp" type="button">Comparar ${d.nombre} con otro país</button>
   `;
   panel.querySelectorAll(".plink").forEach(b => b.onclick = () => elegir(b.dataset.pais));
+  panel.querySelectorAll("details.sec").forEach(dt => dt.addEventListener("toggle", () => {
+    if (dt.open) SECC_ABIERTAS.add(dt.dataset.sec); else SECC_ABIERTAS.delete(dt.dataset.sec);
+    // los gráficos que se dibujaron con la sección cerrada necesitan saber su tamaño real
+    if (dt.open) dt.querySelectorAll("[_echarts_instance_]").forEach(el => { const c = echarts.getInstanceByDom(el); if (c) c.resize(); });
+  }));
   ["pib", "crec", "infl", "deuda", "cc"].filter(ind => HIST[seleccion][ind]).forEach(ind => spark(document.getElementById("sp-" + ind), seleccion, ind, "--accent"));
   panel.querySelectorAll(".hbtn").forEach(b => b.onclick = () => {
     const ind = b.dataset.h, box = document.getElementById("hb-" + ind), abrir = box.hidden;
@@ -1008,17 +1308,16 @@ function renderPanel() {
     b.setAttribute("aria-expanded", abrir);
     b.textContent = abrir ? "Ocultar serie" : "Ver serie histórica";
     const el = document.getElementById("hc-" + ind);
-    if (abrir && !el.dataset.done) { el.dataset.done = "1"; if (ind === "rp" || ind === "usd") arChart(el, ind); else histChart(el, seleccion, ind); }
+    if (abrir && !el.dataset.done) { el.dataset.done = "1"; if (ind === "rp" || ind === "usd") arChart(el, ind, seleccion); else histChart(el, seleccion, ind); }
   });
   document.getElementById("goCmp").onclick = () => {
     compA = seleccion;
     if (compB === compA) compB = compA === "BRA" ? "ARG" : "BRA";
-    renderVersus(); paintMap();
-    document.getElementById("versus").scrollIntoView({ behavior: reduced() ? "auto" : "smooth" });
+    location.hash = "#comparacion";
   };
 }
 
-/* ---------- CARA A CARA ---------- */
+/* ---------- COMPARACIÓN ---------- */
 let METRICAS;
 function armarMetricas() {
   METRICAS = [
@@ -1176,11 +1475,12 @@ function textoFuentes() {
 function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); } }
 
 const leer = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: error ${r.status}`); return r.json(); });
-Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null)])
-  .then(([datos, curado, topo, argentina, noticias]) => {
-    DATOS = datos; CURADO = curado; ARGENTINA = argentina; NOTICIAS = noticias;
+Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null), leer("riesgo.json").catch(() => null)])
+  .then(([datos, curado, topo, argentina, noticias, riesgo]) => {
+    DATOS = datos; CURADO = curado; ARGENTINA = argentina; NOTICIAS = noticias; RIESGO = riesgo;
     prepararDatos();
-    renderAgenda();
+    renderElecciones();
+    renderConflictos();
     armarMetricas();
     const n = Object.keys(PAISES).length, m = Object.values(PAISES).filter(p => p.curada).length;
     document.getElementById("conteo").textContent = `${n} países con datos · ${m} con ficha completa`;
@@ -1191,6 +1491,9 @@ Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json")
     prepararMapa(topo);
     document.getElementById("maploading").remove();
     buildMap();
+    armarBuscador();
+    armarNav();
+    mostrarPagina(location.hash.slice(1) || "inicio");   // si entraron con #elecciones, por ejemplo
   })
   .catch(err => {
     console.error(err);
@@ -1210,7 +1513,7 @@ window.addEventListener("resize", () => {
   clearTimeout(rT);
   rT = setTimeout(() => {
     const r = document.getElementById("map").getBoundingClientRect();
-    if (features && (Math.abs(r.width - W) > 2 || Math.abs(r.height - H) > 2)) buildMap();
+    if (paginaActual === "inicio" && features && (Math.abs(r.width - W) > 2 || Math.abs(r.height - H) > 2)) buildMap();
   }, 200);
 });
 </script>
