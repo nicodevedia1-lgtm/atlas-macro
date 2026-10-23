@@ -1,0 +1,1603 @@
+{
+  "_leeme": "Contenido escrito a mano para Atlas Macro. Cada país va con su código ISO de 3 letras (ARG, BRA, CHL...). Los números macro NO van acá: salen solos de datos.json.",
+  "actualizado": "octubre de 2026",
+  "paises": {
+    "ARG": {
+      "nombre": "Argentina",
+      "capital": "Buenos Aires",
+      "region": "Sudamérica",
+      "resumen": "Una economía grande para la región, con mucho campo, energía que crece fuerte en Vaca Muerta y una historia larga de inflación alta. La inflación bajó fuerte: de más de 200% de promedio en 2024 a cerca de 42% en 2025, y en 2025 la economía volvió a crecer.",
+      "actividades": [
+        ["🌾", "Agro y agroindustria"],
+        ["🛢️", "Petróleo y gas"],
+        ["🚗", "Industria automotriz"],
+        ["🥩", "Alimentos"],
+        ["⛏️", "Minería (litio, oro)"],
+        ["💼", "Servicios"]
+      ],
+      "expo": [
+        ["🫘", "Harina y aceite de soja"],
+        ["🌽", "Maíz"],
+        ["🛢️", "Petróleo crudo"],
+        ["🌾", "Trigo"],
+        ["🚙", "Autos y camionetas"],
+        ["🥇", "Oro"]
+      ],
+      "impo": [
+        ["🔩", "Autopartes y vehículos"],
+        ["⛽", "Combustibles"],
+        ["⚙️", "Maquinaria"],
+        ["🧪", "Químicos"],
+        ["📱", "Celulares y electrónica"]
+      ],
+      "socios": {
+        "vende": [["BRA", 16], ["CHN", 8], ["USA", 8], ["CHL", 6], ["IND", 5]],
+        "compra": [["BRA", 24], ["CHN", 20], ["USA", 10], ["PRY", 4], ["DEU", 3]]
+      },
+      "politica": {
+        "lider": "Javier Milei",
+        "cargo": "Presidente",
+        "ideo": "der",
+        "desde": "diciembre de 2023",
+        "proxima": "Octubre de 2027",
+        "historia": [
+          ["2019–2023", "Alberto Fernández", "cizq"],
+          ["2015–2019", "Mauricio Macri", "cder"],
+          ["2007–2015", "Cristina Fernández de Kirchner", "cizq"],
+          ["2003–2007", "Néstor Kirchner", "cizq"]
+        ]
+      }
+    },
+    "BRA": {
+      "nombre": "Brasil",
+      "capital": "Brasilia",
+      "region": "Sudamérica",
+      "resumen": "La economía más grande de Sudamérica. Produce de todo: soja, petróleo del presal, mineral de hierro, carne, café y hasta aviones. Es el principal socio comercial de Argentina.",
+      "actividades": [
+        ["🚜", "Agronegocios"],
+        ["🛢️", "Petróleo"],
+        ["⛏️", "Minería (hierro)"],
+        ["🏭", "Industria"],
+        ["🏦", "Servicios financieros"],
+        ["✈️", "Aeronáutica"]
+      ],
+      "expo": [
+        ["🫘", "Soja"],
+        ["🛢️", "Petróleo crudo"],
+        ["🪨", "Mineral de hierro"],
+        ["🍬", "Azúcar"],
+        ["🥩", "Carne"],
+        ["☕", "Café"]
+      ],
+      "impo": [
+        ["🌱", "Fertilizantes"],
+        ["⛽", "Combustibles"],
+        ["⚙️", "Maquinaria"],
+        ["🧪", "Químicos"],
+        ["🔩", "Autopartes"]
+      ],
+      "socios": {
+        "vende": [["CHN", 30], ["USA", 11], ["ARG", 4], ["NLD", 4], ["ESP", 3]],
+        "compra": [["CHN", 22], ["USA", 16], ["DEU", 5], ["ARG", 5], ["IND", 3]]
+      },
+      "politica": {
+        "lider": "Luiz Inácio Lula da Silva",
+        "cargo": "Presidente",
+        "ideo": "cizq",
+        "desde": "enero de 2023",
+        "proxima": "Segunda vuelta el 25 de octubre de 2026",
+        "nota": "Lula busca la reelección en la segunda vuelta del 25 de octubre contra Flávio Bolsonaro (derecha), que salió primero en la primera vuelta del 4 de octubre. Quien gane asume el 1 de enero de 2027.",
+        "historia": [
+          ["2019–2022", "Jair Bolsonaro", "der"],
+          ["2016–2018", "Michel Temer", "cder"],
+          ["2011–2016", "Dilma Rousseff", "cizq"],
+          ["2003–2010", "Luiz Inácio Lula da Silva", "cizq"]
+        ]
+      }
+    },
+    "CHL": {
+      "nombre": "Chile",
+      "capital": "Santiago",
+      "region": "Sudamérica",
+      "resumen": "Una economía chica pero muy abierta al mundo. El cobre es su gran producto, y es conocido por su estabilidad: inflación baja la mayor parte del tiempo y deuda moderada.",
+      "actividades": [
+        ["⛏️", "Minería del cobre"],
+        ["🔋", "Litio"],
+        ["💼", "Servicios"],
+        ["🍒", "Fruticultura"],
+        ["🌲", "Forestal y celulosa"],
+        ["🐟", "Pesca y salmón"]
+      ],
+      "expo": [
+        ["🔌", "Cobre refinado"],
+        ["⛏️", "Mineral de cobre"],
+        ["🔋", "Carbonato de litio"],
+        ["🐟", "Salmón"],
+        ["🍒", "Cerezas y fruta"],
+        ["📄", "Celulosa"]
+      ],
+      "impo": [
+        ["⛽", "Combustibles"],
+        ["🚗", "Vehículos"],
+        ["⚙️", "Maquinaria"],
+        ["📱", "Celulares y electrónica"],
+        ["🥫", "Alimentos"]
+      ],
+      "socios": {
+        "vende": [["CHN", 39], ["USA", 16], ["JPN", 7], ["KOR", 6], ["BRA", 5]],
+        "compra": [["CHN", 24], ["USA", 20], ["BRA", 9], ["ARG", 6], ["DEU", 3]]
+      },
+      "politica": {
+        "lider": "José Antonio Kast",
+        "cargo": "Presidente",
+        "ideo": "der",
+        "desde": "marzo de 2026",
+        "proxima": "Noviembre de 2029",
+        "historia": [
+          ["2022–2026", "Gabriel Boric", "izq"],
+          ["2018–2022", "Sebastián Piñera", "cder"],
+          ["2014–2018", "Michelle Bachelet", "cizq"],
+          ["2010–2014", "Sebastián Piñera", "cder"]
+        ]
+      }
+    },
+    "URY": {
+      "nombre": "Uruguay",
+      "capital": "Montevideo",
+      "region": "Sudamérica",
+      "resumen": "Un país chico, de 3,4 millones de habitantes, con el PBI por persona más alto de Sudamérica. Vive de la carne, la celulosa y los servicios, y es conocido por sus instituciones estables.",
+      "actividades": [
+        ["🐄", "Ganadería"],
+        ["📄", "Celulosa"],
+        ["💻", "Software y servicios"],
+        ["🌾", "Agricultura (soja, arroz)"],
+        ["🏖️", "Turismo"],
+        ["🏦", "Servicios financieros"]
+      ],
+      "expo": [
+        ["🥩", "Carne bovina"],
+        ["📄", "Celulosa"],
+        ["🫘", "Soja"],
+        ["🥛", "Lácteos"],
+        ["🍚", "Arroz"],
+        ["🪵", "Madera"]
+      ],
+      "impo": [
+        ["⛽", "Combustibles"],
+        ["🚗", "Vehículos"],
+        ["⚙️", "Maquinaria"],
+        ["📱", "Celulares y electrónica"],
+        ["🧪", "Químicos"]
+      ],
+      "socios": {
+        "vende": [["CHN", 20], ["BRA", 17], ["USA", 11], ["ARG", 6], ["NLD", 3]],
+        "compra": [["BRA", 21], ["CHN", 19], ["ARG", 11], ["USA", 10], ["DEU", 3]]
+      },
+      "politica": {
+        "lider": "Yamandú Orsi",
+        "cargo": "Presidente",
+        "ideo": "cizq",
+        "desde": "marzo de 2025",
+        "proxima": "Octubre de 2029",
+        "historia": [
+          ["2020–2025", "Luis Lacalle Pou", "cder"],
+          ["2015–2020", "Tabaré Vázquez", "cizq"],
+          ["2010–2015", "José Mujica", "izq"],
+          ["2005–2010", "Tabaré Vázquez", "cizq"]
+        ]
+      }
+    },
+    "PRY": {
+      "nombre": "Paraguay",
+      "capital": "Asunción",
+      "region": "Sudamérica",
+      "resumen": "El corazón agrícola y energético de Sudamérica, sin salida al mar. Exporta soja y carne, y le vende a Brasil y Argentina gran parte de la electricidad de las represas de Itaipú y Yacyretá. Crece de forma bastante estable y con inflación baja.",
+      "actividades": [
+        ["🫘", "Agro (soja)"],
+        ["🐄", "Ganadería"],
+        ["⚡", "Energía hidroeléctrica"],
+        ["🚢", "Transporte fluvial"],
+        ["🏭", "Maquila"],
+        ["🛍️", "Comercio"]
+      ],
+      "expo": [
+        ["🫘", "Soja"],
+        ["⚡", "Electricidad"],
+        ["🥩", "Carne bovina"],
+        ["🌽", "Maíz"],
+        ["🫗", "Aceite y harina de soja"],
+        ["🍚", "Arroz"]
+      ],
+      "impo": [
+        ["⛽", "Combustibles"],
+        ["📱", "Celulares y electrónica"],
+        ["⚙️", "Maquinaria"],
+        ["🚗", "Vehículos"],
+        ["🌱", "Fertilizantes"]
+      ],
+      "socios": {
+        "vende": [["BRA", 30], ["ARG", 22], ["CHL", 8], ["USA", 4]],
+        "compra": [["CHN", 31], ["BRA", 23], ["ARG", 11], ["USA", 7]]
+      },
+      "politica": {
+        "lider": "Santiago Peña",
+        "cargo": "Presidente",
+        "ideo": "der",
+        "desde": "agosto de 2023",
+        "proxima": "Abril de 2028",
+        "historia": [
+          ["2018–2023", "Mario Abdo Benítez", "der"],
+          ["2013–2018", "Horacio Cartes", "der"],
+          ["2012–2013", "Federico Franco", "cder"],
+          ["2008–2012", "Fernando Lugo", "izq"]
+        ]
+      }
+    },
+    "BOL": {
+      "nombre": "Bolivia",
+      "capital": "Sucre (gobierno en La Paz)",
+      "region": "Sudamérica",
+      "resumen": "Un país andino y amazónico que creció fuerte durante el boom del gas, con inflación muy baja y tipo de cambio fijo. Desde 2023 se quedó sin dólares: cae la producción de gas, falta combustible y la inflación empezó a subir. Tiene una de las mayores reservas de litio del mundo.",
+      "actividades": [
+        ["⛏️", "Minería (zinc, plata, oro)"],
+        ["🔥", "Gas natural"],
+        ["🫘", "Soja"],
+        ["🔋", "Litio (en desarrollo)"],
+        ["🌾", "Agricultura"],
+        ["🛍️", "Comercio"]
+      ],
+      "expo": [
+        ["🥇", "Oro"],
+        ["🔥", "Gas natural"],
+        ["⛏️", "Zinc"],
+        ["🫘", "Soja y derivados"],
+        ["🪙", "Plata"],
+        ["🌰", "Castaña amazónica"]
+      ],
+      "impo": [
+        ["⛽", "Diésel y nafta"],
+        ["⚙️", "Maquinaria"],
+        ["🚗", "Vehículos"],
+        ["🧪", "Químicos"],
+        ["📱", "Celulares y electrónica"]
+      ],
+      "socios": {
+        "vende": [["IND", 18], ["BRA", 14], ["ARG", 9], ["COL", 7], ["JPN", 7]],
+        "compra": [["CHN", 23], ["BRA", 17], ["ARG", 12], ["USA", 9], ["PER", 7]]
+      },
+      "politica": {
+        "lider": "Rodrigo Paz",
+        "cargo": "Presidente",
+        "ideo": "cder",
+        "desde": "noviembre de 2025",
+        "proxima": "2030",
+        "nota": "Su victoria en el balotaje de octubre de 2025 terminó con casi 20 años de gobiernos de izquierda del MAS.",
+        "historia": [
+          ["2020–2025", "Luis Arce", "izq"],
+          ["2019–2020", "Jeanine Áñez (interina)", "der"],
+          ["2006–2019", "Evo Morales", "izq"],
+          ["2005–2006", "Eduardo Rodríguez Veltzé (interino)", "ind"]
+        ]
+      }
+    },
+    "PER": {
+      "nombre": "Perú",
+      "capital": "Lima",
+      "region": "Sudamérica",
+      "resumen": "Uno de los grandes productores de cobre, oro y plata del mundo. Durante décadas creció rápido con inflación baja, gracias a un banco central muy respetado, aunque la política es inestable: tuvo seis presidentes entre 2016 y 2023. También es potencia en pesca y en frutas como paltas y arándanos.",
+      "actividades": [
+        ["⛏️", "Minería (cobre, oro, zinc)"],
+        ["🎣", "Pesca (anchoveta)"],
+        ["🥑", "Agroexportación"],
+        ["🏗️", "Construcción"],
+        ["🏛️", "Turismo"],
+        ["🛍️", "Comercio"]
+      ],
+      "expo": [
+        ["🔌", "Cobre"],
+        ["🥇", "Oro"],
+        ["⛏️", "Zinc"],
+        ["🐟", "Harina de pescado"],
+        ["🫐", "Arándanos y paltas"],
+        ["🔥", "Gas natural"]
+      ],
+      "impo": [
+        ["⛽", "Combustibles"],
+        ["⚙️", "Maquinaria"],
+        ["🚗", "Vehículos"],
+        ["📱", "Celulares y electrónica"],
+        ["🌾", "Trigo y alimentos"]
+      ],
+      "socios": {
+        "vende": [["CHN", 35], ["USA", 13], ["KOR", 5], ["JPN", 4], ["IND", 4]],
+        "compra": [["CHN", 27], ["USA", 20], ["BRA", 6], ["ARG", 4], ["CHL", 3]]
+      },
+      "politica": {
+        "lider": "Keiko Fujimori",
+        "cargo": "Presidenta",
+        "ideo": "der",
+        "desde": "julio de 2026",
+        "proxima": "Abril de 2031",
+        "nota": "Es la primera mujer elegida presidenta del Perú, en su cuarto intento. Desde 2016 el país tuvo muchos presidentes: varios fueron destituidos por el Congreso o renunciaron.",
+        "historia": [
+          ["2026", "José María Balcázar (interino)", "izq"],
+          ["2025–2026", "José Jerí (interino)", "cder"],
+          ["2022–2025", "Dina Boluarte", "cder"],
+          ["2021–2022", "Pedro Castillo", "izq"],
+          ["2020–2021", "Francisco Sagasti", "cen"],
+          ["2018–2020", "Martín Vizcarra", "cen"]
+        ]
+      }
+    },
+    "COL": {
+      "nombre": "Colombia",
+      "capital": "Bogotá",
+      "region": "Sudamérica",
+      "resumen": "La cuarta economía de América Latina. Vive en buena parte del petróleo y el carbón, y es famosa por el café y las flores. Casi nunca tuvo crisis grandes ni hiperinflación, pero el desempleo es alto y depende mucho de los precios de la energía.",
+      "actividades": [
+        ["🛢️", "Petróleo"],
+        ["🪨", "Carbón"],
+        ["☕", "Café"],
+        ["💐", "Flores"],
+        ["🏦", "Servicios financieros"],
+        ["🏭", "Industria"]
+      ],
+      "expo": [
+        ["🛢️", "Petróleo crudo"],
+        ["🪨", "Carbón"],
+        ["☕", "Café"],
+        ["🥇", "Oro"],
+        ["💐", "Flores"],
+        ["🍌", "Bananas"]
+      ],
+      "impo": [
+        ["⛽", "Combustibles refinados"],
+        ["⚙️", "Maquinaria"],
+        ["📱", "Celulares y electrónica"],
+        ["💊", "Medicamentos"],
+        ["🚗", "Vehículos"]
+      ],
+      "socios": {
+        "vende": [["USA", 28], ["CHN", 6], ["IND", 5], ["ECU", 4], ["BRA", 4]],
+        "compra": [["CHN", 25], ["USA", 24], ["BRA", 6], ["DEU", 3], ["IND", 3]]
+      },
+      "politica": {
+        "lider": "Abelardo de la Espriella",
+        "cargo": "Presidente",
+        "ideo": "der",
+        "desde": "agosto de 2026",
+        "proxima": "Mayo de 2030",
+        "nota": "Ganó la segunda vuelta de junio de 2026 por apenas un punto contra Iván Cepeda, de izquierda.",
+        "historia": [
+          ["2022–2026", "Gustavo Petro", "izq"],
+          ["2018–2022", "Iván Duque", "der"],
+          ["2010–2018", "Juan Manuel Santos", "cder"],
+          ["2002–2010", "Álvaro Uribe", "der"]
+        ]
+      }
+    },
+    "ECU": {
+      "nombre": "Ecuador",
+      "capital": "Quito",
+      "region": "Sudamérica",
+      "resumen": "Usa el dólar como moneda desde 2000, después de una crisis bancaria y una inflación cercana al 100%. Desde entonces la inflación es muy baja. Exporta petróleo, camarón y banano, y en 2024 sufrió una crisis energética con cortes de luz.",
+      "actividades": [
+        ["🛢️", "Petróleo"],
+        ["🦐", "Camarón (acuicultura)"],
+        ["🍌", "Banano"],
+        ["🌹", "Flores"],
+        ["🍫", "Cacao"],
+        ["🎣", "Pesca"]
+      ],
+      "expo": [
+        ["🛢️", "Petróleo crudo"],
+        ["🦐", "Camarón"],
+        ["🍌", "Banano"],
+        ["🍫", "Cacao"],
+        ["🐟", "Atún y conservas"],
+        ["🌹", "Flores"]
+      ],
+      "impo": [
+        ["⛽", "Combustibles"],
+        ["⚙️", "Maquinaria"],
+        ["🚗", "Vehículos"],
+        ["💊", "Medicamentos"],
+        ["📱", "Celulares y electrónica"]
+      ],
+      "socios": {
+        "vende": [["USA", 24], ["CHN", 17], ["CHL", 5], ["ESP", 3], ["COL", 3]],
+        "compra": [["CHN", 23], ["USA", 22], ["COL", 7], ["BRA", 4], ["PER", 4]]
+      },
+      "politica": {
+        "lider": "Daniel Noboa",
+        "cargo": "Presidente",
+        "ideo": "cder",
+        "desde": "noviembre de 2023",
+        "proxima": "Febrero de 2029",
+        "nota": "Llegó en 2023 para completar el mandato de Lasso y fue reelegido en 2025.",
+        "historia": [
+          ["2021–2023", "Guillermo Lasso", "cder"],
+          ["2017–2021", "Lenín Moreno", "cen"],
+          ["2007–2017", "Rafael Correa", "izq"],
+          ["2005–2007", "Alfredo Palacio", "ind"]
+        ]
+      }
+    },
+    "VEN": {
+      "nombre": "Venezuela",
+      "capital": "Caracas",
+      "region": "Sudamérica",
+      "resumen": "Tiene las mayores reservas de petróleo del mundo. Entre 2014 y 2020 su economía se achicó más de dos tercios y sufrió una de las peores hiperinflaciones de la historia; desde 2021 se recupera de a poco. Muchas estadísticas oficiales no se publican, así que hay datos que faltan o son estimaciones.",
+      "actividades": [
+        ["🛢️", "Petróleo"],
+        ["🔥", "Gas"],
+        ["⛏️", "Minería (oro, hierro, bauxita)"],
+        ["🏭", "Petroquímica"],
+        ["🛍️", "Comercio"],
+        ["🌾", "Agricultura"]
+      ],
+      "expo": [
+        ["🛢️", "Petróleo crudo"],
+        ["⛽", "Derivados del petróleo"],
+        ["🥇", "Oro"],
+        ["🧪", "Metanol y químicos"],
+        ["🪨", "Hierro y acero"]
+      ],
+      "impo": [
+        ["🌾", "Alimentos"],
+        ["💊", "Medicamentos"],
+        ["⛽", "Diluyentes y combustibles"],
+        ["⚙️", "Maquinaria"],
+        ["📱", "Celulares y electrónica"]
+      ],
+      "socios": {
+        "vende": [["USA", 25], ["CHN", 23], ["IND", 15], ["ESP", 6]],
+        "compra": [["CHN", 33], ["USA", 15], ["BRA", 12], ["COL", 10]]
+      },
+      "politica": {
+        "lider": "Delcy Rodríguez",
+        "cargo": "Presidenta encargada",
+        "ideo": "izq",
+        "desde": "enero de 2026",
+        "proxima": "Sin fecha anunciada",
+        "nota": "Asumió después de que Estados Unidos capturó a Nicolás Maduro el 3 de enero de 2026. La reelección de Maduro en 2024 había sido cuestionada por la oposición y por buena parte de la comunidad internacional. Rodríguez prometió elecciones, pero sin fecha.",
+        "historia": [
+          ["2013–2026", "Nicolás Maduro", "izq"],
+          ["1999–2013", "Hugo Chávez", "izq"],
+          ["1994–1999", "Rafael Caldera", "cder"],
+          ["1993–1994", "Ramón J. Velásquez (interino)", "ind"]
+        ]
+      },
+      "ajustes": {
+        "infl": {
+          "reemplazar": {
+            "desde": 2017,
+            "valores": [862.6, 130060.2, 9585.5, 2959.8, 686.4, 234.1, 189.8, 48, 475]
+          },
+          "etiqueta": "BCV",
+          "nota": "La zona naranja (2017–2025) son cifras del Banco Central de Venezuela, de diciembre a diciembre, porque no hay datos del Banco Mundial. En 2025 el BCV volvió a publicar después de dos años sin datos."
+        }
+      }
+    },
+    "GUY": {
+      "nombre": "Guyana",
+      "capital": "Georgetown",
+      "region": "Sudamérica",
+      "resumen": "Hasta hace poco era uno de los países más pobres de la región y vivía del azúcar, el arroz y el oro. En 2019 empezó a sacar petróleo del mar y desde entonces es la economía que más crece en el mundo: su PBI se multiplicó casi por cinco en cinco años.",
+      "actividades": [
+        ["🛢️", "Petróleo en el mar"],
+        ["🥇", "Oro"],
+        ["🍚", "Arroz"],
+        ["🍬", "Azúcar"],
+        ["🪨", "Bauxita"],
+        ["🪵", "Madera"]
+      ],
+      "expo": [
+        ["🛢️", "Petróleo crudo"],
+        ["🥇", "Oro"],
+        ["🍚", "Arroz"],
+        ["🪨", "Bauxita"],
+        ["🍬", "Azúcar"],
+        ["🦐", "Camarón"]
+      ],
+      "impo": [
+        ["⚙️", "Equipos para el petróleo"],
+        ["⛽", "Combustibles"],
+        ["🚗", "Vehículos"],
+        ["🏗️", "Materiales de construcción"],
+        ["🌾", "Alimentos"]
+      ],
+      "socios": {
+        "vende": [["USA", 20], ["NLD", 13], ["ESP", 8], ["CHN", 6]],
+        "compra": [["USA", 35], ["CHN", 12], ["BRA", 5], ["NLD", 4]]
+      },
+      "politica": {
+        "lider": "Irfaan Ali",
+        "cargo": "Presidente",
+        "ideo": "cizq",
+        "desde": "agosto de 2020",
+        "proxima": "2030",
+        "nota": "Fue reelegido en septiembre de 2025, en pleno boom petrolero. En Guyana los partidos se dividen más por comunidad étnica que por ideología.",
+        "historia": [
+          ["2015–2020", "David Granger", "cen"],
+          ["2011–2015", "Donald Ramotar", "cizq"],
+          ["1999–2011", "Bharrat Jagdeo", "cizq"]
+        ]
+      }
+    },
+    "SUR": {
+      "nombre": "Surinam",
+      "capital": "Paramaribo",
+      "region": "Sudamérica",
+      "resumen": "El país más chico de Sudamérica y ex colonia neerlandesa: se habla neerlandés. Vive del oro y del petróleo. En 2020 dejó de pagar su deuda y tuvo inflación de más del 50% por tres años; ahora se está estabilizando y espera un boom petrolero como el de Guyana.",
+      "actividades": [
+        ["🥇", "Minería de oro"],
+        ["🛢️", "Petróleo"],
+        ["🍚", "Arroz"],
+        ["🍌", "Bananas"],
+        ["🪵", "Madera"],
+        ["🎣", "Pesca"]
+      ],
+      "expo": [
+        ["🥇", "Oro"],
+        ["🛢️", "Petróleo"],
+        ["🪵", "Madera"],
+        ["🍚", "Arroz"],
+        ["🍌", "Bananas"],
+        ["🐟", "Pescado"]
+      ],
+      "impo": [
+        ["⛽", "Combustibles"],
+        ["⚙️", "Maquinaria"],
+        ["🌾", "Alimentos"],
+        ["🚗", "Vehículos"],
+        ["🧪", "Químicos"]
+      ],
+      "socios": {
+        "vende": [["CHE", 40], ["ARE", 12], ["GUY", 8], ["USA", 5]],
+        "compra": [["USA", 25], ["NLD", 15], ["CHN", 13], ["BRA", 4]]
+      },
+      "politica": {
+        "lider": "Jennifer Geerlings-Simons",
+        "cargo": "Presidenta",
+        "ideo": "cizq",
+        "desde": "julio de 2025",
+        "proxima": "2030",
+        "nota": "Es la primera mujer presidenta de Surinam. En este país al presidente lo elige el Parlamento.",
+        "historia": [
+          ["2020–2025", "Chan Santokhi", "cen"],
+          ["2010–2020", "Dési Bouterse", "cizq"],
+          ["2000–2010", "Ronald Venetiaan", "cen"]
+        ]
+      }
+    },
+    "GTM": {
+      "nombre": "Guatemala",
+      "capital": "Ciudad de Guatemala",
+      "region": "Centroamérica",
+      "resumen": "La economía más grande de Centroamérica. Es muy estable en lo macro, con inflación baja y poca deuda, pero tiene mucha pobreza y desigualdad. Las remesas que mandan los guatemaltecos desde EE.UU. equivalen a casi un quinto del PBI.",
+      "actividades": [
+        ["☕", "Café"],
+        ["🍌", "Bananas"],
+        ["🍬", "Azúcar"],
+        ["👕", "Maquila textil"],
+        ["💸", "Remesas"],
+        ["🛍️", "Comercio"]
+      ],
+      "expo": [
+        ["👕", "Ropa y textiles"],
+        ["🍌", "Bananas"],
+        ["☕", "Café"],
+        ["🌶️", "Cardamomo"],
+        ["🍬", "Azúcar"],
+        ["🫒", "Aceite de palma"]
+      ],
+      "impo": [
+        ["⛽", "Combustibles"],
+        ["⚙️", "Maquinaria"],
+        ["🚗", "Vehículos"],
+        ["📱", "Celulares y electrónica"],
+        ["💊", "Medicamentos"]
+      ],
+      "socios": {
+        "vende": [["USA", 33], ["SLV", 12], ["HND", 10], ["MEX", 5], ["NIC", 5]],
+        "compra": [["USA", 36], ["CHN", 15], ["MEX", 11], ["SLV", 4], ["PAN", 3]]
+      },
+      "politica": {
+        "lider": "Bernardo Arévalo",
+        "cargo": "Presidente",
+        "ideo": "cizq",
+        "desde": "enero de 2024",
+        "proxima": "Junio de 2027",
+        "nota": "Ganó en 2023 con un discurso anticorrupción y asumió después de meses de intentos judiciales de frenar su llegada.",
+        "historia": [
+          ["2020–2024", "Alejandro Giammattei", "der"],
+          ["2016–2020", "Jimmy Morales", "der"],
+          ["2015–2016", "Alejandro Maldonado (interino)", "ind"],
+          ["2012–2015", "Otto Pérez Molina", "der"]
+        ]
+      }
+    },
+    "BLZ": {
+      "nombre": "Belice",
+      "capital": "Belmopán",
+      "region": "Centroamérica",
+      "resumen": "El único país de Centroamérica donde el idioma oficial es el inglés: fue colonia británica hasta 1981. Es chico y vive del turismo, sobre todo del arrecife de coral, y de exportar azúcar, bananas y cítricos.",
+      "actividades": [
+        ["🏝️", "Turismo"],
+        ["🍬", "Azúcar"],
+        ["🍌", "Bananas"],
+        ["🍊", "Cítricos"],
+        ["🦐", "Pesca y camarón"],
+        ["🛍️", "Comercio"]
+      ],
+      "expo": [
+        ["🍬", "Azúcar"],
+        ["🍌", "Bananas"],
+        ["🍊", "Jugo de naranja"],
+        ["🦞", "Langosta"],
+        ["🫘", "Porotos"],
+        ["🛢️", "Petróleo"]
+      ],
+      "impo": [
+        ["⛽", "Combustibles"],
+        ["⚙️", "Maquinaria"],
+        ["🌾", "Alimentos"],
+        ["🚗", "Vehículos"],
+        ["🧪", "Químicos"]
+      ],
+      "socios": {
+        "vende": [["USA", 30], ["GBR", 20], ["GTM", 6], ["MEX", 5]],
+        "compra": [["USA", 35], ["CHN", 14], ["MEX", 12], ["GTM", 7]]
+      },
+      "politica": {
+        "lider": "Johnny Briceño",
+        "cargo": "Primer ministro",
+        "ideo": "cizq",
+        "desde": "noviembre de 2020",
+        "proxima": "2030",
+        "nota": "Es una monarquía parlamentaria: el jefe de Estado es el rey Carlos III y gobierna el primer ministro. Briceño fue reelegido en 2025.",
+        "historia": [
+          ["2008–2020", "Dean Barrow", "cder"],
+          ["1998–2008", "Said Musa", "cizq"],
+          ["1993–1998", "Manuel Esquivel", "cder"]
+        ]
+      },
+      "notas": {
+        "infl": "Faltan los años 2003–2006 porque la serie del Banco Mundial para Belice está duplicada en ese período."
+      },
+      "ajustes": {
+        "infl": {
+          "quitar": [[2003, 2006]]
+        }
+      }
+    },
+    "HND": {
+      "nombre": "Honduras",
+      "capital": "Tegucigalpa",
+      "region": "Centroamérica",
+      "resumen": "Uno de los países más pobres de América Latina. Depende mucho de las remesas, que superan el 25% del PBI, de la maquila textil y del café. Tiene un largo historial de huracanes y de inestabilidad política.",
+      "actividades": [
+        ["☕", "Café"],
+        ["👕", "Maquila textil"],
+        ["🍌", "Bananas"],
+        ["🦐", "Camarón"],
+        ["💸", "Remesas"],
+        ["🫒", "Palma africana"]
+      ],
+      "expo": [
+        ["☕", "Café"],
+        ["👕", "Ropa y textiles"],
+        ["🫒", "Aceite de palma"],
+        ["🍌", "Bananas"],
+        ["🦐", "Camarón"],
+        ["🔌", "Cables eléctricos"]
+      ],
+      "impo": [
+        ["⛽", "Combustibles"],
+        ["🧵", "Hilados y telas"],
+        ["⚙️", "Maquinaria"],
+        ["🚗", "Vehículos"],
+        ["🌾", "Alimentos"]
+      ],
+      "socios": {
+        "vende": [["USA", 40], ["SLV", 9], ["GTM", 8], ["NIC", 6], ["DEU", 4]],
+        "compra": [["USA", 37], ["CHN", 14], ["GTM", 10], ["MEX", 7], ["SLV", 6]]
+      },
+      "politica": {
+        "lider": "Nasry Asfura",
+        "cargo": "Presidente",
+        "ideo": "der",
+        "desde": "enero de 2026",
+        "proxima": "Noviembre de 2029",
+        "nota": "Ganó las elecciones de noviembre de 2025 por un margen muy chico, en un escrutinio largo y cuestionado.",
+        "historia": [
+          ["2022–2026", "Xiomara Castro", "izq"],
+          ["2014–2022", "Juan Orlando Hernández", "der"],
+          ["2010–2014", "Porfirio Lobo", "der"],
+          ["2006–2009", "Manuel Zelaya", "cizq"]
+        ]
+      },
+      "notas": {
+        "crec": "Faltan los años 1990–2000: la serie del Banco Mundial para Honduras tiene un error de empalme en ese período (muestra crecimientos de más del 20% que no ocurrieron)."
+      },
+      "ajustes": {
+        "crec": {
+          "quitar": [[1990, 2000]]
+        }
+      }
+    },
+    "SLV": {
+      "nombre": "El Salvador",
+      "capital": "San Salvador",
+      "region": "Centroamérica",
+      "resumen": "El país más chico de Centroamérica continental. Usa el dólar desde 2001 y en 2021 fue el primero del mundo en hacer del bitcoin una moneda legal, algo que en 2025 dio marcha atrás por un acuerdo con el FMI. Su política de seguridad contra las pandillas bajó fuerte los homicidios.",
+      "actividades": [
+        ["👕", "Maquila textil"],
+        ["💸", "Remesas"],
+        ["☕", "Café"],
+        ["🍬", "Azúcar"],
+        ["🏖️", "Turismo"],
+        ["🛍️", "Comercio"]
+      ],
+      "expo": [
+        ["👕", "Ropa y textiles"],
+        ["☕", "Café"],
+        ["🍬", "Azúcar"],
+        ["🔌", "Componentes eléctricos"],
+        ["🥤", "Bebidas"],
+        ["📦", "Plásticos"]
+      ],
+      "impo": [
+        ["⛽", "Combustibles"],
+        ["🧵", "Hilados y telas"],
+        ["⚙️", "Maquinaria"],
+        ["💊", "Medicamentos"],
+        ["📱", "Celulares y electrónica"]
+      ],
+      "socios": {
+        "vende": [["USA", 38], ["GTM", 17], ["HND", 16], ["NIC", 6], ["CRI", 3]],
+        "compra": [["USA", 30], ["CHN", 17], ["GTM", 12], ["MEX", 8], ["HND", 5]]
+      },
+      "politica": {
+        "lider": "Nayib Bukele",
+        "cargo": "Presidente",
+        "ideo": "der",
+        "desde": "junio de 2019",
+        "proxima": "2027",
+        "nota": "Fue reelegido en 2024 gracias a una reinterpretación de la Constitución, que hasta entonces se entendía que prohibía la reelección inmediata, y en 2025 una reforma habilitó la reelección indefinida y adelantó las elecciones a 2027. Muy popular por su política de seguridad, es criticado por concentrar el poder.",
+        "historia": [
+          ["2014–2019", "Salvador Sánchez Cerén", "izq"],
+          ["2009–2014", "Mauricio Funes", "cizq"],
+          ["2004–2009", "Antonio Saca", "der"],
+          ["1999–2004", "Francisco Flores", "der"]
+        ]
+      }
+    },
+    "NIC": {
+      "nombre": "Nicaragua",
+      "capital": "Managua",
+      "region": "Centroamérica",
+      "resumen": "El segundo país más pobre de América Latina. En 2018 cayó por protestas masivas y la represión del gobierno; desde entonces crece con estabilidad macro, pero sostenida en gran parte por las remesas de los que emigraron. Exporta oro, carne y café.",
+      "actividades": [
+        ["🥇", "Minería de oro"],
+        ["🐄", "Ganadería"],
+        ["☕", "Café"],
+        ["🔌", "Maquila (arneses)"],
+        ["💸", "Remesas"],
+        ["🦐", "Pesca"]
+      ],
+      "expo": [
+        ["🥇", "Oro"],
+        ["🔌", "Arneses eléctricos"],
+        ["🥩", "Carne"],
+        ["☕", "Café"],
+        ["👕", "Ropa"],
+        ["🧀", "Quesos"]
+      ],
+      "impo": [
+        ["⛽", "Combustibles"],
+        ["⚙️", "Maquinaria"],
+        ["💊", "Medicamentos"],
+        ["🚗", "Vehículos"],
+        ["🌾", "Alimentos"]
+      ],
+      "socios": {
+        "vende": [["USA", 45], ["MEX", 10], ["SLV", 6], ["CRI", 5], ["HND", 5]],
+        "compra": [["USA", 27], ["CHN", 16], ["MEX", 11], ["GTM", 9], ["CRI", 7]]
+      },
+      "politica": {
+        "lider": "Daniel Ortega y Rosario Murillo",
+        "cargo": "Copresidentes",
+        "ideo": "izq",
+        "desde": "enero de 2007 (Ortega)",
+        "proxima": "2027",
+        "nota": "Ortega gobierna desde 2007 y en 2025 una reforma constitucional hizo copresidenta a su esposa. Las elecciones de 2021, con los principales opositores presos, no fueron reconocidas por buena parte de la comunidad internacional.",
+        "historia": [
+          ["2002–2007", "Enrique Bolaños", "cder"],
+          ["1997–2002", "Arnoldo Alemán", "der"],
+          ["1990–1997", "Violeta Chamorro", "cder"],
+          ["1985–1990", "Daniel Ortega", "izq"]
+        ]
+      }
+    },
+    "CRI": {
+      "nombre": "Costa Rica",
+      "capital": "San José",
+      "region": "Centroamérica",
+      "resumen": "Uno de los países más estables y prósperos de la región: no tiene ejército desde 1948. Pasó de exportar café y bananas a dispositivos médicos fabricados en zonas francas, y es un destino turístico clave por su naturaleza.",
+      "actividades": [
+        ["🩺", "Dispositivos médicos"],
+        ["🏝️", "Ecoturismo"],
+        ["🍍", "Ananá"],
+        ["🍌", "Bananas"],
+        ["☕", "Café"],
+        ["💻", "Servicios tecnológicos"]
+      ],
+      "expo": [
+        ["🩺", "Dispositivos médicos"],
+        ["🍍", "Ananá"],
+        ["🍌", "Bananas"],
+        ["☕", "Café"],
+        ["🔌", "Componentes electrónicos"],
+        ["🥤", "Jarabes y concentrados"]
+      ],
+      "impo": [
+        ["⛽", "Combustibles"],
+        ["⚙️", "Maquinaria"],
+        ["🚗", "Vehículos"],
+        ["📱", "Electrónica"],
+        ["💊", "Medicamentos"]
+      ],
+      "socios": {
+        "vende": [["USA", 45], ["NLD", 6], ["PAN", 5], ["NIC", 4], ["GTM", 4]],
+        "compra": [["USA", 38], ["CHN", 15], ["MEX", 7], ["GTM", 3], ["BRA", 3]]
+      },
+      "politica": {
+        "lider": "Laura Fernández",
+        "cargo": "Presidenta",
+        "ideo": "der",
+        "desde": "mayo de 2026",
+        "proxima": "Febrero de 2030",
+        "nota": "Ganó en primera vuelta en febrero de 2026 con la promesa de continuar la línea de Rodrigo Chaves, de quien fue ministra, y de mano dura contra el crimen.",
+        "historia": [
+          ["2022–2026", "Rodrigo Chaves", "der"],
+          ["2018–2022", "Carlos Alvarado", "cizq"],
+          ["2014–2018", "Luis Guillermo Solís", "cizq"],
+          ["2010–2014", "Laura Chinchilla", "cen"]
+        ]
+      }
+    },
+    "PAN": {
+      "nombre": "Panamá",
+      "capital": "Ciudad de Panamá",
+      "region": "Centroamérica",
+      "resumen": "Vive del Canal de Panamá, de los servicios financieros y logísticos y de la Zona Libre de Colón. Usa el dólar y fue de las economías que más creció en la región. En 2023 cerró la gran mina de cobre tras protestas masivas, y la sequía afectó el tránsito por el Canal.",
+      "actividades": [
+        ["🚢", "Canal de Panamá"],
+        ["🏦", "Banca y finanzas"],
+        ["📦", "Logística y comercio"],
+        ["🏗️", "Construcción"],
+        ["🏖️", "Turismo"],
+        ["🍌", "Bananas"]
+      ],
+      "expo": [
+        ["🔌", "Cobre (hasta 2023)"],
+        ["🍌", "Bananas"],
+        ["🦐", "Camarón"],
+        ["🐟", "Pescado"],
+        ["☕", "Café"],
+        ["🪵", "Madera"]
+      ],
+      "impo": [
+        ["⛽", "Combustibles"],
+        ["⚙️", "Maquinaria"],
+        ["🚗", "Vehículos"],
+        ["📱", "Electrónica"],
+        ["💊", "Medicamentos"]
+      ],
+      "socios": {
+        "vende": [["USA", 22], ["CHN", 15], ["JPN", 8], ["CRI", 6], ["NLD", 6]],
+        "compra": [["USA", 28], ["CHN", 25], ["MEX", 6], ["CRI", 4], ["COL", 4]]
+      },
+      "politica": {
+        "lider": "José Raúl Mulino",
+        "cargo": "Presidente",
+        "ideo": "der",
+        "desde": "julio de 2024",
+        "proxima": "Mayo de 2029",
+        "historia": [
+          ["2019–2024", "Laurentino Cortizo", "cizq"],
+          ["2014–2019", "Juan Carlos Varela", "cder"],
+          ["2009–2014", "Ricardo Martinelli", "der"],
+          ["2004–2009", "Martín Torrijos", "cizq"]
+        ]
+      }
+    },
+    "MEX": {
+      "nombre": "México",
+      "capital": "Ciudad de México",
+      "region": "Norteamérica",
+      "resumen": "La segunda economía de América Latina y el mayor socio comercial de EE.UU. Es una potencia industrial: arma autos, computadoras y electrodomésticos para el mercado norteamericano gracias al T-MEC. Las remesas, el turismo y el petróleo también pesan mucho.",
+      "actividades": [
+        ["🚗", "Industria automotriz"],
+        ["💻", "Electrónica"],
+        ["🛢️", "Petróleo"],
+        ["🏖️", "Turismo"],
+        ["🥑", "Agroexportación"],
+        ["💸", "Remesas"]
+      ],
+      "expo": [
+        ["🚗", "Autos y autopartes"],
+        ["💻", "Computadoras"],
+        ["📺", "Electrónica"],
+        ["🛢️", "Petróleo crudo"],
+        ["🥑", "Paltas y frutas"],
+        ["🍺", "Cerveza y tequila"]
+      ],
+      "impo": [
+        ["🔩", "Autopartes"],
+        ["⛽", "Gasolina y gas"],
+        ["💾", "Chips y componentes"],
+        ["⚙️", "Maquinaria"],
+        ["🧪", "Plásticos y químicos"]
+      ],
+      "socios": {
+        "vende": [["USA", 83], ["CAN", 3], ["CHN", 2], ["DEU", 1]],
+        "compra": [["USA", 41], ["CHN", 21], ["KOR", 4], ["DEU", 4], ["JPN", 3]]
+      },
+      "politica": {
+        "lider": "Claudia Sheinbaum",
+        "cargo": "Presidenta",
+        "ideo": "izq",
+        "desde": "octubre de 2024",
+        "proxima": "Junio de 2030",
+        "nota": "Es la primera mujer presidenta de México y continúa el proyecto de López Obrador.",
+        "historia": [
+          ["2018–2024", "Andrés Manuel López Obrador", "izq"],
+          ["2012–2018", "Enrique Peña Nieto", "cen"],
+          ["2006–2012", "Felipe Calderón", "cder"],
+          ["2000–2006", "Vicente Fox", "cder"]
+        ]
+      }
+    },
+    "USA": {
+      "nombre": "Estados Unidos",
+      "capital": "Washington D.C.",
+      "region": "Norteamérica",
+      "resumen": "La economía más grande del mundo, una cuarta parte del PBI global. Su moneda, el dólar, es la reserva y el medio de pago del mundo. Lidera en tecnología, finanzas y energía; desde 2025 subió fuerte los aranceles a casi todos sus socios comerciales.",
+      "actividades": [
+        ["💻", "Tecnología"],
+        ["🏦", "Finanzas"],
+        ["🏥", "Salud"],
+        ["🛢️", "Petróleo y gas"],
+        ["✈️", "Industria aeroespacial"],
+        ["🌽", "Agricultura"]
+      ],
+      "expo": [
+        ["🛢️", "Petróleo y derivados"],
+        ["🔥", "Gas natural licuado"],
+        ["✈️", "Aviones"],
+        ["💊", "Medicamentos"],
+        ["💾", "Chips"],
+        ["🫘", "Soja"]
+      ],
+      "impo": [
+        ["🚗", "Autos y autopartes"],
+        ["💻", "Computadoras"],
+        ["📱", "Celulares"],
+        ["💊", "Medicamentos"],
+        ["🛢️", "Petróleo crudo"]
+      ],
+      "socios": {
+        "vende": [["CAN", 17], ["MEX", 16], ["CHN", 7], ["JPN", 4], ["GBR", 4]],
+        "compra": [["MEX", 15], ["CHN", 13], ["CAN", 13], ["DEU", 5], ["JPN", 5]]
+      },
+      "politica": {
+        "lider": "Donald Trump",
+        "cargo": "Presidente",
+        "ideo": "der",
+        "desde": "enero de 2025",
+        "proxima": "Noviembre de 2028",
+        "nota": "Es su segundo mandato, no consecutivo. El 3 de noviembre de 2026 hay elecciones de medio término, que renuevan toda la Cámara de Representantes y un tercio del Senado.",
+        "historia": [
+          ["2021–2025", "Joe Biden", "cizq"],
+          ["2017–2021", "Donald Trump", "der"],
+          ["2009–2017", "Barack Obama", "cizq"],
+          ["2001–2009", "George W. Bush", "der"]
+        ]
+      }
+    },
+    "CAN": {
+      "nombre": "Canadá",
+      "capital": "Ottawa",
+      "region": "Norteamérica",
+      "resumen": "Un país enorme y rico en recursos: tiene la tercera reserva de petróleo del mundo y mucha minería, madera y agro. Tres cuartas partes de lo que exporta va a EE.UU., por eso los aranceles de 2025 lo golpearon fuerte.",
+      "actividades": [
+        ["🛢️", "Petróleo (arenas bituminosas)"],
+        ["⛏️", "Minería"],
+        ["🌲", "Forestal"],
+        ["🚗", "Industria automotriz"],
+        ["🏦", "Banca"],
+        ["🌾", "Agricultura"]
+      ],
+      "expo": [
+        ["🛢️", "Petróleo crudo"],
+        ["🚗", "Autos"],
+        ["🥇", "Oro"],
+        ["🔥", "Gas natural"],
+        ["🪵", "Madera"],
+        ["🌾", "Trigo y canola"]
+      ],
+      "impo": [
+        ["🚗", "Autos y autopartes"],
+        ["💻", "Computadoras"],
+        ["⛽", "Combustibles refinados"],
+        ["💊", "Medicamentos"],
+        ["📱", "Celulares"]
+      ],
+      "socios": {
+        "vende": [["USA", 76], ["CHN", 4], ["GBR", 3], ["JPN", 2], ["MEX", 1]],
+        "compra": [["USA", 49], ["CHN", 11], ["MEX", 6], ["DEU", 3], ["JPN", 2]]
+      },
+      "politica": {
+        "lider": "Mark Carney",
+        "cargo": "Primer ministro",
+        "ideo": "cizq",
+        "desde": "marzo de 2025",
+        "proxima": "Octubre de 2029",
+        "nota": "Ex presidente de los bancos centrales de Canadá e Inglaterra. Reemplazó a Trudeau y ganó las elecciones de abril de 2025. El jefe de Estado es el rey Carlos III.",
+        "historia": [
+          ["2015–2025", "Justin Trudeau", "cizq"],
+          ["2006–2015", "Stephen Harper", "cder"],
+          ["2003–2006", "Paul Martin", "cizq"],
+          ["1993–2003", "Jean Chrétien", "cizq"]
+        ]
+      }
+    },
+    "CUB": {
+      "nombre": "Cuba",
+      "capital": "La Habana",
+      "region": "Caribe",
+      "resumen": "Una economía planificada por el Estado desde la revolución de 1959. Desde 2020 atraviesa su peor crisis en décadas: apagones, escasez de alimentos y combustible, inflación alta y una emigración masiva, con más de un millón de personas que se fueron desde 2021. El embargo de EE.UU. sigue vigente.",
+      "actividades": [
+        ["🏖️", "Turismo"],
+        ["🩺", "Servicios médicos en el exterior"],
+        ["⛏️", "Níquel"],
+        ["🚬", "Tabaco"],
+        ["🍬", "Azúcar"],
+        ["💸", "Remesas"]
+      ],
+      "expo": [
+        ["⛏️", "Níquel"],
+        ["🚬", "Habanos"],
+        ["🥃", "Ron"],
+        ["💊", "Medicamentos y biotecnología"],
+        ["🍬", "Azúcar"],
+        ["🦞", "Langosta y mariscos"]
+      ],
+      "impo": [
+        ["🌾", "Alimentos"],
+        ["⛽", "Combustibles"],
+        ["⚙️", "Maquinaria"],
+        ["💊", "Insumos médicos"],
+        ["🧪", "Químicos"]
+      ],
+      "socios": {
+        "vende": [["CHN", 25], ["CAN", 13], ["ESP", 12], ["NLD", 6]],
+        "compra": [["ESP", 15], ["CHN", 14], ["USA", 8], ["RUS", 7]]
+      },
+      "politica": {
+        "lider": "Miguel Díaz-Canel",
+        "cargo": "Presidente y primer secretario del Partido Comunista",
+        "ideo": "izq",
+        "desde": "abril de 2018",
+        "proxima": "No hay elecciones presidenciales competitivas",
+        "nota": "Es un sistema de partido único: el Partido Comunista es el único legal. Díaz-Canel fue el primer presidente sin el apellido Castro desde 1959.",
+        "historia": [
+          ["2008–2018", "Raúl Castro", "izq"],
+          ["1959–2008", "Fidel Castro", "izq"],
+          ["1952–1959", "Fulgencio Batista", "der"]
+        ]
+      },
+      "notas": {
+        "crec": "El Banco Mundial no publica la inflación de Cuba ni su PBI en dólares desde 2020: las cifras oficiales cubanas son difíciles de comparar por el sistema de tipos de cambio múltiples."
+      }
+    },
+    "DOM": {
+      "nombre": "República Dominicana",
+      "capital": "Santo Domingo",
+      "region": "Caribe",
+      "resumen": "Una de las economías que más creció en América Latina en los últimos veinte años, con un promedio cercano al 5% anual. Vive del turismo (es el destino más visitado del Caribe), de las zonas francas, de las remesas y de la minería de oro.",
+      "actividades": [
+        ["🏖️", "Turismo"],
+        ["🏭", "Zonas francas"],
+        ["💸", "Remesas"],
+        ["🥇", "Minería de oro"],
+        ["🍫", "Cacao y tabaco"],
+        ["🏗️", "Construcción"]
+      ],
+      "expo": [
+        ["🥇", "Oro"],
+        ["🩺", "Dispositivos médicos"],
+        ["🚬", "Cigarros"],
+        ["🔌", "Equipos eléctricos"],
+        ["🍫", "Cacao"],
+        ["🍌", "Bananas"]
+      ],
+      "impo": [
+        ["⛽", "Combustibles"],
+        ["🚗", "Vehículos"],
+        ["⚙️", "Maquinaria"],
+        ["🌾", "Alimentos"],
+        ["🧪", "Plásticos y químicos"]
+      ],
+      "socios": {
+        "vende": [["USA", 55], ["HTI", 8], ["CHE", 6], ["IND", 4], ["CAN", 3]],
+        "compra": [["USA", 42], ["CHN", 17], ["MEX", 4], ["BRA", 3], ["ESP", 3]]
+      },
+      "politica": {
+        "lider": "Luis Abinader",
+        "cargo": "Presidente",
+        "ideo": "cen",
+        "desde": "agosto de 2020",
+        "proxima": "Mayo de 2028",
+        "nota": "Fue reelegido en 2024 por amplio margen y no puede volver a presentarse.",
+        "historia": [
+          ["2012–2020", "Danilo Medina", "cen"],
+          ["2004–2012", "Leonel Fernández", "cen"],
+          ["2000–2004", "Hipólito Mejía", "cizq"],
+          ["1996–2000", "Leonel Fernández", "cen"]
+        ]
+      }
+    },
+    "HTI": {
+      "nombre": "Haití",
+      "capital": "Puerto Príncipe",
+      "region": "Caribe",
+      "resumen": "El país más pobre de América. Desde el asesinato del presidente Jovenel Moïse en 2021 vive una crisis profunda: bandas armadas controlan gran parte de la capital, la economía cae desde hace siete años seguidos y no hay elecciones desde 2016. Las remesas equivalen a cerca de un quinto del PBI.",
+      "actividades": [
+        ["🌾", "Agricultura"],
+        ["👕", "Maquila textil"],
+        ["💸", "Remesas"],
+        ["🛍️", "Comercio informal"],
+        ["🥭", "Frutas"]
+      ],
+      "expo": [
+        ["👕", "Ropa"],
+        ["🌿", "Aceites esenciales (vetiver)"],
+        ["🥭", "Mangos"],
+        ["🍫", "Cacao"],
+        ["☕", "Café"]
+      ],
+      "impo": [
+        ["🍚", "Arroz y alimentos"],
+        ["⛽", "Combustibles"],
+        ["🏗️", "Materiales de construcción"],
+        ["⚙️", "Maquinaria"],
+        ["🧵", "Telas"]
+      ],
+      "socios": {
+        "vende": [["USA", 80], ["CAN", 4], ["MEX", 3], ["FRA", 2]],
+        "compra": [["USA", 33], ["DOM", 26], ["CHN", 15], ["IND", 4]]
+      },
+      "politica": {
+        "lider": "Alix Didier Fils-Aimé",
+        "cargo": "Primer ministro a cargo del Ejecutivo",
+        "ideo": "ind",
+        "desde": "noviembre de 2024",
+        "proxima": "Sin fecha confirmada",
+        "nota": "La presidencia está vacante desde el asesinato de Jovenel Moïse en 2021. El Consejo Presidencial de Transición terminó su mandato en febrero de 2026 y desde entonces gobierna el primer ministro, con el encargo de organizar elecciones.",
+        "historia": [
+          ["2024–2026", "Consejo Presidencial de Transición", "ind"],
+          ["2021–2024", "Ariel Henry (primer ministro)", "ind"],
+          ["2017–2021", "Jovenel Moïse", "cder"],
+          ["2011–2016", "Michel Martelly", "cder"]
+        ]
+      }
+    },
+    "JAM": {
+      "nombre": "Jamaica",
+      "capital": "Kingston",
+      "region": "Caribe",
+      "resumen": "Vive del turismo, la bauxita y la alúmina, y las remesas. Es un caso de estudio de ajuste fiscal: pasó de una deuda de más del 140% del PBI en 2012 a menos del 70%, y el desempleo llegó a mínimos históricos.",
+      "actividades": [
+        ["🏖️", "Turismo"],
+        ["⛏️", "Bauxita y alúmina"],
+        ["💸", "Remesas"],
+        ["📞", "Call centers y servicios"],
+        ["☕", "Café Blue Mountain"],
+        ["🥃", "Ron"]
+      ],
+      "expo": [
+        ["⛏️", "Alúmina"],
+        ["🪨", "Bauxita"],
+        ["🥃", "Ron"],
+        ["⛽", "Combustibles (reexportación)"],
+        ["🌶️", "Salsas y alimentos"],
+        ["☕", "Café"]
+      ],
+      "impo": [
+        ["⛽", "Combustibles"],
+        ["🌾", "Alimentos"],
+        ["⚙️", "Maquinaria"],
+        ["🚗", "Vehículos"],
+        ["🧪", "Químicos"]
+      ],
+      "socios": {
+        "vende": [["USA", 45], ["CAN", 8], ["GBR", 6], ["NLD", 6]],
+        "compra": [["USA", 40], ["CHN", 12], ["TTO", 6], ["JPN", 4]]
+      },
+      "politica": {
+        "lider": "Andrew Holness",
+        "cargo": "Primer ministro",
+        "ideo": "cder",
+        "desde": "marzo de 2016",
+        "proxima": "2030",
+        "nota": "Ganó en septiembre de 2025 su tercer mandato seguido. Es una monarquía parlamentaria con el rey Carlos III como jefe de Estado.",
+        "historia": [
+          ["2012–2016", "Portia Simpson-Miller", "cizq"],
+          ["2011–2012", "Andrew Holness", "cder"],
+          ["2007–2011", "Bruce Golding", "cder"],
+          ["2006–2007", "Portia Simpson-Miller", "cizq"]
+        ]
+      }
+    },
+    "TTO": {
+      "nombre": "Trinidad y Tobago",
+      "capital": "Puerto España",
+      "region": "Caribe",
+      "resumen": "El país más industrializado del Caribe gracias al gas natural: es un gran exportador de gas licuado, amoníaco y metanol. La caída de la producción de gas desde 2015 frenó la economía, que todavía depende casi por completo de la energía.",
+      "actividades": [
+        ["🔥", "Gas natural y GNL"],
+        ["🧪", "Petroquímica"],
+        ["🛢️", "Petróleo"],
+        ["🏦", "Finanzas"],
+        ["🏭", "Manufactura"],
+        ["🏖️", "Turismo en Tobago"]
+      ],
+      "expo": [
+        ["🔥", "Gas natural licuado"],
+        ["🧪", "Amoníaco"],
+        ["⚗️", "Metanol"],
+        ["⛽", "Combustibles refinados"],
+        ["🪨", "Hierro reducido"],
+        ["🌱", "Urea"]
+      ],
+      "impo": [
+        ["🛢️", "Petróleo crudo"],
+        ["⚙️", "Maquinaria"],
+        ["🌾", "Alimentos"],
+        ["🚗", "Vehículos"],
+        ["💊", "Medicamentos"]
+      ],
+      "socios": {
+        "vende": [["USA", 33], ["GUY", 7], ["CHN", 5], ["ESP", 5], ["JAM", 4]],
+        "compra": [["USA", 32], ["CHN", 10], ["BRA", 6], ["COL", 5]]
+      },
+      "politica": {
+        "lider": "Kamla Persad-Bissessar",
+        "cargo": "Primera ministra",
+        "ideo": "cizq",
+        "desde": "mayo de 2025",
+        "proxima": "2030",
+        "nota": "Volvió al poder en 2025. Ya había sido la primera mujer en el cargo, entre 2010 y 2015.",
+        "historia": [
+          ["2025", "Stuart Young", "cen"],
+          ["2015–2025", "Keith Rowley", "cen"],
+          ["2010–2015", "Kamla Persad-Bissessar", "cizq"],
+          ["2001–2010", "Patrick Manning", "cen"]
+        ]
+      }
+    },
+    "BHS": {
+      "nombre": "Bahamas",
+      "capital": "Nasáu",
+      "region": "Caribe",
+      "resumen": "El país independiente más rico del Caribe por persona. Vive del turismo, que directa e indirectamente explica la mayor parte de la economía, y de los servicios financieros internacionales. Por eso la pandemia la golpeó tan fuerte: cayó 20% en 2020.",
+      "actividades": [
+        ["🏖️", "Turismo"],
+        ["🏦", "Servicios financieros"],
+        ["🛳️", "Cruceros"],
+        ["🦞", "Pesca de langosta"],
+        ["🧂", "Sal"],
+        ["🏗️", "Construcción"]
+      ],
+      "expo": [
+        ["⛽", "Combustibles (reexportación)"],
+        ["🦞", "Langosta"],
+        ["🧪", "Polímeros"],
+        ["🧂", "Sal"],
+        ["🥃", "Ron"]
+      ],
+      "impo": [
+        ["⛽", "Combustibles"],
+        ["🌾", "Alimentos"],
+        ["⚙️", "Maquinaria"],
+        ["🚗", "Vehículos"],
+        ["🏗️", "Materiales de construcción"]
+      ],
+      "socios": {
+        "vende": [["USA", 55], ["CAN", 5], ["DOM", 4]],
+        "compra": [["USA", 80], ["CHN", 4], ["JPN", 2]]
+      },
+      "politica": {
+        "lider": "Philip Davis",
+        "cargo": "Primer ministro",
+        "ideo": "cizq",
+        "desde": "septiembre de 2021",
+        "proxima": "2031",
+        "nota": "Fue reelegido en las elecciones anticipadas de mayo de 2026. El jefe de Estado es el rey Carlos III.",
+        "historia": [
+          ["2017–2021", "Hubert Minnis", "cder"],
+          ["2012–2017", "Perry Christie", "cizq"],
+          ["2007–2012", "Hubert Ingraham", "cder"]
+        ]
+      }
+    },
+    "BRB": {
+      "nombre": "Barbados",
+      "capital": "Bridgetown",
+      "region": "Caribe",
+      "resumen": "Pasó a ser república en 2021, dejando de tener a la monarquía británica como jefa de Estado. Vive del turismo y de los servicios financieros internacionales. Su primera ministra, Mia Mottley, es una de las voces más escuchadas del mundo sobre financiamiento climático.",
+      "actividades": [
+        ["🏖️", "Turismo"],
+        ["🏦", "Finanzas internacionales"],
+        ["🥃", "Ron"],
+        ["🍬", "Azúcar"],
+        ["💼", "Servicios"]
+      ],
+      "expo": [
+        ["🥃", "Ron"],
+        ["💊", "Medicamentos"],
+        ["🥤", "Alimentos y bebidas"],
+        ["🍬", "Azúcar"],
+        ["🔌", "Componentes eléctricos"]
+      ],
+      "impo": [
+        ["⛽", "Combustibles"],
+        ["🌾", "Alimentos"],
+        ["⚙️", "Maquinaria"],
+        ["🚗", "Vehículos"],
+        ["🧪", "Químicos"]
+      ],
+      "socios": {
+        "vende": [["USA", 25], ["TTO", 10], ["JAM", 7], ["GUY", 6]],
+        "compra": [["USA", 40], ["TTO", 15], ["CHN", 8], ["GBR", 5]]
+      },
+      "politica": {
+        "lider": "Mia Mottley",
+        "cargo": "Primera ministra",
+        "ideo": "cizq",
+        "desde": "mayo de 2018",
+        "proxima": "2031",
+        "nota": "En febrero de 2026 ganó su tercera elección seguida quedándose con las 30 bancas del Parlamento, igual que en 2018 y 2022.",
+        "historia": [
+          ["2010–2018", "Freundel Stuart", "cizq"],
+          ["2008–2010", "David Thompson", "cizq"],
+          ["1994–2008", "Owen Arthur", "cizq"]
+        ]
+      }
+    },
+    "LCA": {
+      "nombre": "Santa Lucía",
+      "capital": "Castries",
+      "region": "Caribe",
+      "resumen": "Una isla volcánica famosa por sus picos Pitons. Antes vivía de las bananas, pero desde los años 90 el turismo es el motor de la economía. Como otras islas del Caribe oriental, también vende ciudadanía a cambio de inversiones.",
+      "actividades": [
+        ["🏖️", "Turismo"],
+        ["🍌", "Bananas"],
+        ["🏗️", "Construcción"],
+        ["🎣", "Pesca"],
+        ["🛂", "Ciudadanía por inversión"]
+      ],
+      "expo": [["🍌", "Bananas"], ["🍺", "Cerveza"], ["🥃", "Ron"], ["🥥", "Cocos"], ["👕", "Ropa"]],
+      "impo": [["⛽", "Combustibles"], ["🌾", "Alimentos"], ["⚙️", "Maquinaria"], ["🚗", "Vehículos"]],
+      "socios": {
+        "vende": [["USA", 30], ["GBR", 15], ["TTO", 10], ["BRB", 8]],
+        "compra": [["USA", 45], ["TTO", 15], ["CHN", 6]]
+      },
+      "politica": {
+        "lider": "Philip J. Pierre",
+        "cargo": "Primer ministro",
+        "ideo": "cizq",
+        "desde": "julio de 2021",
+        "proxima": "2030",
+        "nota": "Fue reelegido en diciembre de 2025. El jefe de Estado es el rey Carlos III.",
+        "historia": [
+          ["2016–2021", "Allen Chastanet", "cder"],
+          ["2011–2016", "Kenny Anthony", "cizq"],
+          ["2007–2011", "Stephenson King", "cder"]
+        ]
+      }
+    },
+    "VCT": {
+      "nombre": "San Vicente y las Granadinas",
+      "capital": "Kingstown",
+      "region": "Caribe",
+      "resumen": "Una isla principal y más de 30 islotes. Vive del turismo y la agricultura. En 2021 entró en erupción el volcán La Soufrière y en 2024 el huracán Beryl arrasó varias de las Granadinas, lo que explica su enorme déficit externo por la reconstrucción.",
+      "actividades": [
+        ["🏖️", "Turismo"],
+        ["🍌", "Bananas"],
+        ["🌿", "Arrurruz"],
+        ["🎣", "Pesca"],
+        ["💼", "Servicios"]
+      ],
+      "expo": [
+        ["🥔", "Dasheen y tubérculos"],
+        ["🌾", "Harina"],
+        ["🌿", "Arrurruz"],
+        ["🐟", "Pescado"],
+        ["🍌", "Bananas"]
+      ],
+      "impo": [
+        ["🌾", "Alimentos"],
+        ["⛽", "Combustibles"],
+        ["⚙️", "Maquinaria"],
+        ["🏗️", "Materiales de construcción"]
+      ],
+      "socios": {
+        "vende": [["BRB", 15], ["TTO", 12], ["LCA", 12], ["USA", 10]],
+        "compra": [["USA", 35], ["TTO", 20], ["CHN", 8], ["GBR", 5]]
+      },
+      "politica": {
+        "lider": "Godwin Friday",
+        "cargo": "Primer ministro",
+        "ideo": "cder",
+        "desde": "noviembre de 2025",
+        "proxima": "2030",
+        "nota": "Su triunfo en noviembre de 2025 terminó con 24 años de gobierno de Ralph Gonsalves.",
+        "historia": [
+          ["2001–2025", "Ralph Gonsalves", "izq"],
+          ["2000–2001", "Arnhim Eustace", "cder"],
+          ["1984–2000", "James Mitchell", "cder"]
+        ]
+      }
+    },
+    "GRD": {
+      "nombre": "Granada",
+      "capital": "Saint George's",
+      "region": "Caribe",
+      "resumen": "La «isla de las especias»: es uno de los mayores productores de nuez moscada del mundo. Hoy pesan más el turismo y la Universidad St. George's, donde estudian medicina miles de estadounidenses. En 2024 el huracán Beryl destruyó casi todo en sus islas Carriacou y Pequeña Martinica.",
+      "actividades": [
+        ["🏖️", "Turismo"],
+        ["🎓", "Universidad de medicina"],
+        ["🌰", "Nuez moscada y especias"],
+        ["🍫", "Cacao"],
+        ["🎣", "Pesca"]
+      ],
+      "expo": [
+        ["🌰", "Nuez moscada"],
+        ["🐟", "Pescado"],
+        ["🍫", "Cacao y chocolate"],
+        ["🌾", "Harina"],
+        ["📄", "Papel"]
+      ],
+      "impo": [["⛽", "Combustibles"], ["🌾", "Alimentos"], ["⚙️", "Maquinaria"], ["🚗", "Vehículos"]],
+      "socios": {
+        "vende": [["USA", 30], ["LCA", 8], ["NLD", 8], ["TTO", 6]],
+        "compra": [["USA", 40], ["TTO", 18], ["CHN", 6]]
+      },
+      "politica": {
+        "lider": "Dickon Mitchell",
+        "cargo": "Primer ministro",
+        "ideo": "cizq",
+        "desde": "junio de 2022",
+        "proxima": "2027",
+        "historia": [
+          ["2013–2022", "Keith Mitchell", "cder"],
+          ["2008–2013", "Tillman Thomas", "cizq"],
+          ["1995–2008", "Keith Mitchell", "cder"]
+        ]
+      }
+    },
+    "ATG": {
+      "nombre": "Antigua y Barbuda",
+      "capital": "Saint John's",
+      "region": "Caribe",
+      "resumen": "Vive del turismo de lujo y de los yates, y es uno de los países que más dinero obtiene vendiendo ciudadanía a inversores. En 2017 el huracán Irma destruyó casi todas las construcciones de Barbuda, la isla más chica.",
+      "actividades": [
+        ["🏖️", "Turismo de lujo"],
+        ["⛵", "Yates y marinas"],
+        ["🏗️", "Construcción"],
+        ["🛂", "Ciudadanía por inversión"],
+        ["🏦", "Servicios financieros"]
+      ],
+      "expo": [
+        ["⛽", "Combustibles (reexportación)"],
+        ["🚢", "Barcos (reexportación)"],
+        ["🦞", "Langosta y pescado"]
+      ],
+      "impo": [["⛽", "Combustibles"], ["🌾", "Alimentos"], ["⚙️", "Maquinaria"], ["🚗", "Vehículos"]],
+      "socios": {
+        "vende": [["USA", 20], ["GUY", 8], ["BRB", 6]],
+        "compra": [["USA", 45], ["CHN", 8], ["GBR", 6]]
+      },
+      "politica": {
+        "lider": "Gaston Browne",
+        "cargo": "Primer ministro",
+        "ideo": "cizq",
+        "desde": "junio de 2014",
+        "proxima": "2028",
+        "historia": [
+          ["2004–2014", "Baldwin Spencer", "cder"],
+          ["1994–2004", "Lester Bird", "cizq"],
+          ["1981–1994", "Vere Bird", "cizq"]
+        ]
+      }
+    },
+    "DMA": {
+      "nombre": "Dominica",
+      "capital": "Roseau",
+      "region": "Caribe",
+      "resumen": "La «isla naturaleza» del Caribe: selva, volcanes y aguas termales. En 2017 el huracán María destruyó gran parte del país. Financia la reconstrucción y un nuevo aeropuerto internacional en buena parte vendiendo ciudadanía, lo que explica su déficit externo gigante.",
+      "actividades": [
+        ["🌋", "Ecoturismo"],
+        ["🍌", "Bananas"],
+        ["🛂", "Ciudadanía por inversión"],
+        ["💧", "Agua embotellada"],
+        ["🧼", "Jabones"]
+      ],
+      "expo": [
+        ["🧼", "Jabones"],
+        ["🪨", "Piedra pómez"],
+        ["💧", "Agua mineral"],
+        ["🍌", "Bananas"],
+        ["🌶️", "Salsas picantes"]
+      ],
+      "impo": [
+        ["⛽", "Combustibles"],
+        ["🌾", "Alimentos"],
+        ["🏗️", "Materiales de construcción"],
+        ["⚙️", "Maquinaria"]
+      ],
+      "socios": {
+        "vende": [["GUY", 15], ["JAM", 10], ["ATG", 9], ["LCA", 8]],
+        "compra": [["USA", 40], ["TTO", 12], ["CHN", 8]]
+      },
+      "politica": {
+        "lider": "Roosevelt Skerrit",
+        "cargo": "Primer ministro",
+        "ideo": "cizq",
+        "desde": "enero de 2004",
+        "proxima": "2027",
+        "nota": "Es uno de los gobernantes con más tiempo en el cargo de toda América.",
+        "historia": [
+          ["2003–2004", "Pierre Charles", "cizq"],
+          ["2000", "Rosie Douglas", "cizq"],
+          ["1995–2000", "Edison James", "cder"]
+        ]
+      }
+    },
+    "KNA": {
+      "nombre": "San Cristóbal y Nieves",
+      "capital": "Basseterre",
+      "region": "Caribe",
+      "resumen": "El país más chico de América, una federación de dos islas. Cerró su industria azucarera en 2005 y hoy vive del turismo y de su programa de ciudadanía por inversión, el más antiguo del mundo (1984), que llegó a aportar una gran parte de los ingresos del Estado.",
+      "actividades": [
+        ["🏖️", "Turismo"],
+        ["🛂", "Ciudadanía por inversión"],
+        ["🎓", "Universidades de medicina"],
+        ["🔌", "Ensamblado electrónico"]
+      ],
+      "expo": [["🔌", "Componentes electrónicos"], ["🥃", "Bebidas"], ["👕", "Ropa"]],
+      "impo": [["⛽", "Combustibles"], ["🌾", "Alimentos"], ["⚙️", "Maquinaria"], ["🚗", "Vehículos"]],
+      "socios": {
+        "vende": [["USA", 60], ["ATG", 5]],
+        "compra": [["USA", 55], ["TTO", 10], ["CHN", 5]]
+      },
+      "politica": {
+        "lider": "Terrance Drew",
+        "cargo": "Primer ministro",
+        "ideo": "cizq",
+        "desde": "agosto de 2022",
+        "proxima": "2027",
+        "historia": [
+          ["2015–2022", "Timothy Harris", "cder"],
+          ["1995–2015", "Denzil Douglas", "cizq"],
+          ["1980–1995", "Kennedy Simmonds", "cder"]
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,5 @@
+# Cosas que NO se suben a GitHub
+.venv/
+__pycache__/
+*.tmp
+.DS_Store

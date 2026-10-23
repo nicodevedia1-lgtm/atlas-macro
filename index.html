@@ -1,0 +1,1036 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Atlas Macro</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;600;700&display=swap">
+<style>
+/* Layout: sala de mapas — planisferio con relieve a la izquierda, ficha del país a la derecha, "cara a cara" a todo el ancho debajo */
+:root {
+  --bg: #ECEFF2;
+  --surface: #FFFFFF;
+  --ink: #14223A;
+  --muted: #5A6678;
+  --line: #D5DBE2;
+  --land: #C9D1DB;
+  --land-hover: #BCC6D2;
+  --sea: #CFE3EE;
+  --border: #FFFFFF;
+  --terrain-filter: none;
+  --accent: #B5731A;
+  --accent-soft: #EBCB93;
+  --b: #1F7F76;
+  --b-soft: #CFE9E5;
+  --good: #2E7D4F;
+  --warn: #A87A06;
+  --bad: #B23A3A;
+  --good-bg: #DDF0E4;
+  --warn-bg: #F6EBC9;
+  --bad-bg: #F5DCDC;
+  --izq: #B8322A; --cizq: #E07A5F; --cen: #C9A227; --cder: #5B8FC9; --der: #24508F; --ind: #8A939E;
+  --f-display: "Bricolage Grotesque", "Trebuchet MS", system-ui, sans-serif;
+  --f-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --f-data: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --f-emoji: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0E1522; --surface: #162033; --ink: #E6EBF2; --muted: #98A4B5; --line: #27334A;
+    --land: #34425B; --land-hover: #45556F; --sea: #111A2A; --border: #0E1522; --terrain-filter: brightness(.78) saturate(.85);
+    --accent: #E3A645; --accent-soft: #7A5C2A; --b: #4DBFB2; --b-soft: #1C4643;
+    --good: #5CC08A; --warn: #E2B33E; --bad: #E47272;
+    --good-bg: #173326; --warn-bg: #3A3016; --bad-bg: #3D1D1F; --izq: #E0574D; --cizq: #F09A80; --cen: #DDB940; --cder: #7FAEE3; --der: #4C7FCC; --ind: #9AA4B0;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0E1522; --surface: #162033; --ink: #E6EBF2; --muted: #98A4B5; --line: #27334A;
+  --land: #34425B; --land-hover: #45556F; --sea: #111A2A; --border: #0E1522; --terrain-filter: brightness(.78) saturate(.85);
+  --accent: #E3A645; --accent-soft: #7A5C2A; --b: #4DBFB2; --b-soft: #1C4643;
+  --good: #5CC08A; --warn: #E2B33E; --bad: #E47272;
+  --good-bg: #173326; --warn-bg: #3A3016; --bad-bg: #3D1D1F; --izq: #E0574D; --cizq: #F09A80; --cen: #DDB940; --cder: #7FAEE3; --der: #4C7FCC; --ind: #9AA4B0;
+  color-scheme: dark;
+}
+* { box-sizing: border-box; }
+body {
+  background: var(--bg); color: var(--ink);
+  font-family: var(--f-body); font-size: 16px; line-height: 1.5;
+}
+.wrap {
+  max-width: 1280px; margin: 0 auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 24px 48px;
+  display: grid; gap: 28px;
+}
+h1, h2, h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; line-height: 1.1; }
+p { margin: 0; }
+.eyebrow { font-family: var(--f-data); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.emo { font-family: var(--f-emoji); font-size: 1.05em; line-height: 1; }
+
+.flag { display: inline-flex; flex: 0 0 auto; border-radius: 4px; overflow: hidden; box-shadow: 0 0 0 1px var(--line); vertical-align: middle; }
+.flag svg { display: block; width: 100%; height: 100%; }
+
+header.top { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 12px 24px; }
+header.top h1 { font-size: clamp(34px, 5vw, 52px); font-weight: 800; letter-spacing: -.02em; }
+header.top h1 span { color: var(--accent); }
+header.top .lede { color: var(--muted); max-width: 52ch; }
+
+.atlas { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 960px) { .atlas { grid-template-columns: minmax(0, 1fr); } }
+
+.mapcard { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; position: relative; }
+@media (min-width: 961px) { .mapcard { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); } }
+#map { display: block; width: 100%; height: min(62vh, 560px); min-height: 320px; background: var(--sea); cursor: grab; touch-action: none; }
+#map:active { cursor: grabbing; }
+#map path.c { fill: var(--ink); fill-opacity: 0; stroke: var(--border); stroke-opacity: .75; stroke-width: .7; vector-effect: non-scaling-stroke; transition: fill-opacity .15s; cursor: pointer; }
+#map path.c:hover { fill-opacity: .14; }
+#map path.c.has { fill: var(--accent); fill-opacity: .22; stroke: var(--accent); stroke-opacity: 1; stroke-width: 1.2; }
+#map path.c.has:hover { fill-opacity: .38; }
+#map path.c.cmp { fill: var(--b); fill-opacity: .32; stroke: var(--b); stroke-width: 1.6; }
+#map path.c.sel { fill: var(--accent); fill-opacity: .36; stroke: var(--ink); stroke-width: 1.6; }
+#map image.relief { pointer-events: none; filter: var(--terrain-filter); }
+#map.flat image.relief { display: none; }
+#map.flat path.c { fill: var(--land); fill-opacity: 1; stroke: var(--sea); }
+#map.flat path.c:hover { fill: var(--land-hover); }
+#map.flat path.c.has { fill: var(--accent-soft); stroke: var(--sea); }
+#map.flat path.c.has:hover { fill: var(--accent); }
+#map.flat path.c.cmp { fill: var(--b); }
+#map.flat path.c.sel { fill: var(--accent); stroke: var(--ink); }
+.tip { position: absolute; z-index: 3; pointer-events: none; background: var(--surface); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; padding: 7px 10px; font-size: 14px; box-shadow: 0 6px 18px rgba(10, 20, 35, .16); display: flex; gap: 8px; align-items: center; max-width: 240px; }
+.tip small { display: block; color: var(--muted); font-size: 12.5px; }
+.tip .flag { width: 27px; height: 18px; border-radius: 3px; }
+.maploading { position: absolute; inset: 0; display: grid; place-items: center; color: var(--muted); font-size: 14px; pointer-events: none; }
+.mapbar { display: flex; flex-wrap: wrap; gap: 8px 16px; align-items: center; justify-content: space-between; padding: 10px 14px; border-top: 1px solid var(--line); background: var(--surface); }
+.modes { display: flex; gap: 6px; width: 100%; }
+.ideo-filter button { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 3px 10px; font-size: 13px; cursor: pointer; }
+.ideo-filter button i { margin: 0; }
+.ideo-filter button[aria-pressed="true"] { border-color: var(--ink); font-weight: 700; }
+.ideo-filter button.off { opacity: .45; }
+#map.gob path.c { fill: var(--land); fill-opacity: .5; stroke: var(--border); stroke-width: .7; }
+#map.gob path.c[data-ideo] { fill: var(--ic); fill-opacity: .82; }
+#map.gob path.c.dim { fill-opacity: .12; }
+#map.gob path.c.sel { stroke: var(--ink); stroke-width: 2; }
+#map.gob path.c.cmp { stroke: var(--border); stroke-width: .7; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; color: var(--muted); }
+.legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; vertical-align: -1px; margin-right: 6px; }
+.views { display: flex; flex-wrap: wrap; gap: 6px; }
+button, select { font: inherit; color: var(--ink); }
+.btn { border: 1px solid var(--line); background: var(--surface); padding: 5px 12px; border-radius: 999px; font-size: 14px; cursor: pointer; }
+.btn:hover { border-color: var(--accent); }
+.btn[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: grid; gap: 18px; min-width: 0; }
+.panel-head { display: flex; align-items: center; gap: 14px; }
+.panel-head .flag { width: 54px; height: 36px; border-radius: 5px; }
+.panel h2 { font-size: 34px; font-weight: 800; letter-spacing: -.015em; }
+.meta { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 14px; color: var(--muted); }
+.meta b { color: var(--ink); font-weight: 600; }
+.resumen { font-size: 17px; }
+.metrics { display: grid; border-top: 1px solid var(--line); }
+.metric { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 2px 12px; padding: 14px 0; border-bottom: 1px solid var(--line); }
+.metric .lbl { font-weight: 700; font-size: 15px; }
+.metric .val { font-family: var(--f-data); font-size: 20px; font-weight: 500; text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.metric .exp { grid-column: 1 / -1; color: var(--muted); font-size: 14.5px; max-width: 60ch; }
+.metric .ctx { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; font-size: 13px; color: var(--muted); }
+.spark { grid-column: 1 / -1; height: 46px; margin-top: 4px; }
+.pill { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; font-weight: 700; padding: 2px 9px; border-radius: 999px; letter-spacing: .02em; }
+.pill::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
+.pill.good { color: var(--good); background: var(--good-bg); }
+.pill.warn { color: var(--warn); background: var(--warn-bg); }
+.pill.bad { color: var(--bad); background: var(--bad-bg); }
+.pill.nd { color: var(--muted); background: var(--bg); }
+
+.trade { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; }
+@media (max-width: 480px) { .trade { grid-template-columns: minmax(0, 1fr); } }
+.trade h3, .acts h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+.items { list-style: none; margin: 0; padding: 0; display: grid; gap: 5px; font-size: 15px; }
+.items li { display: grid; grid-template-columns: 1.6em minmax(0, 1fr); align-items: baseline; }
+.hint { font-size: 12.5px; color: var(--muted); margin: -4px 0 8px; }
+.socios h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+.socios h4 { font-family: var(--f-body); font-size: 14px; font-weight: 700; color: var(--muted); margin: 0 0 8px; }
+.partners { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
+.partners li { display: grid; grid-template-columns: 24px minmax(0, 1fr) auto; align-items: center; gap: 3px 8px; font-size: 14.5px; }
+.partners .pbar { grid-column: 2 / -1; }
+.partners .flag { width: 24px; height: 16px; border-radius: 3px; }
+.partners .pbar { height: 8px; background: var(--bg); border-radius: 4px; overflow: hidden; }
+.partners .pbar i { display: block; height: 100%; background: var(--accent); border-radius: 4px; }
+.partners .ppct { font-family: var(--f-data); font-size: 13px; text-align: right; font-variant-numeric: tabular-nums; }
+.plink { border: 0; background: none; padding: 0; text-align: left; font-size: inherit; color: var(--ink); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; cursor: pointer; }
+.pol { display: grid; gap: 10px; border-top: 1px solid var(--line); padding-top: 18px; }
+.pol h3 { font-size: 17px; font-weight: 700; }
+.pol h4 { font-family: var(--f-body); font-size: 14px; font-weight: 700; color: var(--muted); margin: 4px 0 0; }
+.pol-now { display: grid; gap: 2px; padding: 14px 16px; background: var(--bg); border-radius: 10px; }
+.pol-now strong { font-family: var(--f-display); font-size: 22px; font-weight: 700; line-height: 1.15; }
+.pol-meta { font-size: 14px; color: var(--muted); }
+.pol-meta b { color: var(--ink); font-weight: 600; }
+.pol-nota { font-size: 14.5px; max-width: 60ch; }
+.pol-list { list-style: none; margin: 0; padding: 0; display: grid; }
+.pol-list li { display: grid; grid-template-columns: 6.6em minmax(0, 1fr); gap: 0 10px; padding: 7px 0; border-bottom: 1px solid var(--line); font-size: 14.5px; }
+.pol-y { font-family: var(--f-data); font-size: 12.5px; color: var(--muted); font-variant-numeric: tabular-nums; padding-top: 2px; }
+.pol-n { font-weight: 600; }
+.pol-p { grid-column: 2; padding-top: 3px; }
+.ipill { display: inline-flex; align-items: center; gap: 6px; font-size: 12.5px; font-weight: 700; color: var(--ink); }
+.ipill::before { content: ""; width: 10px; height: 10px; border-radius: 3px; background: var(--ic); }
+.pol-meta .ipill { margin-right: 4px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { display: inline-flex; gap: 6px; align-items: center; font-size: 14px; padding: 4px 10px; border-radius: 6px; background: var(--bg); border: 1px solid var(--line); }
+.panel .go { justify-self: start; border: 0; background: var(--accent); color: var(--surface); font-weight: 700; padding: 9px 16px; border-radius: 8px; cursor: pointer; }
+.panel .go:hover { filter: brightness(1.06); }
+.empty { display: grid; gap: 10px; color: var(--muted); }
+.empty h2 { color: var(--ink); }
+
+.versus { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 24px; display: grid; gap: 22px; }
+.vs-head { display: flex; flex-wrap: wrap; gap: 14px 24px; align-items: end; justify-content: space-between; }
+.vs-head h2 { font-size: clamp(26px, 3.4vw, 36px); font-weight: 800; }
+.pickers { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.picker { display: flex; align-items: end; gap: 8px; }
+.picker .flag { width: 33px; height: 22px; margin-bottom: 7px; }
+.picker label { display: grid; gap: 2px; font-size: 12px; color: var(--muted); }
+.pickers select { padding: 7px 10px; border-radius: 8px; border: 2px solid var(--line); background: var(--surface); font-weight: 700; font-size: 15px; }
+#selA { border-color: var(--accent); }
+#selB { border-color: var(--b); }
+.vs-word { font-family: var(--f-display); font-weight: 800; color: var(--muted); padding-top: 14px; }
+
+.frases { display: grid; gap: 10px; margin: 0; padding: 0; list-style: none; }
+.frases li { padding: 12px 16px; background: var(--bg); border-radius: 10px; font-size: 16.5px; max-width: 80ch; }
+.frases b.a { color: var(--accent); }
+.frases b.b { color: var(--b); }
+
+.duel { display: grid; gap: 4px; }
+.duel-head, .row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(110px, 170px) minmax(0, 1fr); gap: 10px; align-items: center; }
+.duel-head { font-family: var(--f-display); font-weight: 700; font-size: 18px; padding-bottom: 6px; }
+.duel-head .ha, .duel-head .hb { display: flex; align-items: center; gap: 8px; }
+.duel-head .ha { justify-content: flex-end; color: var(--accent); }
+.duel-head .hb { color: var(--b); }
+.duel-head .flag { width: 27px; height: 18px; }
+.row { padding: 7px 0; border-top: 1px solid var(--line); }
+.row .mid { text-align: center; font-size: 13.5px; font-weight: 600; line-height: 1.25; }
+.row .mid small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
+.side { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.side.left { flex-direction: row-reverse; }
+.bar { height: 14px; border-radius: 3px; min-width: 2px; flex: 0 0 auto; }
+.left .bar { background: var(--accent); }
+.right .bar { background: var(--b); }
+.side .num { font-family: var(--f-data); font-size: 14px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.side .num.win { font-weight: 500; }
+.win-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--good); }
+.track { flex: 1 1 auto; min-width: 0; display: flex; }
+.left .track { justify-content: flex-end; }
+@media (max-width: 560px) {
+  .duel-head, .row { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .row .mid { grid-column: 1 / -1; grid-row: 1; text-align: left; }
+  .duel-head .hmid { display: none; }
+}
+
+.timeline { display: grid; gap: 10px; }
+.tl-head { display: flex; flex-wrap: wrap; gap: 10px 20px; justify-content: space-between; align-items: center; }
+.tl-head h3 { font-size: 19px; font-weight: 700; }
+#tl { width: 100%; height: 340px; }
+.hist { grid-column: 1 / -1; display: grid; gap: 4px; }
+.hist-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; font-family: var(--f-data); font-size: 11.5px; color: var(--muted); }
+.hbtn { border: 1px solid var(--line); background: var(--surface); border-radius: 999px; padding: 3px 11px; font-family: var(--f-body); font-size: 13px; font-weight: 600; cursor: pointer; }
+.hbtn:hover, .hbtn[aria-expanded="true"] { border-color: var(--accent); color: var(--accent); }
+.histbox { display: grid; gap: 6px; margin-top: 6px; padding: 10px; background: var(--bg); border-radius: 10px; }
+.histchart { width: 100%; height: 240px; }
+.ytag { font-family: var(--f-body); font-size: 11px; color: var(--muted); font-weight: 600; white-space: nowrap; }
+.hist-none { grid-column: 1 / -1; font-size: 13px; color: var(--muted); }
+.wrap { grid-template-columns: minmax(0, 1fr); }
+.pickers select { max-width: min(220px, 40vw); text-overflow: ellipsis; }
+.pend { font-size: 15px; color: var(--muted); padding: 12px 14px; background: var(--bg); border-radius: 10px; }
+.note { font-size: 13px; color: var(--muted); max-width: 80ch; }
+footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <div class="eyebrow" id="conteo">Cargando datos…</div>
+      <h1>Atlas <span>Macro</span></h1>
+    </div>
+    <p class="lede">Tocá un país en el mapa y mirá cómo le va a su economía, explicado en simple. Abajo podés enfrentar dos países cara a cara.</p>
+  </header>
+
+  <section class="atlas">
+    <div class="mapcard" id="mapcard">
+      <svg id="map" role="img" aria-label="Planisferio con relieve. Tocá un país para ver su ficha."></svg>
+      <div class="maploading" id="maploading">Cargando el mapa…</div>
+      <div class="tip" id="tip" hidden></div>
+      <div class="mapbar">
+        <div class="modes" role="group" aria-label="Qué muestra el mapa">
+          <button class="btn" id="mFichas" aria-pressed="true" type="button">Fichas</button>
+          <button class="btn" id="mGob" aria-pressed="false" type="button">Quién gobierna</button>
+        </div>
+        <div class="legend" id="legFichas">
+          <span><i style="background:var(--accent)"></i>País elegido</span>
+          <span><i style="background:var(--b)"></i>Comparando con</span>
+          <span><i style="background:var(--accent-soft)"></i>Ficha completa</span>
+          <span><i style="background:#9EC476"></i>Solo datos macro</span>
+        </div>
+        <div class="legend ideo-filter" id="legGob" hidden></div>
+        <div class="views">
+          <button class="btn" id="vRelief" aria-pressed="true" type="button">Relieve</button>
+          <button class="btn" id="vWorld" aria-pressed="false" type="button">Mundo</button>
+          <button class="btn" id="vNA" aria-pressed="false" type="button">Norteamérica</button>
+          <button class="btn" id="vCA" aria-pressed="false" type="button">Centroamérica</button>
+          <button class="btn" id="vCB" aria-pressed="false" type="button">Caribe</button>
+          <button class="btn" id="vSA" aria-pressed="true" type="button">Sudamérica</button>
+        </div>
+      </div>
+    </div>
+    <aside class="panel" id="panel" aria-live="polite"></aside>
+  </section>
+
+  <section class="versus" id="versus">
+    <div class="vs-head">
+      <div>
+        <div class="eyebrow">Cara a cara</div>
+        <h2>¿Quién está mejor?</h2>
+      </div>
+      <div class="pickers">
+        <div class="picker"><span class="flag" id="flagA"></span><label for="selA">País 1<select id="selA"></select></label></div>
+        <span class="vs-word">vs</span>
+        <div class="picker"><span class="flag" id="flagB"></span><label for="selB">País 2<select id="selB"></select></label></div>
+      </div>
+    </div>
+    <ul class="frases" id="frases"></ul>
+    <div class="duel" id="duel"></div>
+    <div class="timeline">
+      <div class="tl-head">
+        <h3 id="tlTitle">Cómo evolucionaron</h3>
+        <div class="views" role="group" aria-label="Indicador del gráfico">
+          <button class="btn" data-ind="pib" aria-pressed="true" type="button">PBI</button>
+          <button class="btn" data-ind="crec" aria-pressed="false" type="button">Crecimiento</button>
+          <button class="btn" data-ind="infl" aria-pressed="false" type="button">Inflación</button>
+          <button class="btn" data-ind="deuda" aria-pressed="false" type="button">Deuda</button>
+          <button class="btn" data-ind="cc" aria-pressed="false" type="button">Cuenta corriente</button>
+        </div>
+      </div>
+      <div id="tl"></div>
+      <p class="note" id="tlNote"></p>
+    </div>
+  </section>
+
+  <footer>
+    <p id="fuentes">Cargando fuentes…</p>
+    <p>PBI por persona ajustado: en paridad de poder adquisitivo (PPA), o sea, teniendo en cuenta lo que cuestan las cosas en cada país. Fronteras: Natural Earth. Relieve: modelo de elevación global, coloreado por altura.</p>
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/echarts@4.9.0/dist/echarts.min.js"></script>
+<script>
+/* =====================================================================
+   Atlas Macro
+   Los datos NO están escritos acá: la página los lee de dos archivos.
+   · datos.json   → números macro de todos los países. Lo genera actualizar.py.
+   · curado.json  → lo que escribís a mano: resúmenes, comercio, política.
+   ===================================================================== */
+
+/* Se completan cuando terminan de cargar los archivos (ver arrancar()) */
+let DATOS = null, CURADO = null;
+let ANIO, ANIOS, YEARS, MUNDO = {};
+const PAISES = {};     /* ficha armada de cada país, por código ISO3 ("ARG") */
+const HIST = {};       /* series históricas de cada país */
+const POLITICA = {};   /* sale de curado.json */
+
+const IDEO = {
+  izq: { t: "Izquierda", c: "--izq" },
+  cizq: { t: "Centroizquierda", c: "--cizq" },
+  cen: { t: "Centro", c: "--cen" },
+  cder: { t: "Centroderecha", c: "--cder" },
+  der: { t: "Derecha", c: "--der" },
+  ind: { t: "Independiente / técnico", c: "--ind" }
+};
+
+/* ---------- ARMAR LAS FICHAS A PARTIR DE LOS DOS ARCHIVOS ---------- */
+const nombresES = (() => { try { return new Intl.DisplayNames(["es"], { type: "region" }); } catch (e) { return null; } })();
+function nombrePais(iso, d) {
+  if (CURADO.paises[iso] && CURADO.paises[iso].nombre) return CURADO.paises[iso].nombre;
+  if (nombresES && d.iso2) { try { const n = nombresES.of(d.iso2); if (n && n !== d.iso2) return n; } catch (e) {} }
+  return d.nombre;
+}
+/* [1960, [v, v, ...]] ⇄ { 1960: v, ... } */
+const aMapa = s => { const m = {}; if (s) s[1].forEach((v, i) => { if (v != null) m[s[0] + i] = v; }); return m; };
+const aSerie = m => { const ys = Object.keys(m).map(Number); if (!ys.length) return null; const a = Math.min(...ys), b = Math.max(...ys); const v = []; for (let y = a; y <= b; y++) v.push(m[y] === undefined ? null : m[y]); return [a, v]; };
+const aRangos = ys => ys.sort((a, b) => a - b).reduce((r, y) => { if (r.length && y === r[r.length - 1][1] + 1) r[r.length - 1][1] = y; else r.push([y, y]); return r; }, []);
+const ultimo = s => { if (!s) return null; for (let i = s[1].length - 1; i >= 0; i--) if (s[1][i] != null) return { y: s[0] + i, v: s[1][i] }; return null; };
+
+function armarPais(iso, d) {
+  const cur = CURADO.paises[iso] || {};
+  const h = { notas: cur.notas || {}, marcas: {} };
+  ["pib", "crec", "infl", "deuda", "cc"].forEach(ind => {
+    const valores = aMapa(d.series[ind]);
+    /* De qué fuente salió cada año: "fmi", "deflactor", "bm" o un ajuste a mano */
+    const marca = {};
+    const org = d.origen[ind] || {};
+    Object.entries(org).forEach(([fuente, rangos]) => {
+      if (fuente === "principal") return;
+      const tipo = fuente === "bm.deflactor" ? "deflactor" : fuente.split(".")[0];
+      rangos.forEach(([a, b]) => { for (let y = a; y <= b; y++) marca[y] = tipo; });
+    });
+    /* Ajustes de curado.json: quitar años con errores o reemplazar con otra fuente */
+    const aj = cur.ajustes && cur.ajustes[ind];
+    if (aj && aj.quitar) aj.quitar.forEach(([a, b]) => { for (let y = a; y <= b; y++) { delete valores[y]; delete marca[y]; } });
+    if (aj && aj.reemplazar) aj.reemplazar.valores.forEach((v, i) => { const y = aj.reemplazar.desde + i; if (v == null) delete valores[y]; else valores[y] = v; marca[y] = "aj"; });
+    const serie = aSerie(valores);
+    if (!serie) return;
+    h[ind] = serie;
+    const porTipo = {};
+    Object.entries(marca).forEach(([y, t]) => { if (valores[y] !== undefined) (porTipo[t] = porTipo[t] || []).push(+y); });
+    h.marcas[ind] = Object.fromEntries(Object.entries(porTipo).map(([t, ys]) => [t, aRangos(ys)]));
+    if (aj) h.marcas[ind].ajuste = { etiqueta: aj.etiqueta || "Ajuste", nota: aj.nota || "" };
+  });
+  HIST[iso] = h;
+
+  const p = {
+    iso, iso2: d.iso2, nombre: nombrePais(iso, d), curada: !!cur.resumen,
+    capital: cur.capital || d.capital, region: cur.region || d.region || "",
+    resumen: cur.resumen, actividades: cur.actividades, expo: cur.expo, impo: cur.impo, socios: cur.socios,
+    u: {}
+  };
+  const tail = ind => { const s = h[ind]; return ANIOS.map(y => { if (!s) return null; const v = s[1][y - s[0]]; return v === undefined ? null : v; }); };
+  p.pib = tail("pib"); p.crec = tail("crec"); p.infl = tail("infl");
+  ["pib", "crec", "infl", "deuda", "cc"].forEach(ind => { const x = ultimo(h[ind]); if (x) p.u[ind] = x; });
+  ["desempleo", "poblacion", "pibpc", "ppa"].forEach(ind => { const x = ultimo(d.series[ind]); if (x) p.u[ind] = x; });
+  /* Deuda y cuenta corriente: solo si el dato es reciente */
+  ["deuda", "cc"].forEach(ind => { if (p.u[ind] && p.u[ind].y >= ANIO - 1) p[ind] = p.u[ind].v; else { p[ind] = null; delete p.u[ind]; } });
+  ["desempleo", "poblacion", "pibpc", "ppa"].forEach(ind => { p[ind] = p.u[ind] ? p.u[ind].v : null; });
+  PAISES[iso] = p;
+  if (cur.politica) POLITICA[iso] = cur.politica;
+}
+
+function prepararDatos() {
+  ANIO = DATOS.anios[1];
+  ANIOS = Array.from({ length: 8 }, (_, i) => ANIO - 7 + i);
+  YEARS = Array.from({ length: ANIO - 1960 + 1 }, (_, i) => 1960 + i);
+  Object.entries(DATOS.mundo).forEach(([ind, s]) => { const x = ultimo(s); if (x) MUNDO[ind] = x.v; });
+  Object.entries(DATOS.paises).forEach(([iso, d]) => armarPais(iso, d));
+}
+
+/* Banderas dibujadas a mano en SVG (las de emoji no se ven en Windows) */
+function star(cx, cy, R, r) {
+  const p = [];
+  for (let i = 0; i < 10; i++) {
+    const a = -Math.PI / 2 + i * Math.PI / 5, rr = i % 2 ? r : R;
+    p.push((cx + rr * Math.cos(a)).toFixed(2) + "," + (cy + rr * Math.sin(a)).toFixed(2));
+  }
+  return p.join(" ");
+}
+const FLAGS = {
+  "ARG": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#74ACDF"/><rect y="6.67" width="30" height="6.67" fill="#FFFFFF"/><circle cx="15" cy="10" r="2.3" fill="#F6B40E" stroke="#85340A" stroke-width=".35"/></svg>`,
+  "BRA": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#009C3B"/><path d="M15 2.2 L27.6 10 L15 17.8 L2.4 10 Z" fill="#FFDF00"/><circle cx="15" cy="10" r="4.5" fill="#002776"/><path d="M10.6 9.1 Q15.2 8.1 19.4 11.2" stroke="#FFFFFF" stroke-width=".8" fill="none"/></svg>`,
+  "CHL": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#D52B1E"/><rect width="30" height="10" fill="#FFFFFF"/><rect width="10" height="10" fill="#0039A6"/><polygon points="${star(5, 5.2, 2.9, 1.15)}" fill="#FFFFFF"/></svg>`
+  ,"CHN": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#DE2910"/><polygon points="${star(5, 5, 3, 1.15)}" fill="#FFDE00"/><polygon points="${star(10, 2, .9, .35)}" fill="#FFDE00"/><polygon points="${star(12, 4, .9, .35)}" fill="#FFDE00"/><polygon points="${star(12, 7, .9, .35)}" fill="#FFDE00"/><polygon points="${star(10, 9, .9, .35)}" fill="#FFDE00"/></svg>`,
+  "USA": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FFFFFF"/>${[0,2,4,6,8,10,12].map(i => `<rect y="${i * 20 / 13}" width="30" height="${20 / 13}" fill="#B22234"/>`).join("")}<rect width="12.5" height="10.77" fill="#3C3B6E"/></svg>`,
+  "IND": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FFFFFF"/><rect width="30" height="6.67" fill="#FF9933"/><rect y="13.33" width="30" height="6.67" fill="#138808"/><circle cx="15" cy="10" r="2.6" fill="none" stroke="#000080" stroke-width=".6"/></svg>`,
+  "JPN": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FFFFFF"/><circle cx="15" cy="10" r="6" fill="#BC002D"/></svg>`,
+  "KOR": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FFFFFF"/><path d="M10 10 A5 5 0 0 1 20 10 Z" fill="#CD2E3A"/><path d="M10 10 A5 5 0 0 0 20 10 Z" fill="#0047A0"/><circle cx="12.5" cy="10" r="2.5" fill="#CD2E3A"/><circle cx="17.5" cy="10" r="2.5" fill="#0047A0"/></svg>`,
+  "DEU": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="6.67" fill="#000000"/><rect y="6.67" width="30" height="6.67" fill="#DD0000"/><rect y="13.33" width="30" height="6.67" fill="#FFCE00"/></svg>`,
+  "NLD": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="6.67" fill="#AE1C28"/><rect y="6.67" width="30" height="6.67" fill="#FFFFFF"/><rect y="13.33" width="30" height="6.67" fill="#21468B"/></svg>`,
+  "ESP": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#AA151B"/><rect y="5" width="30" height="10" fill="#F1BF00"/></svg>`,
+  "URY": `<svg viewBox="0 0 27 18" aria-hidden="true"><rect width="27" height="18" fill="#FFFFFF"/>${[1,3,5,7].map(i => `<rect y="${i * 2}" width="27" height="2" fill="#0038A8"/>`).join("")}<rect width="10" height="10" fill="#FFFFFF"/><circle cx="5" cy="5" r="3" fill="#FCD116" stroke="#7B3F00" stroke-width=".3"/><circle cx="5" cy="5" r="1.8" fill="#FCD116" stroke="#7B3F00" stroke-width=".25"/></svg>`,
+  "PRY": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="6.67" fill="#D52B1E"/><rect y="6.67" width="30" height="6.67" fill="#FFFFFF"/><rect y="13.33" width="30" height="6.67" fill="#0038A8"/><circle cx="15" cy="10" r="1.8" fill="none" stroke="#0038A8" stroke-width=".4"/></svg>`
+  ,"BOL": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="6.67" fill="#D52B1E"/><rect y="6.67" width="30" height="6.67" fill="#F9E300"/><rect y="13.33" width="30" height="6.67" fill="#007934"/></svg>`,
+  "PER": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#D91023"/><rect x="10" width="10" height="20" fill="#FFFFFF"/></svg>`,
+  "COL": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="10" fill="#FCD116"/><rect y="10" width="30" height="5" fill="#003893"/><rect y="15" width="30" height="5" fill="#CE1126"/></svg>`,
+  "ECU": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="10" fill="#FFDD00"/><rect y="10" width="30" height="5" fill="#034EA2"/><rect y="15" width="30" height="5" fill="#ED1C24"/><ellipse cx="15" cy="10" rx="2.4" ry="3" fill="#6E8B3D" stroke="#8B5A2B" stroke-width=".4"/></svg>`,
+  "VEN": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="6.67" fill="#FFCC00"/><rect y="6.67" width="30" height="6.67" fill="#00247D"/><rect y="13.33" width="30" height="6.67" fill="#CF142B"/>${[0,1,2,3,4,5,6,7].map(i => { const a = Math.PI * (0.88 - i * 0.108); return `<polygon points="${star(15 + 4.6 * Math.cos(a), 12.4 - 4.6 * Math.sin(a), .75, .3)}" fill="#FFFFFF"/>`; }).join("")}</svg>`,
+  "GUY": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#009E49"/><path d="M0 0 L30 10 L0 20 Z" fill="#FFFFFF"/><path d="M0 .9 L27.4 10 L0 19.1 Z" fill="#FCD116"/><path d="M0 0 L15 10 L0 20 Z" fill="#000000"/><path d="M0 1.3 L13 10 L0 18.7 Z" fill="#CE1126"/></svg>`,
+  "SUR": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#377E3F"/><rect y="4" width="30" height="12" fill="#FFFFFF"/><rect y="5.6" width="30" height="8.8" fill="#B40A2D"/><polygon points="${star(15, 10.3, 3.4, 1.35)}" fill="#ECC81D"/></svg>`,
+  "CHE": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#DA291C"/><rect x="13.2" y="4.5" width="3.6" height="11" fill="#FFFFFF"/><rect x="9.5" y="8.2" width="11" height="3.6" fill="#FFFFFF"/></svg>`,
+  "ARE": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="6.67" fill="#00732F"/><rect y="6.67" width="30" height="6.67" fill="#FFFFFF"/><rect y="13.33" width="30" height="6.67" fill="#000000"/><rect width="7.5" height="20" fill="#FF0000"/></svg>`
+  ,"GTM": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#4997D0"/><rect x="10" width="10" height="20" fill="#FFFFFF"/><circle cx="15" cy="10" r="2.6" fill="none" stroke="#6C8E3E" stroke-width=".9"/></svg>`,
+  "BLZ": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#CE1126"/><rect y="1.6" width="30" height="16.8" fill="#003F87"/><circle cx="15" cy="10" r="5.4" fill="#FFFFFF"/><circle cx="15" cy="10" r="4.4" fill="none" stroke="#2E7D32" stroke-width=".9"/></svg>`,
+  "HND": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#00BCE4"/><rect y="6.67" width="30" height="6.67" fill="#FFFFFF"/>${[[15,10],[11,8.4],[11,11.6],[19,8.4],[19,11.6]].map(([x, y]) => `<polygon points="${star(x, y, .95, .38)}" fill="#00BCE4"/>`).join("")}</svg>`,
+  "SLV": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#0F47AF"/><rect y="6.67" width="30" height="6.67" fill="#FFFFFF"/><circle cx="15" cy="10" r="2.2" fill="none" stroke="#C9A227" stroke-width=".7"/></svg>`,
+  "NIC": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#0067C6"/><rect y="6.67" width="30" height="6.67" fill="#FFFFFF"/><path d="M15 8 L17.2 11.6 L12.8 11.6 Z" fill="none" stroke="#3E8E41" stroke-width=".55"/></svg>`,
+  "CRI": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#002B7F"/><rect y="3.33" width="30" height="13.33" fill="#FFFFFF"/><rect y="6.67" width="30" height="6.67" fill="#CE1126"/></svg>`,
+  "PAN": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FFFFFF"/><rect x="15" width="15" height="10" fill="#DA121A"/><rect y="10" width="15" height="10" fill="#072357"/><polygon points="${star(7.5, 5, 2.4, .95)}" fill="#072357"/><polygon points="${star(22.5, 15, 2.4, .95)}" fill="#DA121A"/></svg>`,
+  "MEX": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FFFFFF"/><rect width="10" height="20" fill="#006847"/><rect x="20" width="10" height="20" fill="#CE1126"/><ellipse cx="15" cy="10" rx="2.2" ry="2.6" fill="#8C5A2B"/><path d="M12.6 11.4 Q15 14 17.4 11.4" stroke="#3E8E41" stroke-width=".6" fill="none"/></svg>`,
+  "CAN": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FFFFFF"/><rect width="7.5" height="20" fill="#D52B1E"/><rect x="22.5" width="7.5" height="20" fill="#D52B1E"/><path d="M15 4.2 L16 6.3 L17.3 5.6 L16.8 8.8 L18.6 7.4 L19.1 8.6 L20.6 8.3 L20 10.2 L20.8 10.7 L17.6 13.2 L18 14.4 L15.3 14 L15.3 16 L14.7 16 L14.7 14 L12 14.4 L12.4 13.2 L9.2 10.7 L10 10.2 L9.4 8.3 L10.9 8.6 L11.4 7.4 L13.2 8.8 L12.7 5.6 L14 6.3 Z" fill="#D52B1E"/></svg>`,
+  "GBR": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#012169"/><path d="M0 0 L30 20 M30 0 L0 20" stroke="#FFFFFF" stroke-width="4"/><path d="M0 0 L30 20 M30 0 L0 20" stroke="#C8102E" stroke-width="1.4"/><path d="M15 0 V20 M0 10 H30" stroke="#FFFFFF" stroke-width="6"/><path d="M15 0 V20 M0 10 H30" stroke="#C8102E" stroke-width="3.4"/></svg>`
+  ,"CUB": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#002A8F"/><rect y="4" width="30" height="4" fill="#FFFFFF"/><rect y="12" width="30" height="4" fill="#FFFFFF"/><path d="M0 0 L17.3 10 L0 20 Z" fill="#CF142B"/><polygon points="${star(5.8, 10, 2.6, 1)}" fill="#FFFFFF"/></svg>`,
+  "DOM": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FFFFFF"/><rect width="13" height="8" fill="#002D62"/><rect x="17" width="13" height="8" fill="#CE1126"/><rect y="12" width="13" height="8" fill="#CE1126"/><rect x="17" y="12" width="13" height="8" fill="#002D62"/><circle cx="15" cy="10" r="1.3" fill="#2E7D32"/></svg>`,
+  "HTI": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="10" fill="#00209F"/><rect y="10" width="30" height="10" fill="#D21034"/><rect x="11.5" y="7" width="7" height="6" fill="#FFFFFF"/><circle cx="15" cy="10" r="1.6" fill="#2E7D32"/></svg>`,
+  "JAM": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#009B3A"/><path d="M0 0 L15 10 L0 20 Z M30 0 L15 10 L30 20 Z" fill="#000000"/><path d="M0 0 L30 20 M30 0 L0 20" stroke="#FED100" stroke-width="2.6"/></svg>`,
+  "TTO": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#CE1126"/><path d="M3 0 L30 18 L30 20 L27 20 L0 2 L0 0 Z" fill="#FFFFFF"/><path d="M6 0 L30 16 L30 20 L24 20 L0 4 L0 0 Z" fill="#000000"/></svg>`,
+  "BHS": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#00778B"/><rect y="6.67" width="30" height="6.67" fill="#FFC72C"/><path d="M0 0 L12 10 L0 20 Z" fill="#000000"/></svg>`,
+  "BRB": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#00267F"/><rect x="10" width="10" height="20" fill="#FFC726"/><path d="M15 5 V15 M12 6 Q12 10 15 10.5 Q18 10 18 6" stroke="#000000" stroke-width="1" fill="none"/></svg>`,
+  "LCA": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#66CCFF"/><path d="M15 3 L20 17 L10 17 Z" fill="#FFFFFF"/><path d="M15 5 L19 17 L11 17 Z" fill="#000000"/><path d="M15 10 L17.5 17 L12.5 17 Z" fill="#FCD116"/></svg>`,
+  "VCT": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FCD116"/><rect width="7.5" height="20" fill="#002674"/><rect x="22.5" width="7.5" height="20" fill="#009E60"/><path d="M12.5 7 l1.3 2 l-1.3 2 l-1.3 -2 Z M17.5 7 l1.3 2 l-1.3 2 l-1.3 -2 Z M15 10.5 l1.3 2 l-1.3 2 l-1.3 -2 Z" fill="#009E60"/></svg>`,
+  "GRD": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#CE1126"/><rect x="2.5" y="2.5" width="25" height="15" fill="#FCD116"/><path d="M2.5 2.5 L15 10 L2.5 17.5 Z M27.5 2.5 L15 10 L27.5 17.5 Z" fill="#007A5E"/><circle cx="15" cy="10" r="2.6" fill="#CE1126"/><polygon points="${star(15, 10.1, 1.6, .65)}" fill="#FCD116"/></svg>`,
+  "ATG": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#CE1126"/><path d="M0 0 L30 0 L15 20 Z" fill="#000000"/><path d="M6.6 8.8 L23.4 8.8 L19.3 14.3 L10.7 14.3 Z" fill="#0072C6"/><path d="M10.7 14.3 L19.3 14.3 L15 20 Z" fill="#FFFFFF"/><circle cx="15" cy="8.8" r="3" fill="#FCD116"/><rect x="6" y="8.8" width="18" height="0.01" fill="#FCD116"/><path d="M6.6 8.8 L23.4 8.8 L23 9.3 L7 9.3 Z" fill="#0072C6"/></svg>`,
+  "DMA": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#006B3F"/><rect x="12" width="6" height="20" fill="#FCD116"/><rect x="14" width="2" height="20" fill="#000000"/><rect x="16" width="2" height="20" fill="#FFFFFF"/><rect y="7" width="30" height="6" fill="#FCD116"/><rect y="9" width="30" height="2" fill="#000000"/><rect y="11" width="30" height="2" fill="#FFFFFF"/><circle cx="15" cy="10" r="4" fill="#D41C30"/></svg>`,
+  "KNA": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#CE1126"/><path d="M0 0 L30 0 L0 20 Z" fill="#009E49"/><path d="M0 16 L24 0 L30 0 L30 4 L6 20 L0 20 Z" fill="#FCD116"/><path d="M0 18.5 L27.8 0 L30 0 L30 1.5 L2.2 20 L0 20 Z" fill="#000000"/><polygon points="${star(11, 12, 1.5, .6)}" fill="#FFFFFF"/><polygon points="${star(19, 7, 1.5, .6)}" fill="#FFFFFF"/></svg>`,
+  "FRA": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="20" fill="#FFFFFF"/><rect width="10" height="20" fill="#002395"/><rect x="20" width="10" height="20" fill="#ED2939"/></svg>`,
+  "RUS": `<svg viewBox="0 0 30 20" aria-hidden="true"><rect width="30" height="6.67" fill="#FFFFFF"/><rect y="6.67" width="30" height="6.67" fill="#0039A6"/><rect y="13.33" width="30" height="6.67" fill="#D52B1E"/></svg>`
+
+
+
+};
+const flag = k => FLAGS[k] ? `<span class="flag">${FLAGS[k]}</span>` : "";
+const nombreEs = k => PAISES[k] ? PAISES[k].nombre : k;
+
+const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+const nf = (n, d = 0) => n.toLocaleString("es-AR", { minimumFractionDigits: d, maximumFractionDigits: d });
+const pibTxt = v => v == null ? "Sin dato" : v >= 1000 ? `US$ ${nf(v / 1000, 2)} billones` : v < 1 ? `US$ ${nf(v * 1000)} millones` : `US$ ${nf(v)} mil millones`;
+const pct = (v, d = 1) => `${nf(v, d)}%`;
+const last = a => a[a.length - 1];
+const reduced = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+const rng = r => r.map(([a, b]) => a === b ? a : `${a}–${b}`).join(", ");
+
+function semaforo(tipo, v) {
+  if (v == null) return `<span class="pill nd">Sin dato oficial</span>`;
+  const r = {
+    crec: v >= 2.5 ? "good" : v >= 0 ? "warn" : "bad",
+    infl: v <= 4 ? "good" : v <= 10 ? "warn" : "bad",
+    desempleo: v <= 6 ? "good" : v <= 9 ? "warn" : "bad",
+    deuda: v <= 60 ? "good" : v <= 90 ? "warn" : "bad",
+    cc: v >= -2 ? "good" : v >= -4 ? "warn" : "bad"
+  }[tipo];
+  const txt = { good: "Bien", warn: "Ojo", bad: "Complicado" }[r];
+  return `<span class="pill ${r}">${txt}</span>`;
+}
+
+let seleccion = "ARG", sinDatos = null;
+let compA = "ARG", compB = "BRA", indTL = "pib";
+let charts = { sparks: [] };
+
+/* ---------- MAPA CON RELIEVE (d3) ---------- */
+const svg = d3.select("#map");
+const tip = document.getElementById("tip");
+let features = null, projection, pathGen, gRoot, zoom, W = 0, H = 0;
+const CAJAS = { mundo: [[-170, 80], [180, -57]], sa: [[-84, 13], [-32, -56]], ca: [[-93, 19], [-76, 6.5]], na: [[-168, 72], [-52, 13]], cb: [[-86, 27.5], [-59, 10]] };
+const VBTN = { mundo: "vWorld", sa: "vSA", ca: "vCA", na: "vNA", cb: "vCB" };
+let vistaActual = "sa";
+const iso = f => f.properties.iso;
+
+function paintMap() {
+  if (!gRoot) return;
+  gRoot.selectAll("path.c").attr("class", f => {
+    const k = iso(f);
+    let c = "c";
+    if (PAISES[k] && PAISES[k].curada) c += " has";
+    if (k && k === seleccion && !sinDatos) c += " sel";
+    else if (k && k === compB) c += " cmp";
+    return c;
+  });
+  gRoot.selectAll("path.c")
+    .attr("data-ideo", f => POLITICA[iso(f)] ? POLITICA[iso(f)].ideo : null)
+    .style("--ic", f => POLITICA[iso(f)] ? `var(${IDEO[POLITICA[iso(f)].ideo].c})` : null)
+    .classed("dim", f => modo === "gob" && filtroIdeo && (!POLITICA[iso(f)] || POLITICA[iso(f)].ideo !== filtroIdeo));
+  gRoot.selectAll("path.c.sel").raise();
+}
+
+function buildMap() {
+  const el = document.getElementById("map");
+  const box = el.getBoundingClientRect();
+  W = box.width; H = box.height;
+  svg.attr("viewBox", `0 0 ${W} ${H}`);
+  svg.selectAll("*").remove();
+  projection = d3.geoEquirectangular().fitExtent([[6, 6], [W - 6, H - 6]], { type: "FeatureCollection", features });
+  pathGen = d3.geoPath(projection);
+  gRoot = svg.append("g");
+  const [x0, y0] = projection([-180, 90]), [x1, y1] = projection([180, -90]);
+  gRoot.append("image").attr("class", "relief").attr("href", "terrain.webp")
+    .attr("x", x0).attr("y", y0).attr("width", x1 - x0).attr("height", y1 - y0)
+    .attr("preserveAspectRatio", "none");
+  gRoot.selectAll("path.c").data(features).join("path").attr("class", "c")
+    .attr("d", pathGen)
+    .on("click", (e, f) => elegir(iso(f), f.properties.name))
+    .on("pointermove", (e, f) => {
+      if (e.pointerType !== "mouse") return;
+      const k = iso(f), p = PAISES[k];
+      const sub = modo === "gob" && POLITICA[k] ? `${POLITICA[k].lider} · ${IDEO[POLITICA[k].ideo].t}`
+        : !p ? "Sin datos" : p.curada ? "Ficha completa · tocá para ver" : "Datos macro · tocá para ver";
+      tip.innerHTML = `${flag(k)}<div><b>${p ? p.nombre : f.properties.name}</b><small>${sub}</small></div>`;
+      const r = document.getElementById("mapcard").getBoundingClientRect();
+      let x = e.clientX - r.left + 14, y = e.clientY - r.top + 14;
+      tip.hidden = false;
+      if (x + tip.offsetWidth > r.width - 8) x = e.clientX - r.left - tip.offsetWidth - 14;
+      tip.style.left = x + "px"; tip.style.top = y + "px";
+    })
+    .on("pointerleave", () => { tip.hidden = true; });
+  zoom = d3.zoom().scaleExtent([1, 14]).translateExtent([[0, 0], [W, H]])
+    .on("zoom", e => { gRoot.attr("transform", e.transform); tip.hidden = true; });
+  svg.call(zoom);
+  paintMap();
+  irA(vistaActual, true);
+}
+
+let modo = "fichas", filtroIdeo = null;
+function renderLegGob() {
+  const cuenta = c => Object.values(POLITICA).filter(p => p.ideo === c).length;
+  const leg = document.getElementById("legGob");
+  leg.innerHTML = `<button type="button" data-f="" aria-pressed="${!filtroIdeo}">Todos</button>` +
+    Object.keys(IDEO).filter(c => cuenta(c)).map(c => `<button type="button" data-f="${c}" aria-pressed="${filtroIdeo === c}" class="${filtroIdeo && filtroIdeo !== c ? "off" : ""}"><i style="background:var(${IDEO[c].c})"></i>${IDEO[c].t} · ${cuenta(c)}</button>`).join("");
+  leg.querySelectorAll("button").forEach(b => b.onclick = () => { filtroIdeo = b.dataset.f || null; renderLegGob(); paintMap(); });
+}
+function setModo(m) {
+  modo = m;
+  document.getElementById("mFichas").setAttribute("aria-pressed", m === "fichas");
+  document.getElementById("mGob").setAttribute("aria-pressed", m === "gob");
+  document.getElementById("map").classList.toggle("gob", m === "gob");
+  document.getElementById("legFichas").hidden = m === "gob";
+  document.getElementById("legGob").hidden = m !== "gob";
+  if (m === "gob") renderLegGob();
+  paintMap();
+}
+document.getElementById("mFichas").onclick = () => setModo("fichas");
+document.getElementById("mGob").onclick = () => setModo("gob");
+function irA(nombre, instant) {
+  if (!projection) return;
+  const [[lo0, la0], [lo1, la1]] = CAJAS[nombre];
+  const [x0, y0] = projection([lo0, la0]), [x1, y1] = projection([lo1, la1]);
+  const k = Math.max(1, Math.min(14, 0.92 / Math.max((x1 - x0) / W, (y1 - y0) / H)));
+  const t = d3.zoomIdentity.translate(W / 2 - k * (x0 + x1) / 2, H / 2 - k * (y0 + y1) / 2).scale(k);
+  (instant || reduced() ? svg : svg.transition().duration(700)).call(zoom.transform, t);
+}
+function setVista(nombre) {
+  vistaActual = nombre;
+  Object.entries(VBTN).forEach(([k, id]) => document.getElementById(id).setAttribute("aria-pressed", nombre === k));
+  irA(nombre);
+}
+document.getElementById("vWorld").onclick = () => setVista("mundo");
+document.getElementById("vSA").onclick = () => setVista("sa");
+document.getElementById("vCA").onclick = () => setVista("ca");
+document.getElementById("vNA").onclick = () => setVista("na");
+document.getElementById("vCB").onclick = () => setVista("cb");
+document.getElementById("vRelief").onclick = e => {
+  const on = e.currentTarget.getAttribute("aria-pressed") !== "true";
+  e.currentTarget.setAttribute("aria-pressed", on);
+  document.getElementById("map").classList.toggle("flat", !on);
+};
+
+function elegir(k, nombreMapa) {
+  if (!PAISES[k]) { sinDatos = nombreMapa || k; renderPanel(); paintMap(); return; }
+  sinDatos = null;
+  seleccion = k;
+  compA = k;
+  if (compB === compA) compB = compA === "BRA" ? "ARG" : "BRA";
+  renderVersus();
+  renderPanel();
+  paintMap();
+}
+
+/* ---------- SPARKLINES ---------- */
+function spark(el, k, ind, colorVar) {
+  const c = echarts.init(el);
+  const col = css(colorVar);
+  const years = histYears(k, ind), data = HIST[k][ind][1];
+  c.setOption({
+    grid: { left: 2, right: 8, top: 6, bottom: 4 },
+    xAxis: { type: "category", data: years, show: false, boundaryGap: false },
+    yAxis: { type: ind === "infl" ? "log" : "value", show: false, scale: true },
+    tooltip: {
+      trigger: "axis", backgroundColor: css("--surface"), borderColor: css("--line"),
+      textStyle: { color: css("--ink"), fontSize: 12 },
+      formatter: ps => `${ps[0].name}: <b>${ps[0].value == null ? "sin dato" : ind === "pib" ? "US$ " + nf(ps[0].value, 0) + " mil M" : nf(ps[0].value, 1) + "%" + (ind === "deuda" || ind === "cc" ? " del PBI" : "")}</b>`
+    },
+    series: [{
+      type: "line", data: ind === "infl" ? data.map(v => v > 0 ? v : null) : data, symbol: "none", lineStyle: { color: col, width: 1.6 },
+      areaStyle: ind === "crec" || ind === "cc" ? undefined : { color: col, opacity: .14 },
+      markPoint: { symbol: "circle", symbolSize: 7, itemStyle: { color: col }, label: { show: false },
+        data: [{ coord: [years.length - 1, last(data)] }] }
+    }]
+  });
+  charts.sparks.push(c);
+}
+
+/* Gráfico grande con la serie completa */
+const aligned = (k, ind) => { if (!HIST[k][ind]) return YEARS.map(() => null); const [y0, v] = HIST[k][ind]; return YEARS.map(y => { const x = v[y - y0]; return x === undefined ? null : x; }); };
+const histYears = (k, ind) => { const [y0, v] = HIST[k][ind]; return v.map((_, i) => y0 + i); };
+const HNOTAS = {
+  pib: "En dólares de cada año. Además de la producción, lo mueven la inflación del dólar y los saltos del tipo de cambio: por eso Argentina se desploma en 2002 aunque la economía cayó un 11%.",
+  crec: "Crecimiento real, ya sin inflación. Las barras rojas son los años en que la economía se achicó.",
+  deuda: "Deuda bruta del gobierno, en % del PBI. Los saltos suelen venir de crisis y devaluaciones, que agrandan de golpe la deuda en dólares medida contra el PBI.",
+  cc: "En % del PBI. Barras naranjas: el país ganó dólares con el resto del mundo (superávit). Barras verdes: los gastó (déficit).",
+  infl: "Escala logarítmica: cada línea de la grilla multiplica por 10, así entran juntos un 3% y una hiperinflación. Los cortes son años sin inflación o con precios en baja, que esta escala no puede dibujar."
+};
+/* Zonas sombreadas del gráfico: años que vienen de otra fuente */
+function zonas(k, ind) {
+  const m = HIST[k].marcas[ind] || {}, muted = css("--muted"), acc = css("--accent"), out = [];
+  const zona = (r, nombre, color) => r.forEach(([a, b]) => out.push([{ name: b - a >= 4 ? nombre : "", xAxis: String(a), itemStyle: { color, opacity: .12 } }, { xAxis: String(b) }]));
+  if (m.deflactor) zona(m.deflactor, "Deflactor del PBI", muted);
+  if (m.bm) zona(m.bm, "Banco Mundial", muted);
+  if (m.fmi) zona(m.fmi, "FMI", acc);
+  if (m.aj) zona(m.aj, m.ajuste ? m.ajuste.etiqueta : "Ajuste", acc);
+  return out;
+}
+function histChart(el, k, ind) {
+  const c = echarts.init(el);
+  const ink = css("--ink"), muted = css("--muted"), line = css("--line"), acc = css("--accent");
+  const years = histYears(k, ind), data = HIST[k][ind][1];
+  const ax = { color: muted, fontFamily: "IBM Plex Mono, monospace", fontSize: 11 };
+  let series;
+  if (ind === "crec" || ind === "cc") {
+    series = [{ type: "bar", data: data.map(v => ({ value: v, itemStyle: { color: v < 0 ? css(ind === "cc" ? "--b" : "--bad") : acc } })), barCategoryGap: "25%" }];
+  } else {
+    series = [{ type: "line", data: ind === "infl" ? data.map(v => v > 0 ? v : null) : data, symbol: "none", lineStyle: { color: acc, width: 2 }, areaStyle: ind === "pib" || ind === "deuda" ? { color: acc, opacity: .1 } : undefined }];
+  }
+  const z = zonas(k, ind);
+  if (z.length) series[0].markArea = { silent: true, label: { show: true, color: muted, fontSize: 10, position: "insideTop" }, data: z };
+  c.setOption({
+    grid: { left: ind === "infl" ? 62 : 46, right: 12, top: 14, bottom: 58 },
+    tooltip: { trigger: "axis", backgroundColor: css("--surface"), borderColor: line, textStyle: { color: ink },
+      formatter: ps => `<b>${ps[0].name}</b><br>` + (ps[0].value == null ? "sin dato" : ind === "pib" ? `US$ ${nf(ps[0].value, 1)} mil millones` : `${nf(ps[0].value, 1)}%${ind === "deuda" || ind === "cc" ? " del PBI" : ""}`) },
+    xAxis: { type: "category", data: years.map(String), axisLine: { lineStyle: { color: line } }, axisTick: { show: false }, axisLabel: ax },
+    yAxis: { type: ind === "infl" ? "log" : "value", logBase: 10, splitLine: { lineStyle: { color: line, type: "dashed" } },
+      axisLabel: Object.assign({}, ax, { formatter: v => nf(v) }) },
+    dataZoom: [
+      { type: "inside" },
+      { type: "slider", height: 18, bottom: 10, borderColor: line, fillerColor: "rgba(140,140,140,.15)", handleStyle: { color: acc }, textStyle: { color: muted, fontSize: 10 }, dataBackground: { lineStyle: { color: muted }, areaStyle: { color: muted, opacity: .15 } } }
+    ],
+    series
+  });
+  charts.sparks.push(c);
+}
+/* Nota al pie de cada gráfico: explica de dónde sale cada tramo */
+function notaFuentes(k, ind) {
+  const h = HIST[k], m = h.marcas[ind] || {};
+  let t = "";
+  if (m.deflactor) t += ` La zona gris (${rng(m.deflactor)}) usa el deflactor del PBI porque el Banco Mundial no publica el índice de precios al consumidor de esos años${k === "ARG" ? ", que en Argentina estuvo intervenido entre 2007 y 2015" : ""}.`;
+  if (ind === "deuda") t += m.bm ? ` Fuente: FMI. La zona gris (${rng(m.bm)}) es deuda del gobierno central según el Banco Mundial, porque el FMI no tiene esos años: es una medida algo distinta.` : " Fuente: FMI (World Economic Outlook).";
+  if (m.fmi) t += ` La zona naranja (${rng(m.fmi)}) viene del FMI porque el Banco Mundial no tiene esos años; el más reciente puede ser una estimación.`;
+  if (m.ajuste && m.ajuste.nota) t += " " + m.ajuste.nota;
+  if (h.notas[ind]) t += " " + h.notas[ind];
+  return t;
+}
+function histBlock(ind) {
+  if (!HIST[seleccion][ind]) return ind === "deuda" ? `<p class="hist-none">No hay serie histórica de deuda para este país.</p>` : "";
+  return `<div class="hist">
+    <div class="spark" id="sp-${ind}" aria-hidden="true"></div>
+    <div class="hist-foot"><span>${HIST[seleccion][ind][0]} → ${HIST[seleccion][ind][0] + HIST[seleccion][ind][1].length - 1}</span>
+      <button class="hbtn" type="button" data-h="${ind}" aria-expanded="false">Ver serie histórica</button></div>
+    <div class="histbox" id="hb-${ind}" hidden><div class="histchart" id="hc-${ind}"></div><p class="note">${HNOTAS[ind]}${notaFuentes(seleccion, ind)}</p></div>
+  </div>`;
+}
+
+/* ---------- PANEL / FICHA ---------- */
+function socios(arr) {
+  const max = Math.max(...arr.map(x => x[1]));
+  return `<ul class="partners">${arr.map(([k, p]) => {
+    const corto = k === "USA" ? "EE.UU." : nombreEs(k);
+    const nombre = PAISES[k] ? `<button class="plink" type="button" data-pais="${k}">${corto}</button>` : `<span>${corto}</span>`;
+    return `<li>${flag(k) || '<span class="flag"></span>'}${nombre}<span class="ppct">${p}%</span><span class="pbar"><i style="width:${p / max * 100}%"></i></span></li>`;
+  }).join("")}</ul>`;
+}
+const ideoPill = c => `<span class="ipill" style="--ic: var(${IDEO[c].c})">${IDEO[c].t}</span>`;
+function politica(k) {
+  const p = POLITICA[k];
+  if (!p) return "";
+  return `<div class="pol">
+    <h3>Política</h3>
+    <div class="pol-now">
+      <span class="eyebrow">${p.cargo}</span>
+      <strong>${p.lider}</strong>
+      <span class="pol-meta">${ideoPill(p.ideo)} desde ${p.desde}</span>
+      <span class="pol-meta">Próxima elección: <b>${p.proxima}</b></span>
+    </div>
+    ${p.nota ? `<p class="pol-nota">${p.nota}</p>` : ""}
+    <h4>Últimas presidencias</h4>
+    <ol class="pol-list">${p.historia.map(([y, n, c]) => `<li><span class="pol-y">${y}</span><span class="pol-n">${n}</span><span class="pol-p">${ideoPill(c)}</span></li>`).join("")}</ol>
+    <p class="note">La ubicación en izquierda, centro o derecha es aproximada: sigue cómo suelen clasificar a cada gobierno la prensa y la ciencia política, y siempre es discutible.</p>
+  </div>`;
+}
+const anioTag = (d, ind) => d.u && d.u[ind] && d.u[ind].y !== ANIO ? ` <small class="ytag">dato ${d.u[ind].y}</small>` : "";
+const uv = (d, ind) => d.u && d.u[ind] ? d.u[ind].v : null;
+const lista = arr => `<ul class="items">${arr.map(([e, t]) => `<li><span class="emo" aria-hidden="true">${e}</span><span>${t}</span></li>`).join("")}</ul>`;
+
+function renderPanel() {
+  charts.sparks.forEach(c => c.dispose()); charts.sparks = [];
+  const panel = document.getElementById("panel");
+  if (sinDatos) {
+    panel.innerHTML = `<div class="empty">
+      <div class="eyebrow">Sin datos</div>
+      <h2>${sinDatos}</h2>
+      <p>El Banco Mundial y el FMI no publican datos de este territorio.</p>
+    </div>`;
+    return;
+  }
+  const d = PAISES[seleccion];
+  const infl = uv(d, "infl"), crec = uv(d, "crec");
+  panel.innerHTML = `
+    <div class="panel-head">
+      ${flag(seleccion)}
+      <div>
+        <div class="eyebrow">${d.region ? d.region + " · " : ""}datos ${ANIO}</div>
+        <h2>${d.nombre}</h2>
+      </div>
+    </div>
+    <div class="meta">${d.capital ? `<span>Capital <b>${d.capital}</b></span>` : ""}${d.poblacion != null ? `<span>Población <b>${d.poblacion >= 1 ? nf(d.poblacion, 1) + " millones" : nf(d.poblacion * 1e6) + " habitantes"}</b>${anioTag(d, "poblacion")}</span>` : ""}</div>
+    ${d.curada ? `<p class="resumen">${d.resumen}</p>` : `<p class="pend">Por ahora esta ficha tiene solo los datos macro. El resumen, el comercio y la política se van sumando de a una región.</p>`}
+    <div class="metrics">
+      <div class="metric">
+        <span class="lbl">PBI</span><span class="val">${pibTxt(uv(d, "pib"))}${anioTag(d, "pib")}</span>
+        <p class="exp">Todo lo que produce el país en un año, medido en dólares.</p>
+        ${histBlock("pib")}
+      </div>
+      <div class="metric">
+        <span class="lbl">PBI por persona</span><span class="val">${d.pibpc == null ? "Sin dato" : "US$ " + nf(d.pibpc)}${anioTag(d, "pibpc")}</span>
+        <p class="exp">El PBI repartido entre todos los habitantes. Sirve para comparar el nivel de vida. ${d.ppa != null ? `Ajustado por lo que cuestan las cosas allá: US$ ${nf(d.ppa)}.` : "No hay dato confiable ajustado por precios."}</p>
+      </div>
+      <div class="metric">
+        <span class="lbl">Crecimiento</span><span class="val">${crec == null ? "Sin dato" : pct(crec)}${anioTag(d, "crec")}</span>
+        <p class="exp">Cuánto aumentó o cayó la producción respecto del año anterior, sin contar la inflación.</p>
+        <div class="ctx">${semaforo("crec", crec)}<span>El mundo creció cerca de ${nf(MUNDO.crec, 1)}%</span></div>
+        ${histBlock("crec")}
+      </div>
+      <div class="metric">
+        <span class="lbl">Inflación</span><span class="val">${infl == null ? "Sin dato" : pct(infl)}${anioTag(d, "infl")}</span>
+        <p class="exp">Cuánto subieron los precios en el año. ${infl == null ? "No hay un dato oficial comparable." : `Lo que costaba $100 pasó a costar unos $${nf(100 + infl)}.`}</p>
+        <div class="ctx">${semaforo("infl", infl)}<span>Promedio mundial cerca de ${nf(MUNDO.infl, 1)}%</span></div>
+        ${histBlock("infl")}
+      </div>
+      <div class="metric">
+        <span class="lbl">Desempleo</span><span class="val">${d.desempleo == null ? "Sin dato" : pct(d.desempleo)}${anioTag(d, "desempleo")}</span>
+        <p class="exp">De cada 100 personas que buscan trabajo, cuántas no lo consiguen.</p>
+        <div class="ctx">${semaforo("desempleo", d.desempleo)}<span>Mundo cerca de ${nf(MUNDO.desempleo, 0)}%</span></div>
+      </div>
+      <div class="metric">
+        <span class="lbl">Deuda pública</span><span class="val">${d.deuda == null ? "Sin dato" : nf(d.deuda) + "% del PBI"}${anioTag(d, "deuda")}</span>
+        <p class="exp">Lo que debe el Estado comparado con todo lo que produce el país en un año. ${d.deuda == null ? "" : `${nf(d.deuda)}% es como deber ${d.deuda >= 100 ? "más de un año entero" : "unos " + nf(d.deuda / 100 * 12) + " meses"} de producción.`}</p>
+        <div class="ctx">${semaforo("deuda", d.deuda)}</div>
+        ${histBlock("deuda")}
+      </div>
+      <div class="metric">
+        <span class="lbl">Cuenta corriente</span><span class="val">${d.cc == null ? "Sin dato" : (d.cc > 0 ? "+" : "") + pct(d.cc) + " del PBI"}${anioTag(d, "cc")}</span>
+        <p class="exp">Si el país gana o pierde dólares con el resto del mundo por comercio, servicios y rentas. Positivo: entran más de los que salen.</p>
+        <div class="ctx">${semaforo("cc", d.cc)}</div>
+        ${histBlock("cc")}
+      </div>
+    </div>
+    ${d.actividades ? `<div class="acts">
+      <h3>A qué se dedica</h3>
+      <div class="chips">${d.actividades.map(([e, t]) => `<span class="chip"><span class="emo" aria-hidden="true">${e}</span>${t}</span>`).join("")}</div>
+    </div>` : ""}
+    ${d.expo && d.impo ? `<div class="trade">
+      <div><h3>Qué le vende al mundo</h3><p class="hint">De mayor a menor</p>${lista(d.expo)}</div>
+      <div><h3>Qué le compra</h3><p class="hint">De mayor a menor</p>${lista(d.impo)}</div>
+    </div>` : ""}
+    ${d.socios ? `<div class="socios">
+      <h3>Socios comerciales</h3>
+      <p class="hint">Parte de lo que vende o compra que va a cada país, aprox.</p>
+      <div class="trade">
+        <div><h4>A quién le vende</h4>${socios(d.socios.vende)}</div>
+        <div><h4>A quién le compra</h4>${socios(d.socios.compra)}</div>
+      </div>
+    </div>` : ""}
+    ${politica(seleccion)}
+    <button class="go" id="goCmp" type="button">Comparar ${d.nombre} con otro país</button>
+  `;
+  panel.querySelectorAll(".plink").forEach(b => b.onclick = () => elegir(b.dataset.pais));
+  ["pib", "crec", "infl", "deuda", "cc"].filter(ind => HIST[seleccion][ind]).forEach(ind => spark(document.getElementById("sp-" + ind), seleccion, ind, "--accent"));
+  panel.querySelectorAll(".hbtn").forEach(b => b.onclick = () => {
+    const ind = b.dataset.h, box = document.getElementById("hb-" + ind), abrir = box.hidden;
+    box.hidden = !abrir;
+    b.setAttribute("aria-expanded", abrir);
+    b.textContent = abrir ? "Ocultar serie" : "Ver serie histórica";
+    const el = document.getElementById("hc-" + ind);
+    if (abrir && !el.dataset.done) { el.dataset.done = "1"; histChart(el, seleccion, ind); }
+  });
+  document.getElementById("goCmp").onclick = () => {
+    compA = seleccion;
+    if (compB === compA) compB = compA === "BRA" ? "ARG" : "BRA";
+    renderVersus(); paintMap();
+    document.getElementById("versus").scrollIntoView({ behavior: reduced() ? "auto" : "smooth" });
+  };
+}
+
+/* ---------- CARA A CARA ---------- */
+let METRICAS;
+function armarMetricas() {
+  METRICAS = [
+    { lbl: "PBI total", sub: "US$ miles de M", get: d => uv(d, "pib"), fmt: v => nf(v), mejor: null },
+    { lbl: "PBI por persona", sub: "US$", get: d => d.pibpc, fmt: v => nf(v), mejor: "alto" },
+    { lbl: "Por persona ajustado", sub: "US$ PPA", get: d => d.ppa, fmt: v => nf(v), mejor: "alto" },
+    { lbl: `Crecimiento ${ANIO}`, sub: "%", get: d => uv(d, "crec"), fmt: v => nf(v, 1), mejor: "alto" },
+    { lbl: `Inflación ${ANIO}`, sub: "% · último dato", get: d => uv(d, "infl"), fmt: v => nf(v, 1), mejor: "bajo" },
+    { lbl: "Desempleo", sub: "%", get: d => d.desempleo, fmt: v => nf(v, 1), mejor: "bajo" },
+    { lbl: "Deuda pública", sub: "% del PBI", get: d => d.deuda, fmt: v => nf(v), mejor: null },
+    { lbl: "Cuenta corriente", sub: "% del PBI", get: d => d.cc, fmt: v => (v > 0 ? "+" : "") + nf(v, 1), mejor: null }
+  ];
+}
+
+function fillSelects() {
+  const orden = ks => ks.sort((a, b) => PAISES[a].nombre.localeCompare(PAISES[b].nombre, "es"));
+  const con = orden(Object.keys(PAISES).filter(k => PAISES[k].curada)), sin = orden(Object.keys(PAISES).filter(k => !PAISES[k].curada));
+  const opts = ks => ks.map(k => `<option value="${k}">${PAISES[k].nombre}</option>`).join("");
+  ["selA", "selB"].forEach(id => {
+    document.getElementById(id).innerHTML = `<optgroup label="Con ficha completa">${opts(con)}</optgroup><optgroup label="Resto del mundo">${opts(sin)}</optgroup>`;
+  });
+  document.getElementById("selA").onchange = e => {
+    compA = e.target.value;
+    if (compA === compB) compB = compA === "BRA" ? "ARG" : "BRA";
+    seleccion = compA; sinDatos = null; renderPanel(); renderVersus(); paintMap();
+  };
+  document.getElementById("selB").onchange = e => {
+    compB = e.target.value;
+    if (compA === compB) compA = compB === "BRA" ? "ARG" : "BRA";
+    seleccion = compA; sinDatos = null; renderPanel(); renderVersus(); paintMap();
+  };
+}
+
+const acumulado = s => s.some(g => g == null) ? null : (s.reduce((acc, g) => acc * (1 + g / 100), 1) - 1) * 100;
+
+function frases(A, B) {
+  const a = PAISES[A], b = PAISES[B];
+  const nA = `<b class="a">${a.nombre}</b>`, nB = `<b class="b">${b.nombre}</b>`;
+  const out = [];
+  const pa = uv(a, "pib"), pb = uv(b, "pib");
+  if (pa != null && pb != null) {
+    const [gr, ch, gN, cN] = pa >= pb ? [pa, pb, nA, nB] : [pb, pa, nB, nA];
+    const r = gr / ch;
+    out.push(r < 1.15
+      ? `${nA} y ${nB} tienen economías de un tamaño parecido.`
+      : `La economía de ${gN} es ${nf(r, r >= 100 ? 0 : 1)} veces más grande que la de ${cN}.`);
+    const usaPpa = a.ppa != null && b.ppa != null;
+    const xa = usaPpa ? a.ppa : a.pibpc, xb = usaPpa ? b.ppa : b.pibpc;
+    if (xa != null && xb != null) {
+      const ajuste = usaPpa ? "ajustado por lo que cuestan las cosas" : "en dólares corrientes";
+      const ppaGana = xa >= xb ? nA : nB, ppaPierde = xa >= xb ? nB : nA;
+      const ganaTotal = pa >= pb ? A : B, ganaPpa = xa >= xb ? A : B;
+      out.push(ganaTotal !== ganaPpa
+        ? `Pero repartido por persona la cosa se da vuelta: en ${ppaGana} cada habitante produce más que en ${ppaPierde} (US$ ${nf(Math.max(xa, xb))} contra US$ ${nf(Math.min(xa, xb))}, ${ajuste}).`
+        : `Y por persona también gana ${ppaGana}: US$ ${nf(Math.max(xa, xb))} contra US$ ${nf(Math.min(xa, xb))}, ${ajuste}.`);
+    }
+  }
+  const ia = uv(a, "infl"), ib = uv(b, "infl"), ya = a.u.infl && a.u.infl.y, yb = b.u.infl && b.u.infl.y;
+  if (ia != null && ib != null) out.push(ya === yb
+    ? `Con $100 a principio de ${ya}, a fin de año necesitabas unos $${nf(100 + ia)} en ${nA} y unos $${nf(100 + ib)} en ${nB} para comprar lo mismo.`
+    : `Lo que costaba $100 pasó a costar unos $${nf(100 + ia)} en ${nA} (en ${ya}) y unos $${nf(100 + ib)} en ${nB} (en ${yb}).`);
+  const ca = acumulado(a.crec), cb = acumulado(b.crec);
+  const verbo = v => v >= 0 ? `creció ${nf(v, 0)}%` : `cayó ${nf(Math.abs(v), 0)}%`;
+  if (ca != null && cb != null) out.push(`Entre ${ANIOS[0] - 1} y ${ANIO}, la economía de ${nA} ${verbo(ca)} en total y la de ${nB} ${verbo(cb)}.`);
+  return out;
+}
+
+function renderVersus() {
+  document.getElementById("selA").value = compA;
+  document.getElementById("selB").value = compB;
+  document.getElementById("flagA").innerHTML = FLAGS[compA] || "";
+  document.getElementById("flagB").innerHTML = FLAGS[compB] || "";
+  document.getElementById("flagA").hidden = !FLAGS[compA];
+  document.getElementById("flagB").hidden = !FLAGS[compB];
+  const a = PAISES[compA], b = PAISES[compB];
+  document.getElementById("frases").innerHTML = frases(compA, compB).map(f => `<li>${f}</li>`).join("");
+  let html = `<div class="duel-head"><span class="ha">${a.nombre}${flag(compA)}</span><span class="hmid"></span><span class="hb">${flag(compB)}${b.nombre}</span></div>`;
+  METRICAS.forEach(m => {
+    const va = m.get(a), vb = m.get(b);
+    const max = Math.max(Math.abs(va || 0), Math.abs(vb || 0)) || 1;
+    let win = null;
+    if (m.mejor && va != null && vb != null && va !== vb) win = (m.mejor === "alto" ? va > vb : va < vb) ? "a" : "b";
+    const side = (cls, v, w) => `<div class="side ${cls}">
+        <div class="track"><div class="bar" style="width:${v == null ? "0;min-width:0" : Math.max(2, Math.abs(v) / max * 100) + "%"};${v < 0 ? "opacity:.45" : ""}"></div></div>
+        <span class="num ${w ? "win" : ""}">${v == null ? "s/d" : m.fmt(v)}</span>${w ? '<span class="win-tag">mejor</span>' : ""}
+      </div>`;
+    html += `<div class="row">${side("left", va, win === "a")}<div class="mid">${m.lbl}<small>${m.sub}</small></div>${side("right", vb, win === "b")}</div>`;
+  });
+  document.getElementById("duel").innerHTML = html;
+  drawTL();
+}
+
+/* ---------- GRÁFICO TEMPORAL ---------- */
+const tl = echarts.init(document.getElementById("tl"));
+const IND = {
+  deuda: { t: "Deuda pública", u: "% del PBI", note: "Deuda del gobierno en % del PBI. Fuente: FMI; donde falta, Banco Mundial (gobierno central)." },
+  cc: { t: "Cuenta corriente", u: "% del PBI", note: "Arriba de cero, el país gana dólares con el resto del mundo; abajo, los gasta." },
+  pib: { t: "PBI en dólares", u: "US$ miles de M", note: "El PBI en dólares también se mueve por el tipo de cambio: una devaluación lo achica aunque la producción no caiga tanto." },
+  crec: { t: "Crecimiento año a año", u: "%", note: "Debajo de cero, la economía se achicó. Arrastrá la barra de abajo para hacer zoom en un período." },
+  infl: { t: "Inflación anual", u: "%", note: "Escala logarítmica: cada línea de la grilla multiplica por 10, así se pueden comparar un 3% y una hiperinflación en el mismo gráfico. Los cortes en la línea son años sin inflación o con precios en baja, que esta escala no puede dibujar." }
+};
+function drawTL() {
+  const a = PAISES[compA], b = PAISES[compB], cfg = IND[indTL];
+  document.getElementById("tlTitle").textContent = `${cfg.t}: ${a.nombre} y ${b.nombre}`;
+  document.getElementById("tlNote").textContent = cfg.note;
+  const ink = css("--ink"), muted = css("--muted"), line = css("--line");
+  const serie = (d, col) => ({
+    name: d.nombre, type: "line", data: aligned(d === a ? compA : compB, indTL).map(v => indTL === "infl" && v !== null && v <= 0 ? null : v), symbol: "none", connectNulls: false,
+    lineStyle: { width: 2.5, color: col }, itemStyle: { color: col },
+    areaStyle: indTL === "pib" ? { color: col, opacity: .07 } : undefined
+  });
+  tl.setOption({
+    backgroundColor: "transparent",
+    grid: { left: indTL === "infl" ? 64 : 52, right: 18, top: 34, bottom: 62 },
+    legend: { top: 0, left: 0, textStyle: { color: ink, fontFamily: "Source Sans 3, sans-serif", fontSize: 13 }, itemWidth: 14 },
+    tooltip: {
+      trigger: "axis", backgroundColor: css("--surface"), borderColor: line, textStyle: { color: ink },
+      formatter: ps => `<b>${ps[0].name}</b><br>` + ps.map(p => `${p.marker}${p.seriesName}: ${p.value == null ? "sin dato" : nf(p.value, indTL === "pib" ? 0 : 1) + " " + cfg.u}`).join("<br>")
+    },
+    dataZoom: [{ type: "inside" }, { type: "slider", height: 18, bottom: 6, borderColor: line, handleStyle: { color: css("--accent") }, textStyle: { color: muted, fontSize: 10 } }],
+    xAxis: { type: "category", data: YEARS.map(String), boundaryGap: false, axisLine: { lineStyle: { color: line } }, axisTick: { show: false }, axisLabel: { color: muted, fontFamily: "IBM Plex Mono, monospace", fontSize: 11 } },
+    yAxis: { type: indTL === "infl" ? "log" : "value", logBase: 10, splitLine: { lineStyle: { color: line, type: "dashed" } }, axisLabel: { color: muted, fontFamily: "IBM Plex Mono, monospace", fontSize: 11, formatter: v => nf(v) } },
+    series: [serie(a, css("--accent")), serie(b, css("--b"))]
+  }, true);
+}
+document.querySelectorAll("[data-ind]").forEach(btn => btn.onclick = () => {
+  indTL = btn.dataset.ind;
+  document.querySelectorAll("[data-ind]").forEach(b => b.setAttribute("aria-pressed", b === btn ? "true" : "false"));
+  drawTL();
+});
+
+/* ---------- INICIO: CARGAR LOS TRES ARCHIVOS Y DIBUJAR ---------- */
+function prepararMapa(topo) {
+  /* El mapa identifica cada país con su código numérico ISO ("032" = Argentina) */
+  const porNumero = {};
+  Object.entries(DATOS.paises).forEach(([k, d]) => { if (d.isoNum) porNumero[d.isoNum] = k; });
+  const porNombre = { "Kosovo": "XKX" };   /* países que en el mapa no tienen número */
+  features = topojson.feature(topo, topo.objects.countries).features.filter(f => f.properties.name !== "Antarctica");
+  features.forEach(f => { f.properties.iso = porNumero[f.id] || porNombre[f.properties.name] || null; });
+  /* Las Islas Malvinas se dibujan como parte de Argentina */
+  const geoms = topo.objects.countries.geometries;
+  const gArg = geoms.find(g => g.properties.name === "Argentina"), gMal = geoms.find(g => g.properties.name === "Falkland Is.");
+  if (gArg && gMal) {
+    const arg = features.find(f => f.properties.name === "Argentina");
+    arg.geometry = topojson.merge(topo, [gArg, gMal]);
+    features = features.filter(f => f.properties.name !== "Falkland Is.");
+  }
+}
+function textoFuentes() {
+  const fecha = new Date(DATOS.generado).toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" });
+  document.getElementById("fuentes").textContent = `Datos macro: Banco Mundial y FMI (World Economic Outlook), 1960–${ANIO}, actualizados automáticamente el ${fecha}. Inflación: índice de precios al consumidor del Banco Mundial; donde falta, deflactor del PBI o FMI. Deuda pública: FMI; donde falta, Banco Mundial. Promedios mundiales: Banco Mundial. Fichas y datos políticos escritos a mano, actualizados a ${CURADO.actualizado}.`;
+}
+function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); } }
+
+const leer = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: error ${r.status}`); return r.json(); });
+Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json")])
+  .then(([datos, curado, topo]) => {
+    DATOS = datos; CURADO = curado;
+    prepararDatos();
+    armarMetricas();
+    const n = Object.keys(PAISES).length, m = Object.values(PAISES).filter(p => p.curada).length;
+    document.getElementById("conteo").textContent = `${n} países con datos · ${m} con ficha completa`;
+    textoFuentes();
+    fillSelects();
+    renderPanel();
+    renderVersus();
+    prepararMapa(topo);
+    document.getElementById("maploading").remove();
+    buildMap();
+  })
+  .catch(err => {
+    console.error(err);
+    const local = location.protocol === "file:";
+    const msg = local
+      ? "Abriste la página directo desde la carpeta, y así el navegador no la deja leer datos.json. Abrila con un servidor local: en la Terminal, dentro de la carpeta, corré «python3 -m http.server» y entrá a http://localhost:8000"
+      : "No se pudieron cargar los datos. Probá recargar la página.";
+    document.getElementById("maploading").textContent = msg;
+    document.getElementById("panel").innerHTML = `<div class="empty"><h2>No se cargaron los datos</h2><p>${msg}</p></div>`;
+  });
+
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redrawCharts);
+new MutationObserver(redrawCharts).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+let rT;
+window.addEventListener("resize", () => {
+  tl.resize(); charts.sparks.forEach(c => c.resize());
+  clearTimeout(rT);
+  rT = setTimeout(() => {
+    const r = document.getElementById("map").getBoundingClientRect();
+    if (features && (Math.abs(r.width - W) > 2 || Math.abs(r.height - H) > 2)) buildMap();
+  }, 200);
+});
+</script>
