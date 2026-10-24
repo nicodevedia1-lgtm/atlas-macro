@@ -291,6 +291,38 @@ details.sec[open] .sec-flecha { transform: rotate(225deg); }
 .ar-dia { display: grid; gap: 8px; }
 .ar-dia h3 { font-size: 17px; font-weight: 700; }
 .gob-ley { display: inline-flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 4px; }
+/* Rankings */
+.rk-arg { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 14px 18px; font-size: 16px; }
+.rk-arg b.n { font-family: var(--f-data); font-size: 20px; }
+.rk-arg .flag { width: 30px; height: 20px; margin-right: 6px; vertical-align: -3px; }
+.rk-cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; }
+@media (max-width: 760px) { .rk-cols { grid-template-columns: minmax(0, 1fr); } }
+.rk-col { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; display: grid; gap: 10px; align-content: start; min-width: 0; }
+.rk-col h2 { font-size: 20px; font-weight: 800; }
+.rk-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.rk-lista li { display: grid; grid-template-columns: 2.2em 24px minmax(0, 1fr) auto; gap: 2px 10px; align-items: center; padding: 6px 4px; border-radius: 8px; font-size: 15px; }
+.rk-lista li.arg { background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.rk-lista .rk-n { font-family: var(--f-data); font-size: 13px; color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+.rk-lista .flag { width: 24px; height: 16px; border-radius: 3px; }
+.rk-lista .rk-v { font-family: var(--f-data); font-weight: 500; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; }
+.rk-lista .rk-v small { display: block; font-size: 11px; color: var(--muted); font-weight: 400; }
+.rk-bar { grid-column: 3 / 5; height: 4px; border-radius: 2px; background: var(--accent); opacity: .55; }
+.rk-bar.neg { background: var(--b); }
+.rk-todos { columns: 2 320px; column-gap: 24px; display: block; }
+.rk-todos li { break-inside: avoid; }
+.rk-acciones { display: flex; flex-wrap: wrap; gap: 8px; }
+.lab-lbl { font-size: 13px; font-weight: 600; color: var(--muted); }
+/* Mapa por indicador */
+.leg-ind { display: grid; gap: 8px; }
+.leg-ind .lab-fila select:first-child { flex: 0 1 auto; }
+.leg-ind select { padding: 6px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; font-size: 14px; max-width: 100%; justify-self: start; }
+.leg-escala { display: flex; flex-wrap: wrap; align-items: center; gap: 0; font-family: var(--f-data); font-size: 11.5px; color: var(--muted); }
+.leg-escala .cj { display: grid; gap: 2px; min-width: 52px; }
+.leg-escala .cj i { display: block; height: 10px; width: 100%; border-radius: 0; }
+.leg-escala .cj:first-child i { border-radius: 3px 0 0 3px; } .leg-escala .cj:last-of-type i { border-radius: 0 3px 3px 0; }
+.leg-escala .sd { margin-left: 12px; display: inline-flex; align-items: center; gap: 6px; }
+.leg-escala .sd i { width: 12px; height: 10px; border-radius: 3px; background: var(--land); opacity: .5; display: inline-block; }
+
 /* Laboratorio */
 .lab-ejemplos { display: grid; gap: 8px; }
 .lab-chips { display: flex; flex-wrap: wrap; gap: 8px; }
@@ -416,6 +448,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   <ul>
     <li><a href="#inicio" data-pag="inicio"><span class="nav-ico" aria-hidden="true">🗺️</span><span>Mapa y fichas<small>Tocá un país y mirá su economía</small></span></a></li>
     <li><a href="#comparacion" data-pag="comparacion"><span class="nav-ico" aria-hidden="true">⚖️</span><span>Comparación<small>Dos países frente a frente</small></span></a></li>
+    <li><a href="#rankings" data-pag="rankings"><span class="nav-ico" aria-hidden="true">🏆</span><span>Rankings<small>Los primeros y los últimos del mundo</small></span></a></li>
     <li><a href="#laboratorio" data-pag="laboratorio"><span class="nav-ico" aria-hidden="true">🧪</span><span>Laboratorio<small>Relacioná variables y mirá la regresión</small></span></a></li>
     <li><a href="#juego" data-pag="juego"><span class="nav-ico" aria-hidden="true">🎯</span><span>País del día<small>Adiviná el país con pistas económicas</small></span></a></li>
     <li><a href="#elecciones" data-pag="elecciones"><span class="nav-ico" aria-hidden="true">🗳️</span><span>Próximas elecciones<small>Los próximos 12 meses</small></span></a></li>
@@ -442,6 +475,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
           <button class="btn" id="mGob" aria-pressed="false" type="button">Quién gobierna</button>
           <button class="btn" id="mElec" aria-pressed="false" type="button">Elecciones</button>
           <button class="btn" id="mConf" aria-pressed="false" type="button">Conflictos</button>
+          <button class="btn" id="mInd" aria-pressed="false" type="button">Indicadores</button>
         </div>
         <div class="legend" id="legFichas">
           <span><i style="background:var(--accent)"></i>País elegido</span>
@@ -451,6 +485,10 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
         <div class="legend ideo-filter" id="legGob" hidden></div>
         <div class="legend" id="legElec" hidden></div>
         <div class="legend" id="legConf" hidden></div>
+        <div class="legend leg-ind" id="legInd" hidden>
+          <div class="lab-fila"><select id="mapaVar" aria-label="Indicador del mapa"></select><select id="mapaModo" aria-label="Qué dato usar"><option value="ultimo">Último dato</option><option value="prom">Promedio 10 años</option></select></div>
+          <div class="leg-escala" id="legEscala"></div>
+        </div>
         <div class="views">
           <button class="btn" id="vRelief" aria-pressed="true" type="button">Relieve</button>
           <button class="btn" id="vWorld" aria-pressed="false" type="button">Mundo</button>
@@ -469,6 +507,41 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <aside class="panel" id="panel" aria-live="polite"></aside>
   </section>
 
+  </div>
+
+  <div class="pagina" id="pag-rankings" hidden>
+    <header class="top">
+      <div class="eyebrow">Rankings</div>
+      <h1 id="rkTitulo">Rankings de países</h1>
+      <p class="lede">Los países con los valores más altos y más bajos de cada indicador, y en qué puesto está Argentina.</p>
+    </header>
+    <div class="lab-ejemplos"><span class="eyebrow">Los más buscados</span><div class="lab-chips" id="rkPresets"></div></div>
+    <div class="lab-controles">
+      <div class="lab-eje">
+        <label for="rkVar">Indicador</label>
+        <div class="lab-fila"><select id="rkVar"></select><select id="rkModo" aria-label="Qué dato usar"><option value="ultimo">Último dato</option><option value="prom">Promedio 10 años</option></select></div>
+      </div>
+      <div class="lab-eje">
+        <label for="rkReg">Qué países</label>
+        <div class="lab-fila"><select id="rkReg"></select></div>
+      </div>
+      <div class="lab-eje">
+        <span class="lab-lbl">Filtros</span>
+        <div class="lab-fila"><label class="lab-check"><input type="checkbox" id="rkSob" checked> Solo países independientes</label>
+          <label class="lab-check"><input type="checkbox" id="rkChicos" checked> Más de 1 millón de habitantes</label></div>
+      </div>
+    </div>
+    <div class="rk-arg" id="rkArg"></div>
+    <div class="rk-cols">
+      <section class="rk-col"><h2 id="rkTopT">Los 10 más altos</h2><ol class="rk-lista" id="rkTop"></ol></section>
+      <section class="rk-col"><h2 id="rkBotT">Los 10 más bajos</h2><ol class="rk-lista" id="rkBot"></ol></section>
+    </div>
+    <div class="rk-acciones"><button class="btn" type="button" id="rkMapa">Ver este indicador en el mapa</button></div>
+    <details class="lab-ayuda" id="rkTodos">
+      <summary id="rkTodosT">Ver todos los países</summary>
+      <div class="sec-body"><ol class="rk-lista rk-todos" id="rkLista"></ol></div>
+    </details>
+    <p class="note" id="rkNota"></p>
   </div>
 
   <div class="pagina" id="pag-laboratorio" hidden>
@@ -780,6 +853,7 @@ const eleccionDe = k => proximasElecciones().find(e => e.iso === k) || null;
 function colorModo(k) {
   if (modo === "gob") return POLITICA[k] ? `var(${IDEO[POLITICA[k].ideo].c})` : null;
   if (modo === "conf") { const c = crisisDe(k); return c ? `var(${CRISIS[c.tipo].c})` : null; }
+  if (modo === "ind") return MAPA.color[k] || null;
   if (modo === "elec") { const e = eleccionDe(k); if (!e) return null;
     const dias = (new Date(e.fecha) - new Date(hoyISO())) / 864e5;
     return dias <= 60 ? "var(--accent)" : dias <= 180 ? "var(--accent-soft)" : "color-mix(in srgb, var(--accent-soft) 45%, transparent)"; }
@@ -889,7 +963,9 @@ function buildMap() {
       if (e.pointerType !== "mouse") return;
       const k = iso(f), p = PAISES[k];
       const el = modo === "elec" && eleccionDe(k), cr = modo === "conf" && crisisDe(k);
-      const sub = el ? `Elecciones: ${fechaElec(el)}` : cr ? CRISIS[cr.tipo].t
+      const iv = modo === "ind" && MAPA.valor[k];
+      const sub = modo === "ind" ? (iv ? `${labVars()[mapaEstado.v].nombre}: ${fmtValor(iv.v, mapaEstado.v)} (${iv.y})` : "Sin dato")
+        : el ? `Elecciones: ${fechaElec(el)}` : cr ? CRISIS[cr.tipo].t
         : modo === "gob" && POLITICA[k] ? `${POLITICA[k].lider} · ${IDEO[POLITICA[k].ideo].t}`
         : !p ? "Sin datos" : p.curada ? "Ficha completa · tocá para ver" : "Datos macro · tocá para ver";
       tip.innerHTML = `${flag(k)}<div><b>${p ? p.nombre : f.properties.name}</b><small>${sub}</small></div>`;
@@ -917,13 +993,18 @@ function renderLegGob() {
 }
 function setModo(m) {
   modo = m;
-  const botones = { fichas: "mFichas", gob: "mGob", elec: "mElec", conf: "mConf" };
+  const botones = { fichas: "mFichas", gob: "mGob", elec: "mElec", conf: "mConf", ind: "mInd" };
   Object.entries(botones).forEach(([k, id]) => document.getElementById(id).setAttribute("aria-pressed", m === k));
   document.getElementById("map").classList.toggle("gob", m !== "fichas");   /* modos que pintan cada país */
   document.getElementById("legFichas").hidden = m !== "fichas";
   document.getElementById("legGob").hidden = m !== "gob";
   document.getElementById("legElec").hidden = m !== "elec";
   document.getElementById("legConf").hidden = m !== "conf";
+  document.getElementById("legInd").hidden = m !== "ind";
+  if (m === "ind") {
+    mapaSync(); calcularMapa();
+    if (!LAB) cargarLab().then(() => { mapaSync(); calcularMapa(); paintMap(); });
+  }
   if (m === "gob") renderLegGob();
   if (m === "elec") renderLegElec();
   if (m === "conf") renderLegConf();
@@ -933,6 +1014,7 @@ document.getElementById("mFichas").onclick = () => setModo("fichas");
 document.getElementById("mGob").onclick = () => setModo("gob");
 document.getElementById("mElec").onclick = () => setModo("elec");
 document.getElementById("mConf").onclick = () => setModo("conf");
+document.getElementById("mInd").onclick = () => setModo("ind");
 function irA(nombre, instant) {
   if (!projection) return;
   const [[lo0, la0], [lo1, la1]] = CAJAS[nombre];
@@ -967,7 +1049,7 @@ const sinTildes = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowe
 /* ---------- PÁGINAS Y PANEL LATERAL ----------
    Cada sección es una "página": #inicio, #comparacion, #elecciones, #conflictos.
    Se cambia con el link (la dirección cambia, así funciona el botón "atrás" del navegador). */
-const PAGINAS = ["inicio", "comparacion", "laboratorio", "juego", "elecciones", "conflictos"];
+const PAGINAS = ["inicio", "comparacion", "rankings", "laboratorio", "juego", "elecciones", "conflictos"];
 let paginaActual = "inicio";
 const versusAbierto = () => paginaActual === "comparacion";
 function mostrarPagina(nombre) {
@@ -979,6 +1061,7 @@ function mostrarPagina(nombre) {
   cerrarNav();
   if (nombre === "comparacion") { renderVersus(); drawTL(); tl.resize(); }
   if (nombre === "laboratorio") { abrirLab(); if (labChart) labChart.resize(); }
+  if (nombre === "rankings") abrirRankings();
   if (nombre === "inicio") {
     // si la ventana cambió de tamaño mientras el mapa estaba oculto, lo rearmamos
     const r = document.getElementById("map").getBoundingClientRect();
@@ -1095,7 +1178,10 @@ const LAB_BASE = {
   ddesempleo: { g: "Economía", nombre: "Cambio del desempleo en 10 años", unidad: "puntos porcentuales", sinModo: true },
   deuda:      { g: "Economía", nombre: "Deuda pública", unidad: "% del PBI" },
   cc:         { g: "Economía", nombre: "Cuenta corriente", unidad: "% del PBI", prom: true },
-  poblacion:  { g: "Economía", nombre: "Población", unidad: "millones", log: true }
+  poblacion:  { g: "Economía", nombre: "Población", unidad: "millones", log: true },
+  crec10:     { g: "Economía", nombre: "Crecimiento acumulado en 10 años", unidad: "% en total", sinModo: true },
+  recesiones: { g: "Economía", nombre: "Años en recesión desde 1990", unidad: "años", sinModo: true },
+  inflAcum:   { g: "Economía", nombre: "Inflación acumulada desde 2000", unidad: "veces (cuánto se multiplicaron los precios)", sinModo: true, log: true }
 };
 /* Grupo y escala sugerida de las variables de lab.json (el nombre y la unidad vienen en el archivo) */
 const LAB_EXTRA = {
@@ -1138,6 +1224,22 @@ function labSerie(k, v) {
 }
 /* Valor de un país para una variable: último dato de los últimos 5 años, o promedio de 10 años */
 function labValor(k, v, modo) {
+  const valorEn = (s, y) => { const x = s[1][y - s[0]]; return x == null ? null : x; };
+  if (v === "crec10") {            // crecimiento compuesto de los últimos 10 años
+    const s = labSerie(k, "crec"); if (!s) return null;
+    let f = 1; for (let y = ANIO - 9; y <= ANIO; y++) { const g = valorEn(s, y); if (g == null) return null; f *= 1 + g / 100; }
+    return { v: (f - 1) * 100, y: `${ANIO - 9}–${ANIO}` };
+  }
+  if (v === "recesiones") {        // años con crecimiento negativo desde 1990
+    const s = labSerie(k, "crec"); if (!s) return null;
+    let n = 0, con = 0; for (let y = 1990; y <= ANIO; y++) { const g = valorEn(s, y); if (g != null) { con++; if (g < 0) n++; } }
+    return con >= ANIO - 1990 - 4 ? { v: n, y: `1990–${ANIO}` } : null;
+  }
+  if (v === "inflAcum") {          // cuántas veces se multiplicaron los precios desde 2000
+    const s = labSerie(k, "infl"); if (!s) return null;
+    let f = 1, con = 0; for (let y = 2000; y <= ANIO; y++) { const i = valorEn(s, y); if (i != null) { con++; f *= 1 + i / 100; } }
+    return con >= ANIO - 2000 - 1 ? { v: f, y: `2000–${ANIO}` } : null;
+  }
   if (v === "ddesempleo") {
     const s = labSerie(k, "desempleo"); if (!s) return null;
     const en = y => { const x = s[1][y - s[0]]; return x == null ? null : x; };
@@ -1229,17 +1331,22 @@ function labSync() {
   document.getElementById("labReg").value = labEstado.reg;
   document.getElementById("labChicos").checked = labEstado.chicos;
 }
+/* lab.json se baja una sola vez, la primera vez que hace falta (Laboratorio, Rankings o el mapa) */
+let labPromesa = null;
+function cargarLab() {
+  if (!labPromesa) labPromesa = fetch("lab.json").then(r => r.ok ? r.json() : null).catch(() => null).then(j => {
+    LAB = j;
+    ["labY", "labX", "rkVar", "mapaVar"].forEach(id => { const el = document.getElementById(id); if (el) { const v = el.value; el.innerHTML = labOpciones(); if (labVars()[v]) el.value = v; } });
+    return LAB;
+  });
+  return labPromesa;
+}
 function abrirLab() {
-  if (LAB || labCargando === false) { renderLab(); return; }
-  if (!labCargando) {
-    document.getElementById("labRes").innerHTML = `<p class="note">Cargando las variables…</p>`;
-    labCargando = fetch("lab.json").then(r => r.ok ? r.json() : null).catch(() => null).then(j => {
-      LAB = j; labCargando = false;
-      ["labY", "labX"].forEach(id => document.getElementById(id).innerHTML = labOpciones());
-      if (!labVars()[labEstado.y]) Object.assign(labEstado, { y: "crec", ym: "prom", x: "ppa", xlog: true });
-      labSync(); renderLab();
-    });
-  }
+  if (!LAB) document.getElementById("labRes").innerHTML = `<p class="note">Cargando las variables…</p>`;
+  cargarLab().then(() => {
+    if (!labVars()[labEstado.y]) Object.assign(labEstado, { y: "crec", ym: "prom", x: "ppa", xlog: true });
+    labSync(); renderLab();
+  });
 }
 /* "PBI por persona" → "el PBI por persona"; "Inflación" → "la inflación" (sin artículo si art = false) */
 function conArt(nombre, art = true) {
@@ -1249,7 +1356,9 @@ function conArt(nombre, art = true) {
   return (w.endsWith("os") ? "los " : w.endsWith("s") ? "las " : /(a|ion|dad|eza)$/.test(w) ? "la " : "el ") + n;
 }
 /* Formato de números según su tamaño */
-const labNum = v => { const a = Math.abs(v); return a >= 1000 ? nf(v) : a >= 100 ? nf(v, 0) : a >= 10 ? nf(v, 1) : a >= 1 ? nf(v, 2) : nf(v, 3); };
+const labNum = v => { const a = Math.abs(v);
+  if (a >= 1e12) return nf(v / 1e12, 1) + " billones"; if (a >= 1e9) return nf(v / 1e9, 1) + " mil millones"; if (a >= 1e6) return nf(v / 1e6, 1) + " millones";
+  return a >= 1000 ? nf(v) : a >= 100 ? nf(v, 0) : a >= 10 ? nf(v, 1) : a >= 1 ? nf(v, 2) : a >= .01 ? nf(v, 2) : nf(v, 3); };
 
 function renderLab() {
   if (paginaActual !== "laboratorio") return;
@@ -1348,6 +1457,126 @@ function renderLab() {
     </div>
     <p class="note">${r.n} países con dato de las dos variables${E.chicos ? ", de más de 1 millón de habitantes" : ""}.${sinLog ? ` ${sinLog} quedaron afuera porque tienen valores negativos o cero, que no entran en escala log.` : ""} Correlación no es causalidad: mirá "¿Cómo se lee esto?" abajo.</p>`;
   res.querySelectorAll(".plink").forEach(b => b.onclick = () => irAPaisDesdeLista(b.dataset.pais));
+}
+
+/* ---------- RANKINGS ---------- */
+const RK_PRESETS = [
+  { t: "Inflación", v: "infl" }, { t: "Crecimiento", v: "crec" }, { t: "Lo que más creció en 10 años", v: "crec10" },
+  { t: "Más ricos y más pobres", v: "ppa" }, { t: "Deuda pública", v: "deuda" }, { t: "Desempleo", v: "desempleo" },
+  { t: "Años en recesión desde 1990", v: "recesiones" }, { t: "Inflación acumulada desde 2000", v: "inflAcum" },
+  { t: "Esperanza de vida", v: "vida" }, { t: "Corrupción", v: "corrupcion" }, { t: "Desigualdad", v: "gini" }
+];
+const rkEstado = { v: "infl", m: "ultimo", reg: "todas", sob: true, chicos: true };
+/* Valor con su unidad, corto */
+function fmtValor(v, k) {
+  const u = labVars()[k].unidad;
+  if (k === "inflAcum") return `×${labNum(v)}`;
+  if (u.startsWith("%")) return `${labNum(v)}%`;
+  if (u.includes("US$")) return `US$ ${nf(v)}`;
+  if (u === "años") return `${Number.isInteger(v) ? v : labNum(v)} ${v === 1 ? "año" : "años"}`;
+  if (u === "millones") return `${labNum(v)} M`;
+  return labNum(v);
+}
+function rkSync() {
+  const V = labVars();
+  document.getElementById("rkVar").value = rkEstado.v;
+  document.getElementById("rkModo").value = rkEstado.m;
+  document.getElementById("rkModo").disabled = !!(V[rkEstado.v] && V[rkEstado.v].sinModo);
+  document.getElementById("rkReg").value = rkEstado.reg;
+  document.getElementById("rkSob").checked = rkEstado.sob;
+  document.getElementById("rkChicos").checked = rkEstado.chicos;
+  document.querySelectorAll("#rkPresets .btn").forEach(b => b.setAttribute("aria-pressed", b.dataset.v === rkEstado.v));
+}
+function armarRankings() {
+  document.getElementById("rkVar").innerHTML = labOpciones();
+  document.getElementById("rkReg").innerHTML = document.getElementById("labReg").innerHTML;
+  document.getElementById("rkPresets").innerHTML = RK_PRESETS.map(p => `<button class="btn" type="button" data-v="${p.v}" aria-pressed="false">${p.t}</button>`).join("");
+  document.querySelectorAll("#rkPresets .btn").forEach(b => b.onclick = () => {
+    const v = labVars()[b.dataset.v]; if (!v) return;
+    Object.assign(rkEstado, { v: b.dataset.v, m: "ultimo" }); rkSync(); renderRankings();
+  });
+  const cambio = (id, campo, check) => document.getElementById(id).addEventListener("change", e => {
+    rkEstado[campo] = check ? e.target.checked : e.target.value;
+    rkSync(); renderRankings();
+  });
+  cambio("rkVar", "v"); cambio("rkModo", "m"); cambio("rkReg", "reg"); cambio("rkSob", "sob", true); cambio("rkChicos", "chicos", true);
+  document.getElementById("rkMapa").onclick = () => {
+    Object.assign(mapaEstado, { v: rkEstado.v, m: rkEstado.m });
+    history.pushState(null, "", "#inicio"); mostrarPagina("inicio");
+    setModo("ind"); setVista("mundo");
+  };
+  rkSync();
+}
+function abrirRankings() {
+  renderRankings();
+  if (!LAB) cargarLab().then(() => { rkSync(); renderRankings(); });
+}
+function renderRankings() {
+  if (paginaActual !== "rankings") return;
+  const V = labVars(), E = rkEstado, v = V[E.v];
+  if (!v) return;
+  const filas = [];
+  Object.keys(PAISES).forEach(k => {
+    const p = PAISES[k];
+    if (E.sob && !p.curada) return;
+    if (E.chicos && !(p.poblacion >= 1)) return;
+    if (E.reg !== "todas" && LAB_REGION(p.region) !== E.reg) return;
+    const x = labValor(k, E.v, v.sinModo ? "ultimo" : E.m);
+    if (x) filas.push({ k, v: x.v, y: x.y });
+  });
+  filas.sort((a, b) => b.v - a.v);
+  const n = filas.length, max = Math.max(...filas.map(f => Math.abs(f.v)), 1e-9);
+  const usaLog = E.v === "inflAcum" || E.v === "ppa" || E.v === "pibpc" || E.v === "poblacion";   // barras en escala log para variables muy desparejas
+  const ancho = x => usaLog ? Math.max(2, Math.log10(Math.max(x, 1)) / Math.log10(Math.max(max, 10)) * 100) : Math.max(2, Math.abs(x) / max * 100);
+  const fila = (f, i) => `<li class="${f.k === "ARG" ? "arg" : ""}"><span class="rk-n">${i + 1}</span>${flag(f.k) || "<span></span>"}
+    <button class="plink" type="button" data-pais="${f.k}">${PAISES[f.k].nombre}</button><span class="rk-v">${fmtValor(f.v, E.v)}<small>${f.y}</small></span>
+    <span class="rk-bar${f.v < 0 ? " neg" : ""}" style="width:${ancho(f.v)}%"></span></li>`;
+  const nombre = v.nombre + (!v.sinModo && E.m === "prom" ? " (promedio 10 años)" : "");
+  document.getElementById("rkTitulo").textContent = `Ranking: ${nombre}`;
+  document.getElementById("rkTopT").textContent = `Los ${Math.min(10, n)} más altos`;
+  document.getElementById("rkBotT").textContent = `Los ${Math.min(10, n)} más bajos`;
+  document.getElementById("rkTop").innerHTML = filas.slice(0, 10).map(fila).join("");
+  const bajos = filas.slice(-10).reverse();
+  document.getElementById("rkBot").innerHTML = bajos.map(f => fila(f, filas.indexOf(f))).join("");
+  document.getElementById("rkLista").innerHTML = filas.map(fila).join("");
+  document.getElementById("rkTodosT").textContent = `Ver los ${n} países`;
+  const ia = filas.findIndex(f => f.k === "ARG");
+  document.getElementById("rkArg").innerHTML = ia >= 0
+    ? `${flag("ARG")} <b>Argentina</b> está en el puesto <b class="n">${ia + 1}</b> de ${n} (de mayor a menor), con ${fmtValor(filas[ia].v, E.v)} <span class="ytag">${filas[ia].y}</span>.`
+    : `Argentina no tiene dato de este indicador${E.reg !== "todas" ? " o no está en la región elegida" : ""}.`;
+  document.getElementById("rkNota").textContent = `${v.nombre}, en ${v.unidad}. ${!v.sinModo && E.m === "ultimo" ? "Se usa el dato más reciente de los últimos 5 años de cada país (al lado de cada valor está el año). " : ""}${n} países${E.sob ? " independientes" : ""}${E.chicos ? " de más de 1 millón de habitantes" : ""} con dato. Fuentes: Banco Mundial y FMI.`;
+  document.querySelectorAll("#pag-rankings .plink").forEach(b => b.onclick = () => irAPaisDesdeLista(b.dataset.pais));
+}
+
+/* ---------- MAPA POR INDICADOR ---------- */
+const mapaEstado = { v: "infl", m: "ultimo" };
+let MAPA = { color: {}, valor: {} };
+function calcularMapa() {
+  const V = labVars(), v = V[mapaEstado.v]; MAPA = { color: {}, valor: {} };
+  if (!v) return;
+  const vals = [];
+  Object.keys(PAISES).forEach(k => { const x = labValor(k, mapaEstado.v, v.sinModo ? "ultimo" : mapaEstado.m); if (x) { MAPA.valor[k] = x; vals.push(x.v); } });
+  if (vals.length < 7) { document.getElementById("legEscala").innerHTML = `<span>Sin datos para este indicador.</span>`; return; }
+  /* 7 grupos con la misma cantidad de países (cuantiles): así se ven diferencias aunque haya valores extremos */
+  const colores = d3.quantize(d3.interpolateYlOrRd, 9).slice(1, 8);
+  const escala = d3.scaleQuantile().domain(vals).range(colores);
+  Object.entries(MAPA.valor).forEach(([k, x]) => MAPA.color[k] = escala(x.v));
+  const cortes = escala.quantiles(), ext = d3.extent(vals);
+  const lim = [ext[0], ...cortes, ext[1]];
+  document.getElementById("legEscala").innerHTML = colores.map((c, i) => `<span class="cj" title="${fmtValor(lim[i], mapaEstado.v)} a ${fmtValor(lim[i + 1], mapaEstado.v)}"><i style="background:${c}"></i>${i === 0 ? fmtValor(lim[0], mapaEstado.v) : i === 6 ? fmtValor(lim[7], mapaEstado.v) : i === 3 ? fmtValor(lim[3], mapaEstado.v) + "…" : "&nbsp;"}</span>`).join("")
+    + `<span class="sd"><i></i>Sin dato</span>`;
+}
+function armarMapaInd() {
+  const sel = document.getElementById("mapaVar");
+  sel.innerHTML = labOpciones(); sel.value = mapaEstado.v;
+  const modoSel = document.getElementById("mapaModo");
+  sel.onchange = () => { mapaEstado.v = sel.value; mapaSync(); calcularMapa(); paintMap(); };
+  modoSel.onchange = () => { mapaEstado.m = modoSel.value; calcularMapa(); paintMap(); };
+}
+function mapaSync() {
+  const v = labVars()[mapaEstado.v], modoSel = document.getElementById("mapaModo");
+  document.getElementById("mapaVar").value = mapaEstado.v;
+  modoSel.value = mapaEstado.m; modoSel.disabled = !!(v && v.sinModo);
 }
 
 /* ---------- JUEGO: PAÍS DEL DÍA ----------
@@ -2075,6 +2304,8 @@ Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json")
     armarBuscador();
     armarJuego();
     armarLab();
+    armarRankings();
+    armarMapaInd();
     armarNav();
     mostrarPagina(location.hash.slice(1) || "inicio");   // si entraron con #elecciones, por ejemplo
   })
