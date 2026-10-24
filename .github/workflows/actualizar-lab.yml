@@ -1,0 +1,34 @@
+name: Actualizar variables del Laboratorio
+
+on:
+  schedule:
+    - cron: "17 10 * * 1"   # los lunes 10:17 UTC, una hora después de datos.json
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python actualizar_lab.py
+
+      - name: Guardar lab.json si cambió
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add lab.json
+          if git diff --cached --quiet; then
+            echo "Sin cambios"
+          else
+            git commit -m "Variables del Laboratorio actualizadas"
+            git pull --rebase
+            git push
+          fi

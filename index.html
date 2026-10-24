@@ -291,6 +291,36 @@ details.sec[open] .sec-flecha { transform: rotate(225deg); }
 .ar-dia { display: grid; gap: 8px; }
 .ar-dia h3 { font-size: 17px; font-weight: 700; }
 .gob-ley { display: inline-flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 4px; }
+/* Laboratorio */
+.lab-ejemplos { display: grid; gap: 8px; }
+.lab-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.lab-controles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 12px 18px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; }
+.lab-eje { display: grid; gap: 6px; min-width: 0; }
+.lab-eje > label { font-size: 13px; font-weight: 600; color: var(--muted); }
+.lab-fila { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.lab-fila select { padding: 7px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; font-size: 14.5px; max-width: 100%; }
+.lab-fila select:first-child { flex: 1 1 200px; min-width: 0; font-weight: 600; }
+.lab-check { display: inline-flex; align-items: center; gap: 6px; font-size: 14px; color: var(--ink); cursor: pointer; }
+.lab-main { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: 18px; align-items: start; }
+@media (max-width: 900px) { .lab-main { grid-template-columns: minmax(0, 1fr); } }
+.lab-graf { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 12px 12px 14px; display: grid; gap: 8px; min-width: 0; }
+#labChart { height: clamp(340px, 58vh, 560px); }
+.lab-res { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; display: grid; gap: 14px; min-width: 0; }
+.lab-res h3 { font-size: 17px; font-weight: 700; }
+.lab-ecu { font-family: var(--f-data); font-size: 15px; background: var(--bg); border-radius: 8px; padding: 8px 10px; overflow-x: auto; white-space: nowrap; }
+.lab-stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+.lab-stats div { background: var(--bg); border-radius: 8px; padding: 8px 10px; display: grid; gap: 2px; }
+.lab-stats b { font-family: var(--f-data); font-size: 18px; font-weight: 500; }
+.lab-stats span { font-size: 12px; color: var(--muted); }
+.lab-frase { font-size: 15.5px; }
+.lab-arg { border-left: 3px solid var(--accent); padding-left: 12px; font-size: 15px; }
+.lab-lejos { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 12px; }
+.lab-lejos h4 { font-family: var(--f-body); font-size: 13px; font-weight: 700; color: var(--muted); margin: 0 0 6px; }
+.lab-lejos ol { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 14px; }
+.lab-ayuda { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 0 20px; }
+.lab-ayuda summary { padding: 14px 0; cursor: pointer; font-weight: 700; }
+.lab-ayuda p { max-width: 75ch; font-size: 15px; }
+
 /* Juego: país del día */
 .juego { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
 @media (max-width: 860px) { .juego { grid-template-columns: minmax(0, 1fr); } }
@@ -386,6 +416,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   <ul>
     <li><a href="#inicio" data-pag="inicio"><span class="nav-ico" aria-hidden="true">🗺️</span><span>Mapa y fichas<small>Tocá un país y mirá su economía</small></span></a></li>
     <li><a href="#comparacion" data-pag="comparacion"><span class="nav-ico" aria-hidden="true">⚖️</span><span>Comparación<small>Dos países frente a frente</small></span></a></li>
+    <li><a href="#laboratorio" data-pag="laboratorio"><span class="nav-ico" aria-hidden="true">🧪</span><span>Laboratorio<small>Relacioná variables y mirá la regresión</small></span></a></li>
     <li><a href="#juego" data-pag="juego"><span class="nav-ico" aria-hidden="true">🎯</span><span>País del día<small>Adiviná el país con pistas económicas</small></span></a></li>
     <li><a href="#elecciones" data-pag="elecciones"><span class="nav-ico" aria-hidden="true">🗳️</span><span>Próximas elecciones<small>Los próximos 12 meses</small></span></a></li>
     <li><a href="#conflictos" data-pag="conflictos"><span class="nav-ico" aria-hidden="true">⚠️</span><span>Conflictos y crisis<small>Guerras, golpes y crisis</small></span></a></li>
@@ -438,6 +469,47 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <aside class="panel" id="panel" aria-live="polite"></aside>
   </section>
 
+  </div>
+
+  <div class="pagina" id="pag-laboratorio" hidden>
+    <header class="top">
+      <div class="eyebrow">Laboratorio</div>
+      <h1>¿Qué se relaciona con qué?</h1>
+      <p class="lede">Elegí dos variables y mirá cómo se relacionan entre todos los países del mundo. La recta es una regresión por mínimos cuadrados: muestra la relación promedio, no cuál causa cuál.</p>
+    </header>
+    <div class="lab-ejemplos"><span class="eyebrow">Ejemplos famosos</span><div class="lab-chips" id="labEjemplos"></div></div>
+    <div class="lab-controles">
+      <div class="lab-eje">
+        <label for="labY">Eje vertical (Y) · lo que querés explicar</label>
+        <div class="lab-fila"><select id="labY"></select><select id="labYm" aria-label="Qué dato usar en Y"><option value="ultimo">Último dato</option><option value="prom">Promedio 10 años</option></select>
+          <label class="lab-check"><input type="checkbox" id="labYlog"> Escala log</label></div>
+      </div>
+      <div class="lab-eje">
+        <label for="labX">Eje horizontal (X) · con qué lo comparás</label>
+        <div class="lab-fila"><select id="labX"></select><select id="labXm" aria-label="Qué dato usar en X"><option value="ultimo">Último dato</option><option value="prom">Promedio 10 años</option></select>
+          <label class="lab-check"><input type="checkbox" id="labXlog"> Escala log</label></div>
+      </div>
+      <div class="lab-eje">
+        <label for="labReg">Qué países</label>
+        <div class="lab-fila"><select id="labReg"></select>
+          <label class="lab-check"><input type="checkbox" id="labChicos" checked> Solo más de 1 millón de habitantes</label></div>
+      </div>
+    </div>
+    <div class="lab-main">
+      <div class="lab-graf"><div id="labChart"></div><div class="legend" id="labLeyenda"></div></div>
+      <aside class="lab-res" id="labRes" aria-live="polite"></aside>
+    </div>
+    <details class="lab-ayuda">
+      <summary>¿Cómo se lee esto?</summary>
+      <div class="sec-body">
+        <p><b>La recta</b> es la que mejor pasa entre los puntos: la que hace más chica la suma de las distancias al cuadrado de cada país a la recta (mínimos cuadrados ordinarios). Su ecuación es Y = β₀ + β₁·X.</p>
+        <p><b>La pendiente (β₁)</b> dice cuánto cambia Y, en promedio, cuando X aumenta una unidad. Con escala logarítmica cambia la lectura: en X log, cuánto cambia Y cuando X se duplica; en las dos log, es una elasticidad (un 1% más de X se asocia con β₁% más de Y).</p>
+        <p><b>El R²</b> va de 0 a 1 y mide qué parte de las diferencias de Y entre países "acompaña" a X. Cerca de 0: casi no hay relación lineal. Cerca de 1: los puntos están casi todos sobre la recta.</p>
+        <p><b>El valor p</b> responde: si en realidad no hubiera ninguna relación, ¿qué tan raro sería ver una pendiente así? Menos de 0,05 se suele llamar "estadísticamente significativa".</p>
+        <p><b>Correlación no es causalidad.</b> Que dos cosas vayan juntas no dice cuál causa cuál, ni descarta que una tercera cause las dos. Los países ricos tienen más esperanza de vida, pero también más heladeras: las heladeras no alargan la vida. Esta es una regresión simple, sin controles, para explorar: no prueba nada.</p>
+        <p><b>Los datos.</b> "Último dato" toma el valor más reciente de los últimos 5 años de cada país (algunas variables, como la desigualdad, no se miden todos los años). "Promedio 10 años" promedia los últimos diez y sirve para variables que saltan mucho, como el crecimiento o la inflación. Fuentes: Banco Mundial y FMI.</p>
+      </div>
+    </details>
   </div>
 
   <div class="pagina" id="pag-juego" hidden>
@@ -895,7 +967,7 @@ const sinTildes = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowe
 /* ---------- PÁGINAS Y PANEL LATERAL ----------
    Cada sección es una "página": #inicio, #comparacion, #elecciones, #conflictos.
    Se cambia con el link (la dirección cambia, así funciona el botón "atrás" del navegador). */
-const PAGINAS = ["inicio", "comparacion", "juego", "elecciones", "conflictos"];
+const PAGINAS = ["inicio", "comparacion", "laboratorio", "juego", "elecciones", "conflictos"];
 let paginaActual = "inicio";
 const versusAbierto = () => paginaActual === "comparacion";
 function mostrarPagina(nombre) {
@@ -906,6 +978,7 @@ function mostrarPagina(nombre) {
   document.querySelectorAll("#nav a[data-pag]").forEach(a => a.setAttribute("aria-current", a.dataset.pag === nombre ? "page" : "false"));
   cerrarNav();
   if (nombre === "comparacion") { renderVersus(); drawTL(); tl.resize(); }
+  if (nombre === "laboratorio") { abrirLab(); if (labChart) labChart.resize(); }
   if (nombre === "inicio") {
     // si la ventana cambió de tamaño mientras el mapa estaba oculto, lo rearmamos
     const r = document.getElementById("map").getBoundingClientRect();
@@ -1007,6 +1080,274 @@ function armarBuscador() {
     elegir(k); irAPais(k);
     document.getElementById("mapcard").scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "nearest" });
   });
+}
+
+/* ---------- LABORATORIO: REGRESIONES ENTRE PAÍSES ----------
+   Variables de datos.json (macro) y de lab.json (sociales, instituciones, etc.).
+   lab.json se baja recién la primera vez que alguien entra al Laboratorio. */
+let LAB = null, labCargando = null, labChart = null;
+const LAB_BASE = {
+  ppa:        { g: "Economía", nombre: "PBI por persona (ajustado por precios)", unidad: "US$ PPA", log: true },
+  pibpc:      { g: "Economía", nombre: "PBI por persona", unidad: "US$", log: true },
+  crec:       { g: "Economía", nombre: "Crecimiento", unidad: "% anual", prom: true },
+  infl:       { g: "Economía", nombre: "Inflación", unidad: "% anual", prom: true },
+  desempleo:  { g: "Economía", nombre: "Desempleo", unidad: "% de la fuerza laboral" },
+  ddesempleo: { g: "Economía", nombre: "Cambio del desempleo en 10 años", unidad: "puntos porcentuales", sinModo: true },
+  deuda:      { g: "Economía", nombre: "Deuda pública", unidad: "% del PBI" },
+  cc:         { g: "Economía", nombre: "Cuenta corriente", unidad: "% del PBI", prom: true },
+  poblacion:  { g: "Economía", nombre: "Población", unidad: "millones", log: true }
+};
+/* Grupo y escala sugerida de las variables de lab.json (el nombre y la unidad vienen en el archivo) */
+const LAB_EXTRA = {
+  vida: ["Sociales"], mortinf: ["Sociales", true], fert: ["Sociales"], urbano: ["Sociales"], internet: ["Sociales"],
+  gini: ["Desigualdad y pobreza"], pobreza: ["Desigualdad y pobreza"],
+  apertura: ["Comercio e inversión"], inversion: ["Comercio e inversión"], ahorro: ["Comercio e inversión"], ied: ["Comercio e inversión"], remesas: ["Comercio e inversión"],
+  gedu: ["Estado"], gsalud: ["Estado"], impuestos: ["Estado"],
+  corrupcion: ["Instituciones"], derecho: ["Instituciones"],
+  co2: ["Ambiente", true]
+};
+const LAB_EJEMPLOS = [
+  { t: "Riqueza y esperanza de vida", y: "vida", x: "ppa", xlog: true, nota: "La curva de Preston (1975): en los países pobres, un poco más de ingreso se asocia con muchos más años de vida; en los ricos, casi nada." },
+  { t: "Riqueza e hijos por mujer", y: "fert", x: "ppa", xlog: true },
+  { t: "Riqueza y corrupción", y: "corrupcion", x: "ppa", xlog: true },
+  { t: "Riqueza y desigualdad", y: "gini", x: "ppa", xlog: true, nota: "Kuznets sostenía que la desigualdad primero sube y después baja con el desarrollo. Una recta no puede mostrar esa U invertida: mirá la forma de la nube de puntos." },
+  { t: "Ley de Okun", y: "ddesempleo", x: "crec", xm: "prom", nota: "Okun (1962): cuando la economía crece más, el desempleo baja. Acá, crecimiento promedio de 10 años contra cuánto cambió el desempleo en esos 10 años." },
+  { t: "Inflación y crecimiento", y: "crec", ym: "prom", x: "infl", xm: "prom", xlog: true },
+  { t: "Apertura y crecimiento", y: "crec", ym: "prom", x: "apertura" },
+  { t: "Riqueza y CO₂", y: "co2", x: "ppa", xlog: true, ylog: true, nota: "Las dos en escala log: la pendiente es una elasticidad." }
+];
+/* Regiones grandes para colorear y filtrar */
+const LAB_REGION = r => /Sudam|Centroam|Caribe|Latina/.test(r) ? "América Latina y el Caribe" : /Norteam|América del Norte/.test(r) ? "Norteamérica"
+  : /Europa|Cáucaso/.test(r) ? "Europa" : /Medio Oriente|Norte de África/.test(r) ? "Medio Oriente y Norte de África" : /África/.test(r) ? "África subsahariana"
+  : /Oceanía|Pacífico/.test(r) ? "Asia y Oceanía" : /Asia/.test(r) ? "Asia y Oceanía" : "Otros";
+const LAB_COLORES = { "América Latina y el Caribe": "--izq", "Norteamérica": "--der", "Europa": "--b", "Medio Oriente y Norte de África": "--cder", "África subsahariana": "--cen", "Asia y Oceanía": "--good", "Otros": "--ind" };
+
+function labVars() {
+  const v = {};
+  Object.entries(LAB_BASE).forEach(([k, x]) => v[k] = x);
+  if (LAB) Object.entries(LAB.variables).forEach(([k, x]) => { const e = LAB_EXTRA[k] || ["Otras"]; v[k] = { g: e[0], nombre: x.nombre, unidad: x.unidad, log: !!e[1], lab: true }; });
+  return v;
+}
+/* Serie de un país: [primer año, [valores]] */
+function labSerie(k, v) {
+  if (LAB_BASE[v]) {
+    if (HIST[k] && HIST[k][v]) return HIST[k][v];          // pib, crec, infl, deuda, cc (con los ajustes de curado.json)
+    const d = DATOS.paises[k]; return d && d.series[v] || null;
+  }
+  return LAB && LAB.paises[k] && LAB.paises[k][v] || null;
+}
+/* Valor de un país para una variable: último dato de los últimos 5 años, o promedio de 10 años */
+function labValor(k, v, modo) {
+  if (v === "ddesempleo") {
+    const s = labSerie(k, "desempleo"); if (!s) return null;
+    const en = y => { const x = s[1][y - s[0]]; return x == null ? null : x; };
+    const fin = en(ANIO) ?? en(ANIO - 1), ini = en(ANIO - 10) ?? en(ANIO - 9);
+    return fin == null || ini == null ? null : { v: fin - ini, y: `${ANIO - 10}–${ANIO}` };
+  }
+  const s = labSerie(k, v); if (!s) return null;
+  if (modo === "prom") {
+    const vals = []; for (let y = ANIO - 9; y <= ANIO; y++) { const x = s[1][y - s[0]]; if (x != null) vals.push(x); }
+    return vals.length >= 7 ? { v: vals.reduce((a, b) => a + b, 0) / vals.length, y: `promedio ${ANIO - 9}–${ANIO}` } : null;
+  }
+  for (let y = ANIO; y >= ANIO - 4; y--) { const x = s[1][y - s[0]]; if (x != null && x !== undefined) return { v: x, y: String(y) }; }
+  return null;
+}
+
+/* ---- Estadística: MCO simple y valor p con la distribución t de Student ---- */
+function lgamma(x) {
+  const c = [76.18009172947146, -86.50532032941677, 24.01409824083091, -1.231739572450155, 0.1208650973866179e-2, -0.5395239384953e-5];
+  let y = x, t = x + 5.5; t -= (x + .5) * Math.log(t); let s = 1.000000000190015;
+  c.forEach(ci => s += ci / ++y); return -t + Math.log(2.5066282746310005 * s / x);
+}
+function betaInc(a, b, x) {        /* beta incompleta regularizada I_x(a, b) (Numerical Recipes) */
+  if (x <= 0) return 0; if (x >= 1) return 1;
+  const bt = Math.exp(lgamma(a + b) - lgamma(a) - lgamma(b) + a * Math.log(x) + b * Math.log(1 - x));
+  const cf = (a, b, x) => {
+    let qab = a + b, qap = a + 1, qam = a - 1, c = 1, d = 1 - qab * x / qap; if (Math.abs(d) < 1e-30) d = 1e-30; d = 1 / d; let h = d;
+    for (let m = 1; m <= 200; m++) {
+      const m2 = 2 * m; let aa = m * (b - m) * x / ((qam + m2) * (a + m2));
+      d = 1 + aa * d; if (Math.abs(d) < 1e-30) d = 1e-30; c = 1 + aa / c; if (Math.abs(c) < 1e-30) c = 1e-30; d = 1 / d; h *= d * c;
+      aa = -(a + m) * (qab + m) * x / ((a + m2) * (qap + m2));
+      d = 1 + aa * d; if (Math.abs(d) < 1e-30) d = 1e-30; c = 1 + aa / c; if (Math.abs(c) < 1e-30) c = 1e-30; d = 1 / d;
+      const del = d * c; h *= del; if (Math.abs(del - 1) < 3e-12) break;
+    }
+    return h;
+  };
+  return x < (a + 1) / (a + b + 2) ? bt * cf(a, b, x) / a : 1 - bt * cf(b, a, 1 - x) / b;
+}
+const pValor = (t, gl) => betaInc(gl / 2, .5, gl / (gl + t * t));   /* dos colas */
+function mco(xs, ys) {
+  const n = xs.length, mx = xs.reduce((a, b) => a + b, 0) / n, my = ys.reduce((a, b) => a + b, 0) / n;
+  let sxx = 0, sxy = 0, syy = 0;
+  xs.forEach((x, i) => { sxx += (x - mx) ** 2; sxy += (x - mx) * (ys[i] - my); syy += (ys[i] - my) ** 2; });
+  const b1 = sxy / sxx, b0 = my - b1 * mx;
+  const ssr = ys.reduce((a, y, i) => a + (y - b0 - b1 * xs[i]) ** 2, 0);
+  const r2 = syy ? 1 - ssr / syy : 0, se = Math.sqrt(ssr / (n - 2) / sxx), t = b1 / se;
+  return { n, b0, b1, r2, se, t, p: pValor(Math.abs(t), n - 2) };
+}
+
+/* ---- Interfaz ---- */
+const labEstado = { y: "vida", x: "ppa", ym: "ultimo", xm: "ultimo", ylog: false, xlog: true, reg: "todas", chicos: true };
+function labOpciones() {
+  const V = labVars(), grupos = {};
+  Object.entries(V).forEach(([k, v]) => (grupos[v.g] = grupos[v.g] || []).push([k, v]));
+  return Object.entries(grupos).map(([g, vs]) => `<optgroup label="${g}">${vs.map(([k, v]) => `<option value="${k}">${v.nombre}</option>`).join("")}</optgroup>`).join("");
+}
+function armarLab() {
+  ["labY", "labX"].forEach(id => document.getElementById(id).innerHTML = labOpciones());
+  const regiones = [...new Set(Object.values(PAISES).map(p => LAB_REGION(p.region)))].filter(r => r !== "Otros").sort();
+  document.getElementById("labReg").innerHTML = `<option value="todas">Todo el mundo</option>` + regiones.map(r => `<option>${r}</option>`).join("");
+  document.getElementById("labEjemplos").innerHTML = LAB_EJEMPLOS.map((e, i) => `<button class="btn" type="button" data-i="${i}">${e.t}</button>`).join("");
+  document.querySelectorAll("#labEjemplos .btn").forEach(b => b.onclick = () => {
+    const e = LAB_EJEMPLOS[b.dataset.i], V = labVars();
+    if (!V[e.y] || !V[e.x]) return;
+    Object.assign(labEstado, { y: e.y, x: e.x, ym: e.ym || "ultimo", xm: e.xm || "ultimo", ylog: !!e.ylog, xlog: !!e.xlog, nota: e.nota || "" });
+    labSync(); renderLab();
+  });
+  const cambio = (id, campo, tipo) => document.getElementById(id).addEventListener("change", ev => {
+    labEstado[campo] = tipo === "check" ? ev.target.checked : ev.target.value;
+    labEstado.nota = "";
+    if (campo === "y" || campo === "x") {               // al cambiar de variable, usar su escala y modo sugeridos
+      const v = labVars()[ev.target.value], eje = campo;
+      labEstado[eje + "log"] = !!v.log; labEstado[eje + "m"] = v.prom ? "prom" : "ultimo";
+    }
+    labSync(); renderLab();
+  });
+  cambio("labY", "y"); cambio("labX", "x"); cambio("labYm", "ym"); cambio("labXm", "xm");
+  cambio("labYlog", "ylog", "check"); cambio("labXlog", "xlog", "check"); cambio("labReg", "reg"); cambio("labChicos", "chicos", "check");
+  labSync();
+}
+function labSync() {
+  const V = labVars();
+  ["y", "x"].forEach(e => {
+    const E = e.toUpperCase();
+    document.getElementById("lab" + E).value = labEstado[e];
+    document.getElementById("lab" + E + "m").value = labEstado[e + "m"];
+    document.getElementById("lab" + E + "m").disabled = !!(V[labEstado[e]] && V[labEstado[e]].sinModo);
+    document.getElementById("lab" + E + "log").checked = labEstado[e + "log"];
+  });
+  document.getElementById("labReg").value = labEstado.reg;
+  document.getElementById("labChicos").checked = labEstado.chicos;
+}
+function abrirLab() {
+  if (LAB || labCargando === false) { renderLab(); return; }
+  if (!labCargando) {
+    document.getElementById("labRes").innerHTML = `<p class="note">Cargando las variables…</p>`;
+    labCargando = fetch("lab.json").then(r => r.ok ? r.json() : null).catch(() => null).then(j => {
+      LAB = j; labCargando = false;
+      ["labY", "labX"].forEach(id => document.getElementById(id).innerHTML = labOpciones());
+      if (!labVars()[labEstado.y]) Object.assign(labEstado, { y: "crec", ym: "prom", x: "ppa", xlog: true });
+      labSync(); renderLab();
+    });
+  }
+}
+/* "PBI por persona" → "el PBI por persona"; "Inflación" → "la inflación" (sin artículo si art = false) */
+function conArt(nombre, art = true) {
+  const n = /^[A-ZÁÉÍÓÚ][a-záéíóúñ]/.test(nombre) ? nombre.charAt(0).toLowerCase() + nombre.slice(1) : nombre;
+  if (!art) return n;
+  const w = sinTildes(nombre.split(" ")[0]);
+  return (w.endsWith("os") ? "los " : w.endsWith("s") ? "las " : /(a|ion|dad|eza)$/.test(w) ? "la " : "el ") + n;
+}
+/* Formato de números según su tamaño */
+const labNum = v => { const a = Math.abs(v); return a >= 1000 ? nf(v) : a >= 100 ? nf(v, 0) : a >= 10 ? nf(v, 1) : a >= 1 ? nf(v, 2) : nf(v, 3); };
+
+function renderLab() {
+  if (paginaActual !== "laboratorio") return;
+  const V = labVars(), E = labEstado, vy = V[E.y], vx = V[E.x];
+  const T = (v, log) => log ? Math.log10(v) : v, Ti = (v, log) => log ? 10 ** v : v;
+  const puntos = [];
+  let sinLog = 0;
+  Object.keys(PAISES).forEach(k => {
+    const p = PAISES[k], reg = LAB_REGION(p.region);
+    if (E.reg !== "todas" && reg !== E.reg) return;
+    if (E.chicos && !(p.poblacion >= 1)) return;
+    const a = labValor(k, E.y, E.ym), b = labValor(k, E.x, E.xm);
+    if (!a || !b) return;
+    if ((E.ylog && a.v <= 0) || (E.xlog && b.v <= 0)) { sinLog++; return; }
+    puntos.push({ k, reg, y: a.v, x: b.v, yy: a.y, yx: b.y });
+  });
+  const res = document.getElementById("labRes");
+  if (!labChart) labChart = echarts.init(document.getElementById("labChart"));
+  if (puntos.length < 8) {
+    labChart.clear();
+    res.innerHTML = `<h3>Muy pocos países</h3><p class="note">Hay ${puntos.length} países con datos de las dos variables${E.reg !== "todas" ? " en esta región" : ""}. Probá con otra combinación o con todo el mundo.</p>`;
+    return;
+  }
+  const r = mco(puntos.map(p => T(p.x, E.xlog)), puntos.map(p => T(p.y, E.ylog)));
+  puntos.forEach(p => p.res = T(p.y, E.ylog) - (r.b0 + r.b1 * T(p.x, E.xlog)));
+
+  /* Gráfico */
+  const ink = css("--ink"), muted = css("--muted"), line = css("--line");
+  const ax = { color: muted, fontSize: 11, fontFamily: "Source Sans 3, sans-serif" };
+  const xs = puntos.map(p => p.x), xmin = Math.min(...xs), xmax = Math.max(...xs);
+  const recta = Array.from({ length: 60 }, (_, i) => {
+    const tx = T(xmin, E.xlog) + (T(xmax, E.xlog) - T(xmin, E.xlog)) * i / 59;
+    return [Ti(tx, E.xlog), Ti(r.b0 + r.b1 * tx, E.ylog)];
+  });
+  const regiones = [...new Set(puntos.map(p => p.reg))].sort();
+  const eje = (v, log, pos) => ({ type: log ? "log" : "value", logBase: 10, name: `${v.nombre} (${v.unidad})`, nameLocation: "middle",
+    nameGap: pos === "x" ? 30 : 46, nameTextStyle: { color: ink, fontSize: 12, fontWeight: 600 }, scale: true,
+    splitLine: { lineStyle: { color: line, type: "dashed" } }, axisLine: { lineStyle: { color: line } }, axisLabel: Object.assign({}, ax, { formatter: v => labNum(v) }) });
+  const esArg = p => p.k === "ARG";
+  labChart.setOption({
+    animationDuration: reduced() ? 0 : 500,
+    grid: { left: 64, right: 34, top: 16, bottom: 48 },
+    tooltip: { trigger: "item", backgroundColor: css("--surface"), borderColor: line, textStyle: { color: ink },
+      formatter: q => { if (q.seriesType !== "scatter") return ""; const p = q.data.p;
+        return `<b>${PAISES[p.k].nombre}</b><br>${vy.nombre}: ${labNum(p.y)} ${vy.unidad} <span style="color:${muted}">(${p.yy})</span><br>${vx.nombre}: ${labNum(p.x)} ${vx.unidad} <span style="color:${muted}">(${p.yx})</span>`; } },
+    xAxis: eje(vx, E.xlog, "x"), yAxis: eje(vy, E.ylog, "y"),
+    series: [
+      ...regiones.map(rg => ({ name: rg, type: "scatter", symbolSize: 9, itemStyle: { color: css(LAB_COLORES[rg]), opacity: .78, borderColor: css("--surface"), borderWidth: .5 },
+        data: puntos.filter(p => p.reg === rg && !esArg(p)).map(p => ({ value: [p.x, p.y], p })) })),
+      { name: "Argentina", type: "scatter", symbolSize: 15, z: 5, itemStyle: { color: css("--accent"), borderColor: ink, borderWidth: 2 },
+        label: { show: true, formatter: "Argentina", position: "right", color: ink, fontWeight: 700, fontSize: 12 },
+        data: puntos.filter(esArg).map(p => ({ value: [p.x, p.y], p })) },
+      { name: "Recta", type: "line", data: recta, symbol: "none", z: 4, silent: true, lineStyle: { color: ink, width: 2 } }
+    ]
+  }, true);
+  document.getElementById("labLeyenda").innerHTML = regiones.map(rg => `<span><i style="background:var(${LAB_COLORES[rg]})"></i>${rg}</span>`).join("")
+    + `<span><i style="background:var(--accent); outline: 2px solid var(--ink)"></i>Argentina</span>`;
+
+  /* Resultados */
+    /* Frase en castellano según la escala de cada eje */
+  const esPct = u => u.startsWith("%") || u.startsWith("punto");
+  const uCorta = u => esPct(u) ? "puntos porcentuales" : /índice|0 a 100/.test(u) ? "puntos" : u;
+  const pasoX = vx.unidad.includes("US$") ? { m: 1000, t: `${vx.unidad === "US$" ? "US$" : vx.unidad} 1.000` } : esPct(vx.unidad) ? { m: 1, t: "punto porcentual" }
+    : /índice|0 a 100/.test(vx.unidad) ? { m: 1, t: "punto" } : vx.unidad === "millones" ? { m: 1, t: "millón" } : { m: 1, t: `1 ${vx.unidad}` };
+  const delta = d => `<b>${d >= 0 ? "+" : "−"}${labNum(Math.abs(d))}</b>`;
+  let frase;
+  if (!E.xlog && !E.ylog) frase = `${vy.nombre}: ${delta(r.b1 * pasoX.m)} ${uCorta(vy.unidad)} en promedio por cada ${pasoX.t} más de ${conArt(vx.nombre, false)}.`;
+  else if (E.xlog && !E.ylog) frase = `${vy.nombre}: ${delta(r.b1 * Math.log10(2))} ${uCorta(vy.unidad)} en promedio cada vez que se duplica ${conArt(vx.nombre)}.`;
+  else if (!E.xlog && E.ylog) frase = `${vy.nombre}: <b>${r.b1 >= 0 ? "+" : "−"}${labNum(Math.abs(10 ** (r.b1 * pasoX.m) - 1) * 100)}%</b> en promedio por cada ${pasoX.t} más de ${conArt(vx.nombre, false)}.`;
+  else frase = `Es una elasticidad: un 1% más de ${conArt(vx.nombre, false)} se asocia en promedio con <b>${r.b1 >= 0 ? "+" : "−"}${labNum(Math.abs(r.b1))}%</b> de ${conArt(vy.nombre, false)}.`;
+  const fuerza = r.r2 >= .5 ? "fuerte" : r.r2 >= .25 ? "moderada" : r.r2 >= .08 ? "débil" : "muy débil";
+  const signif = r.p < .01 ? "muy significativa (p < 0,01)" : r.p < .05 ? "significativa al 5%" : r.p < .1 ? "apenas significativa al 10%" : "no significativa: podría ser casualidad";
+  const nomY = E.ylog ? `log(${vy.nombre})` : vy.nombre, nomX = E.xlog ? `log(${vx.nombre})` : vx.nombre;
+  const resTxt = p => E.ylog ? `${p.res >= 0 ? "+" : "−"}${labNum(Math.abs(10 ** p.res - 1) * 100)}%` : `${p.res >= 0 ? "+" : "−"}${labNum(Math.abs(p.res))}`;
+  const arg = puntos.find(esArg);
+  const lejos = puntos.slice().sort((a, b) => b.res - a.res);
+  const item = p => `<li><button class="plink" type="button" data-pais="${p.k}">${PAISES[p.k].nombre}</button> <small class="ytag">${resTxt(p)}</small></li>`;
+  res.innerHTML = `
+    <div><div class="eyebrow">Resultado</div><h3>Relación ${fuerza} y ${r.b1 >= 0 ? "positiva" : "negativa"}</h3></div>
+    <p class="lab-frase">${frase} La relación es ${signif}.</p>
+    ${E.nota ? `<p class="note">${E.nota}</p>` : ""}
+    <div class="lab-ecu" title="Ecuación estimada">${nomY} = ${labNum(r.b0)} ${r.b1 >= 0 ? "+" : "−"} ${labNum(Math.abs(r.b1))} · ${nomX}</div>
+    <div class="lab-stats">
+      <div><b>${nf(r.r2, 2)}</b><span>R²</span></div>
+      <div><b>${r.p < .001 ? "< 0,001" : nf(r.p, 3)}</b><span>Valor p</span></div>
+      <div><b>${r.n}</b><span>Países</span></div>
+      <div><b>${labNum(r.b1)}</b><span>Pendiente β₁</span></div>
+      <div><b>${labNum(r.se)}</b><span>Error estándar</span></div>
+      <div><b>${nf(r.t, 1)}</b><span>Estadístico t</span></div>
+    </div>
+    ${arg ? `<p class="lab-arg"><b>Argentina:</b> ${labNum(arg.y)} ${vy.unidad}. Según la recta, con su nivel de ${conArt(vx.nombre, false)} le "tocaría" ${labNum(Ti(r.b0 + r.b1 * T(arg.x, E.xlog), E.ylog))}: está ${E.ylog ? `un ${labNum(Math.abs(10 ** arg.res - 1) * 100)}%` : `${labNum(Math.abs(arg.res))} ${vy.unidad}`} ${arg.res >= 0 ? "por encima" : "por debajo"}.</p>`
+      : `<p class="note">Argentina no tiene dato de alguna de las dos variables${E.reg !== "todas" ? " o no está en esta región" : ""}.</p>`}
+    <div class="lab-lejos">
+      <div><h4>Más arriba de la recta</h4><ol>${lejos.slice(0, 5).map(item).join("")}</ol></div>
+      <div><h4>Más abajo de la recta</h4><ol>${lejos.slice(-5).reverse().map(item).join("")}</ol></div>
+    </div>
+    <p class="note">${r.n} países con dato de las dos variables${E.chicos ? ", de más de 1 millón de habitantes" : ""}.${sinLog ? ` ${sinLog} quedaron afuera porque tienen valores negativos o cero, que no entran en escala log.` : ""} Correlación no es causalidad: mirá "¿Cómo se lee esto?" abajo.</p>`;
+  res.querySelectorAll(".plink").forEach(b => b.onclick = () => irAPaisDesdeLista(b.dataset.pais));
 }
 
 /* ---------- JUEGO: PAÍS DEL DÍA ----------
@@ -1712,7 +2053,7 @@ function textoFuentes() {
   const fecha = new Date(DATOS.generado).toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" });
   document.getElementById("fuentes").textContent = `Datos macro: Banco Mundial y FMI (World Economic Outlook), 1960–${ANIO}, actualizados automáticamente el ${fecha}. Inflación: índice de precios al consumidor del Banco Mundial; donde falta, deflactor del PBI o FMI. Deuda pública: FMI; donde falta, Banco Mundial. Promedios mundiales: Banco Mundial. Fichas y datos políticos escritos a mano, actualizados a ${CURADO.actualizado}.`;
 }
-function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); } }
+function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); renderLab(); } }
 
 const leer = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: error ${r.status}`); return r.json(); });
 Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null), leer("riesgo.json").catch(() => null)])
@@ -1733,6 +2074,7 @@ Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json")
     buildMap();
     armarBuscador();
     armarJuego();
+    armarLab();
     armarNav();
     mostrarPagina(location.hash.slice(1) || "inicio");   // si entraron con #elecciones, por ejemplo
   })
@@ -1750,7 +2092,7 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redrawChar
 new MutationObserver(redrawCharts).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 let rT;
 window.addEventListener("resize", () => {
-  tl.resize(); charts.sparks.forEach(c => c.resize());
+  tl.resize(); charts.sparks.forEach(c => c.resize()); if (labChart) labChart.resize();
   clearTimeout(rT);
   rT = setTimeout(() => {
     const r = document.getElementById("map").getBoundingClientRect();
