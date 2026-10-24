@@ -90,6 +90,9 @@ p { margin: 0; }
 .droplist .flag { width: 24px; height: 16px; border-radius: 3px; flex: none; }
 .droplist small { margin-left: auto; color: var(--muted); font-size: 12.5px; text-align: right; }
 .droplist .vacio { padding: 8px 10px; color: var(--muted); font-size: 14px; }
+.droplist .bx-grupo { padding: 8px 10px 2px; font-family: var(--f-data); font-size: 11px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.droplist .bx-ico { width: 24px; text-align: center; font-family: var(--f-emoji); font-size: 16px; flex: none; }
+.topbar .droplist { max-height: min(460px, 70vh); }
 @media (max-width: 480px) { .topbar .logo { font-size: 18px; } }
 
 /* Pestañas (solo en pantallas grandes) */
@@ -476,6 +479,30 @@ footer a { color: var(--muted); text-decoration-color: var(--accent); text-under
 .lab-ayuda summary { padding: 14px 0; cursor: pointer; font-weight: 700; }
 .lab-ayuda p { max-width: 75ch; font-size: 15px; }
 
+/* Juego: más rico o más pobre */
+.mr-marcador { display: flex; gap: 22px; font-size: 15px; color: var(--muted); }
+.mr-marcador b { font-family: var(--f-data); font-size: 22px; color: var(--ink); margin-left: 6px; }
+.mr-tablero { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 14px; align-items: stretch; }
+@media (max-width: 640px) { .mr-tablero { grid-template-columns: minmax(0, 1fr); gap: 8px; } .mr-vs { justify-self: center; width: 38px; height: 38px; } .mr-carta { min-height: 0; padding: 16px; } .mr-carta .flag { width: 66px; height: 44px; } .mr-carta h2 { font-size: 23px; } .mr-carta .mr-v { font-size: 26px; } }
+.mr-carta { background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 22px 20px; display: grid; justify-items: center; align-content: center; gap: 8px; text-align: center; min-height: 260px; }
+.mr-carta .flag { width: 96px; height: 64px; border-radius: 8px; }
+.mr-carta h2 { font-size: 28px; font-weight: 800; }
+.mr-carta .mr-v { font-family: var(--f-data); font-size: 32px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.mr-carta .mr-l { font-size: 13px; color: var(--muted); }
+.mr-carta.ok { border-color: var(--good); box-shadow: 0 0 0 2px var(--good) inset; }
+.mr-carta.mal { border-color: var(--bad); box-shadow: 0 0 0 2px var(--bad) inset; }
+.mr-botones { display: grid; gap: 8px; width: min(100%, 240px); margin-top: 6px; }
+.mr-botones button { padding: 12px 16px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: inherit; font-size: 16px; font-weight: 700; cursor: pointer; }
+.mr-botones button:hover { border-color: var(--accent); }
+.mr-botones button.mas { background: var(--accent); color: var(--surface); border-color: var(--accent); }
+.mr-vs { align-self: center; width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: var(--ink); color: var(--surface); font-family: var(--f-display); font-weight: 800; }
+.mr-final { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: grid; gap: 10px; justify-items: start; }
+.mr-final h2 { font-size: 24px; font-weight: 800; }
+.mr-final .j-acciones { display: flex; flex-wrap: wrap; gap: 8px; }
+.mr-final .go { border: 0; background: var(--accent); color: var(--surface); font-weight: 700; padding: 9px 16px; border-radius: 8px; cursor: pointer; font-size: 15px; }
+@keyframes revelar { from { opacity: 0; transform: scale(.9); } to { opacity: 1; transform: none; } }
+.mr-v.nuevo { animation: revelar .35s ease; }
+
 /* Juego: país del día */
 .juego { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
 @media (max-width: 860px) { .juego { grid-template-columns: minmax(0, 1fr); } }
@@ -558,7 +585,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   </button>
   <a class="logo" href="#inicio">Atlas <span>Macro</span></a>
   <nav class="tabs" aria-label="Secciones">
-    <a href="#inicio" data-pag="inicio">Mapa</a><a href="#argentina" data-pag="argentina">Argentina hoy</a><a href="#comparacion" data-pag="comparacion">Comparar</a><a href="#rankings" data-pag="rankings">Rankings</a><a href="#laboratorio" data-pag="laboratorio">Laboratorio</a><a href="#juego" data-pag="juego">País del día</a><a href="#elecciones" data-pag="elecciones">Elecciones</a><a href="#conflictos" data-pag="conflictos">Conflictos</a>
+    <a href="#inicio" data-pag="inicio">Mapa</a><a href="#argentina" data-pag="argentina">Argentina hoy</a><a href="#comparacion" data-pag="comparacion">Comparar</a><a href="#rankings" data-pag="rankings">Rankings</a><a href="#laboratorio" data-pag="laboratorio">Laboratorio</a><a href="#juego" data-pag="juego">País del día</a><a href="#masrico" data-pag="masrico">Más rico o más pobre</a><a href="#elecciones" data-pag="elecciones">Elecciones</a><a href="#conflictos" data-pag="conflictos">Conflictos</a>
   </nav>
   <div class="search">
     <input type="search" id="buscar" placeholder="Buscar un país…" autocomplete="off" spellcheck="false"
@@ -580,6 +607,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <li><a href="#rankings" data-pag="rankings"><span class="nav-ico" aria-hidden="true">🏆</span><span>Rankings<small>Los primeros y los últimos del mundo</small></span></a></li>
     <li><a href="#laboratorio" data-pag="laboratorio"><span class="nav-ico" aria-hidden="true">🧪</span><span>Laboratorio<small>Relacioná variables y mirá la regresión</small></span></a></li>
     <li><a href="#juego" data-pag="juego"><span class="nav-ico" aria-hidden="true">🎯</span><span>País del día<small>Adiviná el país con pistas económicas</small></span></a></li>
+    <li><a href="#masrico" data-pag="masrico"><span class="nav-ico" aria-hidden="true">💰</span><span>¿Más rico o más pobre?<small>Juego: ¿hasta dónde llega tu racha?</small></span></a></li>
     <li><a href="#elecciones" data-pag="elecciones"><span class="nav-ico" aria-hidden="true">🗳️</span><span>Próximas elecciones<small>Los próximos 12 meses</small></span></a></li>
     <li><a href="#conflictos" data-pag="conflictos"><span class="nav-ico" aria-hidden="true">⚠️</span><span>Conflictos y crisis<small>Guerras, golpes y crisis</small></span></a></li>
   </ul>
@@ -593,7 +621,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <h1>Atlas <span>Macro</span></h1>
     <p class="lede">Tocá un país en el mapa o buscalo arriba, y mirá cómo le va a su economía, explicado en simple. Debajo del mapa está todo lo demás: el dólar y la inflación de hoy, el juego del día, los rankings y más.</p>
     <nav class="accesos" aria-label="Ir a">
-      <a href="#argentina">🇦🇷 Argentina hoy</a><a href="#juego">🎯 País del día</a><a href="#rankings">🏆 Rankings</a><a href="#comparacion">⚖️ Comparar</a><a href="#elecciones">🗳️ Elecciones</a><a href="#conflictos">⚠️ Conflictos</a><a href="#laboratorio">🧪 Laboratorio</a>
+      <a href="#argentina">🇦🇷 Argentina hoy</a><a href="#juego">🎯 País del día</a><a href="#masrico">💰 Más rico o más pobre</a><a href="#rankings">🏆 Rankings</a><a href="#comparacion">⚖️ Comparar</a><a href="#elecciones">🗳️ Elecciones</a><a href="#conflictos">⚠️ Conflictos</a><a href="#laboratorio">🧪 Laboratorio</a>
     </nav>
   </header>
 
@@ -897,6 +925,18 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
         <p class="note" id="docActualizado"></p>
       </section>
     </article>
+  </div>
+
+  <div class="pagina" id="pag-masrico" hidden>
+    <header class="top">
+      <div class="eyebrow">Juego</div>
+      <h1>¿Más rico o más pobre?</h1>
+      <p class="lede">Mirá el PBI por persona del país de la izquierda y adiviná si el de la derecha es más rico o más pobre. Cada acierto suma a tu racha, y a medida que avanzás los países se parecen más.</p>
+    </header>
+    <div class="mr-marcador"><span>Racha <b id="mrRacha">0</b></span><span>Tu mejor racha <b id="mrMejor">0</b></span></div>
+    <div class="mr-tablero" id="mrTablero"></div>
+    <div class="mr-final" id="mrFinal" hidden></div>
+    <p class="note">PBI por persona en dólares: todo lo que produce un país en un año dividido por sus habitantes. Último dato del Banco Mundial y el FMI. Juegan los países independientes de más de 1 millón de habitantes.</p>
   </div>
 
   <div class="pagina" id="pag-elecciones" hidden>
@@ -1340,7 +1380,7 @@ const sinTildes = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowe
 /* ---------- PÁGINAS Y PANEL LATERAL ----------
    Cada sección es una "página": #inicio, #comparacion, #elecciones, #conflictos.
    Se cambia con el link (la dirección cambia, así funciona el botón "atrás" del navegador). */
-const PAGINAS = ["inicio", "argentina", "comparacion", "rankings", "laboratorio", "juego", "elecciones", "conflictos", "acerca"];
+const PAGINAS = ["inicio", "argentina", "comparacion", "rankings", "laboratorio", "juego", "masrico", "elecciones", "conflictos", "acerca"];
 let paginaActual = "inicio";
 const versusAbierto = () => paginaActual === "comparacion";
 function mostrarPagina(nombre) {
@@ -1355,6 +1395,7 @@ function mostrarPagina(nombre) {
   if (nombre === "laboratorio") { abrirLab(); if (labChart) labChart.resize(); }
   if (nombre === "rankings") abrirRankings();
   if (nombre === "argentina") abrirArgentina();
+  if (nombre === "masrico") abrirMasRico();
   if (nombre === "inicio") {
     // si la ventana cambió de tamaño mientras el mapa estaba oculto, lo rearmamos
     const r = document.getElementById("map").getBoundingClientRect();
@@ -1411,34 +1452,42 @@ const APODOS = { USA: "eeuu ee.uu. usa estados unidos de america", GBR: "inglate
   KOR: "corea del sur", PRK: "corea del norte", ARE: "emiratos dubai", CZE: "republica checa", MMR: "birmania", CIV: "cote d'ivoire",
   SWZ: "suazilandia", MKD: "macedonia", TUR: "turkiye", COD: "congo kinshasa", COG: "congo brazzaville", RUS: "rusia" };
 const capitalDe = k => ((CURADO.paises[k] && CURADO.paises[k].capital) || "").replace(/\s*\(.*\)/, "");
-function autocompletar(input, lista, alElegir, { conCapital = true, excluir = () => false } = {}) {
-  const todos = Object.keys(PAISES).map(k => ({ k, n: sinTildes(PAISES[k].nombre), c: conCapital ? sinTildes(capitalDe(k)) : "", a: sinTildes(APODOS[k] || "") }));
+function autocompletar(input, lista, alElegir, { conCapital = true, excluir = () => false, extras = null } = {}) {
+  /* También se puede buscar a un país por quien lo gobierna ("Milei" → Argentina) */
+  const todos = Object.keys(PAISES).map(k => ({ k, n: sinTildes(PAISES[k].nombre), c: conCapital ? sinTildes(capitalDe(k)) : "",
+    a: sinTildes((APODOS[k] || "") + (extras && POLITICA[k] ? " " + POLITICA[k].lider : "")) }));
   let resultados = [], activo = -1;
 
   function buscar(texto) {
     const q = sinTildes(texto.trim());
     if (!q) return [];
-    // Primero los que empiezan con lo escrito, después los que lo contienen, después por capital y apodos
-    const puntaje = p => p.n.startsWith(q) ? 0 : p.n.split(/[\s-]/).some(w => w.startsWith(q)) ? 1 : p.n.includes(q) ? 2 : p.c && p.c.startsWith(q) ? 3 : p.a && p.a.split(" ").some(w => w.startsWith(q)) || (q.length > 3 && p.a.includes(q)) ? 3 : q.length === 3 && p.k === q.toUpperCase() ? 4 : 9;
-    return todos.filter(p => !excluir(p.k)).map(p => [puntaje(p), p]).filter(([s]) => s < 9)
-      .sort((a, b) => a[0] - b[0] || a[1].n.localeCompare(b[1].n)).slice(0, 8).map(([, p]) => p.k);
+    // Primero los que empiezan con lo escrito, después los que lo contienen, después por capital, apodos y gobernante
+    const puntaje = p => p.n.startsWith(q) ? 0 : p.n.split(/[\s-]/).some(w => w.startsWith(q)) ? 1 : p.n.includes(q) ? 2 : p.c && p.c.startsWith(q) ? 3 : p.a && p.a.split(/\s+/).some(w => w.startsWith(q)) || (q.length > 3 && p.a.includes(q)) ? 3 : q.length === 3 && p.k === q.toUpperCase() ? 4 : 9;
+    const masTareas = extras ? extras(q) : [];
+    const paises = todos.filter(p => !excluir(p.k)).map(p => [puntaje(p), p]).filter(([s]) => s < 9)
+      .sort((a, b) => a[0] - b[0] || a[1].n.localeCompare(b[1].n)).slice(0, masTareas.length ? 5 : 8).map(([, p]) => p.k);
+    return [...paises, ...masTareas];
   }
+  const fila = (r, i) => typeof r === "string"
+    ? `<li role="option" id="${lista.id}-${r}" data-i="${i}" aria-selected="${i === activo}">${flag(r) || ""}<span>${PAISES[r].nombre}</span>${conCapital && capitalDe(r) ? `<small>${capitalDe(r)}</small>` : ""}</li>`
+    : `<li role="option" id="${lista.id}-x${i}" data-i="${i}" aria-selected="${i === activo}" class="bx"><span class="bx-ico" aria-hidden="true">${r.ico}</span><span>${r.t}</span><small>${r.sub}</small></li>`;
   function mostrar() {
     resultados = buscar(input.value); activo = resultados.length ? 0 : -1;
     if (!input.value.trim()) { cerrar(); return; }
+    const nP = resultados.filter(r => typeof r === "string").length;
     lista.innerHTML = resultados.length
-      ? resultados.map((k, i) => `<li role="option" id="${lista.id}-${k}" data-k="${k}" aria-selected="${i === activo}">${flag(k) || ""}<span>${PAISES[k].nombre}</span>${conCapital && capitalDe(k) ? `<small>${capitalDe(k)}</small>` : ""}</li>`).join("")
-      : `<li class="vacio">No encontré ningún país con ese nombre.</li>`;
+      ? resultados.map((r, i) => (extras && i === 0 && nP ? `<li class="bx-grupo" aria-hidden="true">Países</li>` : "") + (extras && i === nP ? `<li class="bx-grupo" aria-hidden="true">En Atlas Macro</li>` : "") + fila(r, i)).join("")
+      : `<li class="vacio">No encontré nada con eso. Probá con un país, "dólar" o "inflación".</li>`;
     lista.hidden = false; input.setAttribute("aria-expanded", true);
     marcar();
   }
   function marcar() {
-    lista.querySelectorAll("li[role=option]").forEach((li, i) => li.setAttribute("aria-selected", i === activo));
+    lista.querySelectorAll("li[role=option]").forEach(li => li.setAttribute("aria-selected", +li.dataset.i === activo));
     const li = lista.querySelector('li[aria-selected="true"]');
     if (li) { li.scrollIntoView({ block: "nearest" }); input.setAttribute("aria-activedescendant", li.id); }
   }
   function cerrar() { lista.hidden = true; input.setAttribute("aria-expanded", false); input.removeAttribute("aria-activedescendant"); }
-  function ir(k) { input.value = ""; cerrar(); alElegir(k); }
+  function ir(r) { input.value = ""; cerrar(); if (typeof r === "string") alElegir(r); else { input.blur(); r.go(); } }
   input.addEventListener("input", mostrar);
   input.addEventListener("focus", () => { if (input.value.trim()) mostrar(); });
   input.addEventListener("keydown", e => {
@@ -1448,17 +1497,60 @@ function autocompletar(input, lista, alElegir, { conCapital = true, excluir = ()
     else if (e.key === "Escape") { input.value = ""; cerrar(); }
   });
   lista.addEventListener("mousedown", e => e.preventDefault());     // que no se pierda el foco antes del click
-  lista.addEventListener("click", e => { const li = e.target.closest("li[data-k]"); if (li) ir(li.dataset.k); });
+  lista.addEventListener("click", e => { const li = e.target.closest("li[data-i]"); if (li) ir(resultados[+li.dataset.i]); });
   document.addEventListener("click", e => { if (!input.parentNode.contains(e.target)) cerrar(); });
+}
+
+/* ---------- BUSCADOR DE TODO: secciones, herramientas e indicadores ---------- */
+const irA_ = (pag, ancla) => () => {
+  if (paginaActual !== pag) { history.pushState(null, "", "#" + pag); mostrarPagina(pag); }
+  if (ancla) setTimeout(() => { const el = document.getElementById(ancla); if (el) el.scrollIntoView({ behavior: "auto" }); }, 120);
+};
+function indiceBusqueda() {
+  const E = [];
+  const add = (ico, t, sub, claves, go) => E.push({ ico, t, sub, txt: sinTildes(t + " " + claves), go });
+  add("💵", "Dólar hoy", "Argentina hoy", "dolar blue oficial mep bolsa contado con liqui ccl mayorista cripto tarjeta cotizacion brecha", irA_("argentina", "ag-dolar"));
+  add("🔁", "Conversor de pesos a dólares", "Argentina hoy", "conversor convertir pesos dolares cambio", irA_("argentina", "ag-conv"));
+  add("📈", "Inflación de Argentina", "Argentina hoy · INDEC", "inflacion indec ipc precios mensual interanual", irA_("argentina", "ag-infl"));
+  add("🧮", "Calculadora de inflación", "Argentina hoy", "calculadora inflacion actualizar monto sueldo alquiler cuanto vale", irA_("argentina", "ag-calc"));
+  add("🐷", "¿Dónde convenía tener la plata?", "Argentina hoy", "ahorro ahorrar inversion plazo fijo uva dolar colchon convenia", irA_("argentina", "ag-ahorro"));
+  add("🏦", "Plazo fijo: tasas por banco", "Argentina hoy", "plazo fijo tasa tna bancos interes", irA_("argentina", "ag-pf"));
+  add("📉", "Riesgo país", "Ficha de Argentina", "riesgo pais embi bonos", () => { irA_("inicio")(); elegir("ARG"); SECC_ABIERTAS.add("rp"); renderPanel(); });
+  add("⚖️", "Comparar dos países", "Comparación", "comparar comparacion versus vs", irA_("comparacion"));
+  add("🏆", "Rankings de países", "Rankings", "ranking rankings top mas menos", irA_("rankings"));
+  add("🧪", "Laboratorio de regresiones", "Laboratorio", "laboratorio regresion econometria correlacion grafico", irA_("laboratorio"));
+  add("🎯", "País del día", "Juego", "juego jugar adivinar pais del dia", irA_("juego"));
+  add("💰", "¿Más rico o más pobre?", "Juego", "juego jugar mas rico pobre pbi racha", irA_("masrico"));
+  add("🗳️", "Próximas elecciones", "Agenda", "elecciones votacion calendario", irA_("elecciones"));
+  add("⚠️", "Conflictos y crisis", "Mundo", "conflictos guerra crisis militar golpe", irA_("conflictos"));
+  add("🏛️", "Quién gobierna cada país", "Mapa", "gobierno presidente izquierda derecha ideologia quien gobierna", () => { irA_("inicio")(); setModo("gob"); setVista("mundo"); });
+  add("ℹ️", "Acerca de y metodología", "Fuentes y privacidad", "acerca metodologia fuentes privacidad contacto datos", irA_("acerca"));
+  /* Cada indicador: su ranking y su mapa */
+  Object.entries(labVars()).forEach(([k, v]) => {
+    add("🏆", `Ranking: ${v.nombre}`, "Rankings", v.nombre, () => { Object.assign(rkEstado, { v: k, m: "ultimo" }); irA_("rankings")(); rkSync(); renderRankings(); });
+    add("🗺️", `Mapa: ${v.nombre}`, "Mapa por indicador", v.nombre + " mapa", () => { Object.assign(mapaEstado, { v: k, m: "ultimo" }); irA_("inicio")(); setModo("ind"); setVista("mundo"); });
+  });
+  return E;
+}
+function buscarExtras(q) {
+  const E = indiceBusqueda();
+  const pal = q.split(/\s+/).filter(Boolean);
+  return E.map(e => {
+    const ws = e.txt.split(/[\s:(),¿?]+/);
+    // todas las palabras escritas tienen que aparecer al principio de alguna palabra
+    if (!pal.every(p => ws.some(w => w.startsWith(p)))) return null;
+    return [sinTildes(e.t).startsWith(q) ? 0 : 1, e];
+  }).filter(Boolean).sort((a, b) => a[0] - b[0]).slice(0, 6).map(x => x[1]);
 }
 function armarBuscador() {
   const input = document.getElementById("buscar");
+  input.placeholder = "Buscar un país, \"dólar\", \"inflación\"…";
   autocompletar(input, document.getElementById("buscarLista"), k => {
     input.blur();
     if (paginaActual !== "inicio") { history.pushState(null, "", "#inicio"); mostrarPagina("inicio"); }
     elegir(k); irAPais(k);
     document.getElementById("mapcard").scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "nearest" });
-  });
+  }, { extras: buscarExtras });
 }
 
 /* ---------- LABORATORIO: REGRESIONES ENTRE PAÍSES ----------
@@ -1781,6 +1873,7 @@ function renderTarjetas() {
   const yaJugo = jugado && jugado.num === hoyN && jugado.fin;
   tarjeta("juego", "🎯", `País del día #${hoyN}`, yaJugo ? `Ya jugaste hoy: ${jugado.intentos.includes(JUEGO_ORDEN[(hoyN - 1) % JUEGO_ORDEN.length]) ? jugado.intentos.length : "X"}/6` : "¿Qué país es? Adivinalo con pistas económicas",
     yaJugo ? "Mañana hay otro país" : "Un país nuevo cada día, el mismo para todos", yaJugo ? "Ver tu resultado" : "Jugar");
+  tarjeta("masrico", "💰", "¿Más rico o más pobre?", "¿Chile o Uruguay? ¿Polonia o Portugal?", `Adiviná cuál tiene más PBI por persona${leerLocal("atlas-masrico-mejor", 0) ? ` · tu mejor racha: ${leerLocal("atlas-masrico-mejor", 0)}` : ""}`, "Jugar");
   const prox = proximasElecciones()[0];
   if (prox) {
     const dias = Math.round((new Date(prox.fecha) - new Date(hoyISO())) / 864e5);
@@ -2122,6 +2215,83 @@ function mapaSync() {
   const v = labVars()[mapaEstado.v], modoSel = document.getElementById("mapaModo");
   document.getElementById("mapaVar").value = mapaEstado.v;
   modoSel.value = mapaEstado.m; modoSel.disabled = !!(v && v.sinModo);
+}
+
+/* ---------- JUEGO: ¿MÁS RICO O MÁS POBRE? ---------- */
+const mr = { pool: [], a: null, b: null, racha: 0, usados: new Set(), bloqueado: false };
+function mrArmarPool() {
+  mr.pool = Object.keys(PAISES).filter(k => PAISES[k].curada && PAISES[k].poblacion >= 1 && PAISES[k].pibpc != null && PAISES[k].iso2);
+}
+/* Cuanto más larga la racha, más parecidos los países: cuántas veces más rico es uno que el otro, [mínimo, máximo] */
+const mrDificultad = r => r < 4 ? [2, Infinity] : r < 9 ? [1.4, 5] : r < 16 ? [1.15, 2.2] : [1.04, 1.5];
+function mrSiguiente(desde) {
+  const va = PAISES[desde].pibpc, [lo, hi] = mrDificultad(mr.racha);
+  const veces = k => Math.max(va, PAISES[k].pibpc) / Math.min(va, PAISES[k].pibpc);
+  let cand = mr.pool.filter(k => k !== desde && !mr.usados.has(k) && veces(k) >= lo && veces(k) <= hi);
+  if (!cand.length) cand = mr.pool.filter(k => k !== desde && !mr.usados.has(k) && veces(k) >= 1.04);   // si no hay, cualquiera no repetido
+  if (!cand.length) cand = mr.pool.filter(k => k !== desde && PAISES[k].pibpc !== va);
+  return cand[Math.floor(Math.random() * cand.length)];
+}
+function mrNueva() {
+  mr.racha = 0; mr.usados = new Set(); mr.bloqueado = false;
+  mr.a = mr.pool[Math.floor(Math.random() * mr.pool.length)]; mr.usados.add(mr.a);
+  mr.b = mrSiguiente(mr.a); mr.usados.add(mr.b);
+  document.getElementById("mrFinal").hidden = true;
+  mrRender();
+}
+const mrValor = k => `US$ ${nf(PAISES[k].pibpc)}`;
+const mrAnio = k => PAISES[k].u.pibpc ? PAISES[k].u.pibpc.y : ANIO;
+function mrCarta(k, visible, estado) {
+  return `<div class="mr-carta ${estado || ""}">${flag(k)}<h2>${PAISES[k].nombre}</h2>
+    ${visible ? `<span class="mr-v ${estado ? "nuevo" : ""}">${mrValor(k)}</span><span class="mr-l">PBI por persona, ${mrAnio(k)}</span>`
+      : `<span class="mr-l">¿Tiene un PBI por persona más alto o más bajo que ${PAISES[mr.a].nombre}?</span>
+         <div class="mr-botones"><button class="mas" type="button" data-r="mas">▲ Más rico</button><button type="button" data-r="menos">▼ Más pobre</button></div>`}</div>`;
+}
+function mrRender(estado) {
+  document.getElementById("mrTablero").innerHTML = mrCarta(mr.a, true) + `<span class="mr-vs" aria-hidden="true">vs</span>` + mrCarta(mr.b, !!estado, estado);
+  document.getElementById("mrRacha").textContent = mr.racha;
+  document.getElementById("mrMejor").textContent = leerLocal("atlas-masrico-mejor", 0);
+  document.querySelectorAll("#mrTablero .mr-botones button").forEach(b => b.onclick = () => mrResponder(b.dataset.r));
+}
+function mrResponder(r) {
+  if (mr.bloqueado) return;
+  mr.bloqueado = true;
+  const va = PAISES[mr.a].pibpc, vb = PAISES[mr.b].pibpc;
+  const ok = r === "mas" ? vb >= va : vb <= va;
+  if (ok) {
+    mr.racha++;
+    if (mr.racha > leerLocal("atlas-masrico-mejor", 0)) guardarLocal("atlas-masrico-mejor", mr.racha);
+    mrRender("ok");
+    setTimeout(() => {
+      mr.a = mr.b; mr.b = mrSiguiente(mr.a); mr.usados.add(mr.b);
+      if (mr.usados.size > mr.pool.length - 3) mr.usados = new Set([mr.a, mr.b]);   // si se acaban los países, se vuelve a empezar la lista
+      mr.bloqueado = false; mrRender();
+    }, reduced() ? 400 : 1300);
+  } else {
+    mrRender("mal");
+    const mejor = leerLocal("atlas-masrico-mejor", 0), fin = document.getElementById("mrFinal");
+    const veces = Math.max(va, vb) / Math.min(va, vb);
+    fin.innerHTML = `<div class="eyebrow">Fin del juego</div>
+      <h2>${mr.racha === 0 ? "¡Uy! A la primera" : `Racha de ${mr.racha} ${mr.racha === 1 ? "acierto" : "aciertos"}`}${mr.racha && mr.racha >= mejor ? " · ¡tu récord!" : ""}</h2>
+      <p>${PAISES[mr.b].nombre} tiene ${mrValor(mr.b)} por persona: ${vb > va ? `${nf(veces, veces < 10 ? 1 : 0)} veces más que` : `${nf(veces, veces < 10 ? 1 : 0)} veces menos que`} ${PAISES[mr.a].nombre} (${mrValor(mr.a)}).</p>
+      <div class="j-acciones"><button class="go" type="button" id="mrOtra">Jugar de nuevo</button><button class="btn" type="button" id="mrCompartir">Compartir</button>
+        <button class="btn" type="button" id="mrFicha">Ver la ficha de ${PAISES[mr.b].nombre}</button></div>`;
+    fin.hidden = false;
+    document.getElementById("mrOtra").onclick = mrNueva;
+    document.getElementById("mrFicha").onclick = () => irAPaisDesdeLista(mr.b);
+    document.getElementById("mrCompartir").onclick = async e => {
+      const t = `Atlas Macro · ¿Más rico o más pobre?\n🔥 Racha de ${mr.racha}\n${location.origin}${location.pathname}#masrico`;
+      try {
+        if (navigator.share && matchMedia("(pointer: coarse)").matches) await navigator.share({ text: t });
+        else { await navigator.clipboard.writeText(t); e.target.textContent = "¡Copiado!"; }
+      } catch (err) { /* cancelado */ }
+    };
+    fin.scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "nearest" });
+  }
+}
+function abrirMasRico() {
+  if (!mr.pool.length) mrArmarPool();
+  if (!mr.a) mrNueva(); else mrRender();
 }
 
 /* ---------- JUEGO: PAÍS DEL DÍA ----------
