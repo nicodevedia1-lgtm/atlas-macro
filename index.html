@@ -92,6 +92,41 @@ p { margin: 0; }
 .droplist .vacio { padding: 8px 10px; color: var(--muted); font-size: 14px; }
 @media (max-width: 480px) { .topbar .logo { font-size: 18px; } }
 
+/* Pestañas (solo en pantallas grandes) */
+.tabs { display: none; gap: 2px; margin-left: 10px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.tabs a { padding: 7px 10px; border-radius: 8px; color: var(--muted); text-decoration: none; font-size: 14.5px; font-weight: 600; white-space: nowrap; }
+.tabs a:hover { color: var(--ink); background: var(--bg); }
+.tabs a[aria-current="page"] { color: var(--ink); background: var(--bg); box-shadow: inset 0 -2px 0 var(--accent); }
+@media (min-width: 1180px) { .tabs { display: flex; } .topbar .search { max-width: 260px; } }
+
+/* Franja de datos */
+.ticker { display: flex; gap: 22px; overflow-x: auto; scrollbar-width: none; white-space: nowrap; text-decoration: none; color: var(--ink);
+  padding: 7px max(16px, env(safe-area-inset-right, 0px)) 7px max(16px, env(safe-area-inset-left, 0px));
+  background: var(--surface); border-bottom: 1px solid var(--line); font-size: 13.5px; }
+.ticker::-webkit-scrollbar, .tabs::-webkit-scrollbar { display: none; }
+.ticker span { display: inline-flex; gap: 6px; align-items: baseline; }
+.ticker span em { font-style: normal; color: var(--muted); }
+.ticker b { font-family: var(--f-data); font-weight: 600; font-variant-numeric: tabular-nums; }
+.ticker:hover em { color: var(--ink); }
+.ticker .t-mas { color: var(--accent); font-weight: 600; margin-left: auto; padding-left: 10px; }
+
+/* Tarjetas de la portada */
+.portada { display: grid; gap: 12px; }
+.portada-t { font-size: 22px; font-weight: 800; }
+.tarjetas { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 12px; }
+.accesos { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 2px 0 4px; margin-top: 4px; }
+.accesos::-webkit-scrollbar { display: none; }
+.accesos a { flex: none; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 600; }
+.accesos a:hover { border-color: var(--accent); }
+@media (min-width: 1180px) { .accesos { display: none; } }
+.tarjeta { display: grid; grid-template-rows: auto 1fr auto; gap: 6px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; color: var(--ink); text-decoration: none; transition: border-color .15s, transform .15s; }
+.tarjeta:hover { border-color: var(--accent); transform: translateY(-2px); }
+.tarjeta .t-sec { display: flex; align-items: center; gap: 8px; font-family: var(--f-data); font-size: 12px; font-weight: 600; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.tarjeta .t-sec i { font-style: normal; font-family: var(--f-emoji); font-size: 18px; letter-spacing: 0; }
+.tarjeta .t-tit { font-family: var(--f-display); font-size: 19px; font-weight: 750; line-height: 1.2; text-wrap: balance; }
+.tarjeta .t-sub { font-size: 14px; color: var(--muted); }
+.tarjeta .t-ir { font-size: 13.5px; font-weight: 700; color: var(--accent); }
+
 /* Panel lateral */
 .nav-fondo { position: fixed; inset: 0; z-index: 40; background: rgba(10, 16, 28, .38); }
 .nav { position: fixed; top: 0; bottom: 0; left: 0; z-index: 50; width: min(320px, 86vw); display: flex; flex-direction: column; gap: 6px;
@@ -328,6 +363,57 @@ details.sec[open] .sec-flecha { transform: rotate(225deg); }
 .nav-sec { border-top: 1px solid var(--line); padding-top: 6px !important; margin-top: 4px !important; }
 footer a { color: var(--muted); text-decoration-color: var(--accent); text-underline-offset: 3px; }
 
+/* Argentina hoy */
+.ag-bloque { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px 22px; display: grid; gap: 14px; min-width: 0; scroll-margin-top: 80px; }
+.ag-bloque > * { min-width: 0; }
+#pfRes { display: grid; gap: 10px; min-width: 0; }
+.ag-tit { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 14px; }
+.ag-tit h2 { font-size: 24px; font-weight: 800; }
+.ag-sub { color: var(--muted); max-width: 70ch; }
+.ag-casas { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 170px), 1fr)); gap: 10px; }
+.ag-casa { background: var(--bg); border-radius: 12px; padding: 12px 14px; display: grid; gap: 2px; }
+.ag-casa .c-n { font-weight: 700; font-size: 14.5px; }
+.ag-casa .c-v { font-family: var(--f-data); font-size: 24px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.ag-casa .c-c, .ag-casa .c-b { font-size: 12.5px; color: var(--muted); }
+.ag-casa .c-d { font-family: var(--f-data); font-size: 12.5px; }
+.sube { color: var(--bad); } .baja { color: var(--good); } .igual { color: var(--muted); }
+.ag-mas summary { cursor: pointer; font-weight: 600; font-size: 14.5px; padding: 4px 0; }
+.ag-chart { height: 340px; margin-top: 8px; }
+.ag-form { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: end; }
+.ag-form label { display: grid; gap: 4px; font-size: 13px; font-weight: 600; color: var(--muted); }
+.ag-form input, .ag-form select { padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; font-size: 16px; font-weight: 600; }
+.ag-form input { width: 190px; max-width: 100%; font-family: var(--f-data); }
+.ag-mes { display: flex; gap: 6px; }
+.ag-conv { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr)); gap: 8px; }
+.ag-conv div { display: flex; justify-content: space-between; gap: 10px; padding: 9px 12px; background: var(--bg); border-radius: 10px; font-size: 14.5px; }
+.ag-conv b { font-family: var(--f-data); font-weight: 500; font-variant-numeric: tabular-nums; }
+.ag-nums { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 10px; }
+.ag-nums div { background: var(--bg); border-radius: 12px; padding: 12px 14px; display: grid; gap: 2px; }
+.ag-nums span { font-size: 13px; color: var(--muted); }
+.ag-nums b { font-family: var(--f-data); font-size: 28px; font-weight: 500; }
+.ag-res { font-size: 17px; background: var(--bg); border-radius: 12px; padding: 14px 16px; display: grid; gap: 6px; }
+.ag-res b { font-family: var(--f-data); font-weight: 600; }
+.ag-res small { color: var(--muted); font-size: 14px; }
+.ag-ahorro { display: grid; gap: 8px; }
+.ah-fila { display: grid; grid-template-columns: minmax(130px, 210px) minmax(0, 1fr) auto; gap: 4px 12px; align-items: center; }
+@media (max-width: 600px) { .ah-fila { grid-template-columns: minmax(0, 1fr) auto; } .ah-fila .ah-bar { grid-column: 1 / -1; grid-row: 2; } }
+.ah-fila .ah-n { font-weight: 600; font-size: 14.5px; }
+.ah-fila .ah-n small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; }
+.ah-bar { height: 22px; background: var(--bg); border-radius: 6px; position: relative; overflow: hidden; }
+.ah-bar i { position: absolute; inset: 0 auto 0 0; background: var(--accent); border-radius: 6px; opacity: .8; }
+.ah-bar i.pierde { background: var(--muted); opacity: .45; }
+.ah-bar u { position: absolute; top: -2px; bottom: -2px; width: 2px; background: var(--ink); text-decoration: none; }
+.ah-fila .ah-v { font-family: var(--f-data); text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ah-fila .ah-v small { display: block; font-size: 12px; }
+.ah-fila.ref .ah-n { color: var(--ink); }
+.pf-tabla { overflow-x: auto; }
+.pf-tabla table { border-collapse: collapse; width: 100%; min-width: 520px; font-size: 14.5px; }
+.pf-tabla th, .pf-tabla td { text-align: left; padding: 8px 10px 8px 0; border-bottom: 1px solid var(--line); }
+.pf-tabla th { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; }
+.pf-tabla td.n { font-family: var(--f-data); text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.pf-tabla th.n { text-align: right; }
+.pf-tabla a { color: var(--ink); text-decoration-color: var(--accent); text-underline-offset: 3px; }
+
 /* Rankings */
 .rk-arg { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 14px 18px; font-size: 16px; }
 .rk-arg b.n { font-family: var(--f-data); font-size: 20px; }
@@ -471,6 +557,9 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <span></span><span></span><span></span>
   </button>
   <a class="logo" href="#inicio">Atlas <span>Macro</span></a>
+  <nav class="tabs" aria-label="Secciones">
+    <a href="#inicio" data-pag="inicio">Mapa</a><a href="#argentina" data-pag="argentina">Argentina hoy</a><a href="#comparacion" data-pag="comparacion">Comparar</a><a href="#rankings" data-pag="rankings">Rankings</a><a href="#laboratorio" data-pag="laboratorio">Laboratorio</a><a href="#juego" data-pag="juego">País del día</a><a href="#elecciones" data-pag="elecciones">Elecciones</a><a href="#conflictos" data-pag="conflictos">Conflictos</a>
+  </nav>
   <div class="search">
     <input type="search" id="buscar" placeholder="Buscar un país…" autocomplete="off" spellcheck="false"
            role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="buscarLista" aria-label="Buscar un país">
@@ -478,12 +567,15 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   </div>
 </header>
 
+<a class="ticker" id="ticker" href="#argentina" hidden aria-label="Datos de Argentina hoy"></a>
+
 <div class="nav-fondo" id="navFondo" hidden></div>
 <nav class="nav" id="nav" aria-label="Secciones" aria-hidden="true">
   <div class="nav-head"><span class="logo">Atlas <span>Macro</span></span>
     <button class="nav-cerrar" id="navCerrar" type="button" aria-label="Cerrar el menú">✕</button></div>
   <ul>
     <li><a href="#inicio" data-pag="inicio"><span class="nav-ico" aria-hidden="true">🗺️</span><span>Mapa y fichas<small>Tocá un país y mirá su economía</small></span></a></li>
+    <li><a href="#argentina" data-pag="argentina"><span class="nav-ico" aria-hidden="true">🇦🇷</span><span>Argentina hoy<small>Dólar, inflación y calculadoras</small></span></a></li>
     <li><a href="#comparacion" data-pag="comparacion"><span class="nav-ico" aria-hidden="true">⚖️</span><span>Comparación<small>Dos países frente a frente</small></span></a></li>
     <li><a href="#rankings" data-pag="rankings"><span class="nav-ico" aria-hidden="true">🏆</span><span>Rankings<small>Los primeros y los últimos del mundo</small></span></a></li>
     <li><a href="#laboratorio" data-pag="laboratorio"><span class="nav-ico" aria-hidden="true">🧪</span><span>Laboratorio<small>Relacioná variables y mirá la regresión</small></span></a></li>
@@ -499,7 +591,10 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   <div class="pagina" id="pag-inicio">
   <header class="top">
     <h1>Atlas <span>Macro</span></h1>
-    <p class="lede">Tocá un país en el mapa o buscalo arriba, y mirá cómo le va a su economía, explicado en simple. En el menú <span aria-hidden="true">☰</span> tenés la comparación entre países, las próximas elecciones y los conflictos del mundo.</p>
+    <p class="lede">Tocá un país en el mapa o buscalo arriba, y mirá cómo le va a su economía, explicado en simple. Debajo del mapa está todo lo demás: el dólar y la inflación de hoy, el juego del día, los rankings y más.</p>
+    <nav class="accesos" aria-label="Ir a">
+      <a href="#argentina">🇦🇷 Argentina hoy</a><a href="#juego">🎯 País del día</a><a href="#rankings">🏆 Rankings</a><a href="#comparacion">⚖️ Comparar</a><a href="#elecciones">🗳️ Elecciones</a><a href="#conflictos">⚠️ Conflictos</a><a href="#laboratorio">🧪 Laboratorio</a>
+    </nav>
   </header>
 
   <section class="atlas">
@@ -545,6 +640,81 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <aside class="panel" id="panel" aria-live="polite"></aside>
   </section>
 
+  <section class="portada" aria-label="Más en Atlas Macro">
+    <h2 class="portada-t">Más en Atlas Macro</h2>
+    <div class="tarjetas" id="tarjetas"></div>
+  </section>
+
+  </div>
+
+  <div class="pagina" id="pag-argentina" hidden>
+    <header class="top">
+      <div class="eyebrow" id="agFecha">Argentina hoy</div>
+      <h1>Argentina hoy</h1>
+      <p class="lede">El dólar, la inflación y las cuentas que todos hacemos: cuánto valen hoy los pesos de antes y dónde convenía tener los ahorros.</p>
+    </header>
+    <nav class="doc-indice" aria-label="En esta página">
+      <a href="#argentina" data-ir="ag-dolar">Dólar hoy</a><a href="#argentina" data-ir="ag-conv">Conversor</a><a href="#argentina" data-ir="ag-infl">Inflación</a><a href="#argentina" data-ir="ag-calc">Calculadora de inflación</a><a href="#argentina" data-ir="ag-ahorro">¿Dónde convenía?</a><a href="#argentina" data-ir="ag-pf">Plazo fijo</a>
+    </nav>
+
+    <section class="ag-bloque" id="ag-dolar">
+      <div class="ag-tit"><h2>Dólar hoy</h2><span class="note" id="agDolarFuente"></span></div>
+      <div class="ag-casas" id="agCasas"></div>
+      <details class="ag-mas"><summary>Ver cómo evolucionaron desde 2011</summary><div id="agDolarChart" class="ag-chart"></div>
+        <p class="note">Precio de venta, promedio de cada mes, en escala logarítmica. Las franjas de fondo muestran quién gobernaba.</p></details>
+    </section>
+
+    <section class="ag-bloque" id="ag-conv">
+      <div class="ag-tit"><h2>Conversor</h2></div>
+      <div class="ag-form">
+        <label>Monto<input type="text" inputmode="decimal" id="convMonto" value="100.000" autocomplete="off"></label>
+        <label>Qué tenés<select id="convDir"><option value="ars">Pesos, quiero dólares</option><option value="usd">Dólares, quiero pesos</option></select></label>
+      </div>
+      <div class="ag-conv" id="convRes"></div>
+      <p class="note">Para comprar dólares se usa el precio de venta; para venderlos, el de compra. No incluye comisiones ni impuestos.</p>
+    </section>
+
+    <section class="ag-bloque" id="ag-infl">
+      <div class="ag-tit"><h2>Inflación</h2><span class="note">Fuente: INDEC</span></div>
+      <div class="ag-nums" id="agInflNums"></div>
+      <details class="ag-mas" open><summary>Inflación de cada mes</summary><div id="agInflChart" class="ag-chart"></div>
+        <p class="note">Suba de precios de cada mes (índice de precios al consumidor). Las franjas de fondo muestran quién gobernaba. Entre 2007 y 2015 el INDEC estuvo intervenido y sus datos subestimaban la inflación.</p></details>
+    </section>
+
+    <section class="ag-bloque" id="ag-calc">
+      <div class="ag-tit"><h2>Calculadora de inflación</h2></div>
+      <p class="ag-sub">¿Cuánto valen hoy los pesos de antes? ¿Le ganó tu sueldo o tu alquiler a la inflación?</p>
+      <div class="ag-form">
+        <label>Monto<input type="text" inputmode="decimal" id="calcMonto" value="10.000" autocomplete="off"></label>
+        <label>Desde<span class="ag-mes"><select id="calcDesdeM" aria-label="Mes de inicio"></select><select id="calcDesdeA" aria-label="Año de inicio"></select></span></label>
+        <label>Hasta<span class="ag-mes"><select id="calcHastaM" aria-label="Mes final"></select><select id="calcHastaA" aria-label="Año final"></select></span></label>
+      </div>
+      <div class="ag-res" id="calcRes"></div>
+      <details class="ag-mas"><summary>Comparar con un aumento</summary>
+        <div class="ag-form"><label>¿A cuánto llegó? (sueldo, alquiler, precio)<input type="text" inputmode="decimal" id="calcAhora" placeholder="Ej.: 45.000" autocomplete="off"></label></div>
+        <div class="ag-res" id="calcComp"></div>
+      </details>
+      <p class="note">Desde enero de 1992, cuando empezó el peso actual. Usa la inflación mensual del INDEC; un monto "de enero" está a precios de enero.</p>
+    </section>
+
+    <section class="ag-bloque" id="ag-ahorro">
+      <div class="ag-tit"><h2>¿Dónde convenía tener la plata?</h2></div>
+      <p class="ag-sub">Elegí cuánto tenías y desde cuándo, y mirá cuánto tendrías hoy según dónde lo hubieras puesto.</p>
+      <div class="ag-form">
+        <label>Pesos que tenías<input type="text" inputmode="decimal" id="ahMonto" value="1.000.000" autocomplete="off"></label>
+        <label>Desde<span class="ag-mes"><select id="ahDesdeM" aria-label="Mes"></select><select id="ahDesdeA" aria-label="Año"></select></span></label>
+      </div>
+      <div class="ag-ahorro" id="ahRes"></div>
+      <p class="note" id="ahNota"></p>
+    </section>
+
+    <section class="ag-bloque" id="ag-pf">
+      <div class="ag-tit"><h2>Plazo fijo: cuánto paga cada banco</h2><span class="note">Fuente: BCRA, vía ArgentinaDatos</span></div>
+      <div class="ag-form"><label>Si ponés<input type="text" inputmode="decimal" id="pfMonto" value="1.000.000" autocomplete="off"></label></div>
+      <div id="pfRes"></div>
+      <p class="note" id="pfNota"></p>
+    </section>
+    <p class="note">Datos de ArgentinaDatos (argentinadatos.com), un proyecto abierto que junta datos públicos del BCRA y el INDEC; el dólar de hoy se actualiza en vivo desde DolarAPI (dolarapi.com) cuando está disponible. Nada de esto es una recomendación de inversión.</p>
   </div>
 
   <div class="pagina" id="pag-rankings" hidden>
@@ -674,7 +844,8 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
             <tr><td>Deuda pública</td><td>FMI; donde no hay dato, Banco Mundial</td><td>Todos los lunes</td></tr>
             <tr><td>Esperanza de vida, mortalidad infantil, fertilidad, urbanización, internet, desigualdad, pobreza, inversión, ahorro, comercio, remesas, gasto público, impuestos, CO₂</td><td>Banco Mundial (World Development Indicators)</td><td>Todos los lunes</td></tr>
             <tr><td>Control de la corrupción y estado de derecho</td><td>Banco Mundial (Worldwide Governance Indicators)</td><td>Todos los lunes</td></tr>
-            <tr><td>Riesgo país y dólar blue y oficial de Argentina</td><td>ArgentinaDatos (argentinadatos.com), un proyecto abierto y no oficial que recopila datos públicos</td><td>Todos los días hábiles</td></tr>
+            <tr><td>Riesgo país, cotizaciones del dólar, inflación del INDEC, UVA y tasas de plazo fijo de Argentina</td><td>ArgentinaDatos (argentinadatos.com), un proyecto abierto y no oficial que recopila datos públicos del BCRA y el INDEC</td><td>Todos los días hábiles</td></tr>
+            <tr><td>Dólar en vivo</td><td>DolarAPI (dolarapi.com); si no responde, se muestra el último cierre</td><td>Cada vez que se abre la página</td></tr>
             <tr><td>Riesgo país de otros países de Latinoamérica</td><td>Banco Central de Reserva del Perú, índice EMBIG con datos de Reuters</td><td>Todos los martes (el dato es mensual)</td></tr>
             <tr><td>Próximas elecciones y control de cambios de gobierno</td><td>Wikidata, base de datos abierta y colaborativa</td><td>Todos los días</td></tr>
             <tr><td>Resúmenes, actividades, exportaciones, importaciones, socios comerciales, gobiernos y su orientación, conflictos</td><td>Escrito a mano a partir de fuentes públicas</td><td>Cuando hay cambios (se avisa la fecha al pie)</td></tr>
@@ -701,6 +872,8 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
         <p>Es una regresión lineal simple por mínimos cuadrados ordinarios entre países (corte transversal), sin variables de control. Con escala logarítmica se usa el logaritmo en base 10 de la variable. El valor p sale de la distribución t de Student con n − 2 grados de libertad. Sirve para explorar relaciones, no para probar causalidad.</p>
         <h3>Gobiernos en los gráficos</h3>
         <p>En Argentina, cada gobierno está marcado con el mes exacto en que empezó. En el resto de los países, las franjas se arman automáticamente con los últimos gobiernos de cada ficha, cambian por año y no por mes, y por eso son aproximadas. La ubicación de cada gobierno en izquierda, centro o derecha sigue cómo suelen clasificarlo la prensa y la ciencia política, y siempre es discutible. El promedio de riesgo país por gobierno describe lo que pasó durante cada mandato, no cuánto se debió a sus decisiones.</p>
+        <h3>Argentina hoy</h3>
+        <p>La calculadora de inflación encadena la inflación mensual del INDEC desde enero de 1992 (cuando empezó el peso actual): un monto "de enero" está a precios de enero. "¿Dónde convenía tener la plata?" compra dólares al precio de venta promedio del mes elegido y los vende hoy al precio de compra; el plazo fijo se renueva cada 30 días a la tasa promedio de depósitos a 30 días de cada mes; el plazo fijo UVA sigue el valor de la UVA, sin el interés extra que agrega cada banco. No se descuentan impuestos ni comisiones. Entre 2007 y 2015 el INDEC estuvo intervenido y sus datos de inflación eran más bajos que los reales.</p>
         <h3>País del día</h3>
         <p>El país de cada día sale de una lista fija de 151 países (independientes, con ficha completa y más de 1,5 millones de habitantes), en un orden mezclado una sola vez, así que a todos les toca el mismo. La distancia se mide entre los centros de cada país y la flecha indica la dirección como se ve en un mapa plano.</p>
       </section>
@@ -712,6 +885,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
           <li>El juego "País del día" guarda tus partidas y estadísticas solo en tu navegador (en el almacenamiento local). Nunca se mandan a ningún servidor. Si borrás los datos del sitio en tu navegador, se borran.</li>
           <li>La página está alojada en Cloudflare Pages, que como cualquier servidor registra datos técnicos de cada visita (como la dirección IP) para funcionar y protegerse de ataques.</li>
           <li>Para mostrarse, la página carga tipografías de Google Fonts y librerías de cdnjs y jsDelivr. Esos servicios reciben la dirección IP de quien visita, como cualquier sitio que los usa.</li>
+          <li>Para mostrar el dólar en vivo, tu navegador consulta DolarAPI (dolarapi.com), que también recibe tu dirección IP.</li>
           <li>Los links a noticias llevan a Google Noticias, que tiene su propia política de privacidad.</li>
           <li>Hoy la página no muestra publicidad. Si eso cambia, esta sección se va a actualizar antes.</li>
         </ul>
@@ -1166,7 +1340,7 @@ const sinTildes = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowe
 /* ---------- PÁGINAS Y PANEL LATERAL ----------
    Cada sección es una "página": #inicio, #comparacion, #elecciones, #conflictos.
    Se cambia con el link (la dirección cambia, así funciona el botón "atrás" del navegador). */
-const PAGINAS = ["inicio", "comparacion", "rankings", "laboratorio", "juego", "elecciones", "conflictos", "acerca"];
+const PAGINAS = ["inicio", "argentina", "comparacion", "rankings", "laboratorio", "juego", "elecciones", "conflictos", "acerca"];
 let paginaActual = "inicio";
 const versusAbierto = () => paginaActual === "comparacion";
 function mostrarPagina(nombre) {
@@ -1174,11 +1348,13 @@ function mostrarPagina(nombre) {
   const cambio = nombre !== paginaActual;
   paginaActual = nombre;
   PAGINAS.forEach(p => document.getElementById("pag-" + p).hidden = p !== nombre);
-  document.querySelectorAll("#nav a[data-pag]").forEach(a => a.setAttribute("aria-current", a.dataset.pag === nombre ? "page" : "false"));
+  document.querySelectorAll("#nav a[data-pag], .tabs a[data-pag]").forEach(a => a.setAttribute("aria-current", a.dataset.pag === nombre ? "page" : "false"));
+  if (nombre === "inicio") renderTarjetas();
   cerrarNav();
   if (nombre === "comparacion") { renderVersus(); drawTL(); tl.resize(); }
   if (nombre === "laboratorio") { abrirLab(); if (labChart) labChart.resize(); }
   if (nombre === "rankings") abrirRankings();
+  if (nombre === "argentina") abrirArgentina();
   if (nombre === "inicio") {
     // si la ventana cambió de tamaño mientras el mapa estaba oculto, lo rearmamos
     const r = document.getElementById("map").getBoundingClientRect();
@@ -1582,6 +1758,252 @@ function renderLab() {
   res.querySelectorAll(".plink").forEach(b => b.onclick = () => irAPaisDesdeLista(b.dataset.pais));
 }
 
+/* ---------- PORTADA: franja de datos y tarjetas ---------- */
+function renderTicker() {
+  const el = document.getElementById("ticker");
+  if (!ARGENTINA || !ARGENTINA.casas) return;
+  const c = k => ARGENTINA.casas[k] ? `<span><em>Dólar ${ARGENTINA.casas[k].nombre.toLowerCase().replace("mep", "MEP")}</em><b>${pesos(cotiz(k).venta)}</b></span>` : "";
+  const inf = ARGENTINA.inflacion.mensual[ARGENTINA.inflacion.mensual.length - 1];
+  el.innerHTML = c("blue") + c("oficial") + c("bolsa") + c("contadoconliqui")
+    + `<span><em>Riesgo país</em><b>${nf(ARGENTINA.riesgo_pais.ultimo.valor)}</b></span>`
+    + `<span><em>Inflación ${MESES[+inf[0].slice(5) - 1]}</em><b>${nf(inf[1], 1)}%</b></span>`
+    + `<span class="t-mas">Argentina hoy →</span>`;
+  el.hidden = false;
+}
+function renderTarjetas() {
+  const T = [];
+  const tarjeta = (h, ico, sec, tit, sub, ir) => T.push(`<a class="tarjeta" href="#${h}"><span class="t-sec"><i aria-hidden="true">${ico}</i>${sec}</span><span><span class="t-tit">${tit}</span>${sub ? `<br><span class="t-sub">${sub}</span>` : ""}</span><span class="t-ir">${ir} →</span></a>`);
+  if (ARGENTINA && ARGENTINA.casas) {
+    const b = cotiz("blue").venta, o = cotiz("oficial").venta, inf = ARGENTINA.inflacion.mensual[ARGENTINA.inflacion.mensual.length - 1];
+    tarjeta("argentina", "🇦🇷", "Argentina hoy", `Dólar blue ${pesos(b)}`, `Brecha ${nf(variacion(b, o), 1)}% · inflación de ${MESES[+inf[0].slice(5) - 1]}: ${nf(inf[1], 1)}% · calculadora de inflación`, "Ver dólar e inflación");
+  }
+  const jugado = leerLocal("atlas-juego-hoy", null), hoyN = numeroDeHoy();
+  const yaJugo = jugado && jugado.num === hoyN && jugado.fin;
+  tarjeta("juego", "🎯", `País del día #${hoyN}`, yaJugo ? `Ya jugaste hoy: ${jugado.intentos.includes(JUEGO_ORDEN[(hoyN - 1) % JUEGO_ORDEN.length]) ? jugado.intentos.length : "X"}/6` : "¿Qué país es? Adivinalo con pistas económicas",
+    yaJugo ? "Mañana hay otro país" : "Un país nuevo cada día, el mismo para todos", yaJugo ? "Ver tu resultado" : "Jugar");
+  const prox = proximasElecciones()[0];
+  if (prox) {
+    const dias = Math.round((new Date(prox.fecha) - new Date(hoyISO())) / 864e5);
+    tarjeta("elecciones", "🗳️", "Próximas elecciones", `${PAISES[prox.iso].nombre}, ${prox.precision >= 11 ? (dias === 0 ? "hoy" : dias === 1 ? "mañana" : `en ${dias} días`) : fechaElec(prox)}`, `${proximasElecciones().length} elecciones nacionales en los próximos 12 meses`, "Ver el calendario");
+  }
+  /* mismo criterio que la página de Rankings: países independientes de más de 1 millón de habitantes */
+  const recs = Object.keys(PAISES).filter(k => PAISES[k].curada && PAISES[k].poblacion >= 1).map(k => [k, labValor(k, "recesiones", "ultimo")]).filter(x => x[1]).sort((a, b) => b[1].v - a[1].v);
+  const pos = recs.findIndex(x => x[0] === "ARG") + 1;
+  if (pos) tarjeta("rankings", "🏆", "Rankings", `Argentina, ${pos}° del mundo en años de recesión desde 1990`, "Inflación, crecimiento, riqueza, deuda y más", "Ver los rankings");
+  tarjeta("comparacion", "⚖️", "Comparación", `${PAISES[compA].nombre} o ${PAISES[compB].nombre}: ¿quién está mejor?`, "Dos países frente a frente, explicado en simple", "Comparar");
+  const nConf = Object.values(CURADO.paises).filter(p => p.crisis).length;
+  tarjeta("conflictos", "⚠️", "Conflictos y crisis", `${nConf} países en guerra, conflicto o crisis`, "Ucrania, Medio Oriente, Sudán, el Sahel y más", "Ver el mapa de conflictos");
+  document.getElementById("tarjetas").innerHTML = T.join("");
+}
+/* ---------- ARGENTINA HOY: dólar, inflación y calculadoras (argentina.json) ---------- */
+const CASAS_ORDEN = ["oficial", "blue", "bolsa", "contadoconliqui", "mayorista", "cripto", "tarjeta"];
+let agListo = false, agVivo = null, agCharts = {};
+/* "1.000.000,5" → 1000000.5 (formato argentino) */
+const leerMonto = t => { const v = parseFloat(String(t).replace(/\s|\$/g, "").replace(/\./g, "").replace(",", ".")); return isFinite(v) && v > 0 ? v : null; };
+const pesos = v => "$ " + nf(v, v < 100 ? 2 : 0);
+const mesNum = k => { const [y, m] = k.split("-").map(Number); return y * 12 + m - 1; };
+const mesKey = n => `${Math.floor(n / 12)}-${String(n % 12 + 1).padStart(2, "0")}`;
+const mesNombre = k => { const [y, m] = k.split("-").map(Number); return `${MESES[m - 1]} de ${y}`; };
+const variacion = (a, b) => b ? (a / b - 1) * 100 : null;
+const flechaVar = v => v == null ? "" : `<span class="c-d ${v > .05 ? "sube" : v < -.05 ? "baja" : "igual"}">${v > .05 ? "▲" : v < -.05 ? "▼" : "="} ${nf(Math.abs(v), 1)}%</span>`;
+
+/* Índice de precios armado con la inflación mensual: P[mes] = nivel de precios de ese mes (dic 1991 = 1) */
+let PRECIOS = null;
+function indicePrecios() {
+  if (PRECIOS) return PRECIOS;
+  PRECIOS = { "1991-12": 1 };
+  let p = 1, ultimo = "1991-12";
+  ARGENTINA.inflacion.mensual.forEach(([m, v]) => { if (m >= "1992-01") { p *= 1 + v / 100; PRECIOS[m] = p; ultimo = m; } });
+  PRECIOS._ultimo = ultimo;
+  return PRECIOS;
+}
+/* Cotización de hoy: la de DolarAPI si llegó, si no la del último cierre */
+const cotiz = c => (agVivo && agVivo[c]) || ARGENTINA.casas[c].ultimo;
+
+function renderCasas() {
+  const of = cotiz("oficial").venta;
+  const hoy = new Date().toISOString().slice(0, 10);
+  document.getElementById("agCasas").innerHTML = CASAS_ORDEN.filter(c => ARGENTINA.casas[c]).map(c => {
+    const x = ARGENTINA.casas[c], q = cotiz(c);
+    // comparamos contra el cierre anterior: si el dato en vivo es de hoy y el cierre guardado es de un día anterior, contra ese cierre
+    const ref = agVivo && agVivo[c] && x.ultimo.fecha < hoy ? x.ultimo.venta : x.antes.dia;
+    const br = c !== "oficial" && of ? variacion(q.venta, of) : null;
+    return `<div class="ag-casa"><span class="c-n">${x.nombre}</span><span class="c-v">${pesos(q.venta)}</span>
+      <span class="c-c">${q.compra ? `Compra ${pesos(q.compra)} · ` : ""}${flechaVar(variacion(q.venta, ref))}</span>
+      ${br != null ? `<span class="c-b">Brecha con el oficial: ${br >= 0 ? "+" : ""}${nf(br, 1)}%</span>` : `<span class="c-b">El del Banco Nación</span>`}</div>`;
+  }).join("");
+  const f = agVivo ? `En vivo · ${agVivo._hora} (DolarAPI)` : `Cierre del ${ARGENTINA.casas.blue.ultimo.fecha.split("-").reverse().join("/")}`;
+  document.getElementById("agDolarFuente").textContent = `${f} · precio de venta`;
+}
+function renderConversor() {
+  const m = leerMonto(document.getElementById("convMonto").value), dir = document.getElementById("convDir").value;
+  const el = document.getElementById("convRes");
+  if (!m) { el.innerHTML = `<p class="note">Escribí un monto, por ejemplo 100.000.</p>`; return; }
+  el.innerHTML = CASAS_ORDEN.filter(c => ARGENTINA.casas[c]).map(c => {
+    const q = cotiz(c), x = ARGENTINA.casas[c];
+    const r = dir === "ars" ? m / q.venta : m * (q.compra || q.venta);
+    return `<div><span>${x.nombre}</span><b>${dir === "ars" ? "US$ " + nf(r, r < 100 ? 2 : 0) : pesos(r)}</b></div>`;
+  }).join("");
+}
+function renderInflacion() {
+  const inf = ARGENTINA.inflacion.mensual, [ultM, ultV] = inf[inf.length - 1], anio = ultM.slice(0, 4);
+  const acum = (inf.filter(([m]) => m.startsWith(anio)).reduce((a, [, v]) => a * (1 + v / 100), 1) - 1) * 100;
+  const ia = ARGENTINA.inflacion.interanual;
+  document.getElementById("agInflNums").innerHTML = `
+    <div><span>Último dato: ${mesNombre(ultM)}</span><b>${nf(ultV, 1)}%</b></div>
+    <div><span>Acumulada en ${anio}</span><b>${nf(acum, 1)}%</b></div>
+    <div><span>Últimos 12 meses (interanual)</span><b>${nf(ia.valor, 1)}%</b></div>`;
+}
+function chartBase() {
+  const muted = css("--muted"), line = css("--line"), ink = css("--ink");
+  return { muted, line, ink, ax: { color: muted, fontSize: 11, fontFamily: "Source Sans 3, sans-serif" } };
+}
+function renderAgCharts() {
+  const { muted, line, ink, ax } = chartBase();
+  /* Inflación de cada mes desde 2002 */
+  const inf = ARGENTINA.inflacion.mensual.filter(([m]) => m >= "2002-01"), cats = inf.map(x => x[0]);
+  agCharts.infl = agCharts.infl || echarts.init(document.getElementById("agInflChart"));
+  const s = { type: "bar", data: inf.map(x => x[1]), itemStyle: { color: css("--accent") }, barCategoryGap: "20%" };
+  const fr = franjasGobierno("ARG", cats); if (fr.length) s.markArea = { silent: true, label: { show: true, color: muted, fontSize: 9, position: "insideTop" }, data: fr };
+  agCharts.infl.setOption({
+    grid: { left: 40, right: 12, top: 14, bottom: 58 },
+    tooltip: { trigger: "axis", backgroundColor: css("--surface"), borderColor: line, textStyle: { color: ink }, formatter: ps => `<b>${mesNombre(ps[0].name)}</b><br>${nf(ps[0].value, 1)}% en el mes${lineaGobierno("ARG", ps[0].name)}` },
+    xAxis: { type: "category", data: cats, axisLabel: Object.assign({}, ax, { formatter: v => v.slice(0, 4) }), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+    yAxis: { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => v + "%" }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+    dataZoom: [{ type: "inside", startValue: "2016-01" }, { type: "slider", height: 18, bottom: 10, startValue: "2016-01", borderColor: line, handleStyle: { color: css("--accent") }, textStyle: { color: muted, fontSize: 10 } }],
+    series: [s]
+  }, true);
+  /* Dólares desde 2011 */
+  const meses = ARGENTINA.casas.oficial.mensual.map(x => x[0]);
+  const serie = (c, color) => { const m = Object.fromEntries(ARGENTINA.casas[c].mensual); return { name: ARGENTINA.casas[c].nombre, type: "line", symbol: "none", data: meses.map(k => m[k] ?? null), lineStyle: { color, width: 2 }, itemStyle: { color } }; };
+  agCharts.dolar = agCharts.dolar || echarts.init(document.getElementById("agDolarChart"));
+  const ds = [serie("oficial", css("--b")), serie("blue", css("--accent")), serie("bolsa", css("--der")), serie("contadoconliqui", css("--muted"))];
+  const fr2 = franjasGobierno("ARG", meses); if (fr2.length) ds[0].markArea = { silent: true, label: { show: true, color: muted, fontSize: 9, position: "insideTop" }, data: fr2 };
+  agCharts.dolar.setOption({
+    grid: { left: 54, right: 12, top: 34, bottom: 58 },
+    legend: { top: 0, left: 0, textStyle: { color: ink, fontSize: 12 }, itemWidth: 14 },
+    tooltip: { trigger: "axis", backgroundColor: css("--surface"), borderColor: line, textStyle: { color: ink }, formatter: ps => `<b>${mesNombre(ps[0].name)}</b><br>` + ps.filter(p => p.value != null).map(p => `${p.marker}${p.seriesName}: ${pesos(p.value)}`).join("<br>") + lineaGobierno("ARG", ps[0].name) },
+    xAxis: { type: "category", data: meses, axisLabel: Object.assign({}, ax, { formatter: v => v.slice(0, 4) }), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+    yAxis: { type: "log", logBase: 10, axisLabel: Object.assign({}, ax, { formatter: v => "$" + nf(v) }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+    dataZoom: [{ type: "inside" }, { type: "slider", height: 18, bottom: 10, borderColor: line, handleStyle: { color: css("--accent") }, textStyle: { color: muted, fontSize: 10 } }],
+    series: ds
+  }, true);
+}
+
+/* Selects de mes y año */
+function llenarMeses(idM, idA, desde, hasta, valor) {
+  const a0 = +desde.slice(0, 4), a1 = +hasta.slice(0, 4);
+  document.getElementById(idM).innerHTML = MESES.map((m, i) => `<option value="${String(i + 1).padStart(2, "0")}">${m}</option>`).join("");
+  document.getElementById(idA).innerHTML = Array.from({ length: a1 - a0 + 1 }, (_, i) => `<option>${a1 - i}</option>`).join("");
+  document.getElementById(idM).value = valor.slice(5); document.getElementById(idA).value = valor.slice(0, 4);
+}
+const mesElegido = (idM, idA) => `${document.getElementById(idA).value}-${document.getElementById(idM).value}`;
+
+function renderCalc() {
+  const P = indicePrecios(), m = leerMonto(document.getElementById("calcMonto").value);
+  let d = mesElegido("calcDesdeM", "calcDesdeA"), h = mesElegido("calcHastaM", "calcHastaA");
+  const el = document.getElementById("calcRes"), comp = document.getElementById("calcComp");
+  if (h > P._ultimo) h = P._ultimo;
+  if (!m || !P[d] || !P[h]) { el.innerHTML = `<span>Elegí un monto y meses entre enero de 1992 y ${mesNombre(P._ultimo)}.</span>`; comp.innerHTML = ""; return; }
+  const f = P[h] / P[d], v = m * f;
+  el.innerHTML = d <= h
+    ? `<span><b>${pesos(m)}</b> de ${mesNombre(d)} equivalen a <b>${pesos(v)}</b> de ${mesNombre(h)}.</span>
+       <small>Los precios ${f >= 1 ? `subieron ${nf((f - 1) * 100, (f - 1) * 100 < 100 ? 1 : 0)}%: se multiplicaron por ${nf(f, f < 10 ? 2 : 1)}` : `bajaron ${nf((1 - f) * 100, 1)}%`}.</small>`
+    : `<span><b>${pesos(m)}</b> de ${mesNombre(d)} equivalían a <b>${pesos(v)}</b> en ${mesNombre(h)}.</span>`;
+  const ahora = leerMonto(document.getElementById("calcAhora").value);
+  comp.innerHTML = ahora && d < h ? (() => {
+    const real = (ahora / v - 1) * 100, nominal = (ahora / m - 1) * 100;
+    return `<span>De ${pesos(m)} a ${pesos(ahora)} es un aumento de <b>${nf(nominal, nominal >= 100 ? 0 : 1)}%</b>. La inflación fue de <b>${nf((f - 1) * 100, f >= 2 ? 0 : 1)}%</b>.</span>
+      <span>${real >= 0 ? `Le <b class="baja">ganó a la inflación por ${nf(real, 1)}%</b>` : `<b class="sube">Perdió contra la inflación: ${nf(-real, 1)}% menos</b> de poder de compra`}. Para empatar tendría que haber llegado a ${pesos(v)}.</span>`;
+  })() : "";
+}
+
+function renderAhorro() {
+  const P = indicePrecios(), m = leerMonto(document.getElementById("ahMonto").value), d = mesElegido("ahDesdeM", "ahDesdeA");
+  const el = document.getElementById("ahRes"), nota = document.getElementById("ahNota");
+  if (!m) { el.innerHTML = `<p class="note">Escribí un monto.</p>`; return; }
+  const mesActual = mesKey(mesNum(new Date().toISOString().slice(0, 7)));
+  const opciones = [];
+  /* Inflación: cuánto necesitarías hoy para comprar lo mismo */
+  const infl = P[d] ? m * P[P._ultimo] / P[d] : null;
+  /* Plazo fijo a 30 días, renovado todos los meses a la tasa promedio */
+  const t30 = Object.fromEntries(ARGENTINA.tasa30);
+  let pf = m, mesesPf = 0, falta = false;
+  for (let n = mesNum(d); n < mesNum(mesActual); n++) { const t = t30[mesKey(n)]; if (t == null) { falta = true; break; } pf *= 1 + t / 100 * 30.42 / 365; mesesPf++; }
+  if (!falta && mesesPf > 0) opciones.push({ n: "Plazo fijo", s: "renovado cada 30 días", v: pf });
+  /* UVA */
+  const uva = Object.fromEntries(ARGENTINA.uva), uvaUlt = ARGENTINA.uva[ARGENTINA.uva.length - 1][1];
+  if (uva[d]) opciones.push({ n: "Plazo fijo UVA", s: "sigue a la inflación", v: m * uvaUlt / uva[d] });
+  /* Dólares: comprás al precio de venta de ese mes, vendés hoy al de compra */
+  [["blue", "Dólar blue"], ["bolsa", "Dólar MEP"], ["oficial", "Dólar oficial", "con cepo no siempre se podía comprar"]].forEach(([c, n, s]) => {
+    const x = ARGENTINA.casas[c], mm = Object.fromEntries(x.mensual), q = cotiz(c);
+    if (mm[d]) opciones.push({ n, s: s || `comprado a ${pesos(mm[d])}`, v: m / mm[d] * (q.compra || q.venta) });
+  });
+  opciones.push({ n: "Debajo del colchón", s: "en pesos, sin hacer nada", v: m });
+  opciones.sort((a, b) => b.v - a.v);
+  const max = Math.max(...opciones.map(o => o.v), infl || 0);
+  const fila = o => {
+    const real = infl ? (o.v / infl - 1) * 100 : null;
+    return `<div class="ah-fila"><span class="ah-n">${o.n}<small>${o.s}</small></span>
+      <span class="ah-bar"><i class="${real != null && real < 0 ? "pierde" : ""}" style="width:${o.v / max * 100}%"></i>${infl ? `<u style="left:${infl / max * 100}%" title="Inflación"></u>` : ""}</span>
+      <span class="ah-v">${pesos(o.v)}${real != null ? `<small class="${real >= 0 ? "baja" : "sube"}">${real >= 0 ? "+" : "−"}${nf(Math.abs(real), 1)}% contra la inflación</small>` : ""}</span></div>`;
+  };
+  el.innerHTML = (infl ? `<div class="ah-fila ref"><span class="ah-n">Lo que necesitás hoy<small>para comprar lo mismo que en ${mesNombre(d)}</small></span>
+      <span class="ah-bar"><u style="left:${infl / max * 100}%"></u></span><span class="ah-v"><b>${pesos(infl)}</b><small>inflación: ${nf((infl / m - 1) * 100, 0)}%</small></span></div>` : "")
+    + opciones.map(fila).join("");
+  nota.textContent = `La raya negra es la inflación (hasta ${mesNombre(P._ultimo)}): lo que está a la derecha le ganó, lo que está a la izquierda perdió poder de compra. Dólares y UVA, a valores de hoy. Sin impuestos ni comisiones; el plazo fijo usa la tasa promedio a 30 días de cada mes y el plazo fijo UVA no incluye el interés extra que paga cada banco. El dólar MEP tiene datos desde noviembre de 2018 y la UVA desde abril de 2016.`;
+}
+
+function renderPlazoFijo() {
+  const m = leerMonto(document.getElementById("pfMonto").value) || 1e6;
+  const inf = ARGENTINA.inflacion.mensual, [ultM, ultV] = inf[inf.length - 1];
+  const fila = b => { const tem = b.tna * 30 / 365, gana = m * tem / 100;
+    return `<tr><td>${b.enlace ? `<a href="${b.enlace}" target="_blank" rel="noopener nofollow">${b.entidad}</a>` : b.entidad}</td><td class="n">${nf(b.tna, 1)}%</td><td class="n">${nf(tem, 2)}%</td><td class="n">${pesos(gana)}</td>
+      <td>${tem >= ultV ? `<span class="baja">Le gana</span>` : `<span class="sube">Pierde</span>`}</td></tr>`; };
+  const tabla = filas => `<div class="pf-tabla"><table><thead><tr><th>Banco</th><th class="n">Tasa anual (TNA)</th><th class="n">En 30 días</th><th class="n">Ganás en 30 días</th><th>Contra la inflación</th></tr></thead><tbody>${filas.map(fila).join("")}</tbody></table></div>`;
+  const B = ARGENTINA.plazo_fijo;
+  document.getElementById("pfRes").innerHTML = tabla(B.slice(0, 10)) + (B.length > 10 ? `<details class="ag-mas"><summary>Ver los ${B.length} bancos</summary>${tabla(B.slice(10))}</details>` : "");
+  document.getElementById("pfNota").textContent = `Tasa para clientes, plazo fijo tradicional a 30 días. "Contra la inflación" compara lo que rinde en 30 días con la inflación del último mes (${nf(ultV, 1)}% en ${mesNombre(ultM)}): es una referencia, porque la inflación de los próximos meses puede ser distinta.`;
+}
+
+function armarArgentina() {
+  if (!ARGENTINA || !ARGENTINA.casas) return;
+  const P = indicePrecios(), ult = P._ultimo;
+  llenarMeses("calcDesdeM", "calcDesdeA", "1992-01", ult, "2020-01");
+  llenarMeses("calcHastaM", "calcHastaA", "1992-01", ult, ult);
+  const hace1 = mesKey(mesNum(new Date().toISOString().slice(0, 7)) - 12);
+  llenarMeses("ahDesdeM", "ahDesdeA", "2011-01", hace1 > ult ? ult : hace1, hace1 > ult ? ult : hace1);
+  ["convMonto", "convDir"].forEach(id => document.getElementById(id).addEventListener("input", renderConversor));
+  ["calcMonto", "calcDesdeM", "calcDesdeA", "calcHastaM", "calcHastaA", "calcAhora"].forEach(id => document.getElementById(id).addEventListener("input", renderCalc));
+  ["ahMonto", "ahDesdeM", "ahDesdeA"].forEach(id => document.getElementById(id).addEventListener("input", renderAhorro));
+  document.getElementById("pfMonto").addEventListener("input", renderPlazoFijo);
+  document.querySelectorAll("#pag-argentina .doc-indice a").forEach(a => a.onclick = e => { e.preventDefault(); document.getElementById(a.dataset.ir).scrollIntoView({ behavior: reduced() ? "auto" : "smooth" }); });
+  document.querySelectorAll("#pag-argentina details.ag-mas").forEach(dt => dt.addEventListener("toggle", () => Object.values(agCharts).forEach(c => c.resize())));
+  const g = new Date(ARGENTINA.generado);
+  document.getElementById("agFecha").textContent = `Datos al ${g.toLocaleDateString("es-AR", { weekday: "long", day: "numeric", month: "long" })}`;
+  dolarEnVivo();
+}
+/* Dólar en vivo desde DolarAPI; si no responde, queda el último cierre */
+function dolarEnVivo() {
+  fetch("https://dolarapi.com/v1/dolares").then(r => r.ok ? r.json() : null).then(lista => {
+    if (!Array.isArray(lista)) return;
+    const v = {};
+    lista.forEach(x => { if (ARGENTINA.casas[x.casa] && x.venta) v[x.casa] = { compra: x.compra, venta: x.venta, fecha: (x.fechaActualizacion || "").slice(0, 10) }; });
+    if (!Object.keys(v).length) return;
+    const ultima = lista.map(x => x.fechaActualizacion).filter(Boolean).sort().pop();
+    v._hora = ultima ? new Date(ultima).toLocaleString("es-AR", { day: "numeric", month: "numeric", hour: "2-digit", minute: "2-digit" }) : "";
+    agVivo = v;
+    renderCasas(); renderConversor(); renderTicker();
+    if (paginaActual === "inicio") renderTarjetas();
+    if (paginaActual === "argentina") renderAhorro();
+  }).catch(() => { /* sin conexión con DolarAPI: queda el cierre */ });
+}
+function abrirArgentina() {
+  if (!ARGENTINA || !ARGENTINA.casas) return;
+  renderCasas(); renderConversor(); renderInflacion(); renderCalc(); renderAhorro(); renderPlazoFijo();
+  renderAgCharts(); Object.values(agCharts).forEach(c => c.resize());
+}
+
 /* ---------- RANKINGS ---------- */
 const RK_PRESETS = [
   { t: "Inflación", v: "infl" }, { t: "Crecimiento", v: "crec" }, { t: "Lo que más creció en 10 años", v: "crec10" },
@@ -1794,6 +2216,7 @@ function adivinar(g) {
     guardarLocal("atlas-juego-stats", st);
   }
   guardarLocal("atlas-juego-hoy", { num: juego.num, intentos: juego.intentos, fin: juego.fin });
+  renderTarjetas();
   renderJuego(true);
 }
 function textoCompartir() {
@@ -2480,7 +2903,7 @@ function textoFuentes() {
   const fecha = new Date(DATOS.generado).toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" });
   document.getElementById("fuentes").textContent = `Datos macro: Banco Mundial y FMI (World Economic Outlook), 1960–${ANIO}, actualizados automáticamente el ${fecha}. Inflación: índice de precios al consumidor del Banco Mundial; donde falta, deflactor del PBI o FMI. Deuda pública: FMI; donde falta, Banco Mundial. Promedios mundiales: Banco Mundial. Fichas y datos políticos escritos a mano, actualizados a ${CURADO.actualizado}.`;
 }
-function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); renderLab(); } }
+function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); renderLab(); if (paginaActual === "argentina") renderAgCharts(); } }
 
 const leer = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: error ${r.status}`); return r.json(); });
 Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null), leer("riesgo.json").catch(() => null)])
@@ -2503,6 +2926,8 @@ Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json")
     armarJuego();
     armarLab();
     armarRankings();
+    armarArgentina();
+    renderTicker();
     armarMapaInd();
     cargarLab().then(() => { Object.keys(RANKS).forEach(k => delete RANKS[k]); renderPanel(); });   // las secciones nuevas de la ficha usan lab.json
     armarNav();
@@ -2522,7 +2947,7 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redrawChar
 new MutationObserver(redrawCharts).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 let rT;
 window.addEventListener("resize", () => {
-  tl.resize(); charts.sparks.forEach(c => c.resize()); if (labChart) labChart.resize();
+  tl.resize(); charts.sparks.forEach(c => c.resize()); if (labChart) labChart.resize(); Object.values(agCharts).forEach(c => c.resize());
   clearTimeout(rT);
   rT = setTimeout(() => {
     const r = document.getElementById("map").getBoundingClientRect();
