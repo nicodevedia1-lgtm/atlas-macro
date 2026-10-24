@@ -310,6 +310,24 @@ details.sec[open] .sec-flecha { transform: rotate(225deg); }
 .ar-dia { display: grid; gap: 8px; }
 .ar-dia h3 { font-size: 17px; font-weight: 700; }
 .gob-ley { display: inline-flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 4px; }
+/* Acerca de */
+.doc-indice { display: flex; flex-wrap: wrap; gap: 8px; }
+.doc-indice a { padding: 6px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); text-decoration: none; font-size: 14px; }
+.doc-indice a:hover { border-color: var(--accent); }
+.doc { display: grid; gap: 18px; }
+.doc section { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px 24px; display: grid; gap: 12px; min-width: 0; scroll-margin-top: 80px; }
+.doc h2 { font-size: 24px; font-weight: 800; }
+.doc h3 { font-size: 17px; font-weight: 700; margin-top: 6px; }
+.doc p, .doc li { max-width: 72ch; font-size: 15.5px; }
+.doc ul { margin: 0; padding-left: 20px; display: grid; gap: 6px; }
+.doc a { color: var(--ink); text-decoration-color: var(--accent); text-underline-offset: 3px; }
+.doc-tabla { overflow-x: auto; }
+.doc-tabla table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 14.5px; }
+.doc-tabla th, .doc-tabla td { text-align: left; vertical-align: top; padding: 9px 12px 9px 0; border-bottom: 1px solid var(--line); }
+.doc-tabla th { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; }
+.nav-sec { border-top: 1px solid var(--line); padding-top: 6px !important; margin-top: 4px !important; }
+footer a { color: var(--muted); text-decoration-color: var(--accent); text-underline-offset: 3px; }
+
 /* Rankings */
 .rk-arg { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 14px 18px; font-size: 16px; }
 .rk-arg b.n { font-family: var(--f-data); font-size: 20px; }
@@ -473,6 +491,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <li><a href="#elecciones" data-pag="elecciones"><span class="nav-ico" aria-hidden="true">🗳️</span><span>Próximas elecciones<small>Los próximos 12 meses</small></span></a></li>
     <li><a href="#conflictos" data-pag="conflictos"><span class="nav-ico" aria-hidden="true">⚠️</span><span>Conflictos y crisis<small>Guerras, golpes y crisis</small></span></a></li>
   </ul>
+  <ul class="nav-sec"><li><a href="#acerca" data-pag="acerca"><span class="nav-ico" aria-hidden="true">ℹ️</span><span>Acerca de y metodología<small>Fuentes, cálculos y privacidad</small></span></a></li></ul>
   <p class="nav-pie" id="conteo">Cargando datos…</p>
 </nav>
 
@@ -628,6 +647,84 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     </div>
   </div>
 
+  <div class="pagina" id="pag-acerca" hidden>
+    <header class="top">
+      <div class="eyebrow">Acerca de</div>
+      <h1>Qué es Atlas Macro y cómo está hecho</h1>
+      <p class="lede">Un atlas de la economía del mundo, explicado en simple y con foco en Argentina. Acá está de dónde sale cada dato, cómo se calcula cada número y qué datos tuyos guarda la página (casi ninguno).</p>
+    </header>
+    <nav class="doc-indice" aria-label="En esta página">
+      <a href="#acerca" data-ir="doc-que">Qué es</a><a href="#acerca" data-ir="doc-fuentes">Fuentes</a><a href="#acerca" data-ir="doc-metodo">Metodología</a><a href="#acerca" data-ir="doc-privacidad">Privacidad</a><a href="#acerca" data-ir="doc-contacto">Errores y contacto</a>
+    </nav>
+    <article class="doc">
+      <section id="doc-que">
+        <h2>Qué es</h2>
+        <p>Atlas Macro junta en un solo lugar los datos económicos de todos los países: cuánto producen, cuánta inflación tienen, cuánto deben, quién los gobierna y cómo viven sus habitantes. La idea es que cualquiera pueda entender cómo le va a un país sin ser economista, y que quien sí estudia economía pueda explorar los datos por su cuenta.</p>
+        <p>Es un proyecto personal e independiente, hecho por un estudiante de economía de Argentina. No tiene relación con ningún gobierno, partido, banco ni empresa, y no recibe financiamiento de nadie.</p>
+        <p>Nada de lo que aparece acá es una recomendación de inversión ni un consejo financiero.</p>
+      </section>
+
+      <section id="doc-fuentes">
+        <h2>De dónde salen los datos</h2>
+        <p>Casi todo se baja solo de fuentes oficiales y abiertas, con programas que corren en GitHub. Lo que está escrito a mano se aclara.</p>
+        <div class="doc-tabla"><table>
+          <thead><tr><th>Qué</th><th>Fuente</th><th>Cada cuánto se actualiza</th></tr></thead>
+          <tbody>
+            <tr><td>PBI, crecimiento, inflación, desempleo, población, cuenta corriente, PBI por persona</td><td>Banco Mundial (World Development Indicators) y FMI (World Economic Outlook)</td><td>Todos los lunes</td></tr>
+            <tr><td>Deuda pública</td><td>FMI; donde no hay dato, Banco Mundial</td><td>Todos los lunes</td></tr>
+            <tr><td>Esperanza de vida, mortalidad infantil, fertilidad, urbanización, internet, desigualdad, pobreza, inversión, ahorro, comercio, remesas, gasto público, impuestos, CO₂</td><td>Banco Mundial (World Development Indicators)</td><td>Todos los lunes</td></tr>
+            <tr><td>Control de la corrupción y estado de derecho</td><td>Banco Mundial (Worldwide Governance Indicators)</td><td>Todos los lunes</td></tr>
+            <tr><td>Riesgo país y dólar blue y oficial de Argentina</td><td>ArgentinaDatos (argentinadatos.com), un proyecto abierto y no oficial que recopila datos públicos</td><td>Todos los días hábiles</td></tr>
+            <tr><td>Riesgo país de otros países de Latinoamérica</td><td>Banco Central de Reserva del Perú, índice EMBIG con datos de Reuters</td><td>Todos los martes (el dato es mensual)</td></tr>
+            <tr><td>Próximas elecciones y control de cambios de gobierno</td><td>Wikidata, base de datos abierta y colaborativa</td><td>Todos los días</td></tr>
+            <tr><td>Resúmenes, actividades, exportaciones, importaciones, socios comerciales, gobiernos y su orientación, conflictos</td><td>Escrito a mano a partir de fuentes públicas</td><td>Cuando hay cambios (se avisa la fecha al pie)</td></tr>
+            <tr><td>Fronteras, banderas y relieve del mapa</td><td>Natural Earth (dominio público), flag-icons (licencia MIT) y un modelo de elevación global</td><td>—</td></tr>
+          </tbody>
+        </table></div>
+      </section>
+
+      <section id="doc-metodo">
+        <h2>Metodología</h2>
+        <h3>Cómo se combinan las fuentes</h3>
+        <p>Para cada indicador hay una fuente principal y otras de respaldo. Si la principal no tiene un año, se usa la siguiente. En los gráficos, los tramos que vienen de otra fuente se marcan y se explican al pie.</p>
+        <ul>
+          <li><b>Inflación:</b> índice de precios al consumidor del Banco Mundial. Donde falta, el deflactor del PBI, que mide los precios de todo lo que produce el país y no solo de lo que consumen las familias. Para los años más recientes que el Banco Mundial todavía no publicó, se usa la inflación del FMI.</li>
+          <li><b>Deuda pública:</b> deuda bruta del gobierno general según el FMI. Donde falta, la del gobierno central según el Banco Mundial, que es una medida algo más chica.</li>
+          <li><b>Resto de los indicadores:</b> Banco Mundial primero y FMI de respaldo.</li>
+          <li><b>Ajustes a mano:</b> en unos pocos casos se corrigen datos con errores conocidos o se completan huecos con otra fuente oficial (por ejemplo, la inflación de Venezuela desde 2017 viene del Banco Central de Venezuela). Cada ajuste está explicado en el gráfico correspondiente.</li>
+        </ul>
+        <h3>"Último dato" y "promedio de 10 años"</h3>
+        <p>Muchos países publican con atraso, y algunas variables (como la desigualdad o la pobreza) no se miden todos los años. Por eso "último dato" toma el valor más reciente de los últimos cinco años de cada país, y siempre se muestra el año al lado. "Promedio de 10 años" promedia los últimos diez años y exige al menos siete con dato; sirve para variables que saltan mucho, como el crecimiento.</p>
+        <h3>Rankings y puestos</h3>
+        <p>Los rankings ordenan de mayor a menor. Por defecto incluyen solo países independientes de más de un millón de habitantes, para que no ganen territorios chicos con datos poco comparables. El puesto que aparece en cada ficha se calcula entre todos los países independientes con dato. "Crecimiento acumulado en 10 años" compone las tasas de cada año; "inflación acumulada" multiplica la suba de precios de cada año desde 2000; "años en recesión" cuenta los años con crecimiento negativo desde 1990.</p>
+        <h3>Laboratorio de regresiones</h3>
+        <p>Es una regresión lineal simple por mínimos cuadrados ordinarios entre países (corte transversal), sin variables de control. Con escala logarítmica se usa el logaritmo en base 10 de la variable. El valor p sale de la distribución t de Student con n − 2 grados de libertad. Sirve para explorar relaciones, no para probar causalidad.</p>
+        <h3>Gobiernos en los gráficos</h3>
+        <p>En Argentina, cada gobierno está marcado con el mes exacto en que empezó. En el resto de los países, las franjas se arman automáticamente con los últimos gobiernos de cada ficha, cambian por año y no por mes, y por eso son aproximadas. La ubicación de cada gobierno en izquierda, centro o derecha sigue cómo suelen clasificarlo la prensa y la ciencia política, y siempre es discutible. El promedio de riesgo país por gobierno describe lo que pasó durante cada mandato, no cuánto se debió a sus decisiones.</p>
+        <h3>País del día</h3>
+        <p>El país de cada día sale de una lista fija de 151 países (independientes, con ficha completa y más de 1,5 millones de habitantes), en un orden mezclado una sola vez, así que a todos les toca el mismo. La distancia se mide entre los centros de cada país y la flecha indica la dirección como se ve en un mapa plano.</p>
+      </section>
+
+      <section id="doc-privacidad">
+        <h2>Privacidad</h2>
+        <ul>
+          <li>Atlas Macro no tiene cuentas de usuario, no pide datos personales y no usa cookies propias.</li>
+          <li>El juego "País del día" guarda tus partidas y estadísticas solo en tu navegador (en el almacenamiento local). Nunca se mandan a ningún servidor. Si borrás los datos del sitio en tu navegador, se borran.</li>
+          <li>La página está alojada en Cloudflare Pages, que como cualquier servidor registra datos técnicos de cada visita (como la dirección IP) para funcionar y protegerse de ataques.</li>
+          <li>Para mostrarse, la página carga tipografías de Google Fonts y librerías de cdnjs y jsDelivr. Esos servicios reciben la dirección IP de quien visita, como cualquier sitio que los usa.</li>
+          <li>Los links a noticias llevan a Google Noticias, que tiene su propia política de privacidad.</li>
+          <li>Hoy la página no muestra publicidad. Si eso cambia, esta sección se va a actualizar antes.</li>
+        </ul>
+      </section>
+
+      <section id="doc-contacto">
+        <h2>Errores y contacto</h2>
+        <p>Si encontrás un dato mal, un gobierno desactualizado o algo que no se entiende, avisá en <a href="https://github.com/nicodevedia1-lgtm/atlas-macro/issues" target="_blank" rel="noopener">la página del proyecto en GitHub</a>. El código del sitio también está ahí.</p>
+        <p class="note" id="docActualizado"></p>
+      </section>
+    </article>
+  </div>
+
   <div class="pagina" id="pag-elecciones" hidden>
     <header class="top">
       <div class="eyebrow">Agenda</div>
@@ -682,6 +779,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   </div>
 
   <footer>
+    <p><a href="#acerca">Acerca de, metodología y privacidad</a></p>
     <p id="fuentes">Cargando fuentes…</p>
     <p>PBI por persona ajustado: en paridad de poder adquisitivo (PPA), o sea, teniendo en cuenta lo que cuestan las cosas en cada país. Fronteras: Natural Earth. Relieve: modelo de elevación global, coloreado por altura.</p>
   </footer>
@@ -1068,7 +1166,7 @@ const sinTildes = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowe
 /* ---------- PÁGINAS Y PANEL LATERAL ----------
    Cada sección es una "página": #inicio, #comparacion, #elecciones, #conflictos.
    Se cambia con el link (la dirección cambia, así funciona el botón "atrás" del navegador). */
-const PAGINAS = ["inicio", "comparacion", "rankings", "laboratorio", "juego", "elecciones", "conflictos"];
+const PAGINAS = ["inicio", "comparacion", "rankings", "laboratorio", "juego", "elecciones", "conflictos", "acerca"];
 let paginaActual = "inicio";
 const versusAbierto = () => paginaActual === "comparacion";
 function mostrarPagina(nombre) {
@@ -1113,6 +1211,9 @@ function armarNav() {
   // tocar el link de la página en la que ya estás solo cierra el panel
   document.querySelectorAll("#nav a[data-pag]").forEach(a => a.addEventListener("click", () => { if (a.dataset.pag === paginaActual) cerrarNav(); }));
   window.addEventListener("hashchange", () => mostrarPagina(location.hash.slice(1)));
+  // índice de "Acerca de": baja a cada parte sin cambiar de página
+  document.querySelectorAll(".doc-indice a").forEach(a => a.onclick = e => { e.preventDefault(); document.getElementById(a.dataset.ir).scrollIntoView({ behavior: reduced() ? "auto" : "smooth" }); });
+  document.getElementById("docActualizado").textContent = `Datos macro actualizados el ${new Date(DATOS.generado).toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" })}. Fichas escritas a mano, actualizadas a ${CURADO.actualizado}.`;
 }
 
 // Acerca el mapa al país elegido (si es muy grande o cruza el mapa, muestra el mundo)
