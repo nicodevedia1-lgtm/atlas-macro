@@ -208,6 +208,25 @@ details.sec summary:hover { color: var(--accent); }
 details.sec[open] .sec-flecha { transform: rotate(225deg); }
 .sec-body { display: grid; gap: 16px; padding-bottom: 18px; }
 .sec-body > .metrics { border-top: 0; }
+.secs { display: grid; border-bottom: 1px solid var(--line); }
+.claves { display: grid; grid-template-columns: repeat(auto-fit, minmax(118px, 1fr)); gap: 8px; }
+.claves div { background: var(--bg); border-radius: 10px; padding: 8px 10px; display: grid; gap: 1px; min-width: 0; }
+.claves span { font-size: 12px; color: var(--muted); }
+.claves b { font-family: var(--f-data); font-size: 16px; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.claves small { font-size: 11px; color: var(--muted); }
+.dvs { display: grid; }
+.dv { display: grid; gap: 3px; padding: 12px 0; border-bottom: 1px solid var(--line); }
+.dv:first-child { padding-top: 0; } .dv:last-child { border-bottom: 0; padding-bottom: 0; }
+.dv-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 2px 12px; }
+.dv-n { font-weight: 700; font-size: 15px; }
+.dv-v { font-family: var(--f-data); font-size: 18px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.dv-v small { font-size: 12px; color: var(--muted); font-family: var(--f-body); }
+.dv .exp { color: var(--muted); font-size: 14px; }
+.dv-pie { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; font-size: 13px; color: var(--muted); }
+.dv-spark { width: 120px; height: 28px; flex: none; }
+.dv-spark polyline { fill: none; stroke: var(--accent); stroke-width: 1.6; stroke-linejoin: round; }
+.dv-spark circle { fill: var(--accent); }
+.dv-años { font-family: var(--f-data); font-size: 11px; }
 .gob-aprox { flex-basis: 100%; }
 .pol h3 { font-size: 17px; font-weight: 700; }
 .pol h4 { font-family: var(--f-body); font-size: 14px; font-weight: 700; color: var(--muted); margin: 4px 0 0; }
@@ -1332,10 +1351,10 @@ function labSync() {
   document.getElementById("labChicos").checked = labEstado.chicos;
 }
 /* lab.json se baja una sola vez, la primera vez que hace falta (Laboratorio, Rankings o el mapa) */
-let labPromesa = null;
+let labPromesa = null, labListo = false;
 function cargarLab() {
   if (!labPromesa) labPromesa = fetch("lab.json").then(r => r.ok ? r.json() : null).catch(() => null).then(j => {
-    LAB = j;
+    LAB = j; labListo = true;
     ["labY", "labX", "rkVar", "mapaVar"].forEach(id => { const el = document.getElementById(id); if (el) { const v = el.value; el.innerHTML = labOpciones(); if (labVars()[v]) el.value = v; } });
     return LAB;
   });
@@ -1358,7 +1377,10 @@ function conArt(nombre, art = true) {
 /* Formato de números según su tamaño */
 const labNum = v => { const a = Math.abs(v);
   if (a >= 1e12) return nf(v / 1e12, 1) + " billones"; if (a >= 1e9) return nf(v / 1e9, 1) + " mil millones"; if (a >= 1e6) return nf(v / 1e6, 1) + " millones";
-  return a >= 1000 ? nf(v) : a >= 100 ? nf(v, 0) : a >= 10 ? nf(v, 1) : a >= 1 ? nf(v, 2) : a >= .01 ? nf(v, 2) : nf(v, 3); };
+  /* hasta 2 decimales (3 si es muy chico), sin ceros de más: 8 y no 8,00 */
+  const dec = a >= 1000 ? 0 : a >= 100 ? 0 : a >= 10 ? 1 : a >= .01 || a === 0 ? 2 : 3;
+  return v.toLocaleString("es-AR", { minimumFractionDigits: 0, maximumFractionDigits: dec });
+};
 
 function renderLab() {
   if (paginaActual !== "laboratorio") return;
@@ -2018,7 +2040,72 @@ const uv = (d, ind) => d.u && d.u[ind] ? d.u[ind].v : null;
 const lista = arr => `<ul class="items">${arr.map(([e, t]) => `<li><span class="emo" aria-hidden="true">${e}</span><span>${t}</span></li>`).join("")}</ul>`;
 
 /* Secciones desplegables de la ficha. Se recuerda cuáles abriste al cambiar de país. */
-const SECC_ABIERTAS = new Set(["ind"]);
+const SECC_ABIERTAS = new Set();   /* todas cerradas de entrada */
+
+/* ---------- MÁS DATOS EN LA FICHA (variables del Laboratorio y derivadas) ---------- */
+const DESC_VAR = {
+  crec10: "Cuánto creció la economía en total en los últimos 10 años, ya sin contar la inflación.",
+  recesiones: "Años en que la economía se achicó, desde 1990.",
+  inflAcum: "Cuántas veces se multiplicaron los precios desde el año 2000.",
+  vida: "Cuántos años vive en promedio una persona que nace hoy.",
+  mortinf: "Bebés que mueren antes de cumplir un año, por cada 1.000 que nacen.",
+  fert: "Cuántos hijos tiene en promedio cada mujer. Con menos de 2,1 la población tiende a achicarse.",
+  urbano: "Parte de la población que vive en ciudades.",
+  internet: "Parte de la población que usó internet en el último año.",
+  gini: "Desigualdad de ingresos: 0 sería que todos ganan lo mismo; 100, que una sola persona se queda con todo.",
+  pobreza: "Personas por debajo de la línea internacional de pobreza extrema del Banco Mundial (unos US$ 3 por día).",
+  apertura: "Exportaciones más importaciones, comparadas con el PBI. Cuanto más alto, más comercia con el mundo.",
+  inversion: "Lo que se invierte en máquinas, construcción y equipos, comparado con el PBI.",
+  ahorro: "La parte del ingreso del país que no se consume, comparada con el PBI.",
+  ied: "Lo que empresas de afuera invirtieron en el país (neto), comparado con el PBI.",
+  remesas: "Plata que mandan a sus familias los que emigraron, comparada con el PBI.",
+  impuestos: "Lo que recauda el gobierno nacional en impuestos, comparado con el PBI.",
+  gedu: "Lo que gasta el Estado en educación, comparado con el PBI.",
+  gsalud: "Lo que gasta el Estado en salud, comparado con el PBI.",
+  corrupcion: "Qué tan controlada está la corrupción según encuestas y expertos. Va de -2,5 (peor) a 2,5 (mejor).",
+  derecho: "Qué tanto se respetan las leyes, los contratos y la justicia. Va de -2,5 (peor) a 2,5 (mejor).",
+  co2: "Toneladas de dióxido de carbono que emite cada habitante por año."
+};
+/* Puesto de cada país entre los países independientes (se calcula una vez por variable) */
+const RANKS = {};
+function rankDe(v) {
+  if (!RANKS[v]) {
+    const filas = Object.keys(PAISES).filter(k => PAISES[k].curada).map(k => [k, labValor(k, v, "ultimo")]).filter(x => x[1]).sort((a, b) => b[1].v - a[1].v);
+    const vals = filas.map(x => x[1].v), n = vals.length;
+    RANKS[v] = { pos: Object.fromEntries(filas.map((x, i) => [x[0], i + 1])), n, mediana: n ? (vals[(n - 1) >> 1] + vals[n >> 1]) / 2 : null };
+  }
+  return RANKS[v];
+}
+/* Minigráfico de la serie desde 2000 (SVG simple, sin librería) */
+function miniSerie(k, v) {
+  const s = labSerie(k, v); if (!s) return "";
+  const pts = s[1].map((x, i) => [s[0] + i, x]).filter(p => p[1] != null && p[0] >= 2000);
+  if (pts.length < 3) return "";
+  const xs = pts.map(p => p[0]), ys = pts.map(p => p[1]), x0 = Math.min(...xs), x1 = Math.max(...xs), y0 = Math.min(...ys), y1 = Math.max(...ys);
+  const X = x => 2 + (x - x0) / (x1 - x0 || 1) * 116, Y = y => 24 - (y - y0) / (y1 - y0 || 1) * 20;
+  const ult = pts[pts.length - 1];
+  return `<svg class="dv-spark" viewBox="0 0 120 28" aria-hidden="true"><polyline points="${pts.map(p => `${X(p[0]).toFixed(1)},${Y(p[1]).toFixed(1)}`).join(" ")}"/><circle cx="${X(ult[0]).toFixed(1)}" cy="${Y(ult[1]).toFixed(1)}" r="2.4"/></svg><span class="dv-años">${x0}–${x1}</span>`;
+}
+function bloqueVars(k, claves) {
+  const V = labVars();
+  if (claves.some(c => !V[c])) return labListo || !labPromesa ? "" : `<p class="note">Cargando datos…</p>`;
+  const filas = claves.map(c => {
+    const x = labValor(k, c, "ultimo"); if (!x) return "";
+    const r = rankDe(c), pos = r.pos[k];
+    return `<div class="dv">
+      <div class="dv-top"><span class="dv-n">${V[c].nombre}</span><span class="dv-v">${fmtValor(x.v, c)}${V[c].unidad.startsWith("%") || ["inflAcum", "recesiones"].includes(c) || ["años", "millones"].includes(V[c].unidad) || V[c].unidad.includes("US$") ? "" : ` <small>${V[c].unidad.replace(/^índice, /, "índice ")}</small>`} <small class="ytag">${x.y}</small></span></div>
+      <p class="exp">${DESC_VAR[c] || ""}</p>
+      <div class="dv-pie">${miniSerie(k, c)}<span class="dv-rank">${pos ? `Puesto <b>${pos}</b> de ${r.n} (de mayor a menor)` : ""}${r.mediana != null ? ` · Mediana mundial: ${fmtValor(r.mediana, c)}` : ""}</span></div>
+    </div>`;
+  }).join("");
+  return filas.trim() ? `<div class="dvs">${filas}</div>` : "";
+}
+/* Datos clave, siempre a la vista arriba de las secciones */
+function datosClave(d) {
+  const item = (lbl, val, ind) => val == null ? "" : `<div><span>${lbl}</span><b>${val}</b>${ind && d.u[ind] && d.u[ind].y !== ANIO ? `<small>${d.u[ind].y}</small>` : ""}</div>`;
+  const infl = uv(d, "infl"), crec = uv(d, "crec");
+  return `<div class="claves">${item("PBI", uv(d, "pib") == null ? null : uv(d, "pib") >= 1000 ? `US$ ${nf(uv(d, "pib") / 1000, 1)} bill.` : uv(d, "pib") >= 1 ? `US$ ${nf(uv(d, "pib"))} mil M` : `US$ ${nf(uv(d, "pib") * 1000)} M`, "pib")}${item("Por persona", d.pibpc == null ? null : "US$ " + nf(d.pibpc), "pibpc")}${item("Inflación", infl == null ? null : pct(infl), "infl")}${item("Crecimiento", crec == null ? null : pct(crec), "crec")}${item("Desempleo", d.desempleo == null ? null : pct(d.desempleo), "desempleo")}</div>`;
+}
 const sec = (id, titulo, html) => html ? `<details class="sec" data-sec="${id}"${SECC_ABIERTAS.has(id) ? " open" : ""}>
   <summary><span>${titulo}</span><span class="sec-flecha" aria-hidden="true"></span></summary><div class="sec-body">${html}</div></details>` : "";
 
@@ -2045,7 +2132,9 @@ function renderPanel() {
     </div>
     <div class="meta">${d.capital ? `<span>Capital <b>${d.capital}</b></span>` : ""}${d.poblacion != null ? `<span>Población <b>${d.poblacion >= 1 ? nf(d.poblacion, 1) + " millones" : nf(d.poblacion * 1e6) + " habitantes"}</b>${anioTag(d, "poblacion")}</span>` : ""}</div>
     ${bloqueCrisis(seleccion)}
-    ${d.curada ? `<p class="resumen">${d.resumen}</p>` : `<p class="pend">Por ahora esta ficha tiene solo los datos macro. El resumen, el comercio y la política se van sumando de a una región.</p>`}
+    ${d.curada ? `<p class="resumen">${d.resumen}</p>` : `<p class="pend">Este territorio tiene solo datos, sin resumen ni comercio.</p>`}
+    ${datosClave(d)}
+    <div class="secs">
     ${sec("ind", "Indicadores económicos", `<div class="metrics">
       <div class="metric">
         <span class="lbl">PBI</span><span class="val">${pibTxt(uv(d, "pib"))}${anioTag(d, "pib")}</span>
@@ -2087,6 +2176,13 @@ function renderPanel() {
       </div>
     </div>`)}
     ${seleccion === "ARG" ? sec("rp", "Argentina al día: riesgo país y dólar", bloqueArgentina()) : sec("rp", "Riesgo país", bloqueRiesgo(seleccion))}
+    ${sec("histe", "Historia económica", bloqueVars(seleccion, ["crec10", "recesiones", "inflAcum"]))}
+    ${sec("soc", "Sociedad", bloqueVars(seleccion, ["vida", "mortinf", "fert", "urbano", "internet"]))}
+    ${sec("des", "Desigualdad y pobreza", bloqueVars(seleccion, ["gini", "pobreza"]))}
+    ${sec("inv", "Inversión y comercio exterior", bloqueVars(seleccion, ["apertura", "inversion", "ahorro", "ied", "remesas"]))}
+    ${sec("est", "Estado", bloqueVars(seleccion, ["impuestos", "gedu", "gsalud"]))}
+    ${sec("inst", "Instituciones", bloqueVars(seleccion, ["corrupcion", "derecho"]))}
+    ${sec("amb", "Ambiente", bloqueVars(seleccion, ["co2"]))}
     ${sec("act", "A qué se dedica", d.actividades ? `<div class="acts">
       <div class="chips">${d.actividades.map(([e, t]) => `<span class="chip"><span class="emo" aria-hidden="true">${e}</span>${t}</span>`).join("")}</div>
     </div>` : "")}
@@ -2103,6 +2199,7 @@ function renderPanel() {
     </div>` : ""))}
     ${sec("pol", "Política", politica(seleccion))}
     ${sec("not", "Noticias", bloqueNoticias(seleccion))}
+    </div>
     <button class="go" id="goCmp" type="button">Comparar ${d.nombre} con otro país</button>
   `;
   panel.querySelectorAll(".plink").forEach(b => b.onclick = () => elegir(b.dataset.pais));
@@ -2306,6 +2403,7 @@ Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json")
     armarLab();
     armarRankings();
     armarMapaInd();
+    cargarLab().then(() => { Object.keys(RANKS).forEach(k => delete RANKS[k]); renderPanel(); });   // las secciones nuevas de la ficha usan lab.json
     armarNav();
     mostrarPagina(location.hash.slice(1) || "inicio");   // si entraron con #elecciones, por ejemplo
   })
