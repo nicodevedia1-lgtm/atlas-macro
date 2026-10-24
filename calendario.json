@@ -1,0 +1,22 @@
+{
+  "_leeme": "Fechas de publicación del INDEC, copiadas a mano de su calendario de difusión (https://www.indec.gob.ar/indec/web/Calendario-Fecha-0). Hay que agregar las del semestre siguiente cuando el INDEC las publica (suele ser en diciembre y en junio). Los feriados se bajan solos en argentina.json.",
+  "actualizado": "2026-10-24",
+  "fuente": "INDEC, calendario de difusión del segundo semestre de 2026",
+  "eventos": [
+    { "fecha": "2026-11-04", "tema": "pobreza", "titulo": "Condiciones de vida de los hogares", "periodo": "primer semestre de 2026", "desc": "Acceso a vivienda, servicios, salud y educación (Encuesta Permanente de Hogares)." },
+    { "fecha": "2026-11-12", "tema": "inflacion", "titulo": "Inflación (IPC)", "periodo": "octubre de 2026", "desc": "El dato de inflación del mes." },
+    { "fecha": "2026-11-12", "tema": "pobreza", "titulo": "Canasta básica alimentaria y total", "periodo": "octubre de 2026", "desc": "Cuánto necesita una familia para no ser indigente ni pobre." },
+    { "fecha": "2026-11-13", "tema": "salarios", "titulo": "Índice de salarios", "periodo": "septiembre de 2026", "desc": "Cuánto subieron los sueldos registrados y no registrados." },
+    { "fecha": "2026-11-19", "tema": "comercio", "titulo": "Intercambio comercial (exportaciones e importaciones)", "periodo": "octubre de 2026", "desc": "Balanza comercial de bienes del mes." },
+    { "fecha": "2026-11-24", "tema": "actividad", "titulo": "Actividad económica (EMAE)", "periodo": "septiembre de 2026", "desc": "El indicador mensual de cómo viene la economía." },
+    { "fecha": "2026-12-15", "tema": "inflacion", "titulo": "Inflación (IPC)", "periodo": "noviembre de 2026", "desc": "El dato de inflación del mes." },
+    { "fecha": "2026-12-15", "tema": "pobreza", "titulo": "Canasta básica alimentaria y total", "periodo": "noviembre de 2026", "desc": "Cuánto necesita una familia para no ser indigente ni pobre." },
+    { "fecha": "2026-12-16", "tema": "actividad", "titulo": "PBI trimestral", "periodo": "tercer trimestre de 2026", "desc": "Cuánto creció o cayó la economía en el trimestre." },
+    { "fecha": "2026-12-16", "tema": "salarios", "titulo": "Índice de salarios", "periodo": "octubre de 2026", "desc": "Cuánto subieron los sueldos registrados y no registrados." },
+    { "fecha": "2026-12-18", "tema": "empleo", "titulo": "Desempleo (mercado de trabajo)", "periodo": "tercer trimestre de 2026", "desc": "Tasas de desocupación, empleo y actividad (Encuesta Permanente de Hogares)." },
+    { "fecha": "2026-12-18", "tema": "comercio", "titulo": "Intercambio comercial (exportaciones e importaciones)", "periodo": "noviembre de 2026", "desc": "Balanza comercial de bienes del mes." },
+    { "fecha": "2026-12-21", "tema": "actividad", "titulo": "Actividad económica (EMAE)", "periodo": "octubre de 2026", "desc": "El indicador mensual de cómo viene la economía." },
+    { "fecha": "2026-12-22", "tema": "comercio", "titulo": "Balanza de pagos y deuda externa", "periodo": "tercer trimestre de 2026", "desc": "Cuentas con el resto del mundo y deuda externa del país." },
+    { "fecha": "2026-12-23", "tema": "pobreza", "titulo": "Distribución del ingreso", "periodo": "tercer trimestre de 2026", "desc": "Cómo se reparten los ingresos entre los hogares." }
+  ]
+}

@@ -116,7 +116,7 @@ p { margin: 0; }
 /* Tarjetas de la portada */
 .portada { display: grid; gap: 12px; }
 .portada-t { font-size: 22px; font-weight: 800; }
-.tarjetas { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 330px), 1fr)); gap: 12px; }
+.tarjetas { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 12px; }
 .accesos { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; padding: 2px 0 4px; margin-top: 4px; }
 .accesos::-webkit-scrollbar { display: none; }
 .accesos a { flex: none; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); text-decoration: none; font-size: 14px; font-weight: 600; }
@@ -397,6 +397,7 @@ footer a { color: var(--muted); text-decoration-color: var(--accent); text-under
 .ag-res { font-size: 17px; background: var(--bg); border-radius: 12px; padding: 14px 16px; display: grid; gap: 6px; }
 .ag-res b { font-family: var(--f-data); font-weight: 600; }
 .ag-res small { color: var(--muted); font-size: 14px; }
+.ag-res strong { font-weight: 700; }
 .ag-ahorro { display: grid; gap: 8px; }
 .ah-fila { display: grid; grid-template-columns: minmax(130px, 210px) minmax(0, 1fr) auto; gap: 4px 12px; align-items: center; }
 @media (max-width: 600px) { .ah-fila { grid-template-columns: minmax(0, 1fr) auto; } .ah-fila .ah-bar { grid-column: 1 / -1; grid-row: 2; } }
@@ -416,6 +417,43 @@ footer a { color: var(--muted); text-decoration-color: var(--accent); text-under
 .pf-tabla td.n { font-family: var(--f-data); text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .pf-tabla th.n { text-align: right; }
 .pf-tabla a { color: var(--ink); text-decoration-color: var(--accent); text-underline-offset: 3px; }
+
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* Gobiernos comparados */
+.gob-barras { display: grid; gap: 6px; }
+.gob-fila { display: grid; grid-template-columns: minmax(110px, 190px) minmax(0, 1fr) auto; gap: 4px 12px; align-items: center; font-size: 14.5px; }
+.gob-fila .g-n { font-weight: 700; }
+.gob-fila .g-n small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; font-family: var(--f-data); }
+.gob-fila .g-bar { height: 20px; position: relative; }
+.gob-fila .g-bar i { position: absolute; top: 0; bottom: 0; border-radius: 4px; background: var(--ic); opacity: .85; }
+.gob-fila .g-bar .g-cero { position: absolute; top: -3px; bottom: -3px; width: 1px; background: var(--muted); }
+.gob-fila .g-v { font-family: var(--f-data); text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; min-width: 72px; }
+.pf-tabla th button { border: 0; background: none; padding: 0; font: inherit; color: inherit; text-transform: inherit; letter-spacing: inherit; cursor: pointer; text-align: inherit; }
+.pf-tabla th button:hover, .pf-tabla th button[aria-sort] { color: var(--ink); }
+.pf-tabla td.gob-n { font-weight: 700; white-space: nowrap; }
+.pf-tabla td.gob-n small { display: block; font-weight: 400; color: var(--muted); font-size: 12px; font-family: var(--f-data); }
+/* Calendario */
+.cal-prox { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 12px; }
+.cal-prox > div { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 14px 16px; display: grid; gap: 2px; }
+.cal-prox span { font-size: 13px; color: var(--muted); }
+.cal-prox b { font-family: var(--f-display); font-size: 22px; font-weight: 800; }
+.cal-dia { display: grid; grid-template-columns: 4.4em minmax(0, 1fr); gap: 4px 14px; padding: 10px 0; border-bottom: 1px solid var(--line); align-items: start; }
+.cal-dia:last-child { border-bottom: 0; }
+.cal-f { font-family: var(--f-data); text-align: center; line-height: 1.1; }
+.cal-f b { display: block; font-size: 22px; font-weight: 600; }
+.cal-f small { font-size: 11.5px; color: var(--muted); text-transform: uppercase; }
+.cal-ev { display: grid; gap: 6px; }
+.cal-ev div { display: grid; gap: 1px; }
+.cal-ev b { font-size: 15.5px; }
+.cal-ev small { color: var(--muted); font-size: 13.5px; }
+.cal-tag { justify-self: start; font-size: 11.5px; font-weight: 700; padding: 1px 8px; border-radius: 999px; background: var(--bg); color: var(--muted); }
+.cal-tag.feriado { background: color-mix(in srgb, var(--b) 18%, transparent); color: var(--ink); }
+.cal-tag.inflacion { background: color-mix(in srgb, var(--accent) 22%, transparent); color: var(--ink); }
+.cal-hoy { color: var(--accent); font-weight: 700; }
+/* Convergencia */
+.conv { display: grid; gap: 12px; border-top: 1px solid var(--line); padding-top: 18px; }
+.conv h3 { font-size: 20px; font-weight: 800; }
+.conv .ag-form input { width: 110px; }
 
 /* Rankings */
 .rk-arg { background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--accent); border-radius: 12px; padding: 14px 18px; font-size: 16px; }
@@ -585,7 +623,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   </button>
   <a class="logo" href="#inicio">Atlas <span>Macro</span></a>
   <nav class="tabs" aria-label="Secciones">
-    <a href="#inicio" data-pag="inicio">Mapa</a><a href="#argentina" data-pag="argentina">Argentina hoy</a><a href="#comparacion" data-pag="comparacion">Comparar</a><a href="#rankings" data-pag="rankings">Rankings</a><a href="#laboratorio" data-pag="laboratorio">Laboratorio</a><a href="#juego" data-pag="juego">País del día</a><a href="#masrico" data-pag="masrico">Más rico o más pobre</a><a href="#elecciones" data-pag="elecciones">Elecciones</a><a href="#conflictos" data-pag="conflictos">Conflictos</a>
+    <a href="#inicio" data-pag="inicio">Mapa</a><a href="#argentina" data-pag="argentina">Argentina hoy</a><a href="#gobiernos" data-pag="gobiernos">Gobiernos</a><a href="#calendario" data-pag="calendario">Calendario</a><a href="#comparacion" data-pag="comparacion">Comparar</a><a href="#rankings" data-pag="rankings">Rankings</a><a href="#laboratorio" data-pag="laboratorio">Laboratorio</a><a href="#juego" data-pag="juego">País del día</a><a href="#masrico" data-pag="masrico">Más rico o más pobre</a><a href="#elecciones" data-pag="elecciones">Elecciones</a><a href="#conflictos" data-pag="conflictos">Conflictos</a>
   </nav>
   <div class="search">
     <input type="search" id="buscar" placeholder="Buscar un país…" autocomplete="off" spellcheck="false"
@@ -603,6 +641,8 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   <ul>
     <li><a href="#inicio" data-pag="inicio"><span class="nav-ico" aria-hidden="true">🗺️</span><span>Mapa y fichas<small>Tocá un país y mirá su economía</small></span></a></li>
     <li><a href="#argentina" data-pag="argentina"><span class="nav-ico" aria-hidden="true">🇦🇷</span><span>Argentina hoy<small>Dólar, inflación y calculadoras</small></span></a></li>
+    <li><a href="#gobiernos" data-pag="gobiernos"><span class="nav-ico" aria-hidden="true">🏛️</span><span>Gobiernos comparados<small>De Alfonsín a hoy, con datos</small></span></a></li>
+    <li><a href="#calendario" data-pag="calendario"><span class="nav-ico" aria-hidden="true">📅</span><span>Calendario económico<small>Próximos datos del INDEC y feriados</small></span></a></li>
     <li><a href="#comparacion" data-pag="comparacion"><span class="nav-ico" aria-hidden="true">⚖️</span><span>Comparación<small>Dos países frente a frente</small></span></a></li>
     <li><a href="#rankings" data-pag="rankings"><span class="nav-ico" aria-hidden="true">🏆</span><span>Rankings<small>Los primeros y los últimos del mundo</small></span></a></li>
     <li><a href="#laboratorio" data-pag="laboratorio"><span class="nav-ico" aria-hidden="true">🧪</span><span>Laboratorio<small>Relacioná variables y mirá la regresión</small></span></a></li>
@@ -621,7 +661,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <h1>Atlas <span>Macro</span></h1>
     <p class="lede">Tocá un país en el mapa o buscalo arriba, y mirá cómo le va a su economía, explicado en simple. Debajo del mapa está todo lo demás: el dólar y la inflación de hoy, el juego del día, los rankings y más.</p>
     <nav class="accesos" aria-label="Ir a">
-      <a href="#argentina">🇦🇷 Argentina hoy</a><a href="#juego">🎯 País del día</a><a href="#masrico">💰 Más rico o más pobre</a><a href="#rankings">🏆 Rankings</a><a href="#comparacion">⚖️ Comparar</a><a href="#elecciones">🗳️ Elecciones</a><a href="#conflictos">⚠️ Conflictos</a><a href="#laboratorio">🧪 Laboratorio</a>
+      <a href="#argentina">🇦🇷 Argentina hoy</a><a href="#gobiernos">🏛️ Gobiernos</a><a href="#calendario">📅 Calendario</a><a href="#juego">🎯 País del día</a><a href="#masrico">💰 Más rico o más pobre</a><a href="#rankings">🏆 Rankings</a><a href="#comparacion">⚖️ Comparar</a><a href="#elecciones">🗳️ Elecciones</a><a href="#conflictos">⚠️ Conflictos</a><a href="#laboratorio">🧪 Laboratorio</a>
     </nav>
   </header>
 
@@ -743,6 +783,30 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
       <p class="note" id="pfNota"></p>
     </section>
     <p class="note">Datos de ArgentinaDatos (argentinadatos.com), un proyecto abierto que junta datos públicos del BCRA y el INDEC; el dólar de hoy se actualiza en vivo desde DolarAPI (dolarapi.com) cuando está disponible. Nada de esto es una recomendación de inversión.</p>
+  </div>
+
+  <div class="pagina" id="pag-gobiernos" hidden>
+    <header class="top">
+      <div class="eyebrow">Argentina desde 1983</div>
+      <h1>Gobiernos comparados</h1>
+      <p class="lede">Cómo le fue a la economía durante cada gobierno desde la vuelta de la democracia. Tocá el título de una columna para ordenar, o elegí un indicador para verlo en barras.</p>
+    </header>
+    <div class="lab-chips" id="gobChips" role="group" aria-label="Indicador de las barras"></div>
+    <section class="ag-bloque"><div id="gobBarras" class="gob-barras"></div><p class="note" id="gobBarrasNota"></p></section>
+    <section class="ag-bloque"><div class="pf-tabla" id="gobTabla"></div></section>
+    <p class="note">Describe lo que pasó durante cada mandato, no cuánto se debió a sus decisiones: también pesan la herencia recibida, el precio de lo que exporta el país y la situación del mundo. Inflación: INDEC mes a mes; entre 2007 y 2015, cuando el INDEC estuvo intervenido, se usa el deflactor del PBI repartido en partes iguales por mes. Crecimiento, desempleo y deuda son anuales (Banco Mundial y FMI): cada año se le asigna al gobierno que estaba a mitad de año. Riesgo país: promedio mensual, desde 1998. El gobierno actual se mide hasta el último dato disponible.</p>
+  </div>
+
+  <div class="pagina" id="pag-calendario" hidden>
+    <header class="top">
+      <div class="eyebrow">Agenda</div>
+      <h1>Calendario económico</h1>
+      <p class="lede">Cuándo salen los próximos datos del INDEC y cuáles son los próximos feriados.</p>
+    </header>
+    <div class="cal-prox" id="calProx"></div>
+    <div class="lab-chips" id="calFiltros" role="group" aria-label="Qué mostrar"></div>
+    <div class="lista-pag" id="calLista"></div>
+    <p class="note" id="calNota"></p>
   </div>
 
   <div class="pagina" id="pag-rankings" hidden>
@@ -873,6 +937,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
             <tr><td>Esperanza de vida, mortalidad infantil, fertilidad, urbanización, internet, desigualdad, pobreza, inversión, ahorro, comercio, remesas, gasto público, impuestos, CO₂</td><td>Banco Mundial (World Development Indicators)</td><td>Todos los lunes</td></tr>
             <tr><td>Control de la corrupción y estado de derecho</td><td>Banco Mundial (Worldwide Governance Indicators)</td><td>Todos los lunes</td></tr>
             <tr><td>Riesgo país, cotizaciones del dólar, inflación del INDEC, UVA y tasas de plazo fijo de Argentina</td><td>ArgentinaDatos (argentinadatos.com), un proyecto abierto y no oficial que recopila datos públicos del BCRA y el INDEC</td><td>Todos los días hábiles</td></tr>
+            <tr><td>Fechas de publicación del INDEC (calendario económico)</td><td>Calendario de difusión del INDEC, copiado a mano; feriados de ArgentinaDatos</td><td>Cada seis meses, cuando el INDEC publica el calendario nuevo</td></tr>
             <tr><td>Dólar en vivo</td><td>DolarAPI (dolarapi.com); si no responde, se muestra el último cierre</td><td>Cada vez que se abre la página</td></tr>
             <tr><td>Riesgo país de otros países de Latinoamérica</td><td>Banco Central de Reserva del Perú, índice EMBIG con datos de Reuters</td><td>Todos los martes (el dato es mensual)</td></tr>
             <tr><td>Próximas elecciones y control de cambios de gobierno</td><td>Wikidata, base de datos abierta y colaborativa</td><td>Todos los días</td></tr>
@@ -902,6 +967,10 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
         <p>En Argentina, cada gobierno está marcado con el mes exacto en que empezó. En el resto de los países, las franjas se arman automáticamente con los últimos gobiernos de cada ficha, cambian por año y no por mes, y por eso son aproximadas. La ubicación de cada gobierno en izquierda, centro o derecha sigue cómo suelen clasificarlo la prensa y la ciencia política, y siempre es discutible. El promedio de riesgo país por gobierno describe lo que pasó durante cada mandato, no cuánto se debió a sus decisiones.</p>
         <h3>Argentina hoy</h3>
         <p>La calculadora de inflación encadena la inflación mensual del INDEC desde enero de 1992 (cuando empezó el peso actual): un monto "de enero" está a precios de enero. "¿Dónde convenía tener la plata?" compra dólares al precio de venta promedio del mes elegido y los vende hoy al precio de compra; el plazo fijo se renueva cada 30 días a la tasa promedio de depósitos a 30 días de cada mes; el plazo fijo UVA sigue el valor de la UVA, sin el interés extra que agrega cada banco. No se descuentan impuestos ni comisiones. Entre 2007 y 2015 el INDEC estuvo intervenido y sus datos de inflación eran más bajos que los reales.</p>
+        <h3>Gobiernos comparados</h3>
+        <p>La inflación de cada gobierno encadena la inflación mensual desde el mes en que asumió hasta el mes anterior a la asunción del siguiente, y se expresa como promedio anual. Entre 2007 y 2015 se usa el deflactor del PBI repartido en partes iguales por mes, porque los datos del INDEC intervenido subestimaban la inflación. Crecimiento, desempleo y deuda son anuales: cada año se le asigna al gobierno que estaba en funciones a mitad de año. El riesgo país está disponible desde 1998.</p>
+        <h3>Calculadora de convergencia</h3>
+        <p>Compara el PBI por persona ajustado por precios (PPA) de dos países y calcula en cuántos años el más pobre alcanzaría al más rico si cada uno creciera a una tasa fija por año: años = ln(brecha) ÷ ln((1 + g₁) ÷ (1 + g₂)).</p>
         <h3>País del día</h3>
         <p>El país de cada día sale de una lista fija de 151 países (independientes, con ficha completa y más de 1,5 millones de habitantes), en un orden mezclado una sola vez, así que a todos les toca el mismo. La distancia se mide entre los centros de cada país y la flecha indica la dirección como se ve en un mapa plano.</p>
       </section>
@@ -988,6 +1057,17 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
       </div>
       <div id="tl"></div>
       <p class="note" id="tlNote"></p>
+    </div>
+    <div class="conv" id="conv">
+      <h3>¿Cuándo lo alcanzaría?</h3>
+      <p class="ag-sub">Si cada país creciera a un ritmo fijo por persona, ¿cuántos años tardaría el más pobre en alcanzar al más rico? Se compara el PBI por persona ajustado por lo que cuestan las cosas (PPA).</p>
+      <div class="ag-form">
+        <label><span id="convNA">País 1</span> crece por año (%)<input type="text" inputmode="decimal" id="convGA" value="3"></label>
+        <label><span id="convNB">País 2</span> crece por año (%)<input type="text" inputmode="decimal" id="convGB" value="2"></label>
+      </div>
+      <div class="ag-res" id="convRes2"></div>
+      <div id="convChart" class="ag-chart"></div>
+      <p class="note" id="convNota"></p>
     </div>
   </section>
   </div>
@@ -1380,7 +1460,7 @@ const sinTildes = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowe
 /* ---------- PÁGINAS Y PANEL LATERAL ----------
    Cada sección es una "página": #inicio, #comparacion, #elecciones, #conflictos.
    Se cambia con el link (la dirección cambia, así funciona el botón "atrás" del navegador). */
-const PAGINAS = ["inicio", "argentina", "comparacion", "rankings", "laboratorio", "juego", "masrico", "elecciones", "conflictos", "acerca"];
+const PAGINAS = ["inicio", "argentina", "gobiernos", "calendario", "comparacion", "rankings", "laboratorio", "juego", "masrico", "elecciones", "conflictos", "acerca"];
 let paginaActual = "inicio";
 const versusAbierto = () => paginaActual === "comparacion";
 function mostrarPagina(nombre) {
@@ -1391,10 +1471,12 @@ function mostrarPagina(nombre) {
   document.querySelectorAll("#nav a[data-pag], .tabs a[data-pag]").forEach(a => a.setAttribute("aria-current", a.dataset.pag === nombre ? "page" : "false"));
   if (nombre === "inicio") renderTarjetas();
   cerrarNav();
-  if (nombre === "comparacion") { renderVersus(); drawTL(); tl.resize(); }
+  if (nombre === "comparacion") { renderVersus(); drawTL(); tl.resize(); renderConvergencia(); if (convChart) convChart.resize(); }
   if (nombre === "laboratorio") { abrirLab(); if (labChart) labChart.resize(); }
   if (nombre === "rankings") abrirRankings();
   if (nombre === "argentina") abrirArgentina();
+  if (nombre === "gobiernos") renderGobiernos();
+  if (nombre === "calendario") renderCalendario();
   if (nombre === "masrico") abrirMasRico();
   if (nombre === "inicio") {
     // si la ventana cambió de tamaño mientras el mapa estaba oculto, lo rearmamos
@@ -1874,6 +1956,9 @@ function renderTarjetas() {
   tarjeta("juego", "🎯", `País del día #${hoyN}`, yaJugo ? `Ya jugaste hoy: ${jugado.intentos.includes(JUEGO_ORDEN[(hoyN - 1) % JUEGO_ORDEN.length]) ? jugado.intentos.length : "X"}/6` : "¿Qué país es? Adivinalo con pistas económicas",
     yaJugo ? "Mañana hay otro país" : "Un país nuevo cada día, el mismo para todos", yaJugo ? "Ver tu resultado" : "Jugar");
   tarjeta("masrico", "💰", "¿Más rico o más pobre?", "¿Chile o Uruguay? ¿Polonia o Portugal?", `Adiviná cuál tiene más PBI por persona${leerLocal("atlas-masrico-mejor", 0) ? ` · tu mejor racha: ${leerLocal("atlas-masrico-mejor", 0)}` : ""}`, "Jugar");
+  const pInf = proximoDe("inflacion");
+  if (pInf) tarjeta("calendario", "📅", "Calendario económico", `El próximo dato de inflación sale ${enDias(diasHasta(pInf.fecha))}`, `${fechaLarga(pInf.fecha)} · datos del INDEC y feriados`, "Ver el calendario");
+  tarjeta("gobiernos", "🏛️", "Gobiernos comparados", "¿Con qué gobierno hubo menos inflación?", "De Alfonsín a hoy: inflación, crecimiento, desempleo y deuda", "Comparar gobiernos");
   const prox = proximasElecciones()[0];
   if (prox) {
     const dias = Math.round((new Date(prox.fecha) - new Date(hoyISO())) / 864e5);
@@ -1883,7 +1968,6 @@ function renderTarjetas() {
   const recs = Object.keys(PAISES).filter(k => PAISES[k].curada && PAISES[k].poblacion >= 1).map(k => [k, labValor(k, "recesiones", "ultimo")]).filter(x => x[1]).sort((a, b) => b[1].v - a[1].v);
   const pos = recs.findIndex(x => x[0] === "ARG") + 1;
   if (pos) tarjeta("rankings", "🏆", "Rankings", `Argentina, ${pos}° del mundo en años de recesión desde 1990`, "Inflación, crecimiento, riqueza, deuda y más", "Ver los rankings");
-  tarjeta("comparacion", "⚖️", "Comparación", `${PAISES[compA].nombre} o ${PAISES[compB].nombre}: ¿quién está mejor?`, "Dos países frente a frente, explicado en simple", "Comparar");
   const nConf = Object.values(CURADO.paises).filter(p => p.crisis).length;
   tarjeta("conflictos", "⚠️", "Conflictos y crisis", `${nConf} países en guerra, conflicto o crisis`, "Ucrania, Medio Oriente, Sudán, el Sahel y más", "Ver el mapa de conflictos");
   document.getElementById("tarjetas").innerHTML = T.join("");
@@ -1945,7 +2029,8 @@ function renderInflacion() {
   document.getElementById("agInflNums").innerHTML = `
     <div><span>Último dato: ${mesNombre(ultM)}</span><b>${nf(ultV, 1)}%</b></div>
     <div><span>Acumulada en ${anio}</span><b>${nf(acum, 1)}%</b></div>
-    <div><span>Últimos 12 meses (interanual)</span><b>${nf(ia.valor, 1)}%</b></div>`;
+    <div><span>Últimos 12 meses (interanual)</span><b>${nf(ia.valor, 1)}%</b></div>`
+    + (proximoDe("inflacion") ? `<div><span>Próximo dato</span><b style="font-size:20px">${enDias(diasHasta(proximoDe("inflacion").fecha))}</b><span>${fechaLarga(proximoDe("inflacion").fecha)}</span></div>` : "");
 }
 function chartBase() {
   const muted = css("--muted"), line = css("--line"), ink = css("--ink");
@@ -2095,6 +2180,159 @@ function abrirArgentina() {
   if (!ARGENTINA || !ARGENTINA.casas) return;
   renderCasas(); renderConversor(); renderInflacion(); renderCalc(); renderAhorro(); renderPlazoFijo();
   renderAgCharts(); Object.values(agCharts).forEach(c => c.resize());
+}
+
+/* ---------- GOBIERNOS COMPARADOS (Argentina desde 1983) ---------- */
+const GOB_INDS = [
+  { k: "infl", t: "Inflación anual promedio", corto: "Inflación anual", fmt: v => `${nf(v, v >= 100 ? 0 : 1)}%`, bajoMejor: true, log: true },
+  { k: "crec", t: "Crecimiento anual promedio", corto: "Crecimiento anual", fmt: v => `${v >= 0 ? "+" : ""}${nf(v, 1)}%` },
+  { k: "crecAcum", t: "Crecimiento acumulado", corto: "Crecimiento total", fmt: v => `${v >= 0 ? "+" : ""}${nf(v, 0)}%` },
+  { k: "desempleo", t: "Desempleo al terminar", corto: "Desempleo final", fmt: v => `${nf(v, 1)}%`, bajoMejor: true },
+  { k: "deuda", t: "Deuda pública al terminar (% del PBI)", corto: "Deuda final", fmt: v => `${nf(v, 0)}%`, bajoMejor: true },
+  { k: "riesgo", t: "Riesgo país promedio", corto: "Riesgo país", fmt: v => nf(v), bajoMejor: true, log: true }
+];
+let GOBS = null, gobOrden = { k: "desde", asc: true }, gobBarra = "infl";
+function calcularGobiernos() {
+  const gs = (CURADO.paises.ARG.gobiernos || []).filter(g => g[0] >= "1983-12");
+  /* Inflación mensual: INDEC, salvo 2007–2015 (deflactor anual repartido por mes) */
+  const mensual = Object.fromEntries(ARGENTINA.inflacion.mensual);
+  const anual = HIST.ARG.infl, defl = y => anual[1][y - anual[0]];
+  for (let y = 2007; y <= 2015; y++) { const v = defl(y); if (v != null) for (let m = 1; m <= 12; m++) mensual[`${y}-${String(m).padStart(2, "0")}`] = (Math.pow(1 + v / 100, 1 / 12) - 1) * 100; }
+  const ultimoMes = ARGENTINA.inflacion.mensual[ARGENTINA.inflacion.mensual.length - 1][0];
+  const rp = Object.fromEntries(ARGENTINA.riesgo_pais.mensual);
+  const serieAnual = ind => { const s = HIST.ARG[ind] || DATOS.paises.ARG.series[ind]; return y => s && s[1][y - s[0]] != null ? s[1][y - s[0]] : null; };
+  const crec = serieAnual("crec"), des = serieAnual("desempleo"), deu = serieAnual("deuda");
+  GOBS = gs.map((g, i) => {
+    const [desde, hasta, nombre, ideo] = g, enCurso = i === gs.length - 1;
+    /* meses del gobierno: desde el mes de asunción hasta el anterior al del siguiente */
+    let f = 1, n = 0, sumR = 0, nR = 0;
+    for (let m = mesNum(desde); m < mesNum(enCurso ? mesKey(mesNum(ultimoMes) + 1) : hasta); m++) {
+      const k = mesKey(m);
+      if (mensual[k] != null) { f *= 1 + mensual[k] / 100; n++; }
+      if (rp[k] != null) { sumR += rp[k]; nR++; }
+    }
+    /* años del gobierno: los que tuvo a mitad de año */
+    const anios = [];
+    for (let y = 1983; y <= ANIO; y++) { const t = y + .5; if (t >= anioDe(desde) && (enCurso || t < anioDe(hasta))) anios.push(y); }
+    const cs = anios.map(crec).filter(v => v != null);
+    const acum = cs.reduce((a, v) => a * (1 + v / 100), 1);
+    const ultAnio = [...anios].reverse().find(y => des(y) != null), ultDeu = [...anios].reverse().find(y => deu(y) != null);
+    return {
+      nombre, ideo, desde, hasta: enCurso ? null : hasta, enCurso, anios,
+      infl: n ? (Math.pow(f, 12 / n) - 1) * 100 : null,
+      crec: cs.length ? (Math.pow(acum, 1 / cs.length) - 1) * 100 : null,
+      crecAcum: cs.length ? (acum - 1) * 100 : null,
+      desempleo: ultAnio ? des(ultAnio) : null, desempleoA: ultAnio,
+      deuda: ultDeu ? deu(ultDeu) : null, deudaA: ultDeu,
+      riesgo: nR >= 6 ? sumR / nR : null
+    };
+  });
+}
+const periodoGob = g => `${g.desde.slice(0, 4)}–${g.enCurso ? "hoy" : g.hasta.slice(0, 4)}`;
+function renderGobiernos() {
+  if (!GOBS) calcularGobiernos();
+  /* Botones de indicador */
+  document.getElementById("gobChips").innerHTML = GOB_INDS.map(i => `<button class="btn" type="button" data-k="${i.k}" aria-pressed="${gobBarra === i.k}">${i.corto}</button>`).join("");
+  document.querySelectorAll("#gobChips .btn").forEach(b => b.onclick = () => { gobBarra = b.dataset.k; renderGobiernos(); });
+  /* Barras */
+  const ind = GOB_INDS.find(i => i.k === gobBarra), con = GOBS.filter(g => g[ind.k] != null);
+  const vals = con.map(g => g[ind.k]);
+  const tr = v => ind.log ? Math.log10(Math.max(v, 1)) : v;          // inflación y riesgo país en escala log: hay valores de miles
+  const min = Math.min(0, ...vals.map(tr)), max = Math.max(...vals.map(tr)), rango = max - min || 1;
+  const pos = v => (tr(v) - min) / rango * 100, cero = (0 - min) / rango * 100;
+  document.getElementById("gobBarras").innerHTML = `<h2 class="sr-only">${ind.t}</h2>` + con.map(g => {
+    const v = g[ind.k], a = Math.min(pos(v), cero), w = Math.abs(pos(v) - cero);
+    return `<div class="gob-fila" style="--ic: var(${IDEO[g.ideo].c})"><span class="g-n">${g.nombre}<small>${periodoGob(g)}</small></span>
+      <span class="g-bar"><i style="left:${a}%; width:${Math.max(w, .6)}%"></i>${min < 0 ? `<span class="g-cero" style="left:${cero}%"></span>` : ""}</span><span class="g-v">${ind.fmt(v)}</span></div>`;
+  }).join("");
+  const usadas = [...new Set(con.map(g => g.ideo))];
+  document.getElementById("gobBarrasNota").innerHTML = `${ind.t}${ind.log ? " · las barras van en escala logarítmica, porque hay valores de miles" : ""}. Colores: ${Object.keys(IDEO).filter(c => usadas.includes(c)).map(c => `<span class="ipill" style="--ic: var(${IDEO[c].c})">${IDEO[c].t}</span>`).join(" ")}`;
+  /* Tabla ordenable */
+  const filas = GOBS.slice().sort((a, b) => {
+    if (gobOrden.k === "desde") return gobOrden.asc ? a.desde.localeCompare(b.desde) : b.desde.localeCompare(a.desde);
+    const x = a[gobOrden.k], y = b[gobOrden.k];
+    if (x == null) return 1; if (y == null) return -1;
+    return gobOrden.asc ? x - y : y - x;
+  });
+  const th = (k, t) => `<th class="${k === "desde" ? "" : "n"}"><button type="button" data-k="${k}"${gobOrden.k === k ? ` aria-sort="${gobOrden.asc ? "ascending" : "descending"}"` : ""}>${t}${gobOrden.k === k ? (gobOrden.asc ? " ▲" : " ▼") : ""}</button></th>`;
+  document.getElementById("gobTabla").innerHTML = `<table><thead><tr>${th("desde", "Gobierno")}${GOB_INDS.map(i => th(i.k, i.corto)).join("")}</tr></thead><tbody>${filas.map(g => `<tr>
+    <td class="gob-n">${g.nombre}${g.enCurso ? " (en curso)" : ""}<small>${periodoGob(g)} · ${IDEO[g.ideo].t.toLowerCase()}</small></td>
+    ${GOB_INDS.map(i => `<td class="n">${g[i.k] == null ? "—" : i.fmt(g[i.k])}${i.k === "desempleo" && g.desempleoA ? `<br><small class="ytag">${g.desempleoA}</small>` : i.k === "deuda" && g.deudaA ? `<br><small class="ytag">${g.deudaA}</small>` : ""}</td>`).join("")}</tr>`).join("")}</tbody></table>`;
+  document.querySelectorAll("#gobTabla th button").forEach(b => b.onclick = () => {
+    const k = b.dataset.k; gobOrden = { k, asc: gobOrden.k === k ? !gobOrden.asc : k === "desde" || !!(GOB_INDS.find(i => i.k === k) || {}).bajoMejor }; renderGobiernos();
+  });
+}
+
+/* ---------- CALENDARIO ECONÓMICO ---------- */
+let CALENDARIO = null, calFiltro = "todo";
+const DIAS_SEM = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+const fechaLarga = f => { const d = new Date(f + "T12:00:00"); return `${DIAS_SEM[d.getDay()]} ${d.getDate()} de ${MESES[d.getMonth()]}`; };
+const diasHasta = f => Math.round((new Date(f + "T12:00:00") - new Date(hoyISO() + "T12:00:00")) / 864e5);
+const enDias = n => n === 0 ? "hoy" : n === 1 ? "mañana" : `en ${n} días`;
+function eventosCalendario() {
+  const ev = [];
+  (CALENDARIO ? CALENDARIO.eventos : []).forEach(e => ev.push({ ...e, tipo: "indec" }));
+  ((ARGENTINA && ARGENTINA.feriados) || []).forEach(f => ev.push({ fecha: f.fecha, tipo: "feriado", tema: "feriado", titulo: f.nombre, periodo: f.tipo === "puente" ? "día no laborable con fines turísticos" : `feriado ${f.tipo}` }));
+  return ev.filter(e => e.fecha >= hoyISO()).sort((a, b) => a.fecha.localeCompare(b.fecha));
+}
+const proximoDe = tema => eventosCalendario().find(e => e.tema === tema);
+function renderCalendario() {
+  const ev = eventosCalendario();
+  const caja = (titulo, e) => e ? `<div><span>${titulo}</span><b>${enDias(diasHasta(e.fecha)).replace(/^./, c => c.toUpperCase())}</b><span>${fechaLarga(e.fecha)} · ${e.titulo}${e.periodo && e.tipo === "indec" ? ` de ${e.periodo}` : ""}</span></div>` : "";
+  document.getElementById("calProx").innerHTML = caja("Próximo dato de inflación", proximoDe("inflacion")) + caja("Próximo feriado", proximoDe("feriado")) + caja("Próximo dato de actividad", proximoDe("actividad"));
+  const FILTROS = [["todo", "Todo"], ["indec", "Datos del INDEC"], ["feriado", "Feriados"]];
+  document.getElementById("calFiltros").innerHTML = FILTROS.map(([k, t]) => `<button class="btn" type="button" data-k="${k}" aria-pressed="${calFiltro === k}">${t}</button>`).join("");
+  document.querySelectorAll("#calFiltros .btn").forEach(b => b.onclick = () => { calFiltro = b.dataset.k; renderCalendario(); });
+  const vis = ev.filter(e => calFiltro === "todo" || e.tipo === calFiltro);
+  /* Agrupado por mes y por día */
+  const meses = new Map();
+  vis.forEach(e => { const m = e.fecha.slice(0, 7); if (!meses.has(m)) meses.set(m, new Map()); const d = meses.get(m); if (!d.has(e.fecha)) d.set(e.fecha, []); d.get(e.fecha).push(e); });
+  document.getElementById("calLista").innerHTML = vis.length ? [...meses].map(([m, dias]) => `<section class="grupo"><h2>${mesTitulo(m)}</h2>${[...dias].map(([f, es]) => {
+    const d = new Date(f + "T12:00:00"), n = diasHasta(f);
+    return `<div class="cal-dia"><span class="cal-f"><b>${d.getDate()}</b><small>${DIAS_SEM[d.getDay()].slice(0, 3)}</small></span><div class="cal-ev">${es.map(e => `<div>
+      <span class="cal-tag ${e.tipo === "feriado" ? "feriado" : e.tema === "inflacion" ? "inflacion" : ""}">${e.tipo === "feriado" ? "Feriado" : "INDEC"}</span>
+      <b>${e.titulo}${e.tipo === "indec" && e.periodo ? ` · ${e.periodo}` : ""}</b>${e.desc ? `<small>${e.desc}</small>` : e.periodo ? `<small>${e.periodo.charAt(0).toUpperCase() + e.periodo.slice(1)}</small>` : ""}</div>`).join("")}
+      ${n <= 7 ? `<small class="cal-hoy">${enDias(n)}</small>` : ""}</div></div>`;
+  }).join("")}</section>`).join("") : `<p class="note">No hay eventos cargados para adelante.</p>`;
+  const hastaCal = CALENDARIO && CALENDARIO.eventos.length ? CALENDARIO.eventos[CALENDARIO.eventos.length - 1].fecha : null;
+  document.getElementById("calNota").textContent = `Datos del INDEC según su calendario de difusión${hastaCal ? ` (cargado hasta el ${fechaLarga(hastaCal)}; las fechas siguientes se suman cuando el INDEC las publica)` : ""}. Feriados nacionales: ArgentinaDatos. Las fechas pueden cambiar.`;
+}
+
+/* ---------- CALCULADORA DE CONVERGENCIA (en la comparación) ---------- */
+let convChart = null;
+function renderConvergencia() {
+  const A = compA, B = compB, pa = PAISES[A], pb = PAISES[B];
+  document.getElementById("convNA").textContent = pa.nombre; document.getElementById("convNB").textContent = pb.nombre;
+  const res = document.getElementById("convRes2"), nota = document.getElementById("convNota");
+  const ga = parseFloat(document.getElementById("convGA").value.replace(",", ".")), gb = parseFloat(document.getElementById("convGB").value.replace(",", "."));
+  const el = document.getElementById("convChart");
+  if (pa.ppa == null || pb.ppa == null || !isFinite(ga) || !isFinite(gb)) { res.innerHTML = `<span>Falta el PBI por persona ajustado de alguno de los dos países, o un porcentaje.</span>`; if (convChart) convChart.clear(); return; }
+  const [pobre, rico, gP, gR] = pa.ppa <= pb.ppa ? [A, B, ga, gb] : [B, A, gb, ga];
+  const yP = PAISES[pobre].ppa, yR = PAISES[rico].ppa, brecha = yR / yP;
+  let frase, anios = null;
+  if (gP > gR) {
+    anios = Math.log(brecha) / Math.log((1 + gP / 100) / (1 + gR / 100));
+    frase = `Con estos ritmos, <strong>${PAISES[pobre].nombre}</strong> alcanzaría a <strong>${PAISES[rico].nombre}</strong> en <b>${Math.ceil(ANIO + anios)}</b>, dentro de <b>${nf(Math.ceil(anios))} años</b>.`;
+  } else frase = `Con estos ritmos, <strong>${PAISES[pobre].nombre}</strong> nunca alcanzaría a <strong>${PAISES[rico].nombre}</strong>: tendría que crecer más rápido que ${PAISES[rico].nombre}, y ${gP === gR ? "crecen igual" : "crece más lento"}, así que la distancia ${gP === gR ? "se mantiene" : "se agranda"}.`;
+  res.innerHTML = `<span>Hoy ${PAISES[rico].nombre} tiene US$ ${nf(yR)} por persona y ${PAISES[pobre].nombre} US$ ${nf(yP)}: ${nf(brecha, brecha < 10 ? 1 : 0)} veces más.</span><span>${frase}</span>`;
+  /* Proyección */
+  const h = Math.min(100, Math.max(25, anios ? Math.ceil(anios * 1.25) : 40));
+  const xs = Array.from({ length: h + 1 }, (_, i) => ANIO + i);
+  const { muted, line, ink, ax } = chartBase();
+  convChart = convChart || echarts.init(el);
+  const serie = (k, g, color) => ({ name: PAISES[k].nombre, type: "line", symbol: "none", data: xs.map((_, i) => Math.round(PAISES[k].ppa * Math.pow(1 + g / 100, i))), lineStyle: { color, width: 2.5 }, itemStyle: { color } });
+  const sA = serie(A, ga, css("--accent")), sB = serie(B, gb, css("--b"));
+  if (anios) sA.markLine = { silent: true, symbol: "none", lineStyle: { color: muted, type: "dashed" }, label: { formatter: String(Math.ceil(ANIO + anios)), color: ink }, data: [{ xAxis: String(Math.min(ANIO + h, Math.ceil(ANIO + anios))) }] };
+  convChart.setOption({
+    grid: { left: 86, right: 16, top: 34, bottom: 30 }, legend: { top: 0, left: 0, textStyle: { color: ink } },
+    tooltip: { trigger: "axis", backgroundColor: css("--surface"), borderColor: line, textStyle: { color: ink }, formatter: ps => `<b>${ps[0].name}</b><br>` + ps.map(p => `${p.marker}${p.seriesName}: US$ ${nf(p.value)}`).join("<br>") },
+    xAxis: { type: "category", data: xs.map(String), axisLabel: ax, axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+    yAxis: { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => "US$ " + nf(v) }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+    series: [sA, sB]
+  }, true);
+  const cr = k => { const s = HIST[k] && HIST[k].crec; if (!s) return null; const v = []; for (let y = ANIO - 9; y <= ANIO; y++) { const x = s[1][y - s[0]]; if (x != null) v.push(x); } return v.length >= 7 ? v.reduce((a, b) => a + b, 0) / v.length : null; };
+  const ca = cr(A), cb = cr(B);
+  nota.textContent = `Referencia: en los últimos 10 años la economía de ${pa.nombre} creció en promedio ${ca == null ? "—" : nf(ca, 1) + "%"} por año y la de ${pb.nombre} ${cb == null ? "—" : nf(cb, 1) + "%"} (PBI total; por persona suele ser un poco menos, porque la población también crece). Es una cuenta simple con tasas fijas: sirve para dimensionar la distancia, no es un pronóstico.`;
 }
 
 /* ---------- RANKINGS ---------- */
@@ -2987,6 +3225,7 @@ function frases(A, B) {
 }
 
 function renderVersus() {
+  if (paginaActual === "comparacion" && document.getElementById("convGA")) setTimeout(renderConvergencia, 0);
   document.getElementById("selA").value = compA;
   document.getElementById("selB").value = compB;
   document.getElementById("flagA").innerHTML = flagInner(compA);
@@ -3076,9 +3315,9 @@ function textoFuentes() {
 function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); renderLab(); if (paginaActual === "argentina") renderAgCharts(); } }
 
 const leer = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: error ${r.status}`); return r.json(); });
-Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null), leer("riesgo.json").catch(() => null)])
-  .then(([datos, curado, topo, argentina, noticias, riesgo]) => {
-    DATOS = datos; CURADO = curado; ARGENTINA = argentina; NOTICIAS = noticias; RIESGO = riesgo;
+Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null), leer("riesgo.json").catch(() => null), leer("calendario.json").catch(() => null)])
+  .then(([datos, curado, topo, argentina, noticias, riesgo, calendario]) => {
+    DATOS = datos; CURADO = curado; ARGENTINA = argentina; NOTICIAS = noticias; RIESGO = riesgo; CALENDARIO = calendario;
     prepararDatos();
     renderElecciones();
     renderConflictos();
@@ -3097,6 +3336,7 @@ Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json")
     armarLab();
     armarRankings();
     armarArgentina();
+    ["convGA", "convGB"].forEach(id => document.getElementById(id).addEventListener("input", renderConvergencia));
     renderTicker();
     armarMapaInd();
     cargarLab().then(() => { Object.keys(RANKS).forEach(k => delete RANKS[k]); renderPanel(); });   // las secciones nuevas de la ficha usan lab.json
@@ -3117,7 +3357,7 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redrawChar
 new MutationObserver(redrawCharts).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 let rT;
 window.addEventListener("resize", () => {
-  tl.resize(); charts.sparks.forEach(c => c.resize()); if (labChart) labChart.resize(); Object.values(agCharts).forEach(c => c.resize());
+  tl.resize(); charts.sparks.forEach(c => c.resize()); if (labChart) labChart.resize(); Object.values(agCharts).forEach(c => c.resize()); if (convChart) convChart.resize();
   clearTimeout(rT);
   rT = setTimeout(() => {
     const r = document.getElementById("map").getBoundingClientRect();

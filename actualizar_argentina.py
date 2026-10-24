@@ -8,6 +8,7 @@ Baja los datos de Argentina que se actualizan todos los días y genera argentina
   · Inflación mensual del INDEC (y la interanual)
   · Valor de la UVA
   · Tasa de plazo fijo a 30 días (histórica) y lo que paga hoy cada banco
+  · Feriados nacionales
 
 Fuente: ArgentinaDatos (https://argentinadatos.com), un proyecto abierto y no
 oficial que junta estos datos de fuentes públicas (BCRA, INDEC, etc.).
@@ -34,6 +35,7 @@ URL_INTERANUAL = f"{BASE}/finanzas/indices/inflacionInteranual/index.json"
 URL_UVA = f"{BASE}/finanzas/indices/uva/index.json"
 URL_TASA30 = f"{BASE}/finanzas/tasas/depositos30Dias/index.json"
 URL_PLAZO_FIJO = f"{BASE}/finanzas/tasas/plazoFijo/index.json"
+URL_FERIADOS = f"{BASE}/feriados/{{anio}}/index.json"
 
 # Las cotizaciones que mostramos: código en ArgentinaDatos → nombre en la página
 CASAS = {
@@ -156,6 +158,15 @@ def main():
         })
     bancos.sort(key=lambda b: -b["tna"])
 
+    # --- Feriados de este año y del que viene (el del año que viene puede no estar todavía) ---
+    print("· Feriados")
+    feriados = []
+    anio = datetime.now().year
+    for a in (anio, anio + 1):
+        respuesta = requests.get(URL_FERIADOS.format(anio=a), timeout=60)
+        if respuesta.status_code == 200:
+            feriados += [{"fecha": f["fecha"], "nombre": f["nombre"], "tipo": f["tipo"]} for f in respuesta.json()]
+
     datos = {
         "generado": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "fuente": "ArgentinaDatos (argentinadatos.com), proyecto abierto y no oficial",
@@ -186,6 +197,7 @@ def main():
         "uva": [[mes, round(uva[mes], 2)] for mes in sorted(uva)],
         "tasa30": [[mes, round(tasa30_mes[mes], 2)] for mes in sorted(tasa30_mes)],   # TNA % promedio del mes
         "plazo_fijo": bancos,
+        "feriados": feriados,
     }
 
     with open(ARCHIVO_SALIDA, "w", encoding="utf-8") as archivo:
