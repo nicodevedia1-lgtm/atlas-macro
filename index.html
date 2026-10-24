@@ -291,6 +291,48 @@ details.sec[open] .sec-flecha { transform: rotate(225deg); }
 .ar-dia { display: grid; gap: 8px; }
 .ar-dia h3 { font-size: 17px; font-weight: 700; }
 .gob-ley { display: inline-flex; flex-wrap: wrap; gap: 4px 10px; margin-top: 4px; }
+/* Juego: país del día */
+.juego { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 860px) { .juego { grid-template-columns: minmax(0, 1fr); } }
+.j-col { display: grid; gap: 14px; min-width: 0; }
+.pistas { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.pistas li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 4px 12px; align-items: start; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+.pistas .p-ico { font-family: var(--f-emoji); font-size: 22px; line-height: 1.2; grid-row: span 2; }
+.pistas .p-tit { font-family: var(--f-data); font-size: 11.5px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); }
+.pistas .p-txt { font-size: 16px; font-weight: 600; }
+.pistas .p-txt small { display: block; font-weight: 400; font-size: 14px; color: var(--muted); }
+.pistas li.oculta { background: transparent; border-style: dashed; color: var(--muted); }
+.pistas li.oculta .p-txt { font-weight: 400; color: var(--muted); font-size: 14.5px; }
+.pistas li.nueva { animation: aparecer .4s ease; }
+@keyframes aparecer { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.j-input { max-width: none; margin: 0; }
+.j-input input { font-size: 16px; padding: 12px 16px; }
+.intentos { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.intentos li { display: grid; grid-template-columns: 22px 28px minmax(0, 1fr) 40px; gap: 10px; align-items: center; padding: 8px 10px 8px 12px; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); font-size: 15px; font-weight: 600; }
+.intentos li.ok { border-color: var(--good); }
+.intentos .i-nom small { display: block; font-weight: 400; font-size: 13.5px; color: var(--muted); }
+.intentos .flag { width: 28px; height: 19px; }
+.intentos .i-km { font-family: var(--f-data); font-size: 13px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.intentos .i-dir { width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; background: var(--bg); font-family: var(--f-emoji); font-size: 20px; }
+.intentos .i-dir svg { width: 26px; height: 26px; fill: var(--accent); }
+.intentos li.vacio { background: transparent; border-style: dashed; height: 58px; }
+.j-ayuda { font-size: 13.5px; color: var(--muted); }
+.j-final { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 18px; display: grid; gap: 12px; }
+.j-final h2 { font-size: 24px; font-weight: 800; display: flex; align-items: center; gap: 12px; }
+.j-final h2 .flag { width: 42px; height: 28px; }
+.j-final .j-acciones { display: flex; flex-wrap: wrap; gap: 8px; }
+.j-final .go { border: 0; background: var(--accent); color: var(--surface); font-weight: 700; padding: 9px 16px; border-radius: 8px; cursor: pointer; font-size: 15px; }
+.j-final .btn { padding: 8px 14px; font-size: 15px; }
+.j-cuadros { font-family: var(--f-emoji); font-size: 22px; letter-spacing: 2px; }
+.j-stats { display: grid; gap: 10px; }
+.j-nums { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; text-align: center; }
+.j-nums b { display: block; font-family: var(--f-data); font-size: 24px; font-weight: 500; }
+.j-nums span { font-size: 12px; color: var(--muted); }
+.j-dist { display: grid; gap: 4px; font-family: var(--f-data); font-size: 12.5px; }
+.j-dist div { display: grid; grid-template-columns: 14px minmax(0, 1fr); gap: 8px; align-items: center; }
+.j-dist i { display: block; height: 18px; min-width: 22px; background: var(--line); border-radius: 4px; color: var(--ink); font-style: normal; text-align: right; padding-right: 6px; line-height: 18px; }
+.j-dist i.hoy { background: var(--accent); color: var(--surface); }
+
 .lista-pag { display: grid; gap: 18px; }
 .grupo { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 22px 8px; display: grid; gap: 4px; min-width: 0; }
 .grupo h2 { font-size: 20px; font-weight: 800; }
@@ -344,6 +386,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   <ul>
     <li><a href="#inicio" data-pag="inicio"><span class="nav-ico" aria-hidden="true">🗺️</span><span>Mapa y fichas<small>Tocá un país y mirá su economía</small></span></a></li>
     <li><a href="#comparacion" data-pag="comparacion"><span class="nav-ico" aria-hidden="true">⚖️</span><span>Comparación<small>Dos países frente a frente</small></span></a></li>
+    <li><a href="#juego" data-pag="juego"><span class="nav-ico" aria-hidden="true">🎯</span><span>País del día<small>Adiviná el país con pistas económicas</small></span></a></li>
     <li><a href="#elecciones" data-pag="elecciones"><span class="nav-ico" aria-hidden="true">🗳️</span><span>Próximas elecciones<small>Los próximos 12 meses</small></span></a></li>
     <li><a href="#conflictos" data-pag="conflictos"><span class="nav-ico" aria-hidden="true">⚠️</span><span>Conflictos y crisis<small>Guerras, golpes y crisis</small></span></a></li>
   </ul>
@@ -395,6 +438,30 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <aside class="panel" id="panel" aria-live="polite"></aside>
   </section>
 
+  </div>
+
+  <div class="pagina" id="pag-juego" hidden>
+    <header class="top">
+      <div class="eyebrow" id="juegoNum">País del día</div>
+      <h1>¿Qué país es?</h1>
+      <p class="lede">Un país nuevo cada día, el mismo para todos. Arrancás con una pista económica y cada error destapa otra. Tenés 6 intentos.</p>
+    </header>
+    <div class="juego">
+      <div class="j-col">
+        <ol class="pistas" id="pistas"></ol>
+      </div>
+      <div class="j-col">
+        <div class="search j-input" id="jBox">
+          <input type="search" id="jInput" placeholder="Escribí un país…" autocomplete="off" spellcheck="false"
+                 role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="jLista" aria-label="Tu respuesta">
+          <ul class="droplist" id="jLista" role="listbox" hidden></ul>
+        </div>
+        <p class="j-ayuda">Si le errás, la flecha te apunta hacia el país que buscás y te dice a cuántos km está.</p>
+        <ol class="intentos" id="intentos"></ol>
+        <div class="j-final" id="jFinal" hidden></div>
+        <div class="j-stats" id="jStats"></div>
+      </div>
+    </div>
   </div>
 
   <div class="pagina" id="pag-elecciones" hidden>
@@ -828,7 +895,7 @@ const sinTildes = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowe
 /* ---------- PÁGINAS Y PANEL LATERAL ----------
    Cada sección es una "página": #inicio, #comparacion, #elecciones, #conflictos.
    Se cambia con el link (la dirección cambia, así funciona el botón "atrás" del navegador). */
-const PAGINAS = ["inicio", "comparacion", "elecciones", "conflictos"];
+const PAGINAS = ["inicio", "comparacion", "juego", "elecciones", "conflictos"];
 let paginaActual = "inicio";
 const versusAbierto = () => paginaActual === "comparacion";
 function mostrarPagina(nombre) {
@@ -886,29 +953,29 @@ function irAPais(k) {
   Object.values(VBTN).forEach(id => document.getElementById(id).setAttribute("aria-pressed", false));
 }
 
-function armarBuscador() {
-  const input = document.getElementById("buscar"), lista = document.getElementById("buscarLista");
-  // Otros nombres con los que la gente busca algunos países
-  const APODOS = { USA: "eeuu ee.uu. usa estados unidos de america", GBR: "inglaterra uk gran bretana escocia gales", NLD: "holanda",
-    KOR: "corea del sur", PRK: "corea del norte", ARE: "emiratos dubai", CZE: "republica checa", MMR: "birmania", CIV: "cote d'ivoire",
-    SWZ: "suazilandia", MKD: "macedonia", TUR: "turkiye", COD: "congo kinshasa", COG: "congo brazzaville", RUS: "rusia" };
-  const capital = k => ((CURADO.paises[k] && CURADO.paises[k].capital) || "").replace(/\s*\(.*\)/, "");
-  const todos = Object.keys(PAISES).map(k => ({ k, n: sinTildes(PAISES[k].nombre), c: sinTildes(capital(k)), a: sinTildes(APODOS[k] || "") }));
+/* Autocompletar de países: lo usan el buscador de arriba y el juego.
+   alElegir(k) se llama con el código del país elegido; excluir(k) saca países de la lista. */
+const APODOS = { USA: "eeuu ee.uu. usa estados unidos de america", GBR: "inglaterra uk gran bretana escocia gales", NLD: "holanda",
+  KOR: "corea del sur", PRK: "corea del norte", ARE: "emiratos dubai", CZE: "republica checa", MMR: "birmania", CIV: "cote d'ivoire",
+  SWZ: "suazilandia", MKD: "macedonia", TUR: "turkiye", COD: "congo kinshasa", COG: "congo brazzaville", RUS: "rusia" };
+const capitalDe = k => ((CURADO.paises[k] && CURADO.paises[k].capital) || "").replace(/\s*\(.*\)/, "");
+function autocompletar(input, lista, alElegir, { conCapital = true, excluir = () => false } = {}) {
+  const todos = Object.keys(PAISES).map(k => ({ k, n: sinTildes(PAISES[k].nombre), c: conCapital ? sinTildes(capitalDe(k)) : "", a: sinTildes(APODOS[k] || "") }));
   let resultados = [], activo = -1;
 
   function buscar(texto) {
     const q = sinTildes(texto.trim());
     if (!q) return [];
-    // Primero los que empiezan con lo escrito, después los que lo contienen, después por capital
-    const puntaje = p => p.n.startsWith(q) ? 0 : p.n.split(/[\s-]/).some(w => w.startsWith(q)) ? 1 : p.n.includes(q) ? 2 : p.c.startsWith(q) ? 3 : p.a && p.a.split(" ").some(w => w.startsWith(q)) || (q.length > 3 && p.a.includes(q)) ? 3 : q.length === 3 && p.k === q.toUpperCase() ? 4 : 9;
-    return todos.map(p => [puntaje(p), p]).filter(([s]) => s < 9)
+    // Primero los que empiezan con lo escrito, después los que lo contienen, después por capital y apodos
+    const puntaje = p => p.n.startsWith(q) ? 0 : p.n.split(/[\s-]/).some(w => w.startsWith(q)) ? 1 : p.n.includes(q) ? 2 : p.c && p.c.startsWith(q) ? 3 : p.a && p.a.split(" ").some(w => w.startsWith(q)) || (q.length > 3 && p.a.includes(q)) ? 3 : q.length === 3 && p.k === q.toUpperCase() ? 4 : 9;
+    return todos.filter(p => !excluir(p.k)).map(p => [puntaje(p), p]).filter(([s]) => s < 9)
       .sort((a, b) => a[0] - b[0] || a[1].n.localeCompare(b[1].n)).slice(0, 8).map(([, p]) => p.k);
   }
   function mostrar() {
     resultados = buscar(input.value); activo = resultados.length ? 0 : -1;
     if (!input.value.trim()) { cerrar(); return; }
     lista.innerHTML = resultados.length
-      ? resultados.map((k, i) => `<li role="option" id="bo-${k}" data-k="${k}" aria-selected="${i === activo}">${flag(k) || ""}<span>${PAISES[k].nombre}</span>${capital(k) ? `<small>${capital(k)}</small>` : ""}</li>`).join("")
+      ? resultados.map((k, i) => `<li role="option" id="${lista.id}-${k}" data-k="${k}" aria-selected="${i === activo}">${flag(k) || ""}<span>${PAISES[k].nombre}</span>${conCapital && capitalDe(k) ? `<small>${capitalDe(k)}</small>` : ""}</li>`).join("")
       : `<li class="vacio">No encontré ningún país con ese nombre.</li>`;
     lista.hidden = false; input.setAttribute("aria-expanded", true);
     marcar();
@@ -919,12 +986,7 @@ function armarBuscador() {
     if (li) { li.scrollIntoView({ block: "nearest" }); input.setAttribute("aria-activedescendant", li.id); }
   }
   function cerrar() { lista.hidden = true; input.setAttribute("aria-expanded", false); input.removeAttribute("aria-activedescendant"); }
-  function ir(k) {
-    input.value = ""; cerrar(); input.blur();
-    if (paginaActual !== "inicio") { history.pushState(null, "", "#inicio"); mostrarPagina("inicio"); }
-    elegir(k); irAPais(k);
-    document.getElementById("mapcard").scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "nearest" });
-  }
+  function ir(k) { input.value = ""; cerrar(); alElegir(k); }
   input.addEventListener("input", mostrar);
   input.addEventListener("focus", () => { if (input.value.trim()) mostrar(); });
   input.addEventListener("keydown", e => {
@@ -935,7 +997,185 @@ function armarBuscador() {
   });
   lista.addEventListener("mousedown", e => e.preventDefault());     // que no se pierda el foco antes del click
   lista.addEventListener("click", e => { const li = e.target.closest("li[data-k]"); if (li) ir(li.dataset.k); });
-  document.addEventListener("click", e => { if (!e.target.closest(".search")) cerrar(); });
+  document.addEventListener("click", e => { if (!input.parentNode.contains(e.target)) cerrar(); });
+}
+function armarBuscador() {
+  const input = document.getElementById("buscar");
+  autocompletar(input, document.getElementById("buscarLista"), k => {
+    input.blur();
+    if (paginaActual !== "inicio") { history.pushState(null, "", "#inicio"); mostrarPagina("inicio"); }
+    elegir(k); irAPais(k);
+    document.getElementById("mapcard").scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "nearest" });
+  });
+}
+
+/* ---------- JUEGO: PAÍS DEL DÍA ----------
+   Todos juegan el mismo país cada día: sale de esta lista, en este orden (mezclada una sola vez).
+   Son los países con ficha completa, más de 1,5 millones de habitantes y datos de inflación y crecimiento. */
+const JUEGO_ORDEN = ["PRT","VNM","FIN","CAF","GHA","SLE","SEN","CAN","SGP","SOM","TZA","AFG","AZE","IRN","GIN","EGY","HRV","BGD","CIV","LBN","SRB","IND","IDN","HUN","LBY","QAT","RUS","KAZ","MEX","BGR","HND","GBR","THA","GRC","SSD","TWN","FRA","BOL","BHR","USA","KGZ","NOR","AUT","IRQ","PRY","GMB","MAR","SDN","CMR","BIH","LVA","SYR","BDI","BWA","JPN","TJK","GTM","SVK","ITA","LTU","PER","CHN","CRI","ZAF","HTI","YEM","ROU","VEN","NAM","BLR","BEL","NPL","AGO","CHE","KEN","PSE","MDA","SWE","ERI","ARG","BFA","CHL","COG","NIC","UKR","DNK","ALB","GAB","ECU","SAU","ZMB","ESP","COL","MDG","KWT","POL","LBR","ZWE","MMR","LSO","TUN","MRT","URY","MKD","NGA","PAN","CUB","DEU","PNG","MOZ","ARE","KHM","TGO","ETH","TKM","GEO","NLD","PHL","CZE","UGA","KOR","COD","TCD","AUS","SLV","MYS","SVN","DZA","NER","RWA","DOM","UZB","OMN","BEN","XKX","JAM","LAO","MLI","LKA","GNQ","NZL","BRA","PAK","ARM","MWI","IRL","MNG","TUR","GNB","JOR","ISR"];
+const JUEGO_INICIO = [2026, 10, 23];       // el día del juego #1
+const JUEGO_INTENTOS = 6;
+const juego = { num: 0, k: null, intentos: [], fin: false };
+
+/* Número de juego de hoy, según la fecha de quien juega (como Wordle) */
+function numeroDeHoy() {
+  const h = new Date();
+  return Math.round((Date.UTC(h.getFullYear(), h.getMonth(), h.getDate()) - Date.UTC(JUEGO_INICIO[0], JUEGO_INICIO[1] - 1, JUEGO_INICIO[2])) / 864e5) + 1;
+}
+/* Lo que se guarda en el navegador de cada jugador (si no se puede, el juego anda igual) */
+const leerLocal = (clave, def) => { try { const v = localStorage.getItem(clave); return v ? JSON.parse(v) : def; } catch (e) { return def; } };
+const guardarLocal = (clave, v) => { try { localStorage.setItem(clave, JSON.stringify(v)); } catch (e) { /* modo privado: no pasa nada */ } };
+
+/* Centro del país (de su pedazo más grande, así Francia no queda en el medio del Atlántico) */
+const CENTROS = {};
+function centroDe(k) {
+  if (k in CENTROS) return CENTROS[k];
+  const f = features && features.find(x => iso(x) === k);
+  let c = null;
+  if (f) {
+    const g = f.geometry;
+    if (g.type === "MultiPolygon") {
+      const partes = g.coordinates.map(cs => ({ type: "Polygon", coordinates: cs }));
+      c = d3.geoCentroid(partes.reduce((a, b) => d3.geoArea(b) > d3.geoArea(a) ? b : a));
+    } else c = d3.geoCentroid(f);
+  }
+  return (CENTROS[k] = c);
+}
+function distanciaYFlecha(desde, hasta) {
+  const a = centroDe(desde), b = centroDe(hasta);
+  if (!a || !b) return { km: null, flecha: "", rumbo: 0, hacia: "" };
+  const km = d3.geoDistance(a, b) * 6371;
+  const rad = x => x * Math.PI / 180, [l1, f1] = a.map(rad), [l2, f2] = b.map(rad);
+  // Dirección como se ve en un mapa plano (rumbo constante): si en el mapa está arriba a la derecha, la flecha apunta así
+  let dl = l2 - l1; if (Math.abs(dl) > Math.PI) dl -= Math.sign(dl) * 2 * Math.PI;   // por el camino más corto
+  const dpsi = Math.log(Math.tan(Math.PI / 4 + f2 / 2) / Math.tan(Math.PI / 4 + f1 / 2));
+  const rumbo = (Math.atan2(dl, dpsi) * 180 / Math.PI + 360) % 360;
+  const sector = Math.round(rumbo / 45) % 8;
+  return { km, rumbo, flecha: ["⬆️", "↗️", "➡️", "↘️", "⬇️", "↙️", "⬅️", "↖️"][sector],
+    hacia: ["el norte", "el noreste", "el este", "el sureste", "el sur", "el suroeste", "el oeste", "el noroeste"][sector] };
+}
+/* Tapa el nombre del país si aparece en una pista ("Canal de Panamá" → "Canal de ███") */
+function tapar(texto, k) {
+  const nombre = PAISES[k].nombre, raiz = sinTildes(nombre.split(/[\s-]/)[0]).slice(0, 5);
+  return texto.split(/(\s+)/).map(w => sinTildes(w).includes(raiz) ? "███" : w).join("");
+}
+function pistasDe(k) {
+  const d = PAISES[k], cur = CURADO.paises[k] || {}, pol = POLITICA[k];
+  const infl = d.u.infl, crec = d.u.crec, top = (arr, n) => arr.slice(0, n).map(x => tapar(x[1], k).toLowerCase()).join(", ");
+  const socio = cur.socios && cur.socios.vende[0];
+  return [
+    { ico: "📊", tit: "Inflación y crecimiento", txt: `Inflación ${infl.y}: ${pct(infl.v)} · Crecimiento ${crec.y}: ${pct(crec.v)}` },
+    { ico: "👥", tit: "Tamaño y nivel de vida", txt: `${nf(d.poblacion, d.poblacion < 10 ? 1 : 0)} millones de habitantes · PBI por persona: US$ ${nf(d.pibpc)}` },
+    { ico: "📦", tit: "Lo que más exporta", txt: cur.expo ? top(cur.expo, 3) : "sin datos" },
+    { ico: "🏭", tit: "A qué se dedica", txt: cur.actividades ? top(cur.actividades, 3) : "sin datos" },
+    { ico: "🌎", tit: "Dónde está", txt: `${d.region}${socio && PAISES[socio[0]] ? ` · Su principal cliente es ${PAISES[socio[0]].nombre} (${socio[1]}% de lo que vende)` : ""}${pol ? `<small>Lo gobierna: ${IDEO[pol.ideo].t.toLowerCase()}</small>` : ""}` },
+    { ico: "🏛️", tit: "Capital", txt: capitalDe(k) || "sin datos" }
+  ];
+}
+const cuadro = (g, k) => g === k ? "🟩" : PAISES[g].region && PAISES[g].region === PAISES[k].region ? "🟨" : "🟥";
+
+function armarJuego() {
+  juego.num = numeroDeHoy();
+  juego.k = JUEGO_ORDEN[((juego.num - 1) % JUEGO_ORDEN.length + JUEGO_ORDEN.length) % JUEGO_ORDEN.length];
+  if (!PAISES[juego.k]) juego.k = "ARG";
+  const guardado = leerLocal("atlas-juego-hoy", null);
+  if (guardado && guardado.num === juego.num) { juego.intentos = guardado.intentos.filter(g => PAISES[g]); juego.fin = guardado.fin; }
+  autocompletar(document.getElementById("jInput"), document.getElementById("jLista"), adivinar,
+    { conCapital: false, excluir: k => juego.intentos.includes(k) });
+  renderJuego();
+}
+function adivinar(g) {
+  if (juego.fin || juego.intentos.includes(g)) return;
+  juego.intentos.push(g);
+  const gano = g === juego.k;
+  if (gano || juego.intentos.length >= JUEGO_INTENTOS) {
+    juego.fin = true;
+    const st = leerLocal("atlas-juego-stats", { jugados: 0, ganados: 0, racha: 0, mejor: 0, ultimo: 0, dist: [0, 0, 0, 0, 0, 0] });
+    st.jugados++;
+    if (gano) {
+      st.ganados++; st.dist[juego.intentos.length - 1]++;
+      st.racha = st.ultimo === juego.num - 1 ? st.racha + 1 : 1;
+      st.mejor = Math.max(st.mejor, st.racha);
+    } else st.racha = 0;
+    st.ultimo = gano ? juego.num : st.ultimo;
+    guardarLocal("atlas-juego-stats", st);
+  }
+  guardarLocal("atlas-juego-hoy", { num: juego.num, intentos: juego.intentos, fin: juego.fin });
+  renderJuego(true);
+}
+function textoCompartir() {
+  const gano = juego.intentos.includes(juego.k);
+  return `Atlas Macro · País del día #${juego.num}\n${juego.intentos.map(g => cuadro(g, juego.k)).join("")} ${gano ? juego.intentos.length : "X"}/${JUEGO_INTENTOS}\n${location.origin}${location.pathname}#juego`;
+}
+function renderJuego(nuevo) {
+  const k = juego.k, pistas = pistasDe(k);
+  const vistas = juego.fin ? JUEGO_INTENTOS : Math.min(juego.intentos.length + 1, JUEGO_INTENTOS);
+  document.getElementById("juegoNum").textContent = `País del día · #${juego.num}`;
+  const quedan = JUEGO_INTENTOS - vistas;
+  document.getElementById("pistas").innerHTML = pistas.slice(0, vistas).map((p, i) =>
+    `<li class="${nuevo && i === vistas - 1 && !juego.fin ? "nueva" : ""}"><span class="p-ico" aria-hidden="true">${p.ico}</span><span class="p-tit">Pista ${i + 1} · ${p.tit}</span><span class="p-txt">${p.txt}</span></li>`).join("")
+    + (quedan ? `<li class="oculta"><span class="p-ico" aria-hidden="true">🔒</span><span class="p-tit">${quedan === 1 ? "Queda 1 pista" : `Quedan ${quedan} pistas`}</span><span class="p-txt">Cada vez que le errás se destapa una nueva.</span></li>` : "");
+  document.getElementById("intentos").innerHTML = Array.from({ length: JUEGO_INTENTOS }, (_, i) => {
+    const g = juego.intentos[i];
+    if (!g) return `<li class="vacio" aria-hidden="true"></li>`;
+    const { km, rumbo, hacia } = distanciaYFlecha(g, k), ok = g === k;
+    const pista = ok ? "¡Es este!" : km == null ? "" : `Está a ${nf(Math.max(10, Math.round(km / 10) * 10))} km, hacia ${hacia}`;
+    // flecha dibujada: apunta exactamente hacia el país que buscás (0° = norte)
+    const dir = ok ? `<span class="i-dir" aria-hidden="true">🎯</span>`
+      : km == null ? "<span></span>" : `<span class="i-dir" aria-hidden="true"><svg viewBox="0 0 24 24" style="transform: rotate(${rumbo.toFixed(0)}deg)"><path d="M12 2 L19 11 H14.5 V22 H9.5 V11 H5 Z"/></svg></span>`;
+    return `<li class="${ok ? "ok" : ""}"><span aria-hidden="true">${cuadro(g, k)}</span>${flag(g) || "<span></span>"}<span class="i-nom">${PAISES[g].nombre}<small>${pista}</small></span>${dir}</li>`;
+  }).join("");
+  const box = document.getElementById("jBox");
+  box.hidden = juego.fin;
+  const fin = document.getElementById("jFinal");
+  fin.hidden = !juego.fin;
+  if (juego.fin) {
+    const gano = juego.intentos.includes(k);
+    fin.innerHTML = `<div class="eyebrow">${gano ? `¡Lo sacaste en ${juego.intentos.length} ${juego.intentos.length === 1 ? "intento" : "intentos"}!` : "Esta vez no salió"}</div>
+      <h2>${flag(k)}${PAISES[k].nombre}</h2>
+      <div class="j-cuadros" aria-label="Tu resultado">${juego.intentos.map(g => cuadro(g, k)).join("")}</div>
+      <div class="j-acciones">
+        <button class="go" type="button" id="jCompartir">Compartir resultado</button>
+        <button class="btn" type="button" id="jFicha">Ver la ficha de ${PAISES[k].nombre}</button>
+      </div>
+      <p class="note" id="jFalta"></p>`;
+    document.getElementById("jFicha").onclick = () => irAPaisDesdeLista(k);
+    document.getElementById("jCompartir").onclick = async e => {
+      const t = textoCompartir();
+      try {
+        if (navigator.share && matchMedia("(pointer: coarse)").matches) await navigator.share({ text: t });
+        else { await navigator.clipboard.writeText(t); e.target.textContent = "¡Copiado! Pegalo donde quieras"; }
+      } catch (err) { /* el usuario canceló */ }
+    };
+    cuentaRegresiva();
+  }
+  renderStats();
+}
+let relojJuego;
+function cuentaRegresiva() {
+  clearInterval(relojJuego);
+  const tic = () => {
+    const el = document.getElementById("jFalta"); if (!el) return clearInterval(relojJuego);
+    const h = new Date(), man = new Date(h.getFullYear(), h.getMonth(), h.getDate() + 1), s = Math.max(0, (man - h) / 1000 | 0);
+    const dd = n => String(n).padStart(2, "0");
+    el.textContent = `Próximo país en ${dd(s / 3600 | 0)}:${dd(s % 3600 / 60 | 0)}:${dd(s % 60)}`;
+    if (s === 0) { clearInterval(relojJuego); juego.intentos = []; juego.fin = false; armarJuegoDeNuevo(); }
+  };
+  tic(); relojJuego = setInterval(tic, 1000);
+}
+function armarJuegoDeNuevo() {
+  juego.num = numeroDeHoy();
+  juego.k = JUEGO_ORDEN[((juego.num - 1) % JUEGO_ORDEN.length + JUEGO_ORDEN.length) % JUEGO_ORDEN.length];
+  renderJuego();
+}
+function renderStats() {
+  const st = leerLocal("atlas-juego-stats", null), el = document.getElementById("jStats");
+  if (!st || !st.jugados) { el.innerHTML = ""; return; }
+  const max = Math.max(1, ...st.dist), hoy = juego.fin && juego.intentos.includes(juego.k) ? juego.intentos.length : 0;
+  el.innerHTML = `<div class="eyebrow">Tus estadísticas</div>
+    <div class="j-nums"><div><b>${st.jugados}</b><span>Jugados</span></div><div><b>${Math.round(st.ganados / st.jugados * 100)}%</b><span>Ganados</span></div>
+      <div><b>${st.racha}</b><span>Racha</span></div><div><b>${st.mejor}</b><span>Mejor racha</span></div></div>
+    <div class="j-dist">${st.dist.map((n, i) => `<div><span>${i + 1}</span><i class="${hoy === i + 1 ? "hoy" : ""}" style="width:${Math.max(8, n / max * 100)}%">${n}</i></div>`).join("")}</div>`;
 }
 
 function elegir(k, nombreMapa) {
@@ -1492,6 +1732,7 @@ Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json")
     document.getElementById("maploading").remove();
     buildMap();
     armarBuscador();
+    armarJuego();
     armarNav();
     mostrarPagina(location.hash.slice(1) || "inicio");   // si entraron con #elecciones, por ejemplo
   })
