@@ -1,0 +1,470 @@
+{
+ "_leeme": "Datos por provincia copiados a mano de los informes del INDEC. Actualizar cuando salgan los nuevos: pobreza cada semestre (marzo y septiembre), mercado de trabajo cada trimestre. Ojo: el INDEC mide en 31 aglomerados urbanos (ciudades), no en toda la provincia.",
+ "actualizado": "2026-10-24",
+ "fuentes": {
+  "pobreza": "INDEC, EPH, Incidencia de la pobreza y la indigencia en 31 aglomerados urbanos, primer semestre de 2026",
+  "trabajo": "INDEC, EPH, Mercado de trabajo. Tasas e indicadores socioeconómicos, segundo trimestre de 2026",
+  "poblacion": "INDEC, Censo Nacional de Población, Hogares y Viviendas 2022, resultados definitivos"
+ },
+ "periodos": {
+  "pobreza": "primer semestre de 2026",
+  "trabajo": "segundo trimestre de 2026"
+ },
+ "total": {
+  "pobreza": 32.3,
+  "indigencia": 7.5,
+  "desocupacion": 7.9,
+  "actividad": 48.9,
+  "empleo": 45.0
+ },
+ "provincias": {
+  "AR-C": {
+   "nombre": "Ciudad de Buenos Aires",
+   "capital": "Ciudad de Buenos Aires",
+   "region": "GBA",
+   "poblacion": 3121707,
+   "aglomerados": [
+    {
+     "nombre": "Ciudad Autónoma de Buenos Aires",
+     "pobreza": 11.1,
+     "indigencia": 1.5,
+     "actividad": 56.2,
+     "empleo": 53.1,
+     "desocupacion": 5.6
+    }
+   ]
+  },
+  "AR-B": {
+   "nombre": "Buenos Aires",
+   "capital": "La Plata",
+   "region": "GBA y Pampeana",
+   "poblacion": 17523996,
+   "aglomerados": [
+    {
+     "nombre": "Partidos del GBA",
+     "pobreza": 36.9,
+     "indigencia": 9.9,
+     "actividad": 47.8,
+     "empleo": 43.6,
+     "desocupacion": 8.8
+    },
+    {
+     "nombre": "Gran La Plata",
+     "pobreza": 37.8,
+     "indigencia": 9.2,
+     "actividad": 51.5,
+     "empleo": 47.0,
+     "desocupacion": 8.7
+    },
+    {
+     "nombre": "Mar del Plata",
+     "pobreza": 20.4,
+     "indigencia": 5.0,
+     "actividad": 51.1,
+     "empleo": 46.0,
+     "desocupacion": 9.9
+    },
+    {
+     "nombre": "Bahía Blanca-Cerri",
+     "pobreza": 26.6,
+     "indigencia": 6.2,
+     "actividad": 50.7,
+     "empleo": 45.8,
+     "desocupacion": 9.7
+    },
+    {
+     "nombre": "San Nicolás-Villa Constitución",
+     "pobreza": 35.5,
+     "indigencia": 10.3,
+     "actividad": 44.9,
+     "empleo": 41.1,
+     "desocupacion": 8.4
+    }
+   ]
+  },
+  "AR-K": {
+   "nombre": "Catamarca",
+   "capital": "San Fernando del Valle de Catamarca",
+   "region": "Noroeste",
+   "poblacion": 429562,
+   "aglomerados": [
+    {
+     "nombre": "Gran Catamarca",
+     "pobreza": 37.3,
+     "indigencia": 8.3,
+     "actividad": 43.9,
+     "empleo": 41.1,
+     "desocupacion": 6.4
+    }
+   ]
+  },
+  "AR-H": {
+   "nombre": "Chaco",
+   "capital": "Resistencia",
+   "region": "Noreste",
+   "poblacion": 1129606,
+   "aglomerados": [
+    {
+     "nombre": "Gran Resistencia",
+     "pobreza": 48.6,
+     "indigencia": 17.3,
+     "actividad": 44.7,
+     "empleo": 41.3,
+     "desocupacion": 7.5
+    }
+   ]
+  },
+  "AR-U": {
+   "nombre": "Chubut",
+   "capital": "Rawson",
+   "region": "Patagonia",
+   "poblacion": 592621,
+   "aglomerados": [
+    {
+     "nombre": "Comodoro Rivadavia-Rada Tilly",
+     "pobreza": 37.2,
+     "indigencia": 3.7,
+     "actividad": 42.4,
+     "empleo": 38.5,
+     "desocupacion": 9.2
+    },
+    {
+     "nombre": "Rawson-Trelew",
+     "pobreza": 35.1,
+     "indigencia": 10.0,
+     "actividad": 40.7,
+     "empleo": 37.5,
+     "desocupacion": 7.7
+    }
+   ]
+  },
+  "AR-X": {
+   "nombre": "Córdoba",
+   "capital": "Córdoba",
+   "region": "Pampeana",
+   "poblacion": 3840905,
+   "aglomerados": [
+    {
+     "nombre": "Gran Córdoba",
+     "pobreza": 31.1,
+     "indigencia": 7.0,
+     "actividad": 50.9,
+     "empleo": 45.5,
+     "desocupacion": 10.5
+    },
+    {
+     "nombre": "Río Cuarto",
+     "pobreza": 23.6,
+     "indigencia": 3.2,
+     "actividad": 45.5,
+     "empleo": 42.6,
+     "desocupacion": 6.4
+    }
+   ]
+  },
+  "AR-W": {
+   "nombre": "Corrientes",
+   "capital": "Corrientes",
+   "region": "Noreste",
+   "poblacion": 1212696,
+   "aglomerados": [
+    {
+     "nombre": "Corrientes",
+     "pobreza": 41.0,
+     "indigencia": 8.6,
+     "actividad": 44.9,
+     "empleo": 40.8,
+     "desocupacion": 9.1
+    }
+   ]
+  },
+  "AR-E": {
+   "nombre": "Entre Ríos",
+   "capital": "Paraná",
+   "region": "Pampeana",
+   "poblacion": 1425578,
+   "aglomerados": [
+    {
+     "nombre": "Gran Paraná",
+     "pobreza": 34.3,
+     "indigencia": 6.0,
+     "actividad": 46.4,
+     "empleo": 43.3,
+     "desocupacion": 6.7
+    },
+    {
+     "nombre": "Concordia",
+     "pobreza": 56.2,
+     "indigencia": 12.7,
+     "actividad": 42.0,
+     "empleo": 39.4,
+     "desocupacion": 6.1
+    }
+   ]
+  },
+  "AR-P": {
+   "nombre": "Formosa",
+   "capital": "Formosa",
+   "region": "Noreste",
+   "poblacion": 607419,
+   "aglomerados": [
+    {
+     "nombre": "Formosa",
+     "pobreza": 29.9,
+     "indigencia": 5.9,
+     "actividad": 44.4,
+     "empleo": 42.3,
+     "desocupacion": 4.8
+    }
+   ]
+  },
+  "AR-Y": {
+   "nombre": "Jujuy",
+   "capital": "San Salvador de Jujuy",
+   "region": "Noroeste",
+   "poblacion": 811611,
+   "aglomerados": [
+    {
+     "nombre": "Jujuy-Palpalá",
+     "pobreza": 27.6,
+     "indigencia": 1.4,
+     "actividad": 47.5,
+     "empleo": 45.9,
+     "desocupacion": 3.4
+    }
+   ]
+  },
+  "AR-L": {
+   "nombre": "La Pampa",
+   "capital": "Santa Rosa",
+   "region": "Pampeana",
+   "poblacion": 361859,
+   "aglomerados": [
+    {
+     "nombre": "Santa Rosa-Toay",
+     "pobreza": 25.4,
+     "indigencia": 4.9,
+     "actividad": 51.0,
+     "empleo": 47.6,
+     "desocupacion": 6.7
+    }
+   ]
+  },
+  "AR-F": {
+   "nombre": "La Rioja",
+   "capital": "La Rioja",
+   "region": "Noroeste",
+   "poblacion": 383865,
+   "aglomerados": [
+    {
+     "nombre": "La Rioja",
+     "pobreza": 38.4,
+     "indigencia": 4.7,
+     "actividad": 46.0,
+     "empleo": 43.9,
+     "desocupacion": 4.5
+    }
+   ]
+  },
+  "AR-M": {
+   "nombre": "Mendoza",
+   "capital": "Mendoza",
+   "region": "Cuyo",
+   "poblacion": 2043540,
+   "aglomerados": [
+    {
+     "nombre": "Gran Mendoza",
+     "pobreza": 36.9,
+     "indigencia": 7.3,
+     "actividad": 50.3,
+     "empleo": 46.2,
+     "desocupacion": 8.1
+    }
+   ]
+  },
+  "AR-N": {
+   "nombre": "Misiones",
+   "capital": "Posadas",
+   "region": "Noreste",
+   "poblacion": 1278873,
+   "aglomerados": [
+    {
+     "nombre": "Posadas",
+     "pobreza": 42.2,
+     "indigencia": 8.2,
+     "actividad": 47.3,
+     "empleo": 44.5,
+     "desocupacion": 5.9
+    }
+   ]
+  },
+  "AR-Q": {
+   "nombre": "Neuquén",
+   "capital": "Neuquén",
+   "region": "Patagonia",
+   "poblacion": 710814,
+   "aglomerados": [
+    {
+     "nombre": "Neuquén-Plottier",
+     "pobreza": 19.6,
+     "indigencia": 2.8,
+     "actividad": 50.5,
+     "empleo": 48.9,
+     "desocupacion": 3.2
+    }
+   ]
+  },
+  "AR-R": {
+   "nombre": "Río Negro",
+   "capital": "Viedma",
+   "region": "Patagonia",
+   "poblacion": 750768,
+   "aglomerados": [
+    {
+     "nombre": "Viedma-Carmen de Patagones",
+     "pobreza": 33.2,
+     "indigencia": 5.2,
+     "actividad": 39.9,
+     "empleo": 39.6,
+     "desocupacion": 0.7
+    }
+   ]
+  },
+  "AR-A": {
+   "nombre": "Salta",
+   "capital": "Salta",
+   "region": "Noroeste",
+   "poblacion": 1441351,
+   "aglomerados": [
+    {
+     "nombre": "Salta",
+     "pobreza": 29.7,
+     "indigencia": 4.4,
+     "actividad": 45.1,
+     "empleo": 43.2,
+     "desocupacion": 4.3
+    }
+   ]
+  },
+  "AR-J": {
+   "nombre": "San Juan",
+   "capital": "San Juan",
+   "region": "Cuyo",
+   "poblacion": 822853,
+   "aglomerados": [
+    {
+     "nombre": "Gran San Juan",
+     "pobreza": 36.8,
+     "indigencia": 1.6,
+     "actividad": 48.5,
+     "empleo": 46.9,
+     "desocupacion": 3.2
+    }
+   ]
+  },
+  "AR-D": {
+   "nombre": "San Luis",
+   "capital": "San Luis",
+   "region": "Cuyo",
+   "poblacion": 542069,
+   "aglomerados": [
+    {
+     "nombre": "Gran San Luis",
+     "pobreza": 35.7,
+     "indigencia": 3.1,
+     "actividad": 48.1,
+     "empleo": 46.9,
+     "desocupacion": 2.6
+    }
+   ]
+  },
+  "AR-Z": {
+   "nombre": "Santa Cruz",
+   "capital": "Río Gallegos",
+   "region": "Patagonia",
+   "poblacion": 337226,
+   "aglomerados": [
+    {
+     "nombre": "Río Gallegos",
+     "pobreza": 25.6,
+     "indigencia": 2.6,
+     "actividad": 48.8,
+     "empleo": 44.5,
+     "desocupacion": 8.8
+    }
+   ]
+  },
+  "AR-S": {
+   "nombre": "Santa Fe",
+   "capital": "Santa Fe",
+   "region": "Pampeana",
+   "poblacion": 3544908,
+   "aglomerados": [
+    {
+     "nombre": "Gran Rosario",
+     "pobreza": 23.1,
+     "indigencia": 6.2,
+     "actividad": 53.0,
+     "empleo": 46.9,
+     "desocupacion": 11.5
+    },
+    {
+     "nombre": "Gran Santa Fe",
+     "pobreza": 38.6,
+     "indigencia": 9.8,
+     "actividad": 44.8,
+     "empleo": 41.0,
+     "desocupacion": 8.6
+    }
+   ]
+  },
+  "AR-G": {
+   "nombre": "Santiago del Estero",
+   "capital": "Santiago del Estero",
+   "region": "Noroeste",
+   "poblacion": 1060906,
+   "aglomerados": [
+    {
+     "nombre": "Santiago del Estero-La Banda",
+     "pobreza": 38.5,
+     "indigencia": 3.9,
+     "actividad": 39.8,
+     "empleo": 39.4,
+     "desocupacion": 0.9
+    }
+   ]
+  },
+  "AR-V": {
+   "nombre": "Tierra del Fuego",
+   "capital": "Ushuaia",
+   "region": "Patagonia",
+   "poblacion": 185732,
+   "aglomerados": [
+    {
+     "nombre": "Ushuaia-Río Grande",
+     "pobreza": 25.9,
+     "indigencia": 3.1,
+     "actividad": 48.5,
+     "empleo": 44.5,
+     "desocupacion": 8.1
+    }
+   ]
+  },
+  "AR-T": {
+   "nombre": "Tucumán",
+   "capital": "San Miguel de Tucumán",
+   "region": "Noroeste",
+   "poblacion": 1731820,
+   "aglomerados": [
+    {
+     "nombre": "Gran Tucumán-Tafí Viejo",
+     "pobreza": 27.9,
+     "indigencia": 4.4,
+     "actividad": 48.6,
+     "empleo": 45.9,
+     "desocupacion": 5.5
+    }
+   ]
+  }
+ }
+}

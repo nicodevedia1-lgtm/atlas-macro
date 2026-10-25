@@ -419,6 +419,36 @@ footer a { color: var(--muted); text-decoration-color: var(--accent); text-under
 .pf-tabla a { color: var(--ink); text-decoration-color: var(--accent); text-underline-offset: 3px; }
 
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* Provincias */
+.prov-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+@media (max-width: 900px) { .prov-main { grid-template-columns: minmax(0, 1fr); } }
+.prov-mapa { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 10px; position: relative; display: grid; gap: 8px; min-width: 0; }
+#provMapa { width: 100%; height: clamp(440px, 78vh, 760px); display: block; }
+#provMapa path { stroke: var(--surface); stroke-width: .8; cursor: pointer; transition: opacity .15s; }
+#provMapa path:hover { opacity: .8; }
+#provMapa path.sel { stroke: var(--ink); stroke-width: 2.2; }
+.prov-ley { display: flex; align-items: center; gap: 8px; font-family: var(--f-data); font-size: 12px; color: var(--muted); padding: 0 6px 4px; }
+.prov-ley i { flex: 1; height: 10px; border-radius: 3px; max-width: 220px; }
+.prov-rank-t { font-size: 20px; font-weight: 800; }
+.prov-ag { width: 100%; border-collapse: collapse; font-size: 14px; }
+.prov-ag th, .prov-ag td { text-align: left; padding: 7px 8px 7px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.prov-ag th { font-size: 11.5px; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); font-weight: 600; }
+.prov-ag td.n, .prov-ag th.n { text-align: right; font-family: var(--f-data); white-space: nowrap; }
+/* Glosario */
+.glos-buscar { max-width: 460px; margin: 0; }
+.glos-letras { display: flex; flex-wrap: wrap; gap: 4px; }
+.glos-letras a { width: 30px; height: 30px; display: grid; place-items: center; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); text-decoration: none; font-weight: 700; font-size: 14px; }
+.glos-letras a:hover { border-color: var(--accent); }
+.glos-lista { display: grid; gap: 12px; }
+.glos-t { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 20px; display: grid; gap: 8px; scroll-margin-top: 90px; }
+.glos-t h2 { font-size: 21px; font-weight: 800; }
+.glos-t h2 small { font-family: var(--f-body); font-weight: 400; font-size: 14px; color: var(--muted); margin-left: 6px; }
+.glos-t p { max-width: 72ch; font-size: 15.5px; }
+.glos-dato { justify-self: start; background: var(--bg); border-radius: 8px; padding: 6px 10px; font-size: 14px; }
+.glos-dato b { font-family: var(--f-data); }
+.glos-ir { font-size: 14px; font-weight: 700; color: var(--accent); text-decoration: none; justify-self: start; }
+.glos-letra { font-family: var(--f-display); font-size: 26px; font-weight: 800; color: var(--muted); margin-top: 6px; scroll-margin-top: 90px; }
+
 /* Gobiernos comparados */
 .gob-barras { display: grid; gap: 6px; }
 .gob-fila { display: grid; grid-template-columns: minmax(110px, 190px) minmax(0, 1fr) auto; gap: 4px 12px; align-items: center; font-size: 14.5px; }
@@ -623,7 +653,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   </button>
   <a class="logo" href="#inicio">Atlas <span>Macro</span></a>
   <nav class="tabs" aria-label="Secciones">
-    <a href="#inicio" data-pag="inicio">Mapa</a><a href="#argentina" data-pag="argentina">Argentina hoy</a><a href="#gobiernos" data-pag="gobiernos">Gobiernos</a><a href="#calendario" data-pag="calendario">Calendario</a><a href="#comparacion" data-pag="comparacion">Comparar</a><a href="#rankings" data-pag="rankings">Rankings</a><a href="#laboratorio" data-pag="laboratorio">Laboratorio</a><a href="#juego" data-pag="juego">País del día</a><a href="#masrico" data-pag="masrico">Más rico o más pobre</a><a href="#elecciones" data-pag="elecciones">Elecciones</a><a href="#conflictos" data-pag="conflictos">Conflictos</a>
+    <a href="#inicio" data-pag="inicio">Mapa</a><a href="#argentina" data-pag="argentina">Argentina hoy</a><a href="#provincias" data-pag="provincias">Provincias</a><a href="#calendario" data-pag="calendario">Calendario</a><a href="#rankings" data-pag="rankings">Rankings</a><a href="#juego" data-pag="juego">País del día</a><a href="#masrico" data-pag="masrico">Más rico o más pobre</a><a href="#elecciones" data-pag="elecciones">Elecciones</a><a href="#conflictos" data-pag="conflictos">Conflictos</a><a href="#glosario" data-pag="glosario">Glosario</a><a href="#laboratorio" data-pag="laboratorio">Laboratorio</a><a href="#comparacion" data-pag="comparacion">Comparar</a><a href="#gobiernos" data-pag="gobiernos">Gobiernos</a>
   </nav>
   <div class="search">
     <input type="search" id="buscar" placeholder="Buscar un país…" autocomplete="off" spellcheck="false"
@@ -641,15 +671,17 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   <ul>
     <li><a href="#inicio" data-pag="inicio"><span class="nav-ico" aria-hidden="true">🗺️</span><span>Mapa y fichas<small>Tocá un país y mirá su economía</small></span></a></li>
     <li><a href="#argentina" data-pag="argentina"><span class="nav-ico" aria-hidden="true">🇦🇷</span><span>Argentina hoy<small>Dólar, inflación y calculadoras</small></span></a></li>
-    <li><a href="#gobiernos" data-pag="gobiernos"><span class="nav-ico" aria-hidden="true">🏛️</span><span>Gobiernos comparados<small>De Alfonsín a hoy, con datos</small></span></a></li>
+    <li><a href="#provincias" data-pag="provincias"><span class="nav-ico" aria-hidden="true">📍</span><span>Argentina por provincia<small>Pobreza, desempleo y población</small></span></a></li>
     <li><a href="#calendario" data-pag="calendario"><span class="nav-ico" aria-hidden="true">📅</span><span>Calendario económico<small>Próximos datos del INDEC y feriados</small></span></a></li>
-    <li><a href="#comparacion" data-pag="comparacion"><span class="nav-ico" aria-hidden="true">⚖️</span><span>Comparación<small>Dos países frente a frente</small></span></a></li>
     <li><a href="#rankings" data-pag="rankings"><span class="nav-ico" aria-hidden="true">🏆</span><span>Rankings<small>Los primeros y los últimos del mundo</small></span></a></li>
-    <li><a href="#laboratorio" data-pag="laboratorio"><span class="nav-ico" aria-hidden="true">🧪</span><span>Laboratorio<small>Relacioná variables y mirá la regresión</small></span></a></li>
     <li><a href="#juego" data-pag="juego"><span class="nav-ico" aria-hidden="true">🎯</span><span>País del día<small>Adiviná el país con pistas económicas</small></span></a></li>
     <li><a href="#masrico" data-pag="masrico"><span class="nav-ico" aria-hidden="true">💰</span><span>¿Más rico o más pobre?<small>Juego: ¿hasta dónde llega tu racha?</small></span></a></li>
     <li><a href="#elecciones" data-pag="elecciones"><span class="nav-ico" aria-hidden="true">🗳️</span><span>Próximas elecciones<small>Los próximos 12 meses</small></span></a></li>
     <li><a href="#conflictos" data-pag="conflictos"><span class="nav-ico" aria-hidden="true">⚠️</span><span>Conflictos y crisis<small>Guerras, golpes y crisis</small></span></a></li>
+    <li><a href="#glosario" data-pag="glosario"><span class="nav-ico" aria-hidden="true">📖</span><span>Glosario<small>Qué es el riesgo país, la brecha y más</small></span></a></li>
+    <li><a href="#laboratorio" data-pag="laboratorio"><span class="nav-ico" aria-hidden="true">🧪</span><span>Laboratorio<small>Relacioná variables y mirá la regresión</small></span></a></li>
+    <li><a href="#comparacion" data-pag="comparacion"><span class="nav-ico" aria-hidden="true">⚖️</span><span>Comparación<small>Dos países frente a frente</small></span></a></li>
+    <li><a href="#gobiernos" data-pag="gobiernos"><span class="nav-ico" aria-hidden="true">🏛️</span><span>Gobiernos comparados<small>De Alfonsín a hoy, con datos</small></span></a></li>
   </ul>
   <ul class="nav-sec"><li><a href="#acerca" data-pag="acerca"><span class="nav-ico" aria-hidden="true">ℹ️</span><span>Acerca de y metodología<small>Fuentes, cálculos y privacidad</small></span></a></li></ul>
   <p class="nav-pie" id="conteo">Cargando datos…</p>
@@ -661,7 +693,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <h1>Atlas <span>Macro</span></h1>
     <p class="lede">Tocá un país en el mapa o buscalo arriba, y mirá cómo le va a su economía, explicado en simple. Debajo del mapa está todo lo demás: el dólar y la inflación de hoy, el juego del día, los rankings y más.</p>
     <nav class="accesos" aria-label="Ir a">
-      <a href="#argentina">🇦🇷 Argentina hoy</a><a href="#gobiernos">🏛️ Gobiernos</a><a href="#calendario">📅 Calendario</a><a href="#juego">🎯 País del día</a><a href="#masrico">💰 Más rico o más pobre</a><a href="#rankings">🏆 Rankings</a><a href="#comparacion">⚖️ Comparar</a><a href="#elecciones">🗳️ Elecciones</a><a href="#conflictos">⚠️ Conflictos</a><a href="#laboratorio">🧪 Laboratorio</a>
+      <a href="#argentina">🇦🇷 Argentina hoy</a><a href="#provincias">📍 Provincias</a><a href="#calendario">📅 Calendario</a><a href="#juego">🎯 País del día</a><a href="#masrico">💰 Más rico o más pobre</a><a href="#rankings">🏆 Rankings</a><a href="#elecciones">🗳️ Elecciones</a><a href="#conflictos">⚠️ Conflictos</a><a href="#glosario">📖 Glosario</a><a href="#laboratorio">🧪 Laboratorio</a><a href="#comparacion">⚖️ Comparar</a><a href="#gobiernos">🏛️ Gobiernos</a>
     </nav>
   </header>
 
@@ -783,6 +815,32 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
       <p class="note" id="pfNota"></p>
     </section>
     <p class="note">Datos de ArgentinaDatos (argentinadatos.com), un proyecto abierto que junta datos públicos del BCRA y el INDEC; el dólar de hoy se actualiza en vivo desde DolarAPI (dolarapi.com) cuando está disponible. Nada de esto es una recomendación de inversión.</p>
+  </div>
+
+  <div class="pagina" id="pag-provincias" hidden>
+    <header class="top">
+      <div class="eyebrow">Argentina por provincia</div>
+      <h1>¿Cómo está cada provincia?</h1>
+      <p class="lede">Pobreza, indigencia, desempleo y población de las 24 jurisdicciones. Tocá una provincia en el mapa o en la lista.</p>
+    </header>
+    <div class="lab-chips" id="provChips" role="group" aria-label="Qué mostrar en el mapa"></div>
+    <div class="prov-main">
+      <div class="prov-mapa"><svg id="provMapa" role="img" aria-label="Mapa de las provincias argentinas"></svg><div class="tip" id="provTip" hidden></div><div class="prov-ley" id="provLey"></div></div>
+      <aside class="panel" id="provPanel" aria-live="polite"></aside>
+    </div>
+    <section class="ag-bloque"><h2 class="prov-rank-t" id="provRankT">Ranking</h2><div class="gob-barras" id="provRank"></div></section>
+    <p class="note" id="provNota"></p>
+  </div>
+
+  <div class="pagina" id="pag-glosario" hidden>
+    <header class="top">
+      <div class="eyebrow">Glosario</div>
+      <h1>Glosario de economía</h1>
+      <p class="lede">Las palabras que aparecen todos los días en las noticias, explicadas en simple, con el dato de hoy y dónde verlo en Atlas Macro.</p>
+    </header>
+    <div class="search glos-buscar"><input type="search" id="glosBuscar" placeholder="Buscar una palabra: brecha, PBI, cepo…" autocomplete="off" aria-label="Buscar en el glosario"></div>
+    <div class="glos-letras" id="glosLetras"></div>
+    <div class="glos-lista" id="glosLista"></div>
   </div>
 
   <div class="pagina" id="pag-gobiernos" hidden>
@@ -937,6 +995,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
             <tr><td>Esperanza de vida, mortalidad infantil, fertilidad, urbanización, internet, desigualdad, pobreza, inversión, ahorro, comercio, remesas, gasto público, impuestos, CO₂</td><td>Banco Mundial (World Development Indicators)</td><td>Todos los lunes</td></tr>
             <tr><td>Control de la corrupción y estado de derecho</td><td>Banco Mundial (Worldwide Governance Indicators)</td><td>Todos los lunes</td></tr>
             <tr><td>Riesgo país, cotizaciones del dólar, inflación del INDEC, UVA y tasas de plazo fijo de Argentina</td><td>ArgentinaDatos (argentinadatos.com), un proyecto abierto y no oficial que recopila datos públicos del BCRA y el INDEC</td><td>Todos los días hábiles</td></tr>
+            <tr><td>Pobreza, indigencia y mercado de trabajo por provincia</td><td>INDEC, Encuesta Permanente de Hogares (31 aglomerados urbanos), copiado a mano de sus informes; población del Censo 2022; mapa de provincias de Natural Earth, con las Islas Malvinas como parte de Tierra del Fuego</td><td>Cuando el INDEC publica datos nuevos (cada trimestre o semestre)</td></tr>
             <tr><td>Fechas de publicación del INDEC (calendario económico)</td><td>Calendario de difusión del INDEC, copiado a mano; feriados de ArgentinaDatos</td><td>Cada seis meses, cuando el INDEC publica el calendario nuevo</td></tr>
             <tr><td>Dólar en vivo</td><td>DolarAPI (dolarapi.com); si no responde, se muestra el último cierre</td><td>Cada vez que se abre la página</td></tr>
             <tr><td>Riesgo país de otros países de Latinoamérica</td><td>Banco Central de Reserva del Perú, índice EMBIG con datos de Reuters</td><td>Todos los martes (el dato es mensual)</td></tr>
@@ -1460,7 +1519,7 @@ const sinTildes = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowe
 /* ---------- PÁGINAS Y PANEL LATERAL ----------
    Cada sección es una "página": #inicio, #comparacion, #elecciones, #conflictos.
    Se cambia con el link (la dirección cambia, así funciona el botón "atrás" del navegador). */
-const PAGINAS = ["inicio", "argentina", "gobiernos", "calendario", "comparacion", "rankings", "laboratorio", "juego", "masrico", "elecciones", "conflictos", "acerca"];
+const PAGINAS = ["inicio", "argentina", "provincias", "glosario", "gobiernos", "calendario", "comparacion", "rankings", "laboratorio", "juego", "masrico", "elecciones", "conflictos", "acerca"];
 let paginaActual = "inicio";
 const versusAbierto = () => paginaActual === "comparacion";
 function mostrarPagina(nombre) {
@@ -1476,6 +1535,8 @@ function mostrarPagina(nombre) {
   if (nombre === "rankings") abrirRankings();
   if (nombre === "argentina") abrirArgentina();
   if (nombre === "gobiernos") renderGobiernos();
+  if (nombre === "provincias") abrirProvincias();
+  if (nombre === "glosario") { renderGlosario(); if (!PROV) cargarProvincias().then(() => paginaActual === "glosario" && renderGlosario()); }
   if (nombre === "calendario") renderCalendario();
   if (nombre === "masrico") abrirMasRico();
   if (nombre === "inicio") {
@@ -1606,6 +1667,10 @@ function indiceBusqueda() {
   add("🗳️", "Próximas elecciones", "Agenda", "elecciones votacion calendario", irA_("elecciones"));
   add("⚠️", "Conflictos y crisis", "Mundo", "conflictos guerra crisis militar golpe", irA_("conflictos"));
   add("🏛️", "Quién gobierna cada país", "Mapa", "gobierno presidente izquierda derecha ideologia quien gobierna", () => { irA_("inicio")(); setModo("gob"); setVista("mundo"); });
+  add("📍", "Argentina por provincia", "Pobreza, desempleo, población", "provincias provincia pobreza indigencia desempleo mapa argentina cordoba santa fe mendoza tucuman salta chaco", irA_("provincias"));
+  if (PROV) Object.entries(PROV.provincias).forEach(([k, pr]) => add("📍", `${pr.nombre} (provincia)`, `Pobreza ${nf(pr.aglomerados[0].pobreza, 1)}% · desempleo ${nf(pr.aglomerados[0].desocupacion, 1)}%`, pr.nombre + " " + pr.capital + " provincia", () => { provSel = k; irA_("provincias")(); if (PROV) renderProvincias(); }));
+  add("📖", "Glosario de economía", "Qué es cada cosa", "glosario que es significa definicion palabras", irA_("glosario"));
+  GLOSARIO.forEach(g => add("📖", `${g.t}: qué es`, "Glosario", `${g.t} ${g.lar || ""} que es`, () => { irA_("glosario")(); setTimeout(() => { const el = document.getElementById("glos-" + g.id); if (el) el.scrollIntoView({ behavior: "auto" }); }, 150); }));
   add("ℹ️", "Acerca de y metodología", "Fuentes y privacidad", "acerca metodologia fuentes privacidad contacto datos", irA_("acerca"));
   /* Cada indicador: su ranking y su mapa */
   Object.entries(labVars()).forEach(([k, v]) => {
@@ -1958,7 +2023,7 @@ function renderTarjetas() {
   tarjeta("masrico", "💰", "¿Más rico o más pobre?", "¿Chile o Uruguay? ¿Polonia o Portugal?", `Adiviná cuál tiene más PBI por persona${leerLocal("atlas-masrico-mejor", 0) ? ` · tu mejor racha: ${leerLocal("atlas-masrico-mejor", 0)}` : ""}`, "Jugar");
   const pInf = proximoDe("inflacion");
   if (pInf) tarjeta("calendario", "📅", "Calendario económico", `El próximo dato de inflación sale ${enDias(diasHasta(pInf.fecha))}`, `${fechaLarga(pInf.fecha)} · datos del INDEC y feriados`, "Ver el calendario");
-  tarjeta("gobiernos", "🏛️", "Gobiernos comparados", "¿Con qué gobierno hubo menos inflación?", "De Alfonsín a hoy: inflación, crecimiento, desempleo y deuda", "Comparar gobiernos");
+  tarjeta("provincias", "📍", "Argentina por provincia", "¿Dónde hay más pobreza y desempleo?", "Las 24 provincias en un mapa, con datos del INDEC", "Ver el mapa");
   const prox = proximasElecciones()[0];
   if (prox) {
     const dias = Math.round((new Date(prox.fecha) - new Date(hoyISO())) / 864e5);
@@ -2333,6 +2398,146 @@ function renderConvergencia() {
   const cr = k => { const s = HIST[k] && HIST[k].crec; if (!s) return null; const v = []; for (let y = ANIO - 9; y <= ANIO; y++) { const x = s[1][y - s[0]]; if (x != null) v.push(x); } return v.length >= 7 ? v.reduce((a, b) => a + b, 0) / v.length : null; };
   const ca = cr(A), cb = cr(B);
   nota.textContent = `Referencia: en los últimos 10 años la economía de ${pa.nombre} creció en promedio ${ca == null ? "—" : nf(ca, 1) + "%"} por año y la de ${pb.nombre} ${cb == null ? "—" : nf(cb, 1) + "%"} (PBI total; por persona suele ser un poco menos, porque la población también crece). Es una cuenta simple con tasas fijas: sirve para dimensionar la distancia, no es un pronóstico.`;
+}
+
+/* ---------- ARGENTINA POR PROVINCIA (provincias.json + provincias-arg.json) ---------- */
+let PROV = null, PROV_GEO = null, provCargando = null, provInd = "pobreza", provSel = "AR-C";
+const PROV_INDS = {
+  pobreza: { t: "Pobreza", u: "% de las personas", desc: "Personas en hogares que no llegan a cubrir la canasta básica total.", periodo: "pobreza", alto: "malo" },
+  indigencia: { t: "Indigencia", u: "% de las personas", desc: "Personas en hogares que no llegan a cubrir la canasta básica de alimentos.", periodo: "pobreza", alto: "malo" },
+  desocupacion: { t: "Desempleo", u: "% de quienes buscan trabajo", desc: "De cada 100 personas que trabajan o buscan trabajo, cuántas no consiguen.", periodo: "trabajo", alto: "malo" },
+  empleo: { t: "Tasa de empleo", u: "% de la población", desc: "Qué parte de toda la población tiene trabajo.", periodo: "trabajo", alto: "bueno" },
+  poblacion: { t: "Población", u: "habitantes", desc: "Habitantes según el Censo 2022.", alto: null }
+};
+const provValor = (k, ind) => { const p = PROV.provincias[k]; return ind === "poblacion" ? p.poblacion : p.aglomerados[0][ind]; };
+const provFmt = (v, ind) => ind === "poblacion" ? (v >= 1e6 ? `${nf(v / 1e6, 1)} millones` : `${nf(v / 1e3, 0)} mil`) : `${nf(v, 1)}%`;
+function cargarProvincias() {
+  if (!provCargando) provCargando = Promise.all([leer("provincias.json"), leer("provincias-arg.json")]).then(([p, g]) => { PROV = p; PROV_GEO = g; }).catch(() => null);
+  return provCargando;
+}
+function abrirProvincias() {
+  if (!PROV) { document.getElementById("provPanel").innerHTML = `<p class="note">Cargando…</p>`; cargarProvincias().then(() => PROV && renderProvincias()); return; }
+  renderProvincias();
+}
+function renderProvincias() {
+  document.getElementById("provChips").innerHTML = Object.entries(PROV_INDS).map(([k, i]) => `<button class="btn" type="button" data-k="${k}" aria-pressed="${provInd === k}">${i.t}</button>`).join("");
+  document.querySelectorAll("#provChips .btn").forEach(b => b.onclick = () => { provInd = b.dataset.k; renderProvincias(); });
+  const ind = PROV_INDS[provInd], ks = Object.keys(PROV.provincias);
+  const vals = ks.map(k => provValor(k, provInd)), [mn, mx] = d3.extent(vals);
+  const esc = provInd === "poblacion" ? d3.scaleSequentialLog(d3.interpolateYlOrRd).domain([mn, mx]) : d3.scaleSequential(d3.interpolateYlOrRd).domain([mn, mx]);
+  /* Mapa */
+  const svgP = d3.select("#provMapa"), el = document.getElementById("provMapa"), r = el.getBoundingClientRect();
+  const feats = topojson.feature(PROV_GEO, PROV_GEO.objects.provincias).features;
+  const proj = d3.geoMercator().fitExtent([[8, 8], [r.width - 8, r.height - 8]], { type: "FeatureCollection", features: feats });
+  const path = d3.geoPath(proj);
+  svgP.attr("viewBox", `0 0 ${r.width} ${r.height}`);
+  const tip = document.getElementById("provTip");
+  svgP.selectAll("path").data(feats, f => f.properties.id).join("path")
+    .attr("d", path).attr("fill", f => esc(provValor(f.properties.id, provInd)))
+    .classed("sel", f => f.properties.id === provSel)
+    .on("click", (e, f) => { provSel = f.properties.id; renderProvincias(); })
+    .on("pointermove", (e, f) => {
+      if (e.pointerType !== "mouse") return;
+      const k = f.properties.id, p = PROV.provincias[k], rr = el.parentNode.getBoundingClientRect();
+      tip.innerHTML = `<div><b>${p.nombre}</b><small>${ind.t}: ${provFmt(provValor(k, provInd), provInd)}</small></div>`;
+      tip.hidden = false; tip.style.left = (e.clientX - rr.left + 14) + "px"; tip.style.top = (e.clientY - rr.top + 14) + "px";
+    })
+    .on("pointerleave", () => tip.hidden = true);
+  svgP.selectAll("path.sel").raise();
+  /* La Ciudad de Buenos Aires es muy chica para verla: la marcamos con un punto */
+  const caba = feats.find(f => f.properties.id === "AR-C");
+  if (caba) {
+    const [cx, cy] = path.centroid(caba);
+    svgP.selectAll("circle.caba").data([caba]).join("circle").attr("class", "caba").attr("cx", cx).attr("cy", cy).attr("r", 7)
+      .attr("fill", esc(provValor("AR-C", provInd))).attr("stroke", provSel === "AR-C" ? css("--ink") : css("--surface")).attr("stroke-width", provSel === "AR-C" ? 2.4 : 1.5)
+      .style("cursor", "pointer").on("click", () => { provSel = "AR-C"; renderProvincias(); })
+      .on("pointermove", e => { if (e.pointerType !== "mouse") return; const rr = el.parentNode.getBoundingClientRect();
+        tip.innerHTML = `<div><b>Ciudad de Buenos Aires</b><small>${ind.t}: ${provFmt(provValor("AR-C", provInd), provInd)}</small></div>`;
+        tip.hidden = false; tip.style.left = (e.clientX - rr.left + 14) + "px"; tip.style.top = (e.clientY - rr.top + 14) + "px"; })
+      .on("pointerleave", () => tip.hidden = true).raise();
+  }
+  document.getElementById("provLey").innerHTML = `<span>${provFmt(mn, provInd)}</span><i style="background:linear-gradient(90deg, ${[0, .25, .5, .75, 1].map(t => d3.interpolateYlOrRd(t)).join(",")})"></i><span>${provFmt(mx, provInd)}</span>`;
+  /* Panel de la provincia elegida */
+  const p = PROV.provincias[provSel], T = PROV.total;
+  const orden = ks.slice().sort((a, b) => provValor(b, provInd) - provValor(a, provInd));
+  const pos = orden.indexOf(provSel) + 1;
+  const comp = (k, v) => T[k] == null ? "" : ` <small class="ytag">país: ${nf(T[k], 1)}%</small>`;
+  document.getElementById("provPanel").innerHTML = `
+    <div class="panel-head"><div><div class="eyebrow">${p.region}</div><h2>${p.nombre}</h2></div></div>
+    <div class="meta"><span>Capital <b>${p.capital}</b></span><span>Población <b>${nf(p.poblacion)}</b> <small class="ytag">Censo 2022</small></span></div>
+    <div class="claves">
+      <div><span>Pobreza</span><b>${nf(p.aglomerados[0].pobreza, 1)}%</b><small>país: ${nf(T.pobreza, 1)}%</small></div>
+      <div><span>Indigencia</span><b>${nf(p.aglomerados[0].indigencia, 1)}%</b><small>país: ${nf(T.indigencia, 1)}%</small></div>
+      <div><span>Desempleo</span><b>${nf(p.aglomerados[0].desocupacion, 1)}%</b><small>país: ${nf(T.desocupacion, 1)}%</small></div>
+      <div><span>Empleo</span><b>${nf(p.aglomerados[0].empleo, 1)}%</b><small>país: ${nf(T.empleo, 1)}%</small></div>
+    </div>
+    <p class="exp">En ${ind.t.toLowerCase()} está en el puesto <b>${pos}</b> de 24 (de mayor a menor).</p>
+    <div class="pf-tabla"><table class="prov-ag"><thead><tr><th>Ciudad (aglomerado)</th><th class="n">Pobreza</th><th class="n">Indigencia</th><th class="n">Desempleo</th></tr></thead><tbody>
+      ${p.aglomerados.map(a => `<tr><td>${a.nombre}</td><td class="n">${nf(a.pobreza, 1)}%</td><td class="n">${nf(a.indigencia, 1)}%</td><td class="n">${nf(a.desocupacion, 1)}%</td></tr>`).join("")}</tbody></table></div>
+    <p class="note">El INDEC mide en las ciudades más grandes de cada provincia, no en toda la provincia.${p.aglomerados.length > 1 ? ` El mapa y las cifras de arriba usan ${p.aglomerados[0].nombre}, la más grande.` : ""}</p>`;
+  /* Ranking */
+  const max = Math.max(...vals);
+  document.getElementById("provRankT").textContent = `${ind.t}: de mayor a menor`;
+  document.getElementById("provRank").innerHTML = orden.map((k, i) => { const v = provValor(k, provInd);
+    return `<div class="gob-fila" style="--ic:${esc(v)}"><span class="g-n"><button class="plink" type="button" data-p="${k}">${i + 1}. ${PROV.provincias[k].nombre}</button></span>
+      <span class="g-bar"><i style="left:0; width:${Math.max(1, v / max * 100)}%; outline: ${k === provSel ? "2px solid var(--ink)" : "0"}"></i></span><span class="g-v">${provFmt(v, provInd)}</span></div>`; }).join("");
+  document.querySelectorAll("#provRank .plink").forEach(b => b.onclick = () => { provSel = b.dataset.p; renderProvincias(); document.getElementById("provPanel").scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "nearest" }); });
+  document.getElementById("provNota").textContent = `${ind.t}: ${ind.desc}${ind.periodo ? ` Dato del ${PROV.periodos[ind.periodo]}.` : ""} Fuentes: ${PROV.fuentes.pobreza}; ${PROV.fuentes.trabajo}; ${PROV.fuentes.poblacion}. En las ciudades chicas la encuesta tiene más margen de error (por ejemplo, el desempleo de Santiago del Estero y de Viedma).`;
+}
+
+/* ---------- GLOSARIO ---------- */
+const GLOSARIO = [
+  { id: "pbi", t: "PBI", lar: "Producto bruto interno", def: "Todo lo que produce un país en un año (bienes y servicios), medido en plata. Es la medida más usada del tamaño de una economía.", dato: () => PAISES.ARG && `Argentina: ${pibTxt(uv(PAISES.ARG, "pib"))}`, ir: ["inicio", "Ver la ficha de Argentina"] },
+  { id: "pbipc", t: "PBI por persona", lar: "PBI per cápita", def: "El PBI dividido por la cantidad de habitantes. Sirve para comparar el nivel de vida entre países de distinto tamaño.", dato: () => PAISES.ARG && `Argentina: US$ ${nf(PAISES.ARG.pibpc)}`, ir: ["rankings", "Ver el ranking"] },
+  { id: "ppa", t: "PPA", lar: "Paridad de poder adquisitivo", def: "Una forma de comparar ingresos entre países teniendo en cuenta lo que cuestan las cosas en cada uno. Con 100 dólares se compra más en Bolivia que en Suiza; la PPA corrige esa diferencia.", dato: () => PAISES.ARG && PAISES.ARG.ppa && `PBI por persona de Argentina ajustado: US$ ${nf(PAISES.ARG.ppa)}`, ir: ["laboratorio", "Usarlo en el Laboratorio"] },
+  { id: "crecimiento", t: "Crecimiento", def: "Cuánto aumentó el PBI de un año al otro, ya sin contar la suba de precios (en términos reales).", dato: () => PAISES.ARG && `Argentina en ${ANIO}: ${pct(uv(PAISES.ARG, "crec"))}`, ir: ["rankings", "Ver el ranking"] },
+  { id: "recesion", t: "Recesión", def: "Un período en que la economía se achica. Se suele hablar de recesión técnica cuando el PBI cae dos trimestres seguidos.", ir: ["rankings", "Ranking de años en recesión"] },
+  { id: "inflacion", t: "Inflación", def: "La suba generalizada de los precios. Una inflación del 2% mensual quiere decir que, en promedio, lo que costaba $100 pasó a costar $102 en un mes.", dato: () => ARGENTINA && ARGENTINA.inflacion && (x => `Último dato (${mesNombre(x[0])}): ${nf(x[1], 1)}%`)(ARGENTINA.inflacion.mensual[ARGENTINA.inflacion.mensual.length - 1]), ir: ["argentina", "Ver la inflación de Argentina", "ag-infl"] },
+  { id: "ipc", t: "IPC", lar: "Índice de precios al consumidor", def: "El índice con el que el INDEC mide la inflación: sigue todos los meses los precios de una canasta de bienes y servicios que compran las familias.", ir: ["calendario", "Cuándo sale el próximo dato"] },
+  { id: "interanual", t: "Inflación interanual", def: "La suba de precios de los últimos 12 meses: compara un mes con el mismo mes del año anterior.", dato: () => ARGENTINA && ARGENTINA.inflacion && `Hoy: ${nf(ARGENTINA.inflacion.interanual.valor, 1)}%`, ir: ["argentina", "Calculadora de inflación", "ag-calc"] },
+  { id: "deflactor", t: "Deflactor del PBI", def: "Otra forma de medir la inflación: mira los precios de todo lo que produce el país, no solo de lo que consumen las familias. Se usa cuando no hay un IPC confiable.", ir: ["acerca", "Ver la metodología"] },
+  { id: "riesgopais", t: "Riesgo país", def: "Cuánto más interés que Estados Unidos le exigen los inversores a un país para prestarle. Se mide en puntos básicos: 700 puntos son 7 puntos porcentuales más por año. Cuanto más alto, más desconfianza.", dato: () => ARGENTINA && `Argentina: ${nf(ARGENTINA.riesgo_pais.ultimo.valor)} puntos`, ir: ["inicio", "Ver el gráfico en la ficha"] },
+  { id: "oficial", t: "Dólar oficial", def: "El precio del dólar en los bancos, que sigue al mayorista que maneja el Banco Central.", dato: () => ARGENTINA && ARGENTINA.casas && `Hoy: ${pesos(cotiz("oficial").venta)}`, ir: ["argentina", "Ver el dólar hoy", "ag-dolar"] },
+  { id: "blue", t: "Dólar blue", def: "El dólar que se compra y vende de manera informal, fuera de los bancos y del mercado regulado.", dato: () => ARGENTINA && ARGENTINA.casas && `Hoy: ${pesos(cotiz("blue").venta)}`, ir: ["argentina", "Ver el dólar hoy", "ag-dolar"] },
+  { id: "mep", t: "Dólar MEP", lar: "Dólar bolsa", def: "El dólar que se obtiene comprando un bono en pesos y vendiéndolo en dólares en la bolsa. Es legal y se hace desde una cuenta de inversión.", dato: () => ARGENTINA && ARGENTINA.casas && `Hoy: ${pesos(cotiz("bolsa").venta)}`, ir: ["argentina", "Ver el dólar hoy", "ag-dolar"] },
+  { id: "ccl", t: "Contado con liquidación", lar: "CCL", def: "Parecido al MEP, pero los dólares quedan en una cuenta en el exterior. Lo usan sobre todo empresas para sacar dólares del país.", dato: () => ARGENTINA && ARGENTINA.casas && `Hoy: ${pesos(cotiz("contadoconliqui").venta)}`, ir: ["argentina", "Ver el dólar hoy", "ag-dolar"] },
+  { id: "brecha", t: "Brecha cambiaria", def: "Cuánto más caro está un dólar alternativo (como el blue) que el oficial, en porcentaje. Una brecha alta suele indicar restricciones o desconfianza.", dato: () => ARGENTINA && ARGENTINA.casas && `Blue contra oficial, hoy: ${nf(variacion(cotiz("blue").venta, cotiz("oficial").venta), 1)}%`, ir: ["argentina", "Ver el dólar hoy", "ag-dolar"] },
+  { id: "cepo", t: "Cepo cambiario", def: "Las restricciones del gobierno para comprar dólares (límites, prohibiciones o impuestos). En Argentina rigieron entre 2011 y 2015 y entre 2019 y 2025.", ir: ["argentina", "Ver la evolución del dólar", "ag-dolar"] },
+  { id: "devaluacion", t: "Devaluación", def: "Cuando la moneda pierde valor frente al dólar: hacen falta más pesos para comprar un dólar.", ir: ["argentina", "¿Dónde convenía tener la plata?", "ag-ahorro"] },
+  { id: "tna", t: "TNA y TEM", lar: "Tasa nominal anual y tasa efectiva mensual", def: "La TNA es la tasa de interés anual que anuncian los bancos. Para saber cuánto rinde un plazo fijo a 30 días, se divide por 12 (más precisamente, se multiplica por 30 y se divide por 365): una TNA del 24% rinde cerca del 2% en un mes.", dato: () => ARGENTINA && ARGENTINA.plazo_fijo && ARGENTINA.plazo_fijo[0] && `La tasa más alta hoy: ${nf(ARGENTINA.plazo_fijo[0].tna, 1)}% TNA`, ir: ["argentina", "Ver las tasas por banco", "ag-pf"] },
+  { id: "uva", t: "UVA", lar: "Unidad de valor adquisitivo", def: "Una unidad que se actualiza todos los días con la inflación. Se usa en créditos hipotecarios y en plazos fijos UVA, para que la plata no pierda valor.", dato: () => ARGENTINA && ARGENTINA.uva && `Hoy: $${nf(ARGENTINA.uva[ARGENTINA.uva.length - 1][1], 2)}`, ir: ["argentina", "¿Dónde convenía tener la plata?", "ag-ahorro"] },
+  { id: "deficit", t: "Déficit fiscal", def: "Cuando el Estado gasta más de lo que recauda. Para cubrir la diferencia tiene que endeudarse o emitir pesos. Lo contrario es el superávit.", ir: ["rankings", "Ver deuda pública por país"] },
+  { id: "deuda", t: "Deuda pública", def: "Lo que debe el Estado. Se compara con el PBI para dimensionarla: una deuda del 80% del PBI equivale a casi 10 meses de todo lo que produce el país.", dato: () => PAISES.ARG && PAISES.ARG.deuda && `Argentina: ${nf(PAISES.ARG.deuda)}% del PBI`, ir: ["rankings", "Ver el ranking"] },
+  { id: "default", t: "Default", def: "Cuando un país deja de pagar su deuda. Argentina entró en default varias veces; la más grande fue en diciembre de 2001.", ir: ["gobiernos", "Ver gobiernos comparados"] },
+  { id: "reservas", t: "Reservas", def: "Los dólares, el oro y otras monedas que tiene el Banco Central. Sirven para pagar deudas, importar y defender el peso.", ir: ["argentina", "Ver el dólar hoy", "ag-dolar"] },
+  { id: "cuentacorriente", t: "Cuenta corriente", def: "El resultado de todo lo que un país gana y gasta con el resto del mundo: comercio, servicios, turismo, intereses y remesas. Si es negativa, entran menos dólares de los que salen.", dato: () => PAISES.ARG && PAISES.ARG.cc != null && `Argentina: ${pct(PAISES.ARG.cc)} del PBI`, ir: ["inicio", "Ver la ficha de Argentina"] },
+  { id: "balanza", t: "Balanza comercial", def: "Exportaciones menos importaciones de bienes. Si se vende más de lo que se compra, hay superávit comercial.", ir: ["calendario", "Cuándo sale el próximo dato"] },
+  { id: "desempleo", t: "Desempleo", lar: "Desocupación", def: "De cada 100 personas que trabajan o buscan trabajo, cuántas no consiguen. Quien no busca trabajo no cuenta como desocupado.", dato: () => PROV ? `Argentina (31 ciudades): ${nf(PROV.total.desocupacion, 1)}%` : PAISES.ARG && PAISES.ARG.desempleo && `Argentina: ${pct(PAISES.ARG.desempleo)}`, ir: ["provincias", "Ver por provincia"] },
+  { id: "pobreza", t: "Pobreza e indigencia", def: "Una persona es pobre si su hogar no llega a cubrir la canasta básica total (comida, ropa, transporte, salud, educación), e indigente si no llega a cubrir ni la canasta de alimentos.", dato: () => PROV && `Argentina (31 ciudades): ${nf(PROV.total.pobreza, 1)}% de pobreza, ${nf(PROV.total.indigencia, 1)}% de indigencia`, ir: ["provincias", "Ver por provincia"] },
+  { id: "canasta", t: "Canasta básica", def: "Lo que necesita un hogar por mes para no ser pobre (canasta básica total) o para no ser indigente (canasta básica alimentaria). La calcula el INDEC todos los meses.", ir: ["calendario", "Cuándo sale la próxima"] },
+  { id: "emae", t: "EMAE", lar: "Estimador mensual de actividad económica", def: "El indicador del INDEC que muestra mes a mes cómo viene la economía, antes de que salga el PBI trimestral.", ir: ["calendario", "Cuándo sale el próximo"] },
+  { id: "gini", t: "Coeficiente de Gini", def: "Mide la desigualdad de ingresos de 0 a 100: 0 sería que todos ganan lo mismo y 100 que una sola persona se queda con todo.", dato: () => LAB && LAB.paises.ARG && LAB.paises.ARG.gini && (s => `Argentina: ${nf([...s[1]].reverse().find(v => v != null), 1)}`)(LAB.paises.ARG.gini), ir: ["rankings", "Ver el ranking"] },
+  { id: "elasticidad", t: "Elasticidad", def: "Cuánto cambia, en porcentaje, una variable cuando otra cambia un 1%. Una elasticidad de 2 quiere decir que si una sube 1%, la otra sube 2%.", ir: ["laboratorio", "Probarlo en el Laboratorio"] },
+  { id: "regresion", t: "Regresión", def: "Una herramienta estadística que busca la recta que mejor describe la relación entre dos variables. Muestra cómo se mueven juntas, pero no prueba que una cause la otra.", ir: ["laboratorio", "Ir al Laboratorio"] }
+];
+function renderGlosario() {
+  const q = sinTildes(document.getElementById("glosBuscar").value.trim());
+  const lista = GLOSARIO.slice().sort((a, b) => a.t.localeCompare(b.t, "es"))
+    .filter(g => !q || sinTildes(`${g.t} ${g.lar || ""} ${g.def}`).includes(q));
+  const letra = g => sinTildes(g.t[0]).toUpperCase();
+  const letras = [...new Set(lista.map(letra))];
+  document.getElementById("glosLetras").innerHTML = letras.map(l => `<a href="#glosario" data-l="${l}">${l}</a>`).join("");
+  let html = "", ult = "";
+  lista.forEach(g => {
+    if (letra(g) !== ult) { ult = letra(g); html += `<div class="glos-letra" id="glos-l-${ult}">${ult}</div>`; }
+    let dato = null; try { dato = g.dato ? g.dato() : null; } catch (e) { dato = null; }
+    html += `<article class="glos-t" id="glos-${g.id}"><h2>${g.t}${g.lar ? `<small>${g.lar}</small>` : ""}</h2><p>${g.def}</p>
+      ${dato ? `<span class="glos-dato">${dato.replace(/: (.*)$/, ": <b>$1</b>")}</span>` : ""}
+      ${g.ir ? `<a class="glos-ir" href="#${g.ir[0]}" data-pag="${g.ir[0]}" data-ancla="${g.ir[2] || ""}">${g.ir[1]} →</a>` : ""}</article>`;
+  });
+  document.getElementById("glosLista").innerHTML = html || `<p class="note">No encontré esa palabra. Probá con otra.</p>`;
+  document.querySelectorAll("#glosLetras a").forEach(a => a.onclick = e => { e.preventDefault(); document.getElementById("glos-l-" + a.dataset.l).scrollIntoView({ behavior: reduced() ? "auto" : "smooth" }); });
+  document.querySelectorAll("#glosLista .glos-ir").forEach(a => a.onclick = e => { e.preventDefault(); irA_(a.dataset.pag, a.dataset.ancla || null)(); });
 }
 
 /* ---------- RANKINGS ---------- */
@@ -3337,8 +3542,10 @@ Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json")
     armarRankings();
     armarArgentina();
     ["convGA", "convGB"].forEach(id => document.getElementById(id).addEventListener("input", renderConvergencia));
+    document.getElementById("glosBuscar").addEventListener("input", renderGlosario);
     renderTicker();
     armarMapaInd();
+    cargarProvincias();   // es chico: así el buscador ya encuentra las provincias
     cargarLab().then(() => { Object.keys(RANKS).forEach(k => delete RANKS[k]); renderPanel(); });   // las secciones nuevas de la ficha usan lab.json
     armarNav();
     mostrarPagina(location.hash.slice(1) || "inicio");   // si entraron con #elecciones, por ejemplo
@@ -3358,6 +3565,7 @@ new MutationObserver(redrawCharts).observe(document.documentElement, { attribute
 let rT;
 window.addEventListener("resize", () => {
   tl.resize(); charts.sparks.forEach(c => c.resize()); if (labChart) labChart.resize(); Object.values(agCharts).forEach(c => c.resize()); if (convChart) convChart.resize();
+  if (paginaActual === "provincias" && PROV) renderProvincias();
   clearTimeout(rT);
   rT = setTimeout(() => {
     const r = document.getElementById("map").getBoundingClientRect();
