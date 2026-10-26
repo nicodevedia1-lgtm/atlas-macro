@@ -992,7 +992,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
           <tbody>
             <tr><td>PBI, crecimiento, inflación, desempleo, población, cuenta corriente, PBI por persona</td><td>Banco Mundial (World Development Indicators) y FMI (World Economic Outlook)</td><td>Todos los lunes</td></tr>
             <tr><td>Deuda pública</td><td>FMI; donde no hay dato, Banco Mundial</td><td>Todos los lunes</td></tr>
-            <tr><td>Esperanza de vida, mortalidad infantil, fertilidad, urbanización, internet, desigualdad, pobreza, inversión, ahorro, comercio, remesas, gasto público, impuestos, CO₂</td><td>Banco Mundial (World Development Indicators)</td><td>Todos los lunes</td></tr>
+            <tr><td>Salud (esperanza de vida, mortalidad infantil y materna, médicos, gasto en salud), educación (escolarización), población (edades, fertilidad, urbanización, inmigrantes), trabajo y género, servicios (electricidad, agua, internet), homicidios, desigualdad, pobreza, inversión, ahorro, comercio, remesas, gasto público, impuestos, CO₂</td><td>Banco Mundial (World Development Indicators)</td><td>Todos los lunes</td></tr>
             <tr><td>Control de la corrupción y estado de derecho</td><td>Banco Mundial (Worldwide Governance Indicators)</td><td>Todos los lunes</td></tr>
             <tr><td>Riesgo país, cotizaciones del dólar, inflación del INDEC, UVA y tasas de plazo fijo de Argentina</td><td>ArgentinaDatos (argentinadatos.com), un proyecto abierto y no oficial que recopila datos públicos del BCRA y el INDEC</td><td>Todos los días hábiles</td></tr>
             <tr><td>Pobreza, indigencia y mercado de trabajo por provincia</td><td>INDEC, Encuesta Permanente de Hogares (31 aglomerados urbanos), copiado a mano de sus informes; población del Censo 2022; mapa de provincias de Natural Earth, con las Islas Malvinas como parte de Tierra del Fuego</td><td>Cuando el INDEC publica datos nuevos (cada trimestre o semestre)</td></tr>
@@ -1720,8 +1720,12 @@ const LAB_BASE = {
 };
 /* Grupo y escala sugerida de las variables de lab.json (el nombre y la unidad vienen en el archivo) */
 const LAB_EXTRA = {
-  vida: ["Sociales"], mortinf: ["Sociales", true], fert: ["Sociales"], urbano: ["Sociales"], internet: ["Sociales"],
-  gini: ["Desigualdad y pobreza"], pobreza: ["Desigualdad y pobreza"],
+  vida: ["Salud"], mortinf: ["Salud", true], mort5: ["Salud", true], materna: ["Salud", true], medicos: ["Salud"], saludpc: ["Salud", true],
+  secundaria: ["Educación"], universidad: ["Educación"],
+  fert: ["Población"], urbano: ["Población"], mayores: ["Población"], chicos: ["Población"], migrantes: ["Población", true],
+  mujeres: ["Trabajo y género"], jovenes: ["Trabajo y género"], parlamento: ["Trabajo y género"],
+  internet: ["Servicios y seguridad"], electricidad: ["Servicios y seguridad"], agua: ["Servicios y seguridad"], homicidios: ["Servicios y seguridad", true],
+  gini: ["Desigualdad y pobreza"], pobreza: ["Desigualdad y pobreza"], top10: ["Desigualdad y pobreza"],
   apertura: ["Comercio e inversión"], inversion: ["Comercio e inversión"], ahorro: ["Comercio e inversión"], ied: ["Comercio e inversión"], remesas: ["Comercio e inversión"],
   gedu: ["Estado"], gsalud: ["Estado"], impuestos: ["Estado"],
   corrupcion: ["Instituciones"], derecho: ["Instituciones"],
@@ -1735,6 +1739,8 @@ const LAB_EJEMPLOS = [
   { t: "Ley de Okun", y: "ddesempleo", x: "crec", xm: "prom", nota: "Okun (1962): cuando la economía crece más, el desempleo baja. Acá, crecimiento promedio de 10 años contra cuánto cambió el desempleo en esos 10 años." },
   { t: "Inflación y crecimiento", y: "crec", ym: "prom", x: "infl", xm: "prom", xlog: true },
   { t: "Apertura y crecimiento", y: "crec", ym: "prom", x: "apertura" },
+  { t: "Mujeres que trabajan e hijos", y: "fert", x: "mujeres" },
+  { t: "Riqueza y homicidios", y: "homicidios", x: "ppa", xlog: true, ylog: true },
   { t: "Riqueza y CO₂", y: "co2", x: "ppa", xlog: true, ylog: true, nota: "Las dos en escala log: la pendiente es una elasticidad." }
 ];
 /* Regiones grandes para colorear y filtrar */
@@ -2545,7 +2551,7 @@ const RK_PRESETS = [
   { t: "Inflación", v: "infl" }, { t: "Crecimiento", v: "crec" }, { t: "Lo que más creció en 10 años", v: "crec10" },
   { t: "Más ricos y más pobres", v: "ppa" }, { t: "Deuda pública", v: "deuda" }, { t: "Desempleo", v: "desempleo" },
   { t: "Años en recesión desde 1990", v: "recesiones" }, { t: "Inflación acumulada desde 2000", v: "inflAcum" },
-  { t: "Esperanza de vida", v: "vida" }, { t: "Corrupción", v: "corrupcion" }, { t: "Desigualdad", v: "gini" }
+  { t: "Esperanza de vida", v: "vida" }, { t: "Homicidios", v: "homicidios" }, { t: "Mujeres en el Congreso", v: "parlamento" }, { t: "Corrupción", v: "corrupcion" }, { t: "Desigualdad", v: "gini" }
 ];
 const rkEstado = { v: "infl", m: "ultimo", reg: "todas", sob: true, chicos: true };
 /* Valor con su unidad, corto */
@@ -3189,6 +3195,22 @@ const DESC_VAR = {
   fert: "Cuántos hijos tiene en promedio cada mujer. Con menos de 2,1 la población tiende a achicarse.",
   urbano: "Parte de la población que vive en ciudades.",
   internet: "Parte de la población que usó internet en el último año.",
+  mort5: "Chicos que mueren antes de cumplir 5 años, por cada 1.000 que nacen.",
+  materna: "Mujeres que mueren por causas del embarazo o el parto, por cada 100.000 nacimientos.",
+  medicos: "Cuántos médicos hay por cada 1.000 habitantes.",
+  saludpc: "Todo lo que se gasta en salud por habitante en un año, sumando lo público y lo privado.",
+  secundaria: "Alumnos en la secundaria comparados con los chicos en edad de ir. Puede pasar del 100% si hay alumnos más grandes o repitentes.",
+  universidad: "Alumnos en la universidad o terciario comparados con la población en edad de estudiar. Puede pasar del 100% por los que estudian de más grandes.",
+  mayores: "Parte de la población que tiene 65 años o más. Cuanto más alta, más envejecido el país.",
+  chicos: "Parte de la población que tiene menos de 15 años.",
+  migrantes: "Personas que nacieron en otro país, comparadas con toda la población.",
+  mujeres: "De cada 100 mujeres de 15 años o más, cuántas trabajan o buscan trabajo.",
+  jovenes: "De cada 100 jóvenes de 15 a 24 años que trabajan o buscan trabajo, cuántos no consiguen.",
+  parlamento: "Parte de las bancas del Congreso (o de la cámara baja) que ocupan mujeres.",
+  electricidad: "Parte de la población que tiene luz eléctrica en su casa.",
+  agua: "Parte de la población que tiene agua potable segura, disponible y sin contaminar.",
+  homicidios: "Homicidios intencionales por año, por cada 100.000 habitantes.",
+  top10: "Qué parte de todos los ingresos del país se queda el 10% de las personas que más ganan.",
   gini: "Desigualdad de ingresos: 0 sería que todos ganan lo mismo; 100, que una sola persona se queda con todo.",
   pobreza: "Personas por debajo de la línea internacional de pobreza extrema del Banco Mundial (unos US$ 3 por día).",
   apertura: "Exportaciones más importaciones, comparadas con el PBI. Cuanto más alto, más comercia con el mundo.",
@@ -3225,7 +3247,9 @@ function miniSerie(k, v) {
 }
 function bloqueVars(k, claves) {
   const V = labVars();
-  if (claves.some(c => !V[c])) return labListo || !labPromesa ? "" : `<p class="note">Cargando datos…</p>`;
+  if (!labListo && labPromesa && claves.some(c => !V[c])) return `<p class="note">Cargando datos…</p>`;
+  claves = claves.filter(c => V[c]);         // con un lab.json viejo, se muestran solo las variables que tiene
+  if (!claves.length) return "";
   const filas = claves.map(c => {
     const x = labValor(k, c, "ultimo"); if (!x) return "";
     const r = rankDe(c), pos = r.pos[k];
@@ -3314,10 +3338,14 @@ function renderPanel() {
     </div>`)}
     ${seleccion === "ARG" ? sec("rp", "Argentina al día: riesgo país y dólar", bloqueArgentina()) : sec("rp", "Riesgo país", bloqueRiesgo(seleccion))}
     ${sec("histe", "Historia económica", bloqueVars(seleccion, ["crec10", "recesiones", "inflAcum"]))}
-    ${sec("soc", "Sociedad", bloqueVars(seleccion, ["vida", "mortinf", "fert", "urbano", "internet"]))}
-    ${sec("des", "Desigualdad y pobreza", bloqueVars(seleccion, ["gini", "pobreza"]))}
+    ${sec("salud", "Salud", bloqueVars(seleccion, ["vida", "mortinf", "mort5", "materna", "medicos", "saludpc"]))}
+    ${sec("edu", "Educación", bloqueVars(seleccion, ["secundaria", "universidad", "gedu"]))}
+    ${sec("pobl", "Población", bloqueVars(seleccion, ["fert", "mayores", "chicos", "urbano", "migrantes"]))}
+    ${sec("trab", "Trabajo y género", bloqueVars(seleccion, ["mujeres", "jovenes", "parlamento"]))}
+    ${sec("serv", "Servicios y seguridad", bloqueVars(seleccion, ["internet", "electricidad", "agua", "homicidios"]))}
+    ${sec("des", "Desigualdad y pobreza", bloqueVars(seleccion, ["gini", "top10", "pobreza"]))}
     ${sec("inv", "Inversión y comercio exterior", bloqueVars(seleccion, ["apertura", "inversion", "ahorro", "ied", "remesas"]))}
-    ${sec("est", "Estado", bloqueVars(seleccion, ["impuestos", "gedu", "gsalud"]))}
+    ${sec("est", "Estado", bloqueVars(seleccion, ["impuestos", "gsalud"]))}
     ${sec("inst", "Instituciones", bloqueVars(seleccion, ["corrupcion", "derecho"]))}
     ${sec("amb", "Ambiente", bloqueVars(seleccion, ["co2"]))}
     ${sec("act", "A qué se dedica", d.actividades ? `<div class="acts">

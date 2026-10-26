@@ -34,9 +34,30 @@ VARIABLES = {
     "fert":     ("Hijos por mujer", "hijos", ["SP.DYN.TFRT.IN"], 2),
     "urbano":   ("Población urbana", "% del total", ["SP.URB.TOTL.IN.ZS"], 2),
     "internet": ("Uso de internet", "% de la población", ["IT.NET.USER.ZS"], 2),
+    # Salud
+    "mort5":    ("Mortalidad de menores de 5 años", "por cada 1.000 nacidos", ["SH.DYN.MORT"], 2),
+    "materna":  ("Mortalidad materna", "por cada 100.000 nacidos", ["SH.STA.MMRT"], 2),
+    "medicos":  ("Médicos", "por cada 1.000 habitantes", ["SH.MED.PHYS.ZS"], 2),
+    "saludpc":  ("Gasto en salud por persona", "US$", ["SH.XPD.CHEX.PC.CD"], 2),
+    # Educación
+    "secundaria": ("Escolarización secundaria", "% de la edad correspondiente (bruta)", ["SE.SEC.ENRR"], 2),
+    "universidad": ("Escolarización universitaria", "% de la edad correspondiente (bruta)", ["SE.TER.ENRR"], 2),
+    # Población
+    "mayores":  ("Población de 65 años o más", "% del total", ["SP.POP.65UP.TO.ZS"], 2),
+    "chicos":   ("Población de 0 a 14 años", "% del total", ["SP.POP.0014.TO.ZS"], 2),
+    "migrantes": ("Inmigrantes", "% de la población", ["SM.POP.TOTL.ZS"], 2),
+    # Trabajo y género
+    "mujeres":  ("Mujeres que trabajan o buscan trabajo", "% de las mujeres de 15 años o más", ["SL.TLF.CACT.FE.ZS"], 2),
+    "jovenes":  ("Desempleo juvenil", "% de los jóvenes de 15 a 24 que buscan trabajo", ["SL.UEM.1524.ZS"], 2),
+    "parlamento": ("Mujeres en el Congreso", "% de las bancas", ["SG.GEN.PARL.ZS"], 2),
+    # Servicios y seguridad
+    "electricidad": ("Acceso a electricidad", "% de la población", ["EG.ELC.ACCS.ZS"], 2),
+    "agua":     ("Agua potable segura", "% de la población", ["SH.H2O.SMDW.ZS"], 2),
+    "homicidios": ("Homicidios", "por cada 100.000 habitantes", ["VC.IHR.PSRC.P5"], 2),
     # Desigualdad y pobreza
     "gini":     ("Desigualdad (Gini)", "0 a 100", ["SI.POV.GINI"], 2),
     "pobreza":  ("Pobreza extrema", "% de la población", ["SI.POV.DDAY"], 2),
+    "top10":    ("Ingreso del 10% más rico", "% del ingreso total", ["SI.DST.10TH.10"], 2),
     # Macro
     "apertura": ("Apertura comercial", "% del PBI", ["NE.TRD.GNFS.ZS"], 2),
     "inversion": ("Inversión", "% del PBI", ["NE.GDI.TOTL.ZS"], 2),
