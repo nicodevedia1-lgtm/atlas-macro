@@ -419,6 +419,23 @@ footer a { color: var(--muted); text-decoration-color: var(--accent); text-under
 .pf-tabla a { color: var(--ink); text-decoration-color: var(--accent); text-underline-offset: 3px; }
 
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+/* Mercados */
+.m-cartas { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 165px), 1fr)); gap: 10px; }
+@media (max-width: 420px) { .m-cartas { grid-template-columns: repeat(2, minmax(0, 1fr)); } .m-p { font-size: 18px; } }
+.m-carta { display: grid; gap: 3px; text-align: left; background: var(--bg); border: 1px solid transparent; border-radius: 12px; padding: 12px 14px; cursor: pointer; font: inherit; color: var(--ink); }
+.m-carta:hover { border-color: var(--line); }
+.m-carta.sel { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent) inset; }
+.m-n { font-weight: 700; font-size: 14.5px; display: flex; justify-content: space-between; gap: 8px; }
+.m-n small { font-family: var(--f-data); font-weight: 400; font-size: 11.5px; color: var(--muted); }
+.m-p { font-family: var(--f-data); font-size: 21px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.m-v, .m-mas { font-family: var(--f-data); font-size: 12.5px; }
+.m-mas { color: var(--muted); }
+.m-up { color: var(--good); } .m-down { color: var(--bad); }
+.m-spark { width: 100%; height: 30px; }
+.m-spark polyline { fill: none; stroke-width: 1.5; stroke-linejoin: round; }
+.m-spark.s-up polyline { stroke: var(--good); } .m-spark.s-down polyline { stroke: var(--bad); }
+#mercDetT small { font-family: var(--f-data); font-size: 15px; font-weight: 500; margin-left: 8px; }
+
 /* Provincias */
 .prov-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
 @media (max-width: 900px) { .prov-main { grid-template-columns: minmax(0, 1fr); } }
@@ -653,7 +670,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   </button>
   <a class="logo" href="#inicio">Atlas <span>Macro</span></a>
   <nav class="tabs" aria-label="Secciones">
-    <a href="#inicio" data-pag="inicio">Mapa</a><a href="#argentina" data-pag="argentina">Argentina hoy</a><a href="#provincias" data-pag="provincias">Provincias</a><a href="#calendario" data-pag="calendario">Calendario</a><a href="#rankings" data-pag="rankings">Rankings</a><a href="#juego" data-pag="juego">País del día</a><a href="#masrico" data-pag="masrico">Más rico o más pobre</a><a href="#elecciones" data-pag="elecciones">Elecciones</a><a href="#conflictos" data-pag="conflictos">Conflictos</a><a href="#glosario" data-pag="glosario">Glosario</a><a href="#laboratorio" data-pag="laboratorio">Laboratorio</a><a href="#comparacion" data-pag="comparacion">Comparar</a><a href="#gobiernos" data-pag="gobiernos">Gobiernos</a>
+    <a href="#inicio" data-pag="inicio">Mapa</a><a href="#argentina" data-pag="argentina">Argentina hoy</a><a href="#mercados" data-pag="mercados">Mercados</a><a href="#provincias" data-pag="provincias">Provincias</a><a href="#calendario" data-pag="calendario">Calendario</a><a href="#rankings" data-pag="rankings">Rankings</a><a href="#juego" data-pag="juego">País del día</a><a href="#masrico" data-pag="masrico">Más rico o más pobre</a><a href="#elecciones" data-pag="elecciones">Elecciones</a><a href="#conflictos" data-pag="conflictos">Conflictos</a><a href="#glosario" data-pag="glosario">Glosario</a><a href="#laboratorio" data-pag="laboratorio">Laboratorio</a><a href="#comparacion" data-pag="comparacion">Comparar</a><a href="#gobiernos" data-pag="gobiernos">Gobiernos</a>
   </nav>
   <div class="search">
     <input type="search" id="buscar" placeholder="Buscar un país…" autocomplete="off" spellcheck="false"
@@ -671,6 +688,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   <ul>
     <li><a href="#inicio" data-pag="inicio"><span class="nav-ico" aria-hidden="true">🗺️</span><span>Mapa y fichas<small>Tocá un país y mirá su economía</small></span></a></li>
     <li><a href="#argentina" data-pag="argentina"><span class="nav-ico" aria-hidden="true">🇦🇷</span><span>Argentina hoy<small>Dólar, inflación y calculadoras</small></span></a></li>
+    <li><a href="#mercados" data-pag="mercados"><span class="nav-ico" aria-hidden="true">📈</span><span>Mercados<small>Bolsas, acciones argentinas, soja y cripto</small></span></a></li>
     <li><a href="#provincias" data-pag="provincias"><span class="nav-ico" aria-hidden="true">📍</span><span>Argentina por provincia<small>Pobreza, desempleo y población</small></span></a></li>
     <li><a href="#calendario" data-pag="calendario"><span class="nav-ico" aria-hidden="true">📅</span><span>Calendario económico<small>Próximos datos del INDEC y feriados</small></span></a></li>
     <li><a href="#rankings" data-pag="rankings"><span class="nav-ico" aria-hidden="true">🏆</span><span>Rankings<small>Los primeros y los últimos del mundo</small></span></a></li>
@@ -693,7 +711,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <h1>Atlas <span>Macro</span></h1>
     <p class="lede">Tocá un país en el mapa o buscalo arriba, y mirá cómo le va a su economía, explicado en simple. Debajo del mapa está todo lo demás: el dólar y la inflación de hoy, el juego del día, los rankings y más.</p>
     <nav class="accesos" aria-label="Ir a">
-      <a href="#argentina">🇦🇷 Argentina hoy</a><a href="#provincias">📍 Provincias</a><a href="#calendario">📅 Calendario</a><a href="#juego">🎯 País del día</a><a href="#masrico">💰 Más rico o más pobre</a><a href="#rankings">🏆 Rankings</a><a href="#elecciones">🗳️ Elecciones</a><a href="#conflictos">⚠️ Conflictos</a><a href="#glosario">📖 Glosario</a><a href="#laboratorio">🧪 Laboratorio</a><a href="#comparacion">⚖️ Comparar</a><a href="#gobiernos">🏛️ Gobiernos</a>
+      <a href="#argentina">🇦🇷 Argentina hoy</a><a href="#mercados">📈 Mercados</a><a href="#provincias">📍 Provincias</a><a href="#calendario">📅 Calendario</a><a href="#juego">🎯 País del día</a><a href="#masrico">💰 Más rico o más pobre</a><a href="#rankings">🏆 Rankings</a><a href="#elecciones">🗳️ Elecciones</a><a href="#conflictos">⚠️ Conflictos</a><a href="#glosario">📖 Glosario</a><a href="#laboratorio">🧪 Laboratorio</a><a href="#comparacion">⚖️ Comparar</a><a href="#gobiernos">🏛️ Gobiernos</a>
     </nav>
   </header>
 
@@ -815,6 +833,21 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
       <p class="note" id="pfNota"></p>
     </section>
     <p class="note">Datos de ArgentinaDatos (argentinadatos.com), un proyecto abierto que junta datos públicos del BCRA y el INDEC; el dólar de hoy se actualiza en vivo desde DolarAPI (dolarapi.com) cuando está disponible. Nada de esto es una recomendación de inversión.</p>
+  </div>
+
+  <div class="pagina" id="pag-mercados" hidden>
+    <header class="top">
+      <div class="eyebrow" id="mercFecha">Mercados</div>
+      <h1>Mercados</h1>
+      <p class="lede">Cómo vienen las principales bolsas del mundo, las acciones argentinas en Nueva York, los precios de lo que exporta el país y las cripto. Tocá cualquiera para ver su gráfico.</p>
+    </header>
+    <section class="ag-bloque" id="mercDetalle">
+      <div class="ag-tit"><h2 id="mercDetT">—</h2><div class="lab-chips" id="mercRangos"></div></div>
+      <div id="mercChart" class="ag-chart"></div>
+      <p class="note" id="mercDetNota"></p>
+    </section>
+    <div class="lista-pag" id="mercGrupos"></div>
+    <p class="note">Precios de cierre de cada día hábil, salvo bitcoin y ether, que se actualizan en vivo. No son cotizaciones en tiempo real ni una recomendación de inversión. Fuentes: Stooq, Yahoo Finance y CoinGecko.</p>
   </div>
 
   <div class="pagina" id="pag-provincias" hidden>
@@ -997,6 +1030,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
             <tr><td>Riesgo país, cotizaciones del dólar, inflación del INDEC, UVA y tasas de plazo fijo de Argentina</td><td>ArgentinaDatos (argentinadatos.com), un proyecto abierto y no oficial que recopila datos públicos del BCRA y el INDEC</td><td>Todos los días hábiles</td></tr>
             <tr><td>Pobreza, indigencia y mercado de trabajo por provincia</td><td>INDEC, Encuesta Permanente de Hogares (31 aglomerados urbanos), copiado a mano de sus informes; población del Censo 2022; mapa de provincias de Natural Earth, con las Islas Malvinas como parte de Tierra del Fuego</td><td>Cuando el INDEC publica datos nuevos (cada trimestre o semestre)</td></tr>
             <tr><td>Fechas de publicación del INDEC (calendario económico)</td><td>Calendario de difusión del INDEC, copiado a mano; feriados de ArgentinaDatos</td><td>Cada seis meses, cuando el INDEC publica el calendario nuevo</td></tr>
+            <tr><td>Índices bursátiles, acciones argentinas en Nueva York, materias primas y cripto</td><td>Stooq y Yahoo Finance (precios de cierre); bitcoin y ether en vivo de CoinGecko</td><td>Todos los días hábiles, después del cierre</td></tr>
             <tr><td>Dólar en vivo</td><td>DolarAPI (dolarapi.com); si no responde, se muestra el último cierre</td><td>Cada vez que se abre la página</td></tr>
             <tr><td>Riesgo país de otros países de Latinoamérica</td><td>Banco Central de Reserva del Perú, índice EMBIG con datos de Reuters</td><td>Todos los martes (el dato es mensual)</td></tr>
             <tr><td>Próximas elecciones y control de cambios de gobierno</td><td>Wikidata, base de datos abierta y colaborativa</td><td>Todos los días</td></tr>
@@ -1041,7 +1075,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
           <li>El juego "País del día" guarda tus partidas y estadísticas solo en tu navegador (en el almacenamiento local). Nunca se mandan a ningún servidor. Si borrás los datos del sitio en tu navegador, se borran.</li>
           <li>La página está alojada en Cloudflare Pages, que como cualquier servidor registra datos técnicos de cada visita (como la dirección IP) para funcionar y protegerse de ataques.</li>
           <li>Para mostrarse, la página carga tipografías de Google Fonts y librerías de cdnjs y jsDelivr. Esos servicios reciben la dirección IP de quien visita, como cualquier sitio que los usa.</li>
-          <li>Para mostrar el dólar en vivo, tu navegador consulta DolarAPI (dolarapi.com), que también recibe tu dirección IP.</li>
+          <li>Para mostrar el dólar y las cripto en vivo, tu navegador consulta DolarAPI (dolarapi.com) y CoinGecko (coingecko.com), que también reciben tu dirección IP.</li>
           <li>Los links a noticias llevan a Google Noticias, que tiene su propia política de privacidad.</li>
           <li>Hoy la página no muestra publicidad. Si eso cambia, esta sección se va a actualizar antes.</li>
         </ul>
@@ -1519,7 +1553,7 @@ const sinTildes = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowe
 /* ---------- PÁGINAS Y PANEL LATERAL ----------
    Cada sección es una "página": #inicio, #comparacion, #elecciones, #conflictos.
    Se cambia con el link (la dirección cambia, así funciona el botón "atrás" del navegador). */
-const PAGINAS = ["inicio", "argentina", "provincias", "glosario", "gobiernos", "calendario", "comparacion", "rankings", "laboratorio", "juego", "masrico", "elecciones", "conflictos", "acerca"];
+const PAGINAS = ["inicio", "argentina", "mercados", "provincias", "glosario", "gobiernos", "calendario", "comparacion", "rankings", "laboratorio", "juego", "masrico", "elecciones", "conflictos", "acerca"];
 let paginaActual = "inicio";
 const versusAbierto = () => paginaActual === "comparacion";
 function mostrarPagina(nombre) {
@@ -1536,6 +1570,7 @@ function mostrarPagina(nombre) {
   if (nombre === "argentina") abrirArgentina();
   if (nombre === "gobiernos") renderGobiernos();
   if (nombre === "provincias") abrirProvincias();
+  if (nombre === "mercados") abrirMercados();
   if (nombre === "glosario") { renderGlosario(); if (!PROV) cargarProvincias().then(() => paginaActual === "glosario" && renderGlosario()); }
   if (nombre === "calendario") renderCalendario();
   if (nombre === "masrico") abrirMasRico();
@@ -1667,6 +1702,8 @@ function indiceBusqueda() {
   add("🗳️", "Próximas elecciones", "Agenda", "elecciones votacion calendario", irA_("elecciones"));
   add("⚠️", "Conflictos y crisis", "Mundo", "conflictos guerra crisis militar golpe", irA_("conflictos"));
   add("🏛️", "Quién gobierna cada país", "Mapa", "gobierno presidente izquierda derecha ideologia quien gobierna", () => { irA_("inicio")(); setModo("gob"); setVista("mundo"); });
+  add("📈", "Mercados", "Bolsas, ADRs, soja y cripto", "mercados bolsa acciones indices merval sp500 s&p nasdaq bovespa adr ypf galicia mercado libre soja maiz trigo petroleo oro cobre bitcoin cripto ether", irA_("mercados"));
+  todosMerc().forEach(x => add("📈", x.nombre, `Mercados · ${fmtMerc(x)}`, `${x.nombre} ${x.ticker} cotizacion precio accion`, () => { mercSel = x.clave; irA_("mercados")(); }));
   add("📍", "Argentina por provincia", "Pobreza, desempleo, población", "provincias provincia pobreza indigencia desempleo mapa argentina cordoba santa fe mendoza tucuman salta chaco", irA_("provincias"));
   if (PROV) Object.entries(PROV.provincias).forEach(([k, pr]) => add("📍", `${pr.nombre} (provincia)`, `Pobreza ${nf(pr.aglomerados[0].pobreza, 1)}% · desempleo ${nf(pr.aglomerados[0].desocupacion, 1)}%`, pr.nombre + " " + pr.capital + " provincia", () => { provSel = k; irA_("provincias")(); if (PROV) renderProvincias(); }));
   add("📖", "Glosario de economía", "Qué es cada cosa", "glosario que es significa definicion palabras", irA_("glosario"));
@@ -2012,6 +2049,7 @@ function renderTicker() {
   el.innerHTML = c("blue") + c("oficial") + c("bolsa") + c("contadoconliqui")
     + `<span><em>Riesgo país</em><b>${nf(ARGENTINA.riesgo_pais.ultimo.valor)}</b></span>`
     + `<span><em>Inflación ${MESES[+inf[0].slice(5) - 1]}</em><b>${nf(inf[1], 1)}%</b></span>`
+    + ["merval", "sp500", "soja", "btc"].map(k => mercDe(k)).filter(Boolean).map(x => `<span><em>${x.nombre}</em><b>${x.unidad === "puntos" ? varMerc(diaMerc(x)) : fmtMerc(x, precioMerc(x))}</b></span>`).join("")
     + `<span class="t-mas">Argentina hoy →</span>`;
   el.hidden = false;
 }
@@ -2405,6 +2443,84 @@ function renderConvergencia() {
   const ca = cr(A), cb = cr(B);
   nota.textContent = `Referencia: en los últimos 10 años la economía de ${pa.nombre} creció en promedio ${ca == null ? "—" : nf(ca, 1) + "%"} por año y la de ${pb.nombre} ${cb == null ? "—" : nf(cb, 1) + "%"} (PBI total; por persona suele ser un poco menos, porque la población también crece). Es una cuenta simple con tasas fijas: sirve para dimensionar la distancia, no es un pronóstico.`;
 }
+
+/* ---------- MERCADOS (mercados.json + cripto en vivo de CoinGecko) ---------- */
+let MERCADOS = null, mercSel = "sp500", mercRango = 365, mercChart = null, criptoVivo = null;
+const MERC_GRUPOS = { indices: "Índices bursátiles", adrs: "Argentinos en Wall Street (ADRs)", materias: "Materias primas", cripto: "Cripto" };
+const MERC_NOTAS = {
+  indices: "Cada índice resume las acciones más importantes de una bolsa. El Merval está en pesos, así que también sube por la inflación.",
+  adrs: "Acciones de empresas argentinas que cotizan en Nueva York, en dólares.",
+  materias: "Precios internacionales de referencia (contratos a futuro de Chicago y Nueva York). Soja, maíz y trigo: lo que más exporta Argentina.",
+  cripto: "Bitcoin y ether se actualizan en vivo cada vez que abrís la página."
+};
+const todosMerc = () => MERCADOS ? Object.values(MERCADOS.grupos).flat() : [];
+const mercDe = k => todosMerc().find(x => x.clave === k);
+function fmtMerc(x, v = x.precio) {
+  if (x.unidad === "puntos") return nf(v, v >= 1000 ? 0 : 2);
+  const n = `US$ ${nf(v, v >= 1000 || (x.unidad !== "US$" && v >= 100) ? 0 : 2)}`;   // materias primas: sin centavos si pasan de 100
+  return x.unidad === "US$ por tonelada" ? n + "/t" : x.unidad === "US$ por barril" ? n + "/barril" : x.unidad === "US$ por onza" ? n + "/onza" : x.unidad === "US$ por libra" ? n + "/libra" : n;
+}
+const varMerc = (v, txt = "") => v == null ? `<span class="igual">—</span>` : `<span class="${v > 0 ? "m-up" : v < 0 ? "m-down" : "igual"}">${v > 0 ? "▲" : v < 0 ? "▼" : "="} ${nf(Math.abs(v), 1)}%${txt}</span>`;
+/* precio en vivo de las cripto (si llegó) */
+const precioMerc = x => criptoVivo && criptoVivo[x.clave] ? criptoVivo[x.clave].precio : x.precio;
+const diaMerc = x => criptoVivo && criptoVivo[x.clave] ? criptoVivo[x.clave].dia : x.dia;
+function sparkMerc(x) {
+  const s = x.serie; if (!s || s.length < 3) return "";
+  const paso = Math.max(1, Math.floor(s.length / 70)), pts = s.filter((_, i) => i % paso === 0 || i === s.length - 1).map(p => p[1]);
+  const mn = Math.min(...pts), mx = Math.max(...pts);
+  const P = pts.map((v, i) => `${(i / (pts.length - 1) * 118 + 1).toFixed(1)},${(26 - (v - mn) / (mx - mn || 1) * 22).toFixed(1)}`).join(" ");
+  const sube = pts[pts.length - 1] >= pts[0];
+  return `<svg class="m-spark ${sube ? "s-up" : "s-down"}" viewBox="0 0 120 28" preserveAspectRatio="none" aria-hidden="true"><polyline points="${P}"/></svg>`;
+}
+function renderMercados() {
+  if (!MERCADOS) { document.getElementById("mercGrupos").innerHTML = `<p class="note">Todavía no hay datos de mercados.</p>`; return; }
+  document.getElementById("mercGrupos").innerHTML = Object.entries(MERC_GRUPOS).filter(([g]) => MERCADOS.grupos[g] && MERCADOS.grupos[g].length).map(([g, t]) => `
+    <section class="ag-bloque"><div class="ag-tit"><h2>${t}</h2>${g === "cripto" && criptoVivo ? `<span class="note">En vivo · ${criptoVivo._hora} (CoinGecko)</span>` : ""}</div>
+      <div class="m-cartas">${MERCADOS.grupos[g].map(x => `<button class="m-carta${x.clave === mercSel ? " sel" : ""}" type="button" data-k="${x.clave}">
+        <span class="m-n">${x.nombre}<small>${x.ticker.replace("=F", "").replace("^", "")}</small></span>
+        <span class="m-p">${fmtMerc(x, precioMerc(x))}</span>
+        <span class="m-v">${varMerc(diaMerc(x), " hoy")}</span>
+        ${sparkMerc(x)}
+        <span class="m-mas">Mes ${varMerc(x.mes)} · Año ${varMerc(x.anio)}</span></button>`).join("")}</div>
+      <p class="note">${MERC_NOTAS[g]}</p></section>`).join("");
+  document.querySelectorAll("#mercGrupos .m-carta").forEach(b => b.onclick = () => { mercSel = b.dataset.k; renderMercados(); document.getElementById("mercDetalle").scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "nearest" }); });
+  renderMercDetalle();
+  const f = MERCADOS.grupos.indices && MERCADOS.grupos.indices[0] ? MERCADOS.grupos.indices[0].fecha : null;
+  document.getElementById("mercFecha").textContent = f ? `Cierre del ${f.split("-").reverse().join("/")}` : "Mercados";
+}
+function renderMercDetalle() {
+  const x = mercDe(mercSel) || todosMerc()[0]; if (!x) return;
+  const desde = new Date(new Date(x.fecha).getTime() - mercRango * 864e5).toISOString().slice(0, 10);
+  const s = x.serie.filter(p => p[0] >= desde);
+  const v0 = s[0][1], v1 = s[s.length - 1][1], ch = (v1 / v0 - 1) * 100;
+  document.getElementById("mercDetT").innerHTML = `${x.nombre} <small>${fmtMerc(x, precioMerc(x))} · ${varMerc(ch, ` en ${mercRango === 30 ? "un mes" : mercRango === 182 ? "6 meses" : "un año"}`)}</small>`;
+  document.getElementById("mercRangos").innerHTML = [[30, "1 mes"], [182, "6 meses"], [365, "1 año"]].map(([d, t]) => `<button class="btn" type="button" data-d="${d}" aria-pressed="${mercRango === d}">${t}</button>`).join("");
+  document.querySelectorAll("#mercRangos .btn").forEach(b => b.onclick = () => { mercRango = +b.dataset.d; renderMercDetalle(); });
+  const { muted, line, ink, ax } = chartBase(), col = css(ch >= 0 ? "--good" : "--bad");
+  mercChart = mercChart || echarts.init(document.getElementById("mercChart"));
+  mercChart.setOption({
+    grid: { left: 70, right: 14, top: 12, bottom: 28 },
+    tooltip: { trigger: "axis", backgroundColor: css("--surface"), borderColor: line, textStyle: { color: ink }, formatter: ps => `<b>${ps[0].name.split("-").reverse().join("/")}</b><br>${fmtMerc(x, ps[0].value)}` },
+    xAxis: { type: "category", data: s.map(p => p[0]), axisLabel: Object.assign({}, ax, { formatter: v => { const [y, m, d] = v.split("-"); return mercRango <= 31 ? `${d}/${m}` : `${MESES[+m - 1].slice(0, 3)} ${y.slice(2)}`; } }), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+    yAxis: { type: "value", scale: true, axisLabel: Object.assign({}, ax, { formatter: v => nf(v, v >= 1000 ? 0 : 2) }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+    series: [{ type: "line", data: s.map(p => p[1]), symbol: "none", lineStyle: { color: col, width: 2 }, areaStyle: { color: col, opacity: .08 } }]
+  }, true);
+  document.getElementById("mercDetNota").textContent = `${x.unidad === "puntos" ? `En puntos${x.moneda === "ARS" ? " (en pesos)" : ""}` : x.unidad}. Precio de cierre de cada día${x.clave === "btc" || x.clave === "eth" ? "; el precio de arriba es en vivo" : ""}. Fuente: ${x.fuente}.`;
+}
+/* Cripto en vivo: CoinGecko permite consultarlo gratis desde el navegador */
+function criptoEnVivo() {
+  fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true&include_last_updated_at=true")
+    .then(r => r.ok ? r.json() : null).then(j => {
+      if (!j || !j.bitcoin) return;
+      const t = j.bitcoin.last_updated_at ? new Date(j.bitcoin.last_updated_at * 1000) : new Date();
+      criptoVivo = { btc: { precio: j.bitcoin.usd, dia: j.bitcoin.usd_24h_change }, eth: j.ethereum ? { precio: j.ethereum.usd, dia: j.ethereum.usd_24h_change } : null,
+        _hora: t.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit" }) };
+      if (!criptoVivo.eth) delete criptoVivo.eth;
+      renderTicker();
+      if (paginaActual === "mercados") renderMercados();
+    }).catch(() => { /* sin conexión con CoinGecko: queda el cierre */ });
+}
+function abrirMercados() { renderMercados(); if (mercChart) mercChart.resize(); }
 
 /* ---------- ARGENTINA POR PROVINCIA (provincias.json + provincias-arg.json) ---------- */
 let PROV = null, PROV_GEO = null, provCargando = null, provInd = "pobreza", provSel = "AR-C";
@@ -3548,9 +3664,9 @@ function textoFuentes() {
 function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); renderLab(); if (paginaActual === "argentina") renderAgCharts(); } }
 
 const leer = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: error ${r.status}`); return r.json(); });
-Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null), leer("riesgo.json").catch(() => null), leer("calendario.json").catch(() => null)])
-  .then(([datos, curado, topo, argentina, noticias, riesgo, calendario]) => {
-    DATOS = datos; CURADO = curado; ARGENTINA = argentina; NOTICIAS = noticias; RIESGO = riesgo; CALENDARIO = calendario;
+Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null), leer("riesgo.json").catch(() => null), leer("calendario.json").catch(() => null), leer("mercados.json").catch(() => null)])
+  .then(([datos, curado, topo, argentina, noticias, riesgo, calendario, mercados]) => {
+    DATOS = datos; CURADO = curado; ARGENTINA = argentina; NOTICIAS = noticias; RIESGO = riesgo; CALENDARIO = calendario; MERCADOS = mercados;
     prepararDatos();
     renderElecciones();
     renderConflictos();
@@ -3572,6 +3688,7 @@ Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json")
     ["convGA", "convGB"].forEach(id => document.getElementById(id).addEventListener("input", renderConvergencia));
     document.getElementById("glosBuscar").addEventListener("input", renderGlosario);
     renderTicker();
+    criptoEnVivo();
     armarMapaInd();
     cargarProvincias();   // es chico: así el buscador ya encuentra las provincias
     cargarLab().then(() => { Object.keys(RANKS).forEach(k => delete RANKS[k]); renderPanel(); });   // las secciones nuevas de la ficha usan lab.json
@@ -3592,7 +3709,7 @@ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", redrawChar
 new MutationObserver(redrawCharts).observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
 let rT;
 window.addEventListener("resize", () => {
-  tl.resize(); charts.sparks.forEach(c => c.resize()); if (labChart) labChart.resize(); Object.values(agCharts).forEach(c => c.resize()); if (convChart) convChart.resize();
+  tl.resize(); charts.sparks.forEach(c => c.resize()); if (labChart) labChart.resize(); Object.values(agCharts).forEach(c => c.resize()); if (convChart) convChart.resize(); if (mercChart) mercChart.resize();
   if (paginaActual === "provincias" && PROV) renderProvincias();
   clearTimeout(rT);
   rT = setTimeout(() => {
