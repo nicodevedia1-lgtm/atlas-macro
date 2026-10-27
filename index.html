@@ -454,6 +454,17 @@ footer a { color: var(--muted); text-decoration-color: var(--accent); text-under
 #mercDetT small { font-family: var(--f-data); font-size: 15px; font-weight: 500; margin-left: 8px; }
 
 /* Provincias */
+.com-prods { display: grid; gap: 10px; }
+.com-grupo { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.com-grupo .eyebrow { width: 100%; }
+.com-flujo { display: flex; flex-wrap: wrap; gap: 6px; }
+.com-main { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 20px; align-items: start; }
+.com-mapa { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 10px; position: relative; display: grid; gap: 8px; min-width: 0; }
+#comMapa { width: 100%; aspect-ratio: 2 / 1.02; height: auto; display: block; }
+#comMapa path { stroke: var(--surface); stroke-width: .5; cursor: pointer; }
+#comMapa path:hover { opacity: .8; }
+#comMapa path.sel { stroke: var(--ink); stroke-width: 1.6; }
+@media (max-width: 860px) { .com-main { grid-template-columns: minmax(0, 1fr); } }
 .prov-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 20px; align-items: start; }
 @media (max-width: 900px) { .prov-main { grid-template-columns: minmax(0, 1fr); } }
 .prov-mapa { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 10px; position: relative; display: grid; gap: 8px; min-width: 0; }
@@ -687,7 +698,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   </button>
   <a class="logo" href="#inicio">Atlas <span>Macro</span></a>
   <nav class="tabs" aria-label="Secciones">
-    <a href="#inicio" data-pag="inicio">Mapa</a><a href="#argentina" data-pag="argentina">Argentina hoy</a><a href="#mercados" data-pag="mercados">Mercados</a><a href="#provincias" data-pag="provincias">Provincias</a><a href="#calendario" data-pag="calendario">Calendario</a><a href="#rankings" data-pag="rankings">Rankings</a><a href="#juego" data-pag="juego">País del día</a><a href="#masrico" data-pag="masrico">Más rico o más pobre</a><a href="#elecciones" data-pag="elecciones">Elecciones</a><a href="#conflictos" data-pag="conflictos">Conflictos</a><a href="#glosario" data-pag="glosario">Glosario</a><a href="#laboratorio" data-pag="laboratorio">Laboratorio</a><a href="#comparacion" data-pag="comparacion">Comparar</a><a href="#gobiernos" data-pag="gobiernos">Gobiernos</a>
+    <a href="#inicio" data-pag="inicio">Mapa</a><a href="#argentina" data-pag="argentina">Argentina hoy</a><a href="#mercados" data-pag="mercados">Mercados</a><a href="#comercio" data-pag="comercio">Comercio</a><a href="#provincias" data-pag="provincias">Provincias</a><a href="#calendario" data-pag="calendario">Calendario</a><a href="#rankings" data-pag="rankings">Rankings</a><a href="#juego" data-pag="juego">País del día</a><a href="#masrico" data-pag="masrico">Más rico o más pobre</a><a href="#elecciones" data-pag="elecciones">Elecciones</a><a href="#conflictos" data-pag="conflictos">Conflictos</a><a href="#glosario" data-pag="glosario">Glosario</a><a href="#laboratorio" data-pag="laboratorio">Laboratorio</a><a href="#comparacion" data-pag="comparacion">Comparar</a><a href="#gobiernos" data-pag="gobiernos">Gobiernos</a>
   </nav>
   <button class="tema" id="temaBtn" type="button" aria-label="Cambiar a modo claro" title="Modo claro / oscuro">
     <svg class="t-sol" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
@@ -710,6 +721,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <li><a href="#inicio" data-pag="inicio"><span class="nav-ico" aria-hidden="true">🗺️</span><span>Mapa y fichas<small>Tocá un país y mirá su economía</small></span></a></li>
     <li><a href="#argentina" data-pag="argentina"><span class="nav-ico" aria-hidden="true">🇦🇷</span><span>Argentina hoy<small>Dólar, inflación y calculadoras</small></span></a></li>
     <li><a href="#mercados" data-pag="mercados"><span class="nav-ico" aria-hidden="true">📈</span><span>Mercados<small>Bolsas, acciones argentinas, soja y cripto</small></span></a></li>
+    <li><a href="#comercio" data-pag="comercio"><span class="nav-ico" aria-hidden="true">🚢</span><span>Comercio mundial<small>Quién le vende petróleo, soja o autos al mundo</small></span></a></li>
     <li><a href="#provincias" data-pag="provincias"><span class="nav-ico" aria-hidden="true">📍</span><span>Argentina por provincia<small>Pobreza, desempleo y población</small></span></a></li>
     <li><a href="#calendario" data-pag="calendario"><span class="nav-ico" aria-hidden="true">📅</span><span>Calendario económico<small>Próximos datos del INDEC y feriados</small></span></a></li>
     <li><a href="#rankings" data-pag="rankings"><span class="nav-ico" aria-hidden="true">🏆</span><span>Rankings<small>Los primeros y los últimos del mundo</small></span></a></li>
@@ -886,6 +898,25 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <p class="note" id="provNota"></p>
   </div>
 
+  <div class="pagina" id="pag-comercio" hidden>
+    <header class="top">
+      <div class="eyebrow">Comercio mundial</div>
+      <h1 id="comTitulo">¿Quién le vende qué al mundo?</h1>
+      <p class="lede">Elegí un producto y mirá qué países lo exportan y cuáles lo compran, cuánto mueve y en qué puesto está Argentina.</p>
+    </header>
+    <div class="com-prods" id="comProds"></div>
+    <div class="com-flujo" role="group" aria-label="Qué mostrar">
+      <button class="btn" type="button" data-f="expo" aria-pressed="true">Quién lo vende</button>
+      <button class="btn" type="button" data-f="impo" aria-pressed="false">Quién lo compra</button>
+    </div>
+    <div class="rk-arg" id="comArg"></div>
+    <div class="com-main">
+      <div class="com-mapa"><svg id="comMapa" role="img" aria-label="Mapa del mundo con el comercio del producto elegido"></svg><div class="tip" id="comTip" hidden></div><div class="prov-ley" id="comLey"></div></div>
+      <section class="rk-col"><h2 id="comTopT">Los 10 que más venden</h2><ol class="rk-lista" id="comTop"></ol></section>
+    </div>
+    <p class="note" id="comNota"></p>
+  </div>
+
   <div class="pagina" id="pag-glosario" hidden>
     <header class="top">
       <div class="eyebrow">Glosario</div>
@@ -1056,6 +1087,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
             <tr><td>Dólar en vivo</td><td>DolarAPI (dolarapi.com); si no responde, se muestra el último cierre</td><td>Cada vez que se abre la página</td></tr>
             <tr><td>Riesgo país de otros países de Latinoamérica</td><td>Banco Central de Reserva del Perú, índice EMBIG con datos de Reuters</td><td>Todos los martes (el dato es mensual)</td></tr>
             <tr><td>Próximas elecciones y control de cambios de gobierno</td><td>Wikidata, base de datos abierta y colaborativa</td><td>Todos los días</td></tr>
+            <tr><td>Comercio mundial por producto (quién exporta e importa petróleo, soja, autos, etc.)</td><td>UN Comtrade (Naciones Unidas), con lo que informa cada país</td><td>Una vez por mes</td></tr>
             <tr><td>Socios comerciales (a quién le vende y le compra cada país)</td><td>WITS, del Banco Mundial, con datos de Naciones Unidas (Comtrade); donde no hay dato, escrito a mano</td><td>Una vez por mes (cada país informa con uno a tres años de atraso)</td></tr>
             <tr><td>Resúmenes, actividades, exportaciones, importaciones, gobiernos y su orientación, conflictos</td><td>Escrito a mano a partir de fuentes públicas</td><td>Cuando hay cambios (se avisa la fecha al pie)</td></tr>
             <tr><td>Fronteras, banderas y relieve del mapa</td><td>Natural Earth (dominio público), flag-icons (licencia MIT) y un modelo de elevación global</td><td>—</td></tr>
@@ -1576,7 +1608,7 @@ const sinTildes = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowe
 /* ---------- PÁGINAS Y PANEL LATERAL ----------
    Cada sección es una "página": #inicio, #comparacion, #elecciones, #conflictos.
    Se cambia con el link (la dirección cambia, así funciona el botón "atrás" del navegador). */
-const PAGINAS = ["inicio", "argentina", "mercados", "provincias", "glosario", "gobiernos", "calendario", "comparacion", "rankings", "laboratorio", "juego", "masrico", "elecciones", "conflictos", "acerca"];
+const PAGINAS = ["inicio", "argentina", "mercados", "comercio", "provincias", "glosario", "gobiernos", "calendario", "comparacion", "rankings", "laboratorio", "juego", "masrico", "elecciones", "conflictos", "acerca"];
 let paginaActual = "inicio";
 const versusAbierto = () => paginaActual === "comparacion";
 function mostrarPagina(nombre) {
@@ -1594,6 +1626,7 @@ function mostrarPagina(nombre) {
   if (nombre === "gobiernos") renderGobiernos();
   if (nombre === "provincias") abrirProvincias();
   if (nombre === "mercados") abrirMercados();
+  if (nombre === "comercio") abrirComercio();
   if (nombre === "glosario") { renderGlosario(); if (!PROV) cargarProvincias().then(() => paginaActual === "glosario" && renderGlosario()); }
   if (nombre === "calendario") renderCalendario();
   if (nombre === "masrico") abrirMasRico();
@@ -1727,6 +1760,8 @@ function indiceBusqueda() {
   add("🏛️", "Quién gobierna cada país", "Mapa", "gobierno presidente izquierda derecha ideologia quien gobierna", () => { irA_("inicio")(); setModo("gob"); setVista("mundo"); });
   add("📈", "Mercados", "Bolsas, ADRs, soja y cripto", "mercados bolsa acciones indices merval sp500 s&p nasdaq bovespa adr ypf galicia mercado libre soja maiz trigo petroleo oro cobre bitcoin cripto ether", irA_("mercados"));
   todosMerc().forEach(x => add("📈", x.nombre, `Mercados · ${fmtMerc(x)}`, `${x.nombre} ${x.ticker} cotizacion precio accion`, () => { mercSel = x.clave; irA_("mercados")(); }));
+  add("🚢", "Comercio mundial", "Quién exporta e importa cada producto", "comercio exportaciones importaciones exporta importa productos " + Object.values(COM_NOMBRES).join(" "), irA_("comercio"));
+  Object.entries(COM_NOMBRES).forEach(([k, n]) => add("🚢", `Comercio de ${n.toLowerCase()}`, "Quién lo vende y quién lo compra", `${n} exportacion exporta importa comercio productor`, () => { comProd = k; irA_("comercio")(); }));
   add("📍", "Argentina por provincia", "Pobreza, desempleo, población", "provincias provincia pobreza indigencia desempleo mapa argentina cordoba santa fe mendoza tucuman salta chaco", irA_("provincias"));
   if (PROV) Object.entries(PROV.provincias).forEach(([k, pr]) => add("📍", `${pr.nombre} (provincia)`, `Pobreza ${nf(pr.aglomerados[0].pobreza, 1)}% · desempleo ${nf(pr.aglomerados[0].desocupacion, 1)}%`, pr.nombre + " " + pr.capital + " provincia", () => { provSel = k; irA_("provincias")(); if (PROV) renderProvincias(); }));
   add("📖", "Glosario de economía", "Qué es cada cosa", "glosario que es significa definicion palabras", irA_("glosario"));
@@ -2099,6 +2134,7 @@ function renderTarjetas() {
   tarjeta("masrico", "💰", "¿Más rico o más pobre?", "¿Chile o Uruguay? ¿Polonia o Portugal?", `Adiviná cuál tiene más PBI por persona${leerLocal("atlas-masrico-mejor", 0) ? ` · tu mejor racha: ${leerLocal("atlas-masrico-mejor", 0)}` : ""}`, "Jugar");
   const pInf = proximoDe("inflacion");
   if (pInf) tarjeta("calendario", "📅", "Calendario económico", `El próximo dato de inflación sale ${enDias(diasHasta(pInf.fecha))}`, `${fechaLarga(pInf.fecha)} · datos del INDEC y feriados`, "Ver el calendario");
+  tarjeta("comercio", "🚢", "Comercio mundial", "¿Quién le vende petróleo, soja o chips al mundo?", "22 productos en un mapa, y en qué puesto está Argentina", "Ver el mapa");
   tarjeta("provincias", "📍", "Argentina por provincia", "¿Dónde hay más pobreza y desempleo?", "Las 24 provincias en un mapa, con datos del INDEC", "Ver el mapa");
   const prox = proximasElecciones()[0];
   if (prox) {
@@ -3301,6 +3337,81 @@ function histBlock(ind) {
   </div>`;
 }
 
+/* ---------- COMERCIO MUNDIAL: quién exporta e importa cada producto (productos.json, de UN Comtrade) ---------- */
+/* Lista fija solo para el buscador; los datos se cargan cuando se abre la página */
+const COM_NOMBRES = { petroleo: "Petróleo crudo", gas: "Gas natural", carbon: "Carbón", oro: "Oro", cobre: "Cobre", hierro: "Mineral de hierro", litio: "Litio",
+  soja: "Soja", harina: "Harina de soja", aceite: "Aceite de soja", maiz: "Maíz", trigo: "Trigo", carne: "Carne vacuna", cafe: "Café", cacao: "Cacao", vino: "Vino",
+  autos: "Autos", celulares: "Celulares", chips: "Chips", compus: "Computadoras", remedios: "Medicamentos", ropa: "Ropa" };
+let PRODUCTOS = null, prodCargando = null, comProd = "petroleo", comFlujo = "expo", comSel = "ARG";
+function cargarProductos() {
+  if (!prodCargando) prodCargando = leer("productos.json").then(d => { PRODUCTOS = d; }).catch(() => { PRODUCTOS = { productos: {} }; });
+  return prodCargando;
+}
+function abrirComercio() {
+  if (!PRODUCTOS) { document.getElementById("comTop").innerHTML = `<li>Cargando…</li>`; cargarProductos().then(() => paginaActual === "comercio" && renderComercio()); return; }
+  renderComercio();
+}
+function renderComercio() {
+  const P = PRODUCTOS.productos;
+  if (!P[comProd]) comProd = Object.keys(P)[0];
+  const pr = P[comProd];
+  if (!pr) { document.getElementById("comTop").innerHTML = `<li>Todavía no hay datos de comercio.</li>`; return; }
+  /* Botones de productos, por grupo */
+  const grupos = {};
+  Object.entries(P).forEach(([k, x]) => (grupos[x.grupo] = grupos[x.grupo] || []).push([k, x]));
+  document.getElementById("comProds").innerHTML = Object.entries(grupos).map(([g, xs]) => `<div class="com-grupo"><span class="eyebrow">${g}</span>${xs.map(([k, x]) =>
+    `<button class="btn" type="button" data-k="${k}" aria-pressed="${k === comProd}"><span aria-hidden="true">${x.emoji}</span> ${x.nombre}</button>`).join("")}</div>`).join("");
+  document.querySelectorAll("#comProds .btn").forEach(b => b.onclick = () => { comProd = b.dataset.k; renderComercio(); });
+  document.querySelectorAll(".com-flujo .btn").forEach(b => { b.setAttribute("aria-pressed", b.dataset.f === comFlujo); b.onclick = () => { comFlujo = b.dataset.f; renderComercio(); }; });
+
+  const filas = pr[comFlujo], total = d3.sum(filas, x => x[1]), val = Object.fromEntries(filas);
+  const vende = comFlujo === "expo", nom = pr.nombre.toLowerCase();
+  const puesto = k => filas.findIndex(x => x[0] === k) + 1;
+  const esp = new Set((pr.espejo && pr.espejo[comFlujo]) || []), ast = k => esp.has(k) ? "*" : "";
+  const parte = v => v / total * 100, fp = v => nf(v, v < 1 ? 1 : v < 10 ? 1 : 0) + "%";
+  document.getElementById("comTitulo").textContent = `${vende ? "¿Quién le vende" : "¿Quién compra"} ${nom}${vende ? " al mundo" : ""}?`;
+  document.getElementById("comTopT").textContent = vende ? "Los 10 que más venden" : "Los 10 que más compran";
+
+  /* Argentina (o el país tocado en el mapa) */
+  const linea = k => {
+    const nombre = PAISES[k] ? PAISES[k].nombre : nombreEs(k), v = val[k];
+    if (!v) return `${flag(k)}<b>${nombre}</b> no figura entre los que ${vende ? "exportan" : "importan"} ${nom} (o no informó el dato).`;
+    return `${flag(k)}<b>${nombre}</b> ${vende ? "exportó" : "importó"} <b class="n">${musd(v)}${ast(k)}</b> en ${pr.anio}: <b>${puesto(k)}°</b> del mundo, con el <b>${fp(parte(v))}</b> del total.`;
+  };
+  document.getElementById("comArg").innerHTML = linea("ARG") + (comSel !== "ARG" ? `<br>${linea(comSel)}` : "");
+
+  /* Top 10 */
+  const max = filas.length ? filas[0][1] : 1;
+  const top = filas.slice(0, 10);
+  if (val.ARG && puesto("ARG") > 10) top.push(["ARG", val.ARG]);
+  document.getElementById("comTop").innerHTML = top.map(([k, v]) => `<li class="${k === "ARG" ? "arg" : ""}"><span class="rk-n">${puesto(k)}</span>${flag(k) || '<span class="flag"></span>'}<button class="plink" type="button" data-pais="${k}">${PAISES[k] ? PAISES[k].nombre : nombreEs(k)}</button><span class="rk-v">${fp(parte(v))}<small>${musd(v)}${ast(k)}</small></span><span class="rk-bar" style="width:${v / max * 100}%"></span></li>`).join("");
+  document.querySelectorAll("#comTop .plink").forEach(b => b.onclick = () => { comSel = b.dataset.pais; renderComercio(); });
+
+  /* Mapa: color según la parte del total (raíz cuadrada, para que se vean también los chicos) */
+  const el = document.getElementById("comMapa"), r = el.getBoundingClientRect();
+  if (!features || !r.width) return;
+  const svgC = d3.select(el).attr("viewBox", `0 0 ${r.width} ${r.height}`);
+  const proj = d3.geoEquirectangular().fitExtent([[4, 4], [r.width - 4, r.height - 4]], { type: "FeatureCollection", features });
+  const path = d3.geoPath(proj);
+  const tope = Math.max(...filas.map(x => parte(x[1])), 1);
+  const color = d3.scaleSqrt().domain([0, tope]).range([css("--accent-soft"), css("--accent")]).interpolate(d3.interpolateRgb);
+  const tip = document.getElementById("comTip");
+  svgC.selectAll("path").data(features).join("path")
+    .attr("d", path).attr("fill", f => { const v = val[f.properties.iso]; return v ? color(parte(v)) : css("--land"); })
+    .classed("sel", f => f.properties.iso === comSel)
+    .on("click", (e, f) => { if (f.properties.iso) { comSel = f.properties.iso; renderComercio(); } })
+    .on("pointermove", (e, f) => {
+      if (e.pointerType !== "mouse") return;
+      const k = f.properties.iso, v = val[k], rr = el.parentNode.getBoundingClientRect();
+      tip.innerHTML = `${flag(k)}<div><b>${PAISES[k] ? PAISES[k].nombre : f.properties.name}</b><small>${v ? `${fp(parte(v))} del total · ${musd(v)} · ${puesto(k)}°${esp.has(k) ? " · estimado" : ""}` : "Sin dato"}</small></div>`;
+      tip.hidden = false; tip.style.left = (e.clientX - rr.left + 14) + "px"; tip.style.top = (e.clientY - rr.top + 14) + "px";
+    })
+    .on("pointerleave", () => tip.hidden = true);
+  svgC.selectAll("path.sel").raise();
+  document.getElementById("comLey").innerHTML = `<span>0%</span><i style="background:linear-gradient(90deg, ${[0, .1, .3, .6, 1].map(t => color(t * tope)).join(",")})"></i><span>${fp(tope)} del total</span><span style="margin-left:auto"><i style="display:inline-block;width:12px;height:10px;max-width:none;flex:none;background:${css("--land")};vertical-align:-1px"></i> sin dato</span>`;
+  document.getElementById("comNota").innerHTML = `Datos de ${pr.anio}, en dólares. El mundo ${vende ? "exportó" : "importó"} unos <b>${musd(total)}</b> de ${nom} (suma de los ${filas.length} países que informaron). Fuente: UN Comtrade (Naciones Unidas), con lo que declara cada país.${esp.size ? ` <b>*</b> Estimado con lo que declaran sus socios, porque ese país no informó (${[...esp].map(k => PAISES[k] ? PAISES[k].nombre : k).join(", ")}).` : ""} Los países en gris no tienen dato. Código del producto en el Sistema Armonizado: ${pr.codigos.replace(",", " y ")}.`;
+}
+
 /* ---------- PANEL / FICHA ---------- */
 const musd = v => v >= 1000 ? `US$ ${nf(v / 1000, v >= 100000 ? 0 : 1)} mil millones` : `US$ ${nf(v)} millones`;
 function socios(arr) {
@@ -3737,7 +3848,7 @@ function textoFuentes() {
   const fecha = new Date(DATOS.generado).toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" });
   document.getElementById("fuentes").textContent = `Datos macro: Banco Mundial y FMI (World Economic Outlook), 1960–${ANIO}, actualizados automáticamente el ${fecha}. Inflación: índice de precios al consumidor del Banco Mundial; donde falta, deflactor del PBI o FMI. Deuda pública: FMI; donde falta, Banco Mundial. Promedios mundiales: Banco Mundial. Fichas y datos políticos escritos a mano, actualizados a ${CURADO.actualizado}.`;
 }
-function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); renderLab(); if (paginaActual === "argentina") renderAgCharts(); } }
+function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); renderLab(); if (paginaActual === "argentina") renderAgCharts(); if (paginaActual === "comercio" && PRODUCTOS) renderComercio(); } }
 
 const leer = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: error ${r.status}`); return r.json(); });
 Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null), leer("riesgo.json").catch(() => null), leer("calendario.json").catch(() => null), leer("mercados.json").catch(() => null), leer("socios.json").catch(() => null)])
