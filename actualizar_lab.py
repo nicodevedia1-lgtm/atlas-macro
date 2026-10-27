@@ -72,6 +72,31 @@ VARIABLES = {
     # En 2024 el Banco Mundial les cambió el código (antes CC.EST, ahora GOV_WGI_CC.EST): probamos los dos
     "corrupcion": ("Control de la corrupción", "índice, -2,5 a 2,5", ["GOV_WGI_CC.EST", "GOV_WGI_CC_EST", "CC.EST"], 3),
     "derecho":  ("Estado de derecho", "índice, -2,5 a 2,5", ["GOV_WGI_RL.EST", "GOV_WGI_RL_EST", "RL.EST"], 3),
+    # Estructura de la economía: de qué vive cada país (% del PBI)
+    "agro":     ("Campo (agro, pesca y forestal)", "% del PBI", ["NV.AGR.TOTL.ZS"], 2),
+    "industria": ("Industria (con minería, energía y construcción)", "% del PBI", ["NV.IND.TOTL.ZS"], 2),
+    "manufactura": ("Industria manufacturera", "% del PBI", ["NV.IND.MANF.ZS"], 2),
+    "servicios": ("Servicios", "% del PBI", ["NV.SRV.TOTL.ZS"], 2),
+    # En qué trabaja la gente (% del empleo)
+    "empagro":  ("Empleo en el campo", "% de los ocupados", ["SL.AGR.EMPL.ZS"], 2),
+    "empind":   ("Empleo en la industria", "% de los ocupados", ["SL.IND.EMPL.ZS"], 2),
+    "empserv":  ("Empleo en servicios", "% de los ocupados", ["SL.SRV.EMPL.ZS"], 2),
+    # Qué exporta (% de las exportaciones de bienes)
+    "xalim":    ("Exportaciones de alimentos", "% de las exportaciones de bienes", ["TX.VAL.FOOD.ZS.UN"], 2),
+    "xcomb":    ("Exportaciones de combustibles", "% de las exportaciones de bienes", ["TX.VAL.FUEL.ZS.UN"], 2),
+    "xmin":     ("Exportaciones de minerales y metales", "% de las exportaciones de bienes", ["TX.VAL.MMTL.ZS.UN"], 2),
+    "xagri":    ("Exportaciones de materias primas agrícolas", "% de las exportaciones de bienes", ["TX.VAL.AGRI.ZS.UN"], 2),
+    "xmanuf":   ("Exportaciones de manufacturas", "% de las exportaciones de bienes", ["TX.VAL.MANF.ZS.UN"], 2),
+    "xtech":    ("Exportaciones de alta tecnología", "% de las exportaciones industriales", ["TX.VAL.TECH.MF.ZS"], 2),
+    # Turismo
+    "turistas": ("Turistas que llegan por año", "llegadas", ["ST.INT.ARVL"], 2),
+    "turismo":  ("Ingresos por turismo", "% de las exportaciones", ["ST.INT.RCPT.XP.ZS"], 2),
+    # Recursos naturales y energía
+    "rentas":   ("Rentas de recursos naturales", "% del PBI", ["NY.GDP.TOTL.RT.ZS"], 2),
+    "rentpetro": ("Rentas del petróleo", "% del PBI", ["NY.GDP.PETR.RT.ZS"], 2),
+    "rentgas":  ("Rentas del gas", "% del PBI", ["NY.GDP.NGAS.RT.ZS"], 2),
+    "rentmin":  ("Rentas de la minería", "% del PBI", ["NY.GDP.MINR.RT.ZS"], 2),
+    "renovable": ("Energía renovable", "% del consumo de energía", ["EG.FEC.RNEW.ZS"], 2),
     # Ambiente
     "co2":      ("Emisiones de CO₂ por persona", "toneladas", ["EN.GHG.CO2.PC.CE.AR5", "EN.ATM.CO2E.PC"], 2),
 }

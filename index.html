@@ -282,6 +282,16 @@ details.sec[open] .sec-flecha { transform: rotate(225deg); }
 .ipill::before { content: ""; width: 10px; height: 10px; border-radius: 3px; background: var(--ic); }
 .pol-meta .ipill { margin-right: 4px; }
 .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.acts h4 { font-family: var(--f-body); font-size: 14px; font-weight: 700; color: var(--muted); margin: 0 0 8px; }
+.apilada { display: grid; gap: 6px; padding-top: 4px; }
+.ap-t { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; font-size: 14.5px; }
+.ap-barra { display: flex; height: 18px; border-radius: 6px; overflow: hidden; background: var(--bg); }
+.ap-barra i { display: block; height: 100%; min-width: 2px; opacity: .85; }
+.ap-barra i + i { box-shadow: -1px 0 0 var(--surface); }
+.ap-ley { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 13px; color: var(--muted); }
+.ap-ley span { display: inline-flex; align-items: center; gap: 5px; }
+.ap-ley i { width: 10px; height: 10px; border-radius: 3px; display: inline-block; opacity: .85; }
+.ap-ley b { color: var(--ink); font-family: var(--f-data); font-weight: 500; }
 .chip { display: inline-flex; gap: 6px; align-items: center; font-size: 14px; padding: 4px 10px; border-radius: 6px; background: var(--bg); border: 1px solid var(--line); }
 .panel .go { justify-self: start; border: 0; background: var(--accent); color: var(--surface); font-weight: 700; padding: 9px 16px; border-radius: 8px; cursor: pointer; }
 .panel .go:hover { filter: brightness(1.06); }
@@ -1025,6 +1035,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
           <tbody>
             <tr><td>PBI, crecimiento, inflación, desempleo, población, cuenta corriente, PBI por persona</td><td>Banco Mundial (World Development Indicators) y FMI (World Economic Outlook)</td><td>Todos los lunes</td></tr>
             <tr><td>Deuda pública</td><td>FMI; donde no hay dato, Banco Mundial</td><td>Todos los lunes</td></tr>
+            <tr><td>Estructura de la economía (PBI y empleo por sector), composición de las exportaciones, turismo, rentas de recursos naturales y energía renovable</td><td>Banco Mundial (World Development Indicators)</td><td>Todos los lunes</td></tr>
             <tr><td>Salud (esperanza de vida, mortalidad infantil y materna, médicos, gasto en salud), educación (escolarización), población (edades, fertilidad, urbanización, inmigrantes), trabajo y género, servicios (electricidad, agua, internet), homicidios, desigualdad, pobreza, inversión, ahorro, comercio, remesas, gasto público, impuestos, CO₂</td><td>Banco Mundial (World Development Indicators)</td><td>Todos los lunes</td></tr>
             <tr><td>Control de la corrupción y estado de derecho</td><td>Banco Mundial (Worldwide Governance Indicators)</td><td>Todos los lunes</td></tr>
             <tr><td>Riesgo país, cotizaciones del dólar, inflación del INDEC, UVA y tasas de plazo fijo de Argentina</td><td>ArgentinaDatos (argentinadatos.com), un proyecto abierto y no oficial que recopila datos públicos del BCRA y el INDEC</td><td>Todos los días hábiles</td></tr>
@@ -1766,6 +1777,11 @@ const LAB_EXTRA = {
   apertura: ["Comercio e inversión"], inversion: ["Comercio e inversión"], ahorro: ["Comercio e inversión"], ied: ["Comercio e inversión"], remesas: ["Comercio e inversión"],
   gedu: ["Estado"], gsalud: ["Estado"], impuestos: ["Estado"],
   corrupcion: ["Instituciones"], derecho: ["Instituciones"],
+  agro: ["De qué vive"], industria: ["De qué vive"], manufactura: ["De qué vive"], servicios: ["De qué vive"],
+  empagro: ["De qué vive"], empind: ["De qué vive"], empserv: ["De qué vive"],
+  xalim: ["Qué exporta"], xcomb: ["Qué exporta"], xmin: ["Qué exporta"], xagri: ["Qué exporta"], xmanuf: ["Qué exporta"], xtech: ["Qué exporta"],
+  turistas: ["Qué exporta", true], turismo: ["Qué exporta"],
+  rentas: ["Recursos naturales y energía"], rentpetro: ["Recursos naturales y energía"], rentgas: ["Recursos naturales y energía"], rentmin: ["Recursos naturales y energía"], renovable: ["Recursos naturales y energía"],
   co2: ["Ambiente", true]
 };
 const LAB_EJEMPLOS = [
@@ -1778,6 +1794,8 @@ const LAB_EJEMPLOS = [
   { t: "Apertura y crecimiento", y: "crec", ym: "prom", x: "apertura" },
   { t: "Mujeres que trabajan e hijos", y: "fert", x: "mujeres" },
   { t: "Riqueza y homicidios", y: "homicidios", x: "ppa", xlog: true, ylog: true },
+  { t: "Petróleo y corrupción", y: "corrupcion", x: "rentpetro", nota: "La llamada \"maldición de los recursos\": ¿los países que viven del petróleo tienen peores instituciones?" },
+  { t: "Riqueza y empleo en el campo", y: "empagro", x: "ppa", xlog: true, nota: "A medida que los países se desarrollan, la gente deja el campo y pasa a la industria y los servicios." },
   { t: "Riqueza y CO₂", y: "co2", x: "ppa", xlog: true, ylog: true, nota: "Las dos en escala log: la pendiente es una elasticidad." }
 ];
 /* Regiones grandes para colorear y filtrar */
@@ -1801,6 +1819,8 @@ function labSerie(k, v) {
   return LAB && LAB.paises[k] && LAB.paises[k][v] || null;
 }
 /* Valor de un país para una variable: último dato de los últimos 5 años, o promedio de 10 años */
+/* Cuántos años hacia atrás se acepta el "último dato". El Banco Mundial dejó de publicar los datos de turismo en 2020. */
+const LAB_VENTANA = { turistas: 8, turismo: 8 };
 function labValor(k, v, modo) {
   const valorEn = (s, y) => { const x = s[1][y - s[0]]; return x == null ? null : x; };
   if (v === "crec10") {            // crecimiento compuesto de los últimos 10 años
@@ -1829,7 +1849,7 @@ function labValor(k, v, modo) {
     const vals = []; for (let y = ANIO - 9; y <= ANIO; y++) { const x = s[1][y - s[0]]; if (x != null) vals.push(x); }
     return vals.length >= 7 ? { v: vals.reduce((a, b) => a + b, 0) / vals.length, y: `promedio ${ANIO - 9}–${ANIO}` } : null;
   }
-  for (let y = ANIO; y >= ANIO - 4; y--) { const x = s[1][y - s[0]]; if (x != null && x !== undefined) return { v: x, y: String(y) }; }
+  for (let y = ANIO; y >= ANIO - (LAB_VENTANA[v] || 5) + 1; y--) { const x = s[1][y - s[0]]; if (x != null && x !== undefined) return { v: x, y: String(y) }; }
   return null;
 }
 
@@ -2453,6 +2473,8 @@ const MERC_NOTAS = {
   materias: "Precios internacionales de referencia (contratos a futuro de Chicago y Nueva York). Soja, maíz y trigo: lo que más exporta Argentina.",
   cripto: "Bitcoin y ether se actualizan en vivo cada vez que abrís la página."
 };
+/* fecha del cierre más reciente: si algún instrumento quedó atrasado, se avisa en su tarjeta */
+const ultimaFechaMerc = () => todosMerc().filter(x => x.moneda !== "JPY").map(x => x.fecha).sort().pop() || "";
 const todosMerc = () => MERCADOS ? Object.values(MERCADOS.grupos).flat() : [];
 const mercDe = k => todosMerc().find(x => x.clave === k);
 function fmtMerc(x, v = x.precio) {
@@ -2478,7 +2500,7 @@ function renderMercados() {
     <section class="ag-bloque"><div class="ag-tit"><h2>${t}</h2>${g === "cripto" && criptoVivo ? `<span class="note">En vivo · ${criptoVivo._hora} (CoinGecko)</span>` : ""}</div>
       <div class="m-cartas">${MERCADOS.grupos[g].map(x => `<button class="m-carta${x.clave === mercSel ? " sel" : ""}" type="button" data-k="${x.clave}">
         <span class="m-n">${x.nombre}<small>${x.ticker.replace("=F", "").replace("^", "")}</small></span>
-        <span class="m-p">${fmtMerc(x, precioMerc(x))}</span>
+        <span class="m-p">${fmtMerc(x, precioMerc(x))}</span>${x.fecha < ultimaFechaMerc() && !(criptoVivo && criptoVivo[x.clave]) ? `<small class="ytag">dato del ${x.fecha.slice(8)}/${x.fecha.slice(5, 7)}</small>` : ""}
         <span class="m-v">${varMerc(diaMerc(x), " hoy")}</span>
         ${sparkMerc(x)}
         <span class="m-mas">Mes ${varMerc(x.mes)} · Año ${varMerc(x.anio)}</span></button>`).join("")}</div>
@@ -2667,7 +2689,7 @@ const RK_PRESETS = [
   { t: "Inflación", v: "infl" }, { t: "Crecimiento", v: "crec" }, { t: "Lo que más creció en 10 años", v: "crec10" },
   { t: "Más ricos y más pobres", v: "ppa" }, { t: "Deuda pública", v: "deuda" }, { t: "Desempleo", v: "desempleo" },
   { t: "Años en recesión desde 1990", v: "recesiones" }, { t: "Inflación acumulada desde 2000", v: "inflAcum" },
-  { t: "Esperanza de vida", v: "vida" }, { t: "Homicidios", v: "homicidios" }, { t: "Mujeres en el Congreso", v: "parlamento" }, { t: "Corrupción", v: "corrupcion" }, { t: "Desigualdad", v: "gini" }
+  { t: "Esperanza de vida", v: "vida" }, { t: "Homicidios", v: "homicidios" }, { t: "Mujeres en el Congreso", v: "parlamento" }, { t: "Dependencia del petróleo", v: "rentpetro" }, { t: "Turistas", v: "turistas" }, { t: "Más industriales", v: "manufactura" }, { t: "Corrupción", v: "corrupcion" }, { t: "Desigualdad", v: "gini" }
 ];
 const rkEstado = { v: "infl", m: "ultimo", reg: "todas", sob: true, chicos: true };
 /* Valor con su unidad, corto */
@@ -3327,6 +3349,26 @@ const DESC_VAR = {
   agua: "Parte de la población que tiene agua potable segura, disponible y sin contaminar.",
   homicidios: "Homicidios intencionales por año, por cada 100.000 habitantes.",
   top10: "Qué parte de todos los ingresos del país se queda el 10% de las personas que más ganan.",
+  agro: "Lo que aportan la agricultura, la ganadería, la pesca y la forestación al PBI.",
+  industria: "Lo que aportan las fábricas, la minería, la energía y la construcción al PBI.",
+  manufactura: "Solo las fábricas: lo que se produce transformando materias primas.",
+  servicios: "Comercio, transporte, bancos, salud, educación, turismo, gobierno y el resto de los servicios.",
+  empagro: "De cada 100 personas que trabajan, cuántas lo hacen en el campo.",
+  empind: "De cada 100 personas que trabajan, cuántas lo hacen en la industria, la minería o la construcción.",
+  empserv: "De cada 100 personas que trabajan, cuántas lo hacen en servicios.",
+  xalim: "Qué parte de lo que el país vende al mundo (en bienes) son alimentos: granos, carne, aceites, frutas.",
+  xcomb: "Qué parte de las exportaciones de bienes son petróleo, gas y carbón.",
+  xmin: "Qué parte de las exportaciones de bienes son minerales y metales, como cobre, litio, hierro u oro.",
+  xagri: "Qué parte son materias primas agrícolas que no son alimentos, como madera, algodón o lana.",
+  xmanuf: "Qué parte son productos industriales: autos, máquinas, químicos, ropa, electrónica.",
+  xtech: "De lo que exporta la industria, qué parte es de alta tecnología: computadoras, aviones, farmacéutica, instrumentos.",
+  turistas: "Cuántos turistas extranjeros llegan al país en un año. El Banco Mundial dejó de actualizarlo en 2020: es el último dato antes o durante la pandemia.",
+  turismo: "Qué parte de todo lo que el país le vende al mundo es turismo. El Banco Mundial dejó de actualizarlo en 2020, el año de la pandemia.",
+  rentas: "Cuánto del PBI viene de explotar recursos naturales (petróleo, gas, minerales, bosques), descontando lo que cuesta extraerlos.",
+  rentpetro: "Cuánto del PBI viene del petróleo, descontando lo que cuesta extraerlo.",
+  rentgas: "Cuánto del PBI viene del gas natural, descontando lo que cuesta extraerlo.",
+  rentmin: "Cuánto del PBI viene de la minería (cobre, oro, hierro, litio y otros), descontando lo que cuesta extraerla.",
+  renovable: "Qué parte de toda la energía que se consume viene de fuentes renovables: agua, viento, sol, leña y biocombustibles.",
   gini: "Desigualdad de ingresos: 0 sería que todos ganan lo mismo; 100, que una sola persona se queda con todo.",
   pobreza: "Personas por debajo de la línea internacional de pobreza extrema del Banco Mundial (unos US$ 3 por día).",
   apertura: "Exportaciones más importaciones, comparadas con el PBI. Cuanto más alto, más comercia con el mundo.",
@@ -3377,6 +3419,26 @@ function bloqueVars(k, claves) {
   }).join("");
   return filas.trim() ? `<div class="dvs">${filas}</div>` : "";
 }
+/* Barra apilada: de qué vive el país, en qué trabaja la gente y qué exporta */
+function barraApilada(k, titulo, partes, resto, nota) {
+  const V = labVars(), vals = partes.map(([c, t, color]) => { const x = V[c] && labValor(k, c, "ultimo"); return x ? { t, v: x.v, y: x.y, color } : null; });
+  if (vals.filter(Boolean).length < 2) return "";
+  const ok = vals.filter(Boolean), suma = ok.reduce((a, b) => a + b.v, 0), anio = ok.map(x => x.y).sort().pop();
+  if (resto && suma < 99.5) ok.push({ t: resto, v: Math.max(0, 100 - suma), color: "--line", resto: true });
+  const total = Math.max(100, ok.reduce((a, b) => a + b.v, 0));
+  return `<div class="apilada"><div class="ap-t"><b>${titulo}</b><small class="ytag">${anio}</small></div>
+    <div class="ap-barra" role="img" aria-label="${titulo}: ${ok.map(x => `${x.t} ${nf(x.v, 0)}%`).join(", ")}">${ok.map(x => `<i style="width:${x.v / total * 100}%; background: var(${x.color})" title="${x.t}: ${nf(x.v, 1)}%"></i>`).join("")}</div>
+    <div class="ap-ley">${ok.map(x => `<span><i style="background: var(${x.color})"></i>${x.t} <b>${nf(x.v, x.v < 10 ? 1 : 0)}%</b></span>`).join("")}</div>
+    ${nota ? `<p class="note">${nota}</p>` : ""}</div>`;
+}
+function bloqueEstructura(k) {
+  const pib = barraApilada(k, "De dónde sale el PBI", [["agro", "Campo", "--good"], ["industria", "Industria", "--b"], ["servicios", "Servicios", "--accent"]], "Impuestos y ajustes",
+    (() => { const m = labValor(k, "manufactura", "ultimo"); return m ? `Dentro de la industria, las fábricas (manufactura) son el ${nf(m.v, 1)}% del PBI. El resto es minería, energía y construcción.` : ""; })());
+  const emp = barraApilada(k, "En qué trabaja la gente", [["empagro", "Campo", "--good"], ["empind", "Industria", "--b"], ["empserv", "Servicios", "--accent"]], null);
+  const exp = barraApilada(k, "Qué vende al mundo (bienes)", [["xalim", "Alimentos", "--good"], ["xagri", "Materias primas agrícolas", "--cen"], ["xcomb", "Combustibles", "--bad"], ["xmin", "Minerales y metales", "--ind"], ["xmanuf", "Manufacturas", "--b"]], "Otros");
+  return pib + emp + exp;
+}
+
 /* Datos clave, siempre a la vista arriba de las secciones */
 function datosClave(d) {
   const item = (lbl, val, ind) => val == null ? "" : `<div><span>${lbl}</span><b>${val}</b>${ind && d.u[ind] && d.u[ind].y !== ANIO ? `<small>${d.u[ind].y}</small>` : ""}</div>`;
@@ -3464,9 +3526,10 @@ function renderPanel() {
     ${sec("est", "Estado", bloqueVars(seleccion, ["impuestos", "gsalud"]))}
     ${sec("inst", "Instituciones", bloqueVars(seleccion, ["corrupcion", "derecho"]))}
     ${sec("amb", "Ambiente", bloqueVars(seleccion, ["co2"]))}
-    ${sec("act", "A qué se dedica", d.actividades ? `<div class="acts">
+    ${sec("act", "A qué se dedica", (d.actividades ? `<div class="acts"><h4>Actividades principales</h4>
       <div class="chips">${d.actividades.map(([e, t]) => `<span class="chip"><span class="emo" aria-hidden="true">${e}</span>${t}</span>`).join("")}</div>
-    </div>` : "")}
+    </div>` : "") + bloqueEstructura(seleccion))}
+    ${sec("recursos", "Exportaciones, turismo y recursos", bloqueVars(seleccion, ["xtech", "turistas", "turismo", "rentas", "rentpetro", "rentgas", "rentmin", "renovable"]))}
     ${sec("com", "Comercio y socios", (d.expo && d.impo ? `<div class="trade">
       <div><h3>Qué le vende al mundo</h3><p class="hint">De mayor a menor</p>${lista(d.expo)}</div>
       <div><h3>Qué le compra</h3><p class="hint">De mayor a menor</p>${lista(d.impo)}</div>
