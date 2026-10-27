@@ -234,6 +234,7 @@ button, select { font: inherit; color: var(--ink); }
 .partners .flag { width: 24px; height: 16px; border-radius: 3px; }
 .partners .pbar { height: 8px; background: var(--bg); border-radius: 4px; overflow: hidden; }
 .partners .pbar i { display: block; height: 100%; background: var(--accent); border-radius: 4px; }
+.socios h4 .ptot { display: block; font-weight: 400; font-size: 13px; color: var(--muted); font-family: var(--f-body); }
 .partners .ppct { font-family: var(--f-data); font-size: 13px; text-align: right; font-variant-numeric: tabular-nums; }
 .plink { border: 0; background: none; padding: 0; text-align: left; font-size: inherit; color: var(--ink); text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; cursor: pointer; }
 .pol { display: grid; gap: 10px; }
@@ -1045,7 +1046,8 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
             <tr><td>Dólar en vivo</td><td>DolarAPI (dolarapi.com); si no responde, se muestra el último cierre</td><td>Cada vez que se abre la página</td></tr>
             <tr><td>Riesgo país de otros países de Latinoamérica</td><td>Banco Central de Reserva del Perú, índice EMBIG con datos de Reuters</td><td>Todos los martes (el dato es mensual)</td></tr>
             <tr><td>Próximas elecciones y control de cambios de gobierno</td><td>Wikidata, base de datos abierta y colaborativa</td><td>Todos los días</td></tr>
-            <tr><td>Resúmenes, actividades, exportaciones, importaciones, socios comerciales, gobiernos y su orientación, conflictos</td><td>Escrito a mano a partir de fuentes públicas</td><td>Cuando hay cambios (se avisa la fecha al pie)</td></tr>
+            <tr><td>Socios comerciales (a quién le vende y le compra cada país)</td><td>WITS, del Banco Mundial, con datos de Naciones Unidas (Comtrade); donde no hay dato, escrito a mano</td><td>Una vez por mes (cada país informa con uno a tres años de atraso)</td></tr>
+            <tr><td>Resúmenes, actividades, exportaciones, importaciones, gobiernos y su orientación, conflictos</td><td>Escrito a mano a partir de fuentes públicas</td><td>Cuando hay cambios (se avisa la fecha al pie)</td></tr>
             <tr><td>Fronteras, banderas y relieve del mapa</td><td>Natural Earth (dominio público), flag-icons (licencia MIT) y un modelo de elevación global</td><td>—</td></tr>
           </tbody>
         </table></div>
@@ -2940,7 +2942,7 @@ function pistasDe(k) {
     { ico: "👥", tit: "Tamaño y nivel de vida", txt: `${nf(d.poblacion, d.poblacion < 10 ? 1 : 0)} millones de habitantes · PBI por persona: US$ ${nf(d.pibpc)}` },
     { ico: "📦", tit: "Lo que más exporta", txt: cur.expo ? top(cur.expo, 3) : "sin datos" },
     { ico: "🏭", tit: "A qué se dedica", txt: cur.actividades ? top(cur.actividades, 3) : "sin datos" },
-    { ico: "🌎", tit: "Dónde está", txt: `${d.region}${socio && PAISES[socio[0]] ? ` · Su principal cliente es ${PAISES[socio[0]].nombre} (${socio[1]}% de lo que vende)` : ""}${pol ? `<small>Lo gobierna: ${IDEO[pol.ideo].t.toLowerCase()}</small>` : ""}` },
+    { ico: "🌎", tit: "Dónde está", txt: `${d.region}${socio && PAISES[socio[0]] ? ` · Su principal cliente es ${PAISES[socio[0]].nombre} (${String(socio[1]).replace(".", ",")}% de lo que vende)` : ""}${pol ? `<small>Lo gobierna: ${IDEO[pol.ideo].t.toLowerCase()}</small>` : ""}` },
     { ico: "🏛️", tit: "Capital", txt: capitalDe(k) || "sin datos" }
   ];
 }
@@ -3290,12 +3292,13 @@ function histBlock(ind) {
 }
 
 /* ---------- PANEL / FICHA ---------- */
+const musd = v => v >= 1000 ? `US$ ${nf(v / 1000, v >= 100000 ? 0 : 1)} mil millones` : `US$ ${nf(v)} millones`;
 function socios(arr) {
   const max = Math.max(...arr.map(x => x[1]));
   return `<ul class="partners">${arr.map(([k, p]) => {
     const corto = k === "USA" ? "EE.UU." : nombreEs(k);
     const nombre = PAISES[k] ? `<button class="plink" type="button" data-pais="${k}">${corto}</button>` : `<span>${corto}</span>`;
-    return `<li>${flag(k) || '<span class="flag"></span>'}${nombre}<span class="ppct">${p}%</span><span class="pbar"><i style="width:${p / max * 100}%"></i></span></li>`;
+    return `<li>${flag(k) || '<span class="flag"></span>'}${nombre}<span class="ppct">${String(p).replace(".", ",")}%</span><span class="pbar"><i style="width:${p / max * 100}%"></i></span></li>`;
   }).join("")}</ul>`;
 }
 const ideoPill = c => `<span class="ipill" style="--ic: var(${IDEO[c].c})">${IDEO[c].t}</span>`;
@@ -3535,10 +3538,10 @@ function renderPanel() {
       <div><h3>Qué le compra</h3><p class="hint">De mayor a menor</p>${lista(d.impo)}</div>
     </div>` : "") + (d.socios ? `<div class="socios">
       <h4>Socios comerciales</h4>
-      <p class="hint">Parte de lo que vende o compra que va a cada país, aprox.</p>
+      <p class="hint">${d.socios.anio ? `Parte de lo que vendió o compró en ${d.socios.anio} que fue a cada país (es el último año informado). Fuente: WITS, Banco Mundial.` : "Parte de lo que vende o compra que va a cada país, aprox."}</p>
       <div class="trade">
-        <div><h4>A quién le vende</h4>${socios(d.socios.vende)}</div>
-        <div><h4>A quién le compra</h4>${socios(d.socios.compra)}</div>
+        <div><h4>A quién le vende${d.socios.expo ? `<small class="ptot">exportó ${musd(d.socios.expo)}</small>` : ""}</h4>${socios(d.socios.vende)}</div>
+        <div><h4>A quién le compra${d.socios.impo ? `<small class="ptot">importó ${musd(d.socios.impo)}</small>` : ""}</h4>${socios(d.socios.compra)}</div>
       </div>
     </div>` : ""))}
     ${sec("pol", "Política", politica(seleccion))}
@@ -3727,9 +3730,14 @@ function textoFuentes() {
 function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); renderLab(); if (paginaActual === "argentina") renderAgCharts(); } }
 
 const leer = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: error ${r.status}`); return r.json(); });
-Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null), leer("riesgo.json").catch(() => null), leer("calendario.json").catch(() => null), leer("mercados.json").catch(() => null)])
-  .then(([datos, curado, topo, argentina, noticias, riesgo, calendario, mercados]) => {
+Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null), leer("riesgo.json").catch(() => null), leer("calendario.json").catch(() => null), leer("mercados.json").catch(() => null), leer("socios.json").catch(() => null)])
+  .then(([datos, curado, topo, argentina, noticias, riesgo, calendario, mercados, socios]) => {
     DATOS = datos; CURADO = curado; ARGENTINA = argentina; NOTICIAS = noticias; RIESGO = riesgo; CALENDARIO = calendario; MERCADOS = mercados;
+    /* socios.json (WITS, con año) reemplaza a los socios escritos a mano en curado.json */
+    if (socios && socios.paises) Object.entries(socios.paises).forEach(([iso, s]) => {
+      if (!CURADO.paises[iso]) CURADO.paises[iso] = {};
+      CURADO.paises[iso].socios = { vende: s.vende, compra: s.compra, anio: s.anio, expo: s.expo_musd, impo: s.impo_musd };
+    });
     prepararDatos();
     renderElecciones();
     renderConflictos();
