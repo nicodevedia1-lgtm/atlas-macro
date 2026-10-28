@@ -424,6 +424,10 @@ footer a { color: var(--muted); text-decoration-color: var(--accent); text-under
 .sube { color: var(--bad); } .baja { color: var(--good); } .igual { color: var(--muted); }
 .ag-mas summary { cursor: pointer; font-weight: 600; font-size: 14.5px; padding: 4px 0; }
 .ag-chart { height: 340px; margin-top: 8px; }
+.ag-chart-chica { height: 220px; }
+#bcLista { max-height: 380px; overflow-y: auto; padding-right: 4px; }
+#bcBloque .com-main { align-items: stretch; }
+.bc-sub { font-size: 17px; font-weight: 700; margin: 6px 0 0; }
 .ag-form { display: flex; flex-wrap: wrap; gap: 12px 18px; align-items: end; }
 .ag-form label { display: grid; gap: 4px; font-size: 13px; font-weight: 600; color: var(--muted); }
 .ag-form input, .ag-form select { padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font: inherit; font-size: 16px; font-weight: 600; }
@@ -926,6 +930,23 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
       <p class="note" id="mercDetNota"></p>
     </section>
     <div class="lista-pag" id="mercGrupos"></div>
+    <section class="ag-bloque" id="bcBloque" hidden>
+      <div class="ag-tit"><h2>Tasas de los bancos centrales</h2><span class="note" id="bcFecha"></span></div>
+      <p class="note">La tasa de interés que fija cada banco central para controlar la inflación: si la sube, el crédito se encarece y la economía se enfría; si la baja, al revés. Tocá un país para ver cómo la fue moviendo.</p>
+      <div class="com-main">
+        <div class="com-mapa"><svg id="bcMapa" role="img" aria-label="Mapa de las tasas de los bancos centrales"></svg><div class="tip" id="bcTip" hidden></div><div class="prov-ley" id="bcLey"></div></div>
+        <section class="rk-col"><h2>De mayor a menor</h2><ol class="rk-lista" id="bcLista"></ol></section>
+      </div>
+      <div><h3 class="bc-sub" id="bcDetT"></h3><div id="bcChart" class="ag-chart"></div></div>
+    </section>
+    <section class="ag-bloque" id="curvaBloque" hidden>
+      <div class="ag-tit"><h2>Curva de rendimientos del Tesoro de EE.UU.</h2><span class="note" id="curvaFecha"></span></div>
+      <p class="note">Cuánto paga Estados Unidos por pedir prestado a cada plazo, de 1 mes a 30 años. Normalmente los plazos largos pagan más; cuando los cortos pagan más que los largos, la curva está "invertida", algo que muchas veces anticipó recesiones.</p>
+      <div id="curvaChart" class="ag-chart"></div>
+      <h3 class="bc-sub" id="spreadT">Diferencia entre la tasa a 10 años y la de 2 años</h3>
+      <div id="spreadChart" class="ag-chart ag-chart-chica"></div>
+      <p class="note">Fuente: Departamento del Tesoro de EE.UU. (tasas "par yield curve", en % anual).</p>
+    </section>
     <p class="note">Precios de cierre de cada día hábil, salvo bitcoin y ether, que se actualizan en vivo. No son cotizaciones en tiempo real ni una recomendación de inversión. Fuentes: Stooq, Yahoo Finance y CoinGecko.</p>
   </div>
 
@@ -1149,6 +1170,8 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
             <tr><td>Riesgo país de otros países de Latinoamérica</td><td>Banco Central de Reserva del Perú, índice EMBIG con datos de Reuters</td><td>Todos los martes (el dato es mensual)</td></tr>
             <tr><td>Próximas elecciones y control de cambios de gobierno</td><td>Wikidata, base de datos abierta y colaborativa</td><td>Todos los días</td></tr>
             <tr><td>Reservas, base monetaria, tasas (BADLAR, TAMAR, plazo fijo), dólar mayorista, depósitos, préstamos e inflación esperada (REM)</td><td>Banco Central de la República Argentina, API de estadísticas</td><td>Todos los días hábiles</td></tr>
+            <tr><td>Tasas de interés de los bancos centrales del mundo</td><td>BIS (Banco de Pagos Internacionales), tasas de política monetaria</td><td>Una vez por semana</td></tr>
+            <tr><td>Curva de rendimientos del Tesoro de EE.UU.</td><td>Departamento del Tesoro de EE.UU.</td><td>Una vez por semana</td></tr>
             <tr><td>Bonos en dólares (Bonares y Globales)</td><td>data912.com, con precios de BYMA</td><td>Todos los días hábiles</td></tr>
             <tr><td>Actividad económica mensual (EMAE)</td><td>INDEC, vía la API de Series de Tiempo de datos.gob.ar</td><td>Todos los días hábiles (el dato sale una vez por mes)</td></tr>
             <tr><td>Comercio mundial por producto (quién exporta e importa petróleo, soja, autos, etc.)</td><td>UN Comtrade (Naciones Unidas), con lo que informa cada país</td><td>Una vez por mes</td></tr>
@@ -1841,6 +1864,8 @@ function indiceBusqueda() {
   add("🏛️", "Quién gobierna cada país", "Mapa", "gobierno presidente izquierda derecha ideologia quien gobierna", () => { irA_("inicio")(); setModo("gob"); setVista("mundo"); });
   add("📈", "Mercados", "Bolsas, ADRs, soja y cripto", "mercados bolsa acciones indices merval sp500 s&p nasdaq bovespa adr ypf galicia mercado libre soja maiz trigo petroleo oro cobre bitcoin cripto ether", irA_("mercados"));
   todosMerc().forEach(x => add("📈", x.nombre, `Mercados · ${fmtMerc(x)}`, `${x.nombre} ${x.ticker} cotizacion precio accion`, () => { mercSel = x.clave; irA_("mercados")(); }));
+  add("🌐", "Tasas de los bancos centrales", "Mercados · Fed, BCE, Brasil y más", "tasa interes banco central fed bce reserva federal politica monetaria tasas mundo", () => { irA_("mercados")(); setTimeout(() => { const el = document.getElementById("bcBloque"); if (el) el.scrollIntoView(); }, 300); });
+  add("🌐", "Curva del Tesoro de EE.UU.", "Mercados · bonos del Tesoro", "curva rendimientos tesoro treasury bonos estados unidos invertida 10 años 2 años", () => { irA_("mercados")(); setTimeout(() => { const el = document.getElementById("curvaBloque"); if (el) el.scrollIntoView(); }, 300); });
   add("🏦", "Argentina financiera", "Reservas, tasas, bonos y actividad", "reservas bcra banco central tasas badlar tamar plazo fijo base monetaria emision depositos prestamos bonos al30 gd30 globales bonares emae actividad rem inflacion esperada", irA_("finanzas"));
   [["reservas", "Reservas del BCRA"], ["badlar", "Tasa BADLAR"], ["tamar", "Tasa TAMAR"], ["base", "Base monetaria"], ["rem", "Inflación esperada (REM)"]].forEach(([k, t]) =>
     add("🏦", t, "Argentina financiera", t + " bcra", () => { finSel = "bcra:" + k; irA_("finanzas")(); }));
@@ -2600,12 +2625,13 @@ function renderConvergencia() {
 
 /* ---------- MERCADOS (mercados.json + cripto en vivo de CoinGecko) ---------- */
 let MERCADOS = null, mercSel = "sp500", mercRango = 365, mercChart = null, criptoVivo = null;
-const MERC_GRUPOS = { indices: "Índices bursátiles", adrs: "Argentinos en Wall Street (ADRs)", materias: "Materias primas", cripto: "Cripto" };
+const MERC_GRUPOS = { indices: "Índices bursátiles", adrs: "Argentinos en Wall Street (ADRs)", materias: "Materias primas", monedas: "Monedas del mundo", cripto: "Cripto" };
 const MERC_NOTAS = {
   indices: "Cada índice resume las acciones más importantes de una bolsa. El Merval está en pesos, así que también sube por la inflación.",
   adrs: "Acciones de empresas argentinas que cotizan en Nueva York, en dólares.",
   materias: "Precios internacionales de referencia (contratos a futuro de Chicago y Nueva York). Soja, maíz y trigo: lo que más exporta Argentina.",
-  cripto: "Bitcoin y ether se actualizan en vivo cada vez que abrís la página."
+  cripto: "Bitcoin y ether se actualizan en vivo cada vez que abrís la página.",
+  monedas: "Cuántas unidades de cada moneda vale un dólar (el euro y la libra, al revés: cuántos dólares vale uno). Si sube, esa moneda se debilita frente al dólar; el índice dólar (DXY) mide al dólar contra las monedas de los países ricos."
 };
 /* fecha del cierre más reciente: si algún instrumento quedó atrasado, se avisa en su tarjeta */
 const ultimaFechaMerc = () => todosMerc().filter(x => x.moneda !== "JPY").map(x => x.fecha).sort().pop() || "";
@@ -2613,6 +2639,7 @@ const todosMerc = () => MERCADOS ? Object.values(MERCADOS.grupos).flat() : [];
 const mercDe = k => todosMerc().find(x => x.clave === k);
 function fmtMerc(x, v = x.precio) {
   if (x.unidad === "puntos") return nf(v, v >= 1000 ? 0 : 2);
+  if (x.unidad.startsWith("moneda:")) return nf(v, v >= 1000 ? 0 : v >= 100 ? 1 : v >= 10 ? 2 : 4);
   const n = `US$ ${nf(v, v >= 1000 || (x.unidad !== "US$" && v >= 100) ? 0 : 2)}`;   // materias primas: sin centavos si pasan de 100
   return x.unidad === "US$ por tonelada" ? n + "/t" : x.unidad === "US$ por barril" ? n + "/barril" : x.unidad === "US$ por onza" ? n + "/onza" : x.unidad === "US$ por libra" ? n + "/libra" : n;
 }
@@ -2661,7 +2688,7 @@ function renderMercDetalle() {
     yAxis: { type: "value", scale: true, axisLabel: Object.assign({}, ax, { formatter: v => nf(v, v >= 1000 ? 0 : 2) }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
     series: [{ type: "line", data: s.map(p => p[1]), symbol: "none", lineStyle: { color: col, width: 2 }, areaStyle: { color: col, opacity: .08 } }]
   }, true);
-  document.getElementById("mercDetNota").textContent = `${x.unidad === "puntos" ? `En puntos${x.moneda === "ARS" ? " (en pesos)" : ""}` : x.unidad}. Precio de cierre de cada día${x.clave === "btc" || x.clave === "eth" ? "; el precio de arriba es en vivo" : ""}. Fuente: ${x.fuente}.`;
+  document.getElementById("mercDetNota").textContent = x.unidad.startsWith("moneda:") ? `En ${x.unidad.slice(7)}. Cierre de cada día. Fuente: ${x.fuente}.` : `${x.unidad === "puntos" ? `En puntos${x.moneda === "ARS" ? " (en pesos)" : ""}` : x.unidad}. Precio de cierre de cada día${x.clave === "btc" || x.clave === "eth" ? "; el precio de arriba es en vivo" : ""}. Fuente: ${x.fuente}.`;
 }
 /* Cripto en vivo: CoinGecko permite consultarlo gratis desde el navegador */
 function criptoEnVivo() {
@@ -2676,7 +2703,104 @@ function criptoEnVivo() {
       if (paginaActual === "mercados") renderMercados();
     }).catch(() => { /* sin conexión con CoinGecko: queda el cierre */ });
 }
-function abrirMercados() { renderMercados(); if (mercChart) mercChart.resize(); }
+function abrirMercados() {
+  renderMercados(); if (mercChart) mercChart.resize();
+  if (!GLOBAL) cargarGlobal().then(() => paginaActual === "mercados" && renderGlobal()); else renderGlobal();
+}
+
+/* ---------- TASAS DE BANCOS CENTRALES Y CURVA DEL TESORO (global.json) ---------- */
+let GLOBAL = null, globCargando = null, bcSel = "USA", bcChart = null, curvaChart = null, spreadChart = null;
+const EUROZONA = ["AUT", "BEL", "BGR", "HRV", "CYP", "EST", "FIN", "FRA", "DEU", "GRC", "IRL", "ITA", "LVA", "LTU", "LUX", "MLT", "NLD", "PRT", "SVK", "SVN", "ESP"];
+const PLAZO_ES = { "1 Mo": "1 mes", "2 Mo": "2 meses", "3 Mo": "3 meses", "4 Mo": "4 meses", "6 Mo": "6 meses", "1 Yr": "1 año", "2 Yr": "2 años", "3 Yr": "3 años", "5 Yr": "5 años", "7 Yr": "7 años", "10 Yr": "10 años", "20 Yr": "20 años", "30 Yr": "30 años" };
+function cargarGlobal() {
+  if (!globCargando) globCargando = leer("global.json").then(d => { GLOBAL = d; }).catch(() => { GLOBAL = {}; });
+  return globCargando;
+}
+const nombreBC = k => k === "EUR" ? "Zona euro (BCE)" : k === "USA" ? "Estados Unidos (Fed)" : PAISES[k] ? PAISES[k].nombre : nombreEs(k);
+function renderGlobal() { renderBancosCentrales(); renderCurva(); }
+function renderBancosCentrales() {
+  const T = (GLOBAL && GLOBAL.tasas) || {};
+  /* solo los que tienen un dato del último año (Argentina, por ejemplo, dejó de fijar una tasa de referencia en 2025) */
+  const lim = (() => { const d = new Date(); d.setMonth(d.getMonth() - 12); return d.toISOString().slice(0, 7); })();
+  const vig = Object.entries(T).filter(([, s]) => s.length && s[s.length - 1][0] >= lim).map(([k, s]) => [k, s[s.length - 1][1], s]).sort((a, b) => b[1] - a[1]);
+  const bloque = document.getElementById("bcBloque");
+  if (!vig.length) { bloque.hidden = true; return; }
+  bloque.hidden = false;
+  if (!vig.some(x => x[0] === bcSel)) bcSel = vig.some(x => x[0] === "USA") ? "USA" : vig[0][0];
+  const ult = vig.map(x => x[2][x[2].length - 1][0]).sort().pop();
+  document.getElementById("bcFecha").textContent = `Dato de ${MESES[+ult.slice(5) - 1]} de ${ult.slice(0, 4)} · ${vig.length} bancos centrales`;
+  const valor = {}; vig.forEach(([k, v]) => { valor[k] = v; if (k === "EUR") EUROZONA.forEach(e => { if (!valor[e]) valor[e] = v; }); });
+  const max = vig[0][1];
+  const cambio12 = s => { const u = s[s.length - 1], a = s.find(x => x[0] === `${+u[0].slice(0, 4) - 1}${u[0].slice(4)}`); return a ? u[1] - a[1] : null; };
+  document.getElementById("bcLista").innerHTML = vig.map(([k, v, s], i) => `<li class="${k === bcSel ? "arg" : ""}"><span class="rk-n">${i + 1}</span>${k === "EUR" ? '<span class="flag"><img src="banderas/eu.svg" alt="" loading="lazy" onerror="this.parentNode.remove()"></span>' : flag(k) || '<span class="flag"></span>'}<button class="plink" type="button" data-bc="${k}">${nombreBC(k)}</button><span class="rk-v">${nf(v, 2)}%<small>${(c => c == null ? "" : `${c > 0 ? "▲" : c < 0 ? "▼" : "="} ${nf(Math.abs(c), 2)} en un año`)(cambio12(s))}</small></span><span class="rk-bar" style="width:${Math.max(v, 0) / max * 100}%"></span></li>`).join("");
+  document.querySelectorAll("#bcLista .plink").forEach(b => b.onclick = () => { bcSel = b.dataset.bc; renderBancosCentrales(); });
+  /* mapa */
+  const el = document.getElementById("bcMapa"), r = el.getBoundingClientRect();
+  if (features && r.width) {
+    const svgB = d3.select(el).attr("viewBox", `0 0 ${r.width} ${r.height}`);
+    const proj = d3.geoEquirectangular().fitExtent([[4, 4], [r.width - 4, r.height - 4]], { type: "FeatureCollection", features });
+    const color = d3.scaleSqrt().domain([0, Math.min(max, 20)]).range([css("--accent-soft"), css("--accent")]).interpolate(d3.interpolateRgb).clamp(true);
+    const tip = document.getElementById("bcTip");
+    const claveDe = iso => iso === bcSel || (bcSel === "EUR" && EUROZONA.includes(iso)) ? true : false;
+    svgB.selectAll("path").data(features).join("path").attr("d", d3.geoPath(proj))
+      .attr("fill", f => valor[f.properties.iso] != null ? color(valor[f.properties.iso]) : css("--land"))
+      .classed("sel", f => claveDe(f.properties.iso))
+      .on("click", (e, f) => { const k = f.properties.iso; if (valor[k] == null) return; bcSel = T[k] ? k : "EUR"; renderBancosCentrales(); })
+      .on("pointermove", (e, f) => {
+        if (e.pointerType !== "mouse") return;
+        const k = f.properties.iso, v = valor[k], rr = el.parentNode.getBoundingClientRect();
+        tip.innerHTML = `${flag(k)}<div><b>${PAISES[k] ? PAISES[k].nombre : f.properties.name}</b><small>${v != null ? `Tasa: ${nf(v, 2)}%${!T[k] ? " (la del BCE)" : ""}` : "Sin dato"}</small></div>`;
+        tip.hidden = false; tip.style.left = (e.clientX - rr.left + 14) + "px"; tip.style.top = (e.clientY - rr.top + 14) + "px";
+      }).on("pointerleave", () => tip.hidden = true);
+    svgB.selectAll("path.sel").raise();
+    document.getElementById("bcLey").innerHTML = `<span>0%</span><i style="background:linear-gradient(90deg, ${[0, .1, .3, .6, 1].map(t => color(t * Math.min(max, 20))).join(",")})"></i><span>${nf(Math.min(max, 20), 0)}%${max > 20 ? " o más" : ""}</span>`;
+    el.parentNode.querySelector("svg").style.aspectRatio = "2 / 1.02";
+  }
+  /* historia del país elegido */
+  const s = T[bcSel];
+  document.getElementById("bcDetT").textContent = `${nombreBC(bcSel)}: tasa de interés desde ${s[0][0].slice(0, 4)}`;
+  const { line, ink, ax } = chartBase(), col = css("--accent");
+  bcChart = bcChart || echarts.init(document.getElementById("bcChart"));
+  bcChart.setOption({
+    grid: { left: 50, right: 14, top: 12, bottom: 28 },
+    tooltip: { trigger: "axis", backgroundColor: css("--surface"), borderColor: line, textStyle: { color: ink }, formatter: ps => `<b>${mesNombre(ps[0].name)}</b><br>${nf(ps[0].value, 2)}%` },
+    xAxis: { type: "category", data: s.map(p => p[0]), axisLabel: Object.assign({}, ax, { formatter: v => v.slice(0, 4) }), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+    yAxis: { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => v + "%" }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+    series: [{ type: "line", step: "end", data: s.map(p => p[1]), symbol: "none", lineStyle: { color: col, width: 2 }, areaStyle: { color: col, opacity: .08 } }]
+  }, true);
+}
+function renderCurva() {
+  const C = GLOBAL && GLOBAL.curva, bloque = document.getElementById("curvaBloque");
+  if (!C || !C.hoy) { bloque.hidden = true; return; }
+  bloque.hidden = false;
+  const fl = f => f.split("-").reverse().join("/");
+  document.getElementById("curvaFecha").textContent = `Al ${fl(C.hoy.fecha)}`;
+  const { line, ink, ax, muted } = chartBase();
+  const plazos = C.hoy.tasas.map(t => t[0]);
+  const serie = (c, nombre, color, punteada) => ({ name: nombre, type: "line", data: plazos.map(p => (c.tasas.find(t => t[0] === p) || [])[1] ?? null), symbol: "circle", symbolSize: 6, showSymbol: !punteada,
+    lineStyle: { color, width: punteada ? 1.5 : 2.5, type: punteada ? "dashed" : "solid" }, itemStyle: { color } });
+  curvaChart = curvaChart || echarts.init(document.getElementById("curvaChart"));
+  curvaChart.setOption({
+    grid: { left: 50, right: 14, top: 36, bottom: 30 }, legend: { top: 0, left: 0, textStyle: { color: ink } },
+    tooltip: { trigger: "axis", backgroundColor: css("--surface"), borderColor: line, textStyle: { color: ink }, formatter: ps => `<b>A ${ps[0].name}</b><br>` + ps.map(p => `${p.marker}${p.seriesName}: ${p.value == null ? "—" : nf(p.value, 2) + "%"}`).join("<br>") },
+    xAxis: { type: "category", data: plazos.map(p => PLAZO_ES[p] || p), axisLabel: ax, axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+    yAxis: { type: "value", scale: true, axisLabel: Object.assign({}, ax, { formatter: v => v + "%" }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+    series: [serie(C.hoy, `Hoy (${fl(C.hoy.fecha)})`, css("--accent")), serie(C.mes, `Hace un mes`, muted, true), serie(C.anio, `Hace un año`, css("--b"), true)]
+  }, true);
+  const S = C.serie || [];
+  if (S.length) {
+    const u = S[S.length - 1], dif = u[2] - u[1];
+    document.getElementById("spreadT").innerHTML = `Diferencia entre la tasa a 10 años y la de 2 años: <span class="${dif < 0 ? "m-down" : ""}">${dif >= 0 ? "+" : "−"}${nf(Math.abs(dif), 2)} puntos</span>${dif < 0 ? " (curva invertida)" : ""}`;
+    spreadChart = spreadChart || echarts.init(document.getElementById("spreadChart"));
+    spreadChart.setOption({
+      grid: { left: 50, right: 14, top: 12, bottom: 28 },
+      tooltip: { trigger: "axis", backgroundColor: css("--surface"), borderColor: line, textStyle: { color: ink }, formatter: ps => `<b>${fl(ps[0].name)}</b><br>${nf(ps[0].value, 2)} puntos` },
+      xAxis: { type: "category", data: S.map(x => x[0]), axisLabel: Object.assign({}, ax, { formatter: v => `${MESES[+v.slice(5, 7) - 1].slice(0, 3)} ${v.slice(2, 4)}` }), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+      yAxis: { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => nf(v, 1) }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+      series: [{ type: "line", data: S.map(x => +(x[2] - x[1]).toFixed(2)), symbol: "none", lineStyle: { width: 1.6, color: css("--accent") } }]
+    }, true);
+  }
+}
 
 /* ---------- ARGENTINA POR PROVINCIA (provincias.json + provincias-arg.json) ---------- */
 let PROV = null, PROV_GEO = null, provCargando = null, provInd = "pobreza", provSel = "AR-C";
@@ -4134,7 +4258,7 @@ function textoFuentes() {
   const fecha = new Date(DATOS.generado).toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" });
   document.getElementById("fuentes").textContent = `Datos macro: Banco Mundial y FMI (World Economic Outlook), 1960–${ANIO}, actualizados automáticamente el ${fecha}. Inflación: índice de precios al consumidor del Banco Mundial; donde falta, deflactor del PBI o FMI. Deuda pública: FMI; donde falta, Banco Mundial. Promedios mundiales: Banco Mundial. Fichas y datos políticos escritos a mano, actualizados a ${CURADO.actualizado}.`;
 }
-function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); renderLab(); if (paginaActual === "argentina") renderAgCharts(); if (paginaActual === "comercio" && PRODUCTOS) renderComercio(); if (paginaActual === "finanzas" && FINANZAS) renderFinanzas(); } }
+function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); renderLab(); if (paginaActual === "argentina") renderAgCharts(); if (paginaActual === "comercio" && PRODUCTOS) renderComercio(); if (paginaActual === "finanzas" && FINANZAS) renderFinanzas(); if (paginaActual === "mercados" && GLOBAL) renderGlobal(); } }
 
 const leer = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: error ${r.status}`); return r.json(); });
 Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null), leer("riesgo.json").catch(() => null), leer("calendario.json").catch(() => null), leer("mercados.json").catch(() => null), leer("socios.json").catch(() => null)])

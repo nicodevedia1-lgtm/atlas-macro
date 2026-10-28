@@ -2,7 +2,7 @@
 actualizar_mercados.py — Atlas Macro
 
 Baja el precio de cierre de índices bursátiles, acciones argentinas en Wall Street
-(ADRs), materias primas y cripto, y genera mercados.json con el último año de datos.
+(ADRs), materias primas, cripto y monedas del mundo, y genera mercados.json con el último año de datos.
 
 Fuentes: Stooq (stooq.com) y, si Stooq no tiene el dato o no responde, Yahoo Finance.
 Los precios son de cierre (o con demora): no es una cotización en tiempo real.
@@ -56,6 +56,18 @@ INSTRUMENTOS = {
     "cripto": [
         ("btc", "Bitcoin", "btcusd", "BTC-USD", "USD", "US$"),
         ("eth", "Ether", "ethusd", "ETH-USD", "USD", "US$"),
+    ],
+    # unidad "moneda:X" = cuántas X vale un dólar (o al revés para euro y libra, como se cotizan siempre)
+    "monedas": [
+        ("dxy", "Índice dólar (DXY)", "dx.f", "DX-Y.NYB", "USD", "puntos"),
+        ("eur", "Euro", "eurusd", "EURUSD=X", "USD", "moneda:US$ por euro"),
+        ("brl", "Real brasileño", "usdbrl", "BRL=X", "BRL", "moneda:reales por dólar"),
+        ("clp", "Peso chileno", "usdclp", "CLP=X", "CLP", "moneda:pesos chilenos por dólar"),
+        ("mxn", "Peso mexicano", "usdmxn", "MXN=X", "MXN", "moneda:pesos mexicanos por dólar"),
+        ("cop", "Peso colombiano", "usdcop", "COP=X", "COP", "moneda:pesos colombianos por dólar"),
+        ("jpy", "Yen", "usdjpy", "JPY=X", "JPY", "moneda:yenes por dólar"),
+        ("cny", "Yuan", "usdcny", "CNY=X", "CNY", "moneda:yuanes por dólar"),
+        ("gbp", "Libra esterlina", "gbpusd", "GBPUSD=X", "USD", "moneda:US$ por libra"),
     ],
 }
 
