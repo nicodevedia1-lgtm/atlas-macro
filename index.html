@@ -97,11 +97,20 @@ p { margin: 0; }
 @media (max-width: 480px) { .topbar .logo { font-size: 18px; } }
 
 /* Pestañas (solo en pantallas grandes) */
-.tabs { display: none; gap: 2px; margin-left: 10px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.tabs { display: none; gap: 2px; margin-left: 10px; min-width: 0; align-items: center; }
+.tab-grupo { position: relative; }
+.tab-btn { display: inline-flex; align-items: center; gap: 5px; padding: 7px 10px; border: 0; border-radius: 8px; background: none; color: var(--muted); font: inherit; font-size: 14.5px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.tab-btn::after { content: ""; width: 6px; height: 6px; border-right: 1.5px solid currentColor; border-bottom: 1.5px solid currentColor; transform: translateY(-2px) rotate(45deg); }
+.tab-btn:hover, .tab-btn[aria-expanded="true"] { color: var(--ink); background: var(--bg); }
+.tab-btn.activo { color: var(--ink); box-shadow: inset 0 -2px 0 var(--accent); }
+.tab-menu { position: absolute; top: calc(100% + 6px); left: 0; z-index: 40; min-width: 220px; display: grid; gap: 2px; padding: 6px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 12px 30px rgba(0,0,0,.25); }
+.tab-menu[hidden] { display: none; }
+.tab-menu a { display: block; }
 .tabs a { padding: 7px 10px; border-radius: 8px; color: var(--muted); text-decoration: none; font-size: 14.5px; font-weight: 600; white-space: nowrap; }
 .tabs a:hover { color: var(--ink); background: var(--bg); }
 .tabs a[aria-current="page"] { color: var(--ink); background: var(--bg); box-shadow: inset 0 -2px 0 var(--accent); }
-@media (min-width: 1180px) { .tabs { display: flex; } .topbar .search { max-width: 260px; } }
+@media (min-width: 960px) { .tabs { display: flex; } .topbar .search { max-width: 260px; } }
 
 /* Franja de datos */
 .tema { flex: 0 0 auto; width: 40px; height: 40px; display: inline-flex; align-items: center; justify-content: center; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); color: var(--muted); cursor: pointer; }
@@ -226,6 +235,21 @@ button, select { font: inherit; color: var(--ink); }
 .pill.bad { color: var(--bad); background: var(--bad-bg); }
 .pill.nd { color: var(--muted); background: var(--bg); }
 
+.destinos { display: grid; gap: 10px; margin-top: 18px; }
+.destinos:empty { display: none; }
+.destinos h4 { font-family: var(--f-body); font-size: 14px; font-weight: 700; color: var(--muted); margin: 0; }
+.dest-flujo { display: flex; flex-wrap: wrap; gap: 6px; }
+.dest-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; counter-reset: dest; }
+.dest-lista li { display: grid; gap: 4px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+.dest-lista li:last-child { border-bottom: 0; padding-bottom: 0; }
+.dest-prod { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 0 10px; align-items: baseline; }
+.dest-prod b { font-size: 15.5px; }
+.dest-prod .ppct { font-family: var(--f-data); font-size: 14px; font-variant-numeric: tabular-nums; }
+.dest-prod small { grid-column: 1 / -1; color: var(--muted); font-size: 13px; }
+.dest-socios { display: flex; flex-wrap: wrap; gap: 4px 14px; font-size: 14px; }
+.dest-socios span { display: inline-flex; align-items: center; gap: 6px; }
+.dest-socios .flag { width: 20px; height: 14px; border-radius: 2px; }
+.dest-socios i { font-style: normal; font-family: var(--f-data); font-size: 12.5px; color: var(--muted); }
 .trade { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 18px; }
 @media (max-width: 480px) { .trade { grid-template-columns: minmax(0, 1fr); } }
 .trade h3, .acts h3 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
@@ -380,6 +404,7 @@ details.sec[open] .sec-flecha { transform: rotate(225deg); }
 .doc-tabla table { border-collapse: collapse; width: 100%; min-width: 560px; font-size: 14.5px; }
 .doc-tabla th, .doc-tabla td { text-align: left; vertical-align: top; padding: 9px 12px 9px 0; border-bottom: 1px solid var(--line); }
 .doc-tabla th { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); font-weight: 600; }
+.nav-grupo { margin: 10px 0 2px; padding: 0 12px; font-family: var(--f-data); font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
 .nav-sec { border-top: 1px solid var(--line); padding-top: 6px !important; margin-top: 4px !important; }
 footer a { color: var(--muted); text-decoration-color: var(--accent); text-underline-offset: 3px; }
 
@@ -698,7 +723,12 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   </button>
   <a class="logo" href="#inicio">Atlas <span>Macro</span></a>
   <nav class="tabs" aria-label="Secciones">
-    <a href="#inicio" data-pag="inicio">Mapa</a><a href="#argentina" data-pag="argentina">Argentina hoy</a><a href="#mercados" data-pag="mercados">Mercados</a><a href="#comercio" data-pag="comercio">Comercio</a><a href="#provincias" data-pag="provincias">Provincias</a><a href="#calendario" data-pag="calendario">Calendario</a><a href="#rankings" data-pag="rankings">Rankings</a><a href="#juego" data-pag="juego">País del día</a><a href="#masrico" data-pag="masrico">Más rico o más pobre</a><a href="#elecciones" data-pag="elecciones">Elecciones</a><a href="#conflictos" data-pag="conflictos">Conflictos</a><a href="#glosario" data-pag="glosario">Glosario</a><a href="#laboratorio" data-pag="laboratorio">Laboratorio</a><a href="#comparacion" data-pag="comparacion">Comparar</a><a href="#gobiernos" data-pag="gobiernos">Gobiernos</a>
+    <a href="#inicio" data-pag="inicio">Mapa</a>
+    <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm0" data-pags="argentina finanzas provincias calendario gobiernos">Argentina</button><div class="tab-menu" id="tm0" hidden><a href="#argentina" data-pag="argentina">Argentina hoy</a><a href="#finanzas" data-pag="finanzas">Argentina financiera</a><a href="#provincias" data-pag="provincias">Provincias</a><a href="#calendario" data-pag="calendario">Calendario</a><a href="#gobiernos" data-pag="gobiernos">Gobiernos comparados</a></div></div>
+    <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm1" data-pags="mercados comercio">Mercados</button><div class="tab-menu" id="tm1" hidden><a href="#mercados" data-pag="mercados">Bolsas, acciones y cripto</a><a href="#comercio" data-pag="comercio">Comercio mundial</a></div></div>
+    <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm2" data-pags="rankings comparacion elecciones conflictos">Mundo</button><div class="tab-menu" id="tm2" hidden><a href="#rankings" data-pag="rankings">Rankings</a><a href="#comparacion" data-pag="comparacion">Comparar países</a><a href="#elecciones" data-pag="elecciones">Elecciones</a><a href="#conflictos" data-pag="conflictos">Conflictos</a></div></div>
+    <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm3" data-pags="juego masrico">Juegos</button><div class="tab-menu" id="tm3" hidden><a href="#juego" data-pag="juego">País del día</a><a href="#masrico" data-pag="masrico">¿Más rico o más pobre?</a></div></div>
+    <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm4" data-pags="laboratorio glosario">Herramientas</button><div class="tab-menu" id="tm4" hidden><a href="#laboratorio" data-pag="laboratorio">Laboratorio</a><a href="#glosario" data-pag="glosario">Glosario</a></div></div>
   </nav>
   <button class="tema" id="temaBtn" type="button" aria-label="Cambiar a modo claro" title="Modo claro / oscuro">
     <svg class="t-sol" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
@@ -719,20 +749,36 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <button class="nav-cerrar" id="navCerrar" type="button" aria-label="Cerrar el menú">✕</button></div>
   <ul>
     <li><a href="#inicio" data-pag="inicio"><span class="nav-ico" aria-hidden="true">🗺️</span><span>Mapa y fichas<small>Tocá un país y mirá su economía</small></span></a></li>
+  </ul>
+  <p class="nav-grupo">Argentina</p>
+  <ul>
     <li><a href="#argentina" data-pag="argentina"><span class="nav-ico" aria-hidden="true">🇦🇷</span><span>Argentina hoy<small>Dólar, inflación y calculadoras</small></span></a></li>
-    <li><a href="#mercados" data-pag="mercados"><span class="nav-ico" aria-hidden="true">📈</span><span>Mercados<small>Bolsas, acciones argentinas, soja y cripto</small></span></a></li>
-    <li><a href="#comercio" data-pag="comercio"><span class="nav-ico" aria-hidden="true">🚢</span><span>Comercio mundial<small>Quién le vende petróleo, soja o autos al mundo</small></span></a></li>
+    <li><a href="#finanzas" data-pag="finanzas"><span class="nav-ico" aria-hidden="true">🏦</span><span>Argentina financiera<small>Reservas, tasas, bonos y actividad</small></span></a></li>
     <li><a href="#provincias" data-pag="provincias"><span class="nav-ico" aria-hidden="true">📍</span><span>Argentina por provincia<small>Pobreza, desempleo y población</small></span></a></li>
     <li><a href="#calendario" data-pag="calendario"><span class="nav-ico" aria-hidden="true">📅</span><span>Calendario económico<small>Próximos datos del INDEC y feriados</small></span></a></li>
+    <li><a href="#gobiernos" data-pag="gobiernos"><span class="nav-ico" aria-hidden="true">🏛️</span><span>Gobiernos comparados<small>De Alfonsín a hoy, con datos</small></span></a></li>
+  </ul>
+  <p class="nav-grupo">Mercados</p>
+  <ul>
+    <li><a href="#mercados" data-pag="mercados"><span class="nav-ico" aria-hidden="true">📈</span><span>Mercados<small>Bolsas, acciones argentinas, soja y cripto</small></span></a></li>
+    <li><a href="#comercio" data-pag="comercio"><span class="nav-ico" aria-hidden="true">🚢</span><span>Comercio mundial<small>Quién le vende petróleo, soja o autos al mundo</small></span></a></li>
+  </ul>
+  <p class="nav-grupo">Mundo</p>
+  <ul>
     <li><a href="#rankings" data-pag="rankings"><span class="nav-ico" aria-hidden="true">🏆</span><span>Rankings<small>Los primeros y los últimos del mundo</small></span></a></li>
-    <li><a href="#juego" data-pag="juego"><span class="nav-ico" aria-hidden="true">🎯</span><span>País del día<small>Adiviná el país con pistas económicas</small></span></a></li>
-    <li><a href="#masrico" data-pag="masrico"><span class="nav-ico" aria-hidden="true">💰</span><span>¿Más rico o más pobre?<small>Juego: ¿hasta dónde llega tu racha?</small></span></a></li>
+    <li><a href="#comparacion" data-pag="comparacion"><span class="nav-ico" aria-hidden="true">⚖️</span><span>Comparación<small>Dos países frente a frente</small></span></a></li>
     <li><a href="#elecciones" data-pag="elecciones"><span class="nav-ico" aria-hidden="true">🗳️</span><span>Próximas elecciones<small>Los próximos 12 meses</small></span></a></li>
     <li><a href="#conflictos" data-pag="conflictos"><span class="nav-ico" aria-hidden="true">⚠️</span><span>Conflictos y crisis<small>Guerras, golpes y crisis</small></span></a></li>
-    <li><a href="#glosario" data-pag="glosario"><span class="nav-ico" aria-hidden="true">📖</span><span>Glosario<small>Qué es el riesgo país, la brecha y más</small></span></a></li>
+  </ul>
+  <p class="nav-grupo">Juegos</p>
+  <ul>
+    <li><a href="#juego" data-pag="juego"><span class="nav-ico" aria-hidden="true">🎯</span><span>País del día<small>Adiviná el país con pistas económicas</small></span></a></li>
+    <li><a href="#masrico" data-pag="masrico"><span class="nav-ico" aria-hidden="true">💰</span><span>¿Más rico o más pobre?<small>Juego: ¿hasta dónde llega tu racha?</small></span></a></li>
+  </ul>
+  <p class="nav-grupo">Herramientas</p>
+  <ul>
     <li><a href="#laboratorio" data-pag="laboratorio"><span class="nav-ico" aria-hidden="true">🧪</span><span>Laboratorio<small>Relacioná variables y mirá la regresión</small></span></a></li>
-    <li><a href="#comparacion" data-pag="comparacion"><span class="nav-ico" aria-hidden="true">⚖️</span><span>Comparación<small>Dos países frente a frente</small></span></a></li>
-    <li><a href="#gobiernos" data-pag="gobiernos"><span class="nav-ico" aria-hidden="true">🏛️</span><span>Gobiernos comparados<small>De Alfonsín a hoy, con datos</small></span></a></li>
+    <li><a href="#glosario" data-pag="glosario"><span class="nav-ico" aria-hidden="true">📖</span><span>Glosario<small>Qué es el riesgo país, la brecha y más</small></span></a></li>
   </ul>
   <ul class="nav-sec"><li><a href="#acerca" data-pag="acerca"><span class="nav-ico" aria-hidden="true">ℹ️</span><span>Acerca de y metodología<small>Fuentes, cálculos y privacidad</small></span></a></li></ul>
   <p class="nav-pie" id="conteo">Cargando datos…</p>
@@ -896,6 +942,21 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     </div>
     <section class="ag-bloque"><h2 class="prov-rank-t" id="provRankT">Ranking</h2><div class="gob-barras" id="provRank"></div></section>
     <p class="note" id="provNota"></p>
+  </div>
+
+  <div class="pagina" id="pag-finanzas" hidden>
+    <header class="top">
+      <div class="eyebrow" id="finFecha">Argentina financiera</div>
+      <h1>Argentina financiera</h1>
+      <p class="lede">Reservas del Banco Central, tasas de interés, cuánta plata hay en la economía, los bonos en dólares y cómo viene la actividad. Tocá cualquier dato para ver su gráfico.</p>
+    </header>
+    <section class="ag-bloque" id="finDetalle">
+      <div class="ag-tit"><h2 id="finDetT">—</h2><div class="lab-chips" id="finRangos"></div></div>
+      <div id="finChart" class="ag-chart"></div>
+      <p class="note" id="finDetNota"></p>
+    </section>
+    <div class="lista-pag" id="finGrupos"></div>
+    <p class="note">Fuentes: Banco Central (API de estadísticas), bonos de data912.com con precios de BYMA en dólares MEP, y EMAE del INDEC vía datos.gob.ar. Se actualiza todos los días hábiles. No es una recomendación de inversión.</p>
   </div>
 
   <div class="pagina" id="pag-comercio" hidden>
@@ -1087,7 +1148,11 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
             <tr><td>Dólar en vivo</td><td>DolarAPI (dolarapi.com); si no responde, se muestra el último cierre</td><td>Cada vez que se abre la página</td></tr>
             <tr><td>Riesgo país de otros países de Latinoamérica</td><td>Banco Central de Reserva del Perú, índice EMBIG con datos de Reuters</td><td>Todos los martes (el dato es mensual)</td></tr>
             <tr><td>Próximas elecciones y control de cambios de gobierno</td><td>Wikidata, base de datos abierta y colaborativa</td><td>Todos los días</td></tr>
+            <tr><td>Reservas, base monetaria, tasas (BADLAR, TAMAR, plazo fijo), dólar mayorista, depósitos, préstamos e inflación esperada (REM)</td><td>Banco Central de la República Argentina, API de estadísticas</td><td>Todos los días hábiles</td></tr>
+            <tr><td>Bonos en dólares (Bonares y Globales)</td><td>data912.com, con precios de BYMA</td><td>Todos los días hábiles</td></tr>
+            <tr><td>Actividad económica mensual (EMAE)</td><td>INDEC, vía la API de Series de Tiempo de datos.gob.ar</td><td>Todos los días hábiles (el dato sale una vez por mes)</td></tr>
             <tr><td>Comercio mundial por producto (quién exporta e importa petróleo, soja, autos, etc.)</td><td>UN Comtrade (Naciones Unidas), con lo que informa cada país</td><td>Una vez por mes</td></tr>
+            <tr><td>Qué vende y compra cada país, y a qué países (principales productos)</td><td>UN Comtrade (Naciones Unidas); nombres de los productos traducidos a mano</td><td>Una vez por mes</td></tr>
             <tr><td>Socios comerciales (a quién le vende y le compra cada país)</td><td>WITS, del Banco Mundial, con datos de Naciones Unidas (Comtrade); donde no hay dato, escrito a mano</td><td>Una vez por mes (cada país informa con uno a tres años de atraso)</td></tr>
             <tr><td>Resúmenes, actividades, exportaciones, importaciones, gobiernos y su orientación, conflictos</td><td>Escrito a mano a partir de fuentes públicas</td><td>Cuando hay cambios (se avisa la fecha al pie)</td></tr>
             <tr><td>Fronteras, banderas y relieve del mapa</td><td>Natural Earth (dominio público), flag-icons (licencia MIT) y un modelo de elevación global</td><td>—</td></tr>
@@ -1608,7 +1673,7 @@ const sinTildes = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowe
 /* ---------- PÁGINAS Y PANEL LATERAL ----------
    Cada sección es una "página": #inicio, #comparacion, #elecciones, #conflictos.
    Se cambia con el link (la dirección cambia, así funciona el botón "atrás" del navegador). */
-const PAGINAS = ["inicio", "argentina", "mercados", "comercio", "provincias", "glosario", "gobiernos", "calendario", "comparacion", "rankings", "laboratorio", "juego", "masrico", "elecciones", "conflictos", "acerca"];
+const PAGINAS = ["inicio", "argentina", "finanzas", "mercados", "comercio", "provincias", "glosario", "gobiernos", "calendario", "comparacion", "rankings", "laboratorio", "juego", "masrico", "elecciones", "conflictos", "acerca"];
 let paginaActual = "inicio";
 const versusAbierto = () => paginaActual === "comparacion";
 function mostrarPagina(nombre) {
@@ -1617,6 +1682,8 @@ function mostrarPagina(nombre) {
   paginaActual = nombre;
   PAGINAS.forEach(p => document.getElementById("pag-" + p).hidden = p !== nombre);
   document.querySelectorAll("#nav a[data-pag], .tabs a[data-pag]").forEach(a => a.setAttribute("aria-current", a.dataset.pag === nombre ? "page" : "false"));
+  document.querySelectorAll(".tab-btn").forEach(b => b.classList.toggle("activo", b.dataset.pags.split(" ").includes(nombre)));
+  cerrarMenusTabs();
   if (nombre === "inicio") renderTarjetas();
   cerrarNav();
   if (nombre === "comparacion") { renderVersus(); drawTL(); tl.resize(); renderConvergencia(); if (convChart) convChart.resize(); }
@@ -1627,6 +1694,7 @@ function mostrarPagina(nombre) {
   if (nombre === "provincias") abrirProvincias();
   if (nombre === "mercados") abrirMercados();
   if (nombre === "comercio") abrirComercio();
+  if (nombre === "finanzas") abrirFinanzas();
   if (nombre === "glosario") { renderGlosario(); if (!PROV) cargarProvincias().then(() => paginaActual === "glosario" && renderGlosario()); }
   if (nombre === "calendario") renderCalendario();
   if (nombre === "masrico") abrirMasRico();
@@ -1638,6 +1706,19 @@ function mostrarPagina(nombre) {
   }
   if (cambio) window.scrollTo(0, 0);
 }
+/* Menús desplegables de las pestañas (compu): se abren con clic y se cierran al elegir, al tocar afuera o con Escape */
+function cerrarMenusTabs(salvo) {
+  document.querySelectorAll(".tab-btn").forEach(b => { if (b !== salvo) { b.setAttribute("aria-expanded", "false"); document.getElementById(b.getAttribute("aria-controls")).hidden = true; } });
+}
+document.querySelectorAll(".tab-btn").forEach(b => b.addEventListener("click", e => {
+  e.stopPropagation();
+  const abrir = b.getAttribute("aria-expanded") !== "true";
+  cerrarMenusTabs(b);
+  b.setAttribute("aria-expanded", abrir);
+  document.getElementById(b.getAttribute("aria-controls")).hidden = !abrir;
+}));
+document.addEventListener("click", e => { if (!e.target.closest(".tab-grupo")) cerrarMenusTabs(); });
+document.addEventListener("keydown", e => { if (e.key === "Escape") cerrarMenusTabs(); });
 function abrirNav() {
   const nav = document.getElementById("nav");
   nav.classList.add("abierto"); nav.inert = false; nav.setAttribute("aria-hidden", "false");
@@ -1760,6 +1841,11 @@ function indiceBusqueda() {
   add("🏛️", "Quién gobierna cada país", "Mapa", "gobierno presidente izquierda derecha ideologia quien gobierna", () => { irA_("inicio")(); setModo("gob"); setVista("mundo"); });
   add("📈", "Mercados", "Bolsas, ADRs, soja y cripto", "mercados bolsa acciones indices merval sp500 s&p nasdaq bovespa adr ypf galicia mercado libre soja maiz trigo petroleo oro cobre bitcoin cripto ether", irA_("mercados"));
   todosMerc().forEach(x => add("📈", x.nombre, `Mercados · ${fmtMerc(x)}`, `${x.nombre} ${x.ticker} cotizacion precio accion`, () => { mercSel = x.clave; irA_("mercados")(); }));
+  add("🏦", "Argentina financiera", "Reservas, tasas, bonos y actividad", "reservas bcra banco central tasas badlar tamar plazo fijo base monetaria emision depositos prestamos bonos al30 gd30 globales bonares emae actividad rem inflacion esperada", irA_("finanzas"));
+  [["reservas", "Reservas del BCRA"], ["badlar", "Tasa BADLAR"], ["tamar", "Tasa TAMAR"], ["base", "Base monetaria"], ["rem", "Inflación esperada (REM)"]].forEach(([k, t]) =>
+    add("🏦", t, "Argentina financiera", t + " bcra", () => { finSel = "bcra:" + k; irA_("finanzas")(); }));
+  add("🏦", "EMAE: actividad económica", "Argentina financiera", "emae actividad economica pbi mensual crecimiento recesion", () => { finSel = "emae"; irA_("finanzas")(); });
+  ["AL29", "AL30", "AL35", "AE38", "AL41", "GD29", "GD30", "GD35", "GD38", "GD41", "GD46"].forEach(t => add("🏦", `Bono ${t}`, "Argentina financiera", `${t} bono bonos ${t.startsWith("GD") ? "global" : "bonar"}`, () => { finSel = "bono:" + t; irA_("finanzas")(); }));
   add("🚢", "Comercio mundial", "Quién exporta e importa cada producto", "comercio exportaciones importaciones exporta importa productos " + Object.values(COM_NOMBRES).join(" "), irA_("comercio"));
   Object.entries(COM_NOMBRES).forEach(([k, n]) => add("🚢", `Comercio de ${n.toLowerCase()}`, "Quién lo vende y quién lo compra", `${n} exportacion exporta importa comercio productor`, () => { comProd = k; irA_("comercio")(); }));
   add("📍", "Argentina por provincia", "Pobreza, desempleo, población", "provincias provincia pobreza indigencia desempleo mapa argentina cordoba santa fe mendoza tucuman salta chaco", irA_("provincias"));
@@ -3337,6 +3423,123 @@ function histBlock(ind) {
   </div>`;
 }
 
+/* ---------- ARGENTINA FINANCIERA (finanzas.json: BCRA, bonos y EMAE) ---------- */
+let FINANZAS = null, finCargando = null, finSel = "bcra:reservas", finRango = 365, finChart = null;
+const FIN_GRUPOS = [
+  ["Banco Central", ["reservas", "mayorista", "base"]],
+  ["Tasas de interés", ["badlar", "tamar", "pf30", "rem"]],
+  ["Bancos", ["depositos", "prestamos"]],
+];
+const FIN_DESC = {
+  reservas: "Los dólares que tiene el Banco Central (incluye oro, encajes de los bancos y el swap con China). Sirven para pagar deuda e intervenir en el dólar.",
+  mayorista: "El dólar oficial al que operan los bancos y las empresas (comunicación A3500).",
+  base: "Billetes y monedas más lo que los bancos tienen depositado en el Central. Es la plata que \"emite\" el BCRA.",
+  badlar: "Lo que pagan los bancos privados por plazos fijos de más de un millón de pesos. Es la tasa de referencia del mercado.",
+  tamar: "Como la BADLAR pero para depósitos de más de mil millones de pesos. Muchos créditos y bonos se ajustan por esta tasa.",
+  pf30: "Lo que pagan en promedio los bancos por un plazo fijo a 30 días.",
+  rem: "Lo que esperan los economistas que encuesta el BCRA (REM) para la inflación de los próximos 12 meses.",
+  depositos: "Toda la plata en pesos que las personas y empresas tienen en los bancos (cuentas y plazos fijos).",
+  prestamos: "Todo lo que los bancos les prestaron en pesos a personas y empresas (tarjetas, personales, hipotecarios, etc.).",
+};
+const ES_TASA = k => ["badlar", "tamar", "pf30", "rem"].includes(k);
+function cargarFinanzas() {
+  if (!finCargando) finCargando = leer("finanzas.json").then(d => { FINANZAS = d; }).catch(() => { FINANZAS = {}; });
+  return finCargando;
+}
+function abrirFinanzas() {
+  if (!FINANZAS) { document.getElementById("finGrupos").innerHTML = `<p class="note">Cargando…</p>`; cargarFinanzas().then(() => paginaActual === "finanzas" && renderFinanzas()); return; }
+  renderFinanzas(); if (finChart) finChart.resize();
+}
+const pesosGrandes = m => m >= 1e6 ? `$ ${nf(m / 1e6, 1)} billones` : `$ ${nf(m / 1e3, 0)} mil millones`;   /* m en millones */
+function fmtFin(k, v) {
+  if (k === "reservas") return musd(v);
+  if (k === "mayorista") return pesos(v);
+  if (ES_TASA(k)) return nf(v, 1) + "%";
+  return pesosGrandes(v);
+}
+/* valor de hace N días (el último dato en o antes de esa fecha) */
+function valorHace(serie, dias) {
+  const u = serie[serie.length - 1][0], lim = new Date(new Date(u).getTime() - dias * 864e5).toISOString().slice(0, 10);
+  let v = null; for (const [f, x] of serie) { if (f <= lim) v = x; else break; } return v;
+}
+const varPuntos = (d, txt = "") => d == null ? `<span class="igual">—</span>` : `<span class="igual">${d > 0 ? "▲" : d < 0 ? "▼" : "="} ${nf(Math.abs(d), 1)} puntos${txt}</span>`;
+function cambioFin(k, serie, dias, txt) {
+  const v0 = valorHace(serie, dias), v1 = serie[serie.length - 1][1];
+  if (v0 == null) return "—";
+  return ES_TASA(k) ? varPuntos(v1 - v0, txt) : varMerc((v1 / v0 - 1) * 100, txt);
+}
+/* variación interanual del EMAE original y mensual del desestacionalizado */
+function emaeDatos() {
+  const E = FINANZAS.emae || {}, o = E.original || [], d = E.desest || [];
+  if (!o.length || !d.length) return null;
+  const u = o[o.length - 1], antes = o.find(x => x[0] === `${+u[0].slice(0, 4) - 1}${u[0].slice(4)}`);
+  return { mes: u[0], ia: antes ? (u[1] / antes[1] - 1) * 100 : null, mm: d.length > 1 ? (d[d.length - 1][1] / d[d.length - 2][1] - 1) * 100 : null, nivel: d[d.length - 1][1] };
+}
+function renderFinanzas() {
+  const B = FINANZAS.bcra || {}, BON = FINANZAS.bonos || [];
+  if (!Object.keys(B).length && !BON.length) { document.getElementById("finGrupos").innerHTML = `<p class="note">Todavía no hay datos.</p>`; return; }
+  const fechaCorta = f => f.split("-").reverse().slice(0, 2).join("/");
+  const carta = (id, nombre, valor, sub, serie, mas) => `<button class="m-carta${finSel === id ? " sel" : ""}" type="button" data-k="${id}">
+      <span class="m-n">${nombre}</span><span class="m-p">${valor}</span><span class="m-v">${sub}</span>${serie ? sparkMerc({ serie: serie.slice(-260) }) : ""}<span class="m-mas">${mas}</span></button>`;
+  let html = FIN_GRUPOS.map(([t, ks]) => {
+    const cs = ks.filter(k => B[k] && B[k].serie.length).map(k => {
+      const x = B[k], s = x.serie, u = s[s.length - 1];
+      return carta("bcra:" + k, x.nombre, fmtFin(k, u[1]), k === "rem" ? `Encuesta de ${MESES[+u[0].slice(5, 7) - 1]}` : cambioFin(k, s, 30, " en un mes"), s, `Un año: ${cambioFin(k, s, 365, "")} · al ${fechaCorta(u[0])}`);
+    });
+    return cs.length ? `<section class="ag-bloque"><div class="ag-tit"><h2>${t}</h2></div><div class="m-cartas">${cs.join("")}</div></section>` : "";
+  }).join("");
+  const em = emaeDatos();
+  if (em) html += `<section class="ag-bloque"><div class="ag-tit"><h2>Actividad económica</h2></div><div class="m-cartas">${carta("emae", "EMAE (actividad)", varMerc(em.ia, ""), `Contra ${MESES[+em.mes.slice(5) - 1]} del año pasado`, FINANZAS.emae.desest.slice(-36), `Contra el mes anterior: ${varMerc(em.mm, "")} · dato de ${MESES[+em.mes.slice(5) - 1]} ${em.mes.slice(0, 4)}`)}</div>
+    <p class="note">El EMAE es el estimador mensual de actividad del INDEC: lo más parecido a un PBI mes a mes. La comparación con el mes anterior usa la serie sin estacionalidad.</p></section>`;
+  if (BON.length) html += `<section class="ag-bloque"><div class="ag-tit"><h2>Bonos en dólares</h2></div><div class="m-cartas">${BON.map(b => {
+      const s = b.serie || [], v0 = s.length ? s[0][1] : null;
+      return carta("bono:" + b.ticker, b.ticker, `US$ ${nf(b.precio, 2)}`, varMerc(b.var, " hoy"), s, `Ley ${b.ley === "Nueva York" ? "Nueva York" : "argentina"} · un año: ${v0 ? varMerc((b.precio / v0 - 1) * 100, "") : "—"}`);
+    }).join("")}</div>
+    <p class="note">Bonares (AL, AE: ley argentina) y Globales (GD: ley de Nueva York), en dólares, cada 100 de valor nominal original. Como ya devolvieron parte del capital, el precio no se compara directo con 100. Que suban los bonos suele ir de la mano de un riesgo país más bajo.</p></section>`;
+  document.getElementById("finGrupos").innerHTML = html;
+  document.querySelectorAll("#finGrupos .m-carta").forEach(b => b.onclick = () => { finSel = b.dataset.k; renderFinanzas(); document.getElementById("finDetalle").scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "nearest" }); });
+  const ur = B.reservas && B.reservas.serie.length ? B.reservas.serie[B.reservas.serie.length - 1][0] : null;
+  document.getElementById("finFecha").textContent = ur ? `Datos del BCRA al ${ur.split("-").reverse().join("/")}` : "Argentina financiera";
+  renderFinDetalle();
+}
+function renderFinDetalle() {
+  const B = FINANZAS.bcra || {};
+  let titulo, serie, fmt, nota, pct = true;
+  let rangos = [[30, "1 mes"], [365, "1 año"], [1826, "5 años"]], defecto = 365;
+  if (finSel.startsWith("bcra:") && B[finSel.slice(5)]) {
+    const k = finSel.slice(5), x = B[k]; serie = x.serie; fmt = v => fmtFin(k, v); titulo = x.nombre; pct = !ES_TASA(k);
+    nota = `${FIN_DESC[k] || ""} Unidad: ${x.unidad}${["base", "depositos", "prestamos"].includes(k) ? " (en pesos corrientes: crecen también por la inflación)" : ""}. Fuente: BCRA.`;
+    if (k === "rem") { rangos = [[365, "1 año"], [1826, "5 años"]]; defecto = 1826; }
+  } else if (finSel.startsWith("bono:")) {
+    const b = (FINANZAS.bonos || []).find(x => "bono:" + x.ticker === finSel); if (!b) { finSel = "bcra:reservas"; return renderFinDetalle(); }
+    rangos = [[30, "1 mes"], [182, "6 meses"], [365, "1 año"]];
+    serie = b.serie; fmt = v => `US$ ${nf(v, 2)}`; titulo = `Bono ${b.ticker}`; nota = `Precio de cierre en dólares cada 100 de valor nominal original. Ley ${b.ley === "Nueva York" ? "de Nueva York" : "argentina"}. Fuente: data912.com (BYMA).`;
+  } else if (finSel === "emae" && FINANZAS.emae) {
+    serie = FINANZAS.emae.desest; fmt = v => nf(v, 1); titulo = "EMAE sin estacionalidad";
+    rangos = [[1826, "5 años"], [7300, "20 años"]]; defecto = 1826;
+    nota = "Índice de actividad económica del INDEC (2004 = 100), sin los efectos de cada época del año. Si sube, la economía está creciendo.";
+  } else { finSel = "bcra:reservas"; if (B.reservas) return renderFinDetalle(); return; }
+  if (!serie || serie.length < 2) return;
+  if (!rangos.some(r => r[0] === finRango)) finRango = defecto;
+  const u = serie[serie.length - 1][0], desde = new Date(new Date(u.length === 7 ? u + "-01" : u).getTime() - finRango * 864e5).toISOString().slice(0, u.length);
+  const s = serie.filter(p => p[0] >= desde);
+  const v0 = s[0][1], v1 = s[s.length - 1][1];
+  const cambio = pct ? varMerc((v1 / v0 - 1) * 100, "") : varPuntos(v1 - v0, "");
+  document.getElementById("finDetT").innerHTML = `${titulo} <small>${fmt(v1)} · ${cambio} en ${rangos.find(r => r[0] === finRango)[1].replace(/^1 /, "un ")}</small>`;
+  document.getElementById("finRangos").innerHTML = rangos.map(([d, t]) => `<button class="btn" type="button" data-d="${d}" aria-pressed="${finRango === d}">${t}</button>`).join("");
+  document.querySelectorAll("#finRangos .btn").forEach(b => b.onclick = () => { finRango = +b.dataset.d; renderFinDetalle(); });
+  const { line, ink, ax } = chartBase(), col = css("--accent");
+  finChart = finChart || echarts.init(document.getElementById("finChart"));
+  finChart.setOption({
+    grid: { left: 86, right: 14, top: 12, bottom: 28 },
+    tooltip: { trigger: "axis", backgroundColor: css("--surface"), borderColor: line, textStyle: { color: ink }, formatter: ps => `<b>${ps[0].name.split("-").reverse().join("/")}</b><br>${fmt(ps[0].value)}` },
+    xAxis: { type: "category", data: s.map(p => p[0]), axisLabel: Object.assign({}, ax, { formatter: v => { const [y, m, d] = v.split("-"); return finRango <= 31 ? `${d}/${m}` : `${MESES[+m - 1].slice(0, 3)} ${y.slice(2)}`; } }), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+    yAxis: { type: "value", scale: true, axisLabel: Object.assign({}, ax, { formatter: v => fmt(v).replace(" mil millones", " mil M").replace(" billones", " B") }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+    series: [{ type: "line", data: s.map(p => p[1]), symbol: "none", lineStyle: { color: col, width: 2 }, areaStyle: { color: col, opacity: .08 } }]
+  }, true);
+  document.getElementById("finDetNota").textContent = nota;
+}
+
 /* ---------- COMERCIO MUNDIAL: quién exporta e importa cada producto (productos.json, de UN Comtrade) ---------- */
 /* Lista fija solo para el buscador; los datos se cargan cuando se abre la página */
 const COM_NOMBRES = { petroleo: "Petróleo crudo", gas: "Gas natural", carbon: "Carbón", oro: "Oro", cobre: "Cobre", hierro: "Mineral de hierro", litio: "Litio",
@@ -3410,6 +3613,38 @@ function renderComercio() {
   svgC.selectAll("path.sel").raise();
   document.getElementById("comLey").innerHTML = `<span>0%</span><i style="background:linear-gradient(90deg, ${[0, .1, .3, .6, 1].map(t => color(t * tope)).join(",")})"></i><span>${fp(tope)} del total</span><span style="margin-left:auto"><i style="display:inline-block;width:12px;height:10px;max-width:none;flex:none;background:${css("--land")};vertical-align:-1px"></i> sin dato</span>`;
   document.getElementById("comNota").innerHTML = `Datos de ${pr.anio}, en dólares. El mundo ${vende ? "exportó" : "importó"} unos <b>${musd(total)}</b> de ${nom} (suma de los ${filas.length} países que informaron). Fuente: UN Comtrade (Naciones Unidas), con lo que declara cada país.${esp.size ? ` <b>*</b> Estimado con lo que declaran sus socios, porque ese país no informó (${[...esp].map(k => PAISES[k] ? PAISES[k].nombre : k).join(", ")}).` : ""} Los países en gris no tienen dato. Código del producto en el Sistema Armonizado: ${pr.codigos.replace(",", " y ")}.`;
+}
+
+/* ---------- QUÉ VENDE CADA PAÍS Y A QUIÉN (destinos.json, de UN Comtrade; se carga al abrir "Comercio y socios") ---------- */
+let DESTINOS = null, HS_ES = {}, destCargando = null, destFlujo = "vende";
+function cargarDestinos() {
+  if (!destCargando) destCargando = Promise.all([leer("destinos.json"), leer("hs4_es.json").catch(() => ({}))])
+    .then(([d, n]) => { DESTINOS = d; HS_ES = n; }).catch(() => { DESTINOS = { paises: {}, nombres: {} }; });
+  return destCargando;
+}
+const nombreHS = c => HS_ES[c] || ((DESTINOS.nombres[c] || c).split(/[;,(]/)[0]);
+function pintarDestinos() {
+  const box = document.getElementById("destBox");
+  if (!box) return;
+  if (!DESTINOS) { box.innerHTML = `<p class="note">Cargando qué vende y a quién…</p>`; cargarDestinos().then(pintarDestinos); return; }
+  const k = seleccion, p = DESTINOS.paises[k];
+  if (!p) { box.innerHTML = box.parentElement.children.length > 1 ? "" : `<p class="note">No hay datos de comercio de este país.</p>`; return; }
+  const vende = destFlujo === "vende", lista = p[destFlujo], total = vende ? p.expo_total : p.impo_total;
+  const oculto = (p.sin_especificar || {})[destFlujo] || 0;
+  const pct = v => nf(v, v < 10 ? 1 : 0) + "%";
+  box.innerHTML = `<h4>${vende ? "Qué vende y a quién" : "Qué compra y a quién"}</h4>
+    <div class="dest-flujo" role="group" aria-label="Ventas o compras">
+      <button class="btn" type="button" data-f="vende" aria-pressed="${vende}">Lo que vende</button>
+      <button class="btn" type="button" data-f="compra" aria-pressed="${!vende}">Lo que compra</button>
+    </div>
+    <p class="hint">Sus ${lista.length} principales productos en ${p.anio} (de un total de ${musd(total)}) y ${vende ? "a qué países van" : "de qué países vienen"}. Fuente: UN Comtrade.</p>
+    <ol class="dest-lista">${lista.map(([c, v, socs]) => `<li>
+      <div class="dest-prod"><b>${nombreHS(c)}</b><span class="ppct">${pct(v / total * 100)}</span><small>${musd(v)}</small></div>
+      <div class="dest-socios">${socs.map(([s, x]) => `<span>${flag(s)}${PAISES[s] ? `<button class="plink" type="button" data-pais="${s}">${s === "USA" ? "EE.UU." : PAISES[s].nombre}</button>` : nombreEs(s)} <i>${pct(x)}</i></span>`).join("")}</div>
+    </li>`).join("")}</ol>
+    ${oculto >= 3 ? `<p class="note">Un ${nf(oculto, 0)}% de lo que ${vende ? "vende" : "compra"} figura como "producto no especificado" (datos que el país declara confidenciales) y no entra en esta lista.</p>` : ""}`;
+  box.querySelectorAll(".dest-flujo .btn").forEach(b => b.onclick = () => { destFlujo = b.dataset.f; pintarDestinos(); });
+  box.querySelectorAll(".plink").forEach(b => b.onclick = () => elegir(b.dataset.pais));
 }
 
 /* ---------- PANEL / FICHA ---------- */
@@ -3664,15 +3899,17 @@ function renderPanel() {
         <div><h4>A quién le vende${d.socios.expo ? `<small class="ptot">exportó ${musd(d.socios.expo)}</small>` : ""}</h4>${socios(d.socios.vende)}</div>
         <div><h4>A quién le compra${d.socios.impo ? `<small class="ptot">importó ${musd(d.socios.impo)}</small>` : ""}</h4>${socios(d.socios.compra)}</div>
       </div>
-    </div>` : ""))}
+    </div>` : "") + `<div class="destinos" id="destBox"></div>`)}
     ${sec("pol", "Política", politica(seleccion))}
     ${sec("not", "Noticias", bloqueNoticias(seleccion))}
     </div>
     <button class="go" id="goCmp" type="button">Comparar ${d.nombre} con otro país</button>
   `;
   panel.querySelectorAll(".plink").forEach(b => b.onclick = () => elegir(b.dataset.pais));
+  if (SECC_ABIERTAS.has("com")) pintarDestinos();
   panel.querySelectorAll("details.sec").forEach(dt => dt.addEventListener("toggle", () => {
     if (dt.open) SECC_ABIERTAS.add(dt.dataset.sec); else SECC_ABIERTAS.delete(dt.dataset.sec);
+    if (dt.open && dt.dataset.sec === "com") pintarDestinos();
     // los gráficos que se dibujaron con la sección cerrada necesitan saber su tamaño real
     if (dt.open) dt.querySelectorAll("[_echarts_instance_]").forEach(el => { const c = echarts.getInstanceByDom(el); if (c) c.resize(); });
   }));
@@ -3848,7 +4085,7 @@ function textoFuentes() {
   const fecha = new Date(DATOS.generado).toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" });
   document.getElementById("fuentes").textContent = `Datos macro: Banco Mundial y FMI (World Economic Outlook), 1960–${ANIO}, actualizados automáticamente el ${fecha}. Inflación: índice de precios al consumidor del Banco Mundial; donde falta, deflactor del PBI o FMI. Deuda pública: FMI; donde falta, Banco Mundial. Promedios mundiales: Banco Mundial. Fichas y datos políticos escritos a mano, actualizados a ${CURADO.actualizado}.`;
 }
-function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); renderLab(); if (paginaActual === "argentina") renderAgCharts(); if (paginaActual === "comercio" && PRODUCTOS) renderComercio(); } }
+function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); renderLab(); if (paginaActual === "argentina") renderAgCharts(); if (paginaActual === "comercio" && PRODUCTOS) renderComercio(); if (paginaActual === "finanzas" && FINANZAS) renderFinanzas(); } }
 
 const leer = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: error ${r.status}`); return r.json(); });
 Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null), leer("riesgo.json").catch(() => null), leer("calendario.json").catch(() => null), leer("mercados.json").catch(() => null), leer("socios.json").catch(() => null)])

@@ -88,6 +88,8 @@ def pedir(anio, flujo, codigos, socio=0):
     """
     params = {"period": anio, "cmdCode": codigos, "flowCode": flujo, "partnerCode": socio,
               "partner2Code": 0, "customsCode": "C00", "motCode": 0, "includeDesc": "true"}
+    if CLAVE:
+        params["maxRecords"] = LIMITE                        # si no se pide, la API puede cortar antes
     for intento in range(5):
         try:
             r = sesion.get(URL, params=params, timeout=120,
