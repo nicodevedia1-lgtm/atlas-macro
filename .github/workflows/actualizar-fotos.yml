@@ -1,0 +1,34 @@
+name: Actualizar fotos de los países
+
+on:
+  schedule:
+    - cron: "29 15 20 * *"   # el día 20 de cada mes, 15:29 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fotos:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python actualizar_fotos.py
+
+      - name: Guardar fotos.json si cambió
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add fotos.json
+          if git diff --cached --quiet; then
+            echo "Sin cambios"
+          else
+            git commit -m "Fotos de los países actualizadas"
+            git pull --rebase
+            git push
+          fi

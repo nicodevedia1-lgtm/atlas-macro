@@ -216,6 +216,13 @@ button, select { font: inherit; color: var(--ink); }
 
 .panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; display: grid; gap: 18px; min-width: 0; }
 .panel-head { display: flex; align-items: center; gap: 14px; }
+.foto { position: relative; margin: -22px -22px -4px; height: clamp(150px, 22vw, 210px); border-radius: 14px 14px 0 0; overflow: hidden; background: var(--bg); }
+.foto img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.foto::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,.6)); pointer-events: none; }
+.foto figcaption { position: absolute; left: 12px; right: 12px; bottom: 8px; z-index: 1; display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; font-size: 12px; color: #fff; }
+.foto-lugar { font-weight: 700; font-size: 13px; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
+.foto-cred { margin-left: auto; color: rgba(255,255,255,.85); text-decoration: none; text-align: right; max-width: 70%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; text-shadow: 0 1px 3px rgba(0,0,0,.6); }
+.foto-cred:hover { color: #fff; text-decoration: underline; }
 .panel-head .flag { width: 54px; height: 36px; border-radius: 5px; }
 .panel h2 { font-size: 34px; font-weight: 800; letter-spacing: -.015em; }
 .meta { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 14px; color: var(--muted); }
@@ -1178,6 +1185,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
             <tr><td>Qué vende y compra cada país, y a qué países (principales productos)</td><td>UN Comtrade (Naciones Unidas); nombres de los productos traducidos a mano</td><td>Una vez por mes</td></tr>
             <tr><td>Socios comerciales (a quién le vende y le compra cada país)</td><td>WITS, del Banco Mundial, con datos de Naciones Unidas (Comtrade); donde no hay dato, escrito a mano</td><td>Una vez por mes (cada país informa con uno a tres años de atraso)</td></tr>
             <tr><td>Resúmenes, actividades, exportaciones, importaciones, gobiernos y su orientación, conflictos</td><td>Escrito a mano a partir de fuentes públicas</td><td>Cuando hay cambios (se avisa la fecha al pie)</td></tr>
+            <tr><td>Fotos de cada país</td><td>Wikimedia Commons (licencias libres: el autor y la licencia figuran en cada foto, con link al original)</td><td>Una vez por mes</td></tr>
             <tr><td>Fronteras, banderas y relieve del mapa</td><td>Natural Earth (dominio público), flag-icons (licencia MIT) y un modelo de elevación global</td><td>—</td></tr>
           </tbody>
         </table></div>
@@ -3820,6 +3828,21 @@ function pintarDestinos() {
   box.querySelectorAll(".plink").forEach(b => b.onclick = () => elegir(b.dataset.pais));
 }
 
+/* ---------- FOTO DEL PAÍS (fotos.json, de Wikimedia Commons, con autor y licencia) ---------- */
+let FOTOS = null, fotosCargando = null;
+function fotoHtml(k) {
+  if (!FOTOS) {
+    if (!fotosCargando) fotosCargando = leer("fotos.json").then(d => { FOTOS = d.paises || {}; }).catch(() => { FOTOS = {}; })
+      .then(() => { const box = document.getElementById("fotoBox"); if (box && seleccion) box.outerHTML = fotoHtml(seleccion); });
+    return `<figure class="foto" id="fotoBox" hidden></figure>`;
+  }
+  const f = FOTOS[k];
+  if (!f) return `<figure class="foto" id="fotoBox" hidden></figure>`;
+  const alt = f.lugar ? `${f.lugar}, ${PAISES[k] ? PAISES[k].nombre : ""}` : (PAISES[k] ? PAISES[k].nombre : "");
+  return `<figure class="foto" id="fotoBox"><img src="${f.url}" alt="Foto de ${alt}" loading="lazy" decoding="async" onerror="this.parentNode.hidden = true">
+    <figcaption>${f.lugar ? `<span class="foto-lugar">${f.lugar}</span>` : ""}<a class="foto-cred" href="${f.pagina}" target="_blank" rel="noopener">Foto: ${f.autor.replace(/</g, "&lt;")}${f.licencia ? " · " + f.licencia : ""}</a></figcaption></figure>`;
+}
+
 /* ---------- PANEL / FICHA ---------- */
 const musd = v => v >= 1000 ? `US$ ${nf(v / 1000, v >= 100000 ? 0 : 1)} mil millones` : `US$ ${nf(v)} millones`;
 function socios(arr) {
@@ -3994,6 +4017,7 @@ function renderPanel() {
   const d = PAISES[seleccion];
   const infl = uv(d, "infl"), crec = uv(d, "crec");
   panel.innerHTML = `
+    ${fotoHtml(seleccion)}
     <div class="panel-head">
       ${flag(seleccion)}
       <div>
