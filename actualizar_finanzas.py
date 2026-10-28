@@ -33,15 +33,31 @@ BCRA_SERIE = "https://api.bcra.gob.ar/estadisticas/{v}/Monetarias/{id}"
 # clave → (nombre en la página, unidad, número de variable en la API del BCRA, v4.0).
 # Los números son fijos; las descripciones del BCRA ahora vienen en inglés, por eso no buscamos por nombre.
 BCRA_VARIABLES = {
-    "reservas":  ("Reservas del BCRA", "millones de US$", 1),
-    "mayorista": ("Dólar mayorista", "$ por US$", 5),
-    "base":      ("Base monetaria", "millones de $", 15),
-    "badlar":    ("Tasa BADLAR (bancos privados)", "% anual", 7),
-    "tamar":     ("Tasa TAMAR (bancos privados)", "% anual", 44),
-    "pf30":      ("Tasa de plazo fijo a 30 días", "% anual", 12),
-    "rem":       ("Inflación esperada para los próximos 12 meses (REM)", "%", 29),
-    "depositos": ("Depósitos en pesos del sector privado", "millones de $", 100),
-    "prestamos": ("Préstamos en pesos al sector privado", "millones de $", 117),
+    # Banco Central y dinero
+    "reservas":     ("Reservas del BCRA", "millones de US$", 1),
+    "mayorista":    ("Dólar mayorista", "$ por US$", 5),
+    "minorista":    ("Dólar minorista (promedio de bancos)", "$ por US$", 4),
+    "base":         ("Base monetaria", "millones de $", 15),
+    "m2var":        ("Dinero en la economía (M2 privado), variación anual", "%", 25),
+    # Tasas
+    "badlar":       ("Tasa BADLAR (bancos privados)", "% anual", 7),
+    "tamar":        ("Tasa TAMAR (bancos privados)", "% anual", 44),
+    "pf30":         ("Tasa de plazo fijo a 30 días", "% anual", 12),
+    "baibar":       ("Tasa entre bancos (BAIBAR)", "% anual", 11),
+    "t_adelantos":  ("Tasa de adelantos en cuenta corriente", "% anual", 13),
+    "t_personales": ("Tasa de préstamos personales", "% anual", 14),
+    "rem":          ("Inflación esperada para los próximos 12 meses (REM)", "%", 29),
+    # Bancos
+    "depositos":    ("Depósitos en pesos del sector privado", "millones de $", 100),
+    "dep_usd":      ("Depósitos en dólares del sector privado", "millones de US$", 108),
+    "prestamos":    ("Préstamos en pesos al sector privado", "millones de $", 117),
+    "hipotecarios": ("Préstamos hipotecarios", "millones de $", 112),
+    "prendarios":   ("Préstamos prendarios (autos)", "millones de $", 113),
+    "personales":   ("Préstamos personales", "millones de $", 114),
+    "tarjetas":     ("Deuda con tarjetas de crédito", "millones de $", 115),
+    # Índices de ajuste
+    "cer":          ("CER", "índice (2/2/2002 = 1)", 30),
+    "uva":          ("UVA", "$ por UVA", 31),
 }
 
 BONOS_URL = "https://data912.com/live/arg_bonds"

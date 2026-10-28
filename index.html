@@ -1695,7 +1695,7 @@ function mostrarPagina(nombre) {
   if (nombre === "mercados") abrirMercados();
   if (nombre === "comercio") abrirComercio();
   if (nombre === "finanzas") abrirFinanzas();
-  if (nombre === "glosario") { renderGlosario(); if (!PROV) cargarProvincias().then(() => paginaActual === "glosario" && renderGlosario()); }
+  if (nombre === "glosario") { renderGlosario(); Promise.all([PROV ? null : cargarProvincias(), FINANZAS ? null : cargarFinanzas()]).then(() => paginaActual === "glosario" && renderGlosario()); }
   if (nombre === "calendario") renderCalendario();
   if (nombre === "masrico") abrirMasRico();
   if (nombre === "inicio") {
@@ -2764,6 +2764,13 @@ function renderProvincias() {
 }
 
 /* ---------- GLOSARIO ---------- */
+/* "Hoy: 22,2%" con el último dato de Argentina financiera (si ya se cargó) */
+function finTxt(k, txt) {
+  const x = FINANZAS && FINANZAS.bcra && FINANZAS.bcra[k];
+  if (!x || !x.serie.length) return null;
+  const u = x.serie[x.serie.length - 1];
+  return `${txt} (${u[0].split("-").reverse().join("/")}): ${fmtFin(k, u[1])}`;
+}
 const GLOSARIO = [
   { id: "pbi", t: "PBI", lar: "Producto bruto interno", def: "Todo lo que produce un país en un año (bienes y servicios), medido en plata. Es la medida más usada del tamaño de una economía.", dato: () => PAISES.ARG && `Argentina: ${pibTxt(uv(PAISES.ARG, "pib"))}`, ir: ["inicio", "Ver la ficha de Argentina"] },
   { id: "pbipc", t: "PBI por persona", lar: "PBI per cápita", def: "El PBI dividido por la cantidad de habitantes. Sirve para comparar el nivel de vida entre países de distinto tamaño.", dato: () => PAISES.ARG && `Argentina: US$ ${nf(PAISES.ARG.pibpc)}`, ir: ["rankings", "Ver el ranking"] },
@@ -2787,15 +2794,39 @@ const GLOSARIO = [
   { id: "deficit", t: "Déficit fiscal", def: "Cuando el Estado gasta más de lo que recauda. Para cubrir la diferencia tiene que endeudarse o emitir pesos. Lo contrario es el superávit.", ir: ["rankings", "Ver deuda pública por país"] },
   { id: "deuda", t: "Deuda pública", def: "Lo que debe el Estado. Se compara con el PBI para dimensionarla: una deuda del 80% del PBI equivale a casi 10 meses de todo lo que produce el país.", dato: () => PAISES.ARG && PAISES.ARG.deuda && `Argentina: ${nf(PAISES.ARG.deuda)}% del PBI`, ir: ["rankings", "Ver el ranking"] },
   { id: "default", t: "Default", def: "Cuando un país deja de pagar su deuda. Argentina entró en default varias veces; la más grande fue en diciembre de 2001.", ir: ["gobiernos", "Ver gobiernos comparados"] },
-  { id: "reservas", t: "Reservas", def: "Los dólares, el oro y otras monedas que tiene el Banco Central. Sirven para pagar deudas, importar y defender el peso.", ir: ["argentina", "Ver el dólar hoy", "ag-dolar"] },
+  { id: "reservas", t: "Reservas", lar: "Reservas internacionales del Banco Central", def: "Los dólares, el oro y otras monedas que tiene el Banco Central. Sirven para pagar deudas, importar y defender el peso.", dato: () => finTxt("reservas", "Hoy"), ir: ["finanzas", "Ver en Argentina financiera"] },
   { id: "cuentacorriente", t: "Cuenta corriente", def: "El resultado de todo lo que un país gana y gasta con el resto del mundo: comercio, servicios, turismo, intereses y remesas. Si es negativa, entran menos dólares de los que salen.", dato: () => PAISES.ARG && PAISES.ARG.cc != null && `Argentina: ${pct(PAISES.ARG.cc)} del PBI`, ir: ["inicio", "Ver la ficha de Argentina"] },
   { id: "balanza", t: "Balanza comercial", def: "Exportaciones menos importaciones de bienes. Si se vende más de lo que se compra, hay superávit comercial.", ir: ["calendario", "Cuándo sale el próximo dato"] },
   { id: "desempleo", t: "Desempleo", lar: "Desocupación", def: "De cada 100 personas que trabajan o buscan trabajo, cuántas no consiguen. Quien no busca trabajo no cuenta como desocupado.", dato: () => PROV ? `Argentina (31 ciudades): ${nf(PROV.total.desocupacion, 1)}%` : PAISES.ARG && PAISES.ARG.desempleo && `Argentina: ${pct(PAISES.ARG.desempleo)}`, ir: ["provincias", "Ver por provincia"] },
   { id: "pobreza", t: "Pobreza e indigencia", def: "Una persona es pobre si su hogar no llega a cubrir la canasta básica total (comida, ropa, transporte, salud, educación), e indigente si no llega a cubrir ni la canasta de alimentos.", dato: () => PROV && `Argentina (31 ciudades): ${nf(PROV.total.pobreza, 1)}% de pobreza, ${nf(PROV.total.indigencia, 1)}% de indigencia`, ir: ["provincias", "Ver por provincia"] },
   { id: "canasta", t: "Canasta básica", def: "Lo que necesita un hogar por mes para no ser pobre (canasta básica total) o para no ser indigente (canasta básica alimentaria). La calcula el INDEC todos los meses.", ir: ["calendario", "Cuándo sale la próxima"] },
-  { id: "emae", t: "EMAE", lar: "Estimador mensual de actividad económica", def: "El indicador del INDEC que muestra mes a mes cómo viene la economía, antes de que salga el PBI trimestral.", ir: ["calendario", "Cuándo sale el próximo"] },
+  { id: "emae", t: "EMAE", lar: "Estimador mensual de actividad económica", def: "El indicador del INDEC que muestra mes a mes cómo viene la economía, antes de que salga el PBI trimestral.", dato: () => FINANZAS && FINANZAS.emae && (e => e && e.ia != null && `${MESES[+e.mes.slice(5) - 1]} de ${e.mes.slice(0, 4)}, contra un año antes: ${pct(e.ia)}`)(emaeDatos()), ir: ["finanzas", "Ver la serie"] },
   { id: "gini", t: "Coeficiente de Gini", def: "Mide la desigualdad de ingresos de 0 a 100: 0 sería que todos ganan lo mismo y 100 que una sola persona se queda con todo.", dato: () => LAB && LAB.paises.ARG && LAB.paises.ARG.gini && (s => `Argentina: ${nf([...s[1]].reverse().find(v => v != null), 1)}`)(LAB.paises.ARG.gini), ir: ["rankings", "Ver el ranking"] },
   { id: "elasticidad", t: "Elasticidad", def: "Cuánto cambia, en porcentaje, una variable cuando otra cambia un 1%. Una elasticidad de 2 quiere decir que si una sube 1%, la otra sube 2%.", ir: ["laboratorio", "Probarlo en el Laboratorio"] },
+  { id: "basemonetaria", t: "Base monetaria", def: "Los billetes y monedas en circulación más la plata que los bancos tienen depositada en el Banco Central. Es el dinero que crea directamente el BCRA.", dato: () => finTxt("base", "Hoy"), ir: ["finanzas", "Ver la serie"] },
+  { id: "m2", t: "M2", lar: "Agregado monetario", def: "Una medida más amplia de cuánto dinero hay en la economía: efectivo en manos del público más lo que hay en cuentas corrientes y cajas de ahorro. Si crece mucho más rápido que la producción, puede presionar sobre los precios.", dato: () => finTxt("m2var", "Variación en un año"), ir: ["finanzas", "Ver en Argentina financiera"] },
+  { id: "emision", t: "Emisión monetaria", def: "Cuando el Banco Central crea pesos: por ejemplo, para comprar dólares, prestarle al Tesoro o pagar intereses. Emitir de más, sin que la gente quiera tener esos pesos, suele terminar en inflación.", ir: ["finanzas", "Ver la base monetaria"] },
+  { id: "encajes", t: "Encajes", def: "La parte de los depósitos que los bancos no pueden prestar y tienen que dejar guardada (en el Banco Central o en efectivo). Subir los encajes saca pesos de la calle; bajarlos los libera.", ir: ["finanzas", "Ver depósitos y préstamos"] },
+  { id: "badlar", t: "BADLAR", lar: "Tasa de plazos fijos de más de un millón de pesos", def: "Lo que pagan los bancos privados por plazos fijos grandes, a 30 o 35 días. Es la tasa de referencia del mercado: muchos créditos y bonos se ajustan por ella.", dato: () => finTxt("badlar", "Hoy"), ir: ["finanzas", "Ver la serie"] },
+  { id: "tamar", t: "TAMAR", lar: "Tasa de plazos fijos mayoristas", def: "Como la BADLAR, pero para depósitos de más de mil millones de pesos. Desde 2024 la usan muchas obligaciones negociables, bonos y créditos a empresas.", dato: () => finTxt("tamar", "Hoy"), ir: ["finanzas", "Ver la serie"] },
+  { id: "tea", t: "TEA", lar: "Tasa efectiva anual", def: "Lo que rinde de verdad una inversión en un año si se reinvierten los intereses cada mes. Siempre es más alta que la TNA: una TNA del 24% en plazos fijos de 30 días renovados da una TEA de cerca del 26,8%.", ir: ["argentina", "Ver las tasas por banco", "ag-pf"] },
+  { id: "tasareal", t: "Tasa real", def: "La tasa de interés descontada la inflación. Si un plazo fijo paga 2% por mes y la inflación es 3%, la tasa real es negativa: la plata pierde poder de compra aunque crezca en pesos.", dato: () => finTxt("pf30", "Plazo fijo hoy"), ir: ["argentina", "¿Dónde convenía tener la plata?", "ag-ahorro"] },
+  { id: "rem", t: "REM", lar: "Relevamiento de Expectativas de Mercado", def: "La encuesta mensual en la que el Banco Central les pregunta a consultoras y bancos qué esperan para la inflación, el dólar, las tasas y el crecimiento. Es el pronóstico \"de consenso\".", dato: () => finTxt("rem", "Inflación esperada a 12 meses"), ir: ["finanzas", "Ver la serie"] },
+  { id: "cer", t: "CER", lar: "Coeficiente de estabilización de referencia", def: "Un índice que acompaña a la inflación del INDEC (con un mes y medio de atraso). Los bonos y plazos fijos \"ajustables por CER\" se actualizan con él para no perder contra la inflación.", dato: () => finTxt("cer", "Hoy"), ir: ["finanzas", "Ver la serie"] },
+  { id: "bono", t: "Bono", def: "Un préstamo que alguien le hace a un gobierno o a una empresa a cambio de cobrar intereses y que le devuelvan el capital en fechas fijas. Se puede comprar y vender en la bolsa, y su precio sube o baja según la confianza en que se pague.", ir: ["finanzas", "Ver los bonos"] },
+  { id: "bonares", t: "Bonares y Globales", def: "Los bonos en dólares del Estado argentino. Los Bonares (AL, AE) se rigen por ley argentina y los Globales (GD) por ley de Nueva York, que da más protección al inversor; por eso los Globales suelen valer un poco más.", dato: () => FINANZAS && FINANZAS.bonos && (b => b && `${b.ticker} hoy: US$ ${nf(b.precio, 2)}`)(FINANZAS.bonos.find(x => x.ticker === "GD30")), ir: ["finanzas", "Ver los bonos"] },
+  { id: "tir", t: "TIR", lar: "Tasa interna de retorno", def: "Lo que rinde por año un bono si lo comprás hoy a ese precio y lo tenés hasta el final, cobrando todos los pagos. Cuanto más barato está un bono, más alta su TIR. El riesgo país es, en el fondo, la TIR de los bonos argentinos menos la de los bonos de Estados Unidos.", ir: ["finanzas", "Ver los bonos"] },
+  { id: "cupon", t: "Cupón y amortización", def: "El cupón es el interés que paga un bono; la amortización, la parte del capital que devuelve. Los bonos argentinos devuelven el capital en cuotas, por eso su precio baja cada vez que pagan una.", ir: ["finanzas", "Ver los bonos"] },
+  { id: "lecap", t: "Lecap", lar: "Letras capitalizables del Tesoro", def: "Letras en pesos que emite el Tesoro a plazos cortos (meses), con una tasa fija que se cobra al final. Son una alternativa al plazo fijo muy usada por inversores y empresas.", ir: ["finanzas", "Ver las tasas"] },
+  { id: "carry", t: "Carry trade", lar: "Bicicleta financiera", def: "Pasar dólares a pesos para ganar una tasa alta y después volver a dólares. Funciona mientras el dólar suba menos que la tasa; si el dólar salta, se pierde.", dato: () => finTxt("tamar", "TAMAR hoy"), ir: ["finanzas", "Ver tasas y dólar"] },
+  { id: "swap", t: "Swap de monedas", def: "Un intercambio de monedas entre dos bancos centrales: Argentina tiene un swap con China, en yuanes, que cuenta dentro de las reservas pero no se puede usar libremente como si fueran dólares propios.", ir: ["finanzas", "Ver las reservas"] },
+  { id: "reservasnetas", t: "Reservas netas", def: "Las reservas sin contar lo que no es realmente del Banco Central: el swap con China, los dólares de los depósitos de los bancos (encajes) y otras deudas de corto plazo. Es la medida que mira el FMI y suele ser mucho más baja que las reservas brutas.", dato: () => finTxt("reservas", "Brutas hoy"), ir: ["finanzas", "Ver las reservas"] },
+  { id: "bandas", t: "Bandas cambiarias", def: "Un sistema en el que el dólar oficial se mueve libremente entre un piso y un techo; si toca el techo, el Banco Central vende dólares para que no suba más, y si toca el piso, compra. Argentina lo adoptó en abril de 2025.", dato: () => finTxt("mayorista", "Dólar mayorista hoy"), ir: ["finanzas", "Ver el dólar mayorista"] },
+  { id: "superavit", t: "Superávit primario y financiero", def: "El primario es la diferencia entre lo que el Estado recauda y lo que gasta sin contar los intereses de la deuda. El financiero suma los intereses. Un país puede tener superávit primario y aun así déficit financiero.", ir: ["inicio", "Ver la deuda en la ficha"] },
+  { id: "terminos", t: "Términos de intercambio", def: "Cuánto valen las cosas que un país vende respecto de las que compra. Si sube la soja y baja el precio de lo que importamos, mejoran los términos de intercambio y entran más dólares sin producir más.", ir: ["comercio", "Ver el comercio mundial"] },
+  { id: "commodities", t: "Commodities", lar: "Materias primas", def: "Productos sin diferenciar que se comercian en todo el mundo a un precio internacional: soja, maíz, trigo, petróleo, cobre, oro. Buena parte de las exportaciones argentinas son commodities.", ir: ["mercados", "Ver los precios"] },
+  { id: "adr", t: "ADR", lar: "American Depositary Receipt", def: "Un certificado que permite comprar en Nueva York, en dólares, acciones de empresas de otro país. YPF, Galicia o Mercado Libre cotizan así en Wall Street.", ir: ["mercados", "Ver los ADRs argentinos"] },
+  { id: "merval", t: "Merval", def: "El índice de las acciones más importantes de la Bolsa de Buenos Aires. Está en pesos, así que también sube por la inflación y por el dólar: para ver si ganó de verdad conviene mirarlo en dólares.", dato: () => MERCADOS && (x => x && `Último cierre: ${nf(x.precio, 0)} puntos`)(mercDe("merval")), ir: ["mercados", "Ver el Merval"] },
   { id: "regresion", t: "Regresión", def: "Una herramienta estadística que busca la recta que mejor describe la relación entre dos variables. Muestra cómo se mueven juntas, pero no prueba que una cause la otra.", ir: ["laboratorio", "Ir al Laboratorio"] }
 ];
 function renderGlosario() {
@@ -3426,10 +3457,14 @@ function histBlock(ind) {
 /* ---------- ARGENTINA FINANCIERA (finanzas.json: BCRA, bonos y EMAE) ---------- */
 let FINANZAS = null, finCargando = null, finSel = "bcra:reservas", finRango = 365, finChart = null;
 const FIN_GRUPOS = [
-  ["Banco Central", ["reservas", "mayorista", "base"]],
-  ["Tasas de interés", ["badlar", "tamar", "pf30", "rem"]],
-  ["Bancos", ["depositos", "prestamos"]],
+  ["Banco Central y dinero", ["reservas", "mayorista", "minorista", "base", "m2var"]],
+  ["Tasas de interés", ["badlar", "tamar", "pf30", "baibar", "t_adelantos", "t_personales", "rem"]],
+  ["Depósitos y préstamos", ["depositos", "dep_usd", "prestamos", "hipotecarios", "prendarios", "personales", "tarjetas"]],
+  ["Índices de ajuste", ["cer", "uva"]],
 ];
+/* cómo se muestra cada dato: en dólares, tipo de cambio, en pesos (millones), tasa (cambios en puntos) o índice */
+const FIN_TIPO = { reservas: "usd", dep_usd: "usd", mayorista: "tc", minorista: "tc", m2var: "tasa", badlar: "tasa", tamar: "tasa", pf30: "tasa", baibar: "tasa",
+  t_adelantos: "tasa", t_personales: "tasa", rem: "tasa", cer: "indice", uva: "indice" };
 const FIN_DESC = {
   reservas: "Los dólares que tiene el Banco Central (incluye oro, encajes de los bancos y el swap con China). Sirven para pagar deuda e intervenir en el dólar.",
   mayorista: "El dólar oficial al que operan los bancos y las empresas (comunicación A3500).",
@@ -3440,8 +3475,20 @@ const FIN_DESC = {
   rem: "Lo que esperan los economistas que encuesta el BCRA (REM) para la inflación de los próximos 12 meses.",
   depositos: "Toda la plata en pesos que las personas y empresas tienen en los bancos (cuentas y plazos fijos).",
   prestamos: "Todo lo que los bancos les prestaron en pesos a personas y empresas (tarjetas, personales, hipotecarios, etc.).",
+  minorista: "El promedio del precio de venta del dólar oficial en los bancos, el que paga una persona en la ventanilla o en el home banking.",
+  m2var: "Cuánto creció en un año la plata en manos del público más las cuentas a la vista (efectivo, cuentas corrientes y cajas de ahorro). Si crece mucho más que la inflación, hay más pesos dando vueltas.",
+  baibar: "La tasa a la que se prestan plata los bancos entre sí de un día para el otro (call). Muestra cuánta liquidez sobra o falta en el sistema.",
+  t_adelantos: "Lo que cobran los bancos a las empresas por girar en descubierto en su cuenta corriente.",
+  t_personales: "Lo que cobran en promedio los bancos por un préstamo personal.",
+  dep_usd: "Los dólares que personas y empresas tienen depositados en los bancos argentinos.",
+  hipotecarios: "Lo que deben las familias por créditos para comprar su casa. Hoy casi todos son en UVA.",
+  prendarios: "Créditos con garantía de un bien, sobre todo para comprar autos.",
+  personales: "Lo que deben personas por préstamos personales.",
+  tarjetas: "Lo que se debe con las tarjetas de crédito (incluye lo que se va a pagar en cuotas).",
+  cer: "Índice que sigue a la inflación del INDEC. Lo usan los bonos y plazos fijos \"ajustables por CER\" para no perder contra la inflación.",
+  uva: "Unidad que vale cada vez más pesos, según el CER. Los créditos hipotecarios y plazos fijos UVA se ajustan con ella.",
 };
-const ES_TASA = k => ["badlar", "tamar", "pf30", "rem"].includes(k);
+const ES_TASA = k => FIN_TIPO[k] === "tasa";
 function cargarFinanzas() {
   if (!finCargando) finCargando = leer("finanzas.json").then(d => { FINANZAS = d; }).catch(() => { FINANZAS = {}; });
   return finCargando;
@@ -3452,9 +3499,11 @@ function abrirFinanzas() {
 }
 const pesosGrandes = m => m >= 1e6 ? `$ ${nf(m / 1e6, 1)} billones` : `$ ${nf(m / 1e3, 0)} mil millones`;   /* m en millones */
 function fmtFin(k, v) {
-  if (k === "reservas") return musd(v);
-  if (k === "mayorista") return pesos(v);
-  if (ES_TASA(k)) return nf(v, 1) + "%";
+  const t = FIN_TIPO[k] || "pesos";
+  if (t === "usd") return musd(v);
+  if (t === "tc") return pesos(v);
+  if (t === "tasa") return nf(v, 1) + "%";
+  if (t === "indice") return nf(v, 2);
   return pesosGrandes(v);
 }
 /* valor de hace N días (el último dato en o antes de esa fecha) */
@@ -3508,7 +3557,7 @@ function renderFinDetalle() {
   let rangos = [[30, "1 mes"], [365, "1 año"], [1826, "5 años"]], defecto = 365;
   if (finSel.startsWith("bcra:") && B[finSel.slice(5)]) {
     const k = finSel.slice(5), x = B[k]; serie = x.serie; fmt = v => fmtFin(k, v); titulo = x.nombre; pct = !ES_TASA(k);
-    nota = `${FIN_DESC[k] || ""} Unidad: ${x.unidad}${["base", "depositos", "prestamos"].includes(k) ? " (en pesos corrientes: crecen también por la inflación)" : ""}. Fuente: BCRA.`;
+    nota = `${FIN_DESC[k] || ""} Unidad: ${x.unidad}${(FIN_TIPO[k] || "pesos") === "pesos" ? " (en pesos corrientes: crecen también por la inflación)" : ""}. Fuente: BCRA.`;
     if (k === "rem") { rangos = [[365, "1 año"], [1826, "5 años"]]; defecto = 1826; }
   } else if (finSel.startsWith("bono:")) {
     const b = (FINANZAS.bonos || []).find(x => "bono:" + x.ticker === finSel); if (!b) { finSel = "bcra:reservas"; return renderFinDetalle(); }
