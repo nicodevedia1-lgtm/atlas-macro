@@ -432,6 +432,12 @@ footer a { color: var(--muted); text-decoration-color: var(--accent); text-under
 .ag-mas summary { cursor: pointer; font-weight: 600; font-size: 14.5px; padding: 4px 0; }
 .ag-chart { height: 340px; margin-top: 8px; }
 .ag-chart-chica { height: 220px; }
+.ag-chart-alta { height: 420px; }
+.bcra-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 10px; }
+.bcra-kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 2px; }
+.bcra-kpi span { font-size: 13.5px; color: var(--muted); }
+.bcra-kpi b { font-family: var(--f-data); font-weight: 500; font-size: 24px; font-variant-numeric: tabular-nums; }
+.bcra-kpi small { font-family: var(--f-data); font-size: 12.5px; color: var(--muted); }
 #bcLista { max-height: 380px; overflow-y: auto; padding-right: 4px; }
 #bcBloque .com-main { align-items: stretch; }
 .bc-sub { font-size: 17px; font-weight: 700; margin: 6px 0 0; }
@@ -735,7 +741,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   <a class="logo" href="#inicio">Atlas <span>Macro</span></a>
   <nav class="tabs" aria-label="Secciones">
     <a href="#inicio" data-pag="inicio">Mapa</a>
-    <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm0" data-pags="argentina finanzas provincias calendario gobiernos">Argentina</button><div class="tab-menu" id="tm0" hidden><a href="#argentina" data-pag="argentina">Argentina hoy</a><a href="#finanzas" data-pag="finanzas">Argentina financiera</a><a href="#provincias" data-pag="provincias">Provincias</a><a href="#calendario" data-pag="calendario">Calendario</a><a href="#gobiernos" data-pag="gobiernos">Gobiernos comparados</a></div></div>
+    <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm0" data-pags="argentina finanzas bcra provincias calendario gobiernos">Argentina</button><div class="tab-menu" id="tm0" hidden><a href="#argentina" data-pag="argentina">Argentina hoy</a><a href="#finanzas" data-pag="finanzas">Argentina financiera</a><a href="#bcra" data-pag="bcra">BCRA: dólares y reservas</a><a href="#provincias" data-pag="provincias">Provincias</a><a href="#calendario" data-pag="calendario">Calendario</a><a href="#gobiernos" data-pag="gobiernos">Gobiernos comparados</a></div></div>
     <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm1" data-pags="mercados comercio">Mercados</button><div class="tab-menu" id="tm1" hidden><a href="#mercados" data-pag="mercados">Bolsas, acciones y cripto</a><a href="#comercio" data-pag="comercio">Comercio mundial</a></div></div>
     <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm2" data-pags="rankings comparacion elecciones conflictos">Mundo</button><div class="tab-menu" id="tm2" hidden><a href="#rankings" data-pag="rankings">Rankings</a><a href="#comparacion" data-pag="comparacion">Comparar países</a><a href="#elecciones" data-pag="elecciones">Elecciones</a><a href="#conflictos" data-pag="conflictos">Conflictos</a></div></div>
     <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm3" data-pags="juego masrico">Juegos</button><div class="tab-menu" id="tm3" hidden><a href="#juego" data-pag="juego">País del día</a><a href="#masrico" data-pag="masrico">¿Más rico o más pobre?</a></div></div>
@@ -765,6 +771,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   <ul>
     <li><a href="#argentina" data-pag="argentina"><span class="nav-ico" aria-hidden="true">🇦🇷</span><span>Argentina hoy<small>Dólar, inflación y calculadoras</small></span></a></li>
     <li><a href="#finanzas" data-pag="finanzas"><span class="nav-ico" aria-hidden="true">🏦</span><span>Argentina financiera<small>Reservas, tasas, bonos y actividad</small></span></a></li>
+    <li><a href="#bcra" data-pag="bcra"><span class="nav-ico" aria-hidden="true">🏛️</span><span>BCRA: dólares y reservas<small>Cuántos dólares compra el Central y por qué se mueve la base</small></span></a></li>
     <li><a href="#provincias" data-pag="provincias"><span class="nav-ico" aria-hidden="true">📍</span><span>Argentina por provincia<small>Pobreza, desempleo y población</small></span></a></li>
     <li><a href="#calendario" data-pag="calendario"><span class="nav-ico" aria-hidden="true">📅</span><span>Calendario económico<small>Próximos datos del INDEC y feriados</small></span></a></li>
     <li><a href="#gobiernos" data-pag="gobiernos"><span class="nav-ico" aria-hidden="true">🏛️</span><span>Gobiernos comparados<small>De Alfonsín a hoy, con datos</small></span></a></li>
@@ -987,6 +994,31 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <p class="note">Fuentes: Banco Central (API de estadísticas), bonos de data912.com con precios de BYMA en dólares MEP, y EMAE del INDEC vía datos.gob.ar. Se actualiza todos los días hábiles. No es una recomendación de inversión.</p>
   </div>
 
+  <div class="pagina" id="pag-bcra" hidden>
+    <header class="top">
+      <div class="eyebrow" id="bcraFecha">Banco Central</div>
+      <h1>BCRA: dólares y reservas</h1>
+      <p class="lede">Cuántos dólares compra o vende el Banco Central cada día, cómo se mueven las reservas y por qué el BCRA emite o absorbe pesos.</p>
+    </header>
+    <div class="bcra-kpis" id="bcraKpis"></div>
+    <section class="ag-bloque">
+      <div class="ag-tit"><h2>Compras de dólares, día por día</h2><div class="lab-chips" id="bcraRangoC"></div></div>
+      <p class="note">Barras: lo que compró (o vendió, si es negativo) cada día hábil, en millones de dólares. Línea: el acumulado del período.</p>
+      <div id="bcraCompras" class="ag-chart"></div>
+    </section>
+    <section class="ag-bloque">
+      <div class="ag-tit"><h2>Reservas</h2><div class="lab-chips" id="bcraRangoR"></div></div>
+      <div id="bcraReservas" class="ag-chart"></div>
+      <p class="note">Reservas brutas, en millones de dólares. Incluyen el swap con China y los dólares de los depósitos que los bancos dejan en el Central (encajes), por eso las reservas "netas" son bastante más bajas.</p>
+    </section>
+    <section class="ag-bloque">
+      <div class="ag-tit"><h2>¿Por qué se mueve la base monetaria?</h2></div>
+      <p class="note">Cada barra suma lo que emitió (arriba de cero) o absorbió (abajo) el BCRA en el mes, según el motivo, en miles de millones de pesos. Cuando compra dólares, emite pesos; cuando le vende dólares al Tesoro o absorbe con letras y pases, los retira.</p>
+      <div id="bcraFactores" class="ag-chart ag-chart-alta"></div>
+    </section>
+    <p class="note">Fuente: Banco Central (API de estadísticas, "factores de explicación" de la base monetaria y de las reservas). Se actualiza todos los días hábiles.</p>
+  </div>
+
   <div class="pagina" id="pag-comercio" hidden>
     <header class="top">
       <div class="eyebrow">Comercio mundial</div>
@@ -1179,6 +1211,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
             <tr><td>Reservas, base monetaria, tasas (BADLAR, TAMAR, plazo fijo), dólar mayorista, depósitos, préstamos e inflación esperada (REM)</td><td>Banco Central de la República Argentina, API de estadísticas</td><td>Todos los días hábiles</td></tr>
             <tr><td>Tasas de interés de los bancos centrales del mundo</td><td>BIS (Banco de Pagos Internacionales), tasas de política monetaria</td><td>Una vez por semana</td></tr>
             <tr><td>Curva de rendimientos del Tesoro de EE.UU.</td><td>Departamento del Tesoro de EE.UU.</td><td>Una vez por semana</td></tr>
+            <tr><td>Compras de dólares del BCRA, reservas día por día y factores de explicación de la base monetaria</td><td>Banco Central de la República Argentina, API de estadísticas</td><td>Todos los días hábiles</td></tr>
             <tr><td>Bonos en dólares (Bonares y Globales)</td><td>data912.com, con precios de BYMA</td><td>Todos los días hábiles</td></tr>
             <tr><td>Actividad económica mensual (EMAE)</td><td>INDEC, vía la API de Series de Tiempo de datos.gob.ar</td><td>Todos los días hábiles (el dato sale una vez por mes)</td></tr>
             <tr><td>Comercio mundial por producto (quién exporta e importa petróleo, soja, autos, etc.)</td><td>UN Comtrade (Naciones Unidas), con lo que informa cada país</td><td>Una vez por mes</td></tr>
@@ -1704,7 +1737,7 @@ const sinTildes = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowe
 /* ---------- PÁGINAS Y PANEL LATERAL ----------
    Cada sección es una "página": #inicio, #comparacion, #elecciones, #conflictos.
    Se cambia con el link (la dirección cambia, así funciona el botón "atrás" del navegador). */
-const PAGINAS = ["inicio", "argentina", "finanzas", "mercados", "comercio", "provincias", "glosario", "gobiernos", "calendario", "comparacion", "rankings", "laboratorio", "juego", "masrico", "elecciones", "conflictos", "acerca"];
+const PAGINAS = ["inicio", "argentina", "finanzas", "bcra", "mercados", "comercio", "provincias", "glosario", "gobiernos", "calendario", "comparacion", "rankings", "laboratorio", "juego", "masrico", "elecciones", "conflictos", "acerca"];
 let paginaActual = "inicio";
 const versusAbierto = () => paginaActual === "comparacion";
 function mostrarPagina(nombre) {
@@ -1726,6 +1759,7 @@ function mostrarPagina(nombre) {
   if (nombre === "mercados") abrirMercados();
   if (nombre === "comercio") abrirComercio();
   if (nombre === "finanzas") abrirFinanzas();
+  if (nombre === "bcra") abrirBCRA();
   if (nombre === "glosario") { renderGlosario(); Promise.all([PROV ? null : cargarProvincias(), FINANZAS ? null : cargarFinanzas()]).then(() => paginaActual === "glosario" && renderGlosario()); }
   if (nombre === "calendario") renderCalendario();
   if (nombre === "masrico") abrirMasRico();
@@ -1874,6 +1908,7 @@ function indiceBusqueda() {
   todosMerc().forEach(x => add("📈", x.nombre, `Mercados · ${fmtMerc(x)}`, `${x.nombre} ${x.ticker} cotizacion precio accion`, () => { mercSel = x.clave; irA_("mercados")(); }));
   add("🌐", "Tasas de los bancos centrales", "Mercados · Fed, BCE, Brasil y más", "tasa interes banco central fed bce reserva federal politica monetaria tasas mundo", () => { irA_("mercados")(); setTimeout(() => { const el = document.getElementById("bcBloque"); if (el) el.scrollIntoView(); }, 300); });
   add("🌐", "Curva del Tesoro de EE.UU.", "Mercados · bonos del Tesoro", "curva rendimientos tesoro treasury bonos estados unidos invertida 10 años 2 años", () => { irA_("mercados")(); setTimeout(() => { const el = document.getElementById("curvaBloque"); if (el) el.scrollIntoView(); }, 300); });
+  add("🏛️", "BCRA: compras de dólares y reservas", "Cuánto compra el Central y por qué se mueve la base", "bcra compras dolares compra de divisas reservas base monetaria emision factores banco central", irA_("bcra"));
   add("🏦", "Argentina financiera", "Reservas, tasas, bonos y actividad", "reservas bcra banco central tasas badlar tamar plazo fijo base monetaria emision depositos prestamos bonos al30 gd30 globales bonares emae actividad rem inflacion esperada", irA_("finanzas"));
   [["reservas", "Reservas del BCRA"], ["badlar", "Tasa BADLAR"], ["tamar", "Tasa TAMAR"], ["base", "Base monetaria"], ["rem", "Inflación esperada (REM)"]].forEach(([k, t]) =>
     add("🏦", t, "Argentina financiera", t + " bcra", () => { finSel = "bcra:" + k; irA_("finanzas")(); }));
@@ -3721,6 +3756,88 @@ function renderFinDetalle() {
   document.getElementById("finDetNota").textContent = nota;
 }
 
+/* ---------- BCRA: COMPRAS DE DÓLARES, RESERVAS Y FACTORES DE LA BASE (bcra.json) ---------- */
+let BCRA = null, bcraCargando = null, bcraRC = 90, bcraRR = 365, bcraCharts = {};
+function abrirBCRA() {
+  if (!BCRA) { document.getElementById("bcraKpis").innerHTML = `<p class="note">Cargando…</p>`;
+    if (!bcraCargando) bcraCargando = leer("bcra.json").then(d => { BCRA = d; }).catch(() => { BCRA = {}; });
+    bcraCargando.then(() => paginaActual === "bcra" && renderBCRA()); return; }
+  renderBCRA(); Object.values(bcraCharts).forEach(c => c.resize());
+}
+const usdM = v => `US$ ${nf(v, Math.abs(v) < 100 ? 1 : 0)} M`;
+const conSigno = (v, f) => (v > 0 ? "+" : v < 0 ? "−" : "") + f(Math.abs(v));
+function renderBCRA() {
+  const C = BCRA.compras || [], R = BCRA.reservas || [];
+  if (!C.length && !R.length) { document.getElementById("bcraKpis").innerHTML = `<p class="note">Todavía no hay datos.</p>`; return; }
+  const fl = f => f.split("-").reverse().join("/");
+  /* tarjetas */
+  const uc = C[C.length - 1], anio = uc[0].slice(0, 4), mes = uc[0].slice(0, 7);
+  const sum = pref => C.filter(x => x[0].startsWith(pref)).reduce((a, x) => a + x[1], 0);
+  const ultHabil = [...C].reverse().find(x => x[1] !== 0) || uc;
+  const ur = R[R.length - 1], rAnt = R[R.length - 2];
+  const rAnio = (R.find(x => x[0] >= `${anio}-01-01`) || R[0]);
+  const kpi = (t, v, s) => `<div class="bcra-kpi"><span>${t}</span><b>${v}</b><small>${s}</small></div>`;
+  document.getElementById("bcraKpis").innerHTML =
+    kpi("Última compra con movimiento", conSigno(ultHabil[1], usdM), `el ${fl(ultHabil[0])}`) +
+    kpi(`Compras en ${MESES[+mes.slice(5) - 1]}`, conSigno(sum(mes), usdM), "acumulado del mes") +
+    kpi(`Compras en ${anio}`, conSigno(sum(anio), usdM), "acumulado del año") +
+    (ur ? kpi("Reservas", musd(ur[1]), `${rAnt ? conSigno(ur[1] - rAnt[1], usdM) + " en el día · " : ""}${conSigno(ur[1] - rAnio[1], usdM)} en el año`) : "");
+  document.getElementById("bcraFecha").textContent = `Datos del BCRA al ${fl(uc[0])}`;
+  const { line, ink, ax, muted } = chartBase(), acc = css("--accent"), good = css("--good"), bad = css("--bad");
+  const ejeFecha = (r) => Object.assign({}, ax, { formatter: v => { const [y, m, d] = v.split("-"); return r <= 120 ? `${d}/${m}` : `${MESES[+m - 1].slice(0, 3)} ${y.slice(2)}`; } });
+  const desdeDias = (serie, d) => { const u = serie[serie.length - 1][0]; const lim = new Date(new Date(u).getTime() - d * 864e5).toISOString().slice(0, 10); return serie.filter(x => x[0] >= lim); };
+  const chips = (id, rangos, act, set) => {
+    document.getElementById(id).innerHTML = rangos.map(([d, t]) => `<button class="btn" type="button" data-d="${d}" aria-pressed="${act === d}">${t}</button>`).join("");
+    document.querySelectorAll(`#${id} .btn`).forEach(b => b.onclick = () => { set(+b.dataset.d); renderBCRA(); });
+  };
+  /* compras diarias + acumulado */
+  chips("bcraRangoC", [[30, "1 mes"], [90, "3 meses"], [365, "1 año"], [1095, "3 años"]], bcraRC, v => bcraRC = v);
+  const sc = desdeDias(C, bcraRC); let acum = 0; const ac = sc.map(x => +(acum += x[1]).toFixed(1));
+  bcraCharts.c = bcraCharts.c || echarts.init(document.getElementById("bcraCompras"));
+  bcraCharts.c.setOption({
+    grid: { left: 64, right: 64, top: 14, bottom: 28 },
+    tooltip: { trigger: "axis", backgroundColor: css("--surface"), borderColor: line, textStyle: { color: ink }, formatter: ps => `<b>${fl(ps[0].name)}</b><br>` + ps.map(p => `${p.marker}${p.seriesName}: ${conSigno(p.value, usdM)}`).join("<br>") },
+    xAxis: { type: "category", data: sc.map(x => x[0]), axisLabel: ejeFecha(bcraRC), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+    yAxis: [{ type: "value", axisLabel: Object.assign({}, ax, { formatter: v => nf(v) }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+            { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => nf(v) }), splitLine: { show: false } }],
+    series: [{ name: "En el día", type: "bar", data: sc.map(x => ({ value: x[1], itemStyle: { color: x[1] >= 0 ? good : bad } })), barMaxWidth: 10 },
+             { name: "Acumulado", type: "line", yAxisIndex: 1, data: ac, symbol: "none", lineStyle: { color: acc, width: 2 } }]
+  }, true);
+  /* reservas */
+  if (R.length) {
+    chips("bcraRangoR", [[90, "3 meses"], [365, "1 año"], [1095, "3 años"]], bcraRR, v => bcraRR = v);
+    const sr = desdeDias(R, bcraRR);
+    bcraCharts.r = bcraCharts.r || echarts.init(document.getElementById("bcraReservas"));
+    bcraCharts.r.setOption({
+      grid: { left: 86, right: 14, top: 12, bottom: 28 },
+      tooltip: { trigger: "axis", backgroundColor: css("--surface"), borderColor: line, textStyle: { color: ink }, formatter: ps => `<b>${fl(ps[0].name)}</b><br>${musd(ps[0].value)}` },
+      xAxis: { type: "category", data: sr.map(x => x[0]), axisLabel: ejeFecha(bcraRR), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+      yAxis: { type: "value", scale: true, axisLabel: Object.assign({}, ax, { formatter: v => `US$ ${nf(v / 1000, 0)} mil M` }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+      series: [{ type: "line", data: sr.map(x => x[1]), symbol: "none", lineStyle: { color: acc, width: 2 }, areaStyle: { color: acc, opacity: .08 } }]
+    }, true);
+  }
+  /* factores de la base: suma mensual de los últimos 24 meses, sin el total; los que casi no se mueven van a "Otros" */
+  const F = BCRA.factores || {};
+  const ids = Object.keys(F).filter(k => k !== "46" && k !== "78");
+  const meses = [...new Set(ids.flatMap(k => F[k].serie.map(x => x[0].slice(0, 7))))].sort().slice(-24);
+  const porMes = k => meses.map(m => F[k].serie.filter(x => x[0].startsWith(m)).reduce((a, x) => a + x[1], 0) / 1000);
+  let filas = ids.map(k => ({ nombre: F[k].nombre, data: porMes(k) }));
+  const peso = f => f.data.reduce((a, v) => a + Math.abs(v), 0), totalPeso = filas.reduce((a, f) => a + peso(f), 0) || 1;
+  const chicos = filas.filter(f => peso(f) / totalPeso < .03 || f.nombre === "Otros");
+  filas = filas.filter(f => !chicos.includes(f));
+  if (chicos.length) filas.push({ nombre: "Otros", data: meses.map((_, i) => chicos.reduce((a, f) => a + f.data[i], 0)) });
+  const paleta = [acc, css("--b"), css("--good"), css("--warn"), css("--bad"), "#9AA4B0", "#B79CFF", "#4FC3A1"];
+  bcraCharts.f = bcraCharts.f || echarts.init(document.getElementById("bcraFactores"));
+  bcraCharts.f.setOption({
+    grid: { left: 70, right: 14, top: 56, bottom: 28 }, legend: { top: 0, left: 0, textStyle: { color: ink } },
+    tooltip: { trigger: "axis", axisPointer: { type: "shadow" }, backgroundColor: css("--surface"), borderColor: line, textStyle: { color: ink },
+      formatter: ps => `<b>${mesNombre(ps[0].name)}</b><br>` + ps.filter(p => Math.abs(p.value) >= .5).map(p => `${p.marker}${p.seriesName}: ${conSigno(p.value, v => "$ " + nf(v, 0) + " mil M")}`).join("<br>") },
+    xAxis: { type: "category", data: meses, axisLabel: Object.assign({}, ax, { formatter: v => `${MESES[+v.slice(5) - 1].slice(0, 3)} ${v.slice(2, 4)}` }), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+    yAxis: { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => nf(v) }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+    series: filas.map((f, i) => ({ name: f.nombre, type: "bar", stack: "t", data: f.data.map(v => +v.toFixed(1)), itemStyle: { color: paleta[i % paleta.length] }, barMaxWidth: 26 }))
+  }, true);
+}
+
 /* ---------- COMERCIO MUNDIAL: quién exporta e importa cada producto (productos.json, de UN Comtrade) ---------- */
 /* Lista fija solo para el buscador; los datos se cargan cuando se abre la página */
 const COM_NOMBRES = { petroleo: "Petróleo crudo", gas: "Gas natural", carbon: "Carbón", oro: "Oro", cobre: "Cobre", hierro: "Mineral de hierro", litio: "Litio",
@@ -4282,7 +4399,7 @@ function textoFuentes() {
   const fecha = new Date(DATOS.generado).toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" });
   document.getElementById("fuentes").textContent = `Datos macro: Banco Mundial y FMI (World Economic Outlook), 1960–${ANIO}, actualizados automáticamente el ${fecha}. Inflación: índice de precios al consumidor del Banco Mundial; donde falta, deflactor del PBI o FMI. Deuda pública: FMI; donde falta, Banco Mundial. Promedios mundiales: Banco Mundial. Fichas y datos políticos escritos a mano, actualizados a ${CURADO.actualizado}.`;
 }
-function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); renderLab(); if (paginaActual === "argentina") renderAgCharts(); if (paginaActual === "comercio" && PRODUCTOS) renderComercio(); if (paginaActual === "finanzas" && FINANZAS) renderFinanzas(); if (paginaActual === "mercados" && GLOBAL) renderGlobal(); } }
+function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); renderLab(); if (paginaActual === "argentina") renderAgCharts(); if (paginaActual === "comercio" && PRODUCTOS) renderComercio(); if (paginaActual === "finanzas" && FINANZAS) renderFinanzas(); if (paginaActual === "mercados" && GLOBAL) renderGlobal(); if (paginaActual === "bcra" && BCRA) renderBCRA(); } }
 
 const leer = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: error ${r.status}`); return r.json(); });
 Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null), leer("riesgo.json").catch(() => null), leer("calendario.json").catch(() => null), leer("mercados.json").catch(() => null), leer("socios.json").catch(() => null)])

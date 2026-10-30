@@ -1,0 +1,34 @@
+name: Actualizar BCRA
+
+on:
+  schedule:
+    - cron: "7 23 * * 1-5"   # lunes a viernes 23:07 UTC (20:07 en Argentina)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  bcra:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+      - run: python actualizar_bcra.py
+
+      - name: Guardar bcra.json si cambió
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add bcra.json
+          if git diff --cached --quiet; then
+            echo "Sin cambios"
+          else
+            git commit -m "BCRA actualizado"
+            git pull --rebase
+            git push
+          fi
