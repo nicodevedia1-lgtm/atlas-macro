@@ -433,6 +433,12 @@ footer a { color: var(--muted); text-decoration-color: var(--accent); text-under
 .ag-chart { height: 340px; margin-top: 8px; }
 .ag-chart-chica { height: 220px; }
 .ag-chart-alta { height: 420px; }
+.cmp-controles { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+.cmp-controles .lab-fila { flex-wrap: wrap; }
+.cmp-controles .lab-eje { grid-template-columns: minmax(0, 1fr); }
+.cmp-controles select { min-width: 0; max-width: 100%; flex: 1 1 140px; }
+.cmp-res { font-size: 16px; line-height: 1.55; }
+.cmp-res b.n { font-family: var(--f-data); font-size: 22px; }
 .bcra-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 10px; }
 .bcra-kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; display: grid; gap: 2px; }
 .bcra-kpi span { font-size: 13.5px; color: var(--muted); }
@@ -741,11 +747,11 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   <a class="logo" href="#inicio">Atlas <span>Macro</span></a>
   <nav class="tabs" aria-label="Secciones">
     <a href="#inicio" data-pag="inicio">Mapa</a>
-    <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm0" data-pags="argentina finanzas bcra provincias calendario gobiernos">Argentina</button><div class="tab-menu" id="tm0" hidden><a href="#argentina" data-pag="argentina">Argentina hoy</a><a href="#finanzas" data-pag="finanzas">Argentina financiera</a><a href="#bcra" data-pag="bcra">BCRA: dólares y reservas</a><a href="#provincias" data-pag="provincias">Provincias</a><a href="#calendario" data-pag="calendario">Calendario</a><a href="#gobiernos" data-pag="gobiernos">Gobiernos comparados</a></div></div>
+    <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm0" data-pags="argentina finanzas bcra actividad provincias calendario gobiernos">Argentina</button><div class="tab-menu" id="tm0" hidden><a href="#argentina" data-pag="argentina">Argentina hoy</a><a href="#finanzas" data-pag="finanzas">Argentina financiera</a><a href="#bcra" data-pag="bcra">BCRA: dólares y reservas</a><a href="#actividad" data-pag="actividad">Actividad, precios y empleo</a><a href="#provincias" data-pag="provincias">Provincias</a><a href="#calendario" data-pag="calendario">Calendario</a><a href="#gobiernos" data-pag="gobiernos">Gobiernos comparados</a></div></div>
     <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm1" data-pags="mercados comercio">Mercados</button><div class="tab-menu" id="tm1" hidden><a href="#mercados" data-pag="mercados">Bolsas, acciones y cripto</a><a href="#comercio" data-pag="comercio">Comercio mundial</a></div></div>
     <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm2" data-pags="rankings comparacion elecciones conflictos">Mundo</button><div class="tab-menu" id="tm2" hidden><a href="#rankings" data-pag="rankings">Rankings</a><a href="#comparacion" data-pag="comparacion">Comparar países</a><a href="#elecciones" data-pag="elecciones">Elecciones</a><a href="#conflictos" data-pag="conflictos">Conflictos</a></div></div>
     <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm3" data-pags="juego masrico">Juegos</button><div class="tab-menu" id="tm3" hidden><a href="#juego" data-pag="juego">País del día</a><a href="#masrico" data-pag="masrico">¿Más rico o más pobre?</a></div></div>
-    <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm4" data-pags="laboratorio glosario">Herramientas</button><div class="tab-menu" id="tm4" hidden><a href="#laboratorio" data-pag="laboratorio">Laboratorio</a><a href="#glosario" data-pag="glosario">Glosario</a></div></div>
+    <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm4" data-pags="laboratorio comparador glosario">Herramientas</button><div class="tab-menu" id="tm4" hidden><a href="#laboratorio" data-pag="laboratorio">Laboratorio</a><a href="#comparador" data-pag="comparador">Comparador de series</a><a href="#glosario" data-pag="glosario">Glosario</a></div></div>
   </nav>
   <button class="tema" id="temaBtn" type="button" aria-label="Cambiar a modo claro" title="Modo claro / oscuro">
     <svg class="t-sol" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
@@ -772,6 +778,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <li><a href="#argentina" data-pag="argentina"><span class="nav-ico" aria-hidden="true">🇦🇷</span><span>Argentina hoy<small>Dólar, inflación y calculadoras</small></span></a></li>
     <li><a href="#finanzas" data-pag="finanzas"><span class="nav-ico" aria-hidden="true">🏦</span><span>Argentina financiera<small>Reservas, tasas, bonos y actividad</small></span></a></li>
     <li><a href="#bcra" data-pag="bcra"><span class="nav-ico" aria-hidden="true">🏛️</span><span>BCRA: dólares y reservas<small>Cuántos dólares compra el Central y por qué se mueve la base</small></span></a></li>
+    <li><a href="#actividad" data-pag="actividad"><span class="nav-ico" aria-hidden="true">🏭</span><span>Actividad, precios y empleo<small>EMAE por sector, inflación, comercio y empleo</small></span></a></li>
     <li><a href="#provincias" data-pag="provincias"><span class="nav-ico" aria-hidden="true">📍</span><span>Argentina por provincia<small>Pobreza, desempleo y población</small></span></a></li>
     <li><a href="#calendario" data-pag="calendario"><span class="nav-ico" aria-hidden="true">📅</span><span>Calendario económico<small>Próximos datos del INDEC y feriados</small></span></a></li>
     <li><a href="#gobiernos" data-pag="gobiernos"><span class="nav-ico" aria-hidden="true">🏛️</span><span>Gobiernos comparados<small>De Alfonsín a hoy, con datos</small></span></a></li>
@@ -796,6 +803,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   <p class="nav-grupo">Herramientas</p>
   <ul>
     <li><a href="#laboratorio" data-pag="laboratorio"><span class="nav-ico" aria-hidden="true">🧪</span><span>Laboratorio<small>Relacioná variables y mirá la regresión</small></span></a></li>
+    <li><a href="#comparador" data-pag="comparador"><span class="nav-ico" aria-hidden="true">📊</span><span>Comparador de series<small>Cruzá dos datos de Argentina y mirá cómo se relacionan</small></span></a></li>
     <li><a href="#glosario" data-pag="glosario"><span class="nav-ico" aria-hidden="true">📖</span><span>Glosario<small>Qué es el riesgo país, la brecha y más</small></span></a></li>
   </ul>
   <ul class="nav-sec"><li><a href="#acerca" data-pag="acerca"><span class="nav-ico" aria-hidden="true">ℹ️</span><span>Acerca de y metodología<small>Fuentes, cálculos y privacidad</small></span></a></li></ul>
@@ -1016,7 +1024,72 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
       <p class="note">Cada barra suma lo que emitió (arriba de cero) o absorbió (abajo) el BCRA en el mes, según el motivo, en miles de millones de pesos. Cuando compra dólares, emite pesos; cuando le vende dólares al Tesoro o absorbe con letras y pases, los retira.</p>
       <div id="bcraFactores" class="ag-chart ag-chart-alta"></div>
     </section>
+    <section class="ag-bloque" id="bcraResBloque" hidden>
+      <div class="ag-tit"><h2 id="bcraResT">¿Por qué se movieron las reservas?</h2></div>
+      <p class="note">Cuánto sumó o restó cada motivo desde el 1 de enero, en millones de dólares. "Valuación y otros" es lo que cambian las reservas por el precio del oro y de las otras monedas, y movimientos menores.</p>
+      <div id="bcraResChart" class="ag-chart"></div>
+    </section>
+    <section class="ag-bloque" id="bcraUsdBloque" hidden>
+      <div class="ag-tit"><h2>Dólares en los bancos</h2></div>
+      <p class="note">Depósitos y préstamos en dólares del sector privado (millones de US$, eje izquierdo) y qué parte de los depósitos se prestó (eje derecho).</p>
+      <div id="bcraUsdChart" class="ag-chart"></div>
+    </section>
+    <section class="ag-bloque" id="bcraTasasBloque" hidden>
+      <div class="ag-tit"><h2>Tasas del mercado de dinero</h2></div>
+      <p class="note">Promedio de cada mes, en % anual: la tasa call y la de repo (préstamos de un día entre bancos e inversores), la BADLAR, la TAMAR y el plazo fijo.</p>
+      <div id="bcraTasasChart" class="ag-chart"></div>
+    </section>
+    <section class="ag-bloque" id="bcraPasBloque" hidden>
+      <div class="ag-tit"><h2>Encajes y pases</h2></div>
+      <p class="note">Lo que los bancos tienen depositado en el BCRA (encajes) y el stock de pases pasivos (pesos que el BCRA toma prestados a los bancos), en billones de pesos a fin de cada mes.</p>
+      <div id="bcraPasChart" class="ag-chart"></div>
+    </section>
     <p class="note">Fuente: Banco Central (API de estadísticas, "factores de explicación" de la base monetaria y de las reservas). Se actualiza todos los días hábiles.</p>
+  </div>
+
+  <div class="pagina" id="pag-actividad" hidden>
+    <header class="top">
+      <div class="eyebrow" id="actFecha">Actividad, precios y empleo</div>
+      <h1>Actividad, precios y empleo</h1>
+      <p class="lede">Cómo viene la economía mes a mes: qué sectores crecen y cuáles caen, cómo se compone la inflación, el comercio con el mundo y el empleo registrado.</p>
+    </header>
+    <div class="bcra-kpis" id="actKpis"></div>
+    <section class="ag-bloque"><div class="ag-tit"><h2>Actividad económica (EMAE)</h2></div>
+      <p class="note">Línea: el índice sin estacionalidad (2004 = 100). Barras: cuánto creció o cayó contra el mes anterior.</p>
+      <div id="actEmae" class="ag-chart"></div></section>
+    <section class="ag-bloque"><div class="ag-tit"><h2>Sectores que ganan y que pierden</h2><span class="note" id="actSecT"></span></div>
+      <p class="note">Cuánto creció o cayó cada sector contra el mismo mes del año anterior.</p>
+      <div id="actSec" class="ag-chart ag-chart-chica"></div></section>
+    <section class="ag-bloque"><div class="ag-tit"><h2>Inflación por categorías</h2></div>
+      <p class="note">Variación mensual de los últimos tres meses. Núcleo: sin los precios regulados ni los estacionales; es la que mejor muestra la tendencia.</p>
+      <div id="actIpc" class="ag-chart"></div></section>
+    <section class="ag-bloque"><div class="ag-tit"><h2>Comercio exterior</h2></div>
+      <p class="note">Exportaciones e importaciones de bienes (líneas) y el saldo (barras), en millones de dólares por mes.</p>
+      <div id="actCom" class="ag-chart"></div>
+      <div id="actEnergiaBox" hidden><h3 class="bc-sub">Saldo de energía, acumulado en cada año</h3><div id="actEnergia" class="ag-chart ag-chart-chica"></div></div></section>
+    <section class="ag-bloque"><div class="ag-tit"><h2>Empleo registrado</h2><span class="note" id="actEmpT"></span></div>
+      <p class="note">Cuántos trabajadores registrados más (o menos) hay en cada categoría, en miles de personas, desde noviembre de 2023.</p>
+      <div id="actEmp" class="ag-chart ag-chart-chica"></div>
+      <h3 class="bc-sub">Salario real</h3>
+      <p class="note">Índice de salarios registrados descontada la inflación (noviembre de 2023 = 100). Si sube, los sueldos le ganan a los precios.</p>
+      <div id="actSal" class="ag-chart ag-chart-chica"></div></section>
+    <p class="note">Fuentes: INDEC y Ministerio de Trabajo (vía la API de Series de Tiempo de datos.gob.ar) y BCRA. Cada dato sale con su propio atraso: el EMAE y el comercio, unos dos meses; el empleo, unos cuatro.</p>
+  </div>
+
+  <div class="pagina" id="pag-comparador" hidden>
+    <header class="top">
+      <div class="eyebrow">Herramientas</div>
+      <h1>Comparador de series</h1>
+      <p class="lede">Elegí dos datos de Argentina y miralos juntos. Podés pasarlos a variación mensual o anual, y correr el segundo unos meses para ver si uno se adelanta al otro.</p>
+    </header>
+    <div class="lab-controles cmp-controles">
+      <div class="lab-eje"><label for="cmpA">Serie 1 (eje izquierdo)</label><div class="lab-fila"><select id="cmpA"></select><select id="cmpTA" aria-label="Cómo mostrar la serie 1"></select></div></div>
+      <div class="lab-eje"><label for="cmpB">Serie 2 (eje derecho)</label><div class="lab-fila"><select id="cmpB"></select><select id="cmpTB" aria-label="Cómo mostrar la serie 2"></select></div></div>
+      <div class="lab-eje"><label for="cmpLag">Correr la serie 2</label><div class="lab-fila"><select id="cmpLag"></select><select id="cmpDesde" aria-label="Desde qué año"></select></div></div>
+    </div>
+    <div class="lab-ejemplos"><span class="eyebrow">Para probar</span><div class="lab-chips" id="cmpEjemplos"></div></div>
+    <section class="ag-bloque"><div id="cmpChart" class="ag-chart ag-chart-alta"></div><p class="note" id="cmpNota"></p></section>
+    <section class="ag-bloque"><div class="ag-tit"><h2>¿Se mueven juntas?</h2></div><div class="cmp-res" id="cmpRes"></div><div id="cmpScatter" class="ag-chart"></div></section>
   </div>
 
   <div class="pagina" id="pag-comercio" hidden>
@@ -1212,6 +1285,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
             <tr><td>Tasas de interés de los bancos centrales del mundo</td><td>BIS (Banco de Pagos Internacionales), tasas de política monetaria</td><td>Una vez por semana</td></tr>
             <tr><td>Curva de rendimientos del Tesoro de EE.UU.</td><td>Departamento del Tesoro de EE.UU.</td><td>Una vez por semana</td></tr>
             <tr><td>Compras de dólares del BCRA, reservas día por día y factores de explicación de la base monetaria</td><td>Banco Central de la República Argentina, API de estadísticas</td><td>Todos los días hábiles</td></tr>
+            <tr><td>EMAE por sector, IPC por categorías, exportaciones e importaciones, empleo registrado y salarios</td><td>INDEC y Ministerio de Trabajo, vía la API de Series de Tiempo de datos.gob.ar</td><td>Todos los días hábiles (cada dato sale una vez por mes)</td></tr>
             <tr><td>Bonos en dólares (Bonares y Globales)</td><td>data912.com, con precios de BYMA</td><td>Todos los días hábiles</td></tr>
             <tr><td>Actividad económica mensual (EMAE)</td><td>INDEC, vía la API de Series de Tiempo de datos.gob.ar</td><td>Todos los días hábiles (el dato sale una vez por mes)</td></tr>
             <tr><td>Comercio mundial por producto (quién exporta e importa petróleo, soja, autos, etc.)</td><td>UN Comtrade (Naciones Unidas), con lo que informa cada país</td><td>Una vez por mes</td></tr>
@@ -1737,7 +1811,7 @@ const sinTildes = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowe
 /* ---------- PÁGINAS Y PANEL LATERAL ----------
    Cada sección es una "página": #inicio, #comparacion, #elecciones, #conflictos.
    Se cambia con el link (la dirección cambia, así funciona el botón "atrás" del navegador). */
-const PAGINAS = ["inicio", "argentina", "finanzas", "bcra", "mercados", "comercio", "provincias", "glosario", "gobiernos", "calendario", "comparacion", "rankings", "laboratorio", "juego", "masrico", "elecciones", "conflictos", "acerca"];
+const PAGINAS = ["inicio", "argentina", "finanzas", "bcra", "actividad", "comparador", "mercados", "comercio", "provincias", "glosario", "gobiernos", "calendario", "comparacion", "rankings", "laboratorio", "juego", "masrico", "elecciones", "conflictos", "acerca"];
 let paginaActual = "inicio";
 const versusAbierto = () => paginaActual === "comparacion";
 function mostrarPagina(nombre) {
@@ -1760,6 +1834,8 @@ function mostrarPagina(nombre) {
   if (nombre === "comercio") abrirComercio();
   if (nombre === "finanzas") abrirFinanzas();
   if (nombre === "bcra") abrirBCRA();
+  if (nombre === "actividad") abrirActividad();
+  if (nombre === "comparador") abrirComparador();
   if (nombre === "glosario") { renderGlosario(); Promise.all([PROV ? null : cargarProvincias(), FINANZAS ? null : cargarFinanzas()]).then(() => paginaActual === "glosario" && renderGlosario()); }
   if (nombre === "calendario") renderCalendario();
   if (nombre === "masrico") abrirMasRico();
@@ -1908,6 +1984,8 @@ function indiceBusqueda() {
   todosMerc().forEach(x => add("📈", x.nombre, `Mercados · ${fmtMerc(x)}`, `${x.nombre} ${x.ticker} cotizacion precio accion`, () => { mercSel = x.clave; irA_("mercados")(); }));
   add("🌐", "Tasas de los bancos centrales", "Mercados · Fed, BCE, Brasil y más", "tasa interes banco central fed bce reserva federal politica monetaria tasas mundo", () => { irA_("mercados")(); setTimeout(() => { const el = document.getElementById("bcBloque"); if (el) el.scrollIntoView(); }, 300); });
   add("🌐", "Curva del Tesoro de EE.UU.", "Mercados · bonos del Tesoro", "curva rendimientos tesoro treasury bonos estados unidos invertida 10 años 2 años", () => { irA_("mercados")(); setTimeout(() => { const el = document.getElementById("curvaBloque"); if (el) el.scrollIntoView(); }, 300); });
+  add("🏭", "Actividad, precios y empleo", "EMAE por sector, inflación, comercio y empleo", "actividad emae sectores construccion industria agro mineria inflacion nucleo regulados estacionales comercio exterior exportaciones importaciones balanza saldo energia empleo registrado sipa salario real", irA_("actividad"));
+  add("📊", "Comparador de series", "Cruzá dos datos de Argentina", "comparador comparar series correlacion relacion cruzar datos", irA_("comparador"));
   add("🏛️", "BCRA: compras de dólares y reservas", "Cuánto compra el Central y por qué se mueve la base", "bcra compras dolares compra de divisas reservas base monetaria emision factores banco central", irA_("bcra"));
   add("🏦", "Argentina financiera", "Reservas, tasas, bonos y actividad", "reservas bcra banco central tasas badlar tamar plazo fijo base monetaria emision depositos prestamos bonos al30 gd30 globales bonares emae actividad rem inflacion esperada", irA_("finanzas"));
   [["reservas", "Reservas del BCRA"], ["badlar", "Tasa BADLAR"], ["tamar", "Tasa TAMAR"], ["base", "Base monetaria"], ["rem", "Inflación esperada (REM)"]].forEach(([k, t]) =>
@@ -3761,7 +3839,7 @@ let BCRA = null, bcraCargando = null, bcraRC = 90, bcraRR = 365, bcraCharts = {}
 function abrirBCRA() {
   if (!BCRA) { document.getElementById("bcraKpis").innerHTML = `<p class="note">Cargando…</p>`;
     if (!bcraCargando) bcraCargando = leer("bcra.json").then(d => { BCRA = d; }).catch(() => { BCRA = {}; });
-    bcraCargando.then(() => paginaActual === "bcra" && renderBCRA()); return; }
+    bcraCargando.then(() => paginaActual === "bcra" && renderBCRA()); cargarSeriesAr().then(() => paginaActual === "bcra" && BCRA && renderBCRAExtra()); return; }
   renderBCRA(); Object.values(bcraCharts).forEach(c => c.resize());
 }
 const usdM = v => `US$ ${nf(v, Math.abs(v) < 100 ? 1 : 0)} M`;
@@ -3775,7 +3853,7 @@ function renderBCRA() {
   const sum = pref => C.filter(x => x[0].startsWith(pref)).reduce((a, x) => a + x[1], 0);
   const ultHabil = [...C].reverse().find(x => x[1] !== 0) || uc;
   const ur = R[R.length - 1], rAnt = R[R.length - 2];
-  const rAnio = (R.find(x => x[0] >= `${anio}-01-01`) || R[0]);
+  const rAnio = [...R].reverse().find(x => x[0] < `${anio}-01-01`) || R[0];   /* el último dato del año anterior */
   const kpi = (t, v, s) => `<div class="bcra-kpi"><span>${t}</span><b>${v}</b><small>${s}</small></div>`;
   document.getElementById("bcraKpis").innerHTML =
     kpi("Última compra con movimiento", conSigno(ultHabil[1], usdM), `el ${fl(ultHabil[0])}`) +
@@ -3836,6 +3914,277 @@ function renderBCRA() {
     yAxis: { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => nf(v) }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
     series: filas.map((f, i) => ({ name: f.nombre, type: "bar", stack: "t", data: f.data.map(v => +v.toFixed(1)), itemStyle: { color: paleta[i % paleta.length] }, barMaxWidth: 26 }))
   }, true);
+  renderBCRAExtra();
+}
+
+/* ---------- SERIES MENSUALES DE ARGENTINA (series_ar.json): actividad, BCRA y comparador ---------- */
+let SAR = null, sarCargando = null;
+function cargarSeriesAr() {
+  if (!sarCargando) sarCargando = leer("series_ar.json").then(d => { SAR = d.series || {}; }).catch(() => { SAR = {}; });
+  return sarCargando;
+}
+const SA = k => (SAR && SAR[k] && SAR[k].serie) || [];
+const mapaSerie = s => new Map(s);
+const mesAnt = (m, n) => { const [y, mm] = m.split("-").map(Number); const t = y * 12 + mm - 1 - n; return `${Math.floor(t / 12)}-${String(t % 12 + 1).padStart(2, "0")}`; };
+const varMes = s => { const M = mapaSerie(s); return s.filter(([m]) => M.has(mesAnt(m, 1))).map(([m, v]) => [m, (v / M.get(mesAnt(m, 1)) - 1) * 100]); };
+const varIA = s => { const M = mapaSerie(s); return s.filter(([m]) => M.has(mesAnt(m, 12))).map(([m, v]) => [m, (v / M.get(mesAnt(m, 12)) - 1) * 100]); };
+const ejeMes = ax => Object.assign({}, ax, { formatter: v => `${MESES[+v.slice(5, 7) - 1].slice(0, 3)} ${v.slice(2, 4)}` });
+function graf(id, opt) {
+  const el = document.getElementById(id); if (!el) return null;
+  const c = echarts.getInstanceByDom(el) || echarts.init(el); c.setOption(opt, true); return c;
+}
+const tipBase = () => ({ trigger: "axis", backgroundColor: css("--surface"), borderColor: css("--line"), textStyle: { color: css("--ink") } });
+
+/* --- secciones nuevas del BCRA --- */
+function renderBCRAExtra() {
+  const { line, ink, ax } = chartBase(), pal = [css("--accent"), css("--b"), css("--good"), css("--warn"), css("--bad"), "#9AA4B0"];
+  /* reservas: factores del año */
+  const FR = BCRA.factores_reservas || {}, R = BCRA.reservas || [];
+  if (FR["78"] && R.length) {
+    const anio = R[R.length - 1][0].slice(0, 4), suma = k => FR[k] ? FR[k].serie.filter(x => x[0].startsWith(anio)).reduce((a, x) => a + x[1], 0) : 0;
+    const ini = [...R].reverse().find(x => x[0] < `${anio}-01-01`) || R[0], total = R[R.length - 1][1] - ini[1];
+    const partes = [["Compras", suma("78")], ["Organismos internacionales", suma("79")], ["Tesoro y sector público", suma("80")], ["Encajes en dólares", suma("81")], ["Otros", suma("82")]];
+    partes.push(["Valuación y otros", total - partes.reduce((a, p) => a + p[1], 0)]);
+    const filas = [["Variación total", total], ...partes];
+    document.getElementById("bcraResBloque").hidden = false;
+    document.getElementById("bcraResT").textContent = `¿Por qué se movieron las reservas en ${anio}?`;
+    graf("bcraResChart", {
+      grid: { left: 70, right: 14, top: 24, bottom: 54 }, tooltip: Object.assign(tipBase(), { formatter: ps => `<b>${ps[0].name}</b><br>${conSigno(ps[0].value, usdM)}` }),
+      xAxis: { type: "category", data: filas.map(f => f[0]), axisLabel: Object.assign({}, ax, { interval: 0, width: 90, overflow: "break" }), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+      yAxis: { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => nf(v) }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+      series: [{ type: "bar", barMaxWidth: 46, data: filas.map((f, i) => ({ value: Math.round(f[1]), itemStyle: { color: i === 0 ? css("--accent") : f[1] >= 0 ? css("--good") : css("--bad") } })),
+        label: { show: true, position: "top", color: ink, fontSize: 11, formatter: p => nf(p.value) } }]
+    });
+  }
+  if (!SAR) return;
+  const desde = mesAnt(SA("reservas").length ? SA("reservas")[SA("reservas").length - 1][0] : "2026-01", 60);
+  const recorte = s => s.filter(x => x[0] >= desde);
+  /* dólares en los bancos */
+  if (SA("dep_usd").length && SA("prest_usd").length) {
+    document.getElementById("bcraUsdBloque").hidden = false;
+    const d = recorte(SA("dep_usd")), p = recorte(SA("prest_usd")), r = recorte(SA("ratio_usd"));
+    graf("bcraUsdChart", {
+      grid: { left: 64, right: 50, top: 36, bottom: 28 }, legend: { top: 0, left: 0, textStyle: { color: ink } }, tooltip: tipBase(),
+      xAxis: { type: "category", data: d.map(x => x[0]), axisLabel: ejeMes(ax), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+      yAxis: [{ type: "value", axisLabel: Object.assign({}, ax, { formatter: v => nf(v / 1000) + " mil M" }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+              { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => v + "%" }), splitLine: { show: false } }],
+      series: [{ name: "Depósitos", type: "line", data: d.map(x => Math.round(x[1])), symbol: "none", lineStyle: { color: pal[0], width: 2 }, itemStyle: { color: pal[0] } },
+               { name: "Préstamos", type: "line", data: p.map(x => Math.round(x[1])), symbol: "none", lineStyle: { color: pal[1], width: 2 }, itemStyle: { color: pal[1] } },
+               { name: "Préstamos / depósitos", type: "line", yAxisIndex: 1, data: r.map(x => +x[1].toFixed(1)), symbol: "none", lineStyle: { color: pal[2], width: 1.5, type: "dashed" }, itemStyle: { color: pal[2] } }]
+    });
+  }
+  /* tasas */
+  const tasas = [["call", "Call"], ["repo", "Repo"], ["badlar", "BADLAR"], ["tamar", "TAMAR"], ["pf30", "Plazo fijo"]].filter(([k]) => SA(k).length);
+  if (tasas.length) {
+    document.getElementById("bcraTasasBloque").hidden = false;
+    const desdeT = mesAnt(SA("badlar")[SA("badlar").length - 1][0], 24), meses = SA("badlar").filter(x => x[0] >= desdeT).map(x => x[0]);
+    graf("bcraTasasChart", {
+      grid: { left: 50, right: 14, top: 36, bottom: 28 }, legend: { top: 0, left: 0, textStyle: { color: ink } }, tooltip: Object.assign(tipBase(), { valueFormatter: v => v == null ? "—" : nf(v, 1) + "%" }),
+      xAxis: { type: "category", data: meses, axisLabel: ejeMes(ax), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+      yAxis: { type: "value", scale: true, axisLabel: Object.assign({}, ax, { formatter: v => v + "%" }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+      series: tasas.map(([k, n], i) => { const M = mapaSerie(SA(k)); return { name: n, type: "line", data: meses.map(m => M.has(m) ? +M.get(m).toFixed(2) : null), symbol: "none", lineStyle: { color: pal[i], width: 2 }, itemStyle: { color: pal[i] } }; })
+    });
+  }
+  /* encajes y pases */
+  if (SA("encajes").length) {
+    document.getElementById("bcraPasBloque").hidden = false;
+    const e = recorte(SA("encajes")), P = mapaSerie(SA("pases"));
+    graf("bcraPasChart", {
+      grid: { left: 50, right: 14, top: 36, bottom: 28 }, legend: { top: 0, left: 0, textStyle: { color: ink } }, tooltip: Object.assign(tipBase(), { valueFormatter: v => v == null ? "—" : "$ " + nf(v, 1) + " billones" }),
+      xAxis: { type: "category", data: e.map(x => x[0]), axisLabel: ejeMes(ax), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+      yAxis: { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => nf(v) }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+      series: [{ name: "Encajes (cuentas de los bancos en el BCRA)", type: "line", data: e.map(x => +(x[1] / 1e6).toFixed(2)), symbol: "none", lineStyle: { color: pal[0], width: 2 }, itemStyle: { color: pal[0] } },
+               { name: "Pases pasivos", type: "line", data: e.map(x => P.has(x[0]) ? +(P.get(x[0]) / 1e6).toFixed(2) : null), symbol: "none", lineStyle: { color: pal[1], width: 2 }, itemStyle: { color: pal[1] } }]
+    });
+  }
+}
+
+/* --- página de Actividad, precios y empleo --- */
+/* empleo registrado total = suma de las cinco categorías (solo si están todas, para que cierre con las barras) */
+function empleoSuma() {
+  const ks = ["empleo_priv", "empleo_pub", "empleo_casas", "empleo_auto", "empleo_mono"];
+  if (!ks.every(k => SA(k).length)) return [];
+  const Ms = ks.map(k => mapaSerie(SA(k)));
+  return SA("empleo_priv").filter(([m]) => Ms.every(M => M.has(m))).map(([m]) => [m, Ms.reduce((a, M) => a + M.get(m), 0)]);
+}
+function abrirActividad() {
+  if (!SAR) { document.getElementById("actKpis").innerHTML = `<p class="note">Cargando…</p>`; cargarSeriesAr().then(() => paginaActual === "actividad" && renderActividad()); return; }
+  renderActividad();
+}
+function renderActividad() {
+  const { line, ink, ax } = chartBase(), pal = [css("--accent"), css("--b"), css("--good"), css("--warn"), css("--bad"), "#9AA4B0"];
+  const ult = s => s.length ? s[s.length - 1] : null, mn = m => `${MESES[+m.slice(5) - 1]} ${m.slice(0, 4)}`;
+  const kpi = (t, v, sub) => `<div class="bcra-kpi"><span>${t}</span><b>${v}</b><small>${sub}</small></div>`;
+  const K = [];
+  const em = ult(varMes(SA("emae"))), emIA = ult(varIA(SA("emae_orig")));
+  if (em) K.push(kpi("Actividad (EMAE)", conSigno(em[1], v => nf(v, 1) + "%"), `contra el mes anterior · ${emIA ? conSigno(emIA[1], v => nf(v, 1) + "%") + " contra un año antes" : ""} · ${mn(em[0])}`));
+  const inf = ult(SA("inflacion")), infIA = ult(SA("inflacion_ia"));
+  if (inf) K.push(kpi("Inflación", nf(inf[1], 1) + "%", `en ${mn(inf[0])}${infIA ? ` · ${nf(infIA[1], 1)}% en un año` : ""}`));
+  const sc = SA("saldo_com"), sl = ult(sc);
+  if (sl) { const acum = sc.filter(x => x[0].startsWith(sl[0].slice(0, 4))).reduce((a, x) => a + x[1], 0); K.push(kpi("Saldo comercial", conSigno(sl[1], usdM), `en ${mn(sl[0])} · ${conSigno(acum, usdM)} en el año`)); }
+  const et = empleoSuma(), eu = ult(et), e0 = et.find(x => x[0] === "2023-11");
+  if (eu && e0) K.push(kpi("Empleo registrado", nf(eu[1] / 1000, 2) + " M", `${conSigno(eu[1] - e0[1], v => nf(v, 0) + " mil")} desde nov 2023 · ${mn(eu[0])}`));
+  document.getElementById("actKpis").innerHTML = K.join("");
+  document.getElementById("actFecha").textContent = em ? `EMAE al ${mn(em[0])}` : "Actividad, precios y empleo";
+  /* EMAE */
+  const E = SA("emae").filter(x => x[0] >= mesAnt(ult(SA("emae"))[0], 48)), VM = mapaSerie(varMes(SA("emae")));
+  graf("actEmae", {
+    grid: { left: 50, right: 44, top: 14, bottom: 28 }, tooltip: tipBase(),
+    xAxis: { type: "category", data: E.map(x => x[0]), axisLabel: ejeMes(ax), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+    yAxis: [{ type: "value", scale: true, axisLabel: ax, splitLine: { lineStyle: { color: line, type: "dashed" } } }, { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => v + "%" }), splitLine: { show: false } }],
+    series: [{ name: "Var. mensual (%)", type: "bar", yAxisIndex: 1, data: E.map(x => { const v = VM.get(x[0]); return v == null ? null : { value: +v.toFixed(2), itemStyle: { color: v >= 0 ? css("--good") : css("--bad"), opacity: .6 } }; }), barMaxWidth: 8 },
+             { name: "EMAE (índice)", type: "line", data: E.map(x => +x[1].toFixed(1)), symbol: "none", lineStyle: { color: pal[0], width: 2.2 }, itemStyle: { color: pal[0] } }]
+  });
+  /* sectores */
+  const SEC = [["emae_mineria", "Minería, petróleo y gas"], ["emae_agro", "Agro"], ["emae_comercio", "Comercio"], ["emae_ind", "Industria"], ["emae_constr", "Construcción"], ["emae_orig", "Total"]];
+  const sec = SEC.map(([k, n]) => [n, ult(varIA(SA(k)))]).filter(x => x[1]).sort((a, b) => b[1][1] - a[1][1]);
+  if (sec.length) {
+    document.getElementById("actSecT").textContent = mn(sec[0][1][0]);
+    graf("actSec", {
+      grid: { left: 150, right: 50, top: 6, bottom: 20 }, tooltip: Object.assign(tipBase(), { axisPointer: { type: "shadow" }, formatter: ps => `<b>${ps[0].name}</b><br>${conSigno(ps[0].value, v => nf(v, 1) + "%")} en un año` }),
+      yAxis: { type: "category", inverse: true, data: sec.map(x => x[0]), axisLabel: Object.assign({}, ax, { fontSize: 12 }), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+      xAxis: { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => v + "%" }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+      series: [{ type: "bar", barMaxWidth: 22, data: sec.map(x => ({ value: +x[1][1].toFixed(1), itemStyle: { color: x[0] === "Total" ? css("--accent") : x[1][1] >= 0 ? css("--good") : css("--bad") } })), label: { show: true, position: "right", color: ink, fontSize: 11, formatter: p => conSigno(p.value, v => nf(v, 1) + "%") } }]
+    });
+  }
+  /* IPC por categorías */
+  const CAT = [["ipc_general", "Nivel general"], ["ipc_nucleo", "Núcleo"], ["ipc_regulados", "Regulados"], ["ipc_estac", "Estacionales"]].filter(([k]) => SA(k).length);
+  if (CAT.length) {
+    const vm = Object.fromEntries(CAT.map(([k]) => [k, mapaSerie(varMes(SA(k)))]));
+    const u = CAT.map(([k]) => ult(SA(k))[0]).sort()[0], meses = [mesAnt(u, 2), mesAnt(u, 1), u];
+    graf("actIpc", {
+      grid: { left: 44, right: 14, top: 36, bottom: 28 }, legend: { top: 0, left: 0, textStyle: { color: ink } }, tooltip: Object.assign(tipBase(), { axisPointer: { type: "shadow" }, valueFormatter: v => v == null ? "—" : nf(v, 1) + "%" }),
+      xAxis: { type: "category", data: CAT.map(c => c[1]), axisLabel: ax, axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+      yAxis: { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => v + "%" }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+      series: meses.map((m, i) => ({ name: mn(m), type: "bar", barMaxWidth: 26, data: CAT.map(([k]) => { const v = vm[k].get(m); return v == null ? null : +v.toFixed(1); }), itemStyle: { color: [pal[5], pal[1], pal[0]][i] },
+        label: { show: i === 2, position: "top", color: ink, fontSize: 11, formatter: p => nf(p.value, 1) } }))
+    });
+  }
+  /* comercio */
+  if (SA("expo").length) {
+    const X = SA("expo").filter(x => x[0] >= mesAnt(ult(SA("expo"))[0], 60)), I = mapaSerie(SA("impo")), S = mapaSerie(SA("saldo_com"));
+    graf("actCom", {
+      grid: { left: 60, right: 14, top: 36, bottom: 28 }, legend: { top: 0, left: 0, textStyle: { color: ink } }, tooltip: Object.assign(tipBase(), { valueFormatter: v => v == null ? "—" : usdM(v) }),
+      xAxis: { type: "category", data: X.map(x => x[0]), axisLabel: ejeMes(ax), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+      yAxis: { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => nf(v) }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+      series: [{ name: "Saldo", type: "bar", barMaxWidth: 8, data: X.map(x => { const v = S.get(x[0]); return v == null ? null : { value: Math.round(v), itemStyle: { color: v >= 0 ? css("--good") : css("--bad"), opacity: .7 } }; }) },
+               { name: "Exportaciones", type: "line", data: X.map(x => Math.round(x[1])), symbol: "none", lineStyle: { color: pal[0], width: 2 }, itemStyle: { color: pal[0] } },
+               { name: "Importaciones", type: "line", data: X.map(x => I.has(x[0]) ? Math.round(I.get(x[0])) : null), symbol: "none", lineStyle: { color: pal[1], width: 2 }, itemStyle: { color: pal[1] } }]
+    });
+  }
+  const SE = SA("saldo_energia");
+  document.getElementById("actEnergiaBox").hidden = !SE.length;
+  if (SE.length) {
+    const anios = [...new Set(SE.map(x => x[0].slice(0, 4)))].sort().slice(-6), M = mapaSerie(SE), ua = anios[anios.length - 1];
+    graf("actEnergia", {
+      grid: { left: 60, right: 14, top: 36, bottom: 28 }, legend: { top: 0, left: 0, textStyle: { color: ink } }, tooltip: Object.assign(tipBase(), { valueFormatter: v => v == null ? "—" : usdM(v) }),
+      xAxis: { type: "category", data: MESES.map(x => x.slice(0, 3)), axisLabel: ax, axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+      yAxis: { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => nf(v) }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+      series: anios.map(a => { let ac = 0; return { name: a, type: "line", symbol: "none", data: MESES.map((_, i) => { const v = M.get(`${a}-${String(i + 1).padStart(2, "0")}`); if (v == null) return null; ac += v; return Math.round(ac); }),
+        lineStyle: { width: a === ua ? 3 : 1.2, color: a === ua ? css("--accent") : css("--muted"), opacity: a === ua ? 1 : .5 }, itemStyle: { color: a === ua ? css("--accent") : css("--muted") } }; })
+    });
+  }
+  /* empleo */
+  const EMP = [["empleo_priv", "Asalariados privados"], ["empleo_pub", "Asalariados públicos"], ["empleo_casas", "Casas particulares"], ["empleo_auto", "Autónomos"], ["empleo_mono", "Monotributistas"]];
+  const dif = EMP.map(([k, n]) => { const s = SA(k), u = ult(s), b = s.find(x => x[0] === "2023-11"); return u && b ? [n, u[1] - b[1], u[0]] : null; }).filter(Boolean);
+  const tot = empleoSuma(), tu = ult(tot), tb = tot.find(x => x[0] === "2023-11");
+  if (tu && tb) dif.push(["Total registrado", tu[1] - tb[1], tu[0]]);
+  if (dif.length) {
+    document.getElementById("actEmpT").textContent = `Hasta ${mn(dif[0][2])}`;
+    graf("actEmp", {
+      grid: { left: 150, right: 60, top: 6, bottom: 20 }, tooltip: Object.assign(tipBase(), { axisPointer: { type: "shadow" }, formatter: ps => `<b>${ps[0].name}</b><br>${conSigno(ps[0].value, v => nf(v, 1) + " mil personas")}` }),
+      yAxis: { type: "category", inverse: true, data: dif.map(x => x[0]), axisLabel: Object.assign({}, ax, { fontSize: 12 }), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+      xAxis: { type: "value", axisLabel: ax, splitLine: { lineStyle: { color: line, type: "dashed" } } },
+      series: [{ type: "bar", barMaxWidth: 22, data: dif.map(x => ({ value: +x[1].toFixed(1), itemStyle: { color: x[0] === "Total registrado" ? css("--accent") : x[1] >= 0 ? css("--good") : css("--bad") } })), label: { show: true, position: "right", color: ink, fontSize: 11, formatter: p => conSigno(p.value, v => nf(v, 1)) } }]
+    });
+  }
+  /* salario real: índice de salarios / índice de precios armado con la inflación mensual */
+  const W = SA("salarios"), INF = SA("inflacion");
+  if (W.length && INF.length) {
+    const P = {}; let pv = 100; INF.forEach(([m, v]) => { pv *= 1 + v / 100; P[m] = pv; });
+    const r = W.filter(([m]) => P[m]).map(([m, v]) => [m, v / P[m]]), b = r.find(x => x[0] === "2023-11");
+    if (b) { const rr = r.filter(x => x[0] >= "2021-01").map(([m, v]) => [m, v / b[1] * 100]);
+      graf("actSal", {
+        grid: { left: 50, right: 14, top: 12, bottom: 28 }, tooltip: Object.assign(tipBase(), { valueFormatter: v => nf(v, 1) }),
+        xAxis: { type: "category", data: rr.map(x => x[0]), axisLabel: ejeMes(ax), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+        yAxis: { type: "value", scale: true, axisLabel: ax, splitLine: { lineStyle: { color: line, type: "dashed" } } },
+        series: [{ name: "Salario real", type: "line", data: rr.map(x => +x[1].toFixed(1)), symbol: "none", lineStyle: { color: pal[0], width: 2.2 }, itemStyle: { color: pal[0] }, areaStyle: { color: pal[0], opacity: .06 } }]
+      }); }
+  }
+}
+
+/* --- comparador de series --- */
+const CMP_T = [["nivel", "Nivel"], ["vm", "Var. % mensual"], ["ia", "Var. % anual"]];
+let cmpListo = false;
+const CMP_EJ = [
+  ["Compras del BCRA y dólar", "compras", "nivel", "mayorista", "vm", 0],
+  ["Dinero (M2) e inflación", "m2priv_ia", "nivel", "inflacion_ia", "nivel", 0],
+  ["Tasas y préstamos", "badlar", "nivel", "prest_pesos", "ia", 0],
+  ["Actividad e importaciones", "emae", "ia", "impo", "ia", 0],
+  ["Dólar e inflación (6 meses después)", "mayorista", "vm", "inflacion", "nivel", -6],
+];
+function abrirComparador() {
+  if (!SAR) { cargarSeriesAr().then(() => paginaActual === "comparador" && abrirComparador()); return; }
+  if (!cmpListo) {
+    cmpListo = true;
+    const grupos = {}; Object.entries(SAR).forEach(([k, v]) => (grupos[v.grupo] = grupos[v.grupo] || []).push([k, v.nombre]));
+    const opts = Object.entries(grupos).map(([g, xs]) => `<optgroup label="${g}">${xs.map(([k, n]) => `<option value="${k}">${n}</option>`).join("")}</optgroup>`).join("");
+    ["cmpA", "cmpB"].forEach(id => document.getElementById(id).innerHTML = opts);
+    ["cmpTA", "cmpTB"].forEach(id => document.getElementById(id).innerHTML = CMP_T.map(([v, t]) => `<option value="${v}">${t}</option>`).join(""));
+    document.getElementById("cmpLag").innerHTML = [-12, -9, -6, -3, -2, -1, 0, 1, 2, 3, 6, 9, 12].map(n => `<option value="${n}"${n === 0 ? " selected" : ""}>${n === 0 ? "Sin correr" : n < 0 ? `${-n} ${-n === 1 ? "mes" : "meses"} después` : `${n} ${n === 1 ? "mes" : "meses"} antes`}</option>`).join("");
+    document.getElementById("cmpDesde").innerHTML = [2016, 2018, 2020, 2022, 2024].map(a => `<option value="${a}"${a === 2020 ? " selected" : ""}>Desde ${a}</option>`).join("");
+    document.getElementById("cmpEjemplos").innerHTML = CMP_EJ.map((e, i) => SAR[e[1]] && SAR[e[3]] ? `<button class="btn" type="button" data-i="${i}">${e[0]}</button>` : "").join("");
+    document.querySelectorAll("#cmpEjemplos .btn").forEach(b => b.onclick = () => { const e = CMP_EJ[+b.dataset.i]; cmpSet(e[1], e[2], e[3], e[4], e[5]); });
+    ["cmpA", "cmpB", "cmpTA", "cmpTB", "cmpLag", "cmpDesde"].forEach(id => document.getElementById(id).onchange = renderComparador);
+    const e = CMP_EJ.find(e => SAR[e[1]] && SAR[e[3]]); if (e) cmpSet(e[1], e[2], e[3], e[4], e[5]); else return;
+  }
+  renderComparador();
+}
+function cmpSet(a, ta, b, tb, lag) {
+  document.getElementById("cmpA").value = a; document.getElementById("cmpTA").value = ta;
+  document.getElementById("cmpB").value = b; document.getElementById("cmpTB").value = tb;
+  document.getElementById("cmpLag").value = String(lag); renderComparador();
+}
+const cmpTrans = (s, t) => t === "vm" ? varMes(s) : t === "ia" ? varIA(s) : s;
+function renderComparador() {
+  const a = document.getElementById("cmpA").value, b = document.getElementById("cmpB").value, ta = document.getElementById("cmpTA").value, tb = document.getElementById("cmpTB").value;
+  const lag = +document.getElementById("cmpLag").value, desde = document.getElementById("cmpDesde").value + "-01";
+  const A = cmpTrans(SA(a), ta), B0 = cmpTrans(SA(b), tb);
+  /* correr la serie 2: con lag = -6, el valor de B en un mes se compara con A de 6 meses antes */
+  const B = B0.map(([m, v]) => [mesAnt(m, -lag), v]);
+  const meses = [...new Set([...A, ...B].map(x => x[0]))].filter(m => m >= desde).sort();
+  const MA = mapaSerie(A), MB = mapaSerie(B);
+  const nom = (k, t) => `${SAR[k].nombre}${t === "vm" ? " (var. % mensual)" : t === "ia" ? " (var. % anual)" : ""}`;
+  const uni = (k, t) => t === "nivel" ? SAR[k].unidad : "%";
+  const { line, ink, ax } = chartBase(), cA = css("--accent"), cB = css("--b");
+  const fmt = v => Math.abs(v) >= 1e6 ? nf(v / 1e6, 1) + " M" : Math.abs(v) >= 1e4 ? nf(v / 1e3, 0) + " mil" : nf(v, Math.abs(v) < 10 ? 1 : 0);
+  graf("cmpChart", {
+    grid: { left: 64, right: 64, top: 48, bottom: 28 }, legend: { top: 0, left: 0, textStyle: { color: ink } }, tooltip: Object.assign(tipBase(), { valueFormatter: v => v == null ? "—" : fmt(v) }),
+    xAxis: { type: "category", data: meses, axisLabel: ejeMes(ax), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+    yAxis: [{ type: "value", scale: true, name: uni(a, ta), nameTextStyle: { color: cA }, axisLabel: Object.assign({}, ax, { formatter: fmt }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+            { type: "value", scale: true, name: uni(b, tb), nameTextStyle: { color: cB }, axisLabel: Object.assign({}, ax, { formatter: fmt }), splitLine: { show: false } }],
+    series: [{ name: nom(a, ta), type: "line", data: meses.map(m => MA.has(m) ? +MA.get(m).toFixed(3) : null), symbol: "none", connectNulls: true, lineStyle: { color: cA, width: 2.2 }, itemStyle: { color: cA } },
+             { name: nom(b, tb) + (lag ? ` · corrida ${Math.abs(lag)} ${Math.abs(lag) === 1 ? "mes" : "meses"}` : ""), type: "line", yAxisIndex: 1, data: meses.map(m => MB.has(m) ? +MB.get(m).toFixed(3) : null), symbol: "none", connectNulls: true, lineStyle: { color: cB, width: 2.2 }, itemStyle: { color: cB } }]
+  });
+  document.getElementById("cmpNota").textContent = `Fuentes: ${SAR[a].fuente}${SAR[b].fuente !== SAR[a].fuente ? " y " + SAR[b].fuente : ""}. ${lag ? `La serie 2 está corrida ${Math.abs(lag)} ${Math.abs(lag) === 1 ? "mes" : "meses"} ${lag < 0 ? "hacia atrás: cada punto muestra lo que pasó con ella después" : "hacia adelante: cada punto muestra lo que pasó con ella antes"}.` : ""}`;
+  /* correlación y dispersión */
+  const pares = meses.filter(m => MA.has(m) && MB.has(m)).map(m => [MA.get(m), MB.get(m), m]);
+  const res = document.getElementById("cmpRes");
+  if (pares.length < 6) { res.innerHTML = `<p class="note">Hay muy pocos meses en común para calcular la relación.</p>`; return; }
+  const n = pares.length, mx = d3.mean(pares, p => p[0]), my = d3.mean(pares, p => p[1]);
+  const sxy = d3.sum(pares, p => (p[0] - mx) * (p[1] - my)), sxx = d3.sum(pares, p => (p[0] - mx) ** 2), syy = d3.sum(pares, p => (p[1] - my) ** 2);
+  const r = sxy / Math.sqrt(sxx * syy), pend = sxy / sxx, ord = my - pend * mx;
+  const fuerza = Math.abs(r) >= .7 ? "fuerte" : Math.abs(r) >= .4 ? "moderada" : Math.abs(r) >= .2 ? "débil" : "casi nula";
+  res.innerHTML = `Correlación: <b class="n">${nf(r, 2)}</b> con ${n} meses en común. Es una relación <b>${fuerza}</b>${Math.abs(r) >= .2 ? ` y <b>${r > 0 ? "positiva" : "negativa"}</b>: cuando una sube, la otra tiende a ${r > 0 ? "subir" : "bajar"}` : ""}.
+    <br><span class="note">La correlación va de −1 a 1. Que dos series se muevan juntas no quiere decir que una cause a la otra: puede haber un tercer factor que mueve a las dos. Probá correr la serie 2 para ver si una se adelanta.</span>`;
+  const xs = pares.map(p => p[0]), xmin = Math.min(...xs), xmax = Math.max(...xs);
+  graf("cmpScatter", {
+    grid: { left: 64, right: 20, top: 20, bottom: 48 }, tooltip: { trigger: "item", backgroundColor: css("--surface"), borderColor: line, textStyle: { color: ink }, formatter: p => p.seriesIndex ? "" : `<b>${mesNombre(p.data[2])}</b><br>${fmt(p.data[0])} · ${fmt(p.data[1])}` },
+    xAxis: { type: "value", scale: true, name: nom(a, ta), nameLocation: "middle", nameGap: 30, nameTextStyle: { color: cA }, axisLabel: Object.assign({}, ax, { formatter: fmt }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+    yAxis: { type: "value", scale: true, axisLabel: Object.assign({}, ax, { formatter: fmt }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+    series: [{ type: "scatter", data: pares, symbolSize: 7, itemStyle: { color: cA, opacity: .7 } },
+             { type: "line", data: [[xmin, ord + pend * xmin], [xmax, ord + pend * xmax]], symbol: "none", lineStyle: { color: cB, width: 2, type: "dashed" } }]
+  });
 }
 
 /* ---------- COMERCIO MUNDIAL: quién exporta e importa cada producto (productos.json, de UN Comtrade) ---------- */
@@ -4399,7 +4748,7 @@ function textoFuentes() {
   const fecha = new Date(DATOS.generado).toLocaleDateString("es-AR", { day: "numeric", month: "long", year: "numeric" });
   document.getElementById("fuentes").textContent = `Datos macro: Banco Mundial y FMI (World Economic Outlook), 1960–${ANIO}, actualizados automáticamente el ${fecha}. Inflación: índice de precios al consumidor del Banco Mundial; donde falta, deflactor del PBI o FMI. Deuda pública: FMI; donde falta, Banco Mundial. Promedios mundiales: Banco Mundial. Fichas y datos políticos escritos a mano, actualizados a ${CURADO.actualizado}.`;
 }
-function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); renderLab(); if (paginaActual === "argentina") renderAgCharts(); if (paginaActual === "comercio" && PRODUCTOS) renderComercio(); if (paginaActual === "finanzas" && FINANZAS) renderFinanzas(); if (paginaActual === "mercados" && GLOBAL) renderGlobal(); if (paginaActual === "bcra" && BCRA) renderBCRA(); } }
+function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); renderLab(); if (paginaActual === "argentina") renderAgCharts(); if (paginaActual === "comercio" && PRODUCTOS) renderComercio(); if (paginaActual === "finanzas" && FINANZAS) renderFinanzas(); if (paginaActual === "mercados" && GLOBAL) renderGlobal(); if (paginaActual === "bcra" && BCRA) renderBCRA(); if (paginaActual === "actividad" && SAR) renderActividad(); if (paginaActual === "comparador" && SAR && cmpListo) renderComparador(); } }
 
 const leer = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: error ${r.status}`); return r.json(); });
 Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null), leer("riesgo.json").catch(() => null), leer("calendario.json").catch(() => null), leer("mercados.json").catch(() => null), leer("socios.json").catch(() => null)])

@@ -99,6 +99,45 @@ def parte_compras(factores):
     return out
 
 
+# Factores de variación de las reservas: el BCRA los numera seguidos después de las compras (78)
+FACTORES_RESERVAS = range(78, 84)
+
+
+def parte_factores_reservas(lista):
+    """Por qué subieron o bajaron las reservas cada día (en millones de US$)."""
+    print("· Factores de variación de las reservas")
+    por_id = {v["idVariable"]: v for v in lista}
+    salida = {}
+    for idv in FACTORES_RESERVAS:
+        v = por_id.get(idv)
+        if not v:
+            continue
+        try:
+            s = serie(idv)
+        except Exception as e:
+            print(f"     ⚠️  {idv}: {str(e)[:60]}")
+            continue
+        desc = v["descripcion"]
+        salida[str(idv)] = {"desc_bcra": desc, "serie": s}
+        print(f"     · {idv}: {desc[:90]} · en {date.today().year}: "
+              f"{sum(x for f, x in s if f.startswith(str(date.today().year))):,.0f}")
+    return salida
+
+
+def parte_tesoro(lista):
+    """Depósitos del Tesoro en pesos en el BCRA (millones de $)."""
+    print("· Depósitos del Tesoro en el BCRA")
+    cand = [v for v in lista if "government deposits" in v["descripcion"].lower() and "foreign" not in v["descripcion"].lower()]
+    if VER:
+        for v in cand:
+            print(f"        {v['idVariable']}: {v['descripcion']}")
+    if not cand:
+        raise RuntimeError("no encontré los depósitos del gobierno en pesos")
+    s = serie(cand[0]["idVariable"])
+    print(f"     · {cand[0]['descripcion'][:80]} · último {s[-1] if s else '—'}")
+    return {"desc_bcra": cand[0]["descripcion"], "serie": s}
+
+
 def parte_reservas():
     print("· Reservas día por día")
     s = serie(RESERVAS)
@@ -151,6 +190,11 @@ def main():
             print(f"     ❌ compras: {str(e)[:120]}")
         salida["reservas"] = parte_reservas()
         ok += 1
+        for clave, funcion in (("factores_reservas", parte_factores_reservas), ("tesoro", parte_tesoro)):
+            try:
+                salida[clave] = funcion(lista)
+            except Exception as e:
+                print(f"     ❌ {clave}: {str(e)[:120]}")
     except Exception as e:
         print(f"     ❌ BCRA: {str(e)[:120]} (dejo el dato anterior)")
     try:
@@ -158,7 +202,7 @@ def main():
         ok += 1
     except Exception as e:
         print(f"     ❌ letras: {str(e)[:120]} (dejo el dato anterior)")
-    for k in ("factores", "compras", "reservas", "letras"):
+    for k in ("factores", "compras", "reservas", "letras", "factores_reservas", "tesoro"):
         if k not in salida and k in anterior:
             salida[k] = anterior[k]
     if ok == 0:
