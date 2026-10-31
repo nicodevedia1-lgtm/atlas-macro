@@ -6,6 +6,8 @@ Datos del Banco Central para la página "BCRA":
   · Factores de explicación de la base monetaria: por qué se emitieron o absorbieron
     pesos cada día (compras de dólares, operaciones con el Tesoro, pases, letras, etc.).
   · Reservas día por día y su variación.
+  · Reservas netas estimadas: brutas − encajes de los depósitos en dólares − BOPREAL y letras
+    en dólares (las tres de la API, día por día) − swap con China (monto fijo, cargado a mano).
 Además baja los precios de las letras del Tesoro en pesos (Lecap/Boncap) de data912.com
 para la curva de tasas en pesos.
 
@@ -145,6 +147,30 @@ def parte_reservas():
     return s
 
 
+# Reservas netas. Las tres primeras salen de la API (millones de US$); el swap con China no está en
+# ninguna serie: se carga a mano acá cuando cambia (con la fecha y la fuente).
+NETAS_VARIABLES = {"encajes": 1243, "bopreal": 158}
+SWAP_CHINA = {"monto": 19000, "detalle": "RMB 130.000 millones",
+              "fuente": "BCRA, renovación del swap con el Banco Popular de China (5 de agosto de 2026)"}
+
+
+def parte_netas(reservas):
+    """[[fecha, brutas, encajes en dólares, BOPREAL y letras en dólares], ...] y el swap a mano."""
+    print("· Reservas netas (estimación)")
+    partes = {k: dict(serie(v)) for k, v in NETAS_VARIABLES.items()}
+    filas = []
+    for f, brutas in reservas:
+        e, b = partes["encajes"].get(f), partes["bopreal"].get(f)
+        if e is not None and b is not None:
+            filas.append([f, brutas, round(e, 1), round(b, 1)])
+    if not filas:
+        raise RuntimeError("no coinciden las fechas de las reservas, los encajes y los BOPREAL")
+    f, br, e, b = filas[-1]
+    print(f"     · {f}: brutas {br:,.0f} − encajes {e:,.0f} − BOPREAL {b:,.0f} − swap China {SWAP_CHINA['monto']:,.0f} "
+          f"= {br - e - b - SWAP_CHINA['monto']:,.0f}")
+    return {"serie": filas, "swap_china": SWAP_CHINA}
+
+
 def vencimiento(ticker):
     """'S31O5' → '2025-10-31'; 'T15E7' → '2027-01-15' (Lecap empiezan con S, Boncap con T)."""
     m = re.fullmatch(r"[ST](\d{2})([EFMAYJLGSOND])(\d)", ticker)
@@ -190,6 +216,10 @@ def main():
             print(f"     ❌ compras: {str(e)[:120]}")
         salida["reservas"] = parte_reservas()
         ok += 1
+        try:
+            salida["netas"] = parte_netas(salida["reservas"])
+        except Exception as e:
+            print(f"     ❌ reservas netas: {str(e)[:120]}")
         for clave, funcion in (("factores_reservas", parte_factores_reservas), ("tesoro", parte_tesoro)):
             try:
                 salida[clave] = funcion(lista)
@@ -202,7 +232,7 @@ def main():
         ok += 1
     except Exception as e:
         print(f"     ❌ letras: {str(e)[:120]} (dejo el dato anterior)")
-    for k in ("factores", "compras", "reservas", "letras", "factores_reservas", "tesoro"):
+    for k in ("factores", "compras", "reservas", "letras", "factores_reservas", "tesoro", "netas"):
         if k not in salida and k in anterior:
             salida[k] = anterior[k]
     if ok == 0:

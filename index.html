@@ -1025,6 +1025,14 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
       <div id="bcraReservas" class="ag-chart"></div>
       <p class="note">Reservas brutas, en millones de dólares. Incluyen el swap con China y los dólares de los depósitos que los bancos dejan en el Central (encajes), por eso las reservas "netas" son bastante más bajas.</p>
     </section>
+    <section class="ag-bloque" id="bcraNetasBloque" hidden>
+      <div class="ag-tit"><h2>Reservas netas (estimación)</h2><span class="note" id="bcraNetasT"></span></div>
+      <p class="note">No hay un número oficial: cada uno resta cosas distintas. Acá restamos de las reservas brutas los dólares que no son del BCRA y que tendría que devolver: los encajes de los depósitos en dólares (son de los ahorristas), los BOPREAL y letras en dólares, y el swap con China. No restamos los repos con bancos internacionales, el swap con EE.UU. si se usa, ni la deuda con el FMI (que es del Tesoro): con esos, las netas dan más bajas, y con el criterio del FMI dan negativas.</p>
+      <div id="bcraNetasCuenta" class="ag-chart ag-chart-chica"></div>
+      <h3 class="bc-sub">Brutas y netas, día por día</h3>
+      <div id="bcraNetasChart" class="ag-chart ag-chart-chica"></div>
+      <p class="note" id="bcraNetasFuente"></p>
+    </section>
     <section class="ag-bloque">
       <div class="ag-tit"><h2>¿Por qué se mueve la base monetaria?</h2></div>
       <p class="note">Cada barra suma lo que emitió (arriba de cero) o absorbió (abajo) el BCRA en el mes, según el motivo, en miles de millones de pesos. Cuando compra dólares, emite pesos; cuando le vende dólares al Tesoro o absorbe con letras y pases, los retira.</p>
@@ -1308,7 +1316,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
             <tr><td>Reservas, base monetaria, tasas (BADLAR, TAMAR, plazo fijo), dólar mayorista, depósitos, préstamos e inflación esperada (REM)</td><td>Banco Central de la República Argentina, API de estadísticas</td><td>Todos los días hábiles</td></tr>
             <tr><td>Tasas de interés de los bancos centrales del mundo</td><td>BIS (Banco de Pagos Internacionales), tasas de política monetaria</td><td>Una vez por semana</td></tr>
             <tr><td>Curva de rendimientos del Tesoro de EE.UU.</td><td>Departamento del Tesoro de EE.UU.</td><td>Una vez por semana</td></tr>
-            <tr><td>Compras de dólares del BCRA, reservas día por día y factores de explicación de la base monetaria</td><td>Banco Central de la República Argentina, API de estadísticas</td><td>Todos los días hábiles</td></tr>
+            <tr><td>Compras de dólares del BCRA, reservas día por día, factores de explicación de la base monetaria y reservas netas estimadas (brutas menos encajes en dólares, BOPREAL y letras en dólares, y el swap con China, este último cargado a mano)</td><td>Banco Central de la República Argentina, API de estadísticas</td><td>Todos los días hábiles</td></tr>
             <tr><td>Bandas cambiarias, balance cambiario (compra de dólares de las personas, utilidades y dividendos, deuda y ONs), tipo de cambio real multilateral y morosidad del crédito por línea</td><td>Banco Central de la República Argentina, planillas de Excel (bandas cambiarias, anexo del balance cambiario, serie del ITCRM e informe sobre bancos). Las bandas de abril a diciembre de 2025 se reconstruyen con la regla de ese período</td><td>Los martes y viernes (el BCRA las publica una vez por mes; el ITCRM, todos los días)</td></tr>
             <tr><td>EMAE por sector, IPC por categorías, exportaciones e importaciones, empleo registrado y salarios</td><td>INDEC y Ministerio de Trabajo, vía la API de Series de Tiempo de datos.gob.ar</td><td>Todos los días hábiles (cada dato sale una vez por mes)</td></tr>
             <tr><td>Bonos en dólares (Bonares y Globales)</td><td>data912.com, con precios de BYMA</td><td>Todos los días hábiles</td></tr>
@@ -3969,6 +3977,35 @@ const tipBase = () => ({ trigger: "axis", backgroundColor: css("--surface"), bor
 /* --- secciones nuevas del BCRA --- */
 function renderBCRAExtra() {
   const { line, ink, ax } = chartBase(), pal = [css("--accent"), css("--b"), css("--good"), css("--warn"), css("--bad"), "#9AA4B0"];
+  /* reservas netas estimadas */
+  const N = BCRA.netas;
+  if (N && N.serie && N.serie.length) {
+    document.getElementById("bcraNetasBloque").hidden = false;
+    const sw = (N.swap_china && N.swap_china.monto) || 0, u = N.serie[N.serie.length - 1], neta = x => x[1] - x[2] - x[3] - sw;
+    const fd = d => `${+d.slice(8)} de ${MESES[+d.slice(5, 7) - 1].toLowerCase()} de ${d.slice(0, 4)}`;
+    document.getElementById("bcraNetasT").textContent = `Al ${fd(u[0])}`;
+    const pasos = [["Reservas brutas", u[1]], ["Encajes en dólares", -u[2]], ["BOPREAL y letras en dólares", -u[3]], ["Swap con China", -sw], ["Reservas netas", neta(u)]];
+    let acc = 0; const base = [], val = [];
+    pasos.forEach(([n, v], i) => { if (i === 0 || i === pasos.length - 1) { base.push(Math.min(0, v)); val.push(Math.abs(v)); acc = v; } else { acc += v; base.push(Math.min(acc, acc - v)); val.push(Math.abs(v)); } });
+    graf("bcraNetasCuenta", {
+      grid: { left: 70, right: 14, top: 24, bottom: 54 }, tooltip: Object.assign(tipBase(), { axisPointer: { type: "shadow" }, formatter: ps => { const i = ps[0].dataIndex; return `<b>${pasos[i][0]}</b><br>${i === 0 || i === pasos.length - 1 ? usdM(pasos[i][1]) : conSigno(pasos[i][1], usdM)}`; } }),
+      xAxis: { type: "category", data: innerWidth < 600 ? ["Brutas", "Encajes", "BOPREAL", "Swap", "Netas"] : pasos.map(p => p[0]), axisLabel: Object.assign({}, ax, { interval: 0, width: 90, overflow: "break" }), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+      yAxis: { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => nf(v) }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+      series: [{ type: "bar", stack: "w", data: base, itemStyle: { color: "transparent" }, tooltip: { show: false } },
+               { type: "bar", stack: "w", barMaxWidth: 56, data: val.map((v, i) => ({ value: Math.round(v), itemStyle: { color: i === 0 ? css("--accent") : i === pasos.length - 1 ? (pasos[i][1] >= 0 ? css("--good") : css("--bad")) : css("--bad") } })),
+                 label: { show: true, position: "top", color: ink, fontSize: 11, formatter: p => { const v = pasos[p.dataIndex][1]; return (p.dataIndex === 0 || p.dataIndex === pasos.length - 1 ? "" : "−") + nf(Math.abs(v)); } } }]
+    });
+    const S = N.serie.filter(x => x[0] >= mesAnt(u[0].slice(0, 7), 24) + "-01");
+    graf("bcraNetasChart", {
+      grid: { left: 64, right: 14, top: 36, bottom: 28 }, legend: { top: 0, left: 0, textStyle: { color: ink } }, tooltip: Object.assign(tipBase(), { valueFormatter: v => v == null ? "—" : usdM(v) }),
+      xAxis: { type: "category", data: S.map(x => x[0]), axisLabel: Object.assign({}, ax, { formatter: d => `${MESES[+d.slice(5, 7) - 1].slice(0, 3).toLowerCase()} ${d.slice(2, 4)}` }), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+      yAxis: { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => nf(v) }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+      series: [{ name: "Reservas brutas", type: "line", symbol: "none", data: S.map(x => Math.round(x[1])), lineStyle: { color: pal[0], width: 2 }, itemStyle: { color: pal[0] } },
+               { name: "Reservas netas (estimación)", type: "line", symbol: "none", data: S.map(x => Math.round(neta(x))), lineStyle: { color: pal[1], width: 2 }, itemStyle: { color: pal[1] },
+                 markLine: { symbol: "none", silent: true, label: { show: false }, lineStyle: { color: css("--muted"), type: "dashed" }, data: [{ yAxis: 0 }] } }]
+    });
+    document.getElementById("bcraNetasFuente").textContent = `Encajes en dólares (cuentas de los bancos en el BCRA) y BOPREAL y letras en dólares: API del BCRA, día por día. Swap con China: ${N.swap_china ? `${N.swap_china.detalle}, unos ${usdM(sw)}, monto fijo cargado a mano (fuente: ${N.swap_china.fuente})` : "sin dato"}. Como el swap se toma por su monto fijo, la línea de netas es la de las brutas corrida hacia abajo: no refleja cuánto del swap se usó en cada momento.`;
+  }
   /* reservas: factores del año */
   const FR = BCRA.factores_reservas || {}, R = BCRA.reservas || [];
   if (FR["78"] && R.length) {
