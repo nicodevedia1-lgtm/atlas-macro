@@ -1006,7 +1006,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <header class="top">
       <div class="eyebrow" id="bcraFecha">Banco Central</div>
       <h1>BCRA: dólares y reservas</h1>
-      <p class="lede">Cuántos dólares compra o vende el Banco Central cada día, cómo se mueven las reservas y por qué el BCRA emite o absorbe pesos.</p>
+      <p class="lede">Cuántos dólares compra o vende el Banco Central cada día, cómo se mueven las reservas, por qué el BCRA emite o absorbe pesos, adónde van los dólares del mercado de cambios, el tipo de cambio real y la morosidad del crédito.</p>
     </header>
     <div class="bcra-kpis" id="bcraKpis"></div>
     <section class="ag-bloque">
@@ -1044,7 +1044,25 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
       <p class="note">Lo que los bancos tienen depositado en el BCRA (encajes) y el stock de pases pasivos (pesos que el BCRA toma prestados a los bancos), en billones de pesos a fin de cada mes.</p>
       <div id="bcraPasChart" class="ag-chart"></div>
     </section>
-    <p class="note">Fuente: Banco Central (API de estadísticas, "factores de explicación" de la base monetaria y de las reservas). Se actualiza todos los días hábiles.</p>
+    <section class="ag-bloque" id="bcraBcBloque" hidden>
+      <div class="ag-tit"><h2>Balance cambiario: ¿adónde van los dólares?</h2><span class="note" id="bcraBcT"></span></div>
+      <p class="note">Lo que entró y salió por el mercado de cambios en el año, en millones de dólares. Abajo, mes a mes: cuántos dólares compraron las personas (formación de activos externos), cuánto giraron las empresas en utilidades y dividendos, y cuánto entró neto por préstamos, bonos y obligaciones negociables (ONs).</p>
+      <div class="bcra-kpis" id="bcraBcKpis"></div>
+      <div id="bcraBcChart" class="ag-chart"></div>
+    </section>
+    <section class="ag-bloque" id="bcraTcrBloque" hidden>
+      <div class="ag-tit"><h2>Tipo de cambio real</h2><div class="lab-chips" id="bcraTcrRango"></div></div>
+      <p class="note">Cuán caro o barato está el peso frente a las monedas de los socios comerciales, descontada la inflación de cada país (índice 17 de diciembre de 2015 = 100). Más alto: el peso está más barato (los productos argentinos son más competitivos y viajar afuera sale más caro). Más bajo: el peso está "apreciado".</p>
+      <div id="bcraTcrChart" class="ag-chart"></div>
+    </section>
+    <section class="ag-bloque" id="bcraIrrBloque" hidden>
+      <div class="ag-tit"><h2>Morosidad del crédito</h2><span class="note" id="bcraIrrT"></span></div>
+      <p class="note">Qué parte de los préstamos de los bancos al sector privado está en situación irregular (con atrasos de más de 90 días o en problemas), en %.</p>
+      <div id="bcraIrrChart" class="ag-chart"></div>
+      <h3 class="bc-sub">Por tipo de préstamo, último dato</h3>
+      <div id="bcraIrrLineas" class="ag-chart ag-chart-chica"></div>
+    </section>
+    <p class="note">Fuentes: Banco Central (API de estadísticas, "factores de explicación" de la base monetaria y de las reservas; y sus planillas del balance cambiario, del tipo de cambio real multilateral y del informe de bancos). La API se actualiza todos los días hábiles; las planillas, una vez por mes (el tipo de cambio real, todos los días).</p>
   </div>
 
   <div class="pagina" id="pag-actividad" hidden>
@@ -1285,6 +1303,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
             <tr><td>Tasas de interés de los bancos centrales del mundo</td><td>BIS (Banco de Pagos Internacionales), tasas de política monetaria</td><td>Una vez por semana</td></tr>
             <tr><td>Curva de rendimientos del Tesoro de EE.UU.</td><td>Departamento del Tesoro de EE.UU.</td><td>Una vez por semana</td></tr>
             <tr><td>Compras de dólares del BCRA, reservas día por día y factores de explicación de la base monetaria</td><td>Banco Central de la República Argentina, API de estadísticas</td><td>Todos los días hábiles</td></tr>
+            <tr><td>Balance cambiario (compra de dólares de las personas, utilidades y dividendos, deuda y ONs), tipo de cambio real multilateral y morosidad del crédito por línea</td><td>Banco Central de la República Argentina, planillas de Excel (anexo del balance cambiario, serie del ITCRM e informe sobre bancos)</td><td>Los martes y viernes (el BCRA las publica una vez por mes; el ITCRM, todos los días)</td></tr>
             <tr><td>EMAE por sector, IPC por categorías, exportaciones e importaciones, empleo registrado y salarios</td><td>INDEC y Ministerio de Trabajo, vía la API de Series de Tiempo de datos.gob.ar</td><td>Todos los días hábiles (cada dato sale una vez por mes)</td></tr>
             <tr><td>Bonos en dólares (Bonares y Globales)</td><td>data912.com, con precios de BYMA</td><td>Todos los días hábiles</td></tr>
             <tr><td>Actividad económica mensual (EMAE)</td><td>INDEC, vía la API de Series de Tiempo de datos.gob.ar</td><td>Todos los días hábiles (el dato sale una vez por mes)</td></tr>
@@ -3052,6 +3071,10 @@ const GLOSARIO = [
   { id: "m2", t: "M2", lar: "Agregado monetario", def: "Una medida más amplia de cuánto dinero hay en la economía: efectivo en manos del público más lo que hay en cuentas corrientes y cajas de ahorro. Si crece mucho más rápido que la producción, puede presionar sobre los precios.", dato: () => finTxt("m2var", "Variación en un año"), ir: ["finanzas", "Ver en Argentina financiera"] },
   { id: "emision", t: "Emisión monetaria", def: "Cuando el Banco Central crea pesos: por ejemplo, para comprar dólares, prestarle al Tesoro o pagar intereses. Emitir de más, sin que la gente quiera tener esos pesos, suele terminar en inflación.", ir: ["finanzas", "Ver la base monetaria"] },
   { id: "encajes", t: "Encajes", def: "La parte de los depósitos que los bancos no pueden prestar y tienen que dejar guardada (en el Banco Central o en efectivo). Subir los encajes saca pesos de la calle; bajarlos los libera.", ir: ["finanzas", "Ver depósitos y préstamos"] },
+  { id: "tcr", t: "Tipo de cambio real", lar: "ITCRM: índice de tipo de cambio real multilateral", def: "El precio del dólar (y de las otras monedas) corregido por la inflación de cada país. Si el dólar sube menos que la inflación argentina, el peso se 'aprecia': importar y viajar se abaratan y exportar cuesta más. El BCRA lo calcula contra una canasta de socios comerciales, ponderados por cuánto comerciamos con cada uno.", ir: ["bcra", "Ver la serie"] },
+  { id: "fae", t: "Formación de activos externos", lar: "FAE", def: "Los dólares que compran las personas y empresas para ahorrar o invertir afuera (billetes, cuentas, inversiones), sin un fin comercial. Es lo que en la calle se llama 'compra de dólares para atesoramiento'. El BCRA la publica todos los meses en el balance cambiario.", ir: ["bcra", "Ver el balance cambiario"] },
+  { id: "balcamb", t: "Balance cambiario", def: "La cuenta de todos los dólares que entran y salen por el mercado de cambios oficial: exportaciones e importaciones cobradas y pagadas, servicios, intereses, dividendos, deuda y compra de dólares de las personas. Es distinto del balance de pagos del INDEC, que registra las operaciones cuando ocurren y no cuando se pagan.", ir: ["bcra", "Ver el balance cambiario"] },
+  { id: "morosidad", t: "Morosidad (cartera irregular)", def: "La parte de los préstamos que no se está pagando bien: deudores con atrasos de más de 90 días o en situación de riesgo (situación 3 a 6 de la Central de Deudores). Sube cuando las tasas reales son altas o los ingresos caen.", ir: ["bcra", "Ver la morosidad"] },
   { id: "badlar", t: "BADLAR", lar: "Tasa de plazos fijos de más de un millón de pesos", def: "Lo que pagan los bancos privados por plazos fijos grandes, a 30 o 35 días. Es la tasa de referencia del mercado: muchos créditos y bonos se ajustan por ella.", dato: () => finTxt("badlar", "Hoy"), ir: ["finanzas", "Ver la serie"] },
   { id: "tamar", t: "TAMAR", lar: "Tasa de plazos fijos mayoristas", def: "Como la BADLAR, pero para depósitos de más de mil millones de pesos. Desde 2024 la usan muchas obligaciones negociables, bonos y créditos a empresas.", dato: () => finTxt("tamar", "Hoy"), ir: ["finanzas", "Ver la serie"] },
   { id: "tea", t: "TEA", lar: "Tasa efectiva anual", def: "Lo que rinde de verdad una inversión en un año si se reinvierten los intereses cada mes. Siempre es más alta que la TNA: una TNA del 24% en plazos fijos de 30 días renovados da una TEA de cerca del 26,8%.", ir: ["argentina", "Ver las tasas por banco", "ag-pf"] },
@@ -3920,7 +3943,8 @@ function renderBCRA() {
 /* ---------- SERIES MENSUALES DE ARGENTINA (series_ar.json): actividad, BCRA y comparador ---------- */
 let SAR = null, sarCargando = null;
 function cargarSeriesAr() {
-  if (!sarCargando) sarCargando = leer("series_ar.json").then(d => { SAR = d.series || {}; }).catch(() => { SAR = {}; });
+  if (!sarCargando) sarCargando = Promise.all(["series_ar.json", "series_excel.json"].map(a => leer(a).catch(() => ({}))))
+    .then(ds => { SAR = Object.assign({}, ...ds.map(d => d.series || {})); });
   return sarCargando;
 }
 const SA = k => (SAR && SAR[k] && SAR[k].serie) || [];
@@ -3995,6 +4019,77 @@ function renderBCRAExtra() {
       yAxis: { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => nf(v) }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
       series: [{ name: "Encajes (cuentas de los bancos en el BCRA)", type: "line", data: e.map(x => +(x[1] / 1e6).toFixed(2)), symbol: "none", lineStyle: { color: pal[0], width: 2 }, itemStyle: { color: pal[0] } },
                { name: "Pases pasivos", type: "line", data: e.map(x => P.has(x[0]) ? +(P.get(x[0]) / 1e6).toFixed(2) : null), symbol: "none", lineStyle: { color: pal[1], width: 2 }, itemStyle: { color: pal[1] } }]
+    });
+  }
+  renderBCRAExcel();
+}
+
+/* --- planillas del BCRA (series_excel.json): balance cambiario, tipo de cambio real y morosidad --- */
+let tcrDesde = "2015-01";
+function renderBCRAExcel() {
+  const { line, ink, ax } = chartBase(), pal = [css("--accent"), css("--b"), css("--good"), css("--warn"), css("--bad"), "#9AA4B0"];
+  const ult = s => s.length ? s[s.length - 1] : null, mn = m => `${MESES[+m.slice(5) - 1]} ${m.slice(0, 4)}`;
+  /* balance cambiario */
+  if (SA("bc_fae_ph").length || SA("bc_fae").length) {
+    document.getElementById("bcraBcBloque").hidden = false;
+    const u = ult(SA("bc_cc"))[0], anio = u.slice(0, 4), acum = k => SA(k).filter(x => x[0].startsWith(anio)).reduce((a, x) => a + x[1], 0);
+    document.getElementById("bcraBcT").textContent = u.endsWith("-01") ? `Enero de ${anio}` : `Enero a ${MESES[+u.slice(5) - 1].toLowerCase()} de ${anio}`;
+    const kp = [["Cuenta corriente cambiaria", "bc_cc", "saldo de exportaciones, importaciones, servicios, intereses y dividendos", 1],
+      ["Compra de dólares de las personas", "bc_fae_ph", "compra neta para ahorro o viajes (formación de activos externos)", 0],
+      ["Utilidades y dividendos", "bc_dividendos", "lo que giraron las empresas a sus dueños en el exterior", 0],
+      ["Préstamos, bonos y ONs", "bc_deuda", "ingreso neto por deuda de empresas, bancos y provincias", 1],
+      ["Inversión directa", "bc_ied", "ingreso neto de inversores del exterior", 1]].filter(([, k]) => SA(k).length);
+    document.getElementById("bcraBcKpis").innerHTML = kp.map(([t, k, sub, sg]) => `<div class="bcra-kpi"><span>${t}</span><b>${sg ? conSigno(acum(k), usdM) : usdM(acum(k))}</b><small>${sub}</small></div>`).join("");
+    const meses = SA("bc_cc").map(x => x[0]).filter(m => m >= mesAnt(u, 23));
+    const S = [["bc_fae_ph", "Compra de dólares de las personas", pal[1]], ["bc_dividendos", "Utilidades y dividendos", pal[3]], ["bc_deuda", "Préstamos, bonos y ONs (neto)", pal[2]]].filter(([k]) => SA(k).length);
+    graf("bcraBcChart", {
+      grid: { left: 60, right: 14, top: 36, bottom: 28 }, legend: { top: 0, left: 0, textStyle: { color: ink } }, tooltip: Object.assign(tipBase(), { axisPointer: { type: "shadow" }, valueFormatter: v => v == null ? "—" : usdM(v) }),
+      xAxis: { type: "category", data: meses, axisLabel: ejeMes(ax), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+      yAxis: { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => nf(v) }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+      series: S.map(([k, n, c]) => { const M = mapaSerie(SA(k)); return { name: n, type: "bar", barMaxWidth: 10, data: meses.map(m => M.has(m) ? Math.round(M.get(m)) : null), itemStyle: { color: c } }; })
+    });
+  }
+  /* tipo de cambio real */
+  if (SA("itcrm").length) {
+    document.getElementById("bcraTcrBloque").hidden = false;
+    const R = document.getElementById("bcraTcrRango");
+    R.innerHTML = [["2023-01", "3 años"], ["2015-01", "Desde 2015"], ["2003-01", "Desde 2003"], ["1997-01", "Todo"]].map(([d, t]) => `<button class="btn" type="button" data-d="${d}" aria-pressed="${d === tcrDesde}">${t}</button>`).join("");
+    R.querySelectorAll(".btn").forEach(x => x.onclick = () => { tcrDesde = x.dataset.d; renderBCRAExcel(); });
+    const T = [["itcrm", "Multilateral", pal[0]], ["itcrb_brasil", "Brasil", pal[2]], ["itcrb_eeuu", "EE.UU.", pal[3]], ["itcrb_china", "China", pal[1]], ["itcrb_euro", "Zona Euro", pal[5]]].filter(([k]) => SA(k).length);
+    const meses = SA("itcrm").map(x => x[0]).filter(m => m >= tcrDesde);
+    graf("bcraTcrChart", {
+      grid: { left: 44, right: 14, top: 36, bottom: 28 }, legend: { top: 0, left: 0, textStyle: { color: ink } }, tooltip: Object.assign(tipBase(), { valueFormatter: v => v == null ? "—" : nf(v, 1) }),
+      xAxis: { type: "category", data: meses, axisLabel: ejeMes(ax), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+      yAxis: { type: "value", scale: true, axisLabel: ax, splitLine: { lineStyle: { color: line, type: "dashed" } } },
+      series: T.map(([k, n, c], i) => { const M = mapaSerie(SA(k)); return { name: n, type: "line", symbol: "none", data: meses.map(m => M.has(m) ? +M.get(m).toFixed(1) : null),
+        lineStyle: { color: c, width: i === 0 ? 2.6 : 1.3, opacity: i === 0 ? 1 : .8 }, itemStyle: { color: c },
+        markLine: i === 0 ? { symbol: "none", silent: true, label: { color: css("--muted"), formatter: "dic 2015 = 100", position: "insideEndTop" }, lineStyle: { color: css("--muted"), type: "dashed" }, data: [{ yAxis: 100 }] } : undefined }; })
+    });
+  }
+  /* morosidad */
+  if (SA("irr").length) {
+    document.getElementById("bcraIrrBloque").hidden = false;
+    const u = ult(SA("irr"))[0], meses = SA("irr").map(x => x[0]).filter(m => m >= "2016-01");
+    document.getElementById("bcraIrrT").textContent = `Hasta ${mn(u).toLowerCase()}`;
+    const L = [["irr", "Total", pal[0], 2.6, "solid"], ["irr_fam", "Familias", pal[1], 2, "solid"], ["irr_emp", "Empresas", pal[2], 2, "solid"],
+      ["irr_fam_personales", "Préstamos personales", pal[3], 1.3, "dashed"], ["irr_fam_tarjetas", "Tarjetas", pal[5], 1.3, "dashed"]].filter(([k]) => SA(k).length);
+    graf("bcraIrrChart", {
+      grid: { left: 44, right: 14, top: 36, bottom: 28 }, legend: { top: 0, left: 0, textStyle: { color: ink } }, tooltip: Object.assign(tipBase(), { valueFormatter: v => v == null ? "—" : nf(v, 1) + "%" }),
+      xAxis: { type: "category", data: meses, axisLabel: ejeMes(ax), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+      yAxis: { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => v + "%" }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+      series: L.map(([k, n, c, w, t]) => { const M = mapaSerie(SA(k)); return { name: n, type: "line", symbol: "none", data: meses.map(m => M.has(m) ? +M.get(m).toFixed(2) : null), lineStyle: { color: c, width: w, type: t }, itemStyle: { color: c } }; })
+    });
+    /* por línea: familias y empresas, último dato y hace un año */
+    const LIN = [["Familias · personales", "irr_fam_personales"], ["Familias · tarjetas", "irr_fam_tarjetas"], ["Familias · prendarios", "irr_fam_prendarios"], ["Familias · hipotecarios", "irr_fam_hipotecarios"],
+      ["Empresas · adelantos", "irr_emp_adelantos"], ["Empresas · documentos", "irr_emp_documentos"], ["Empresas · prendarios", "irr_emp_prendarios"], ["Empresas · hipotecarios", "irr_emp_hipotecarios"]]
+      .filter(([, k]) => SA(k).length).map(([n, k]) => { const M = mapaSerie(SA(k)); return [n, M.get(u), M.get(mesAnt(u, 12))]; }).filter(x => x[1] != null);
+    graf("bcraIrrLineas", {
+      grid: { left: 160, right: 40, top: 30, bottom: 20 }, legend: { top: 0, left: 0, textStyle: { color: ink } },
+      tooltip: Object.assign(tipBase(), { axisPointer: { type: "shadow" }, valueFormatter: v => v == null ? "—" : nf(v, 1) + "%" }),
+      yAxis: { type: "category", inverse: true, data: LIN.map(x => x[0]), axisLabel: Object.assign({}, ax, { fontSize: 12 }), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+      xAxis: { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => v + "%" }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+      series: [{ name: mn(mesAnt(u, 12)), type: "bar", barMaxWidth: 10, data: LIN.map(x => x[2] == null ? null : +x[2].toFixed(1)), itemStyle: { color: css("--muted"), opacity: .55 } },
+               { name: mn(u), type: "bar", barMaxWidth: 10, data: LIN.map(x => +x[1].toFixed(1)), itemStyle: { color: css("--bad") }, label: { show: true, position: "right", color: ink, fontSize: 11, formatter: p => nf(p.value, 1) + "%" } }]
     });
   }
 }
@@ -4122,6 +4217,8 @@ const CMP_EJ = [
   ["Tasas y préstamos", "badlar", "nivel", "prest_pesos", "ia", 0],
   ["Actividad e importaciones", "emae", "ia", "impo", "ia", 0],
   ["Dólar e inflación (6 meses después)", "mayorista", "vm", "inflacion", "nivel", -6],
+  ["Tipo de cambio real y compra de dólares de las personas", "itcrm", "nivel", "bc_fae_ph", "nivel", 0],
+  ["Tasa de préstamos personales y morosidad (6 meses después)", "t_personales", "nivel", "irr_fam_personales", "nivel", -6],
 ];
 function abrirComparador() {
   if (!SAR) { cargarSeriesAr().then(() => paginaActual === "comparador" && abrirComparador()); return; }
@@ -4132,7 +4229,7 @@ function abrirComparador() {
     ["cmpA", "cmpB"].forEach(id => document.getElementById(id).innerHTML = opts);
     ["cmpTA", "cmpTB"].forEach(id => document.getElementById(id).innerHTML = CMP_T.map(([v, t]) => `<option value="${v}">${t}</option>`).join(""));
     document.getElementById("cmpLag").innerHTML = [-12, -9, -6, -3, -2, -1, 0, 1, 2, 3, 6, 9, 12].map(n => `<option value="${n}"${n === 0 ? " selected" : ""}>${n === 0 ? "Sin correr" : n < 0 ? `${-n} ${-n === 1 ? "mes" : "meses"} después` : `${n} ${n === 1 ? "mes" : "meses"} antes`}</option>`).join("");
-    document.getElementById("cmpDesde").innerHTML = [2016, 2018, 2020, 2022, 2024].map(a => `<option value="${a}"${a === 2020 ? " selected" : ""}>Desde ${a}</option>`).join("");
+    document.getElementById("cmpDesde").innerHTML = [2004, 2010, 2016, 2018, 2020, 2022, 2024].map(a => `<option value="${a}"${a === 2020 ? " selected" : ""}>Desde ${a}</option>`).join("");
     document.getElementById("cmpEjemplos").innerHTML = CMP_EJ.map((e, i) => SAR[e[1]] && SAR[e[3]] ? `<button class="btn" type="button" data-i="${i}">${e[0]}</button>` : "").join("");
     document.querySelectorAll("#cmpEjemplos .btn").forEach(b => b.onclick = () => { const e = CMP_EJ[+b.dataset.i]; cmpSet(e[1], e[2], e[3], e[4], e[5]); });
     ["cmpA", "cmpB", "cmpTA", "cmpTB", "cmpLag", "cmpDesde"].forEach(id => document.getElementById(id).onchange = renderComparador);
