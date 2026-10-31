@@ -1014,6 +1014,12 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
       <p class="note">Barras: lo que compró (o vendió, si es negativo) cada día hábil, en millones de dólares. Línea: el acumulado del período.</p>
       <div id="bcraCompras" class="ag-chart"></div>
     </section>
+    <section class="ag-bloque" id="bcraBandasBloque" hidden>
+      <div class="ag-tit"><h2>Dólar y bandas cambiarias</h2><div class="lab-chips" id="bcraBandasRango"></div></div>
+      <p class="note">El dólar mayorista puede moverse libre entre un piso y un techo. Si toca el techo, el BCRA vende dólares para que no suba más; si toca el piso, compra. Desde enero de 2026 el techo sube y el piso baja todos los meses según la inflación de dos meses antes. La parte punteada es lo que el BCRA ya anunció para los próximos días. Las bandas de 2025 (piso desde $1.000 y techo desde $1.400, que se movían 1% por mes) están reconstruidas con esa regla; las de 2026 son las que publica el BCRA.</p>
+      <div class="bcra-kpis" id="bcraBandasKpis"></div>
+      <div id="bcraBandasChart" class="ag-chart"></div>
+    </section>
     <section class="ag-bloque">
       <div class="ag-tit"><h2>Reservas</h2><div class="lab-chips" id="bcraRangoR"></div></div>
       <div id="bcraReservas" class="ag-chart"></div>
@@ -1303,7 +1309,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
             <tr><td>Tasas de interés de los bancos centrales del mundo</td><td>BIS (Banco de Pagos Internacionales), tasas de política monetaria</td><td>Una vez por semana</td></tr>
             <tr><td>Curva de rendimientos del Tesoro de EE.UU.</td><td>Departamento del Tesoro de EE.UU.</td><td>Una vez por semana</td></tr>
             <tr><td>Compras de dólares del BCRA, reservas día por día y factores de explicación de la base monetaria</td><td>Banco Central de la República Argentina, API de estadísticas</td><td>Todos los días hábiles</td></tr>
-            <tr><td>Balance cambiario (compra de dólares de las personas, utilidades y dividendos, deuda y ONs), tipo de cambio real multilateral y morosidad del crédito por línea</td><td>Banco Central de la República Argentina, planillas de Excel (anexo del balance cambiario, serie del ITCRM e informe sobre bancos)</td><td>Los martes y viernes (el BCRA las publica una vez por mes; el ITCRM, todos los días)</td></tr>
+            <tr><td>Bandas cambiarias, balance cambiario (compra de dólares de las personas, utilidades y dividendos, deuda y ONs), tipo de cambio real multilateral y morosidad del crédito por línea</td><td>Banco Central de la República Argentina, planillas de Excel (bandas cambiarias, anexo del balance cambiario, serie del ITCRM e informe sobre bancos). Las bandas de abril a diciembre de 2025 se reconstruyen con la regla de ese período</td><td>Los martes y viernes (el BCRA las publica una vez por mes; el ITCRM, todos los días)</td></tr>
             <tr><td>EMAE por sector, IPC por categorías, exportaciones e importaciones, empleo registrado y salarios</td><td>INDEC y Ministerio de Trabajo, vía la API de Series de Tiempo de datos.gob.ar</td><td>Todos los días hábiles (cada dato sale una vez por mes)</td></tr>
             <tr><td>Bonos en dólares (Bonares y Globales)</td><td>data912.com, con precios de BYMA</td><td>Todos los días hábiles</td></tr>
             <tr><td>Actividad económica mensual (EMAE)</td><td>INDEC, vía la API de Series de Tiempo de datos.gob.ar</td><td>Todos los días hábiles (el dato sale una vez por mes)</td></tr>
@@ -3071,6 +3077,7 @@ const GLOSARIO = [
   { id: "m2", t: "M2", lar: "Agregado monetario", def: "Una medida más amplia de cuánto dinero hay en la economía: efectivo en manos del público más lo que hay en cuentas corrientes y cajas de ahorro. Si crece mucho más rápido que la producción, puede presionar sobre los precios.", dato: () => finTxt("m2var", "Variación en un año"), ir: ["finanzas", "Ver en Argentina financiera"] },
   { id: "emision", t: "Emisión monetaria", def: "Cuando el Banco Central crea pesos: por ejemplo, para comprar dólares, prestarle al Tesoro o pagar intereses. Emitir de más, sin que la gente quiera tener esos pesos, suele terminar en inflación.", ir: ["finanzas", "Ver la base monetaria"] },
   { id: "encajes", t: "Encajes", def: "La parte de los depósitos que los bancos no pueden prestar y tienen que dejar guardada (en el Banco Central o en efectivo). Subir los encajes saca pesos de la calle; bajarlos los libera.", ir: ["finanzas", "Ver depósitos y préstamos"] },
+  { id: "bandas", t: "Bandas cambiarias", def: "El régimen del dólar desde abril de 2025: el mayorista flota libre entre un piso y un techo. Si llega al techo, el BCRA vende dólares; si llega al piso, compra. Arrancaron en $1.000 y $1.400 y se abrían 1% por mes; desde enero de 2026 se abren según la última inflación publicada.", ir: ["bcra", "Ver el dólar y las bandas"] },
   { id: "tcr", t: "Tipo de cambio real", lar: "ITCRM: índice de tipo de cambio real multilateral", def: "El precio del dólar (y de las otras monedas) corregido por la inflación de cada país. Si el dólar sube menos que la inflación argentina, el peso se 'aprecia': importar y viajar se abaratan y exportar cuesta más. El BCRA lo calcula contra una canasta de socios comerciales, ponderados por cuánto comerciamos con cada uno.", ir: ["bcra", "Ver la serie"] },
   { id: "fae", t: "Formación de activos externos", lar: "FAE", def: "Los dólares que compran las personas y empresas para ahorrar o invertir afuera (billetes, cuentas, inversiones), sin un fin comercial. Es lo que en la calle se llama 'compra de dólares para atesoramiento'. El BCRA la publica todos los meses en el balance cambiario.", ir: ["bcra", "Ver el balance cambiario"] },
   { id: "balcamb", t: "Balance cambiario", def: "La cuenta de todos los dólares que entran y salen por el mercado de cambios oficial: exportaciones e importaciones cobradas y pagadas, servicios, intereses, dividendos, deuda y compra de dólares de las personas. Es distinto del balance de pagos del INDEC, que registra las operaciones cuando ocurren y no cuando se pagan.", ir: ["bcra", "Ver el balance cambiario"] },
@@ -3941,10 +3948,10 @@ function renderBCRA() {
 }
 
 /* ---------- SERIES MENSUALES DE ARGENTINA (series_ar.json): actividad, BCRA y comparador ---------- */
-let SAR = null, sarCargando = null;
+let SAR = null, sarCargando = null, BANDAS = null;
 function cargarSeriesAr() {
   if (!sarCargando) sarCargando = Promise.all(["series_ar.json", "series_excel.json"].map(a => leer(a).catch(() => ({}))))
-    .then(ds => { SAR = Object.assign({}, ...ds.map(d => d.series || {})); });
+    .then(ds => { SAR = Object.assign({}, ...ds.map(d => d.series || {})); BANDAS = ds[1].bandas || null; });
   return sarCargando;
 }
 const SA = k => (SAR && SAR[k] && SAR[k].serie) || [];
@@ -4025,10 +4032,46 @@ function renderBCRAExtra() {
 }
 
 /* --- planillas del BCRA (series_excel.json): balance cambiario, tipo de cambio real y morosidad --- */
-let tcrDesde = "2015-01";
+let tcrDesde = "2015-01", bandasDesde = "2025-04-14";
 function renderBCRAExcel() {
   const { line, ink, ax } = chartBase(), pal = [css("--accent"), css("--b"), css("--good"), css("--warn"), css("--bad"), "#9AA4B0"];
   const ult = s => s.length ? s[s.length - 1] : null, mn = m => `${MESES[+m.slice(5) - 1]} ${m.slice(0, 4)}`;
+  /* bandas cambiarias + dólar mayorista (diario, de finanzas.json) */
+  if (BANDAS && BANDAS.serie && BANDAS.serie.length) {
+    if (!FINANZAS) cargarFinanzas().then(() => paginaActual === "bcra" && renderBCRAExcel());
+    const may = (FINANZAS && FINANZAS.bcra && FINANZAS.bcra.mayorista && FINANZAS.bcra.mayorista.serie) || [];
+    if (may.length) {
+      document.getElementById("bcraBandasBloque").hidden = false;
+      const R = document.getElementById("bcraBandasRango"), uM = may[may.length - 1];
+      const ops = [[mesAnt(uM[0].slice(0, 7), 3) + "-01", "3 meses"], [mesAnt(uM[0].slice(0, 7), 12) + "-01", "1 año"], ["2025-04-14", "Desde el inicio"]];
+      R.innerHTML = ops.map(([d, t]) => `<button class="btn" type="button" data-d="${d}" aria-pressed="${d === bandasDesde}">${t}</button>`).join("");
+      R.querySelectorAll(".btn").forEach(x => x.onclick = () => { bandasDesde = x.dataset.d; renderBCRAExcel(); });
+      const B = BANDAS.serie.filter(x => x[0] >= bandasDesde), M = new Map(may), hoyB = [...BANDAS.serie].reverse().find(x => x[0] <= uM[0]);
+      const dias = [...new Set([...B.map(x => x[0]), ...may.filter(x => x[0] >= bandasDesde).map(x => x[0])])].sort();
+      const BM = new Map(BANDAS.serie.map(x => [x[0], x])), fut = d => d > uM[0];
+      const fd = d => `${+d.slice(8)} ${MESES[+d.slice(5, 7) - 1].slice(0, 3).toLowerCase()} ${d.slice(2, 4)}`;
+      if (hoyB) {
+        const aTecho = (hoyB[2] / uM[1] - 1) * 100, aPiso = (1 - hoyB[1] / uM[1]) * 100, pos = (uM[1] - hoyB[1]) / (hoyB[2] - hoyB[1]) * 100;
+        const k = (t, v, sub) => `<div class="bcra-kpi"><span>${t}</span><b>${v}</b><small>${sub}</small></div>`;
+        document.getElementById("bcraBandasKpis").innerHTML = [
+          k("Dólar mayorista", "$ " + nf(uM[1], 2), `al ${fd(uM[0])}`),
+          k("Techo de la banda", "$ " + nf(hoyB[2], 2), `el dólar tendría que subir ${nf(aTecho, 1)}% para tocarlo`),
+          k("Piso de la banda", "$ " + nf(hoyB[1], 2), `tendría que bajar ${nf(aPiso, 1)}%`),
+          k("Ubicación dentro de la banda", nf(pos, 0) + "%", "0% = en el piso · 100% = en el techo")].join("");
+      }
+      const banda = (i, fu) => dias.map(d => { const b = BM.get(d); return b && (fu ? d >= uM[0] : d <= uM[0]) ? b[i] : null; });
+      const estilo = (c, t) => ({ type: "line", symbol: "none", connectNulls: true, lineStyle: { color: c, width: 1.6, type: t }, itemStyle: { color: c } });
+      graf("bcraBandasChart", {
+        grid: { left: 56, right: 14, top: 36, bottom: 28 }, legend: { top: 0, left: 0, textStyle: { color: ink }, data: ["Dólar mayorista", "Techo", "Piso"] },
+        tooltip: Object.assign(tipBase(), { formatter: ps => `<b>${fd(ps[0].axisValue)}</b>` + ps.filter(p => p.value != null && !(p.seriesName.endsWith(" ") && ps.some(q => q.seriesName === p.seriesName.trim() && q.value != null))).map(p => `<br>${p.marker}${p.seriesName.trim()}${fut(ps[0].axisValue) && p.seriesName !== "Dólar mayorista" ? " (anunciado)" : ""}: $ ${nf(p.value, 2)}`).join("") }),
+        xAxis: { type: "category", data: dias, axisLabel: Object.assign({}, ax, { formatter: fd }), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+        yAxis: { type: "value", min: v => Math.floor(v.min / 100) * 100 - 100, axisLabel: Object.assign({}, ax, { formatter: v => "$ " + nf(v) }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+        series: [Object.assign(estilo(css("--bad"), "solid"), { name: "Techo", data: banda(2, false) }), Object.assign(estilo(css("--bad"), "dotted"), { name: "Techo ", data: banda(2, true) }),
+                 Object.assign(estilo(css("--good"), "solid"), { name: "Piso", data: banda(1, false) }), Object.assign(estilo(css("--good"), "dotted"), { name: "Piso ", data: banda(1, true) }),
+                 { name: "Dólar mayorista", type: "line", symbol: "none", data: dias.map(d => M.has(d) ? M.get(d) : null), connectNulls: true, lineStyle: { color: css("--accent"), width: 2.4 }, itemStyle: { color: css("--accent") }, areaStyle: undefined }]
+      });
+    }
+  }
   /* balance cambiario */
   if (SA("bc_fae_ph").length || SA("bc_fae").length) {
     document.getElementById("bcraBcBloque").hidden = false;

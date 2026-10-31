@@ -7,6 +7,9 @@ Datos del BCRA que no están en su API y solo se publican en planillas de Excel:
     inversión directa, cuenta corriente cambiaria...  (mensual, millones de US$)
   · Tipo de cambio real multilateral (ITCRM) y bilaterales con Brasil, EE.UU., China y la
     Zona Euro (promedio mensual, índice 17-12-2015 = 100).
+  · Bandas cambiarias: piso y techo día por día (el BCRA publica desde enero de 2026, con los
+    días que faltan del mes siguiente ya proyectados; abril-diciembre de 2025 se reconstruye
+    con la regla de ese momento: arrancó en $1.000 y $1.400 y se movía 1% por mes).
   · Irregularidad (morosidad) del crédito: total, familias y empresas, por línea
     (personales, tarjetas, hipotecarios, prendarios, adelantos, documentos...) en %.
 
@@ -20,6 +23,7 @@ Uso:
 """
 
 import io
+from datetime import date
 import json
 import sys
 import warnings
@@ -41,6 +45,7 @@ PLANILLAS = {
     "cambiario": ("informes/anexo-estadistico-mercado-cambios-balance-cambiario.xlsx", "balance_cambiario.xlsx"),
     "itcrm": ("itcrm-serie.xlsx", "itcrm.xlsx"),
     "credito": ("informes/informe-bancos-anexo.xlsx", "informe_bancos.xlsx"),
+    "bandas": ("serie-completa-bandas-cambiarias.xlsx", "bandas.xlsx"),
 }
 
 GB, GT, GC = "Balance cambiario", "Tipo de cambio real", "Morosidad del crédito"
@@ -211,6 +216,37 @@ def parte_credito():
     return out
 
 
+# ---------------------------------------------------------------- bandas cambiarias
+INICIO_BANDAS = date(2025, 4, 14)          # primer día hábil del régimen: piso $1.000, techo $1.400
+
+
+def parte_bandas():
+    print("· Bandas cambiarias")
+    wb = libro("bandas")
+    filas = []
+    for f in wb[wb.sheetnames[0]].iter_rows(values_only=True):
+        f = [x for x in (f or []) if x is not None]           # la tabla no arranca en la columna A
+        if len(f) >= 3 and isinstance(f[0], datetime) and num(f[1]) and num(f[2]):
+            filas.append(f)
+    if not filas:
+        raise RuntimeError("no encontré las filas con fechas")
+    oficial = [[f[0].date().isoformat(), round(num(f[1]), 2), round(num(f[2]), 2)] for f in filas]
+    # 2025: interpolación geométrica día por día entre el inicio (1.000 / 1.400) y el primer dato oficial de 2026,
+    # que equivale a moverse a una tasa diaria constante (−1% y +1% por mes)
+    d1 = date.fromisoformat(oficial[0][0])
+    total = (d1 - INICIO_BANDAS).days
+    rec, d = [], INICIO_BANDAS
+    while d < d1:
+        if d.weekday() < 5:
+            t = (d - INICIO_BANDAS).days / total
+            rec.append([d.isoformat(), round(1000 * (oficial[0][1] / 1000) ** t, 2), round(1400 * (oficial[0][2] / 1400) ** t, 2)])
+        d = date.fromordinal(d.toordinal() + 1)
+    hoy = date.today().isoformat()
+    actual = [f for f in oficial if f[0] <= hoy][-1] if any(f[0] <= hoy for f in oficial) else oficial[0]
+    print(f"     · oficial desde {oficial[0][0]} hasta {oficial[-1][0]} · hoy ({actual[0]}): piso ${actual[1]:,.2f} · techo ${actual[2]:,.2f}")
+    return {"serie": rec + oficial, "oficial_desde": oficial[0][0]}
+
+
 def main():
     print("Atlas Macro · planillas del BCRA (balance cambiario, ITCRM, morosidad)")
     anterior = json.load(open(ARCHIVO_SALIDA, encoding="utf-8")) if ARCHIVO_SALIDA.exists() else {"series": {}}
@@ -224,6 +260,13 @@ def main():
         except Exception as e:
             print(f"     ❌ {str(e)[:150]} (dejo el dato anterior)")
             salida["series"].update({k: v for k, v in anterior["series"].items() if k.startswith(prefijos)})
+    try:
+        salida["bandas"] = parte_bandas()
+        ok += 1
+    except Exception as e:
+        print(f"     ❌ bandas: {str(e)[:150]} (dejo el dato anterior)")
+        if "bandas" in anterior:
+            salida["bandas"] = anterior["bandas"]
     if ok == 0:
         sys.exit("❌ No se pudo leer ninguna planilla: dejo el series_excel.json anterior")
     with open(ARCHIVO_SALIDA, "w", encoding="utf-8") as archivo:
