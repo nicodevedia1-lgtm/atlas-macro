@@ -641,6 +641,33 @@ footer a { color: var(--muted); text-decoration-color: var(--accent); text-under
 .lab-ayuda p { max-width: 75ch; font-size: 15px; }
 
 /* Juego: más rico o más pobre */
+/* juego: ¿dónde queda? */
+.dq-regiones { display: flex; flex-wrap: wrap; gap: 6px; }
+.dq-pregunta { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; font-size: 18px; color: var(--muted); }
+.dq-pregunta b { font-size: 28px; color: var(--ink); font-weight: 800; letter-spacing: -.01em; }
+.dq-mapa { position: relative; background: var(--sea); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; touch-action: none; }
+#dqMapa { width: 100%; aspect-ratio: 16 / 9; height: auto; display: block; cursor: crosshair; }
+@media (max-width: 640px) { #dqMapa { aspect-ratio: 4 / 3.4; } .dq-pregunta b { font-size: 23px; } }
+#dqMapa path.p { fill: var(--land); stroke: var(--border); stroke-width: .5; vector-effect: non-scaling-stroke; }
+#dqMapa path.p:hover { fill: var(--land-hover); }
+#dqMapa path.p.ok { fill: var(--good); }
+#dqMapa path.p.mal { fill: var(--bad); }
+#dqMapa path.linea { fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 5 4; vector-effect: non-scaling-stroke; pointer-events: none; }
+#dqMapa circle.clic { fill: var(--bad); stroke: var(--surface); stroke-width: 1.5; vector-effect: non-scaling-stroke; pointer-events: none; }
+.dq-zoom { position: absolute; right: 10px; top: 10px; display: grid; gap: 4px; }
+.dq-zoom button { width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 18px; cursor: pointer; }
+.dq-res { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px 18px; display: grid; gap: 10px; }
+.dq-res .dq-veredicto { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; font-size: 20px; font-weight: 800; }
+.dq-res .dq-veredicto small { font-size: 14px; font-weight: 500; color: var(--muted); }
+.dq-res .dq-pais { display: flex; align-items: center; gap: 10px; }
+.dq-res .dq-pais .flag { width: 48px; height: 32px; }
+.dq-res .dq-datos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 8px; }
+.dq-res .dq-datos div { background: var(--bg); border-radius: 10px; padding: 8px 10px; display: grid; gap: 2px; }
+.dq-res .dq-datos span { font-size: 12.5px; color: var(--muted); }
+.dq-res .dq-datos b { font-family: var(--f-data); font-size: 16px; }
+.dq-res p { color: var(--muted); font-size: 14.5px; line-height: 1.5; }
+.dq-res .j-acciones, .dq-final .j-acciones { display: flex; flex-wrap: wrap; gap: 8px; }
+.dq-res .go { border: 0; background: var(--accent); color: var(--surface); font-weight: 700; padding: 9px 16px; border-radius: 8px; cursor: pointer; font-size: 15px; }
 .mr-marcador { display: flex; gap: 22px; font-size: 15px; color: var(--muted); }
 .mr-marcador b { font-family: var(--f-data); font-size: 22px; color: var(--ink); margin-left: 6px; }
 .mr-tablero { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: 14px; align-items: stretch; }
@@ -750,7 +777,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm0" data-pags="argentina finanzas bcra actividad provincias calendario gobiernos">Argentina</button><div class="tab-menu" id="tm0" hidden><a href="#argentina" data-pag="argentina">Argentina hoy</a><a href="#finanzas" data-pag="finanzas">Argentina financiera</a><a href="#bcra" data-pag="bcra">BCRA: dólares y reservas</a><a href="#actividad" data-pag="actividad">Actividad, precios y empleo</a><a href="#provincias" data-pag="provincias">Provincias</a><a href="#calendario" data-pag="calendario">Calendario</a><a href="#gobiernos" data-pag="gobiernos">Gobiernos comparados</a></div></div>
     <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm1" data-pags="mercados comercio">Mercados</button><div class="tab-menu" id="tm1" hidden><a href="#mercados" data-pag="mercados">Bolsas, acciones y cripto</a><a href="#comercio" data-pag="comercio">Comercio mundial</a></div></div>
     <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm2" data-pags="rankings comparacion elecciones conflictos">Mundo</button><div class="tab-menu" id="tm2" hidden><a href="#rankings" data-pag="rankings">Rankings</a><a href="#comparacion" data-pag="comparacion">Comparar países</a><a href="#elecciones" data-pag="elecciones">Elecciones</a><a href="#conflictos" data-pag="conflictos">Conflictos</a></div></div>
-    <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm3" data-pags="juego masrico">Juegos</button><div class="tab-menu" id="tm3" hidden><a href="#juego" data-pag="juego">País del día</a><a href="#masrico" data-pag="masrico">¿Más rico o más pobre?</a></div></div>
+    <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm3" data-pags="juego masrico dondequeda">Juegos</button><div class="tab-menu" id="tm3" hidden><a href="#juego" data-pag="juego">País del día</a><a href="#masrico" data-pag="masrico">¿Más rico o más pobre?</a><a href="#dondequeda" data-pag="dondequeda">¿Dónde queda?</a></div></div>
     <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm4" data-pags="laboratorio comparador glosario">Herramientas</button><div class="tab-menu" id="tm4" hidden><a href="#laboratorio" data-pag="laboratorio">Laboratorio</a><a href="#comparador" data-pag="comparador">Comparador de series</a><a href="#glosario" data-pag="glosario">Glosario</a></div></div>
   </nav>
   <button class="tema" id="temaBtn" type="button" aria-label="Cambiar a modo claro" title="Modo claro / oscuro">
@@ -799,6 +826,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   <ul>
     <li><a href="#juego" data-pag="juego"><span class="nav-ico" aria-hidden="true">🎯</span><span>País del día<small>Adiviná el país con pistas económicas</small></span></a></li>
     <li><a href="#masrico" data-pag="masrico"><span class="nav-ico" aria-hidden="true">💰</span><span>¿Más rico o más pobre?<small>Juego: ¿hasta dónde llega tu racha?</small></span></a></li>
+    <li><a href="#dondequeda" data-pag="dondequeda"><span class="nav-ico" aria-hidden="true">📍</span><span>¿Dónde queda?<small>Juego: encontrá el país en el mapa</small></span></a></li>
   </ul>
   <p class="nav-grupo">Herramientas</p>
   <ul>
@@ -816,7 +844,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <h1>Atlas <span>Macro</span></h1>
     <p class="lede">Tocá un país en el mapa o buscalo arriba, y mirá cómo le va a su economía, explicado en simple. Debajo del mapa está todo lo demás: el dólar y la inflación de hoy, el juego del día, los rankings y más.</p>
     <nav class="accesos" aria-label="Ir a">
-      <a href="#argentina">🇦🇷 Argentina hoy</a><a href="#mercados">📈 Mercados</a><a href="#provincias">📍 Provincias</a><a href="#calendario">📅 Calendario</a><a href="#juego">🎯 País del día</a><a href="#masrico">💰 Más rico o más pobre</a><a href="#rankings">🏆 Rankings</a><a href="#elecciones">🗳️ Elecciones</a><a href="#conflictos">⚠️ Conflictos</a><a href="#glosario">📖 Glosario</a><a href="#laboratorio">🧪 Laboratorio</a><a href="#comparacion">⚖️ Comparar</a><a href="#gobiernos">🏛️ Gobiernos</a>
+      <a href="#argentina">🇦🇷 Argentina hoy</a><a href="#mercados">📈 Mercados</a><a href="#provincias">📍 Provincias</a><a href="#calendario">📅 Calendario</a><a href="#juego">🎯 País del día</a><a href="#masrico">💰 Más rico o más pobre</a><a href="#dondequeda">🗺️ ¿Dónde queda?</a><a href="#rankings">🏆 Rankings</a><a href="#elecciones">🗳️ Elecciones</a><a href="#conflictos">⚠️ Conflictos</a><a href="#glosario">📖 Glosario</a><a href="#laboratorio">🧪 Laboratorio</a><a href="#comparacion">⚖️ Comparar</a><a href="#gobiernos">🏛️ Gobiernos</a>
     </nav>
   </header>
 
@@ -1397,6 +1425,22 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <p class="note">PBI por persona en dólares: todo lo que produce un país en un año dividido por sus habitantes. Último dato del Banco Mundial y el FMI. Juegan los países independientes de más de 1 millón de habitantes.</p>
   </div>
 
+  <div class="pagina" id="pag-dondequeda" hidden>
+    <header class="top">
+      <div class="eyebrow">Juego</div>
+      <h1>¿Dónde queda?</h1>
+      <p class="lede">Te decimos un país y lo tenés que tocar en el mapa. Si le pegás, sumás 100 puntos; si le errás, sumás menos cuanto más lejos quedes, y si te pasás de 1.000 km perdés una vida. Arranca con países grandes y se pone más difícil. Después de cada ronda aparecen los datos del país.</p>
+    </header>
+    <div class="dq-regiones" id="dqRegiones" role="group" aria-label="Elegir región"></div>
+    <div class="mr-marcador"><span>Puntos <b id="dqPuntos">0</b></span><span>Vidas <b id="dqVidas">❤❤❤</b></span><span>Ronda <b id="dqRonda">1</b></span><span>Tu récord <b id="dqMejor">0</b></span></div>
+    <div class="dq-pregunta" id="dqPregunta"></div>
+    <div class="dq-mapa"><svg id="dqMapa" role="img" aria-label="Mapa para tocar el país"></svg>
+      <div class="dq-zoom"><button type="button" id="dqMas" aria-label="Acercar">+</button><button type="button" id="dqMenos" aria-label="Alejar">−</button><button type="button" id="dqCentro" aria-label="Volver a ver toda la región">⤢</button></div></div>
+    <div class="dq-res" id="dqRes" hidden></div>
+    <div class="mr-final dq-final" id="dqFinal" hidden></div>
+    <p class="note">Podés acercar el mapa con la rueda del mouse, con dos dedos o con los botones, y moverlo arrastrando. Juegan los países independientes con datos en Atlas Macro; los muy chicos aparecen recién en las rondas avanzadas.</p>
+  </div>
+
   <div class="pagina" id="pag-elecciones" hidden>
     <header class="top">
       <div class="eyebrow">Agenda</div>
@@ -1849,7 +1893,7 @@ const sinTildes = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowe
 /* ---------- PÁGINAS Y PANEL LATERAL ----------
    Cada sección es una "página": #inicio, #comparacion, #elecciones, #conflictos.
    Se cambia con el link (la dirección cambia, así funciona el botón "atrás" del navegador). */
-const PAGINAS = ["inicio", "argentina", "finanzas", "bcra", "actividad", "comparador", "mercados", "comercio", "provincias", "glosario", "gobiernos", "calendario", "comparacion", "rankings", "laboratorio", "juego", "masrico", "elecciones", "conflictos", "acerca"];
+const PAGINAS = ["inicio", "argentina", "finanzas", "bcra", "actividad", "comparador", "mercados", "comercio", "provincias", "glosario", "gobiernos", "calendario", "comparacion", "rankings", "laboratorio", "juego", "masrico", "dondequeda", "elecciones", "conflictos", "acerca"];
 let paginaActual = "inicio";
 const versusAbierto = () => paginaActual === "comparacion";
 function mostrarPagina(nombre) {
@@ -1877,6 +1921,7 @@ function mostrarPagina(nombre) {
   if (nombre === "glosario") { renderGlosario(); Promise.all([PROV ? null : cargarProvincias(), FINANZAS ? null : cargarFinanzas()]).then(() => paginaActual === "glosario" && renderGlosario()); }
   if (nombre === "calendario") renderCalendario();
   if (nombre === "masrico") abrirMasRico();
+  if (nombre === "dondequeda") abrirDondeQueda();
   if (nombre === "inicio") {
     // si la ventana cambió de tamaño mientras el mapa estaba oculto, lo rearmamos
     const r = document.getElementById("map").getBoundingClientRect();
@@ -2015,6 +2060,7 @@ function indiceBusqueda() {
   add("🧪", "Laboratorio de regresiones", "Laboratorio", "laboratorio regresion econometria correlacion grafico", irA_("laboratorio"));
   add("🎯", "País del día", "Juego", "juego jugar adivinar pais del dia", irA_("juego"));
   add("💰", "¿Más rico o más pobre?", "Juego", "juego jugar mas rico pobre pbi racha", irA_("masrico"));
+  add("🗺️", "¿Dónde queda?", "Juego", "juego jugar donde queda mapa geografia encontrar pais", irA_("dondequeda"));
   add("🗳️", "Próximas elecciones", "Agenda", "elecciones votacion calendario", irA_("elecciones"));
   add("⚠️", "Conflictos y crisis", "Mundo", "conflictos guerra crisis militar golpe", irA_("conflictos"));
   add("🏛️", "Quién gobierna cada país", "Mapa", "gobierno presidente izquierda derecha ideologia quien gobierna", () => { irA_("inicio")(); setModo("gob"); setVista("mundo"); });
@@ -2402,6 +2448,7 @@ function renderTarjetas() {
   tarjeta("juego", "🎯", `País del día #${hoyN}`, yaJugo ? `Ya jugaste hoy: ${jugado.intentos.includes(JUEGO_ORDEN[(hoyN - 1) % JUEGO_ORDEN.length]) ? jugado.intentos.length : "X"}/6` : "¿Qué país es? Adivinalo con pistas económicas",
     yaJugo ? "Mañana hay otro país" : "Un país nuevo cada día, el mismo para todos", yaJugo ? "Ver tu resultado" : "Jugar");
   tarjeta("masrico", "💰", "¿Más rico o más pobre?", "¿Chile o Uruguay? ¿Polonia o Portugal?", `Adiviná cuál tiene más PBI por persona${leerLocal("atlas-masrico-mejor", 0) ? ` · tu mejor racha: ${leerLocal("atlas-masrico-mejor", 0)}` : ""}`, "Jugar");
+  tarjeta("dondequeda", "🗺️", "¿Dónde queda?", "¿Sabés dónde está Kazajistán? ¿Y Malaui?", `Encontrá el país en el mapa${leerLocal("atlas-dq-mejor-mundo", 0) ? ` · tu récord: ${nf(leerLocal("atlas-dq-mejor-mundo", 0))} puntos` : ""}`, "Jugar");
   const pInf = proximoDe("inflacion");
   if (pInf) tarjeta("calendario", "📅", "Calendario económico", `El próximo dato de inflación sale ${enDias(diasHasta(pInf.fecha))}`, `${fechaLarga(pInf.fecha)} · datos del INDEC y feriados`, "Ver el calendario");
   tarjeta("comercio", "🚢", "Comercio mundial", "¿Quién le vende petróleo, soja o chips al mundo?", "22 productos en un mapa, y en qué puesto está Argentina", "Ver el mapa");
@@ -3333,6 +3380,144 @@ function mrResponder(r) {
 function abrirMasRico() {
   if (!mr.pool.length) mrArmarPool();
   if (!mr.a) mrNueva(); else mrRender();
+}
+
+/* ---------- JUEGO: ¿DÓNDE QUEDA? ---------- */
+const DQ_REGIONES = {
+  mundo:  { t: "Todo el mundo", caja: null, es: () => true },
+  america:{ t: "América", caja: [[-168, -56], [-34, 72]], es: r => /Sudam|Centroam|Caribe|Latina|Norteam|América del Norte/.test(r) },
+  europa: { t: "Europa", caja: [[-12, 35], [50, 70]], es: r => /Europa|Cáucaso/.test(r) },
+  africa: { t: "África", caja: [[-19, -36], [53, 38]], es: r => /África/.test(r) },
+  asia:   { t: "Asia y Oceanía", caja: [[25, -48], [180, 56]], es: r => /Asia|Oceanía|Pacífico|Medio Oriente/.test(r) && !/África/.test(r) },
+};
+const dq = { reg: "mundo", listo: false, k: null, puntos: 0, vidas: 3, ronda: 1, usados: new Set(), respondido: false, zoom: null, proj: null, svg: null, g: null };
+const dqFeat = () => { const m = {}; (features || []).forEach(f => { if (f.properties.iso) m[f.properties.iso] = f; }); return m; };
+let DQ_F = null;
+/* cuanto más avanzás, entran países más chicos (población en millones) */
+const dqMinPob = r => r <= 5 ? 25 : r <= 10 ? 8 : r <= 18 ? 2 : 0;
+function dqPool() {
+  const R = DQ_REGIONES[dq.reg], base = Object.keys(PAISES).filter(k => DQ_F[k] && PAISES[k].poblacion != null && R.es(PAISES[k].region) && PAISES[k].iso2);
+  let c = base.filter(k => PAISES[k].poblacion >= dqMinPob(dq.ronda) && !dq.usados.has(k));
+  if (c.length < 3) c = base.filter(k => !dq.usados.has(k));
+  if (!c.length) { dq.usados = new Set(); c = base; }
+  return c;
+}
+function dqNueva() {
+  dq.puntos = 0; dq.vidas = 3; dq.ronda = 1; dq.usados = new Set();
+  document.getElementById("dqFinal").hidden = true;
+  dqSiguiente();
+}
+function dqSiguiente() {
+  const c = dqPool(); dq.k = c[Math.floor(Math.random() * c.length)]; dq.usados.add(dq.k); dq.respondido = false;
+  document.getElementById("dqRes").hidden = true;
+  dqMarcador(); dqPregunta(); dqDibujar();
+}
+function dqMarcador() {
+  document.getElementById("dqPuntos").textContent = nf(dq.puntos);
+  document.getElementById("dqVidas").textContent = "❤".repeat(dq.vidas) + "♡".repeat(3 - dq.vidas);
+  document.getElementById("dqRonda").textContent = dq.ronda;
+  document.getElementById("dqMejor").textContent = nf(leerLocal("atlas-dq-mejor-" + dq.reg, 0));
+}
+function dqPregunta() {
+  document.getElementById("dqPregunta").innerHTML = `<span>Tocá en el mapa:</span> <b>${PAISES[dq.k].nombre}</b>`;
+}
+function dqRegiones() {
+  const el = document.getElementById("dqRegiones");
+  el.innerHTML = Object.entries(DQ_REGIONES).map(([k, r]) => `<button class="btn" type="button" data-r="${k}" aria-pressed="${k === dq.reg}">${r.t}</button>`).join("");
+  el.querySelectorAll(".btn").forEach(b => b.onclick = () => { if (b.dataset.r === dq.reg) return; dq.reg = b.dataset.r; dqRegiones(); dqNueva(); });
+}
+function dqDibujar() {
+  const el = document.getElementById("dqMapa"), r = el.getBoundingClientRect();
+  if (!r.width) return;
+  const W2 = r.width, H2 = r.height, R = DQ_REGIONES[dq.reg];
+  const objeto = R.caja ? { type: "MultiPoint", coordinates: [R.caja[0], R.caja[1], [R.caja[0][0], R.caja[1][1]], [R.caja[1][0], R.caja[0][1]]] } : { type: "FeatureCollection", features };
+  dq.proj = d3.geoNaturalEarth1().fitExtent([[8, 8], [W2 - 8, H2 - 8]], objeto);
+  const path = d3.geoPath(dq.proj);
+  const svg = d3.select(el).attr("viewBox", `0 0 ${W2} ${H2}`); svg.selectAll("*").remove();
+  dq.svg = svg;
+  svg.append("rect").attr("width", W2).attr("height", H2).attr("fill", "transparent");
+  dq.g = svg.append("g");
+  dq.g.selectAll("path.p").data(features).join("path").attr("class", "p").attr("d", path);
+  dq.zoom = d3.zoom().scaleExtent([1, 14]).translateExtent([[-W2 * .2, -H2 * .2], [W2 * 1.2, H2 * 1.2]]).on("zoom", e => dq.g.attr("transform", e.transform));
+  svg.call(dq.zoom).on("dblclick.zoom", null);
+  svg.call(dq.zoom.transform, d3.zoomIdentity);
+  svg.on("click", e => dqClic(e));
+  if (dq.respondido) dqMostrarRespuesta(false);
+}
+function dqZoomA(f) {
+  const el = document.getElementById("dqMapa"), r = el.getBoundingClientRect(), path = d3.geoPath(dq.proj);
+  const [[x0, y0], [x1, y1]] = path.bounds(f), k = Math.max(1, Math.min(8, .55 / Math.max((x1 - x0) / r.width, (y1 - y0) / r.height)));
+  const t = d3.zoomIdentity.translate(r.width / 2, r.height / 2).scale(k).translate(-(x0 + x1) / 2, -(y0 + y1) / 2);
+  dq.svg.transition().duration(reduced() ? 0 : 700).call(dq.zoom.transform, t);
+}
+function dqClic(e) {
+  if (dq.respondido || !dq.k) return;
+  const [x, y] = d3.pointer(e, dq.g.node()), ll = dq.proj.invert([x, y]);
+  if (!ll || isNaN(ll[0])) return;
+  const f = e.target && e.target.__data__ && e.target.__data__.properties ? e.target.__data__ : null;
+  const objetivo = DQ_F[dq.k], acierto = f && f.properties.iso === dq.k;
+  const km = acierto ? 0 : Math.round(d3.geoDistance(ll, d3.geoCentroid(objetivo)) * 6371);
+  const pts = acierto ? 100 : Math.max(0, Math.round(80 - km / 25));
+  dq.respondido = { ll, iso: f ? f.properties.iso : null, km, pts, acierto };
+  dq.puntos += pts;
+  if (!acierto && km > 1000) dq.vidas--;
+  dqMarcador();
+  dqMostrarRespuesta(true);
+}
+function dqMostrarRespuesta(conZoom) {
+  const a = dq.respondido, objetivo = DQ_F[dq.k], path = d3.geoPath(dq.proj);
+  dq.g.selectAll("path.p").classed("ok", f => f.properties.iso === dq.k).classed("mal", f => !a.acierto && a.iso && f.properties.iso === a.iso);
+  dq.g.selectAll("path.p.ok, path.p.mal").raise();
+  if (!a.acierto) {
+    dq.g.append("path").attr("class", "linea").attr("d", path({ type: "LineString", coordinates: [a.ll, d3.geoCentroid(objetivo)] }));
+    const [cx, cy] = dq.proj(a.ll); dq.g.append("circle").attr("class", "clic").attr("cx", cx).attr("cy", cy).attr("r", 4.5);
+  }
+  if (conZoom) dqZoomA(a.acierto ? objetivo : { type: "FeatureCollection", features: [objetivo, { type: "Feature", geometry: { type: "Point", coordinates: a.ll } }] });
+  const p = PAISES[a.iso], P = PAISES[dq.k], u = P.u || {};
+  const ver = a.acierto ? `<span>✅ ¡Le pegaste!</span><small>+100 puntos</small>`
+    : `<span>${a.km > 1000 ? "❌" : "🟡"} ${a.km > 1000 ? "Lejos" : "Cerca"}: a ${nf(a.km)} km</span><small>${p ? `tocaste ${p.nombre} · ` : ""}+${a.pts} puntos${a.km > 1000 ? " · perdiste una vida" : ""}</small>`;
+  const dato = (t, v) => v ? `<div><span>${t}</span><b>${v}</b></div>` : "";
+  const fin = dq.vidas <= 0;
+  const res = document.getElementById("dqRes");
+  res.innerHTML = `<div class="dq-veredicto">${ver}</div>
+    <div class="dq-pais">${flag(dq.k)}<div><h2>${P.nombre}</h2><span class="note">${P.region || ""}</span></div></div>
+    <div class="dq-datos">${dato("Capital", P.capital)}${dato("Habitantes", P.poblacion != null ? (P.poblacion >= 1 ? nf(P.poblacion, P.poblacion < 10 ? 1 : 0) + " millones" : nf(P.poblacion * 1000) + " mil") : "")}
+      ${dato("PBI por persona", P.pibpc != null ? "US$ " + nf(P.pibpc) : "")}${dato("Inflación", u.infl ? nf(u.infl.v, 1) + "% en " + u.infl.y : "")}
+      ${dato("Exporta sobre todo", P.expo && P.expo[0] ? (Array.isArray(P.expo[0]) ? P.expo[0].join(" ") : P.expo[0]) : "")}</div>
+    ${P.resumen ? `<p>${P.resumen}</p>` : ""}
+    <div class="j-acciones">${fin ? "" : `<button class="go" type="button" id="dqSig">Siguiente país →</button>`}<button class="btn" type="button" id="dqFicha">Ver la ficha de ${P.nombre}</button></div>`;
+  res.hidden = false;
+  document.getElementById("dqFicha").onclick = () => irAPaisDesdeLista(dq.k);
+  if (!fin) { document.getElementById("dqSig").onclick = () => { dq.ronda++; dqSiguiente(); document.getElementById("dqPregunta").scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "center" }); }; }
+  else dqFinal();
+  if (conZoom) res.scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "nearest" });
+}
+function dqFinal() {
+  const clave = "atlas-dq-mejor-" + dq.reg, mejor = leerLocal(clave, 0), record = dq.puntos > mejor;
+  if (record) guardarLocal(clave, dq.puntos);
+  dqMarcador();
+  const fin = document.getElementById("dqFinal");
+  fin.innerHTML = `<div class="eyebrow">Fin del juego · ${DQ_REGIONES[dq.reg].t}</div>
+    <h2>${nf(dq.puntos)} puntos en ${dq.ronda} ${dq.ronda === 1 ? "ronda" : "rondas"}${record && dq.puntos ? " · ¡tu récord!" : ""}</h2>
+    <div class="j-acciones"><button class="go" type="button" id="dqOtra">Jugar de nuevo</button><button class="btn" type="button" id="dqCompartir">Compartir</button></div>`;
+  fin.hidden = false;
+  document.getElementById("dqOtra").onclick = () => { dqNueva(); document.getElementById("dqPregunta").scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "center" }); };
+  document.getElementById("dqCompartir").onclick = async e => {
+    const t = `Atlas Macro · ¿Dónde queda? (${DQ_REGIONES[dq.reg].t})\n📍 ${nf(dq.puntos)} puntos en ${dq.ronda} rondas\n${location.origin}${location.pathname}#dondequeda`;
+    try { if (navigator.share && matchMedia("(pointer: coarse)").matches) await navigator.share({ text: t }); else { await navigator.clipboard.writeText(t); e.target.textContent = "¡Copiado!"; } } catch (err) { /* cancelado */ }
+  };
+}
+function abrirDondeQueda() {
+  if (!features || !DATOS) return;
+  if (!DQ_F) DQ_F = dqFeat();
+  if (!dq.listo) {
+    dq.listo = true; dqRegiones();
+    document.getElementById("dqMas").onclick = () => dq.svg.transition().duration(250).call(dq.zoom.scaleBy, 1.6);
+    document.getElementById("dqMenos").onclick = () => dq.svg.transition().duration(250).call(dq.zoom.scaleBy, 1 / 1.6);
+    document.getElementById("dqCentro").onclick = () => dq.svg.transition().duration(350).call(dq.zoom.transform, d3.zoomIdentity);
+    document.addEventListener("keydown", e => { if (paginaActual === "dondequeda" && e.key === "Enter" && dq.respondido && document.getElementById("dqSig")) document.getElementById("dqSig").click(); });
+    dqNueva();
+  } else dqDibujar();
 }
 
 /* ---------- JUEGO: PAÍS DEL DÍA ----------
@@ -5029,6 +5214,7 @@ window.addEventListener("resize", () => {
   rT = setTimeout(() => {
     const r = document.getElementById("map").getBoundingClientRect();
     if (paginaActual === "inicio" && features && (Math.abs(r.width - W) > 2 || Math.abs(r.height - H) > 2)) buildMap();
+    if (paginaActual === "dondequeda" && dq.listo) dqDibujar();
   }, 200);
 });
 </script>
