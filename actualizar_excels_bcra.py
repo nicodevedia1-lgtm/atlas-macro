@@ -10,6 +10,8 @@ Datos del BCRA que no están en su API y solo se publican en planillas de Excel:
   · Bandas cambiarias: piso y techo día por día (el BCRA publica desde enero de 2026, con los
     días que faltan del mes siguiente ya proyectados; abril-diciembre de 2025 se reconstruye
     con la regla de ese momento: arrancó en $1.000 y $1.400 y se movía 1% por mes).
+  · Índice de Confianza en el Gobierno (ICG) de la Universidad Di Tella, mensual desde 2001
+    (el link de la planilla cambia cada mes: se busca en la página de descargas).
   · Irregularidad (morosidad) del crédito: total, familias y empresas, por línea
     (personales, tarjetas, hipotecarios, prendarios, adelantos, documentos...) en %.
 
@@ -31,7 +33,10 @@ from collections import defaultdict
 from datetime import datetime, timezone
 from pathlib import Path
 
+import re
+
 import openpyxl
+import xlrd
 from curl_cffi import requests
 
 CARPETA = Path(__file__).parent
@@ -247,13 +252,62 @@ def parte_bandas():
     return {"serie": rec + oficial, "oficial_desde": oficial[0][0]}
 
 
+# ---------------------------------------------------------------- confianza en el gobierno (UTDT)
+ICG_PAGINA = "https://www.utdt.edu/listado_contenidos.php?id_item_menu=28756"
+MESES_CORTOS = {"ene": 1, "feb": 2, "mar": 3, "abr": 4, "may": 5, "jun": 6, "jul": 7, "ago": 8, "sep": 9, "set": 9, "oct": 10, "nov": 11, "dic": 12}
+
+
+def parte_icg():
+    print("· Confianza en el gobierno (UTDT)")
+    if LOCAL:
+        datos = (Path(LOCAL) / "icg.xls").read_bytes()
+    else:
+        r = sesion.get(ICG_PAGINA, timeout=60)
+        r.raise_for_status()
+        # el link del Excel con la serie mensual ("Evolución Mensual del ICG ... (Excel)")
+        links = re.findall(r'href="([^"]*download\.php\?fname=[^"]+\.xlsx?)"', r.text)
+        if not links:
+            raise RuntimeError("no encontré el link de la planilla en la página de la UTDT")
+        url = links[0] if links[0].startswith("http") else "https://www.utdt.edu/" + links[0].lstrip("/")
+        if VER:
+            print(f"        {url}")
+        r = sesion.get(url, timeout=120)
+        r.raise_for_status()
+        datos = r.content
+    wb = xlrd.open_workbook(file_contents=datos)
+    valores = {}
+    for hoja in wb.sheets():
+        filas = [hoja.row(i) for i in range(hoja.nrows)]
+        fechas = next((f for f in filas if sum(c.ctype == xlrd.XL_CELL_DATE for c in f) > 3), None)
+        icg = next((f for f in filas if len(f) > 1 and str(f[1].value).strip().upper() == "ICG"), None)
+        if not fechas or not icg:
+            continue
+        for c, v in zip(fechas, icg):
+            m = None
+            if c.ctype == xlrd.XL_CELL_DATE:
+                y, mm, *_ = xlrd.xldate_as_tuple(c.value, wb.datemode)
+                m = f"{y}-{mm:02d}"
+            elif c.ctype == xlrd.XL_CELL_TEXT:                       # algunos meses vienen como texto: "jul-26"
+                t = re.fullmatch(r"([a-z]{3})\w*[-/ ](\d{2,4})", c.value.strip().lower())
+                if t and t.group(1) in MESES_CORTOS:
+                    y = int(t.group(2)) + (2000 if len(t.group(2)) == 2 else 0)
+                    m = f"{y}-{MESES_CORTOS[t.group(1)]:02d}"
+            if m and v.ctype == xlrd.XL_CELL_NUMBER:
+                valores[m] = v.value
+    if len(valores) < 100:
+        raise RuntimeError(f"leí solo {len(valores)} meses: revisar la planilla")
+    u = max(valores)
+    print(f"     · {len(valores)} meses ({min(valores)} a {u}) · último {valores[u]:.2f}")
+    return {"icg": serie("Índice de Confianza en el Gobierno (UTDT)", "puntos, de 0 a 5", "Política", "Universidad Torcuato Di Tella", valores, 4)}
+
+
 def main():
     print("Atlas Macro · planillas del BCRA (balance cambiario, ITCRM, morosidad)")
     anterior = json.load(open(ARCHIVO_SALIDA, encoding="utf-8")) if ARCHIVO_SALIDA.exists() else {"series": {}}
     salida = {"generado": datetime.now(timezone.utc).isoformat(timespec="seconds"),
               "fuente": "BCRA (planillas de Excel: balance cambiario, ITCRM e informe de bancos)", "series": {}}
     ok = 0
-    for prefijos, funcion in ((("bc_",), parte_cambiario), (("itcr",), parte_itcrm), (("irr",), parte_credito)):
+    for prefijos, funcion in ((("bc_",), parte_cambiario), (("itcr",), parte_itcrm), (("irr",), parte_credito), (("icg",), parte_icg)):
         try:
             salida["series"].update(funcion())
             ok += 1

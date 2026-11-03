@@ -1083,7 +1083,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <header class="top">
       <div class="eyebrow" id="actFecha">Actividad, precios y empleo</div>
       <h1>Actividad, precios y empleo</h1>
-      <p class="lede">Cómo viene la economía mes a mes: qué sectores crecen y cuáles caen, cómo se compone la inflación, el comercio con el mundo y el empleo registrado.</p>
+      <p class="lede">Cómo viene la economía mes a mes: qué sectores crecen y cuáles caen, cómo se compone la inflación, el comercio con el mundo, el empleo registrado y la confianza en el gobierno.</p>
     </header>
     <div class="bcra-kpis" id="actKpis"></div>
     <section class="ag-bloque"><div class="ag-tit"><h2>Actividad económica (EMAE)</h2></div>
@@ -1105,6 +1105,10 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
       <h3 class="bc-sub">Salario real</h3>
       <p class="note">Índice de salarios registrados descontada la inflación (noviembre de 2023 = 100). Si sube, los sueldos le ganan a los precios.</p>
       <div id="actSal" class="ag-chart ag-chart-chica"></div></section>
+    <section class="ag-bloque" id="actIcgBloque" hidden><div class="ag-tit"><h2>Confianza en el gobierno</h2><span class="note" id="actIcgT"></span></div>
+      <p class="note">Índice de Confianza en el Gobierno de la Universidad Di Tella: una encuesta mensual que pregunta por la imagen del gobierno, si se preocupa por el interés general, si es eficiente, honesto y capaz de resolver los problemas del país. Va de 0 (ninguna confianza) a 5 (máxima). Cada color es un gobierno.</p>
+      <div class="bcra-kpis" id="actIcgKpis"></div>
+      <div id="actIcg" class="ag-chart"></div></section>
     <p class="note">Fuentes: INDEC y Ministerio de Trabajo (vía la API de Series de Tiempo de datos.gob.ar) y BCRA. Cada dato sale con su propio atraso: el EMAE y el comercio, unos dos meses; el empleo, unos cuatro.</p>
   </div>
 
@@ -1318,6 +1322,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
             <tr><td>Curva de rendimientos del Tesoro de EE.UU.</td><td>Departamento del Tesoro de EE.UU.</td><td>Una vez por semana</td></tr>
             <tr><td>Compras de dólares del BCRA, reservas día por día, factores de explicación de la base monetaria y reservas netas estimadas (brutas menos encajes en dólares, BOPREAL y letras en dólares, y el swap con China, este último cargado a mano)</td><td>Banco Central de la República Argentina, API de estadísticas</td><td>Todos los días hábiles</td></tr>
             <tr><td>Bandas cambiarias, balance cambiario (compra de dólares de las personas, utilidades y dividendos, deuda y ONs), tipo de cambio real multilateral y morosidad del crédito por línea</td><td>Banco Central de la República Argentina, planillas de Excel (bandas cambiarias, anexo del balance cambiario, serie del ITCRM e informe sobre bancos). Las bandas de abril a diciembre de 2025 se reconstruyen con la regla de ese período</td><td>Los martes y viernes (el BCRA las publica una vez por mes; el ITCRM, todos los días)</td></tr>
+            <tr><td>Índice de Confianza en el Gobierno</td><td>Universidad Torcuato Di Tella, Escuela de Gobierno (planilla de la serie mensual)</td><td>Los martes y viernes (la UTDT lo publica una vez por mes)</td></tr>
             <tr><td>EMAE por sector, IPC por categorías, exportaciones e importaciones, empleo registrado y salarios</td><td>INDEC y Ministerio de Trabajo, vía la API de Series de Tiempo de datos.gob.ar</td><td>Todos los días hábiles (cada dato sale una vez por mes)</td></tr>
             <tr><td>Bonos en dólares (Bonares y Globales)</td><td>data912.com, con precios de BYMA</td><td>Todos los días hábiles</td></tr>
             <tr><td>Actividad económica mensual (EMAE)</td><td>INDEC, vía la API de Series de Tiempo de datos.gob.ar</td><td>Todos los días hábiles (el dato sale una vez por mes)</td></tr>
@@ -3086,6 +3091,7 @@ const GLOSARIO = [
   { id: "emision", t: "Emisión monetaria", def: "Cuando el Banco Central crea pesos: por ejemplo, para comprar dólares, prestarle al Tesoro o pagar intereses. Emitir de más, sin que la gente quiera tener esos pesos, suele terminar en inflación.", ir: ["finanzas", "Ver la base monetaria"] },
   { id: "encajes", t: "Encajes", def: "La parte de los depósitos que los bancos no pueden prestar y tienen que dejar guardada (en el Banco Central o en efectivo). Subir los encajes saca pesos de la calle; bajarlos los libera.", ir: ["finanzas", "Ver depósitos y préstamos"] },
   { id: "bandas", t: "Bandas cambiarias", def: "El régimen del dólar desde abril de 2025: el mayorista flota libre entre un piso y un techo. Si llega al techo, el BCRA vende dólares; si llega al piso, compra. Arrancaron en $1.000 y $1.400 y se abrían 1% por mes; desde enero de 2026 se abren según la última inflación publicada.", ir: ["bcra", "Ver el dólar y las bandas"] },
+  { id: "icg", t: "Índice de Confianza en el Gobierno", lar: "ICG, Universidad Di Tella", def: "Encuesta mensual de la Universidad Di Tella, desde 2001, que mide la confianza en el gobierno nacional según cinco preguntas: imagen general, preocupación por el interés general, eficiencia, honestidad y capacidad para resolver los problemas del país. Va de 0 a 5.", ir: ["actividad", "Ver el índice"] },
   { id: "tcr", t: "Tipo de cambio real", lar: "ITCRM: índice de tipo de cambio real multilateral", def: "El precio del dólar (y de las otras monedas) corregido por la inflación de cada país. Si el dólar sube menos que la inflación argentina, el peso se 'aprecia': importar y viajar se abaratan y exportar cuesta más. El BCRA lo calcula contra una canasta de socios comerciales, ponderados por cuánto comerciamos con cada uno.", ir: ["bcra", "Ver la serie"] },
   { id: "fae", t: "Formación de activos externos", lar: "FAE", def: "Los dólares que compran las personas y empresas para ahorrar o invertir afuera (billetes, cuentas, inversiones), sin un fin comercial. Es lo que en la calle se llama 'compra de dólares para atesoramiento'. El BCRA la publica todos los meses en el balance cambiario.", ir: ["bcra", "Ver el balance cambiario"] },
   { id: "balcamb", t: "Balance cambiario", def: "La cuenta de todos los dólares que entran y salen por el mercado de cambios oficial: exportaciones e importaciones cobradas y pagadas, servicios, intereses, dividendos, deuda y compra de dólares de las personas. Es distinto del balance de pagos del INDEC, que registra las operaciones cuando ocurren y no cuando se pagan.", ir: ["bcra", "Ver el balance cambiario"] },
@@ -4271,6 +4277,33 @@ function renderActividad() {
       yAxis: { type: "category", inverse: true, data: dif.map(x => x[0]), axisLabel: Object.assign({}, ax, { fontSize: 12 }), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
       xAxis: { type: "value", axisLabel: ax, splitLine: { lineStyle: { color: line, type: "dashed" } } },
       series: [{ type: "bar", barMaxWidth: 22, data: dif.map(x => ({ value: +x[1].toFixed(1), itemStyle: { color: x[0] === "Total registrado" ? css("--accent") : x[1] >= 0 ? css("--good") : css("--bad") } })), label: { show: true, position: "right", color: ink, fontSize: 11, formatter: p => conSigno(p.value, v => nf(v, 1)) } }]
+    });
+  }
+  /* confianza en el gobierno (UTDT), con cada gobierno de otro color */
+  const G = SA("icg");
+  document.getElementById("actIcgBloque").hidden = !G.length;
+  if (G.length) {
+    const GOB = [["2002-01", "Duhalde"], ["2003-05", "N. Kirchner"], ["2007-12", "C. Fernández de Kirchner"], ["2011-12", "C. Fernández de Kirchner (2.º)"], ["2015-12", "Macri"], ["2019-12", "A. Fernández"], ["2023-12", "Milei"]];
+    const CORTO = { "C. Fernández de Kirchner": "CFK", "C. Fernández de Kirchner (2.º)": "CFK 2", "A. Fernández": "A. Fernández", "N. Kirchner": "Kirchner" };
+    const gobDe = m => [...GOB].reverse().find(g => m >= g[0]) || ["", "De la Rúa"];
+    const cols = ["#9AA4B0", css("--warn"), css("--b"), "#C77DFF", css("--good"), css("--bad"), css("--accent")];
+    const u = ult(G), g = gobDe(u[0]), ini = G.filter(x => x[0] >= g[0]), prom = ini.reduce((a, x) => a + x[1], 0) / ini.length, n = ini.length;
+    document.getElementById("actIcgT").textContent = mn(u[0]);
+    const igual = GOB.filter(x => x[0] < g[0]).map(([d, nom]) => { const m = mesAnt(d, -(n - 1)), v = mapaSerie(G).get(m); return v == null ? null : [nom, v]; }).filter(Boolean);
+    const kpi = (t, v, sub) => `<div class="bcra-kpi"><span>${t}</span><b>${v}</b><small>${sub}</small></div>`;
+    const ant = mapaSerie(G).get(mesAnt(u[0], 1));
+    document.getElementById("actIcgKpis").innerHTML = [
+      kpi("Último dato", nf(u[1], 2), `${mn(u[0])}${ant ? ` · ${conSigno((u[1] / ant - 1) * 100, v => nf(v, 1) + "%")} contra el mes anterior` : ""}`),
+      kpi(`Promedio de ${g[1]}`, nf(prom, 2), `en sus ${n} meses de gobierno`),
+      igual.length ? kpi("Otros gobiernos a esta altura", `<span style="font-size:.72em">${igual.slice(-3).map(([nom, v]) => `${CORTO[nom] || nom} ${nf(v, 2)}`).join(" · ")}</span>`, `en el mes ${n} de cada mandato`) : ""].join("");
+    const S = G.filter(x => x[0] >= "2002-01");
+    graf("actIcg", {
+      grid: { left: 40, right: 14, top: 36, bottom: 28 }, legend: { top: 0, left: 0, type: "scroll", textStyle: { color: ink } },
+      tooltip: Object.assign(tipBase(), { formatter: ps => { const p = ps.find(q => q.value != null); return p ? `<b>${mn(p.axisValue)}</b><br>${p.marker}${p.seriesName}: ${nf(p.value, 2)}` : ""; } }),
+      xAxis: { type: "category", data: S.map(x => x[0]), axisLabel: ejeMes(ax), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+      yAxis: { type: "value", min: 0, max: 4, axisLabel: ax, splitLine: { lineStyle: { color: line, type: "dashed" } } },
+      series: GOB.map(([d, nom], i) => { const hasta = GOB[i + 1] ? GOB[i + 1][0] : "9999"; return { name: nom, type: "line", symbol: "none",
+        data: S.map(x => x[0] >= d && x[0] <= hasta ? +x[1].toFixed(2) : null), lineStyle: { color: cols[i], width: i === GOB.length - 1 ? 2.6 : 1.8 }, itemStyle: { color: cols[i] } }; })
     });
   }
   /* salario real: índice de salarios / índice de precios armado con la inflación mensual */
