@@ -2,11 +2,15 @@ name: Actualizar mercados
 
 on:
   schedule:
-    - cron: "47 21 * * 1-5"   # lunes a viernes, 21:47 UTC (después del cierre de Wall Street)
+    - cron: "47 14-21 * * 1-5"   # lunes a viernes, cada hora de 11:47 a 18:47 (hora argentina): con los mercados abiertos y al cierre
   workflow_dispatch:
 
 permissions:
   contents: write
+
+concurrency:
+  group: mercados
+  cancel-in-progress: false
 
 jobs:
   mercados:

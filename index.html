@@ -1015,7 +1015,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
       <div id="spreadChart" class="ag-chart ag-chart-chica"></div>
       <p class="note">Fuente: Departamento del Tesoro de EE.UU. (tasas "par yield curve", en % anual).</p>
     </section>
-    <p class="note">Precios de cierre de cada día hábil, salvo bitcoin y ether, que se actualizan en vivo. No son cotizaciones en tiempo real ni una recomendación de inversión. Fuentes: Stooq, Yahoo Finance y CoinGecko.</p>
+    <p class="note">Se actualizan cada hora mientras los mercados están abiertos (de lunes a viernes, de 11:47 a 18:47, hora argentina) y el último dato del día es el de cierre. Bitcoin y ether se actualizan en vivo. No son cotizaciones en tiempo real ni una recomendación de inversión. Fuentes: Stooq, Yahoo Finance y CoinGecko.</p>
   </div>
 
   <div class="pagina" id="pag-provincias" hidden>
@@ -1352,7 +1352,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
             <tr><td>Riesgo país, cotizaciones del dólar, inflación del INDEC, UVA y tasas de plazo fijo de Argentina</td><td>ArgentinaDatos (argentinadatos.com), un proyecto abierto y no oficial que recopila datos públicos del BCRA y el INDEC</td><td>Todos los días hábiles</td></tr>
             <tr><td>Pobreza, indigencia y mercado de trabajo por provincia</td><td>INDEC, Encuesta Permanente de Hogares (31 aglomerados urbanos), copiado a mano de sus informes; población del Censo 2022; mapa de provincias de Natural Earth, con las Islas Malvinas como parte de Tierra del Fuego</td><td>Cuando el INDEC publica datos nuevos (cada trimestre o semestre)</td></tr>
             <tr><td>Fechas de publicación del INDEC (calendario económico)</td><td>Calendario de difusión del INDEC, copiado a mano; feriados de ArgentinaDatos</td><td>Cada seis meses, cuando el INDEC publica el calendario nuevo</td></tr>
-            <tr><td>Índices bursátiles, acciones argentinas en Nueva York, materias primas y cripto</td><td>Stooq y Yahoo Finance (precios de cierre); bitcoin y ether en vivo de CoinGecko</td><td>Todos los días hábiles, después del cierre</td></tr>
+            <tr><td>Índices bursátiles, acciones argentinas en Nueva York, materias primas y cripto</td><td>Stooq y Yahoo Finance; bitcoin y ether en vivo de CoinGecko</td><td>Cada hora con los mercados abiertos, de lunes a viernes</td></tr>
             <tr><td>Dólar en vivo</td><td>DolarAPI (dolarapi.com); si no responde, se muestra el último cierre</td><td>Cada vez que se abre la página</td></tr>
             <tr><td>Riesgo país de otros países de Latinoamérica</td><td>Banco Central de Reserva del Perú, índice EMBIG con datos de Reuters</td><td>Todos los martes (el dato es mensual)</td></tr>
             <tr><td>Próximas elecciones y control de cambios de gobierno</td><td>Wikidata, base de datos abierta y colaborativa</td><td>Todos los días</td></tr>
@@ -2910,8 +2910,8 @@ function renderMercados() {
       <p class="note">${MERC_NOTAS[g]}</p></section>`).join("");
   document.querySelectorAll("#mercGrupos .m-carta").forEach(b => b.onclick = () => { mercSel = b.dataset.k; renderMercados(); document.getElementById("mercDetalle").scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "nearest" }); });
   renderMercDetalle();
-  const f = MERCADOS.grupos.indices && MERCADOS.grupos.indices[0] ? MERCADOS.grupos.indices[0].fecha : null;
-  document.getElementById("mercFecha").textContent = f ? `Cierre del ${f.split("-").reverse().join("/")}` : "Mercados";
+  const g = MERCADOS.generado ? new Date(MERCADOS.generado) : null;
+  document.getElementById("mercFecha").textContent = g && !isNaN(g) ? `Actualizado el ${g.toLocaleDateString("es-AR", { day: "numeric", month: "numeric" })} a las ${g.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit" })}` : "Mercados";
 }
 function renderMercDetalle() {
   const x = mercDe(mercSel) || todosMerc()[0]; if (!x) return;
