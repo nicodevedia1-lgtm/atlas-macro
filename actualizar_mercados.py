@@ -228,8 +228,11 @@ def main():
         salida["grupos"][grupo] = []
         for clave, nombre, t_stooq, t_yahoo, moneda, unidad in lista:
             datos, fuente = de_stooq(t_stooq), "Stooq"
-            if not datos:
-                datos, fuente = de_yahoo(t_yahoo), "Yahoo"
+            viejo_stooq = datos and datos[-1][0] < (date.today() - timedelta(days=4)).isoformat()
+            if not datos or viejo_stooq:                   # Stooq a veces deja de actualizar alguno (le pasó al Merval)
+                y = de_yahoo(t_yahoo)
+                if y and (not datos or y[-1][0] > datos[-1][0]):
+                    datos, fuente = y, "Yahoo"
             if not datos:
                 falla += 1
                 viejo = next((x for x in anterior.get("grupos", {}).get(grupo, []) if x["clave"] == clave), None)

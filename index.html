@@ -519,6 +519,37 @@ footer a { color: var(--muted); text-decoration-color: var(--accent); text-under
 .m-sector { font-size: 14px; font-weight: 700; color: var(--muted); }
 .m-sec-fila th { padding-top: 16px; color: var(--accent); font-size: 12.5px; }
 .m-tk { color: var(--muted); font-size: 12px; margin-left: 4px; }
+/* Mercados con estilo terminal: mapa de calor y tablas compactas */
+.mon-heat-chart { width: 100%; height: 480px; }
+@media (max-width: 640px) { .mon-heat-chart { height: 560px; } }
+.mon-escala { display: flex; align-items: center; gap: 2px; font-family: var(--f-data); font-size: 11.5px; color: var(--muted); justify-content: flex-end; }
+.mon-escala i { width: 28px; height: 10px; display: block; }
+.mon-escala span { padding: 0 6px; }
+.mon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 540px), 1fr)); gap: 18px; align-items: start; }
+.mon-col { display: grid; gap: 18px; }
+.mon-panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.mon-panel h2 { font-size: 13px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); padding: 10px 14px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 10px; }
+.mon-panel h2 small { font-weight: 500; letter-spacing: 0; text-transform: none; color: var(--muted); font-size: 12px; }
+.mon-panel table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.mon-panel th { font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 600; text-align: right; padding: 6px 10px; }
+.mon-panel th:first-child, .mon-panel td:first-child { text-align: left; padding-left: 14px; }
+.mon-panel td { padding: 5px 10px; border-top: 1px solid var(--line); text-align: right; font-family: var(--f-data); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.mon-panel td:first-child { font-family: var(--f-body); white-space: normal; }
+.mon-panel tr.mon-fila { cursor: pointer; }
+.mon-panel tr.mon-fila:hover td { background: var(--bg); }
+.mon-panel tr.sel td { background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.mon-panel tr.mon-sec td { font-family: var(--f-body); font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--bg); padding-top: 6px; padding-bottom: 6px; }
+.mon-nom { background: none; border: 0; padding: 0; font: inherit; font-weight: 600; color: var(--ink); cursor: pointer; text-align: left; }
+.mon-tk { font-family: var(--f-data); font-size: 11.5px; color: var(--muted); margin-left: 6px; }
+.pill { display: inline-block; min-width: 64px; padding: 2px 7px; border-radius: 5px; font-weight: 600; text-align: right; }
+.pill.up { color: #4ADE80; background: rgba(34, 197, 94, .14); } .pill.down { color: #F87171; background: rgba(239, 68, 68, .14); } .pill.eq { color: var(--muted); background: var(--bg); }
+:root[data-theme="light"] .pill.up { color: #15803D; } :root[data-theme="light"] .pill.down { color: #B91C1C; }
+.mon-c { color: var(--muted); }
+.mon-c.up { color: var(--good); } .mon-c.down { color: var(--bad); }
+.mon-spark { width: 84px; height: 22px; display: block; margin-left: auto; }
+.mon-spark polyline { fill: none; stroke-width: 1.4; }
+.mon-spark.s-up polyline { stroke: var(--good); } .mon-spark.s-down polyline { stroke: var(--bad); }
+@media (max-width: 640px) { .mon-oc { display: none; } .pill { min-width: 56px; } .mon-panel td, .mon-panel th { padding-left: 6px; padding-right: 6px; } }
 .m-cartas { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 165px), 1fr)); gap: 10px; }
 @media (max-width: 420px) { .m-cartas { grid-template-columns: repeat(2, minmax(0, 1fr)); } .m-p { font-size: 18px; } }
 .m-carta { display: grid; gap: 3px; text-align: left; background: var(--bg); border: 1px solid transparent; border-radius: 12px; padding: 12px 14px; cursor: pointer; font: inherit; color: var(--ink); }
@@ -1000,8 +1031,14 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <header class="top">
       <div class="eyebrow" id="mercFecha">Mercados</div>
       <h1>Mercados</h1>
-      <p class="lede">Cómo vienen las bolsas del mundo, las acciones argentinas en Nueva York y en Buenos Aires, los CEDEARs, los bonos en dólares con su rendimiento, los precios de lo que exporta el país y las cripto. Tocá cualquier tarjeta para ver su gráfico.</p>
+      <p class="lede">Cómo vienen las bolsas del mundo, las acciones argentinas en Nueva York y en Buenos Aires, los CEDEARs, los bonos en dólares con su rendimiento, los precios de lo que exporta el país y las cripto. Tocá cualquier fila para ver su gráfico.</p>
     </header>
+    <section class="ag-bloque mon-heat" id="mercHeatBloque" hidden>
+      <div class="ag-tit"><h2>Mapa del mercado</h2><div class="lab-chips" id="mercHeatSel"></div></div>
+      <p class="note" id="mercHeatNota"></p>
+      <div id="mercHeat" class="mon-heat-chart" role="img" aria-label="Mapa de calor de las acciones por sector"></div>
+      <div class="mon-escala" aria-hidden="true"><span>−4%</span><i style="background:#B3261E"></i><i style="background:#7A2620"></i><i style="background:#3A1F1D"></i><i style="background:#2A2E35"></i><i style="background:#1B3A28"></i><i style="background:#1D6B3F"></i><i style="background:#1E9E55"></i><span>+4%</span></div>
+    </section>
     <section class="ag-bloque" id="mercDetalle">
       <div class="ag-tit"><h2 id="mercDetT">—</h2><div class="lab-chips" id="mercRangos"></div></div>
       <div id="mercChart" class="ag-chart"></div>
@@ -2927,22 +2964,20 @@ function bloquesByma() {
       <p class="note">La TIR es cuánto rinde por año un bono si lo comprás hoy y lo tenés hasta el final, cobrando todos los pagos. La duración es cuántos años, en promedio, tarda en devolverte la plata. Los Bonares (AL, AE) son de ley argentina; los Globales (GD), de ley de Nueva York, y suelen rendir menos porque se consideran más seguros ante un problema.</p>
       <div id="mercCurva" class="ag-chart"></div>
       ${tabla(`<th>Bono</th><th class="m-ley">Ley</th><th class="n">Precio</th><th class="n">TIR</th><th class="n">Duración</th><th class="n">Paridad</th><th class="n">Hoy</th><th class="n">Próximo pago</th>`,
-        B.bonos.map(b => `<tr><td><b>${b.ticker}</b></td><td class="m-ley">${b.ley}</td><td class="n">US$ ${nf(b.precio, 2)}</td><td class="n"><b>${nf(b.tir, 1)}%</b></td><td class="n">${nf(b.duracion, 1)} años</td><td class="n">${nf(b.paridad, 0)}%</td><td class="n">${varMerc(b.dia)}</td>
+        B.bonos.map(b => `<tr><td><b>${b.ticker}</b></td><td class="m-ley">${b.ley}</td><td class="n">US$ ${nf(b.precio, 2)}</td><td class="n"><b>${nf(b.tir, 1)}%</b></td><td class="n">${nf(b.duracion, 1)} años</td><td class="n">${nf(b.paridad, 0)}%</td><td class="n">${pill(b.dia)}</td>
           <td class="n">${b.proximo.fecha.slice(8)}/${b.proximo.fecha.slice(5, 7)}/${b.proximo.fecha.slice(2, 4)}: US$ ${nf(b.proximo.interes + b.proximo.amort, 2)}</td></tr>`).join(""))}
       <p class="note">Precio cada 100 dólares de valor nominal original. Paridad: el precio sobre lo que "vale" el bono según sus condiciones (lo que falta amortizar más los intereses corridos). TIR y duración calculadas por Atlas Macro con el cronograma de pagos de cada bono; pueden diferir un poco de las de cada broker. No es una recomendación de inversión.</p></section>`;
   }
-  h += `<div class="m-dos">`;
-  if (B.panel && B.panel.length) {
-    h += `<section class="ag-bloque"><div class="ag-tit"><h2>Panel líder de la Bolsa de Buenos Aires</h2><span class="note">En pesos · ${hora}</span></div>
-      ${tabla(`<th>Empresa</th><th class="n">Precio</th><th class="n">Hoy</th>`, porSector(B.panel, SECTORES_AR, (s, xs) => `<tr class="m-sec-fila"><th colspan="3">${s}</th></tr>` + xs.map(x => `<tr><td>${x.nombre} <small class="m-tk">${x.ticker}</small></td><td class="n">${pesosMerc(x.precio)}</td><td class="n">${varMerc(x.dia)}</td></tr>`).join("")))}
-      <p class="note">Las acciones del índice S&P Merval, en pesos, en BYMA. Con unos 20 minutos de demora.</p></section>`;
-  }
-  if (B.cedears && B.cedears.length) {
-    h += `<section class="ag-bloque"><div class="ag-tit"><h2>CEDEARs más operados</h2><span class="note">En pesos · ${hora}</span></div>
-      <p class="note">Certificados que se compran en pesos en Buenos Aires y representan acciones o fondos del exterior. Su precio sigue al de la acción en Nueva York y al dólar contado con liquidación.</p>
-      ${tabla(`<th>Empresa o fondo</th><th class="n">Precio</th><th class="n">En dólares</th><th class="n">Hoy</th>`, porSector(B.cedears, SECTORES_CED, (s, xs) => `<tr class="m-sec-fila"><th colspan="4">${s}</th></tr>` + xs.map(x => `<tr><td>${x.nombre} <small class="m-tk">${x.ticker}</small></td><td class="n">${pesosMerc(x.precio)}</td><td class="n">${x.usd ? "US$ " + nf(x.usd, 2) : "—"}</td><td class="n">${varMerc(x.dia)}</td></tr>`).join("")))}
-      <p class="note">"En dólares": el mismo CEDEAR comprado con dólares MEP. Con unos 20 minutos de demora. No es una recomendación de inversión.</p></section>`;
-  }
+  const fila = (x, cols) => `<tr><td>${x.nombre}<span class="mon-tk">${x.ticker}</span></td>${cols}</tr>`;
+  const pan = (tit, sub, cab, cuerpo, nota) => `<section class="mon-panel"><h2>${tit}<small>${sub}</small></h2><table><thead><tr>${cab}</tr></thead><tbody>${cuerpo}</tbody></table><p class="note" style="padding:10px 14px">${nota}</p></section>`;
+  const secFila = (s, n) => `<tr class="mon-sec"><td colspan="${n}">${s}</td></tr>`;
+  h += `<div class="mon-grid">`;
+  if (B.panel && B.panel.length) h += pan("Panel líder · BYMA", `En pesos · ${hora}`, `<th>Empresa</th><th>Último</th><th>Hoy</th>`,
+    porSector(B.panel, SECTORES_AR, (s, xs) => secFila(s, 3) + xs.map(x => fila(x, `<td>${pesosMerc(x.precio)}</td><td>${pill(x.dia)}</td>`)).join("")),
+    "Las acciones del índice S&P Merval, en pesos. Con unos 20 minutos de demora.");
+  if (B.cedears && B.cedears.length) h += pan("CEDEARs más operados", `En pesos · ${hora}`, `<th>Empresa o fondo</th><th>Último</th><th class="mon-oc">En US$ MEP</th><th>Hoy</th>`,
+    porSector(B.cedears, SECTORES_CED, (s, xs) => secFila(s, 4) + xs.map(x => fila(x, `<td>${pesosMerc(x.precio)}</td><td class="mon-oc">${x.usd ? nf(x.usd, 2) : "—"}</td><td>${pill(x.dia)}</td>`)).join("")),
+    "Certificados en pesos que representan acciones o fondos del exterior: siguen al precio en Nueva York y al dólar contado con liquidación. No es una recomendación de inversión.");
   return h + `</div>`;
 }
 function curvaBonos() {
@@ -2959,6 +2994,56 @@ function curvaBonos() {
     series: [serie("Argentina", css("--b")), serie("Nueva York", css("--accent"))]
   }, true);
 }
+/* variación del día como "píldora" verde o roja, y variaciones chicas de color */
+const pill = v => v == null ? `<span class="pill eq">—</span>` : `<span class="pill ${v > 0 ? "up" : v < 0 ? "down" : "eq"}">${v > 0 ? "+" : v < 0 ? "−" : ""}${nf(Math.abs(v), 2)}%</span>`;
+const pctC = v => v == null ? `<span class="mon-c">—</span>` : `<span class="mon-c ${v > 0 ? "up" : v < 0 ? "down" : ""}">${v > 0 ? "+" : v < 0 ? "−" : ""}${nf(Math.abs(v), 1)}%</span>`;
+function sparkMon(x) {
+  const s = x.serie; if (!s || s.length < 3) return "";
+  const ult = s.slice(-66), paso = Math.max(1, Math.floor(ult.length / 40)), pts = ult.filter((_, i) => i % paso === 0 || i === ult.length - 1).map(p => p[1]);
+  const mn = Math.min(...pts), mx = Math.max(...pts);
+  const P = pts.map((v, i) => `${(i / (pts.length - 1) * 82 + 1).toFixed(1)},${(20 - (v - mn) / (mx - mn || 1) * 17).toFixed(1)}`).join(" ");
+  return `<svg class="mon-spark ${pts[pts.length - 1] >= pts[0] ? "s-up" : "s-down"}" viewBox="0 0 84 22" preserveAspectRatio="none" aria-hidden="true"><polyline points="${P}"/></svg>`;
+}
+/* tabla de cotizaciones: una fila por instrumento, se toca para ver el gráfico */
+function monPanel(g, titulo, sub, items, sectores) {
+  const filaM = x => `<tr class="mon-fila${x.clave === mercSel ? " sel" : ""}" data-k="${x.clave}"><td><button class="mon-nom" type="button" data-k="${x.clave}">${x.nombre}</button><span class="mon-tk">${x.ticker.replace("=F", "").replace("^", "").replace("=X", "")}</span>${x.fecha < ultimaFechaMerc() && !(criptoVivo && criptoVivo[x.clave]) ? ` <small class="ytag">dato del ${x.fecha.slice(8)}/${x.fecha.slice(5, 7)}</small>` : ""}</td>
+    <td>${fmtMerc(x, precioMerc(x))}</td><td>${pill(diaMerc(x))}</td><td class="mon-oc">${pctC(x.mes)}</td><td class="mon-oc">${pctC(x.anio)}</td><td class="mon-oc">${sparkMon(x)}</td></tr>`;
+  const cuerpo = sectores ? porSector(items, sectores, (s, xs) => `<tr class="mon-sec"><td colspan="6">${s}</td></tr>` + xs.map(filaM).join("")) : items.map(filaM).join("");
+  return `<section class="mon-panel"><h2>${titulo}<small>${sub}</small></h2><table><thead><tr><th>${g === "monedas" ? "Moneda" : "Nombre"}</th><th>Último</th><th>Hoy</th><th class="mon-oc">Mes</th><th class="mon-oc">Año</th><th class="mon-oc">3 meses</th></tr></thead><tbody>${cuerpo}</tbody></table></section>`;
+}
+/* mapa de calor estilo Finviz: un cuadro por acción, agrupadas por sector, del color de su variación del día */
+let heatSel = "panel";
+function colorHeat(v) {
+  if (v == null) return "#2A2E35";
+  const t = Math.max(-1, Math.min(1, v / 4)), mix = (a, b, k) => "#" + [0, 2, 4].map(i => Math.round(parseInt(a.substr(i + 1, 2), 16) * (1 - k) + parseInt(b.substr(i + 1, 2), 16) * k).toString(16).padStart(2, "0")).join("");
+  return t < 0 ? mix("#2A2E35", "#C62828", Math.pow(-t, .8)) : mix("#2A2E35", "#1EA65A", Math.pow(t, .8));
+}
+function renderHeat() {
+  const B = MERCADOS.byma || {}, el = document.getElementById("mercHeat");
+  const fuentes = { panel: ["Panel líder (pesos)", B.panel, SECTORES_AR, "El tamaño de cada cuadro es cuánto se operó hoy en BYMA; el color, cuánto subió o bajó."],
+    cedears: ["CEDEARs", B.cedears, SECTORES_CED, "El tamaño de cada cuadro es cuánto se operó hoy en BYMA; el color, cuánto subió o bajó."],
+    adrs: ["ADRs en Nueva York", (MERCADOS.grupos.adrs || []).map(x => ({ ticker: x.ticker, nombre: x.nombre, sector: x.sector || "Otras", dia: x.dia, precio: x.precio, usd: true })), SECTORES_AR, "Todas del mismo tamaño; el color es cuánto subió o bajó cada una en Nueva York en el día."] };
+  const disp = Object.entries(fuentes).filter(([, f]) => f[1] && f[1].length);
+  document.getElementById("mercHeatBloque").hidden = !disp.length;
+  if (!disp.length) return;
+  if (!fuentes[heatSel][1] || !fuentes[heatSel][1].length) heatSel = disp[0][0];
+  const sel = document.getElementById("mercHeatSel");
+  sel.innerHTML = disp.map(([k, f]) => `<button class="btn" type="button" data-h="${k}" aria-pressed="${k === heatSel}">${f[0]}</button>`).join("");
+  sel.querySelectorAll(".btn").forEach(b => b.onclick = () => { heatSel = b.dataset.h; renderHeat(); });
+  const [, lista, orden, nota] = fuentes[heatSel];
+  document.getElementById("mercHeatNota").textContent = nota;
+  const secs = [...orden, ...new Set(lista.map(x => x.sector).filter(s => !orden.includes(s)))];
+  const data = secs.map(s => ({ name: s, children: lista.filter(x => x.sector === s).map(x => ({ name: `${x.ticker.replace("^", "")}\n${x.dia == null ? "" : (x.dia > 0 ? "+" : "") + nf(x.dia, 1) + "%"}`, tk: x.ticker, value: heatSel === "adrs" ? 1 : Math.max(Math.sqrt(x.volumen || 1), 1), dia: x.dia, nombre: x.nombre, precio: x.precio,
+    itemStyle: { color: colorHeat(x.dia) } })) })).filter(s => s.children.length);
+  const c = echarts.getInstanceByDom(el) || echarts.init(el), bg = css("--bg");
+  c.setOption({
+    tooltip: Object.assign(tipBase(), { trigger: "item", formatter: p => p.data && p.data.nombre ? `<b>${p.data.nombre}</b> (${p.data.tk})<br>${heatSel === "adrs" ? "US$ " + nf(p.data.precio, 2) : pesosMerc(p.data.precio)} · ${p.data.dia == null ? "—" : (p.data.dia > 0 ? "+" : "") + nf(p.data.dia, 2) + "% hoy"}` : `<b>${p.name}</b>` }),
+    series: [{ type: "treemap", left: 0, right: 0, top: 0, bottom: 0, roam: false, nodeClick: false, breadcrumb: { show: false }, data,
+      levels: [{ itemStyle: { borderColor: bg, borderWidth: 0, gapWidth: 4 }, upperLabel: { show: false } },
+               { itemStyle: { borderColor: bg, borderWidth: 2, gapWidth: 1 }, upperLabel: { show: true, height: 20, color: "#C9CED6", fontSize: 11, fontWeight: 700 } },
+               { itemStyle: { borderColor: bg, borderWidth: 0, gapWidth: 1 }, label: { show: true, color: "#FFFFFF", fontSize: 12, lineHeight: 16, fontWeight: 700 } }] }]
+  }, true);
+}
 function cartaMerc(x) { return `<button class="m-carta${x.clave === mercSel ? " sel" : ""}" type="button" data-k="${x.clave}">
         <span class="m-n">${x.nombre}<small>${x.ticker.replace("=F", "").replace("^", "")}</small></span>
         <span class="m-p">${fmtMerc(x, precioMerc(x))}</span>${x.fecha < ultimaFechaMerc() && !(criptoVivo && criptoVivo[x.clave]) ? `<small class="ytag">dato del ${x.fecha.slice(8)}/${x.fecha.slice(5, 7)}</small>` : ""}
@@ -2967,12 +3052,15 @@ function cartaMerc(x) { return `<button class="m-carta${x.clave === mercSel ? " 
         <span class="m-mas">Mes ${varMerc(x.mes)} · Año ${varMerc(x.anio)}</span></button>`; }
 function renderMercados() {
   if (!MERCADOS) { document.getElementById("mercGrupos").innerHTML = `<p class="note">Todavía no hay datos de mercados.</p>`; return; }
-  document.getElementById("mercGrupos").innerHTML = Object.entries(MERC_GRUPOS).filter(([g]) => g === "byma" || (MERCADOS.grupos[g] && MERCADOS.grupos[g].length)).map(([g, t]) => g === "byma" ? bloquesByma() : `
-    <section class="ag-bloque"><div class="ag-tit"><h2>${t}</h2>${g === "cripto" && criptoVivo ? `<span class="note">En vivo · ${criptoVivo._hora} (CoinGecko)</span>` : ""}</div>
-      ${g === "adrs" ? `<div class="m-sectores">${porSector(MERCADOS.grupos.adrs, SECTORES_AR, (s, xs) => `<div class="m-sec-g" style="--n:${xs.length}"><h3 class="m-sector">${s}</h3><div class="m-cartas">${xs.map(cartaMerc).join("")}</div></div>`)}</div>` : `<div class="m-cartas">${MERCADOS.grupos[g].map(cartaMerc).join("")}</div>`}
-      <p class="note">${MERC_NOTAS[g]}</p></section>`).join("");
-  curvaBonos();
-  document.querySelectorAll("#mercGrupos .m-carta").forEach(b => b.onclick = () => { mercSel = b.dataset.k; renderMercados(); document.getElementById("mercDetalle").scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "nearest" }); });
+  const G = MERCADOS.grupos, p = (g, t, sub, sec) => G[g] && G[g].length ? monPanel(g, t, sub, G[g], sec) : "";
+  document.getElementById("mercGrupos").innerHTML = `<div class="mon-grid">
+      <div class="mon-col">${p("adrs", "Acciones argentinas en Nueva York", "En dólares", SECTORES_AR)}</div>
+      <div class="mon-col">${p("indices", "Índices", "Puntos")}${p("materias", "Materias primas", "En dólares")}${p("cripto", "Cripto", criptoVivo ? `En vivo · ${criptoVivo._hora}` : "En dólares")}</div>
+    </div>
+    ${bloquesByma()}
+    <div class="mon-grid">${p("monedas", "Monedas", "Cuántas unidades vale un dólar (euro y libra: cuántos dólares vale uno)")}</div>`;
+  renderHeat(); curvaBonos();
+  document.querySelectorAll("#mercGrupos tr.mon-fila").forEach(tr => tr.onclick = () => { mercSel = tr.dataset.k; renderMercados(); document.getElementById("mercDetalle").scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "nearest" }); });
   renderMercDetalle();
   const g = MERCADOS.generado ? new Date(MERCADOS.generado) : null;
   document.getElementById("mercFecha").textContent = g && !isNaN(g) ? `Actualizado el ${g.toLocaleDateString("es-AR", { day: "numeric", month: "numeric" })} a las ${g.toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit" })}` : "Mercados";
