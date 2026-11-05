@@ -5,7 +5,9 @@ Baja el precio de cierre de índices bursátiles, acciones argentinas en Wall St
 (ADRs), materias primas, cripto y monedas del mundo, y genera mercados.json con el último año de datos.
 
 Fuentes: Stooq (stooq.com) y, si Stooq no tiene el dato o no responde, Yahoo Finance.
-Los precios son de cierre (o con demora): no es una cotización en tiempo real.
+Además, de data912.com (precios de BYMA): el panel líder de acciones en pesos, los CEDEARs
+más operados y los bonos en dólares, con su TIR, duración y paridad (calculadas en bonos_ar.py).
+Los precios tienen unos 15-20 minutos de demora: no es una cotización en tiempo real.
 
 Uso:
     python3 actualizar_mercados.py
@@ -16,10 +18,13 @@ import io
 import json
 import sys
 import time
+import warnings
 from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 
 from curl_cffi import requests
+
+import bonos_ar
 
 CARPETA = Path(__file__).parent
 ARCHIVO_SALIDA = CARPETA / "mercados.json"
@@ -39,11 +44,22 @@ INSTRUMENTOS = {
     ],
     "adrs": [
         ("ypf", "YPF", "ypf.us", "YPF", "USD", "US$"),
-        ("ggal", "Grupo Galicia", "ggal.us", "GGAL", "USD", "US$"),
-        ("meli", "Mercado Libre", "meli.us", "MELI", "USD", "US$"),
-        ("pam", "Pampa Energía", "pam.us", "PAM", "USD", "US$"),
         ("vist", "Vista Energy", "vist.us", "VIST", "USD", "US$"),
+        ("tgs", "Transportadora Gas del Sur", "tgs.us", "TGS", "USD", "US$"),
+        ("pam", "Pampa Energía", "pam.us", "PAM", "USD", "US$"),
+        ("cepu", "Central Puerto", "cepu.us", "CEPU", "USD", "US$"),
+        ("edn", "Edenor", "edn.us", "EDN", "USD", "US$"),
+        ("ggal", "Grupo Galicia", "ggal.us", "GGAL", "USD", "US$"),
         ("bma", "Banco Macro", "bma.us", "BMA", "USD", "US$"),
+        ("bbar", "BBVA Argentina", "bbar.us", "BBAR", "USD", "US$"),
+        ("supv", "Supervielle", "supv.us", "SUPV", "USD", "US$"),
+        ("meli", "Mercado Libre", "meli.us", "MELI", "USD", "US$"),
+        ("glob", "Globant", "glob.us", "GLOB", "USD", "US$"),
+        ("teo", "Telecom Argentina", "teo.us", "TEO", "USD", "US$"),
+        ("loma", "Loma Negra", "loma.us", "LOMA", "USD", "US$"),
+        ("irs", "IRSA", "irs.us", "IRS", "USD", "US$"),
+        ("cresy", "Cresud", "cresy.us", "CRESY", "USD", "US$"),
+        ("caap", "Corporación América", "caap.us", "CAAP", "USD", "US$"),
     ],
     "materias": [
         ("soja", "Soja", "zs.f", "ZS=F", "USD", "US$ por tonelada"),
@@ -70,6 +86,77 @@ INSTRUMENTOS = {
         ("gbp", "Libra esterlina", "gbpusd", "GBPUSD=X", "USD", "moneda:US$ por libra"),
     ],
 }
+
+# sector de cada acción argentina (para agruparlas en la página)
+SECTOR_ADR = {"ypf": "Petróleo y gas", "vist": "Petróleo y gas", "tgs": "Petróleo y gas", "pam": "Electricidad", "cepu": "Electricidad",
+              "edn": "Electricidad", "ggal": "Bancos", "bma": "Bancos", "bbar": "Bancos", "supv": "Bancos",
+              "meli": "Tecnología y telecomunicaciones", "glob": "Tecnología y telecomunicaciones", "teo": "Tecnología y telecomunicaciones",
+              "loma": "Construcción, inmuebles e infraestructura", "irs": "Construcción, inmuebles e infraestructura",
+              "cresy": "Construcción, inmuebles e infraestructura", "caap": "Construcción, inmuebles e infraestructura"}
+
+# ---- BYMA (data912.com): panel líder en pesos, CEDEARs y bonos ----
+D912 = "https://data912.com/live/{}"
+# panel líder (S&P Merval): ticker en BYMA → (nombre, sector)
+PANEL = {
+    "YPFD": ("YPF", "Petróleo y gas"), "PAMP": ("Pampa Energía", "Electricidad"), "TGSU2": ("TGS", "Petróleo y gas"),
+    "TGNO4": ("Transportadora Gas del Norte", "Petróleo y gas"), "CEPU": ("Central Puerto", "Electricidad"), "EDN": ("Edenor", "Electricidad"),
+    "TRAN": ("Transener", "Electricidad"), "GGAL": ("Grupo Galicia", "Bancos"), "BMA": ("Banco Macro", "Bancos"), "BBAR": ("BBVA Argentina", "Bancos"),
+    "SUPV": ("Supervielle", "Bancos"), "VALO": ("Grupo Valores", "Bancos"), "BYMA": ("BYMA", "Bancos"), "TECO2": ("Telecom", "Tecnología y telecomunicaciones"),
+    "ALUA": ("Aluar", "Industria y materiales"), "TXAR": ("Ternium Argentina", "Industria y materiales"), "LOMA": ("Loma Negra", "Construcción, inmuebles e infraestructura"),
+    "IRSA": ("IRSA", "Construcción, inmuebles e infraestructura"), "CRES": ("Cresud", "Construcción, inmuebles e infraestructura"),
+    "COME": ("Sociedad Comercial del Plata", "Industria y materiales"), "METR": ("Metrogas", "Petróleo y gas"), "CVH": ("Cablevisión Holding", "Tecnología y telecomunicaciones"),
+}
+# CEDEARs más operados: ticker → (nombre, sector)
+CEDEARS = {
+    "AAPL": ("Apple", "Tecnología"), "MSFT": ("Microsoft", "Tecnología"), "NVDA": ("Nvidia", "Tecnología"), "GOOGL": ("Alphabet (Google)", "Tecnología"),
+    "AMZN": ("Amazon", "Tecnología"), "META": ("Meta (Facebook)", "Tecnología"), "TSLA": ("Tesla", "Tecnología"), "MELI": ("Mercado Libre", "Tecnología"),
+    "XOM": ("ExxonMobil", "Energía"), "CVX": ("Chevron", "Energía"), "VIST": ("Vista Energy", "Energía"), "PBR": ("Petrobras", "Energía"),
+    "JPM": ("JPMorgan", "Finanzas"), "BRKB": ("Berkshire Hathaway", "Finanzas"), "V": ("Visa", "Finanzas"),
+    "KO": ("Coca-Cola", "Consumo"), "MCD": ("McDonald's", "Consumo"), "WMT": ("Walmart", "Consumo"), "PEP": ("PepsiCo", "Consumo"),
+    "JNJ": ("Johnson & Johnson", "Salud"), "PFE": ("Pfizer", "Salud"), "LLY": ("Eli Lilly", "Salud"),
+    "VALE": ("Vale", "Minería y oro"), "NEM": ("Newmont", "Minería y oro"), "B": ("Barrick", "Minería y oro"),
+    "SPY": ("S&P 500 (SPY)", "Fondos"), "QQQ": ("Nasdaq 100 (QQQ)", "Fondos"), "DIA": ("Dow Jones (DIA)", "Fondos"), "EWZ": ("Brasil (EWZ)", "Fondos"),
+    "IBIT": ("Bitcoin (IBIT)", "Fondos"), "ETHA": ("Ether (ETHA)", "Fondos"),
+}
+
+
+def de_data912(nombre):
+    """{ticker: fila} de una lista de data912 (precios de BYMA con demora)."""
+    try:
+        r = sesion.get(D912.format(nombre), timeout=40)
+    except Exception:
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore")
+            r = sesion.get(D912.format(nombre), timeout=40, verify=False)
+    r.raise_for_status()
+    return {x.get("symbol"): x for x in r.json()}
+
+
+def parte_byma():
+    """Panel líder en pesos, CEDEARs y bonos en dólares (con TIR) desde data912."""
+    print("· BYMA (data912): panel líder, CEDEARs y bonos")
+    salida = {}
+    acc = de_data912("arg_stocks")
+    salida["panel"] = [{"ticker": t, "nombre": n, "sector": sec, "precio": acc[t].get("c"), "dia": acc[t].get("pct_change"), "volumen": acc[t].get("v")}
+                       for t, (n, sec) in PANEL.items() if t in acc and acc[t].get("c")]
+    ced = de_data912("arg_cedears")
+    salida["cedears"] = [{"ticker": t, "nombre": n, "sector": sec, "precio": ced[t].get("c"), "dia": ced[t].get("pct_change"), "volumen": ced[t].get("v"),
+                          "usd": (ced.get(t + "D") or {}).get("c")}
+                         for t, (n, sec) in CEDEARS.items() if t in ced and ced[t].get("c")]
+    bon = de_data912("arg_bonds")
+    salida["bonos"] = []
+    for t in bonos_ar.TICKERS:
+        fila = bon.get(t + "D")                                   # precio en dólares MEP
+        if not fila or not fila.get("c"):
+            continue
+        m = bonos_ar.metricas(t, fila["c"])
+        if m and 0 < m["tir"] < 60:
+            m["dia"] = fila.get("pct_change")
+            salida["bonos"].append(m)
+    print(f"     · panel {len(salida['panel'])} · CEDEARs {len(salida['cedears'])} · bonos {len(salida['bonos'])}: "
+          + ", ".join(f"{b['ticker']} {b['tir']:.1f}%" for b in salida["bonos"][:4]))
+    return salida
+
 
 # Los granos cotizan en centavos de dólar por bushel: los pasamos a dólares por tonelada
 TONELADAS_POR_BUSHEL = {"soja": 0.0272155, "trigo": 0.0272155, "maiz": 0.0254012}
@@ -135,7 +222,7 @@ def main():
     print("Atlas Macro · mercados")
     anterior = json.load(open(ARCHIVO_SALIDA, encoding="utf-8")) if ARCHIVO_SALIDA.exists() else {}
     salida = {"generado": datetime.now(timezone.utc).isoformat(timespec="seconds"),
-              "fuente": "Stooq y Yahoo Finance (precios de cierre)", "grupos": {}}
+              "fuente": "Stooq, Yahoo Finance y data912.com (precios de BYMA)", "grupos": {}}
     ok = falla = 0
     for grupo, lista in INSTRUMENTOS.items():
         salida["grupos"][grupo] = []
@@ -154,12 +241,19 @@ def main():
                 datos = [(f, v / 100 / TONELADAS_POR_BUSHEL[clave]) for f, v in datos]
             r = resumen(datos)
             salida["grupos"][grupo].append({"clave": clave, "nombre": nombre, "ticker": t_yahoo, "moneda": moneda,
-                                             "unidad": unidad, "fuente": fuente, **r})
+                                             "unidad": unidad, "fuente": fuente, **({"sector": SECTOR_ADR[clave]} if clave in SECTOR_ADR else {}), **r})
             ok += 1
             dia = f"{r['dia']:+.2f}%" if r["dia"] is not None else "—"
             print(f"     · {nombre:<16} {r['precio']:>14,.2f}  {dia:>8}  ({r['fecha']}, {fuente})")
             time.sleep(0.6)                                               # sin apurar a los servidores
 
+    try:
+        salida["byma"] = parte_byma()
+        salida["byma"]["generado"] = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    except Exception as e:
+        print(f"     ❌ BYMA: {str(e)[:120]} (dejo el dato anterior)")
+        if "byma" in anterior:
+            salida["byma"] = anterior["byma"]
     if ok == 0:
         sys.exit("❌ No llegó ningún precio: dejo el mercados.json anterior")
     with open(ARCHIVO_SALIDA, "w", encoding="utf-8") as archivo:

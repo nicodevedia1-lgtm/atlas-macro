@@ -509,6 +509,16 @@ footer a { color: var(--muted); text-decoration-color: var(--accent); text-under
 
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 /* Mercados */
+@media (max-width: 600px) { .m-ley { display: none; } }
+.m-dos { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 520px), 1fr)); gap: 24px; align-items: start; }
+.m-dos .pf-tabla table { min-width: 0; }
+.m-sectores { display: flex; flex-wrap: wrap; gap: 16px 26px; }
+.m-sec-g { display: grid; gap: 8px; align-content: start; min-width: 0; }
+.m-sec-g .m-cartas { grid-template-columns: repeat(var(--n), 172px); }
+@media (max-width: 760px) { .m-sec-g { width: 100%; } .m-sec-g .m-cartas { grid-template-columns: repeat(auto-fill, minmax(min(100%, 150px), 1fr)); } }
+.m-sector { font-size: 14px; font-weight: 700; color: var(--muted); }
+.m-sec-fila th { padding-top: 16px; color: var(--accent); font-size: 12.5px; }
+.m-tk { color: var(--muted); font-size: 12px; margin-left: 4px; }
 .m-cartas { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 165px), 1fr)); gap: 10px; }
 @media (max-width: 420px) { .m-cartas { grid-template-columns: repeat(2, minmax(0, 1fr)); } .m-p { font-size: 18px; } }
 .m-carta { display: grid; gap: 3px; text-align: left; background: var(--bg); border: 1px solid transparent; border-radius: 12px; padding: 12px 14px; cursor: pointer; font: inherit; color: var(--ink); }
@@ -990,7 +1000,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <header class="top">
       <div class="eyebrow" id="mercFecha">Mercados</div>
       <h1>Mercados</h1>
-      <p class="lede">Cómo vienen las principales bolsas del mundo, las acciones argentinas en Nueva York, los precios de lo que exporta el país y las cripto. Tocá cualquiera para ver su gráfico.</p>
+      <p class="lede">Cómo vienen las bolsas del mundo, las acciones argentinas en Nueva York y en Buenos Aires, los CEDEARs, los bonos en dólares con su rendimiento, los precios de lo que exporta el país y las cripto. Tocá cualquier tarjeta para ver su gráfico.</p>
     </header>
     <section class="ag-bloque" id="mercDetalle">
       <div class="ag-tit"><h2 id="mercDetT">—</h2><div class="lab-chips" id="mercRangos"></div></div>
@@ -2090,6 +2100,8 @@ function indiceBusqueda() {
   add("🗳️", "Próximas elecciones", "Agenda", "elecciones votacion calendario", irA_("elecciones"));
   add("⚠️", "Conflictos y crisis", "Mundo", "conflictos guerra crisis militar golpe", irA_("conflictos"));
   add("🏛️", "Quién gobierna cada país", "Mapa", "gobierno presidente izquierda derecha ideologia quien gobierna", () => { irA_("inicio")(); setModo("gob"); setVista("mundo"); });
+  add("💵", "Bonos en dólares: TIR y curva", "Globales y Bonares", "bonos tir rendimiento curva globales bonares al30 gd30 gd35 al35 gd38 gd41 gd46 duracion paridad", () => { irA_("mercados")(); setTimeout(() => { const e = document.getElementById("mercBonos"); if (e) e.scrollIntoView(); }, 300); });
+  add("📊", "CEDEARs y panel líder", "Acciones en pesos en BYMA", "cedears cedear panel lider byma acciones pesos apple nvidia tesla spy qqq pampa ypfd galicia", irA_("mercados"));
   add("📈", "Mercados", "Bolsas, ADRs, soja y cripto", "mercados bolsa acciones indices merval sp500 s&p nasdaq bovespa adr ypf galicia mercado libre soja maiz trigo petroleo oro cobre bitcoin cripto ether", irA_("mercados"));
   todosMerc().forEach(x => add("📈", x.nombre, `Mercados · ${fmtMerc(x)}`, `${x.nombre} ${x.ticker} cotizacion precio accion`, () => { mercSel = x.clave; irA_("mercados")(); }));
   add("🌐", "Tasas de los bancos centrales", "Mercados · Fed, BCE, Brasil y más", "tasa interes banco central fed bce reserva federal politica monetaria tasas mundo", () => { irA_("mercados")(); setTimeout(() => { const el = document.getElementById("bcBloque"); if (el) el.scrollIntoView(); }, 300); });
@@ -2867,10 +2879,12 @@ function renderConvergencia() {
 
 /* ---------- MERCADOS (mercados.json + cripto en vivo de CoinGecko) ---------- */
 let MERCADOS = null, mercSel = "sp500", mercRango = 365, mercChart = null, criptoVivo = null;
-const MERC_GRUPOS = { indices: "Índices bursátiles", adrs: "Argentinos en Wall Street (ADRs)", materias: "Materias primas", monedas: "Monedas del mundo", cripto: "Cripto" };
+const MERC_GRUPOS = { indices: "Índices bursátiles", adrs: "Acciones argentinas en Nueva York (ADRs)", byma: "", materias: "Materias primas", monedas: "Monedas del mundo", cripto: "Cripto" };
+const SECTORES_AR = ["Petróleo y gas", "Electricidad", "Bancos", "Tecnología y telecomunicaciones", "Industria y materiales", "Construcción, inmuebles e infraestructura"];
+const SECTORES_CED = ["Tecnología", "Energía", "Finanzas", "Consumo", "Salud", "Minería y oro", "Fondos"];
 const MERC_NOTAS = {
   indices: "Cada índice resume las acciones más importantes de una bolsa. El Merval está en pesos, así que también sube por la inflación.",
-  adrs: "Acciones de empresas argentinas que cotizan en Nueva York, en dólares.",
+  adrs: "Acciones de empresas argentinas que cotizan en Nueva York, en dólares, agrupadas por sector.",
   materias: "Precios internacionales de referencia (contratos a futuro de Chicago y Nueva York). Soja, maíz y trigo: lo que más exporta Argentina.",
   cripto: "Bitcoin y ether se actualizan en vivo cada vez que abrís la página.",
   monedas: "Cuántas unidades de cada moneda vale un dólar (el euro y la libra, al revés: cuántos dólares vale uno). Si sube, esa moneda se debilita frente al dólar; el índice dólar (DXY) mide al dólar contra las monedas de los países ricos."
@@ -2897,17 +2911,67 @@ function sparkMerc(x) {
   const sube = pts[pts.length - 1] >= pts[0];
   return `<svg class="m-spark ${sube ? "s-up" : "s-down"}" viewBox="0 0 120 28" preserveAspectRatio="none" aria-hidden="true"><polyline points="${P}"/></svg>`;
 }
-function renderMercados() {
-  if (!MERCADOS) { document.getElementById("mercGrupos").innerHTML = `<p class="note">Todavía no hay datos de mercados.</p>`; return; }
-  document.getElementById("mercGrupos").innerHTML = Object.entries(MERC_GRUPOS).filter(([g]) => MERCADOS.grupos[g] && MERCADOS.grupos[g].length).map(([g, t]) => `
-    <section class="ag-bloque"><div class="ag-tit"><h2>${t}</h2>${g === "cripto" && criptoVivo ? `<span class="note">En vivo · ${criptoVivo._hora} (CoinGecko)</span>` : ""}</div>
-      <div class="m-cartas">${MERCADOS.grupos[g].map(x => `<button class="m-carta${x.clave === mercSel ? " sel" : ""}" type="button" data-k="${x.clave}">
+/* acciones locales, CEDEARs y bonos (de BYMA, vía data912) */
+const pesosMerc = v => "$ " + nf(v, v >= 1000 ? 0 : 2);
+function porSector(lista, orden, fila) {
+  const sec = [...orden, ...new Set(lista.map(x => x.sector).filter(s => !orden.includes(s)))];
+  return sec.map(s => [s, lista.filter(x => (x.sector || "Otras") === s)]).filter(([, xs]) => xs.length).map(([s, xs]) => fila(s, xs)).join("");
+}
+function bloquesByma() {
+  const B = MERCADOS.byma; if (!B) return "";
+  const hora = B.generado ? new Date(B.generado).toLocaleTimeString("es-AR", { hour: "2-digit", minute: "2-digit" }) : "";
+  const tabla = (cab, filas) => `<div class="pf-tabla"><table><thead><tr>${cab}</tr></thead><tbody>${filas}</tbody></table></div>`;
+  let h = "";
+  if (B.bonos && B.bonos.length) {
+    h += `<section class="ag-bloque" id="mercBonos"><div class="ag-tit"><h2>Bonos en dólares: rendimiento y curva</h2><span class="note">BYMA, en dólares MEP · ${hora}</span></div>
+      <p class="note">La TIR es cuánto rinde por año un bono si lo comprás hoy y lo tenés hasta el final, cobrando todos los pagos. La duración es cuántos años, en promedio, tarda en devolverte la plata. Los Bonares (AL, AE) son de ley argentina; los Globales (GD), de ley de Nueva York, y suelen rendir menos porque se consideran más seguros ante un problema.</p>
+      <div id="mercCurva" class="ag-chart"></div>
+      ${tabla(`<th>Bono</th><th class="m-ley">Ley</th><th class="n">Precio</th><th class="n">TIR</th><th class="n">Duración</th><th class="n">Paridad</th><th class="n">Hoy</th><th class="n">Próximo pago</th>`,
+        B.bonos.map(b => `<tr><td><b>${b.ticker}</b></td><td class="m-ley">${b.ley}</td><td class="n">US$ ${nf(b.precio, 2)}</td><td class="n"><b>${nf(b.tir, 1)}%</b></td><td class="n">${nf(b.duracion, 1)} años</td><td class="n">${nf(b.paridad, 0)}%</td><td class="n">${varMerc(b.dia)}</td>
+          <td class="n">${b.proximo.fecha.slice(8)}/${b.proximo.fecha.slice(5, 7)}/${b.proximo.fecha.slice(2, 4)}: US$ ${nf(b.proximo.interes + b.proximo.amort, 2)}</td></tr>`).join(""))}
+      <p class="note">Precio cada 100 dólares de valor nominal original. Paridad: el precio sobre lo que "vale" el bono según sus condiciones (lo que falta amortizar más los intereses corridos). TIR y duración calculadas por Atlas Macro con el cronograma de pagos de cada bono; pueden diferir un poco de las de cada broker. No es una recomendación de inversión.</p></section>`;
+  }
+  h += `<div class="m-dos">`;
+  if (B.panel && B.panel.length) {
+    h += `<section class="ag-bloque"><div class="ag-tit"><h2>Panel líder de la Bolsa de Buenos Aires</h2><span class="note">En pesos · ${hora}</span></div>
+      ${tabla(`<th>Empresa</th><th class="n">Precio</th><th class="n">Hoy</th>`, porSector(B.panel, SECTORES_AR, (s, xs) => `<tr class="m-sec-fila"><th colspan="3">${s}</th></tr>` + xs.map(x => `<tr><td>${x.nombre} <small class="m-tk">${x.ticker}</small></td><td class="n">${pesosMerc(x.precio)}</td><td class="n">${varMerc(x.dia)}</td></tr>`).join("")))}
+      <p class="note">Las acciones del índice S&P Merval, en pesos, en BYMA. Con unos 20 minutos de demora.</p></section>`;
+  }
+  if (B.cedears && B.cedears.length) {
+    h += `<section class="ag-bloque"><div class="ag-tit"><h2>CEDEARs más operados</h2><span class="note">En pesos · ${hora}</span></div>
+      <p class="note">Certificados que se compran en pesos en Buenos Aires y representan acciones o fondos del exterior. Su precio sigue al de la acción en Nueva York y al dólar contado con liquidación.</p>
+      ${tabla(`<th>Empresa o fondo</th><th class="n">Precio</th><th class="n">En dólares</th><th class="n">Hoy</th>`, porSector(B.cedears, SECTORES_CED, (s, xs) => `<tr class="m-sec-fila"><th colspan="4">${s}</th></tr>` + xs.map(x => `<tr><td>${x.nombre} <small class="m-tk">${x.ticker}</small></td><td class="n">${pesosMerc(x.precio)}</td><td class="n">${x.usd ? "US$ " + nf(x.usd, 2) : "—"}</td><td class="n">${varMerc(x.dia)}</td></tr>`).join("")))}
+      <p class="note">"En dólares": el mismo CEDEAR comprado con dólares MEP. Con unos 20 minutos de demora. No es una recomendación de inversión.</p></section>`;
+  }
+  return h + `</div>`;
+}
+function curvaBonos() {
+  const el = document.getElementById("mercCurva"), B = MERCADOS.byma; if (!el || !B || !B.bonos) return;
+  const { line, ink, ax } = chartBase(), c = echarts.getInstanceByDom(el) || echarts.init(el);
+  const serie = (ley, col) => ({ name: ley === "Nueva York" ? "Globales (ley Nueva York)" : "Bonares (ley argentina)", type: "line", smooth: false, symbolSize: 9,
+    data: B.bonos.filter(b => b.ley === ley).sort((a, b) => a.duracion - b.duracion).map(b => ({ value: [b.duracion, b.tir], name: b.ticker })),
+    lineStyle: { color: col, width: 2 }, itemStyle: { color: col }, label: { show: true, formatter: p => p.name, position: "top", color: ink, fontSize: 11 } });
+  c.setOption({
+    grid: { left: 50, right: 18, top: innerWidth < 600 ? 66 : 40, bottom: 40 }, legend: { top: 0, left: 0, textStyle: { color: ink } },
+    tooltip: Object.assign(tipBase(), { trigger: "item", formatter: p => `<b>${p.name}</b><br>TIR ${nf(p.value[1], 1)}% · duración ${nf(p.value[0], 1)} años` }),
+    xAxis: { type: "value", name: "Duración (años)", nameLocation: "middle", nameGap: 26, nameTextStyle: { color: css("--muted") }, axisLabel: ax, splitLine: { show: false }, axisLine: { lineStyle: { color: line } } },
+    yAxis: { type: "value", scale: true, axisLabel: Object.assign({}, ax, { formatter: v => v + "%" }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+    series: [serie("Argentina", css("--b")), serie("Nueva York", css("--accent"))]
+  }, true);
+}
+function cartaMerc(x) { return `<button class="m-carta${x.clave === mercSel ? " sel" : ""}" type="button" data-k="${x.clave}">
         <span class="m-n">${x.nombre}<small>${x.ticker.replace("=F", "").replace("^", "")}</small></span>
         <span class="m-p">${fmtMerc(x, precioMerc(x))}</span>${x.fecha < ultimaFechaMerc() && !(criptoVivo && criptoVivo[x.clave]) ? `<small class="ytag">dato del ${x.fecha.slice(8)}/${x.fecha.slice(5, 7)}</small>` : ""}
         <span class="m-v">${varMerc(diaMerc(x), " hoy")}</span>
         ${sparkMerc(x)}
-        <span class="m-mas">Mes ${varMerc(x.mes)} · Año ${varMerc(x.anio)}</span></button>`).join("")}</div>
+        <span class="m-mas">Mes ${varMerc(x.mes)} · Año ${varMerc(x.anio)}</span></button>`; }
+function renderMercados() {
+  if (!MERCADOS) { document.getElementById("mercGrupos").innerHTML = `<p class="note">Todavía no hay datos de mercados.</p>`; return; }
+  document.getElementById("mercGrupos").innerHTML = Object.entries(MERC_GRUPOS).filter(([g]) => g === "byma" || (MERCADOS.grupos[g] && MERCADOS.grupos[g].length)).map(([g, t]) => g === "byma" ? bloquesByma() : `
+    <section class="ag-bloque"><div class="ag-tit"><h2>${t}</h2>${g === "cripto" && criptoVivo ? `<span class="note">En vivo · ${criptoVivo._hora} (CoinGecko)</span>` : ""}</div>
+      ${g === "adrs" ? `<div class="m-sectores">${porSector(MERCADOS.grupos.adrs, SECTORES_AR, (s, xs) => `<div class="m-sec-g" style="--n:${xs.length}"><h3 class="m-sector">${s}</h3><div class="m-cartas">${xs.map(cartaMerc).join("")}</div></div>`)}</div>` : `<div class="m-cartas">${MERCADOS.grupos[g].map(cartaMerc).join("")}</div>`}
       <p class="note">${MERC_NOTAS[g]}</p></section>`).join("");
+  curvaBonos();
   document.querySelectorAll("#mercGrupos .m-carta").forEach(b => b.onclick = () => { mercSel = b.dataset.k; renderMercados(); document.getElementById("mercDetalle").scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "nearest" }); });
   renderMercDetalle();
   const g = MERCADOS.generado ? new Date(MERCADOS.generado) : null;
