@@ -1706,7 +1706,7 @@ const flag = k => { const f = flagInner(k); return f ? `<span class="flag">${f}<
 const nombreEs = k => PAISES[k] ? PAISES[k].nombre : k;
 
 const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
-const nf = (n, d = 0) => n.toLocaleString("es-AR", { minimumFractionDigits: d, maximumFractionDigits: d });
+const nf = (n, d = 0) => (n == null || isNaN(n)) ? "—" : Number(n).toLocaleString("es-AR", { minimumFractionDigits: d, maximumFractionDigits: d });
 const pibTxt = v => v == null ? "Sin dato" : v >= 1000 ? `US$ ${nf(v / 1000, 2)} billones` : v < 1 ? `US$ ${nf(v * 1000)} millones` : `US$ ${nf(v)} mil millones`;
 const pct = (v, d = 1) => `${nf(v, d)}%`;
 const last = a => a[a.length - 1];
@@ -1986,7 +1986,7 @@ function mostrarPagina(nombre) {
   if (nombre === "argentina") abrirArgentina();
   if (nombre === "gobiernos") renderGobiernos();
   if (nombre === "provincias") abrirProvincias();
-  if (nombre === "mercados") abrirMercados();
+  if (nombre === "mercados") { try { abrirMercados(); } catch (e) { console.error(e); } }
   if (nombre === "comercio") abrirComercio();
   if (nombre === "bcra") { abrirBCRA(); abrirFinanzas(); }
   if (nombre === "actividad") abrirActividad();

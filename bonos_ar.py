@@ -115,6 +115,7 @@ def metricas(ticker, precio, hoy=None):
     dur = sum(t * c / (1 + tir) ** t for t, c in pagos) / vp(tir)
     tecnico = residual + corrido
     return {"ticker": ticker, "ley": ley, "vence": BONOS[serie]["vence"].isoformat(), "precio": precio,
-            "tir": round(tir * 100, 2), "duracion": round(dur / (1 + tir / 2), 2),   # duración modificada con la convención semestral del mercado "paridad": round(precio / tecnico * 100, 1),
+            "tir": round(tir * 100, 2), "duracion": round(dur / (1 + tir / 2), 2),
+            "paridad": round(precio / tecnico * 100, 1),   # duración: modificada, con la convención semestral del mercado
             "residual": round(residual, 2), "tecnico": round(tecnico, 2),
             "proximo": {"fecha": fl[0][0].isoformat(), "interes": round(fl[0][1], 3), "amort": round(fl[0][2], 3)}}
