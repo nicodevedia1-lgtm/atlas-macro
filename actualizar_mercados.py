@@ -38,7 +38,7 @@ INSTRUMENTOS = {
     "indices": [
         ("sp500", "S&P 500", "^spx", "^GSPC", "USD", "puntos"),
         ("nasdaq", "Nasdaq", "^ndq", "^IXIC", "USD", "puntos"),
-        ("merval", "Merval", "^mrv", "^MERV", "ARS", "puntos"),
+        ("merval", "Merval (MSCI)", "^mrv", "^MERV", "ARS", "puntos"),
         ("bovespa", "Bovespa", "^bvp", "^BVSP", "BRL", "puntos"),
         ("eurostoxx", "Euro Stoxx 50", "^stx", "^STOXX50E", "EUR", "puntos"),
         ("nikkei", "Nikkei 225", "^nkx", "^N225", "JPY", "puntos"),
@@ -146,12 +146,13 @@ def merval_en_dolares(salida, anterior):
     if y and (not datos or y[-1][0] > datos[-1][0]):
         datos = y
     j, c, serie = 0, None, []
+    escala = EMPALME["factor"] if MERVAL_DATOS else 1.0          # en dólares, en la escala histórica del S&P Merval
     for f, v in datos:
         while j < len(ccl) and ccl[j][0] <= f:
             c = ccl[j][1]
             j += 1
         if c:
-            serie.append((f, v / c))
+            serie.append((f, v * escala / c))
     if len(serie) < 30:
         return
     r = resumen(serie)
@@ -208,6 +209,9 @@ sesion = requests.Session(impersonate="chrome")
 STOOQ_FALLAS = [0]
 URL_BYMA_INDICE = "https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/chart/index-historical-series/history"
 MERVAL_DATOS = []
+# El 20/10/2026 el Merval pasó a calcularlo MSCI con base 100.000 (el S&P Merval venía en ~2,8 millones).
+# Al empalmar, el factor sirve para mostrar el Merval en dólares en la escala histórica, la que usa el mercado.
+EMPALME = {"factor": 1.0, "fecha": None}
 
 
 def de_byma_indice(simbolo):
@@ -230,7 +234,18 @@ def de_byma_indice(simbolo):
     for t, c in zip(d["t"], d["c"]):
         if c:
             datos[datetime.fromtimestamp(t, timezone(timedelta(hours=-3))).strftime("%Y-%m-%d")] = c
-    return sorted(datos.items()) or None
+    datos = sorted(datos.items())
+    # cambio de base: si de un día para el otro el índice cae más de 80%, es la base nueva, no una caída.
+    # La serie vieja se lleva a la escala nueva (base 100.000 = último cierre de la vieja) y así las variaciones dan bien.
+    for i in range(1, len(datos)):
+        antes, ahora = datos[i - 1][1], datos[i][1]
+        if ahora < antes * 0.2:
+            factor = (100000 if 50000 < ahora < 150000 else ahora) / antes
+            datos = [(f, v * factor) for f, v in datos[:i]] + datos[i:]
+            EMPALME.update(factor=1 / factor, fecha=datos[i][0])
+            print(f"     · Merval: cambio de base el {datos[i][0]} (la serie anterior se pasó a la escala nueva)")
+            break
+    return datos or None
 
 
 def de_stooq(ticker):
