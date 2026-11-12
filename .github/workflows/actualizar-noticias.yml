@@ -2,7 +2,7 @@ name: Actualizar noticias
 
 on:
   schedule:
-    - cron: "37 10 * * *"   # todos los días, 10:37 UTC (7:37 en Argentina)
+    - cron: "37 10,22 * * *"   # todos los días, 7:37 y 19:37 (hora argentina)
   workflow_dispatch:
 
 permissions:
