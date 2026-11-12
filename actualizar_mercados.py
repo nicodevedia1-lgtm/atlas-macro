@@ -4,7 +4,8 @@ actualizar_mercados.py — Atlas Macro
 Baja el precio de cierre de índices bursátiles, acciones argentinas en Wall Street
 (ADRs), materias primas, cripto y monedas del mundo, y genera mercados.json con el último año de datos.
 
-Fuentes: Stooq (stooq.com) y, si Stooq no tiene el dato o no responde, Yahoo Finance.
+Fuentes: Stooq (stooq.com) y, si Stooq no tiene el dato o no responde, Yahoo Finance. El Merval sale
+del servicio público de datos de BYMA (open.bymadata.com.ar), que está al día; Yahoo lo dejó de actualizar.
 Además, de data912.com (precios de BYMA): el panel líder de acciones en pesos, los CEDEARs
 más operados y los bonos en dólares, con su TIR, duración y paridad (calculadas en bonos_ar.py).
 Los precios tienen unos 15-20 minutos de demora: no es una cotización en tiempo real.
@@ -139,9 +140,9 @@ def merval_en_dolares(salida, anterior):
     if not merv:
         return
     ccl = sorted((f["fecha"], f["venta"]) for f in sesion.get(URL_CCL, timeout=60).json() if f.get("venta"))
-    # Merval completo (2 años) para calcular bien las variaciones
-    datos = de_stooq("^mrv") or []
-    y = de_yahoo("^MERV")
+    # Merval completo (2 años) para calcular bien las variaciones: el de BYMA si llegó, si no Stooq o Yahoo
+    datos = MERVAL_DATOS or de_stooq("^mrv") or []
+    y = None if MERVAL_DATOS else de_yahoo("^MERV")
     if y and (not datos or y[-1][0] > datos[-1][0]):
         datos = y
     j, c, serie = 0, None, []
@@ -205,6 +206,31 @@ sesion = requests.Session(impersonate="chrome")
 
 
 STOOQ_FALLAS = [0]
+URL_BYMA_INDICE = "https://open.bymadata.com.ar/vanoms-be-core/rest/api/bymadata/free/chart/index-historical-series/history"
+MERVAL_DATOS = []
+
+
+def de_byma_indice(simbolo):
+    """[(fecha, cierre), ...] de un índice de BYMA (M = S&P Merval), de su servicio público de datos (con demora)."""
+    hasta = int(time.time())
+    params = {"symbol": simbolo, "resolution": "D", "from": hasta - 730 * 86400, "to": hasta}
+    try:
+        try:
+            r = sesion.get(URL_BYMA_INDICE, params=params, timeout=40)
+        except Exception:
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                r = sesion.get(URL_BYMA_INDICE, params=params, timeout=40, verify=False)
+        d = r.json()
+    except Exception:
+        return None
+    if d.get("s") != "ok" or not d.get("t"):
+        return None
+    datos = {}
+    for t, c in zip(d["t"], d["c"]):
+        if c:
+            datos[datetime.fromtimestamp(t, timezone(timedelta(hours=-3))).strftime("%Y-%m-%d")] = c
+    return sorted(datos.items()) or None
 
 
 def de_stooq(ticker):
@@ -277,7 +303,11 @@ def main():
     for grupo, lista in INSTRUMENTOS.items():
         salida["grupos"][grupo] = []
         for clave, nombre, t_stooq, t_yahoo, moneda, unidad in lista:
-            datos, fuente = de_stooq(t_stooq), "Stooq"
+            datos, fuente = (de_byma_indice("M"), "BYMA") if clave == "merval" else (None, "")
+            if datos:
+                MERVAL_DATOS[:] = datos
+            else:
+                datos, fuente = de_stooq(t_stooq), "Stooq"
             viejo_stooq = datos and datos[-1][0] < (date.today() - timedelta(days=4)).isoformat()
             if not datos or viejo_stooq:                   # Stooq a veces deja de actualizar alguno (le pasó al Merval)
                 y = de_yahoo(t_yahoo) if t_yahoo else None
