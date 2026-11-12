@@ -41,6 +41,16 @@ INSTRUMENTOS = {
         ("bovespa", "Bovespa", "^bvp", "^BVSP", "BRL", "puntos"),
         ("eurostoxx", "Euro Stoxx 50", "^stx", "^STOXX50E", "EUR", "puntos"),
         ("nikkei", "Nikkei 225", "^nkx", "^N225", "JPY", "puntos"),
+        ("msciw", "MSCI Mundo (ETF URTH)", "urth.us", "URTH", "USD", "US$"),
+        ("mscie", "MSCI Emergentes (ETF EEM)", "eem.us", "EEM", "USD", "US$"),
+        ("vix", "VIX (índice del miedo)", "^vix", "^VIX", "USD", "puntos"),
+    ],
+    # tasas de los bonos del gobierno a 10 años: las variaciones van en puntos básicos, no en %
+    "tasas": [
+        ("t3m", "EE.UU. 3 meses", "13wusy.b", "^IRX", "USD", "tasa"),
+        ("t5us", "EE.UU. 5 años", "5usy.b", "^FVX", "USD", "tasa"),
+        ("t10us", "EE.UU. 10 años", "10usy.b", "^TNX", "USD", "tasa"),
+        ("t30us", "EE.UU. 30 años", "30usy.b", "^TYX", "USD", "tasa"),
     ],
     "adrs": [
         ("ypf", "YPF", "ypf.us", "YPF", "USD", "US$"),
@@ -120,6 +130,36 @@ CEDEARS = {
 }
 
 
+URL_CCL = "https://raw.githubusercontent.com/enzonotario/esjs-argentina-datos-api/main/datos/v1/cotizaciones/dolares/contadoconliqui/index.json"
+
+
+def merval_en_dolares(salida, anterior):
+    """Merval dividido por el dólar contado con liquidación de cada día: lo que hizo la bolsa medida en dólares."""
+    merv = next((x for x in salida["grupos"].get("indices", []) if x["clave"] == "merval"), None)
+    if not merv:
+        return
+    ccl = sorted((f["fecha"], f["venta"]) for f in sesion.get(URL_CCL, timeout=60).json() if f.get("venta"))
+    # Merval completo (2 años) para calcular bien las variaciones
+    datos = de_stooq("^mrv") or []
+    y = de_yahoo("^MERV")
+    if y and (not datos or y[-1][0] > datos[-1][0]):
+        datos = y
+    j, c, serie = 0, None, []
+    for f, v in datos:
+        while j < len(ccl) and ccl[j][0] <= f:
+            c = ccl[j][1]
+            j += 1
+        if c:
+            serie.append((f, v / c))
+    if len(serie) < 30:
+        return
+    r = resumen(serie)
+    i = salida["grupos"]["indices"].index(merv)
+    salida["grupos"]["indices"].insert(i + 1, {"clave": "merval_ccl", "nombre": "Merval en dólares (CCL)", "ticker": "MERVAL/CCL", "moneda": "USD",
+                                               "unidad": "puntos", "fuente": "Stooq/Yahoo y ArgentinaDatos", **r})
+    print(f"     · Merval en dólares: {r['precio']:,.0f} ({r['fecha']}) · en el año {r['anio']}%")
+
+
 def de_data912(nombre):
     """{ticker: fila} de una lista de data912 (precios de BYMA con demora)."""
     try:
@@ -164,8 +204,13 @@ TONELADAS_POR_BUSHEL = {"soja": 0.0272155, "trigo": 0.0272155, "maiz": 0.0254012
 sesion = requests.Session(impersonate="chrome")
 
 
+STOOQ_FALLAS = [0]
+
+
 def de_stooq(ticker):
-    """[(fecha, cierre), ...] desde Stooq, o None si no anduvo."""
+    """[(fecha, cierre), ...] desde Stooq, o None si no anduvo. Si falla 3 veces seguidas, no se insiste en esta corrida."""
+    if STOOQ_FALLAS[0] >= 3:
+        return None
     hasta = date.today()
     desde = hasta - timedelta(days=730)
     url = URL_STOOQ.format(ticker=ticker, desde=desde.strftime("%Y%m%d"), hasta=hasta.strftime("%Y%m%d"))
@@ -174,7 +219,9 @@ def de_stooq(ticker):
     except Exception:
         return None
     if r.status_code != 200 or not r.text.startswith("Date"):
-        return None                                  # Stooq responde "No data" o un aviso de límite
+        STOOQ_FALLAS[0] += 1
+        return None                                  # Stooq responde "No data", un aviso de límite o una página en vez del CSV
+    STOOQ_FALLAS[0] = 0
     filas = list(csv.DictReader(io.StringIO(r.text)))
     datos = [(f["Date"], float(f["Close"])) for f in filas if f.get("Close") not in (None, "", "null")]
     return datos or None
@@ -193,7 +240,7 @@ def de_yahoo(ticker):
     return datos or None
 
 
-def resumen(datos):
+def resumen(datos, tasa=False):
     """Último precio y variaciones: del día, del mes, del año y de 12 meses."""
     fechas = [f for f, _ in datos]
     ult_f, ult = datos[-1]
@@ -208,7 +255,10 @@ def resumen(datos):
     hace_mes = precio_al((fin - timedelta(days=30)).isoformat())
     fin_anio_pasado = precio_al(f"{fin.year - 1}-12-31")
     hace_anio = precio_al((fin - timedelta(days=365)).isoformat())
-    var = lambda a: round((ult / a - 1) * 100, 2) if a else None
+    if tasa:                                    # tasas: diferencia en puntos básicos (1 pb = 0,01 punto)
+        var = lambda a: round((ult - a) * 100, 1) if a is not None else None
+    else:
+        var = lambda a: round((ult / a - 1) * 100, 2) if a else None
     # para el gráfico: último año, un punto por día hábil
     ultimo_anio = [(f, round(v, 4)) for f, v in datos if f >= (fin - timedelta(days=366)).isoformat()]
     return {
@@ -230,7 +280,7 @@ def main():
             datos, fuente = de_stooq(t_stooq), "Stooq"
             viejo_stooq = datos and datos[-1][0] < (date.today() - timedelta(days=4)).isoformat()
             if not datos or viejo_stooq:                   # Stooq a veces deja de actualizar alguno (le pasó al Merval)
-                y = de_yahoo(t_yahoo)
+                y = de_yahoo(t_yahoo) if t_yahoo else None
                 if y and (not datos or y[-1][0] > datos[-1][0]):
                     datos, fuente = y, "Yahoo"
             if not datos:
@@ -242,14 +292,18 @@ def main():
                 continue
             if clave in TONELADAS_POR_BUSHEL and datos[-1][1] > 100:      # viene en centavos por bushel
                 datos = [(f, v / 100 / TONELADAS_POR_BUSHEL[clave]) for f, v in datos]
-            r = resumen(datos)
-            salida["grupos"][grupo].append({"clave": clave, "nombre": nombre, "ticker": t_yahoo, "moneda": moneda,
+            r = resumen(datos, tasa=unidad == "tasa")
+            salida["grupos"][grupo].append({"clave": clave, "nombre": nombre, "ticker": t_yahoo or t_stooq.upper(), "moneda": moneda,
                                              "unidad": unidad, "fuente": fuente, **({"sector": SECTOR_ADR[clave]} if clave in SECTOR_ADR else {}), **r})
             ok += 1
             dia = f"{r['dia']:+.2f}%" if r["dia"] is not None else "—"
             print(f"     · {nombre:<16} {r['precio']:>14,.2f}  {dia:>8}  ({r['fecha']}, {fuente})")
             time.sleep(0.6)                                               # sin apurar a los servidores
 
+    try:
+        merval_en_dolares(salida, anterior)
+    except Exception as e:
+        print(f"     ⚠️  Merval en dólares: {str(e)[:100]}")
     try:
         salida["byma"] = parte_byma()
         salida["byma"]["generado"] = datetime.now(timezone.utc).isoformat(timespec="seconds")

@@ -74,6 +74,8 @@ CATALOGO = {
     "emae":         ("EMAE desestacionalizado", "índice 2004 = 100", "Actividad", "ts", "143.3_NO_PR_2004_A_31", "ult"),
     "emae_orig":    ("EMAE original", "índice 2004 = 100", "Actividad", "ts", "143.3_NO_PR_2004_A_21", "ult"),
     "emae_constr":  ("Actividad de la construcción", "índice 2004 = 100", "Actividad", "ts", "11.3_VMATC_2004_M_12", "ult"),
+    "isac":         ("ISAC: construcción, sin estacionalidad", "índice 2004 = 100", "Actividad", "ts", "33.2_ISAC_SIN_EDAD_0_M_23_56", "ult"),
+    "ipi":          ("IPI manufacturero: industria, sin estacionalidad", "índice", "Actividad", "buscar", ["IPI manufacturero Nivel general desestacionalizada", ["nivel general", "desestacionalizad"]], "ult"),
     "emae_ind":     ("Actividad de la industria", "índice 2004 = 100", "Actividad", "ts", "11.3_VMASD_2004_M_23", "ult"),
     "emae_agro":    ("Actividad del agro", "índice 2004 = 100", "Actividad", "ts", "11.3_ISOM_2004_M_39", "ult"),
     "emae_mineria": ("Actividad de minería, petróleo y gas", "índice 2004 = 100", "Actividad", "ts", "11.3_ISD_2004_M_26", "ult"),

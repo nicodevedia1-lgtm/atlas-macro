@@ -1154,6 +1154,14 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
       <h3 class="bc-sub">Por tipo de préstamo, último dato</h3>
       <div id="bcraIrrLineas" class="ag-chart ag-chart-chica"></div>
     </section>
+    <section class="ag-bloque" id="bcraLiqBloque" hidden>
+      <div class="ag-tit"><h2>Liquidez en pesos y depósitos del Tesoro</h2><span class="note" id="bcraLiqT"></span></div>
+      <p class="note">Las tasas de un día para otro muestran cuánto "cuesta" conseguir pesos: cuando suben de golpe, falta liquidez. La de pases entre terceros es la que se negocia en el mercado (caución y repo); la BAIBAR, la que se cobran los bancos entre sí. Los depósitos del Tesoro en el BCRA son la "caja" con la que paga los vencimientos de deuda en pesos que no logra renovar en las licitaciones.</p>
+      <div class="bcra-kpis" id="bcraLiqKpis"></div>
+      <div id="bcraLiqChart" class="ag-chart ag-chart-chica"></div>
+      <h3 class="bc-sub">Depósitos del Tesoro en el BCRA, en pesos</h3>
+      <div id="bcraTesChart" class="ag-chart ag-chart-chica"></div>
+    </section>
     <section class="ag-bloque" id="bcraSeries">
       <div class="ag-tit"><h2>Todas las series del BCRA y los bonos</h2><span class="note" id="finFecha"></span></div>
       <p class="note">Reservas, tasas, dinero, depósitos y préstamos, inflación esperada, los bonos en dólares y la actividad. Tocá cualquier dato para ver su gráfico.</p>
@@ -1178,6 +1186,10 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <section class="ag-bloque"><div class="ag-tit"><h2>Sectores que ganan y que pierden</h2><span class="note" id="actSecT"></span></div>
       <p class="note">Cuánto creció o cayó cada sector contra el mismo mes del año anterior.</p>
       <div id="actSec" class="ag-chart ag-chart-chica"></div></section>
+    <section class="ag-bloque" id="actCiBloque" hidden><div class="ag-tit"><h2>Construcción e industria</h2><span class="note" id="actCiT"></span></div>
+      <p class="note">Los dos indicadores del INDEC que más se miran para ver cómo vienen la obra y las fábricas: el ISAC (construcción) y el IPI manufacturero (industria), sin estacionalidad, así se pueden comparar mes contra mes.</p>
+      <div class="bcra-kpis" id="actCiKpis"></div>
+      <div id="actCi" class="ag-chart ag-chart-chica"></div></section>
     <section class="ag-bloque"><div class="ag-tit"><h2>Inflación por categorías</h2></div>
       <p class="note">Variación mensual de los últimos tres meses. Núcleo: sin los precios regulados ni los estacionales; es la que mejor muestra la tendencia.</p>
       <div id="actIpc" class="ag-chart"></div></section>
@@ -2931,6 +2943,7 @@ const ultimaFechaMerc = () => todosMerc().filter(x => x.moneda !== "JPY").map(x 
 const todosMerc = () => MERCADOS ? Object.values(MERCADOS.grupos).flat() : [];
 const mercDe = k => todosMerc().find(x => x.clave === k);
 function fmtMerc(x, v = x.precio) {
+  if (x.unidad === "tasa") return nf(v, 2) + "%";
   if (x.unidad === "puntos") return nf(v, v >= 1000 ? 0 : 2);
   if (x.unidad.startsWith("moneda:")) return nf(v, v >= 1000 ? 0 : v >= 100 ? 1 : v >= 10 ? 2 : 4);
   const n = `US$ ${nf(v, v >= 1000 || (x.unidad !== "US$" && v >= 100) ? 0 : 2)}`;   // materias primas: sin centavos si pasan de 100
@@ -2997,6 +3010,24 @@ function curvaBonos() {
 /* variación del día como "píldora" verde o roja, y variaciones chicas de color */
 const pill = v => v == null ? `<span class="pill eq">—</span>` : `<span class="pill ${v > 0 ? "up" : v < 0 ? "down" : "eq"}">${v > 0 ? "+" : v < 0 ? "−" : ""}${nf(Math.abs(v), 2)}%</span>`;
 const pctC = v => v == null ? `<span class="mon-c">—</span>` : `<span class="mon-c ${v > 0 ? "up" : v < 0 ? "down" : ""}">${v > 0 ? "+" : v < 0 ? "−" : ""}${nf(Math.abs(v), 1)}%</span>`;
+const pillPb = v => v == null ? `<span class="pill eq">—</span>` : `<span class="pill ${v > 0 ? "up" : v < 0 ? "down" : "eq"}">${v > 0 ? "+" : v < 0 ? "−" : ""}${nf(Math.abs(v), 0)} pb</span>`;
+const pbC = v => v == null ? `<span class="mon-c">—</span>` : `<span class="mon-c ${v > 0 ? "up" : v < 0 ? "down" : ""}">${v > 0 ? "+" : v < 0 ? "−" : ""}${nf(Math.abs(v), 0)} pb</span>`;
+/* panel de dólares de Argentina: en vivo (DolarAPI) o el último cierre, con brecha y canje */
+function panelDolares() {
+  if (!ARGENTINA || !ARGENTINA.casas) return "";
+  const C = [["mayorista", "Mayorista"], ["oficial", "Oficial (Banco Nación)"], ["bolsa", "MEP"], ["contadoconliqui", "Contado con liqui (CCL)"], ["blue", "Blue"], ["cripto", "Cripto"]]
+    .filter(([c]) => ARGENTINA.casas[c]);
+  const v = c => cotiz(c).venta, ant = c => ARGENTINA.casas[c].antes && ARGENTINA.casas[c].antes.dia;
+  const fila = (n, val, d) => `<tr><td>${n}</td><td>${val}</td><td>${d}</td></tr>`;
+  const may = v("mayorista"), mep = v("bolsa"), ccl = v("contadoconliqui");
+  const brecha = (a, b) => a && b ? (a > b ? "+" : "") + nf((a / b - 1) * 100, 1) + "%" : "—";
+  return `<section class="mon-panel"><h2>Dólares en Argentina<small>${agVivo ? "En vivo (DolarAPI)" : "Último cierre"}</small></h2><table>
+    <thead><tr><th>Tipo</th><th>Venta</th><th>Hoy</th></tr></thead><tbody>
+    ${C.map(([c, n]) => { const x = v(c), a = ant(c); return fila(n, pesos(x), pill(a ? (x / a - 1) * 100 : null)); }).join("")}
+    <tr class="mon-sec"><td colspan="3">Brechas</td></tr>
+    ${fila("CCL contra el mayorista", brecha(ccl, may), "")}${fila("MEP contra el mayorista", brecha(mep, may), "")}${fila("Canje (CCL contra MEP)", brecha(ccl, mep), "")}
+    </tbody></table><p class="note" style="padding:10px 14px">El canje es cuánto más cuesta tener los dólares afuera (CCL) que en una cuenta en el país (MEP).</p></section>`;
+}
 function sparkMon(x) {
   const s = x.serie; if (!s || s.length < 3) return "";
   const ult = s.slice(-66), paso = Math.max(1, Math.floor(ult.length / 40)), pts = ult.filter((_, i) => i % paso === 0 || i === ult.length - 1).map(p => p[1]);
@@ -3007,7 +3038,7 @@ function sparkMon(x) {
 /* tabla de cotizaciones: una fila por instrumento, se toca para ver el gráfico */
 function monPanel(g, titulo, sub, items, sectores) {
   const filaM = x => `<tr class="mon-fila${x.clave === mercSel ? " sel" : ""}" data-k="${x.clave}"><td><button class="mon-nom" type="button" data-k="${x.clave}">${x.nombre}</button><span class="mon-tk">${x.ticker.replace("=F", "").replace("^", "").replace("=X", "")}</span>${x.fecha < ultimaFechaMerc() && !(criptoVivo && criptoVivo[x.clave]) ? ` <small class="ytag">dato del ${x.fecha.slice(8)}/${x.fecha.slice(5, 7)}</small>` : ""}</td>
-    <td>${fmtMerc(x, precioMerc(x))}</td><td>${pill(diaMerc(x))}</td><td class="mon-oc">${pctC(x.mes)}</td><td class="mon-oc">${pctC(x.anio)}</td><td class="mon-oc">${sparkMon(x)}</td></tr>`;
+    <td>${fmtMerc(x, precioMerc(x))}</td><td>${x.unidad === "tasa" ? pillPb(x.dia) : pill(diaMerc(x))}</td><td class="mon-oc">${x.unidad === "tasa" ? pbC(x.mes) : pctC(x.mes)}</td><td class="mon-oc">${x.unidad === "tasa" ? pbC(x.anio) : pctC(x.anio)}</td><td class="mon-oc">${sparkMon(x)}</td></tr>`;
   const cuerpo = sectores ? porSector(items, sectores, (s, xs) => `<tr class="mon-sec"><td colspan="6">${s}</td></tr>` + xs.map(filaM).join("")) : items.map(filaM).join("");
   return `<section class="mon-panel"><h2>${titulo}<small>${sub}</small></h2><table><thead><tr><th>${g === "monedas" ? "Moneda" : "Nombre"}</th><th>Último</th><th>Hoy</th><th class="mon-oc">Mes</th><th class="mon-oc">Año</th><th class="mon-oc">3 meses</th></tr></thead><tbody>${cuerpo}</tbody></table></section>`;
 }
@@ -3055,7 +3086,11 @@ function renderMercados() {
   const G = MERCADOS.grupos, p = (g, t, sub, sec) => G[g] && G[g].length ? monPanel(g, t, sub, G[g], sec) : "";
   document.getElementById("mercGrupos").innerHTML = `<div class="mon-grid">
       <div class="mon-col">${p("adrs", "Acciones argentinas en Nueva York", "En dólares", SECTORES_AR)}</div>
-      <div class="mon-col">${p("indices", "Índices", "Puntos")}${p("materias", "Materias primas", "En dólares")}${p("cripto", "Cripto", criptoVivo ? `En vivo · ${criptoVivo._hora}` : "En dólares")}</div>
+      <div class="mon-col">${panelDolares()}${p("indices", "Índices", "Puntos")}</div>
+    </div>
+    <div class="mon-grid">
+      <div class="mon-col">${p("tasas", "Tasas a 10 años", "Bonos de cada gobierno · variaciones en puntos básicos")}${p("cripto", "Cripto", criptoVivo ? `En vivo · ${criptoVivo._hora}` : "En dólares")}</div>
+      <div class="mon-col">${p("materias", "Materias primas", "En dólares")}</div>
     </div>
     ${bloquesByma()}
     <div class="mon-grid">${p("monedas", "Monedas", "Cuántas unidades vale un dólar (euro y libra: cuántos dólares vale uno)")}</div>`;
@@ -4119,15 +4154,17 @@ function histBlock(ind) {
 /* ---------- ARGENTINA FINANCIERA (finanzas.json: BCRA, bonos y EMAE) ---------- */
 let FINANZAS = null, finCargando = null, finSel = "bcra:reservas", finRango = 365, finChart = null;
 const FIN_GRUPOS = [
-  ["Banco Central y dinero", ["reservas", "mayorista", "minorista", "base", "m2var"]],
-  ["Tasas de interés", ["badlar", "tamar", "pf30", "baibar", "t_adelantos", "t_personales", "rem"]],
+  ["Banco Central y dinero", ["reservas", "mayorista", "minorista", "base", "m2var", "tesoro_dep"]],
+  ["Tasas de interés", ["repo", "badlar", "tamar", "pf30", "baibar", "t_adelantos", "t_personales", "rem"]],
   ["Depósitos y préstamos", ["depositos", "dep_usd", "prestamos", "hipotecarios", "prendarios", "personales", "tarjetas"]],
   ["Índices de ajuste", ["cer", "uva"]],
 ];
 /* cómo se muestra cada dato: en dólares, tipo de cambio, en pesos (millones), tasa (cambios en puntos) o índice */
-const FIN_TIPO = { reservas: "usd", dep_usd: "usd", mayorista: "tc", minorista: "tc", m2var: "tasa", badlar: "tasa", tamar: "tasa", pf30: "tasa", baibar: "tasa",
+const FIN_TIPO = { reservas: "usd", dep_usd: "usd", mayorista: "tc", minorista: "tc", m2var: "tasa", badlar: "tasa", tamar: "tasa", pf30: "tasa", baibar: "tasa", repo: "tasa",
   t_adelantos: "tasa", t_personales: "tasa", rem: "tasa", cer: "indice", uva: "indice" };
 const FIN_DESC = {
+  tesoro_dep: "La plata en pesos que el Tesoro tiene depositada en el Banco Central. Con eso paga los vencimientos de deuda que no logra renovar en las licitaciones.",
+  repo: "La tasa de los préstamos de un día para otro que se negocian en el mercado (caución y pases entre terceros en BYMA y A3). Cuando salta, falta liquidez en pesos.",
   reservas: "Los dólares que tiene el Banco Central (incluye oro, encajes de los bancos y el swap con China). Sirven para pagar deuda e intervenir en el dólar.",
   mayorista: "El dólar oficial al que operan los bancos y las empresas (comunicación A3500).",
   base: "Billetes y monedas más lo que los bancos tienen depositado en el Central. Es la plata que \"emite\" el BCRA.",
@@ -4186,7 +4223,43 @@ function emaeDatos() {
   const u = o[o.length - 1], antes = o.find(x => x[0] === `${+u[0].slice(0, 4) - 1}${u[0].slice(4)}`);
   return { mes: u[0], ia: antes ? (u[1] / antes[1] - 1) * 100 : null, mm: d.length > 1 ? (d[d.length - 1][1] / d[d.length - 2][1] - 1) * 100 : null, nivel: d[d.length - 1][1] };
 }
+/* liquidez en pesos (tasas de un día) y depósitos del Tesoro, con los datos diarios de finanzas.json */
+function renderLiquidez() {
+  const B = (FINANZAS && FINANZAS.bcra) || {}, S = k => (B[k] && B[k].serie) || [];
+  const T = [["repo", "Pases entre terceros (caución/repo)", css("--bad")], ["baibar", "Entre bancos (BAIBAR)", css("--warn")], ["badlar", "BADLAR (plazo fijo grande)", css("--accent")], ["tamar", "TAMAR", css("--b")]].filter(([k]) => S(k).length);
+  document.getElementById("bcraLiqBloque").hidden = !T.length && !S("tesoro_dep").length;
+  if (!T.length && !S("tesoro_dep").length) return;
+  const { line, ink, ax } = chartBase(), ult = s => s[s.length - 1], hace = (s, d) => { const f = new Date(ult(s)[0]); f.setDate(f.getDate() - d); const c = s.filter(x => x[0] <= f.toISOString().slice(0, 10)); return c.length ? c[c.length - 1][1] : null; };
+  const fd = d => `${+d.slice(8)}/${+d.slice(5, 7)}`;
+  const k = (t, v, sub) => `<div class="bcra-kpi"><span>${t}</span><b>${v}</b><small>${sub}</small></div>`, K = [];
+  if (S("repo").length) { const u = ult(S("repo")), s7 = hace(S("repo"), 7); K.push(k("Tasa de pases entre terceros", nf(u[1], 1) + "%", `anual · ${s7 != null ? conSigno(u[1] - s7, v => nf(v, 1) + " puntos") + " en una semana · " : ""}al ${fd(u[0])}`)); }
+  if (S("baibar").length) { const u = ult(S("baibar")); K.push(k("Tasa entre bancos (BAIBAR)", nf(u[1], 1) + "%", `anual · al ${fd(u[0])}`)); }
+  if (S("tesoro_dep").length) { const u = ult(S("tesoro_dep")), m = hace(S("tesoro_dep"), 30);
+    K.push(k("Depósitos del Tesoro en el BCRA", "$ " + nf(u[1] / 1e6, 2) + " billones", `${m ? conSigno((u[1] - m) / 1e6, v => nf(v, 2) + " billones") + " en un mes · " : ""}al ${fd(u[0])}`)); }
+  document.getElementById("bcraLiqKpis").innerHTML = K.join("");
+  const desde = (() => { const f = new Date(); f.setMonth(f.getMonth() - 6); return f.toISOString().slice(0, 10); })();
+  if (T.length) {
+    const dias = [...new Set(T.flatMap(([k]) => S(k).map(x => x[0])))].sort().filter(d => d >= desde);
+    graf("bcraLiqChart", {
+      grid: { left: 44, right: 14, top: 36, bottom: 28 }, legend: { top: 0, left: 0, textStyle: { color: ink } }, tooltip: Object.assign(tipBase(), { valueFormatter: v => v == null ? "—" : nf(v, 1) + "%" }),
+      xAxis: { type: "category", data: dias, axisLabel: Object.assign({}, ax, { formatter: fd }), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+      yAxis: { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => v + "%" }), splitLine: { lineStyle: { color: line, type: "dashed" } } },
+      series: T.map(([kk, n, c]) => { const M = new Map(S(kk)); return { name: n, type: "line", symbol: "none", connectNulls: true, data: dias.map(d => M.has(d) ? M.get(d) : null), lineStyle: { color: c, width: kk === "repo" ? 2.4 : 1.6 }, itemStyle: { color: c } }; })
+    });
+  }
+  if (S("tesoro_dep").length) {
+    const D = S("tesoro_dep").filter(x => x[0] >= desde);
+    graf("bcraTesChart", {
+      grid: { left: 56, right: 14, top: 14, bottom: 28 }, tooltip: Object.assign(tipBase(), { valueFormatter: v => v == null ? "—" : "$ " + nf(v, 2) + " billones" }),
+      xAxis: { type: "category", data: D.map(x => x[0]), axisLabel: Object.assign({}, ax, { formatter: fd }), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+      yAxis: { type: "value", axisLabel: Object.assign({}, ax, { formatter: v => nf(v, 0) }), name: "billones de $", nameTextStyle: { color: css("--muted") }, splitLine: { lineStyle: { color: line, type: "dashed" } } },
+      series: [{ name: "Depósitos del Tesoro", type: "line", symbol: "none", areaStyle: { opacity: .12 }, data: D.map(x => +(x[1] / 1e6).toFixed(2)), lineStyle: { color: css("--good"), width: 2 }, itemStyle: { color: css("--good") } }]
+    });
+  }
+  document.getElementById("bcraLiqT").textContent = "Últimos 6 meses";
+}
 function renderFinanzas() {
+  renderLiquidez();
   const B = FINANZAS.bcra || {}, BON = FINANZAS.bonos || [];
   if (!Object.keys(B).length && !BON.length) { document.getElementById("finGrupos").innerHTML = `<p class="note">Todavía no hay datos.</p>`; return; }
   const fechaCorta = f => f.split("-").reverse().slice(0, 2).join("/");
@@ -4650,6 +4723,24 @@ function renderActividad() {
       yAxis: { type: "category", inverse: true, data: dif.map(x => x[0]), axisLabel: Object.assign({}, ax, { fontSize: 12 }), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
       xAxis: { type: "value", axisLabel: ax, splitLine: { lineStyle: { color: line, type: "dashed" } } },
       series: [{ type: "bar", barMaxWidth: 22, data: dif.map(x => ({ value: +x[1].toFixed(1), itemStyle: { color: x[0] === "Total registrado" ? css("--accent") : x[1] >= 0 ? css("--good") : css("--bad") } })), label: { show: true, position: "right", color: ink, fontSize: 11, formatter: p => conSigno(p.value, v => nf(v, 1)) } }]
+    });
+  }
+  /* construcción (ISAC) e industria (IPI), sin estacionalidad */
+  const CI = [["isac", "Construcción (ISAC)", pal[3]], ["ipi", "Industria (IPI)", pal[0]]].filter(([k]) => SA(k).length);
+  document.getElementById("actCiBloque").hidden = !CI.length;
+  if (CI.length) {
+    const ia = (k, m) => { const M = mapaSerie(SA(k)), a = M.get(m), b = M.get(mesAnt(m, 12)); return a && b ? (a / b - 1) * 100 : null; };
+    const acum = (k, m) => { const M = mapaSerie(SA(k)); let a = 0, b = 0; for (let i = +m.slice(5); i >= 1; i--) { const mm = `${m.slice(0, 4)}-${String(i).padStart(2, "0")}`; a += M.get(mm) || 0; b += M.get(mesAnt(mm, 12)) || 0; } return a && b ? (a / b - 1) * 100 : null; };
+    const pc = v => v == null ? "—" : conSigno(v, x => nf(x, 1) + "%");
+    document.getElementById("actCiKpis").innerHTML = CI.map(([k, n]) => { const u = ult(SA(k)), vm = ult(varMes(SA(k)));
+      return kpi(n, pc(vm && vm[1]), `contra el mes anterior · ${pc(ia(k, u[0]))} contra un año antes · ${pc(acum(k, u[0]))} en lo que va del año · ${mn(u[0])}`); }).join("");
+    document.getElementById("actCiT").textContent = "Índice, sin estacionalidad";
+    const meses = [...new Set(CI.flatMap(([k]) => SA(k).map(x => x[0])))].sort().filter(m => m >= "2018-01");
+    graf("actCi", {
+      grid: { left: 44, right: 14, top: 36, bottom: 28 }, legend: { top: 0, left: 0, textStyle: { color: ink } }, tooltip: Object.assign(tipBase(), { valueFormatter: v => v == null ? "—" : nf(v, 1) }),
+      xAxis: { type: "category", data: meses, axisLabel: ejeMes(ax), axisLine: { lineStyle: { color: line } }, axisTick: { show: false } },
+      yAxis: { type: "value", scale: true, axisLabel: ax, splitLine: { lineStyle: { color: line, type: "dashed" } } },
+      series: CI.map(([k, n, c]) => { const M = mapaSerie(SA(k)); return { name: n, type: "line", symbol: "none", data: meses.map(m => M.has(m) ? +M.get(m).toFixed(1) : null), lineStyle: { color: c, width: 2 }, itemStyle: { color: c } }; })
     });
   }
   /* confianza en el gobierno (UTDT), con cada gobierno de otro color */
