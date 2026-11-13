@@ -1,14 +1,14 @@
 {
- "generado": "2026-11-13T15:48:19+00:00",
+ "generado": "2026-11-13T16:54:46+00:00",
  "fecha": "2026-11-13",
- "hora": "12:48",
+ "hora": "13:54",
  "dia": [
   {
    "id": "hoy",
    "circulo": "Hoy",
    "kicker": "Viernes 13 de noviembre",
    "titulo": "El día en 30 segundos",
-   "texto": "Lo más llamativo: Bitcoin bajó 4,2%, 2,0 veces lo que se mueve en un día normal.",
+   "texto": "Lo más llamativo: Bitcoin bajó 3,9%, 1,9 veces lo que se mueve en un día normal.",
    "grandes": [
     {
      "nombre": "Merval",
@@ -46,12 +46,12 @@
    "circulo": "Acciones",
    "kicker": "Panel líder en BYMA",
    "titulo": "Día verde en la bolsa",
-   "texto": "14 de 22 acciones del panel líder subieron y 7 bajaron.",
+   "texto": "16 de 22 acciones del panel líder subieron y 5 bajaron.",
    "filas": [
     {
      "nombre": "Cresud",
-     "valor": "$ 1.535",
-     "cambio": 2.19,
+     "valor": "$ 1.574",
+     "cambio": 4.79,
      "tipo": "pct",
      "sub": "CRES",
      "destacado": false,
@@ -59,8 +59,8 @@
     },
     {
      "nombre": "Cablevisión Holding",
-     "valor": "$ 8.660",
-     "cambio": 1.88,
+     "valor": "$ 8.750",
+     "cambio": 2.94,
      "tipo": "pct",
      "sub": "CVH",
      "destacado": false,
@@ -68,8 +68,8 @@
     },
     {
      "nombre": "Ternium Argentina",
-     "valor": "$ 684",
-     "cambio": 1.55,
+     "valor": "$ 690",
+     "cambio": 2.44,
      "tipo": "pct",
      "sub": "TXAR",
      "destacado": false,
@@ -77,33 +77,33 @@
     },
     {
      "nombre": "Metrogas",
-     "valor": "$ 2.294",
-     "cambio": -2.0,
+     "valor": "$ 2.287",
+     "cambio": -2.3,
      "tipo": "pct",
      "sub": "METR",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Aluar",
-     "valor": "$ 742",
-     "cambio": -0.8,
+     "nombre": "BYMA",
+     "valor": "$ 198",
+     "cambio": -0.5,
      "tipo": "pct",
-     "sub": "ALUA",
+     "sub": "BYMA",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Telecom",
-     "valor": "$ 3.488",
-     "cambio": -0.28,
+     "nombre": "Aluar",
+     "valor": "$ 744",
+     "cambio": -0.46,
      "tipo": "pct",
-     "sub": "TECO2",
+     "sub": "ALUA",
      "destacado": false,
      "inverso": false
     }
    ],
-   "nota": "En Nueva York, Cresud subió 2,5%.",
+   "nota": "En Nueva York, Cresud subió 5,0%.",
    "link": "#mercados",
    "link_txt": "Ver el mapa del mercado"
   },
@@ -128,7 +128,7 @@
     {
      "nombre": "GD30",
      "valor": "12,6%",
-     "cambio": 29.0,
+     "cambio": 31.0,
      "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
@@ -137,7 +137,7 @@
     {
      "nombre": "GD35",
      "valor": "12,4%",
-     "cambio": 9.0,
+     "cambio": 4.0,
      "tipo": "pb",
      "sub": "vence 2035",
      "destacado": false,
@@ -146,7 +146,7 @@
     {
      "nombre": "GD38",
      "valor": "12,3%",
-     "cambio": 6.0,
+     "cambio": 5.0,
      "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
@@ -154,8 +154,8 @@
     },
     {
      "nombre": "GD41",
-     "valor": "12,1%",
-     "cambio": 11.0,
+     "valor": "12,0%",
+     "cambio": 1.0,
      "tipo": "pb",
      "sub": "vence 2041",
      "destacado": false,
@@ -164,7 +164,7 @@
     {
      "nombre": "GD46",
      "valor": "11,7%",
-     "cambio": 0.0,
+     "cambio": 3.0,
      "tipo": "pb",
      "sub": "vence 2046",
      "destacado": false,
@@ -246,21 +246,21 @@
    "circulo": "Mundo",
    "kicker": "Mercados del mundo",
    "titulo": "Afuera, lo que más se movió: Bitcoin",
-   "texto": "El S&P 500 bajó 0,9%.",
+   "texto": "El S&P 500 bajó 1,0%.",
    "filas": [
     {
      "nombre": "Bitcoin",
-     "valor": "US$ 68.366",
-     "cambio": -4.17,
+     "valor": "US$ 68.564",
+     "cambio": -3.9,
      "tipo": "pct",
-     "sub": "fuera de lo normal",
-     "destacado": true,
+     "sub": null,
+     "destacado": false,
      "inverso": false
     },
     {
      "nombre": "Trigo",
-     "valor": "US$ 218,81",
-     "cambio": 1.93,
+     "valor": "US$ 218,53",
+     "cambio": 1.8,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -277,17 +277,17 @@
     },
     {
      "nombre": "Ether",
-     "valor": "US$ 1.923",
-     "cambio": -4.64,
+     "valor": "US$ 1.925",
+     "cambio": -4.56,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Maíz",
-     "valor": "US$ 176,47",
-     "cambio": 1.3,
+     "nombre": "Libra esterlina",
+     "valor": "1,32",
+     "cambio": -0.5,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -382,17 +382,17 @@
     },
     {
      "nombre": "Central Puerto",
-     "valor": "US$ 10,40",
-     "cambio": 4.42,
+     "valor": "US$ 10,43",
+     "cambio": 4.72,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Supervielle",
-     "valor": "US$ 5,78",
-     "cambio": 2.66,
+     "nombre": "Cresud",
+     "valor": "US$ 9,40",
+     "cambio": 2.96,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -400,17 +400,8 @@
     },
     {
      "nombre": "Vista Energy",
-     "valor": "US$ 55,22",
-     "cambio": -3.83,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Banco Macro",
-     "valor": "US$ 55,60",
-     "cambio": -3.74,
+     "valor": "US$ 54,86",
+     "cambio": -4.46,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -418,8 +409,17 @@
     },
     {
      "nombre": "YPF",
-     "valor": "US$ 37,22",
-     "cambio": -3.72,
+     "valor": "US$ 37,20",
+     "cambio": -3.76,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Banco Macro",
+     "valor": "US$ 55,83",
+     "cambio": -3.34,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -447,16 +447,16 @@
     {
      "nombre": "Libra esterlina",
      "valor": "1,32",
-     "cambio": -1.75,
+     "cambio": -1.83,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
      "inverso": false
     },
     {
-     "nombre": "EE.UU. 10 años",
-     "valor": "5,13%",
-     "cambio": 27.4,
+     "nombre": "EE.UU. 3 meses",
+     "valor": "4,12%",
+     "cambio": 12.2,
      "tipo": "pb",
      "sub": null,
      "destacado": false,
@@ -464,30 +464,30 @@
     },
     {
      "nombre": "EE.UU. 5 años",
-     "valor": "4,95%",
-     "cambio": 30.3,
+     "valor": "4,96%",
+     "cambio": 31.0,
      "tipo": "pb",
      "sub": null,
      "destacado": false,
      "inverso": true
     },
     {
-     "nombre": "EE.UU. 3 meses",
-     "valor": "4,12%",
-     "cambio": 11.8,
+     "nombre": "EE.UU. 10 años",
+     "valor": "5,13%",
+     "cambio": 27.2,
      "tipo": "pb",
      "sub": null,
      "destacado": false,
      "inverso": true
     },
     {
-     "nombre": "EE.UU. 30 años",
-     "valor": "5,47%",
-     "cambio": 21.1,
-     "tipo": "pb",
+     "nombre": "Yen",
+     "valor": "159,9",
+     "cambio": 1.55,
+     "tipo": "pct",
      "sub": null,
      "destacado": false,
-     "inverso": true
+     "inverso": false
     }
    ],
    "link": "#mercados",
