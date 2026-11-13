@@ -1,14 +1,14 @@
 {
- "generado": "2026-11-13T19:54:16+00:00",
+ "generado": "2026-11-13T21:50:11+00:00",
  "fecha": "2026-11-13",
- "hora": "16:54",
+ "hora": "18:50",
  "dia": [
   {
    "id": "hoy",
    "circulo": "Hoy",
    "kicker": "Viernes 13 de noviembre",
-   "titulo": "El día en 30 segundos",
-   "texto": "Lo más llamativo: Cresud subió 11,3%, 4,1 veces lo que se mueve en un día normal.",
+   "titulo": "Un día movido",
+   "texto": "Lo más llamativo: Cresud subió 8,8%, 3,2 veces lo que se mueve en un día normal.",
    "grandes": [
     {
      "nombre": "Merval",
@@ -42,43 +42,147 @@
    "link_txt": "Ver Mercados"
   },
   {
-   "id": "acciones",
-   "circulo": "Acciones",
-   "kicker": "Panel líder en BYMA",
-   "titulo": "Día verde en la bolsa",
-   "texto": "21 de 22 acciones del panel líder subieron y 1 bajaron.",
-   "filas": [
+   "id": "after",
+   "circulo": "After hours",
+   "kicker": "Después del cierre en Nueva York",
+   "titulo": "Después del cierre",
+   "texto": "Lo que se sigue operando en Nueva York después de la campana.",
+   "grandes": [
     {
-     "nombre": "Cresud",
-     "valor": "$ 1.660",
-     "cambio": 10.51,
+     "nombre": "S&P 500 (futuro)",
+     "valor": "7.544",
+     "cambio": -0.94,
      "tipo": "pct",
-     "sub": "CRES",
+     "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
+     "nombre": "Nasdaq 100 (futuro)",
+     "valor": "27.826",
+     "cambio": -1.97,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Dow Jones (futuro)",
+     "valor": "52.215",
+     "cambio": -0.33,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    }
+   ],
+   "filas": [
+    {
+     "nombre": "YPF",
+     "valor": "US$ 37,90",
+     "cambio": 0.0,
+     "tipo": "pct",
+     "sub": "YPF",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Vista Energy",
+     "valor": "US$ 55,84",
+     "cambio": 0.0,
+     "tipo": "pct",
+     "sub": "VIST",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Transportadora Gas del Sur",
+     "valor": "US$ 21,53",
+     "cambio": 0.0,
+     "tipo": "pct",
+     "sub": "TGS",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Edenor",
+     "valor": "US$ 13,91",
+     "cambio": -0.98,
+     "tipo": "pct",
+     "sub": "EDN",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Mercado Libre",
+     "valor": "US$ 1.483,57",
+     "cambio": -0.53,
+     "tipo": "pct",
+     "sub": "poco volumen",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Corporación América",
+     "valor": "US$ 24,99",
+     "cambio": 0.0,
+     "tipo": "pct",
+     "sub": "CAAP",
+     "destacado": false,
+     "inverso": false
+    }
+   ],
+   "nota": "Fuera de horario se opera poco: con poco volumen el precio puede moverse mucho.",
+   "link": "#mercados",
+   "link_txt": "Ver en Mercados"
+  },
+  {
+   "id": "acciones",
+   "circulo": "Acciones",
+   "kicker": "Panel líder en BYMA",
+   "titulo": "Día verde en la bolsa",
+   "texto": "20 de 22 acciones del panel líder subieron y 2 bajaron.",
+   "filas": [
+    {
      "nombre": "Ternium Argentina",
-     "valor": "$ 739",
-     "cambio": 9.72,
+     "valor": "$ 734",
+     "cambio": 8.98,
      "tipo": "pct",
      "sub": "TXAR",
      "destacado": false,
      "inverso": false
     },
     {
+     "nombre": "Cresud",
+     "valor": "$ 1.631",
+     "cambio": 8.58,
+     "tipo": "pct",
+     "sub": "CRES",
+     "destacado": false,
+     "inverso": false
+    },
+    {
      "nombre": "Central Puerto",
-     "valor": "$ 1.808",
-     "cambio": 5.6,
+     "valor": "$ 1.799",
+     "cambio": 5.08,
      "tipo": "pct",
      "sub": "CEPU",
      "destacado": false,
      "inverso": false
     },
     {
+     "nombre": "BYMA",
+     "valor": "$ 198",
+     "cambio": -0.37,
+     "tipo": "pct",
+     "sub": "BYMA",
+     "destacado": false,
+     "inverso": false
+    },
+    {
      "nombre": "Grupo Valores",
-     "valor": "$ 523",
-     "cambio": -0.47,
+     "valor": "$ 524",
+     "cambio": -0.19,
      "tipo": "pct",
      "sub": "VALO",
      "destacado": false,
@@ -86,24 +190,15 @@
     },
     {
      "nombre": "Sociedad Comercial del Plata",
-     "valor": "$ 32,15",
-     "cambio": 0.4,
+     "valor": "$ 32,19",
+     "cambio": 0.53,
      "tipo": "pct",
      "sub": "COME",
      "destacado": false,
      "inverso": false
-    },
-    {
-     "nombre": "Loma Negra",
-     "valor": "$ 2.890",
-     "cambio": 0.43,
-     "tipo": "pct",
-     "sub": "LOMA",
-     "destacado": false,
-     "inverso": false
     }
    ],
-   "nota": "En Nueva York, Cresud subió 11,3%, su mayor suba del último año.",
+   "nota": "En Nueva York, Cresud subió 8,8%, su mayor suba desde el 11 de junio.",
    "link": "#mercados",
    "link_txt": "Ver el mapa del mercado"
   },
@@ -128,7 +223,7 @@
     {
      "nombre": "GD30",
      "valor": "12,7%",
-     "cambio": 37.0,
+     "cambio": 35.0,
      "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
@@ -137,7 +232,7 @@
     {
      "nombre": "GD35",
      "valor": "12,3%",
-     "cambio": -1.0,
+     "cambio": -5.0,
      "tipo": "pb",
      "sub": "vence 2035",
      "destacado": false,
@@ -145,8 +240,8 @@
     },
     {
      "nombre": "GD38",
-     "valor": "12,3%",
-     "cambio": -1.0,
+     "valor": "12,2%",
+     "cambio": -5.0,
      "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
@@ -154,8 +249,8 @@
     },
     {
      "nombre": "GD41",
-     "valor": "12,0%",
-     "cambio": -4.0,
+     "valor": "11,9%",
+     "cambio": -6.0,
      "tipo": "pb",
      "sub": "vence 2041",
      "destacado": false,
@@ -230,10 +325,10 @@
     },
     {
      "nombre": "Reservas brutas",
-     "valor": "US$ 49.586 M",
+     "valor": "US$ 49.336 M",
      "cambio": null,
      "tipo": "pct",
-     "sub": "−US$ 851 M en el día",
+     "sub": "−US$ 250 M en el día",
      "destacado": false,
      "inverso": false
     }
@@ -245,22 +340,31 @@
    "id": "mundo",
    "circulo": "Mundo",
    "kicker": "Mercados del mundo",
-   "titulo": "Afuera, lo que más se movió: Euro",
-   "texto": "El S&P 500 bajó 0,6%.",
+   "titulo": "Afuera, lo que más se movió: Bitcoin",
+   "texto": "El S&P 500 bajó 0,4%.",
    "filas": [
+    {
+     "nombre": "Bitcoin",
+     "valor": "US$ 68.252",
+     "cambio": -4.33,
+     "tipo": "pct",
+     "sub": "fuera de lo normal",
+     "destacado": true,
+     "inverso": false
+    },
     {
      "nombre": "Euro",
      "valor": "1,10",
-     "cambio": -0.63,
+     "cambio": -0.64,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Bitcoin",
-     "valor": "US$ 68.909",
-     "cambio": -3.41,
+     "nombre": "Ether",
+     "valor": "US$ 1.927",
+     "cambio": -4.43,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -276,27 +380,18 @@
      "inverso": false
     },
     {
+     "nombre": "Cobre",
+     "valor": "US$ 6,05",
+     "cambio": -2.09,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
      "nombre": "Libra esterlina",
      "valor": "1,32",
-     "cambio": -0.51,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Ether",
-     "valor": "US$ 1.947",
-     "cambio": -3.47,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Cobre",
-     "valor": "US$ 6,08",
-     "cambio": -1.71,
+     "cambio": -0.5,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -372,18 +467,18 @@
    "titulo": "Las que más subieron y bajaron",
    "filas": [
     {
-     "nombre": "Cresud",
-     "valor": "US$ 9,96",
-     "cambio": 9.15,
+     "nombre": "Central Puerto",
+     "valor": "US$ 10,86",
+     "cambio": 9.04,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Central Puerto",
-     "valor": "US$ 10,86",
-     "cambio": 8.99,
+     "nombre": "Cresud",
+     "valor": "US$ 9,74",
+     "cambio": 6.68,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -391,8 +486,8 @@
     },
     {
      "nombre": "Telecom Argentina",
-     "valor": "US$ 10,53",
-     "cambio": 5.62,
+     "valor": "US$ 10,57",
+     "cambio": 6.02,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -400,8 +495,8 @@
     },
     {
      "nombre": "Globant",
-     "valor": "US$ 45,95",
-     "cambio": -3.08,
+     "valor": "US$ 45,42",
+     "cambio": -4.2,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -409,8 +504,8 @@
     },
     {
      "nombre": "Vista Energy",
-     "valor": "US$ 55,80",
-     "cambio": -2.83,
+     "valor": "US$ 55,84",
+     "cambio": -2.75,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -418,8 +513,8 @@
     },
     {
      "nombre": "YPF",
-     "valor": "US$ 37,71",
-     "cambio": -2.46,
+     "valor": "US$ 37,90",
+     "cambio": -1.97,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -438,7 +533,7 @@
     {
      "nombre": "Euro",
      "valor": "1,10",
-     "cambio": -1.81,
+     "cambio": -1.82,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -447,7 +542,7 @@
     {
      "nombre": "Libra esterlina",
      "valor": "1,32",
-     "cambio": -1.84,
+     "cambio": -1.82,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -456,7 +551,7 @@
     {
      "nombre": "EE.UU. 5 años",
      "valor": "4,98%",
-     "cambio": 33.0,
+     "cambio": 33.3,
      "tipo": "pb",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -465,7 +560,7 @@
     {
      "nombre": "EE.UU. 10 años",
      "valor": "5,15%",
-     "cambio": 29.0,
+     "cambio": 29.5,
      "tipo": "pb",
      "sub": null,
      "destacado": false,
@@ -483,7 +578,7 @@
     {
      "nombre": "EE.UU. 30 años",
      "valor": "5,48%",
-     "cambio": 21.9,
+     "cambio": 22.1,
      "tipo": "pb",
      "sub": null,
      "destacado": false,
