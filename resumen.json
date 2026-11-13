@@ -1,19 +1,19 @@
 {
- "generado": "2026-11-12T23:07:13+00:00",
- "fecha": "2026-11-12",
- "hora": "20:07",
+ "generado": "2026-11-13T13:00:57+00:00",
+ "fecha": "2026-11-13",
+ "hora": "10:00",
  "dia": [
   {
    "id": "hoy",
    "circulo": "Hoy",
-   "kicker": "Jueves 12 de noviembre",
-   "titulo": "Un día movido",
-   "texto": "Lo más llamativo: Euro bajó 1,0%, 3,2 veces lo que se mueve en un día normal.",
+   "kicker": "Viernes 13 de noviembre",
+   "titulo": "El día en 30 segundos",
+   "texto": "Lo más llamativo: Trigo subió 1,9%, 1,9 veces lo que se mueve en un día normal.",
    "grandes": [
     {
      "nombre": "Merval",
-     "valor": "83.440",
-     "cambio": -0.78,
+     "valor": "82.492",
+     "cambio": -1.14,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -21,8 +21,8 @@
     },
     {
      "nombre": "Dólar CCL",
-     "valor": "$ 1.665",
-     "cambio": 0.0,
+     "valor": "$ 1.668",
+     "cambio": 0.21,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -30,8 +30,8 @@
     },
     {
      "nombre": "Riesgo país",
-     "valor": "852",
-     "cambio": -1,
+     "valor": "829",
+     "cambio": -23,
      "tipo": "pb",
      "sub": null,
      "destacado": false,
@@ -50,8 +50,8 @@
    "filas": [
     {
      "nombre": "Metrogas",
-     "valor": "$ 2.342",
-     "cambio": 6.21,
+     "valor": "$ 2.341",
+     "cambio": 6.17,
      "tipo": "pct",
      "sub": "METR",
      "destacado": false,
@@ -59,51 +59,51 @@
     },
     {
      "nombre": "Central Puerto",
-     "valor": "$ 1.714",
-     "cambio": 1.24,
+     "valor": "$ 1.712",
+     "cambio": 1.12,
      "tipo": "pct",
      "sub": "CEPU",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Sociedad Comercial del Plata",
-     "valor": "$ 32,33",
-     "cambio": 0.4,
+     "nombre": "BYMA",
+     "valor": "$ 199",
+     "cambio": 0.76,
      "tipo": "pct",
-     "sub": "COME",
+     "sub": "BYMA",
      "destacado": false,
      "inverso": false
     },
     {
      "nombre": "IRSA",
-     "valor": "$ 2.035",
-     "cambio": -3.32,
+     "valor": "$ 2.030",
+     "cambio": -3.56,
      "tipo": "pct",
      "sub": "IRSA",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Banco Macro",
-     "valor": "$ 9.295",
-     "cambio": -2.82,
-     "tipo": "pct",
-     "sub": "BMA",
-     "destacado": false,
-     "inverso": false
-    },
-    {
      "nombre": "BBVA Argentina",
-     "valor": "$ 5.775",
-     "cambio": -2.69,
+     "valor": "$ 5.760",
+     "cambio": -2.95,
      "tipo": "pct",
      "sub": "BBAR",
      "destacado": false,
      "inverso": false
+    },
+    {
+     "nombre": "Banco Macro",
+     "valor": "$ 9.285",
+     "cambio": -2.93,
+     "tipo": "pct",
+     "sub": "BMA",
+     "destacado": false,
+     "inverso": false
     }
    ],
-   "nota": "En Nueva York, Edenor bajó 4,1%.",
+   "nota": "En Nueva York, Banco Macro bajó 3,5%.",
    "link": "#mercados",
    "link_txt": "Ver el mapa del mercado"
   },
@@ -111,13 +111,13 @@
    "id": "bonos",
    "circulo": "Bonos",
    "kicker": "Bonos en dólares (Globales)",
-   "titulo": "Los bonos subieron",
+   "titulo": "La curva, sin cambios grandes",
    "texto": "El GD30 rinde 12,3% y el GD46 11,7%: la curva está invertida, los bonos cortos rinden 0,6 puntos más que los largos.",
    "grandes": [
     {
      "nombre": "Riesgo país",
-     "valor": "852",
-     "cambio": -1,
+     "valor": "829",
+     "cambio": -23,
      "tipo": "pb",
      "sub": null,
      "destacado": false,
@@ -128,50 +128,50 @@
     {
      "nombre": "GD30",
      "valor": "12,3%",
-     "cambio": 0.15,
-     "tipo": "pct",
+     "cambio": 2.0,
+     "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
-     "inverso": false
+     "inverso": true
     },
     {
      "nombre": "GD35",
      "valor": "12,3%",
-     "cambio": 1.5,
-     "tipo": "pct",
+     "cambio": 1.0,
+     "tipo": "pb",
      "sub": "vence 2035",
      "destacado": false,
-     "inverso": false
+     "inverso": true
     },
     {
      "nombre": "GD38",
      "valor": "12,3%",
-     "cambio": 1.49,
-     "tipo": "pct",
+     "cambio": 1.0,
+     "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
-     "inverso": false
+     "inverso": true
     },
     {
      "nombre": "GD41",
      "valor": "12,0%",
-     "cambio": 2.33,
-     "tipo": "pct",
+     "cambio": 0.0,
+     "tipo": "pb",
      "sub": "vence 2041",
      "destacado": false,
-     "inverso": false
+     "inverso": true
     },
     {
      "nombre": "GD46",
      "valor": "11,7%",
-     "cambio": 1.53,
-     "tipo": "pct",
+     "cambio": 1.0,
+     "tipo": "pb",
      "sub": "vence 2046",
      "destacado": false,
-     "inverso": false
+     "inverso": true
     }
    ],
-   "nota": "Las columnas muestran cuánto cambió el precio en el día.",
+   "nota": "Las columnas muestran cuánto cambió la TIR (en puntos básicos).",
    "link": "#mercados",
    "link_txt": "Ver la curva"
   },
@@ -179,7 +179,7 @@
    "id": "dolar",
    "circulo": "Dólar",
    "kicker": "Dólar y BCRA",
-   "titulo": "El dólar blue subió 1,0%",
+   "titulo": "El dólar blue bajó 0,3%",
    "grandes": [
     {
      "nombre": "Oficial",
@@ -192,8 +192,8 @@
     },
     {
      "nombre": "MEP",
-     "valor": "$ 1.578",
-     "cambio": -0.6,
+     "valor": "$ 1.574",
+     "cambio": -0.29,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -201,8 +201,8 @@
     },
     {
      "nombre": "CCL",
-     "valor": "$ 1.665",
-     "cambio": 0.0,
+     "valor": "$ 1.668",
+     "cambio": 0.21,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -210,8 +210,8 @@
     },
     {
      "nombre": "Blue",
-     "valor": "$ 1.570",
-     "cambio": 0.96,
+     "valor": "$ 1.565",
+     "cambio": -0.32,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -221,7 +221,7 @@
    "filas": [
     {
      "nombre": "Brecha CCL vs. oficial",
-     "valor": "6,0%",
+     "valor": "6,3%",
      "cambio": null,
      "tipo": "pct",
      "sub": null,
@@ -230,10 +230,10 @@
     },
     {
      "nombre": "Reservas brutas",
-     "valor": "US$ 50.437 M",
+     "valor": "US$ 49.586 M",
      "cambio": null,
      "tipo": "pct",
-     "sub": "+US$ 139 M en el día",
+     "sub": "−US$ 851 M en el día",
      "destacado": false,
      "inverso": false
     }
@@ -245,58 +245,58 @@
    "id": "mundo",
    "circulo": "Mundo",
    "kicker": "Mercados del mundo",
-   "titulo": "Afuera, lo que más se movió: Euro",
-   "texto": "El S&P 500 bajó 0,3%.",
+   "titulo": "Afuera, lo que más se movió: Trigo",
+   "texto": "El S&P 500 bajó 0,4%.",
    "filas": [
     {
-     "nombre": "Euro",
-     "valor": "1,11",
-     "cambio": -0.98,
-     "tipo": "pct",
-     "sub": "fuera de lo normal",
-     "destacado": true,
-     "inverso": false
-    },
-    {
      "nombre": "Trigo",
-     "valor": "US$ 214,03",
-     "cambio": -2.84,
-     "tipo": "pct",
-     "sub": "fuera de lo normal",
-     "destacado": true,
-     "inverso": false
-    },
-    {
-     "nombre": "Libra esterlina",
-     "valor": "1,32",
-     "cambio": -0.84,
-     "tipo": "pct",
-     "sub": "fuera de lo normal",
-     "destacado": true,
-     "inverso": false
-    },
-    {
-     "nombre": "Yen",
-     "valor": "159,9",
-     "cambio": 0.74,
-     "tipo": "pct",
-     "sub": "fuera de lo normal",
-     "destacado": true,
-     "inverso": false
-    },
-    {
-     "nombre": "Oro",
-     "valor": "US$ 3.885",
-     "cambio": -2.89,
+     "valor": "US$ 218,81",
+     "cambio": 1.93,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
+     "nombre": "EE.UU. 5 años",
+     "valor": "4,95%",
+     "cambio": 11.8,
+     "tipo": "pb",
+     "sub": null,
+     "destacado": false,
+     "inverso": true
+    },
+    {
+     "nombre": "EE.UU. 10 años",
+     "valor": "5,10%",
+     "cambio": 10.5,
+     "tipo": "pb",
+     "sub": null,
+     "destacado": false,
+     "inverso": true
+    },
+    {
      "nombre": "Bitcoin",
-     "valor": "US$ 71.506",
-     "cambio": -3.32,
+     "valor": "US$ 69.093",
+     "cambio": -3.15,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "EE.UU. 30 años",
+     "valor": "5,43%",
+     "cambio": 7.7,
+     "tipo": "pb",
+     "sub": null,
+     "destacado": false,
+     "inverso": true
+    },
+    {
+     "nombre": "Peso chileno",
+     "valor": "1.001,8",
+     "cambio": 1.87,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -311,24 +311,15 @@
    "id": "dato",
    "circulo": "Datos",
    "kicker": "Publicado hoy por el INDEC",
-   "titulo": "Salieron datos nuevos",
+   "titulo": "Índice de salarios",
    "grandes": [],
    "filas": [
     {
-     "nombre": "Inflación (IPC)",
+     "nombre": "Índice de salarios",
      "valor": "",
      "cambio": null,
      "tipo": "pct",
-     "sub": "octubre de 2026",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Canasta básica alimentaria y total",
-     "valor": "",
-     "cambio": null,
-     "tipo": "pct",
-     "sub": "octubre de 2026",
+     "sub": "septiembre de 2026",
      "destacado": false,
      "inverso": false
     }
@@ -343,12 +334,12 @@
    "circulo": "Semana",
    "kicker": "Semana del 9 de noviembre",
    "titulo": "La semana en 30 segundos",
-   "texto": "Lo que más se salió de lo normal: Euro, que bajó 1,5% en la semana.",
+   "texto": "Lo que más se salió de lo normal: EE.UU. 3 meses, que subió 13 pb en la semana.",
    "grandes": [
     {
      "nombre": "Merval",
-     "valor": "83.440",
-     "cambio": -0.78,
+     "valor": "82.492",
+     "cambio": -1.9,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -356,8 +347,8 @@
     },
     {
      "nombre": "Dólar CCL",
-     "valor": "$ 1.665",
-     "cambio": 0.0,
+     "valor": "$ 1.668",
+     "cambio": 0.21,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -365,8 +356,8 @@
     },
     {
      "nombre": "Riesgo país",
-     "valor": "852",
-     "cambio": -87,
+     "valor": "829",
+     "cambio": -110,
      "tipo": "pb",
      "sub": null,
      "destacado": false,
@@ -391,8 +382,8 @@
     },
     {
      "nombre": "Central Puerto",
-     "valor": "US$ 10,25",
-     "cambio": 2.91,
+     "valor": "US$ 10,31",
+     "cambio": 3.51,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -400,8 +391,8 @@
     },
     {
      "nombre": "Corporación América",
-     "valor": "US$ 24,98",
-     "cambio": 1.79,
+     "valor": "US$ 25,09",
+     "cambio": 2.24,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -409,8 +400,8 @@
     },
     {
      "nombre": "Banco Macro",
-     "valor": "US$ 55,35",
-     "cambio": -4.17,
+     "valor": "US$ 55,23",
+     "cambio": -4.38,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -426,9 +417,9 @@
      "inverso": false
     },
     {
-     "nombre": "Globant",
-     "valor": "US$ 45,82",
-     "cambio": -3.35,
+     "nombre": "IRSA",
+     "valor": "US$ 12,11",
+     "cambio": -3.74,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -444,24 +435,6 @@
    "kicker": "Mercados del mundo",
    "titulo": "Lo que más se movió en la semana",
    "filas": [
-    {
-     "nombre": "Euro",
-     "valor": "1,11",
-     "cambio": -1.51,
-     "tipo": "pct",
-     "sub": "fuera de lo normal",
-     "destacado": true,
-     "inverso": false
-    },
-    {
-     "nombre": "Libra esterlina",
-     "valor": "1,32",
-     "cambio": -1.63,
-     "tipo": "pct",
-     "sub": "fuera de lo normal",
-     "destacado": true,
-     "inverso": false
-    },
     {
      "nombre": "EE.UU. 3 meses",
      "valor": "4,13%",
@@ -481,9 +454,18 @@
      "inverso": true
     },
     {
-     "nombre": "Yen",
-     "valor": "159,9",
-     "cambio": 1.51,
+     "nombre": "Euro",
+     "valor": "1,11",
+     "cambio": -1.56,
+     "tipo": "pct",
+     "sub": "fuera de lo normal",
+     "destacado": true,
+     "inverso": false
+    },
+    {
+     "nombre": "Libra esterlina",
+     "valor": "1,32",
+     "cambio": -1.71,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -497,6 +479,15 @@
      "sub": null,
      "destacado": false,
      "inverso": true
+    },
+    {
+     "nombre": "Yen",
+     "valor": "160,0",
+     "cambio": 1.6,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
     }
    ],
    "link": "#mercados",
