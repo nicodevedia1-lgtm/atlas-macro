@@ -1,0 +1,506 @@
+{
+ "generado": "2026-11-12T23:07:13+00:00",
+ "fecha": "2026-11-12",
+ "hora": "20:07",
+ "dia": [
+  {
+   "id": "hoy",
+   "circulo": "Hoy",
+   "kicker": "Jueves 12 de noviembre",
+   "titulo": "Un día movido",
+   "texto": "Lo más llamativo: Euro bajó 1,0%, 3,2 veces lo que se mueve en un día normal.",
+   "grandes": [
+    {
+     "nombre": "Merval",
+     "valor": "83.440",
+     "cambio": -0.78,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Dólar CCL",
+     "valor": "$ 1.665",
+     "cambio": 0.0,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Riesgo país",
+     "valor": "852",
+     "cambio": -1,
+     "tipo": "pb",
+     "sub": null,
+     "destacado": false,
+     "inverso": true
+    }
+   ],
+   "link": "#mercados",
+   "link_txt": "Ver Mercados"
+  },
+  {
+   "id": "acciones",
+   "circulo": "Acciones",
+   "kicker": "Panel líder en BYMA",
+   "titulo": "Día rojo en la bolsa",
+   "texto": "4 de 22 acciones del panel líder subieron y 18 bajaron.",
+   "filas": [
+    {
+     "nombre": "Metrogas",
+     "valor": "$ 2.342",
+     "cambio": 6.21,
+     "tipo": "pct",
+     "sub": "METR",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Central Puerto",
+     "valor": "$ 1.714",
+     "cambio": 1.24,
+     "tipo": "pct",
+     "sub": "CEPU",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Sociedad Comercial del Plata",
+     "valor": "$ 32,33",
+     "cambio": 0.4,
+     "tipo": "pct",
+     "sub": "COME",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "IRSA",
+     "valor": "$ 2.035",
+     "cambio": -3.32,
+     "tipo": "pct",
+     "sub": "IRSA",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Banco Macro",
+     "valor": "$ 9.295",
+     "cambio": -2.82,
+     "tipo": "pct",
+     "sub": "BMA",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "BBVA Argentina",
+     "valor": "$ 5.775",
+     "cambio": -2.69,
+     "tipo": "pct",
+     "sub": "BBAR",
+     "destacado": false,
+     "inverso": false
+    }
+   ],
+   "nota": "En Nueva York, Edenor bajó 4,1%.",
+   "link": "#mercados",
+   "link_txt": "Ver el mapa del mercado"
+  },
+  {
+   "id": "bonos",
+   "circulo": "Bonos",
+   "kicker": "Bonos en dólares (Globales)",
+   "titulo": "Los bonos subieron",
+   "texto": "El GD30 rinde 12,3% y el GD46 11,7%: la curva está invertida, los bonos cortos rinden 0,6 puntos más que los largos.",
+   "grandes": [
+    {
+     "nombre": "Riesgo país",
+     "valor": "852",
+     "cambio": -1,
+     "tipo": "pb",
+     "sub": null,
+     "destacado": false,
+     "inverso": true
+    }
+   ],
+   "filas": [
+    {
+     "nombre": "GD30",
+     "valor": "12,3%",
+     "cambio": 0.15,
+     "tipo": "pct",
+     "sub": "vence 2030",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "GD35",
+     "valor": "12,3%",
+     "cambio": 1.5,
+     "tipo": "pct",
+     "sub": "vence 2035",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "GD38",
+     "valor": "12,3%",
+     "cambio": 1.49,
+     "tipo": "pct",
+     "sub": "vence 2038",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "GD41",
+     "valor": "12,0%",
+     "cambio": 2.33,
+     "tipo": "pct",
+     "sub": "vence 2041",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "GD46",
+     "valor": "11,7%",
+     "cambio": 1.53,
+     "tipo": "pct",
+     "sub": "vence 2046",
+     "destacado": false,
+     "inverso": false
+    }
+   ],
+   "nota": "Las columnas muestran cuánto cambió el precio en el día.",
+   "link": "#mercados",
+   "link_txt": "Ver la curva"
+  },
+  {
+   "id": "dolar",
+   "circulo": "Dólar",
+   "kicker": "Dólar y BCRA",
+   "titulo": "El dólar blue subió 1,0%",
+   "grandes": [
+    {
+     "nombre": "Oficial",
+     "valor": "$ 1.570",
+     "cambio": 0.0,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "MEP",
+     "valor": "$ 1.578",
+     "cambio": -0.6,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "CCL",
+     "valor": "$ 1.665",
+     "cambio": 0.0,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Blue",
+     "valor": "$ 1.570",
+     "cambio": 0.96,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    }
+   ],
+   "filas": [
+    {
+     "nombre": "Brecha CCL vs. oficial",
+     "valor": "6,0%",
+     "cambio": null,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Reservas brutas",
+     "valor": "US$ 50.437 M",
+     "cambio": null,
+     "tipo": "pct",
+     "sub": "+US$ 139 M en el día",
+     "destacado": false,
+     "inverso": false
+    }
+   ],
+   "link": "#bcra",
+   "link_txt": "Ver Dólar y BCRA"
+  },
+  {
+   "id": "mundo",
+   "circulo": "Mundo",
+   "kicker": "Mercados del mundo",
+   "titulo": "Afuera, lo que más se movió: Euro",
+   "texto": "El S&P 500 bajó 0,3%.",
+   "filas": [
+    {
+     "nombre": "Euro",
+     "valor": "1,11",
+     "cambio": -0.98,
+     "tipo": "pct",
+     "sub": "fuera de lo normal",
+     "destacado": true,
+     "inverso": false
+    },
+    {
+     "nombre": "Trigo",
+     "valor": "US$ 214,03",
+     "cambio": -2.84,
+     "tipo": "pct",
+     "sub": "fuera de lo normal",
+     "destacado": true,
+     "inverso": false
+    },
+    {
+     "nombre": "Libra esterlina",
+     "valor": "1,32",
+     "cambio": -0.84,
+     "tipo": "pct",
+     "sub": "fuera de lo normal",
+     "destacado": true,
+     "inverso": false
+    },
+    {
+     "nombre": "Yen",
+     "valor": "159,9",
+     "cambio": 0.74,
+     "tipo": "pct",
+     "sub": "fuera de lo normal",
+     "destacado": true,
+     "inverso": false
+    },
+    {
+     "nombre": "Oro",
+     "valor": "US$ 3.885",
+     "cambio": -2.89,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Bitcoin",
+     "valor": "US$ 71.506",
+     "cambio": -3.32,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    }
+   ],
+   "nota": "Ordenados por cuánto se salieron de lo normal, no por el tamaño del movimiento.",
+   "link": "#mercados",
+   "link_txt": "Ver todos los mercados"
+  },
+  {
+   "id": "dato",
+   "circulo": "Datos",
+   "kicker": "Publicado hoy por el INDEC",
+   "titulo": "Salieron datos nuevos",
+   "grandes": [],
+   "filas": [
+    {
+     "nombre": "Inflación (IPC)",
+     "valor": "",
+     "cambio": null,
+     "tipo": "pct",
+     "sub": "octubre de 2026",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Canasta básica alimentaria y total",
+     "valor": "",
+     "cambio": null,
+     "tipo": "pct",
+     "sub": "octubre de 2026",
+     "destacado": false,
+     "inverso": false
+    }
+   ],
+   "link": "#calendario",
+   "link_txt": "Ver el calendario"
+  }
+ ],
+ "semana": [
+  {
+   "id": "sem",
+   "circulo": "Semana",
+   "kicker": "Semana del 9 de noviembre",
+   "titulo": "La semana en 30 segundos",
+   "texto": "Lo que más se salió de lo normal: Euro, que bajó 1,5% en la semana.",
+   "grandes": [
+    {
+     "nombre": "Merval",
+     "valor": "83.440",
+     "cambio": -0.78,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Dólar CCL",
+     "valor": "$ 1.665",
+     "cambio": 0.0,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Riesgo país",
+     "valor": "852",
+     "cambio": -87,
+     "tipo": "pb",
+     "sub": null,
+     "destacado": false,
+     "inverso": true
+    }
+   ]
+  },
+  {
+   "id": "sem-acc",
+   "circulo": "Acciones",
+   "kicker": "Acciones argentinas en Nueva York",
+   "titulo": "Las que más subieron y bajaron",
+   "filas": [
+    {
+     "nombre": "Telecom Argentina",
+     "valor": "US$ 10,53",
+     "cambio": 5.62,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Central Puerto",
+     "valor": "US$ 10,25",
+     "cambio": 2.91,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Corporación América",
+     "valor": "US$ 24,98",
+     "cambio": 1.79,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Banco Macro",
+     "valor": "US$ 55,35",
+     "cambio": -4.17,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "YPF",
+     "valor": "US$ 37,20",
+     "cambio": -3.78,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Globant",
+     "valor": "US$ 45,82",
+     "cambio": -3.35,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    }
+   ],
+   "link": "#mercados",
+   "link_txt": "Ver Mercados"
+  },
+  {
+   "id": "sem-mundo",
+   "circulo": "Mundo",
+   "kicker": "Mercados del mundo",
+   "titulo": "Lo que más se movió en la semana",
+   "filas": [
+    {
+     "nombre": "Euro",
+     "valor": "1,11",
+     "cambio": -1.51,
+     "tipo": "pct",
+     "sub": "fuera de lo normal",
+     "destacado": true,
+     "inverso": false
+    },
+    {
+     "nombre": "Libra esterlina",
+     "valor": "1,32",
+     "cambio": -1.63,
+     "tipo": "pct",
+     "sub": "fuera de lo normal",
+     "destacado": true,
+     "inverso": false
+    },
+    {
+     "nombre": "EE.UU. 3 meses",
+     "valor": "4,13%",
+     "cambio": 12.8,
+     "tipo": "pb",
+     "sub": "fuera de lo normal",
+     "destacado": true,
+     "inverso": true
+    },
+    {
+     "nombre": "EE.UU. 5 años",
+     "valor": "4,95%",
+     "cambio": 29.7,
+     "tipo": "pb",
+     "sub": "fuera de lo normal",
+     "destacado": true,
+     "inverso": true
+    },
+    {
+     "nombre": "Yen",
+     "valor": "159,9",
+     "cambio": 1.51,
+     "tipo": "pct",
+     "sub": "fuera de lo normal",
+     "destacado": true,
+     "inverso": false
+    },
+    {
+     "nombre": "EE.UU. 10 años",
+     "valor": "5,10%",
+     "cambio": 24.4,
+     "tipo": "pb",
+     "sub": null,
+     "destacado": false,
+     "inverso": true
+    }
+   ],
+   "link": "#mercados",
+   "link_txt": "Ver Mercados"
+  }
+ ]
+}

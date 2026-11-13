@@ -1,0 +1,80 @@
+name: Actualizar datos cada hora
+
+# Junta en una sola corrida todo lo que cambia durante el día (mercados, dólar, riesgo país,
+# BCRA, bonos, series del INDEC y planillas del BCRA) y guarda todo en un solo commit.
+# Así cada hora hay un solo deploy en Cloudflare Pages (el plan gratis permite 500 por mes).
+
+on:
+  schedule:
+    - cron: "7 12-23 * * 1-5"   # lunes a viernes, cada hora de 9:07 a 20:07 (hora argentina)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: datos-frecuentes
+  cancel-in-progress: false
+
+jobs:
+  actualizar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install -r requirements.txt
+
+      # Si una fuente falla, las demás siguen (cada script deja el dato anterior si no consigue el nuevo)
+      - name: Mercados, CEDEARs, panel líder y bonos
+        run: python actualizar_mercados.py
+        continue-on-error: true
+      - name: Dólar, inflación y riesgo país
+        run: python actualizar_argentina.py
+        continue-on-error: true
+      - name: BCRA (reservas, compras, factores)
+        run: python actualizar_bcra.py
+        continue-on-error: true
+      - name: Series del BCRA y bonos (Dólar y BCRA)
+        run: python actualizar_finanzas.py
+        continue-on-error: true
+      - name: Series del INDEC (actividad, precios, empleo)
+        # a las 11, 13, 16, 18 y 20 (hora argentina): el INDEC publica a las 16
+        run: |
+          H=$(date -u +%H)
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "$H" = "14" ] || [ "$H" = "16" ] || [ "$H" = "19" ] || [ "$H" = "21" ] || [ "$H" = "23" ]; then
+            python actualizar_series_ar.py
+          else
+            echo "No toca a esta hora"
+          fi
+        continue-on-error: true
+      - name: Planillas del BCRA (bandas, ITCRM, balance cambiario) y curva del Tesoro
+        # dos veces por día: 13 y 20 (hora argentina)
+        run: |
+          H=$(date -u +%H)
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "$H" = "16" ] || [ "$H" = "23" ]; then
+            python actualizar_excels_bcra.py
+            python actualizar_global.py
+          else
+            echo "No toca a esta hora"
+          fi
+        continue-on-error: true
+
+      - name: Resumen del día en formato stories (lee los JSON de arriba)
+        run: python armar_resumen.py
+        continue-on-error: true
+
+      - name: Guardar lo que cambió (un solo commit)
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add mercados.json argentina.json bcra.json finanzas.json series_ar.json series_excel.json global.json resumen.json resumen_hist.json
+          if git diff --cached --quiet; then
+            echo "Sin cambios"
+          else
+            git commit -m "Datos actualizados ($(TZ=America/Argentina/Buenos_Aires date +'%d/%m %H:%M'))"
+            git pull --rebase
+            git push
+          fi
