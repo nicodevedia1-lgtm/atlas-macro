@@ -830,6 +830,67 @@ footer a { color: var(--muted); text-decoration-color: var(--accent); text-under
 .note { font-size: 13px; color: var(--muted); max-width: 80ch; }
 footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+/* ---------- Resumen del día en formato stories ---------- */
+.historias { display: grid; gap: 10px; }
+.hs-cab { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.hs-cab h2 { margin: 0; font-family: var(--f-display); font-size: 20px; }
+.hs-cab small { color: var(--muted); font-size: 13.5px; }
+.hs-fila { display: flex; gap: 14px; overflow-x: auto; scrollbar-width: none; padding: 4px 2px 6px; }
+.hs-fila::-webkit-scrollbar { display: none; }
+.hs-c { flex: none; display: grid; justify-items: center; gap: 6px; width: 78px; padding: 0; border: 0; background: none; color: var(--ink); font: inherit; cursor: pointer; }
+.hs-aro { width: 72px; height: 72px; border-radius: 50%; padding: 3px; background: conic-gradient(from 210deg, var(--accent), var(--b), var(--warn), var(--accent)); transition: transform .15s; }
+.hs-c.visto .hs-aro { background: var(--line); }
+.hs-c:hover .hs-aro { transform: scale(1.05); }
+.hs-c:focus-visible { outline: none; } .hs-c:focus-visible .hs-aro { box-shadow: 0 0 0 3px var(--accent-soft); }
+.hs-in { width: 100%; height: 100%; border-radius: 50%; border: 3px solid var(--bg); background: var(--surface); display: grid; place-content: center; text-align: center;
+  font-family: var(--f-data); font-size: 13px; font-weight: 500; line-height: 1.15; }
+.hs-in i { display: block; font-style: normal; font-family: var(--f-body); font-size: 10.5px; font-weight: 600; color: var(--muted); max-width: 54px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hs-c > span { font-size: 13px; font-weight: 600; max-width: 78px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hs-sube { color: var(--good); } .hs-baja { color: var(--bad); } .hs-igual { color: var(--muted); }
+
+.hv { position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; background: rgba(4, 6, 10, .78); backdrop-filter: blur(6px); }
+.hv-marco { position: relative; display: flex; align-items: center; gap: 18px; }
+.hv-caja { --hv-c: var(--accent); position: relative; width: min(420px, 100vw); height: min(780px, 92vh); border-radius: 20px; overflow: hidden; display: flex; flex-direction: column;
+  background: radial-gradient(130% 70% at 0% 0%, color-mix(in srgb, var(--hv-c) 30%, var(--surface)) 0%, var(--surface) 62%); border: 1px solid var(--line); color: var(--ink);
+  box-shadow: 0 30px 80px rgba(0,0,0,.45); user-select: none; -webkit-user-select: none; touch-action: manipulation; }
+.hv-barras { display: flex; gap: 4px; padding: 12px 14px 0; }
+.hv-barras span { flex: 1; height: 3px; border-radius: 3px; background: color-mix(in srgb, var(--ink) 22%, transparent); overflow: hidden; }
+.hv-barras b { display: block; height: 100%; width: 0; background: var(--ink); }
+.hv-top { display: flex; align-items: center; gap: 10px; padding: 12px 14px 0 18px; }
+.hv-kicker { flex: 1; font-size: 13px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
+.hv-btn { position: relative; z-index: 3; width: 40px; height: 40px; border: 0; border-radius: 10px; background: none; color: var(--ink); font-size: 20px; cursor: pointer; display: grid; place-items: center; }
+.hv-btn:hover { background: color-mix(in srgb, var(--ink) 10%, transparent); }
+.hv-cuerpo { flex: 1; display: flex; flex-direction: column; gap: 18px; padding: 14px 22px 22px; overflow-y: auto; }
+.hv-cuerpo h2 { margin: 0; font-family: var(--f-display); font-weight: 800; font-size: clamp(27px, 7.5vw, 34px); line-height: 1.05; letter-spacing: -.02em; }
+.hv-cuerpo > p { margin: 0; font-size: 17px; line-height: 1.4; }
+.hv-grandes { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.hv-grandes > div { background: color-mix(in srgb, var(--bg) 70%, transparent); border: 1px solid var(--line); border-radius: 14px; padding: 12px 14px; display: grid; gap: 2px; }
+.hv-grandes > div:only-child, .hv-grandes > div:nth-child(3):last-child { grid-column: 1 / -1; }
+.hv-grandes small { font-size: 13.5px; color: var(--muted); }
+.hv-grandes b { font-family: var(--f-data); font-weight: 500; font-size: 25px; line-height: 1.15; }
+.hv-grandes em { font-style: normal; font-family: var(--f-data); font-size: 15px; }
+.hv-filas { display: grid; gap: 2px; }
+.hv-f { display: grid; grid-template-columns: minmax(0, 1fr) auto 78px; align-items: center; gap: 10px; padding: 9px 10px; border-radius: 10px; }
+.hv-f.dest { background: color-mix(in srgb, var(--hv-c) 14%, transparent); }
+.hv-f span { min-width: 0; font-weight: 600; font-size: 15.5px; line-height: 1.2; }
+.hv-f span small { display: block; font-weight: 400; font-size: 12.5px; color: var(--muted); }
+.hv-f.dest span small { color: var(--hv-c); font-weight: 600; }
+.hv-f b { font-family: var(--f-data); font-weight: 500; font-size: 14.5px; }
+.hv-f em { font-style: normal; font-family: var(--f-data); font-size: 14.5px; text-align: right; }
+.hv-nota { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.4; }
+.hv-ir { position: relative; z-index: 3; margin-top: auto; align-self: stretch; padding: 13px 16px; border-radius: 12px; background: var(--ink); color: var(--bg); font-weight: 700; text-align: center; text-decoration: none; }
+.hv-zona { position: absolute; top: 60px; bottom: 0; z-index: 2; border: 0; background: none; cursor: pointer; padding: 0; }
+.hv-zona.izq { left: 0; width: 30%; } .hv-zona.der { right: 0; width: 70%; }
+.hv-flecha { width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(255,255,255,.25); background: rgba(255,255,255,.08); color: #fff; font-size: 22px; cursor: pointer; }
+.hv-flecha:hover { background: rgba(255,255,255,.18); }
+.hv-flecha:disabled { opacity: .25; cursor: default; }
+.hv-pausa .hv-barras b { opacity: .55; }
+@media (max-width: 560px) {
+  .hv { background: var(--surface); }
+  .hv-caja { width: 100vw; height: 100vh; height: 100dvh; border-radius: 0; border: 0; box-shadow: none; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .hv-flecha { display: none; }
+}
+@media (max-width: 760px) { #pag-inicio > .historias { order: -2; } .hs-fila { gap: 8px; margin-right: -16px; padding-right: 16px; } .hs-c { width: 70px; } .hs-aro { width: 66px; height: 66px; } }
 </style>
 
 <header class="topbar">
@@ -895,6 +956,20 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   <p class="nav-pie" id="conteo">Cargando datos…</p>
 </nav>
 
+<div class="hv" id="hv" role="dialog" aria-modal="true" aria-label="Resumen del día" hidden>
+  <div class="hv-marco">
+    <button type="button" class="hv-flecha" id="hvAnt" aria-label="Anterior">‹</button>
+    <div class="hv-caja" id="hvCaja">
+      <div class="hv-barras" id="hvBarras"></div>
+      <div class="hv-top"><span class="hv-kicker" id="hvKicker"></span><button type="button" class="hv-btn" id="hvCerrar" aria-label="Cerrar">✕</button></div>
+      <button type="button" class="hv-zona izq" tabindex="-1" aria-hidden="true"></button>
+      <button type="button" class="hv-zona der" tabindex="-1" aria-hidden="true"></button>
+      <div class="hv-cuerpo" id="hvCuerpo" aria-live="polite"></div>
+    </div>
+    <button type="button" class="hv-flecha" id="hvSig" aria-label="Siguiente">›</button>
+  </div>
+</div>
+
 <div class="wrap">
   <div class="pagina" id="pag-inicio">
   <header class="top portada-cab">
@@ -902,6 +977,8 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <h1>La economía de cada país, <span>explicada en simple.</span></h1>
     <p class="lede">Inflación, dólar, deuda, comercio y política de todo el mundo, con datos del Banco Mundial, el FMI, el BCRA y el INDEC. Tocá un país en el mapa o buscalo arriba.</p>
   </header>
+
+  <section class="historias" id="historias" aria-label="Resumen del día" hidden></section>
 
   <section class="atlas">
     <div class="mapcard" id="mapcard">
@@ -5438,6 +5515,123 @@ function textoFuentes() {
   document.getElementById("fuentes").textContent = `Datos macro: Banco Mundial y FMI (World Economic Outlook), 1960–${ANIO}, actualizados automáticamente el ${fecha}. Inflación: índice de precios al consumidor del Banco Mundial; donde falta, deflactor del PBI o FMI. Deuda pública: FMI; donde falta, Banco Mundial. Promedios mundiales: Banco Mundial. Fichas y datos políticos escritos a mano, actualizados a ${CURADO.actualizado}.`;
 }
 function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); renderLab(); if (paginaActual === "argentina") renderAgCharts(); if (paginaActual === "comercio" && PRODUCTOS) renderComercio(); if (paginaActual === "bcra" && FINANZAS) renderFinanzas(); if (paginaActual === "mercados" && GLOBAL) renderGlobal(); if (paginaActual === "bcra" && BCRA) renderBCRA(); if (paginaActual === "actividad" && SAR) renderActividad(); if (paginaActual === "comparador" && SAR && cmpListo) renderComparador(); } }
+
+/* ---------- RESUMEN DEL DÍA en formato stories (resumen.json, lo arma armar_resumen.py) ---------- */
+let RESUMEN = null;
+const HV = { lista: [], i: 0, t0: 0, dur: 7000, pausa: false, transcurrido: 0, raf: null, origen: null, grupo: "dia" };
+const HS_COLOR = { hoy: "var(--accent)", acciones: "var(--good)", bonos: "var(--b)", dolar: "var(--warn)", mundo: "var(--cder)", dato: "var(--accent)",
+  sem: "var(--accent)", "sem-acc": "var(--good)", "sem-bonos": "var(--b)", "sem-mundo": "var(--cder)" };
+const hsCambio = f => {
+  if (!f || f.cambio == null) return "";
+  const v = f.cambio, cls = Math.abs(v) < (f.tipo === "pb" ? 0.5 : 0.005) ? "hs-igual" : (v > 0) !== !!f.inverso ? "hs-sube" : "hs-baja";
+  const s = (v > 0 ? "+" : v < 0 ? "−" : "") + (f.tipo === "pb" ? `${nf(Math.abs(v), 0)} pb` : `${nf(Math.abs(v), 1)}%`);
+  return `<em class="${cls}">${s}</em>`;
+};
+const hsEsFinde = () => ["Sat", "Sun"].includes(new Intl.DateTimeFormat("en-US", { timeZone: "America/Argentina/Buenos_Aires", weekday: "short" }).format(new Date()));
+const hsVistos = () => { try { return JSON.parse(localStorage.getItem("historiasVistas") || "{}"); } catch (e) { return {}; } };
+function hsMarcar(id) {
+  const v = hsVistos(), k = RESUMEN.fecha;
+  const lista = new Set(v[k] || []); lista.add(id);
+  try { localStorage.setItem("historiasVistas", JSON.stringify({ [k]: [...lista] })); } catch (e) { /* sin almacenamiento: no pasa nada */ }
+}
+function renderHistorias() {
+  const el = document.getElementById("historias");
+  if (!RESUMEN || !RESUMEN.dia || !RESUMEN.dia.length) return;
+  if ((Date.now() - new Date(RESUMEN.fecha + "T12:00:00-03:00")) / 864e5 > 5) return;   // si quedó viejo, mejor no mostrarlo
+  const vistos = new Set(hsVistos()[RESUMEN.fecha] || []);
+  const circ = (s, grupo, i) => {
+    const f = (s.grandes && s.grandes.find(g => g.cambio != null)) || (s.filas && s.filas.find(g => g.cambio != null));
+    const adentro = f ? `${hsCambio(f).replace(/<\/?em[^>]*>/g, m => m.startsWith("</") ? "</span>" : m.replace("em", "span"))}<i>${f.nombre}</i>` : `<i style="color:var(--ink);font-size:12px">${s.circulo}</i>`;
+    return `<button type="button" class="hs-c${vistos.has(s.id) ? " visto" : ""}" data-grupo="${grupo}" data-i="${i}" aria-label="${s.circulo}: ${s.titulo}">
+      <div class="hs-aro"><div class="hs-in">${adentro}</div></div><span>${grupo === "semana" ? "La semana" : s.circulo}</span></button>`;
+  };
+  const dia = RESUMEN.dia.map((s, i) => circ(s, "dia", i)).join("");
+  const sem = RESUMEN.semana && RESUMEN.semana.length ? circ(RESUMEN.semana[0], "semana", 0) : "";
+  const finde = hsEsFinde();
+  const fecha = new Date(RESUMEN.fecha + "T12:00:00-03:00");
+  const cuando = `${DIAS_SEM[fecha.getDay()]} ${fecha.getDate()} de ${MESES[fecha.getMonth()]}`;
+  el.innerHTML = `<div class="hs-cab"><h2>${finde ? "Resumen de la semana" : "Resumen del día"}</h2><small>${cuando} · actualizado a las ${RESUMEN.hora}</small></div>
+    <div class="hs-fila" role="list">${finde ? sem + dia : dia + sem}</div>`;
+  el.hidden = false;
+  el.querySelectorAll(".hs-c").forEach(b => b.addEventListener("click", () => abrirHistoria(b.dataset.grupo, +b.dataset.i, b)));
+}
+function hvPintar() {
+  const s = HV.lista[HV.i];
+  const caja = document.getElementById("hvCaja");
+  caja.style.setProperty("--hv-c", HS_COLOR[s.id] || "var(--accent)");
+  document.getElementById("hvBarras").innerHTML = HV.lista.map((_, j) => `<span><b style="width:${j < HV.i ? 100 : 0}%"></b></span>`).join("");
+  document.getElementById("hvKicker").textContent = s.kicker || "";
+  const grandes = s.grandes && s.grandes.length ? `<div class="hv-grandes">${s.grandes.map(g => `<div><small>${g.nombre}</small><b>${g.valor}</b>${hsCambio(g)}</div>`).join("")}</div>` : "";
+  const filas = s.filas && s.filas.length ? `<div class="hv-filas">${s.filas.map(f => `<div class="hv-f${f.destacado ? " dest" : ""}"><span>${f.nombre}${f.sub ? `<small>${f.sub}</small>` : ""}</span><b>${f.valor || ""}</b>${hsCambio(f) || "<em></em>"}</div>`).join("")}</div>` : "";
+  document.getElementById("hvCuerpo").innerHTML = `<h2>${s.titulo}</h2>${s.texto ? `<p>${s.texto}</p>` : ""}${grandes}${filas}${s.nota ? `<p class="hv-nota">${s.nota}</p>` : ""}${s.link ? `<a class="hv-ir" href="${s.link}">${s.link_txt || "Ver más"} →</a>` : ""}`;
+  document.getElementById("hvAnt").disabled = HV.i === 0;
+  hsMarcar(s.id);
+  HV.transcurrido = 0; HV.t0 = performance.now();
+}
+function hvTick(t) {
+  if (!HV.pausa) {
+    const p = Math.min(1, (HV.transcurrido + t - HV.t0) / HV.dur);
+    const b = document.querySelectorAll("#hvBarras b")[HV.i];
+    if (b) b.style.width = `${p * 100}%`;
+    if (p >= 1) { hvMover(1); }
+  }
+  HV.raf = requestAnimationFrame(hvTick);
+}
+function hvMover(d) {
+  const j = HV.i + d;
+  if (j < 0) { HV.i = 0; hvPintar(); return; }
+  if (j >= HV.lista.length) { cerrarHistoria(); return; }
+  HV.i = j; hvPintar();
+}
+function hvPausar(si) {
+  if (si === HV.pausa) return;
+  const ahora = performance.now();
+  if (si) HV.transcurrido += ahora - HV.t0; else HV.t0 = ahora;
+  HV.pausa = si;
+  document.getElementById("hvCaja").classList.toggle("hv-pausa", si);
+}
+function abrirHistoria(grupo, i, origen) {
+  HV.lista = RESUMEN[grupo]; HV.i = i; HV.grupo = grupo; HV.origen = origen; HV.pausa = false;
+  document.getElementById("hv").hidden = false;
+  document.body.style.overflow = "hidden";
+  hvPintar();
+  cancelAnimationFrame(HV.raf); HV.raf = requestAnimationFrame(hvTick);
+  document.getElementById("hvCerrar").focus();
+}
+function cerrarHistoria() {
+  cancelAnimationFrame(HV.raf);
+  document.getElementById("hv").hidden = true;
+  document.body.style.overflow = "";
+  renderHistorias();
+  const b = document.querySelector(`.hs-c[data-grupo="${HV.grupo}"][data-i="${HV.grupo === "dia" ? HV.i : 0}"]`) || document.querySelector(".hs-c");
+  if (b) b.focus();
+}
+function armarHistorias() {
+  const hv = document.getElementById("hv"), caja = document.getElementById("hvCaja");
+  document.getElementById("hvCerrar").addEventListener("click", cerrarHistoria);
+  document.getElementById("hvAnt").addEventListener("click", () => hvMover(-1));
+  document.getElementById("hvSig").addEventListener("click", () => hvMover(1));
+  hv.addEventListener("click", e => { if (e.target === hv) cerrarHistoria(); });
+  // tocar a la izquierda vuelve, a la derecha avanza; mantener apretado pausa
+  let apretado = 0;
+  ["izq", "der"].forEach(lado => {
+    const z = caja.querySelector(`.hv-zona.${lado}`);
+    z.addEventListener("pointerdown", () => { apretado = performance.now(); hvPausar(true); });
+    z.addEventListener("pointerup", () => { const largo = performance.now() - apretado > 300; hvPausar(false); if (!largo) hvMover(lado === "izq" ? -1 : 1); });
+    z.addEventListener("pointerleave", () => hvPausar(false));
+  });
+  caja.addEventListener("click", e => { const a = e.target.closest(".hv-ir"); if (a) { cerrarHistoria(); } });
+  document.addEventListener("keydown", e => {
+    if (hv.hidden) return;
+    if (e.key === "Escape") cerrarHistoria();
+    else if (e.key === "ArrowRight") hvMover(1);
+    else if (e.key === "ArrowLeft") hvMover(-1);
+    else if (e.key === " ") { e.preventDefault(); hvPausar(!HV.pausa); }
+  });
+  document.addEventListener("visibilitychange", () => { if (!hv.hidden) hvPausar(document.hidden); });
+  fetch("resumen.json").then(r => r.ok ? r.json() : null).catch(() => null).then(j => { RESUMEN = j; try { renderHistorias(); } catch (e) { console.error(e); } });
+}
+armarHistorias();
 
 const leer = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: error ${r.status}`); return r.json(); });
 Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null), leer("riesgo.json").catch(() => null), leer("calendario.json").catch(() => null), leer("mercados.json").catch(() => null), leer("socios.json").catch(() => null)])

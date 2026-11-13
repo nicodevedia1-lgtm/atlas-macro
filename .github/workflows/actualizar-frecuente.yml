@@ -62,11 +62,15 @@ jobs:
           fi
         continue-on-error: true
 
+      - name: Resumen del día en formato stories (lee los JSON de arriba)
+        run: python armar_resumen.py
+        continue-on-error: true
+
       - name: Guardar lo que cambió (un solo commit)
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add mercados.json argentina.json bcra.json finanzas.json series_ar.json series_excel.json global.json
+          git add mercados.json argentina.json bcra.json finanzas.json series_ar.json series_excel.json global.json resumen.json resumen_hist.json
           if git diff --cached --quiet; then
             echo "Sin cambios"
           else
