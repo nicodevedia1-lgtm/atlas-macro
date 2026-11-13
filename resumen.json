@@ -1,14 +1,14 @@
 {
- "generado": "2026-11-13T13:00:57+00:00",
+ "generado": "2026-11-13T14:14:24+00:00",
  "fecha": "2026-11-13",
- "hora": "10:00",
+ "hora": "11:14",
  "dia": [
   {
    "id": "hoy",
    "circulo": "Hoy",
    "kicker": "Viernes 13 de noviembre",
    "titulo": "El día en 30 segundos",
-   "texto": "Lo más llamativo: Trigo subió 1,9%, 1,9 veces lo que se mueve en un día normal.",
+   "texto": "Día tranquilo: nada se movió fuera de lo normal.",
    "grandes": [
     {
      "nombre": "Merval",
@@ -45,58 +45,58 @@
    "id": "acciones",
    "circulo": "Acciones",
    "kicker": "Panel líder en BYMA",
-   "titulo": "Día rojo en la bolsa",
-   "texto": "4 de 22 acciones del panel líder subieron y 18 bajaron.",
+   "titulo": "Día verde en la bolsa",
+   "texto": "14 de 22 acciones del panel líder subieron y 5 bajaron.",
    "filas": [
     {
-     "nombre": "Metrogas",
-     "valor": "$ 2.341",
-     "cambio": 6.17,
-     "tipo": "pct",
-     "sub": "METR",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Central Puerto",
-     "valor": "$ 1.712",
-     "cambio": 1.12,
-     "tipo": "pct",
-     "sub": "CEPU",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "BYMA",
-     "valor": "$ 199",
-     "cambio": 0.76,
-     "tipo": "pct",
-     "sub": "BYMA",
-     "destacado": false,
-     "inverso": false
-    },
-    {
      "nombre": "IRSA",
-     "valor": "$ 2.030",
-     "cambio": -3.56,
+     "valor": "$ 2.080",
+     "cambio": 2.46,
      "tipo": "pct",
      "sub": "IRSA",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "BBVA Argentina",
-     "valor": "$ 5.760",
-     "cambio": -2.95,
+     "nombre": "Cresud",
+     "valor": "$ 1.534",
+     "cambio": 2.13,
      "tipo": "pct",
-     "sub": "BBAR",
+     "sub": "CRES",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "TGS",
+     "valor": "$ 7.180",
+     "cambio": 1.84,
+     "tipo": "pct",
+     "sub": "TGSU2",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Metrogas",
+     "valor": "$ 2.294",
+     "cambio": -2.0,
+     "tipo": "pct",
+     "sub": "METR",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Telecom",
+     "valor": "$ 3.478",
+     "cambio": -0.57,
+     "tipo": "pct",
+     "sub": "TECO2",
      "destacado": false,
      "inverso": false
     },
     {
      "nombre": "Banco Macro",
-     "valor": "$ 9.285",
-     "cambio": -2.93,
+     "valor": "$ 9.235",
+     "cambio": -0.53,
      "tipo": "pct",
      "sub": "BMA",
      "destacado": false,
@@ -128,7 +128,7 @@
     {
      "nombre": "GD30",
      "valor": "12,3%",
-     "cambio": 2.0,
+     "cambio": 3.0,
      "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
@@ -137,7 +137,7 @@
     {
      "nombre": "GD35",
      "valor": "12,3%",
-     "cambio": 1.0,
+     "cambio": -3.0,
      "tipo": "pb",
      "sub": "vence 2035",
      "destacado": false,
@@ -145,8 +145,8 @@
     },
     {
      "nombre": "GD38",
-     "valor": "12,3%",
-     "cambio": 1.0,
+     "valor": "12,2%",
+     "cambio": -10.0,
      "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
@@ -155,7 +155,7 @@
     {
      "nombre": "GD41",
      "valor": "12,0%",
-     "cambio": 0.0,
+     "cambio": 1.0,
      "tipo": "pb",
      "sub": "vence 2041",
      "destacado": false,
@@ -245,58 +245,58 @@
    "id": "mundo",
    "circulo": "Mundo",
    "kicker": "Mercados del mundo",
-   "titulo": "Afuera, lo que más se movió: Trigo",
+   "titulo": "Afuera, un día tranquilo",
    "texto": "El S&P 500 bajó 0,4%.",
    "filas": [
     {
-     "nombre": "Trigo",
-     "valor": "US$ 218,81",
-     "cambio": 1.93,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "EE.UU. 5 años",
-     "valor": "4,95%",
-     "cambio": 11.8,
-     "tipo": "pb",
-     "sub": null,
-     "destacado": false,
-     "inverso": true
-    },
-    {
-     "nombre": "EE.UU. 10 años",
-     "valor": "5,10%",
-     "cambio": 10.5,
-     "tipo": "pb",
-     "sub": null,
-     "destacado": false,
-     "inverso": true
-    },
-    {
      "nombre": "Bitcoin",
-     "valor": "US$ 69.093",
-     "cambio": -3.15,
+     "valor": "US$ 69.212",
+     "cambio": -2.99,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
-    },
-    {
-     "nombre": "EE.UU. 30 años",
-     "valor": "5,43%",
-     "cambio": 7.7,
-     "tipo": "pb",
-     "sub": null,
-     "destacado": false,
-     "inverso": true
     },
     {
      "nombre": "Peso chileno",
-     "valor": "1.001,8",
-     "cambio": 1.87,
+     "valor": "999,4",
+     "cambio": 1.63,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Yuan",
+     "valor": "6,66",
+     "cambio": -0.14,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Trigo",
+     "valor": "US$ 217,06",
+     "cambio": 1.11,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Euro",
+     "valor": "1,11",
+     "cambio": -0.35,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Ether",
+     "valor": "US$ 1.963",
+     "cambio": -2.68,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -334,7 +334,7 @@
    "circulo": "Semana",
    "kicker": "Semana del 9 de noviembre",
    "titulo": "La semana en 30 segundos",
-   "texto": "Lo que más se salió de lo normal: EE.UU. 3 meses, que subió 13 pb en la semana.",
+   "texto": "Lo que más se salió de lo normal: Euro, que bajó 1,5% en la semana.",
    "grandes": [
     {
      "nombre": "Merval",
@@ -436,27 +436,9 @@
    "titulo": "Lo que más se movió en la semana",
    "filas": [
     {
-     "nombre": "EE.UU. 3 meses",
-     "valor": "4,13%",
-     "cambio": 12.8,
-     "tipo": "pb",
-     "sub": "fuera de lo normal",
-     "destacado": true,
-     "inverso": true
-    },
-    {
-     "nombre": "EE.UU. 5 años",
-     "valor": "4,95%",
-     "cambio": 29.7,
-     "tipo": "pb",
-     "sub": "fuera de lo normal",
-     "destacado": true,
-     "inverso": true
-    },
-    {
      "nombre": "Euro",
      "valor": "1,11",
-     "cambio": -1.56,
+     "cambio": -1.53,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -465,29 +447,47 @@
     {
      "nombre": "Libra esterlina",
      "valor": "1,32",
-     "cambio": -1.71,
+     "cambio": -1.66,
      "tipo": "pct",
-     "sub": "fuera de lo normal",
-     "destacado": true,
+     "sub": null,
+     "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "EE.UU. 10 años",
-     "valor": "5,10%",
-     "cambio": 24.4,
+     "nombre": "EE.UU. 5 años",
+     "valor": "4,97%",
+     "cambio": 31.9,
      "tipo": "pb",
      "sub": null,
      "destacado": false,
      "inverso": true
     },
     {
-     "nombre": "Yen",
-     "valor": "160,0",
-     "cambio": 1.6,
-     "tipo": "pct",
+     "nombre": "EE.UU. 10 años",
+     "valor": "5,14%",
+     "cambio": 27.8,
+     "tipo": "pb",
      "sub": null,
      "destacado": false,
-     "inverso": false
+     "inverso": true
+    },
+    {
+     "nombre": "EE.UU. 3 meses",
+     "valor": "4,12%",
+     "cambio": 11.8,
+     "tipo": "pb",
+     "sub": null,
+     "destacado": false,
+     "inverso": true
+    },
+    {
+     "nombre": "EE.UU. 30 años",
+     "valor": "5,47%",
+     "cambio": 21.0,
+     "tipo": "pb",
+     "sub": null,
+     "destacado": false,
+     "inverso": true
     }
    ],
    "link": "#mercados",
