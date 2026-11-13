@@ -1,7 +1,7 @@
 {
- "generado": "2026-11-13T21:50:11+00:00",
+ "generado": "2026-11-13T22:44:44+00:00",
  "fecha": "2026-11-13",
- "hora": "18:50",
+ "hora": "19:44",
  "dia": [
   {
    "id": "hoy",
@@ -50,8 +50,8 @@
    "grandes": [
     {
      "nombre": "S&P 500 (futuro)",
-     "valor": "7.544",
-     "cambio": -0.94,
+     "valor": "7.561",
+     "cambio": -0.71,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -59,8 +59,8 @@
     },
     {
      "nombre": "Nasdaq 100 (futuro)",
-     "valor": "27.826",
-     "cambio": -1.97,
+     "valor": "27.927",
+     "cambio": -1.61,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -68,8 +68,8 @@
     },
     {
      "nombre": "Dow Jones (futuro)",
-     "valor": "52.215",
-     "cambio": -0.33,
+     "valor": "52.347",
+     "cambio": -0.08,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -77,6 +77,15 @@
     }
    ],
    "filas": [
+    {
+     "nombre": "Cresud",
+     "valor": "US$ 9,76",
+     "cambio": 0.21,
+     "tipo": "pct",
+     "sub": "poco volumen",
+     "destacado": false,
+     "inverso": false
+    },
     {
      "nombre": "YPF",
      "valor": "US$ 37,90",
@@ -96,38 +105,29 @@
      "inverso": false
     },
     {
-     "nombre": "Transportadora Gas del Sur",
-     "valor": "US$ 21,53",
-     "cambio": 0.0,
-     "tipo": "pct",
-     "sub": "TGS",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Edenor",
-     "valor": "US$ 13,91",
-     "cambio": -0.98,
-     "tipo": "pct",
-     "sub": "EDN",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Mercado Libre",
-     "valor": "US$ 1.483,57",
-     "cambio": -0.53,
+     "nombre": "Grupo Galicia",
+     "valor": "US$ 29,51",
+     "cambio": -0.81,
      "tipo": "pct",
      "sub": "poco volumen",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Corporación América",
-     "valor": "US$ 24,99",
-     "cambio": 0.0,
+     "nombre": "Edenor",
+     "valor": "US$ 13,96",
+     "cambio": -0.64,
      "tipo": "pct",
-     "sub": "CAAP",
+     "sub": "EDN",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "IRSA",
+     "valor": "US$ 12,51",
+     "cambio": -0.24,
+     "tipo": "pct",
+     "sub": "IRS",
      "destacado": false,
      "inverso": false
     }
@@ -345,8 +345,8 @@
    "filas": [
     {
      "nombre": "Bitcoin",
-     "valor": "US$ 68.252",
-     "cambio": -4.33,
+     "valor": "US$ 68.356",
+     "cambio": -4.19,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -355,16 +355,7 @@
     {
      "nombre": "Euro",
      "valor": "1,10",
-     "cambio": -0.64,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Ether",
-     "valor": "US$ 1.927",
-     "cambio": -4.43,
+     "cambio": -0.6,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -380,9 +371,9 @@
      "inverso": false
     },
     {
-     "nombre": "Cobre",
-     "valor": "US$ 6,05",
-     "cambio": -2.09,
+     "nombre": "Ether",
+     "valor": "US$ 1.930",
+     "cambio": -4.32,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -391,7 +382,16 @@
     {
      "nombre": "Libra esterlina",
      "valor": "1,32",
-     "cambio": -0.5,
+     "cambio": -0.51,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Cobre",
+     "valor": "US$ 6,06",
+     "cambio": -1.92,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -533,7 +533,7 @@
     {
      "nombre": "Euro",
      "valor": "1,10",
-     "cambio": -1.82,
+     "cambio": -1.78,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -542,7 +542,7 @@
     {
      "nombre": "Libra esterlina",
      "valor": "1,32",
-     "cambio": -1.82,
+     "cambio": -1.84,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
