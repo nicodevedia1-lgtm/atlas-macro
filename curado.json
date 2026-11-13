@@ -1,6 +1,6 @@
 {
   "_leeme": "Contenido escrito a mano para Atlas Macro. Cada país va con su código ISO de 3 letras (ARG, BRA, CHL...). Los números macro NO van acá: salen solos de datos.json.",
-  "actualizado": "octubre de 2026",
+  "actualizado": "noviembre de 2026",
   "paises": {
     "ARG": {
       "nombre": "Argentina",
@@ -103,8 +103,8 @@
         "cargo": "Presidente",
         "ideo": "cizq",
         "desde": "enero de 2023",
-        "proxima": "Segunda vuelta el 25 de octubre de 2026",
-        "nota": "Lula busca la reelección en la segunda vuelta del 25 de octubre contra Flávio Bolsonaro (derecha), que salió primero en la primera vuelta del 4 de octubre. Quien gane asume el 1 de enero de 2027.",
+        "proxima": "Octubre de 2030",
+        "nota": "Fue reelecto en la segunda vuelta del 25 de octubre de 2026 con cerca del 51,8% contra Flávio Bolsonaro (derecha). El 1 de enero de 2027 empieza su cuarto mandato.",
         "historia": [
           ["2019–2022", "Jair Bolsonaro", "der"],
           ["2016–2018", "Michel Temer", "cder"],
@@ -238,17 +238,23 @@
         "compra": [["CHN", 31], ["BRA", 23], ["ARG", 11], ["USA", 7]]
       },
       "politica": {
-        "lider": "Santiago Peña",
+        "lider": "Pedro Alliana",
         "cargo": "Presidente",
         "ideo": "der",
-        "desde": "agosto de 2023",
+        "desde": "noviembre de 2026",
         "proxima": "Abril de 2028",
+        "nota": "Era el vicepresidente. Asumió el 6 de noviembre de 2026, cuando el Senado destituyó a Santiago Peña por juicio político tras el colapso del Ueno Bank. Completa el mandato hasta agosto de 2028.",
         "historia": [
+          ["2023–2026", "Santiago Peña", "der"],
           ["2018–2023", "Mario Abdo Benítez", "der"],
           ["2013–2018", "Horacio Cartes", "der"],
           ["2012–2013", "Federico Franco", "cder"],
           ["2008–2012", "Fernando Lugo", "izq"]
         ]
+      },
+      "crisis": {
+        "tipo": "crisis",
+        "texto": "Crisis política y bancaria: en noviembre de 2026 colapsó el Ueno Bank, con unos 3 millones de cuentas congeladas, y el Senado destituyó al presidente Santiago Peña."
       }
     },
     "BOL": {
@@ -395,7 +401,7 @@
       },
       "crisis": {
         "tipo": "conflicto",
-        "texto": "Guerrillas y grupos armados ligados al narcotráfico se disputan varias regiones."
+        "texto": "Guerrillas y grupos armados ligados al narcotráfico se disputan varias regiones. En noviembre de 2026 hubo una ola de atentados y el gobierno intensificó los bombardeos."
       }
     },
     "ECU": {

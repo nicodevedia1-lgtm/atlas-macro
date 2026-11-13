@@ -133,7 +133,7 @@ p { margin: 0; }
 .portada-t { font-size: 22px; font-weight: 800; }
 .portada-cab h1 { font-size: clamp(30px, 4.6vw, 50px); line-height: 1.06; letter-spacing: -.02em; max-width: 18ch; }
 .portada-cab h1 span { color: var(--accent); }
-@media (max-width: 760px) { .ar-hoy .bcra-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ar-hoy .bcra-kpi b { font-size: 19px; } .ar-hoy .bcra-kpi { padding: 10px 12px; } }
+@media (max-width: 760px) { #pag-inicio > .portada-cab { order: -2; } #pag-inicio > .ar-hoy { order: -1; } .ar-hoy .bcra-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); } .ar-hoy .bcra-kpi b { font-size: 19px; } .ar-hoy .bcra-kpi { padding: 10px 12px; } }
 .ar-tabs { display: flex; align-items: center; gap: 4px; overflow-x: auto; scrollbar-width: none; border-bottom: 1px solid var(--line); margin-bottom: -6px; }
 .ar-tabs::-webkit-scrollbar { display: none; }
 .ar-tabs-t { font-family: var(--f-display); font-weight: 800; font-size: 15px; color: var(--b); margin-right: 10px; flex: none; }
@@ -890,46 +890,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   .hv-caja { width: 100vw; height: 100vh; height: 100dvh; border-radius: 0; border: 0; box-shadow: none; padding-top: env(safe-area-inset-top, 0px); padding-bottom: env(safe-area-inset-bottom, 0px); }
   .hv-flecha { display: none; }
 }
-@media (max-width: 760px) { .hs-fila { gap: 8px; margin-right: -16px; padding-right: 16px; } .hs-c { width: 70px; } .hs-aro { width: 66px; height: 66px; } }
-
-/* ---------- Portada: Finanzas y Economía en dos columnas ---------- */
-.tab-menu small { display: block; font-size: 12.5px; font-weight: 400; color: var(--muted); }
-.tab-menu-2 { grid-template-columns: repeat(2, minmax(210px, 1fr)); gap: 4px 10px; }
-.tab-menu-2 > div { display: grid; gap: 2px; align-content: start; }
-.tm-sub { padding: 6px 10px 2px; font-size: 11.5px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
-.home-cols { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 20px; align-items: stretch; }
-@media (max-width: 860px) { .home-cols { grid-template-columns: minmax(0, 1fr); } }
-.home-col { display: flex; flex-direction: column; gap: 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 18px 20px; border-top: 3px solid var(--hc); }
-.home-fin { --hc: var(--accent); } .home-eco { --hc: var(--b); }
-.home-cab { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; }
-.home-cab h2 { margin: 0; font-size: 22px; font-weight: 800; flex-basis: 100%; }
-.home-cab small { color: var(--muted); font-size: 13.5px; }
-.home-k { margin: 0; font-size: 12px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--hc, var(--accent)); }
-.home-filas { display: grid; }
-.home-cargando { margin: 0; color: var(--muted); }
-.home-f { display: grid; grid-template-columns: minmax(0, 1fr) auto 76px; align-items: center; gap: 12px; padding: 10px 6px; border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none; border-radius: 6px; }
-.home-f:last-child { border-bottom: 0; }
-.home-f.sc { grid-template-columns: minmax(0, 1fr) auto; }
-.home-f:hover { background: var(--bg); }
-.home-f > span { min-width: 0; font-weight: 600; font-size: 15.5px; line-height: 1.25; }
-.home-f > span small { display: block; font-weight: 400; font-size: 13px; color: var(--muted); }
-.home-f > b { font-family: var(--f-data); font-weight: 500; font-size: 16px; font-variant-numeric: tabular-nums; text-align: right; white-space: nowrap; }
-.home-f > .mon-c, .home-f > .home-c { font-family: var(--f-data); font-size: 14px; text-align: right; white-space: nowrap; }
-.home-c { color: var(--muted); }
-.home-links { margin-top: auto; display: flex; flex-wrap: wrap; gap: 8px; padding-top: 4px; }
-.home-links a { padding: 7px 12px; border-radius: 999px; border: 1px solid var(--line); color: var(--ink); text-decoration: none; font-weight: 600; font-size: 14px; }
-.home-links a:hover { border-color: var(--hc); color: var(--hc); }
-.home-abajo { display: grid; gap: 22px; }
-.home-mapa { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); align-items: center; gap: 22px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 16px 20px; color: var(--ink); text-decoration: none; transition: border-color .15s; }
-.home-mapa:hover { border-color: var(--accent); }
-.home-mapa svg { width: 100%; height: auto; display: block; }
-.home-mapa svg path { fill: color-mix(in srgb, var(--muted) 38%, var(--surface)); stroke: var(--surface); stroke-width: .3; }
-.home-mapa svg path.arg { fill: var(--accent); }
-.home-mapa > span { display: grid; gap: 6px; }
-.home-mapa b { font-family: var(--f-display); font-size: 24px; font-weight: 800; }
-.home-mapa > span > span { color: var(--muted); font-size: 15.5px; }
-.home-mapa em { font-style: normal; font-weight: 700; color: var(--accent); }
-@media (max-width: 640px) { .home-mapa { grid-template-columns: minmax(0, 1fr); gap: 12px; } .home-col { padding: 16px; } .home-f { grid-template-columns: minmax(0, 1fr) auto 66px; gap: 8px; } }
+@media (max-width: 760px) { #pag-inicio > .historias { order: -2; } .hs-fila { gap: 8px; margin-right: -16px; padding-right: 16px; } .hs-c { width: 70px; } .hs-aro { width: 66px; height: 66px; } }
 </style>
 
 <header class="topbar">
@@ -938,8 +899,8 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   </button>
   <a class="logo" href="#inicio">Atlas <span>Macro</span></a>
   <nav class="tabs" aria-label="Secciones">
-    <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm0" data-pags="mercados bcra calendario">Finanzas</button><div class="tab-menu" id="tm0" hidden><a href="#mercados" data-pag="mercados">Mercados<small>Acciones, bonos, CEDEARs y el mundo</small></a><a href="#bcra" data-pag="bcra">Dólar y BCRA<small>Bandas, reservas, tasas y liquidez</small></a><a href="#calendario" data-pag="calendario">Calendario<small>Próximos datos y feriados</small></a></div></div>
-    <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm1" data-pags="argentina actividad provincias gobiernos paises rankings comercio elecciones conflictos">Economía</button><div class="tab-menu tab-menu-2" id="tm1" hidden><div><span class="tm-sub">Argentina</span><a href="#argentina" data-pag="argentina">Panorama<small>Dólar, inflación y calculadoras</small></a><a href="#actividad" data-pag="actividad">Economía real<small>Actividad, precios, empleo</small></a><a href="#provincias" data-pag="provincias">Provincias</a><a href="#gobiernos" data-pag="gobiernos">Gobiernos comparados</a></div><div><span class="tm-sub">Mundo</span><a href="#paises" data-pag="paises">Explorar países<small>Mapa y fichas de 200 países</small></a><a href="#rankings" data-pag="rankings">Rankings</a><a href="#comercio" data-pag="comercio">Comercio mundial</a><a href="#elecciones" data-pag="elecciones">Elecciones</a><a href="#conflictos" data-pag="conflictos">Conflictos y crisis</a></div></div></div>
+    <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm0" data-pags="inicio rankings comercio mercados elecciones conflictos">Mundo</button><div class="tab-menu" id="tm0" hidden><a href="#inicio" data-pag="inicio">Mapa y fichas</a><a href="#rankings" data-pag="rankings">Rankings</a><a href="#comercio" data-pag="comercio">Comercio mundial</a><a href="#mercados" data-pag="mercados">Mercados</a><a href="#elecciones" data-pag="elecciones">Elecciones</a><a href="#conflictos" data-pag="conflictos">Conflictos y crisis</a></div></div>
+    <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm1" data-pags="argentina bcra actividad provincias calendario gobiernos">Argentina</button><div class="tab-menu" id="tm1" hidden><a href="#argentina" data-pag="argentina">Hoy: dólar e inflación</a><a href="#bcra" data-pag="bcra">Dólar y BCRA</a><a href="#actividad" data-pag="actividad">Economía real</a><a href="#provincias" data-pag="provincias">Provincias</a><a href="#calendario" data-pag="calendario">Calendario</a><a href="#gobiernos" data-pag="gobiernos">Gobiernos comparados</a></div></div>
     <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm2" data-pags="comparacion comparador laboratorio glosario">Herramientas</button><div class="tab-menu" id="tm2" hidden><a href="#comparacion" data-pag="comparacion">Comparar países</a><a href="#comparador" data-pag="comparador">Comparador de series</a><a href="#laboratorio" data-pag="laboratorio">Laboratorio</a><a href="#glosario" data-pag="glosario">Glosario</a></div></div>
     <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm3" data-pags="juego masrico dondequeda">Juegos</button><div class="tab-menu" id="tm3" hidden><a href="#juego" data-pag="juego">País del día</a><a href="#dondequeda" data-pag="dondequeda">¿Dónde queda?</a><a href="#masrico" data-pag="masrico">¿Más rico o más pobre?</a></div></div>
   </nav>
@@ -960,27 +921,23 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
 <nav class="nav" id="nav" aria-label="Secciones" aria-hidden="true">
   <div class="nav-head"><span class="logo">Atlas <span>Macro</span></span>
     <button class="nav-cerrar" id="navCerrar" type="button" aria-label="Cerrar el menú">✕</button></div>
-  <ul class="nav-sec"><li><a href="#inicio" data-pag="inicio"><span class="nav-ico" aria-hidden="true">🏠</span><span>Inicio<small>El resumen del día</small></span></a></li></ul>
-  <p class="nav-grupo">Finanzas</p>
+  <p class="nav-grupo">Mundo</p>
   <ul>
-    <li><a href="#mercados" data-pag="mercados"><span class="nav-ico" aria-hidden="true">📈</span><span>Mercados<small>Acciones, bonos, CEDEARs y el mundo</small></span></a></li>
-    <li><a href="#bcra" data-pag="bcra"><span class="nav-ico" aria-hidden="true">🏛️</span><span>Dólar y BCRA<small>Bandas, reservas, tasas y liquidez</small></span></a></li>
-    <li><a href="#calendario" data-pag="calendario"><span class="nav-ico" aria-hidden="true">📅</span><span>Calendario<small>Próximos datos del INDEC y feriados</small></span></a></li>
-  </ul>
-  <p class="nav-grupo">Economía · Argentina</p>
-  <ul>
-    <li><a href="#argentina" data-pag="argentina"><span class="nav-ico" aria-hidden="true">🇦🇷</span><span>Panorama<small>Dólar, inflación y calculadoras</small></span></a></li>
-    <li><a href="#actividad" data-pag="actividad"><span class="nav-ico" aria-hidden="true">🏭</span><span>Economía real<small>Actividad, precios, comercio, empleo y confianza</small></span></a></li>
-    <li><a href="#provincias" data-pag="provincias"><span class="nav-ico" aria-hidden="true">📍</span><span>Provincias<small>Pobreza, desempleo y población</small></span></a></li>
-    <li><a href="#gobiernos" data-pag="gobiernos"><span class="nav-ico" aria-hidden="true">⚖️</span><span>Gobiernos comparados<small>De Alfonsín a hoy, con datos</small></span></a></li>
-  </ul>
-  <p class="nav-grupo">Economía · Mundo</p>
-  <ul>
-    <li><a href="#paises" data-pag="paises"><span class="nav-ico" aria-hidden="true">🗺️</span><span>Explorar países<small>Mapa y fichas de 200 países</small></span></a></li>
+    <li><a href="#inicio" data-pag="inicio"><span class="nav-ico" aria-hidden="true">🗺️</span><span>Mapa y fichas<small>Tocá un país y mirá su economía</small></span></a></li>
     <li><a href="#rankings" data-pag="rankings"><span class="nav-ico" aria-hidden="true">🏆</span><span>Rankings<small>Los primeros y los últimos del mundo</small></span></a></li>
     <li><a href="#comercio" data-pag="comercio"><span class="nav-ico" aria-hidden="true">🚢</span><span>Comercio mundial<small>Quién le vende petróleo, soja o autos al mundo</small></span></a></li>
+    <li><a href="#mercados" data-pag="mercados"><span class="nav-ico" aria-hidden="true">📈</span><span>Mercados<small>Bolsas, monedas, tasas del mundo y cripto</small></span></a></li>
     <li><a href="#elecciones" data-pag="elecciones"><span class="nav-ico" aria-hidden="true">🗳️</span><span>Elecciones<small>Los próximos 12 meses</small></span></a></li>
     <li><a href="#conflictos" data-pag="conflictos"><span class="nav-ico" aria-hidden="true">⚠️</span><span>Conflictos y crisis<small>Guerras, golpes y crisis</small></span></a></li>
+  </ul>
+  <p class="nav-grupo">Argentina</p>
+  <ul>
+    <li><a href="#argentina" data-pag="argentina"><span class="nav-ico" aria-hidden="true">🇦🇷</span><span>Hoy: dólar e inflación<small>Cotizaciones, inflación y calculadoras</small></span></a></li>
+    <li><a href="#bcra" data-pag="bcra"><span class="nav-ico" aria-hidden="true">🏛️</span><span>Dólar y BCRA<small>Bandas, reservas, tasas, bonos y morosidad</small></span></a></li>
+    <li><a href="#actividad" data-pag="actividad"><span class="nav-ico" aria-hidden="true">🏭</span><span>Economía real<small>Actividad, precios, comercio, empleo y confianza</small></span></a></li>
+    <li><a href="#provincias" data-pag="provincias"><span class="nav-ico" aria-hidden="true">📍</span><span>Provincias<small>Pobreza, desempleo y población</small></span></a></li>
+    <li><a href="#calendario" data-pag="calendario"><span class="nav-ico" aria-hidden="true">📅</span><span>Calendario<small>Próximos datos del INDEC y feriados</small></span></a></li>
+    <li><a href="#gobiernos" data-pag="gobiernos"><span class="nav-ico" aria-hidden="true">⚖️</span><span>Gobiernos comparados<small>De Alfonsín a hoy, con datos</small></span></a></li>
   </ul>
   <p class="nav-grupo">Herramientas</p>
   <ul>
@@ -1016,42 +973,13 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
 <div class="wrap">
   <div class="pagina" id="pag-inicio">
   <header class="top portada-cab">
-    <div class="eyebrow">Argentina y el mundo · datos actualizados todo el día</div>
-    <h1>Mercados y economía, <span>explicados en simple.</span></h1>
-    <p class="lede">Lo que pasó hoy en la bolsa, el dólar y los bonos, y los datos de fondo de la economía argentina y de 200 países.</p>
+    <div class="eyebrow">200 países · datos actualizados todos los días</div>
+    <h1>La economía de cada país, <span>explicada en simple.</span></h1>
+    <p class="lede">Inflación, dólar, deuda, comercio y política de todo el mundo, con datos del Banco Mundial, el FMI, el BCRA y el INDEC. Tocá un país en el mapa o buscalo arriba.</p>
   </header>
 
   <section class="historias" id="historias" aria-label="Resumen del día" hidden></section>
 
-  <section class="home-cols" aria-label="Finanzas y economía">
-    <article class="home-col home-fin">
-      <div class="home-cab"><p class="home-k">Finanzas</p><h2>Los mercados hoy</h2><small id="homeFinFecha"></small></div>
-      <div class="home-filas" id="homeFin"><p class="home-cargando">Cargando…</p></div>
-      <nav class="home-links" aria-label="Finanzas"><a href="#mercados">Mercados</a><a href="#bcra">Dólar y BCRA</a><a href="#calendario">Calendario</a></nav>
-    </article>
-    <article class="home-col home-eco">
-      <div class="home-cab"><p class="home-k">Economía</p><h2>La economía argentina</h2><small>Últimos datos publicados</small></div>
-      <div class="home-filas" id="homeEco"><p class="home-cargando">Cargando…</p></div>
-      <nav class="home-links" aria-label="Economía"><a href="#argentina">Panorama</a><a href="#actividad">Economía real</a><a href="#provincias">Provincias</a><a href="#gobiernos">Gobiernos</a></nav>
-    </article>
-  </section>
-
-  <section class="home-abajo" aria-label="Más en Atlas Macro">
-    <a class="home-mapa" href="#paises">
-      <svg id="miniMapa" viewBox="0 0 360 160" role="img" aria-label="Planisferio"></svg>
-      <span><small class="home-k">Economía · Mundo</small><b>Explorar países</b><span>El mapa con la ficha de 200 países: quién gobierna, elecciones, conflictos e indicadores.</span><em>Abrir el mapa →</em></span>
-    </a>
-    <div class="port-cols" id="tarjetas"></div>
-  </section>
-
-  </div>
-
-  <div class="pagina" id="pag-paises" hidden>
-  <header class="top">
-    <div class="eyebrow">Economía · Mundo</div>
-    <h1>Explorar países</h1>
-    <p class="lede">Tocá un país en el mapa o buscalo arriba para ver su ficha. Con los botones de abajo, el mapa muestra quién gobierna, las próximas elecciones, los conflictos o cualquier indicador.</p>
-  </header>
   <section class="atlas">
     <div class="mapcard" id="mapcard">
       <svg id="map" role="img" aria-label="Planisferio con relieve. Tocá un país para ver su ficha."></svg>
@@ -1094,6 +1022,16 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     </div>
     <aside class="panel" id="panel" aria-live="polite"></aside>
   </section>
+
+  <section class="ar-hoy" id="arHoy" aria-label="Argentina hoy" hidden>
+    <div class="ag-tit"><h2>Argentina hoy</h2><a class="ar-hoy-ir" href="#argentina">Todo sobre Argentina →</a></div>
+    <div class="bcra-kpis" id="arHoyKpis"></div>
+  </section>
+
+  <section class="portada" aria-label="Más en Atlas Macro">
+    <div class="port-cols" id="tarjetas"></div>
+  </section>
+
   </div>
 
   <div class="pagina" id="pag-argentina" hidden>
@@ -1914,8 +1852,8 @@ function colorModo(k) {
 }
 /* Al tocar un país en una lista: vuelve al mapa y abre su ficha */
 function irAPaisDesdeLista(k) {
-  history.pushState(null, "", "#paises");
-  mostrarPagina("paises");
+  history.pushState(null, "", "#inicio");
+  mostrarPagina("inicio");
   elegir(k); irAPais(k);
 }
 const mesTitulo = f => { const [y, m] = f.split("-").map(Number); return `${MESES[m - 1][0].toUpperCase() + MESES[m - 1].slice(1)} de ${y}`; };
@@ -2102,7 +2040,7 @@ const sinTildes = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowe
 /* ---------- PÁGINAS Y PANEL LATERAL ----------
    Cada sección es una "página": #inicio, #comparacion, #elecciones, #conflictos.
    Se cambia con el link (la dirección cambia, así funciona el botón "atrás" del navegador). */
-const PAGINAS = ["inicio", "paises", "argentina", "bcra", "actividad", "comparador", "mercados", "comercio", "provincias", "glosario", "gobiernos", "calendario", "comparacion", "rankings", "laboratorio", "juego", "masrico", "dondequeda", "elecciones", "conflictos", "acerca"];
+const PAGINAS = ["inicio", "argentina", "bcra", "actividad", "comparador", "mercados", "comercio", "provincias", "glosario", "gobiernos", "calendario", "comparacion", "rankings", "laboratorio", "juego", "masrico", "dondequeda", "elecciones", "conflictos", "acerca"];
 let paginaActual = "inicio";
 const versusAbierto = () => paginaActual === "comparacion";
 /* páginas que se juntaron con otra: el link viejo abre la nueva y baja hasta esa parte */
@@ -2134,7 +2072,7 @@ function mostrarPagina(nombre) {
   if (nombre === "calendario") renderCalendario();
   if (nombre === "masrico") abrirMasRico();
   if (nombre === "dondequeda") abrirDondeQueda();
-  if (nombre === "paises") {
+  if (nombre === "inicio") {
     // si la ventana cambió de tamaño mientras el mapa estaba oculto, lo rearmamos
     const r = document.getElementById("map").getBoundingClientRect();
     if (features && (Math.abs(r.width - W) > 2 || Math.abs(r.height - H) > 2)) buildMap();
@@ -2171,18 +2109,15 @@ function cerrarNav() {
   document.getElementById("menuBtn").setAttribute("aria-expanded", "false");
   document.getElementById("menuBtn").focus();
 }
-/* Pestañas internas: las páginas de cada grupo se recorren con una barra arriba */
-const SUBTABS = [
-  ["Finanzas", [["mercados", "Mercados"], ["bcra", "Dólar y BCRA"], ["calendario", "Calendario"]]],
-  ["Argentina", [["argentina", "Panorama"], ["actividad", "Economía real"], ["provincias", "Provincias"], ["gobiernos", "Gobiernos"]]],
-  ["Mundo", [["paises", "Países"], ["rankings", "Rankings"], ["comercio", "Comercio"], ["elecciones", "Elecciones"], ["conflictos", "Conflictos"]]]];
+/* Argentina: las seis páginas se muestran como una sola, con una barra de pestañas arriba */
+const AR_TABS = [["argentina", "Hoy"], ["bcra", "Dólar y BCRA"], ["actividad", "Economía real"], ["provincias", "Provincias"], ["calendario", "Calendario"], ["gobiernos", "Gobiernos"]];
 function armarArTabs() {
-  SUBTABS.forEach(([titulo, tabs]) => tabs.forEach(([pag]) => {
+  AR_TABS.forEach(([pag]) => {
     const el = document.getElementById("pag-" + pag); if (!el) return;
-    const n = document.createElement("nav"); n.className = "ar-tabs"; n.setAttribute("aria-label", "Secciones de " + titulo);
-    n.innerHTML = `<span class="ar-tabs-t">${titulo}</span>` + tabs.map(([p, t]) => `<a href="#${p}" data-ar="${p}"${p === pag ? ' aria-current="page"' : ""}>${t}</a>`).join("");
+    const n = document.createElement("nav"); n.className = "ar-tabs"; n.setAttribute("aria-label", "Secciones de Argentina");
+    n.innerHTML = `<span class="ar-tabs-t">Argentina</span>` + AR_TABS.map(([p, t]) => `<a href="#${p}" data-ar="${p}"${p === pag ? ' aria-current="page"' : ""}>${t}</a>`).join("");
     el.prepend(n);
-  }));
+  });
 }
 function armarNav() {
   armarArTabs();
@@ -2334,7 +2269,7 @@ function armarBuscador() {
   input.placeholder = "Buscar un país, \"dólar\", \"inflación\"…";
   autocompletar(input, document.getElementById("buscarLista"), k => {
     input.blur();
-    if (paginaActual !== "paises") { history.pushState(null, "", "#paises"); mostrarPagina("paises"); }
+    if (paginaActual !== "inicio") { history.pushState(null, "", "#inicio"); mostrarPagina("inicio"); }
     elegir(k); irAPais(k);
     document.getElementById("mapcard").scrollIntoView({ behavior: reduced() ? "auto" : "smooth", block: "nearest" });
   }, { extras: buscarExtras });
@@ -2666,8 +2601,7 @@ function renderTicker() {
   el.hidden = false;
 }
 function renderTarjetas() {
-  renderHome();
-  dibujarMiniMapa();
+  renderArHoy();
   const G = { mundo: [], herr: [], jugar: [] };
   const tarjeta = (g, h, tit, sub) => G[g].push(`<a class="port-item" href="#${h}"><b>${tit}</b>${sub ? `<span>${sub}</span>` : ""}</a>`);
   /* mismo criterio que la página de Rankings: países independientes de más de 1 millón de habitantes */
@@ -2675,6 +2609,7 @@ function renderTarjetas() {
   const pos = recs.findIndex(x => x[0] === "ARG") + 1;
   tarjeta("mundo", "rankings", "Rankings", pos ? `Argentina, ${pos}.º del mundo en años de recesión desde 1990` : "Los primeros y los últimos del mundo");
   tarjeta("mundo", "comercio", "Comercio mundial", "Quién le vende petróleo, soja o chips al mundo");
+  tarjeta("mundo", "mercados", "Mercados", "Bolsas, monedas, tasas de los bancos centrales y cripto");
   const prox = proximasElecciones(), nConf = Object.values(CURADO.paises).filter(p => p.crisis).length;
   tarjeta("mundo", "elecciones", "Elecciones y conflictos", `${prox.length} elecciones en los próximos 12 meses · ${nConf} países en guerra o crisis`);
   tarjeta("herr", "comparacion", "Comparar países", "Dos países lado a lado, indicador por indicador");
@@ -2688,67 +2623,23 @@ function renderTarjetas() {
   tarjeta("jugar", "dondequeda", "¿Dónde queda?", `Encontrá el país en el mapa${dqm ? ` · tu récord: ${nf(dqm)} puntos` : ". ¿Sabés dónde está Malaui?"}`);
   tarjeta("jugar", "masrico", "¿Más rico o más pobre?", `¿Chile o Uruguay? ¿Polonia o Portugal?${mrm ? ` · tu mejor racha: ${mrm}` : ""}`);
   const col = (t, xs) => `<div class="port-col"><h2>${t}</h2>${xs.join("")}</div>`;
-  document.getElementById("tarjetas").innerHTML = col("Más del mundo", G.mundo) + col("Herramientas", G.herr) + col("Jugá", G.jugar);
+  document.getElementById("tarjetas").innerHTML = col("Explorá el mundo", G.mundo) + col("Herramientas", G.herr) + col("Jugá", G.jugar);
 }
-/* Planisferio chiquito de la portada: lleva a la página del mapa */
-let miniMapaListo = false;
-function dibujarMiniMapa() {
-  if (miniMapaListo || !features) return;
-  const svgM = d3.select("#miniMapa");
-  const sinAnt = features.filter(f => iso(f) !== "ATA");
-  const pr = d3.geoEquirectangular().fitExtent([[2, 2], [358, 158]], { type: "FeatureCollection", features: sinAnt });
-  const pg = d3.geoPath(pr);
-  svgM.selectAll("path").data(sinAnt).join("path").attr("d", pg).attr("class", f => iso(f) === "ARG" ? "arg" : null);
-  miniMapaListo = true;
-}
-/* Portada: las dos columnas. Finanzas con lo que se mueve en el día; Economía con los últimos datos publicados */
-const homeFila = (href, nom, sub, valor, cambio) => `<a class="home-f${cambio === null ? " sc" : ""}" href="#${href}"><span>${nom}${sub ? `<small>${sub}</small>` : ""}</span><b>${valor}</b>${cambio === null ? "" : cambio || '<span class="home-c"></span>'}</a>`;
-const mesCorto = k => MESES[+k.slice(5, 7) - 1];
-function renderHome() {
+/* Franja "Argentina hoy" de la portada: dólar, inflación, reservas y riesgo país */
+function renderArHoy() {
   if (!ARGENTINA || !ARGENTINA.casas) return;
-  // Finanzas
-  const F = [], casa = c => ARGENTINA.casas[c] && cotiz(c);
-  const varCasa = c => { const x = ARGENTINA.casas[c], q = cotiz(c), hoy = new Date().toISOString().slice(0, 10);
-    const ref = agVivo && agVivo[c] && x.ultimo.fecha < hoy ? x.ultimo.venta : x.antes && x.antes.dia; return ref ? variacion(q.venta, ref) : null; };
-  const m = k => MERCADOS ? mercDe(k) : null;
-  const mv = m("merval"); if (mv) F.push(homeFila("mercados", "Merval", "Índice de la bolsa porteña", nf(mv.precio, 0), pctC(mv.dia)));
-  const mc = m("merval_ccl"); if (mc) F.push(homeFila("mercados", "Merval en dólares", "Al contado con liqui", nf(mc.precio, 0), pctC(mc.dia)));
-  if (casa("contadoconliqui")) F.push(homeFila("bcra", "Dólar CCL", `Oficial ${pesos(cotiz("oficial").venta)} · MEP ${pesos(cotiz("bolsa").venta)}`, pesos(cotiz("contadoconliqui").venta), pctC(varCasa("contadoconliqui"))));
-  const rp = ARGENTINA.riesgo_pais.ultimo;
-  const rpRes = RESUMEN && RESUMEN.dia && RESUMEN.dia[0] && (RESUMEN.dia[0].grandes || []).find(g => g.nombre === "Riesgo país");
-  F.push(homeFila("mercados", "Riesgo país", "Puntos básicos sobre los bonos de EE. UU.", nf(rpRes ? +rpRes.valor.replace(/\./g, "") : rp.valor), rpRes && rpRes.cambio != null ? pbC(rpRes.cambio) : undefined));
-  const gd = MERCADOS && MERCADOS.byma && (MERCADOS.byma.bonos || []).find(b => b.ticker === "GD30");
-  if (gd) F.push(homeFila("mercados", "Bono GD30", `Precio US$ ${nf(gd.precio, 2)} · TIR`, nf(gd.tir, 1) + "%", pctC(gd.dia)));
-  const sp = m("sp500"); if (sp) F.push(homeFila("mercados", "S&P 500", "Bolsa de Nueva York", nf(sp.precio, 0), pctC(sp.dia)));
-  const t10 = m("t10us"); if (t10) F.push(homeFila("mercados", "Tasa a 10 años de EE. UU.", "La referencia de tasas del mundo", nf(t10.precio, 2) + "%", pbC(t10.dia)));
-  const bt = m("btc"); if (bt) F.push(homeFila("mercados", "Bitcoin", "En dólares", "US$ " + nf(precioMerc(bt), 0), pctC(diaMerc(bt))));
-  document.getElementById("homeFin").innerHTML = F.join("");
-  const fm = MERCADOS && MERCADOS.generado ? new Date(MERCADOS.generado) : null;
-  document.getElementById("homeFinFecha").textContent = fm ? `Actualizado ${fm.toLocaleString("es-AR", { weekday: "long", hour: "2-digit", minute: "2-digit" })}` : "";
-
-  // Economía
-  const E = [];
-  const infl = ARGENTINA.inflacion.mensual, ui = infl[infl.length - 1];
-  let acum = 1; infl.slice(-12).forEach(([, v]) => acum *= 1 + v / 100);
-  const pInf = proximoDe("inflacion");
-  E.push(homeFila("argentina", `Inflación de ${mesCorto(ui[0])}`, `${nf((acum - 1) * 100, 1)}% en los últimos 12 meses${pInf ? ` · el próximo dato sale ${enDias(diasHasta(pInf.fecha))}` : ""}`, nf(ui[1], 1) + "%", null));
-  const ult = k => { const x = SAR && SAR[k] && SAR[k].serie; return x && x.length > 1 ? [x[x.length - 1], x[x.length - 2]] : null; };
-  const em = ult("emae");
-  if (em) E.push(homeFila("actividad", "Actividad económica (EMAE)", `${mesCorto(em[0][0])} contra ${mesCorto(em[1][0])}, sin estacionalidad`, (em[0][1] / em[1][1] > 1 ? "+" : "") + nf((em[0][1] / em[1][1] - 1) * 100, 1) + "%", null));
-  const ip = ult("ipi");
-  if (ip) E.push(homeFila("actividad", "Industria (IPI)", `${mesCorto(ip[0][0])} contra ${mesCorto(ip[1][0])}, sin estacionalidad`, (ip[0][1] / ip[1][1] > 1 ? "+" : "") + nf((ip[0][1] / ip[1][1] - 1) * 100, 1) + "%", null));
-  const ep = ult("empleo_priv");
-  if (ep) E.push(homeFila("actividad", "Empleo privado registrado", `${mesCorto(ep[0][0])}: ${ep[0][1] >= ep[1][1] ? "+" : "−"}${nf(Math.abs(ep[0][1] - ep[1][1]) * (ep[0][1] > 100000 ? 1 : 1000), 0)} puestos en el mes`, nf(ep[0][1] > 100000 ? ep[0][1] / 1e6 : ep[0][1] / 1000, 2) + " M", null));
-  const sc = ult("saldo_com");
-  if (sc) E.push(homeFila("actividad", "Saldo comercial", `Exportaciones menos importaciones, ${mesCorto(sc[0][0])}`, usdM(sc[0][1]), null));
+  const k = (t, v, sub) => `<div class="bcra-kpi"><span>${t}</span><b>${v}</b><small>${sub}</small></div>`;
+  const o = cotiz("oficial").venta, b = cotiz("blue").venta, inf = ARGENTINA.inflacion.mensual[ARGENTINA.inflacion.mensual.length - 1], pInf = proximoDe("inflacion");
   const R = FINANZAS && FINANZAS.bcra && FINANZAS.bcra.reservas && FINANZAS.bcra.reservas.serie;
-  const ur = R && R.length ? R[R.length - 1] : null;
-  if (ur) E.push(homeFila("bcra", "Reservas del BCRA", "Brutas, en millones de dólares", usdM(ur[1]), null));
-  document.getElementById("homeEco").innerHTML = E.join("");
-  if (!FINANZAS) cargarFinanzas().then(() => paginaActual === "inicio" && FINANZAS && renderHome());
-  if (!SAR) cargarSeriesAr().then(() => paginaActual === "inicio" && SAR && renderHome());
+  const ur = R && R.length ? R[R.length - 1] : null, rp = ARGENTINA.riesgo_pais.ultimo;
+  document.getElementById("arHoyKpis").innerHTML = [
+    k("Dólar oficial", pesos(o), `Blue ${pesos(b)} · brecha ${nf(variacion(b, o), 1)}%`),
+    k(`Inflación de ${MESES[+inf[0].slice(5) - 1].toLowerCase()}`, nf(inf[1], 1) + "%", pInf ? `El próximo dato sale ${enDias(diasHasta(pInf.fecha))}` : "Variación mensual del IPC"),
+    ur ? k("Reservas del BCRA", usdM(ur[1]), "Brutas, en millones de dólares") : "",
+    k("Riesgo país", nf(rp.valor), "Puntos básicos")].join("");
+  document.getElementById("arHoy").hidden = false;
+  if (!FINANZAS) cargarFinanzas().then(() => paginaActual === "inicio" && FINANZAS && FINANZAS.bcra && renderArHoy());
 }
-const renderArHoy = renderHome;
 /* ---------- ARGENTINA HOY: dólar, inflación y calculadoras (argentina.json) ---------- */
 const CASAS_ORDEN = ["oficial", "blue", "bolsa", "contadoconliqui", "mayorista", "cripto", "tarjeta"];
 let agListo = false, agVivo = null, agCharts = {};
@@ -3637,7 +3528,7 @@ function armarRankings() {
   cambio("rkVar", "v"); cambio("rkModo", "m"); cambio("rkReg", "reg"); cambio("rkSob", "sob", true); cambio("rkChicos", "chicos", true);
   document.getElementById("rkMapa").onclick = () => {
     Object.assign(mapaEstado, { v: rkEstado.v, m: rkEstado.m });
-    history.pushState(null, "", "#paises"); mostrarPagina("paises");
+    history.pushState(null, "", "#inicio"); mostrarPagina("inicio");
     setModo("ind"); setVista("mundo");
   };
   rkSync();
@@ -5738,7 +5629,7 @@ function armarHistorias() {
     else if (e.key === " ") { e.preventDefault(); hvPausar(!HV.pausa); }
   });
   document.addEventListener("visibilitychange", () => { if (!hv.hidden) hvPausar(document.hidden); });
-  fetch("resumen.json").then(r => r.ok ? r.json() : null).catch(() => null).then(j => { RESUMEN = j; try { renderHistorias(); if (paginaActual === "inicio" && ARGENTINA) renderHome(); } catch (e) { console.error(e); } });
+  fetch("resumen.json").then(r => r.ok ? r.json() : null).catch(() => null).then(j => { RESUMEN = j; try { renderHistorias(); } catch (e) { console.error(e); } });
 }
 armarHistorias();
 
@@ -5785,7 +5676,7 @@ Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json")
     const msg = local
       ? "Abriste la página directo desde la carpeta, y así el navegador no la deja leer datos.json. Abrila con un servidor local: en la Terminal, dentro de la carpeta, corré «python3 -m http.server» y entrá a http://localhost:8000"
       : "No se pudieron cargar los datos. Probá recargar la página.";
-    const ml = document.getElementById("maploading"); if (ml) ml.textContent = msg;
+    document.getElementById("maploading").textContent = msg;
     document.getElementById("panel").innerHTML = `<div class="empty"><h2>No se cargaron los datos</h2><p>${msg}</p></div>`;
   });
 
@@ -5810,7 +5701,7 @@ window.addEventListener("resize", () => {
   clearTimeout(rT);
   rT = setTimeout(() => {
     const r = document.getElementById("map").getBoundingClientRect();
-    if (paginaActual === "paises" && features && (Math.abs(r.width - W) > 2 || Math.abs(r.height - H) > 2)) buildMap();
+    if (paginaActual === "inicio" && features && (Math.abs(r.width - W) > 2 || Math.abs(r.height - H) > 2)) buildMap();
     if (paginaActual === "dondequeda" && dq.listo) dqDibujar();
   }, 200);
 });

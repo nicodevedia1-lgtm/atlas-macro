@@ -1,0 +1,131 @@
+{
+ "_leeme": "Señales del radar de noticias, revisadas a mano. Cada una se muestra en la ficha del país hasta la fecha 'vence'.",
+ "actualizado": "2026-11-13",
+ "senales": [
+  {
+   "pais": "Brazil",
+   "tipo": "elecciones",
+   "icono": "🗳️",
+   "fecha": "2026-10-25",
+   "vence": "2027-01-01",
+   "titulo": "Lula reelecto en el balotaje",
+   "resumen": "Lula le ganó a Flávio Bolsonaro con ~51,8% contra 48,2%; el PL reconoció la derrota.",
+   "fuentes": [
+    "https://www.lanacion.com.ar/el-mundo/que-se-sabe-de-los-resultados-de-las-elecciones-brasil-2026-este-domingo-25-de-octubre-nid25102026/",
+    "https://www12.senado.leg.br/noticias/materias/2026/10/25/lula-e-reeleito-para-quarto-mandato-de-presidente",
+    "https://www.jn.pt/mundo/artigo/partido-de-flavio-bolsonaro-reconhece-vitoria-de-lula-da-silva/18141486"
+   ],
+   "confirmado": true,
+   "iso": "BRA"
+  },
+  {
+   "pais": "Brazil",
+   "tipo": "cambio de gobierno",
+   "icono": "🏛️",
+   "fecha": "2027-01-01",
+   "vence": "2027-01-15",
+   "titulo": "Lula asume su cuarto mandato",
+   "resumen": "Asunción programada del período 2027-2030.",
+   "fuentes": [
+    "https://exame.com/brasil/lula-e-reeleito-quando-sera-a-posse-presidencial-em-2027-veja-a-data/",
+    "https://www12.senado.leg.br/noticias/materias/2026/10/25/lula-e-reeleito-para-quarto-mandato-de-presidente"
+   ],
+   "confirmado": true,
+   "iso": "BRA"
+  },
+  {
+   "pais": "Chile",
+   "tipo": "protestas",
+   "icono": "✊",
+   "fecha": "2026-11-09",
+   "vence": "2026-11-27",
+   "titulo": "Paro nacional de camioneros",
+   "resumen": "Cortes de rutas en todo el país por la suba del diésel; el gobierno congeló los combustibles pero parte del paro sigue.",
+   "fuentes": [
+    "https://www.infobae.com/america/america-latina/2026/11/12/chile-gobierno-congelo-del-precio-de-los-combustibles-hasta-febrero-de-2027-pero-camioneros-siguen-en-paro/",
+    "https://www.pauta.cl/actualidad/2026/11/13/paro-de-camioneros-continua-pese-a-acuerdo-con-el-gobierno-quienes-mantienen-las-movilizaciones-y-donde-persisten-los-cortes.html",
+    "https://www.biobiochile.cl/noticias/nacional/chile/2026/11/11/sin-acuerdo-con-el-gobierno-camioneros-mantienen-el-paro-y-exigen-congelar-combustibles-por-4-meses.shtml"
+   ],
+   "confirmado": true,
+   "iso": "CHL"
+  },
+  {
+   "pais": "Paraguay",
+   "tipo": "crisis económica",
+   "icono": "📉",
+   "fecha": "2026-11-02",
+   "vence": "2026-12-31",
+   "titulo": "Colapso del Ueno Bank",
+   "resumen": "Banco intervenido con ~3 millones de cuentas congeladas; empezó la devolución parcial vía fondo de garantía y allanaron la residencia presidencial.",
+   "fuentes": [
+    "https://www.aljazeera.com/economy/2026/11/5/paraguay-president-pena-resigns-in-wake-of-bank-collapse",
+    "https://www.aljazeera.com/news/2026/11/6/how-paraguays-ueno-collapse-is-only-its-latest-banking-crisis",
+    "https://es-us.noticias.yahoo.com/paraguay-fiscales-allanan-residencia-presidencial-195200607.html"
+   ],
+   "confirmado": true,
+   "iso": "PRY"
+  },
+  {
+   "pais": "Paraguay",
+   "tipo": "cambio de gobierno",
+   "icono": "🏛️",
+   "fecha": "2026-11-06",
+   "vence": "2026-12-06",
+   "titulo": "Destituyen a Peña; asume Alliana",
+   "resumen": "El Senado destituyó a Peña por juicio político (44 votos); Pedro Alliana completa el mandato hasta 2028.",
+   "fuentes": [
+    "https://sg.news.yahoo.com/paraguay-senate-votes-impeach-president-220546687.html",
+    "https://www.abc.com.py/politica/2026/11/06/en-vivo-juicio-politico-a-pena-senado-retoma-proceso-en-medio-de-renuncia-trabada-y-pedido-de-prorroga/",
+    "https://www.thestar.com.my/news/world/2026/11/07/paraguay039s-alliana-sworn-in-as-president-after-pea-impeachment"
+   ],
+   "confirmado": true,
+   "iso": "PRY"
+  },
+  {
+   "pais": "Colombia",
+   "tipo": "conflicto",
+   "icono": "⚔️",
+   "fecha": "2026-11-02",
+   "vence": "2026-12-15",
+   "titulo": "Ola de atentados y ofensiva militar",
+   "resumen": "Atentados, secuestros del ELN y ataques con drones; el gobierno intensifica los bombardeos y reconoce un orden público grave.",
+   "fuentes": [
+    "https://www.infobae.com/america/agencias/2026/11/02/el-gobierno-colombiano-mantendra-bombardeos-tras-ola-de-atentados-que-dejo-cinco-muertos/",
+    "https://www.elcolombiano.com/colombia/abelardo-de-la-espriella-reconoce-que-es-grave-el-orden-publico-en-el-pais-y-anuncia-medidas-no-hay-otra-salida-BC43501770",
+    "https://www.ntn24.com/noticias-actualidad/de-la-espriella-ordeno-reforzar-seguridad-de-la-prensa-en-colombia-tras-alerta-de-atentados-terroristas-contra-rcn-y-otros-medios-de-comunicacion-664584"
+   ],
+   "confirmado": true,
+   "iso": "COL"
+  },
+  {
+   "pais": "Venezuela",
+   "tipo": "protestas",
+   "icono": "✊",
+   "fecha": "2026-11-16",
+   "vence": "2026-11-23",
+   "titulo": "Paro nacional de 12 horas",
+   "resumen": "Gremios de salud, educación y universidades paran por reclamos salariales sin respuesta.",
+   "fuentes": [
+    "https://eldiario.com/2026/11/05/paro-nacional-16-noviembre/",
+    "https://www.elnacional.com/2026/11/trabajadores-de-salud-y-educacion-convocan-a-paro-nacional-para-el-16-de-noviembre/"
+   ],
+   "confirmado": true,
+   "iso": "VEN"
+  },
+  {
+   "pais": "Ecuador",
+   "tipo": "elecciones",
+   "icono": "🗳️",
+   "fecha": "2026-11-29",
+   "vence": "2026-12-13",
+   "titulo": "Elecciones seccionales",
+   "resumen": "Elección nacional de autoridades locales y del CPCCS; la campaña arrancó el 12/11 con hechos de violencia política.",
+   "fuentes": [
+    "https://www.lexis.com.ec/noticias/elecciones-seccionales-2026-en-ecuador-se-votara-el-29-de-noviembre",
+    "https://www.eltelegrafo.com.ec/noticias/elecciones-seccionales-2026/241/ecuador-entra-en-campana-electoral-este-doce-de-noviembre"
+   ],
+   "confirmado": true,
+   "iso": "ECU"
+  }
+ ]
+}
