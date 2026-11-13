@@ -1,0 +1,79 @@
+diff --git a/index.html b/index.html
+index 0683a07..7b2c55d 100644
+--- a/index.html
++++ b/index.html
+@@ -822,6 +822,13 @@ footer a { color: var(--muted); text-decoration-color: var(--accent); text-under
+ .crisis-box { display: grid; gap: 4px; padding: 12px 14px; border-radius: 10px; background: var(--bg); border-left: 4px solid var(--ic); font-size: 14.5px; }
+ .crisis-box b { font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--ic); }
+ .news { display: grid; gap: 8px; }
++.senales { display: grid; gap: 8px; margin: 0 0 12px; padding: 0; list-style: none; }
++.senal { display: grid; grid-template-columns: auto 1fr; gap: 2px 10px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); }
++.senal-ico { grid-row: span 3; font-size: 20px; line-height: 1.2; }
++.senal-k { font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted, inherit); opacity: .8; }
++.senal p { margin: 0; font-size: 14.5px; }
++.senal-f { font-size: 12.5px; }
++.senal-f a { color: inherit; }
+ .news h3 { font-size: 17px; font-weight: 700; }
+ .news-btn { justify-self: start; padding: 9px 14px; border: 1px solid var(--line); border-radius: 12px; color: var(--ink); text-decoration: none; font-weight: 600; font-size: 14.5px; }
+ .news-btn:hover { border-color: var(--accent); color: var(--accent); }
+@@ -1668,7 +1675,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
+     </header>
+     <div class="conf-filtros" id="confFiltros" role="group" aria-label="Filtrar por tipo"></div>
+     <div class="lista-pag" id="agConf"></div>
+-    <p class="note">Lista escrita a mano, actualizada a octubre de 2026. Para ver los conflictos en el mapa, elegí el modo "Conflictos" arriba del planisferio.</p>
++    <p class="note">Lista escrita a mano, actualizada a noviembre de 2026. Para ver los conflictos en el mapa, elegí el modo "Conflictos" arriba del planisferio.</p>
+   </div>
+ 
+   <div class="pagina" id="pag-comparacion" hidden>
+@@ -1733,7 +1740,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
+    ===================================================================== */
+ 
+ /* Se completan cuando terminan de cargar los archivos (ver arrancar()) */
+-let DATOS = null, CURADO = null, ARGENTINA = null, NOTICIAS = null, RIESGO = null;  /* argentina.json: riesgo país y dólar · riesgo.json: riesgo país de Latinoamérica */
++let DATOS = null, CURADO = null, ARGENTINA = null, NOTICIAS = null, RIESGO = null, SENALES = null;  /* senales.json: radar de noticias */  /* argentina.json: riesgo país y dólar · riesgo.json: riesgo país de Latinoamérica */
+ let ANIO, ANIOS, YEARS, MUNDO = {};
+ const PAISES = {};     /* ficha armada de cada país, por código ISO3 ("ARG") */
+ const HIST = {};       /* series históricas de cada país */
+@@ -1969,12 +1976,29 @@ function bloqueCrisis(k) {
+   const c = crisisDe(k); if (!c) return "";
+   return `<div class="crisis-box" style="--ic: var(${CRISIS[c.tipo].c})"><b>${CRISIS[c.tipo].t}</b><span>${c.texto}</span></div>`;
+ }
++/* Señales del radar (senales.json): se muestran hasta su fecha de vencimiento */
++function senalesDe(k) {
++  if (!SENALES || !SENALES.senales) return [];
++  const hoy = hoyISO();
++  return SENALES.senales.filter(s => s.iso === k && s.vence >= hoy).sort((a, b) => b.fecha.localeCompare(a.fecha));
++}
++function fechaSenal(iso) { const [y, m, d] = iso.split("-").map(Number); return `${d} de ${MESES[m - 1]} de ${y}`; }
++function bloqueSenales(k) {
++  const lista = senalesDe(k); if (!lista.length) return "";
++  const esc = t => String(t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
++  return `<ul class="senales">${lista.map(s => `<li class="senal">
++      <span class="senal-ico" aria-hidden="true">${s.icono}</span>
++      <span class="senal-k">${esc(s.tipo)} · ${s.fecha > hoyISO() ? "programado para el " : ""}${fechaSenal(s.fecha)}${s.confirmado ? "" : " · sin confirmar"}</span>
++      <p><b>${esc(s.titulo)}.</b> ${esc(s.resumen)}</p>
++      <span class="senal-f">Fuentes: ${s.fuentes.map((u, i) => `<a href="${esc(u)}" target="_blank" rel="noopener">${i + 1}</a>`).join(" · ")}</span>
++    </li>`).join("")}</ul>`;
++}
+ function bloqueNoticias(k) {
+   const p = PAISES[k]; if (!p) return "";
+   // Busca en Google Noticias las notas de economía y política de la última semana
+   const q = `"${p.nombre}" (economía OR inflación OR gobierno OR elecciones) when:7d`;
+   const url = "https://news.google.com/search?hl=es-419&gl=AR&ceid=AR:es-419&q=" + encodeURIComponent(q);
+-  return `<div class="news">
++  return `<div class="news">${bloqueSenales(k)}
+     <a class="news-btn" href="${url}" target="_blank" rel="noopener">Ver noticias de economía y política de ${p.nombre} <span aria-hidden="true">↗</span></a>
+     <p class="note">Abre Google Noticias con las notas de los últimos 7 días.</p></div>`;
+ }
+@@ -5743,8 +5767,9 @@ function armarHistorias() {
+ armarHistorias();
+ 
+ const leer = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: error ${r.status}`); return r.json(); });
+-Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null), leer("riesgo.json").catch(() => null), leer("calendario.json").catch(() => null), leer("mercados.json").catch(() => null), leer("socios.json").catch(() => null)])
+-  .then(([datos, curado, topo, argentina, noticias, riesgo, calendario, mercados, socios]) => {
++Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null), leer("riesgo.json").catch(() => null), leer("calendario.json").catch(() => null), leer("mercados.json").catch(() => null), leer("socios.json").catch(() => null), leer("senales.json").catch(() => null)])
++  .then(([datos, curado, topo, argentina, noticias, riesgo, calendario, mercados, socios, senales]) => {
++    SENALES = senales;
+     DATOS = datos; CURADO = curado; ARGENTINA = argentina; NOTICIAS = noticias; RIESGO = riesgo; CALENDARIO = calendario; MERCADOS = mercados;
+     /* socios.json (WITS, con año) reemplaza a los socios escritos a mano en curado.json */
+     if (socios && socios.paises) Object.entries(socios.paises).forEach(([iso, s]) => {

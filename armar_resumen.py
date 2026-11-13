@@ -336,6 +336,37 @@ def main():
                     "titulo": "Salieron datos nuevos" if len(hoy_cal) > 1 else hoy_cal[0]["titulo"],
                     "grandes": grandes, "filas": filas, "link": "#calendario", "link_txt": "Ver el calendario"})
 
+    # 7. Fuera de horario en Nueva York: antes de la apertura va primera; después del cierre, al final
+    pm = m.get("premarket") or {}
+    vigente = pm.get("fase") in ("pre", "post") and pm.get("fin") and datetime.now(timezone.utc).timestamp() < pm["fin"]
+    if vigente and (pm.get("futuros") or pm.get("adrs")):
+        pre = pm["fase"] == "pre"
+        fut = {f["clave"]: f for f in pm.get("futuros", [])}
+        sp_f = fut.get("es")
+        abre = datetime.fromtimestamp(pm["apertura"], AR).strftime("%H:%M")
+        if pre:
+            if sp_f:
+                c = sp_f["cambio"]
+                titulo = "Wall Street viene en alza" if c >= 0.3 else "Wall Street viene en baja" if c <= -0.3 else "Wall Street viene estable"
+                texto = f"Los futuros del S&P 500 marcan {'+' if c >= 0 else '−'}{num(abs(c), 1)}%. Nueva York abre a las {abre}."
+            else:
+                titulo, texto = "Antes de la apertura", f"Nueva York abre a las {abre}."
+        else:
+            titulo, texto = "Después del cierre", "Lo que se sigue operando en Nueva York después de la campana."
+        grandes = [fila(f"{f['nombre']} (futuro)", num(f["precio"], 0), f["cambio"]) for f in pm.get("futuros", [])]
+        ad = pm.get("adrs", [])
+        sel = ad[:3] + [a for a in ad[-3:][::-1] if a not in ad[:3]] if len(ad) > 3 else ad
+        filas = [fila(a["nombre"], f"US$ {num(a['precio'], 2)}", a["cambio"], sub=("poco volumen" if a["poco"] else a["ticker"])) for a in sel]
+        placa = {"id": "apertura" if pre else "after", "circulo": "Apertura" if pre else "After hours",
+                 "kicker": "Antes de que abra Nueva York" if pre else "Después del cierre en Nueva York",
+                 "titulo": titulo, "texto": texto, "grandes": grandes, "filas": filas,
+                 "nota": "Fuera de horario se opera poco: con poco volumen el precio puede moverse mucho.",
+                 "link": "#mercados", "link_txt": "Ver en Mercados"}
+        if pre:
+            dia.insert(0, placa)
+        else:
+            dia.insert(1, placa)
+
     # ---------- la semana ----------
     semana = []
     grandes = []

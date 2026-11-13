@@ -9,6 +9,8 @@ del servicio público de datos de BYMA (open.bymadata.com.ar), que está al día
 Además, de data912.com (precios de BYMA): el panel líder de acciones en pesos, los CEDEARs
 más operados y los bonos en dólares, con su TIR, duración y paridad (calculadas en bonos_ar.py).
 Los precios tienen unos 15-20 minutos de demora: no es una cotización en tiempo real.
+También guarda lo que se opera fuera de horario en Nueva York (Yahoo Finance): antes de la apertura
+(premarket) y después del cierre (after hours), con los futuros del S&P 500, el Nasdaq y el Dow.
 
 Uso:
     python3 actualizar_mercados.py
@@ -32,6 +34,10 @@ ARCHIVO_SALIDA = CARPETA / "mercados.json"
 
 URL_STOOQ = "https://stooq.com/q/d/l/?s={ticker}&i=d&d1={desde}&d2={hasta}"
 URL_YAHOO = "https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?range=2y&interval=1d"
+# lo de hoy cada 5 minutos, incluido lo que se opera antes de la apertura y después del cierre
+URL_YAHOO_EXT = "https://query1.finance.yahoo.com/v8/finance/chart/{ticker}?range=1d&interval=5m&includePrePost=true"
+FUTUROS = [("es", "S&P 500", "ES=F"), ("nq", "Nasdaq 100", "NQ=F"), ("ym", "Dow Jones", "YM=F")]
+POCO_VOLUMEN = 3000          # acciones operadas en la sesión: por debajo, el precio es poco confiable
 
 # grupo → [(clave, nombre, ticker en Stooq, ticker en Yahoo, moneda, unidad)]
 INSTRUMENTOS = {
@@ -281,6 +287,67 @@ def de_yahoo(ticker):
     return datos or None
 
 
+def yahoo_ext(ticker):
+    """Datos de hoy cada 5 minutos con pre y post mercado: (meta, [(epoch, cierre, volumen)])."""
+    r = sesion.get(URL_YAHOO_EXT.format(ticker=ticker), timeout=30)
+    res = r.json()["chart"]["result"][0]
+    q = res["indicators"]["quote"][0]
+    barras = [(t, c, v or 0) for t, c, v in zip(res.get("timestamp") or [], q.get("close") or [], q.get("volume") or []) if c is not None]
+    return res["meta"], barras
+
+
+def fuera_de_horario():
+    """Premarket (antes de la apertura de Nueva York) o after hours (después del cierre).
+
+    Yahoo informa los horarios de la sesión de hoy: pre, regular y post. Si ahora estamos en el pre,
+    comparamos el último precio contra el cierre de ayer; si estamos en el post, contra el cierre de hoy.
+    Fuera de esas ventanas devuelve solo la fase, para que la página sepa que no hay nada que mostrar.
+    """
+    ahora = time.time()
+    meta, _ = yahoo_ext("SPY")
+    tp = meta["currentTradingPeriod"]
+    pre_ini, apertura, cierre, post_fin = tp["pre"]["start"], tp["regular"]["start"], tp["regular"]["end"], tp["post"]["end"]
+    fase = ("pre" if pre_ini <= ahora < apertura else "regular" if apertura <= ahora < cierre
+            else "post" if cierre <= ahora < post_fin else "cerrado")
+    out = {"fase": fase, "generado": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+           "apertura": apertura, "cierre": cierre, "fin": post_fin if fase == "post" else apertura}
+    print(f"   · Nueva York: fase {fase}")
+    if fase not in ("pre", "post"):
+        return out
+    desde = pre_ini if fase == "pre" else cierre
+
+    futuros = []
+    for clave, nombre, tk in FUTUROS:
+        try:
+            m, barras = yahoo_ext(tk)
+            base = m.get("chartPreviousClose") or m.get("previousClose")
+            precio = barras[-1][1] if barras else m.get("regularMarketPrice")
+            if base and precio:
+                futuros.append({"clave": clave, "nombre": nombre, "ticker": tk, "precio": round(precio, 2), "cambio": round((precio / base - 1) * 100, 2)})
+        except Exception as e:
+            print(f"     ⚠️  futuro {nombre}: {str(e)[:80]}")
+        time.sleep(0.3)
+
+    adrs = []
+    for clave, nombre, _, tk, _, _ in INSTRUMENTOS["adrs"]:
+        try:
+            m, barras = yahoo_ext(tk)
+            base = m.get("regularMarketPrice")            # en el pre: cierre de ayer; en el post: cierre de hoy
+            sesion_b = [b for b in barras if desde <= b[0] <= ahora]
+            if not base or not sesion_b:
+                continue                                    # no se operó nada fuera de horario
+            precio, vol = sesion_b[-1][1], sum(b[2] for b in sesion_b)
+            adrs.append({"clave": clave, "nombre": nombre, "ticker": tk, "precio": round(precio, 2),
+                         "cambio": round((precio / base - 1) * 100, 2), "volumen": int(vol), "poco": vol < POCO_VOLUMEN})
+        except Exception as e:
+            print(f"     ⚠️  {nombre} fuera de horario: {str(e)[:80]}")
+        time.sleep(0.3)
+    adrs.sort(key=lambda x: x["cambio"], reverse=True)
+    out.update({"futuros": futuros, "adrs": adrs})
+    print(f"   · fuera de horario: {len(futuros)} futuros, {len(adrs)} ADRs con operaciones")
+    return out
+
+
 def resumen(datos, tasa=False):
     """Último precio y variaciones: del día, del mes, del año y de 12 meses."""
     fechas = [f for f, _ in datos]
@@ -356,6 +423,10 @@ def main():
         print(f"     ❌ BYMA: {str(e)[:120]} (dejo el dato anterior)")
         if "byma" in anterior:
             salida["byma"] = anterior["byma"]
+    try:
+        salida["premarket"] = fuera_de_horario()
+    except Exception as e:
+        print(f"     ⚠️  premarket / after hours: {str(e)[:120]}")      # sin dato: la página no muestra el bloque
     if ok == 0:
         sys.exit("❌ No llegó ningún precio: dejo el mercados.json anterior")
     with open(ARCHIVO_SALIDA, "w", encoding="utf-8") as archivo:
