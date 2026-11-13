@@ -1,7 +1,7 @@
 {
- "generado": "2026-11-13T22:44:44+00:00",
+ "generado": "2026-11-13T23:43:36+00:00",
  "fecha": "2026-11-13",
- "hora": "19:44",
+ "hora": "20:43",
  "dia": [
   {
    "id": "hoy",
@@ -105,29 +105,29 @@
      "inverso": false
     },
     {
-     "nombre": "Grupo Galicia",
-     "valor": "US$ 29,51",
-     "cambio": -0.81,
-     "tipo": "pct",
-     "sub": "poco volumen",
-     "destacado": false,
-     "inverso": false
-    },
-    {
      "nombre": "Edenor",
-     "valor": "US$ 13,96",
-     "cambio": -0.64,
+     "valor": "US$ 13,85",
+     "cambio": -1.42,
      "tipo": "pct",
      "sub": "EDN",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "IRSA",
-     "valor": "US$ 12,51",
-     "cambio": -0.24,
+     "nombre": "Central Puerto",
+     "valor": "US$ 10,76",
+     "cambio": -0.95,
      "tipo": "pct",
-     "sub": "IRS",
+     "sub": "CEPU",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Grupo Galicia",
+     "valor": "US$ 29,51",
+     "cambio": -0.81,
+     "tipo": "pct",
+     "sub": "poco volumen",
      "destacado": false,
      "inverso": false
     }
@@ -345,8 +345,8 @@
    "filas": [
     {
      "nombre": "Bitcoin",
-     "valor": "US$ 68.356",
-     "cambio": -4.19,
+     "valor": "US$ 68.126",
+     "cambio": -4.51,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -362,18 +362,18 @@
      "inverso": false
     },
     {
-     "nombre": "Trigo",
-     "valor": "US$ 218,07",
-     "cambio": 1.58,
+     "nombre": "Ether",
+     "valor": "US$ 1.923",
+     "cambio": -4.66,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Ether",
-     "valor": "US$ 1.930",
-     "cambio": -4.32,
+     "nombre": "Trigo",
+     "valor": "US$ 218,07",
+     "cambio": 1.58,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
