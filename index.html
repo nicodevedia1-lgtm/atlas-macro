@@ -958,6 +958,64 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
 .pm-a b { font-family: var(--f-data); font-weight: 500; font-size: 14.5px; }
 .pm-a .mon-c { text-align: right; font-family: var(--f-data); }
 @media (max-width: 560px) { .pm-fut { grid-template-columns: minmax(0, 1fr); } .pm-fut > div { grid-template-columns: minmax(0, 1fr) auto auto; align-items: baseline; gap: 10px; } .pm-fut b { font-size: 18px; } }
+/* ---------- Tu lista ---------- */
+.estrella { flex: none; width: 30px; height: 30px; margin: -4px 4px -4px -6px; padding: 5px; border: 0; border-radius: 8px; background: none; color: var(--muted); cursor: pointer; vertical-align: middle; display: inline-grid; place-items: center; }
+.estrella svg { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
+.estrella:hover { color: var(--warn); background: color-mix(in srgb, var(--warn) 12%, transparent); }
+.estrella[aria-pressed="true"] { color: var(--warn); }
+.estrella[aria-pressed="true"] svg { fill: currentColor; }
+.estrella:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+.estrella-ficha { display: inline-flex; align-items: center; gap: 6px; margin-left: auto; padding: 7px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--ink); font: inherit; font-size: 14px; font-weight: 600; cursor: pointer; }
+.estrella-ficha svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
+.estrella-ficha[aria-pressed="true"] { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 50%, var(--line)); }
+.estrella-ficha[aria-pressed="true"] svg { fill: currentColor; }
+.estrella-ficha[aria-pressed="true"] .ef-no, .estrella-ficha[aria-pressed="false"] .ef-si { display: none; }
+.mio-btn { position: relative; }
+.mio-btn svg { fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linejoin: round; }
+.mio-n { position: absolute; top: -6px; right: -6px; min-width: 18px; height: 18px; padding: 0 4px; border-radius: 9px; background: var(--warn); color: #111; font: 700 11px/18px var(--f-data); text-align: center; }
+.mio-home { display: grid; gap: 10px; background: var(--surface); border: 1px solid var(--line); border-radius: 16px; padding: 14px 18px; border-left: 3px solid var(--warn); }
+.mio-cab { display: flex; align-items: center; gap: 10px; }
+.mio-cab h2 { margin: 0; font-size: 19px; display: inline-flex; align-items: center; gap: 8px; }
+.mio-cab h2 svg { width: 18px; height: 18px; fill: var(--warn); }
+.mio-editar { margin-left: auto; border: 0; background: none; color: var(--accent); font: inherit; font-weight: 600; cursor: pointer; }
+.mio-chips { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: thin; padding-bottom: 4px; }
+.mio-chip { flex: none; display: grid; grid-template-columns: auto auto; grid-template-areas: "n n" "v c"; gap: 2px 10px; min-width: 150px; padding: 9px 12px; border: 1px solid var(--line); border-radius: 12px; background: var(--bg); color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+.mio-chip:hover { border-color: var(--warn); }
+.mio-chip > span { grid-area: n; font-weight: 600; font-size: 14.5px; line-height: 1.2; display: block; }
+.mio-chip > span small { display: block; font-weight: 400; font-size: 12px; color: var(--muted); }
+.mio-chip > b { grid-area: v; font-family: var(--f-data); font-weight: 500; font-size: 14px; }
+.mio-chip > .mon-c { grid-area: c; font-family: var(--f-data); font-size: 13.5px; text-align: right; }
+.mio-chip > .flag, .mio-ir > .flag { display: none; }
+.mio { position: fixed; inset: 0; z-index: 85; display: flex; justify-content: flex-end; background: rgba(4, 6, 10, .55); }
+.mio-caja { width: min(420px, 100vw); height: 100%; overflow-y: auto; background: var(--surface); border-left: 1px solid var(--line); padding: 18px 20px 28px; display: flex; flex-direction: column; gap: 18px; box-shadow: -20px 0 60px rgba(0,0,0,.35); }
+.mio-top { display: flex; align-items: center; gap: 10px; }
+.mio-top h2 { margin: 0; font-size: 22px; flex: 1; }
+.mio-caja h3 { margin: 0; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+.mio-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.mio-lista li { display: flex; align-items: center; gap: 4px; }
+.mio-ir { flex: 1; min-width: 0; display: grid; grid-template-columns: minmax(0, 1fr) auto 66px; align-items: center; gap: 10px; padding: 9px 8px; border: 0; border-radius: 8px; background: none; color: var(--ink); font: inherit; text-align: left; cursor: pointer; }
+.mio-ir:hover { background: var(--bg); }
+.mio-ir > span { min-width: 0; font-weight: 600; font-size: 15px; }
+.mio-ir > span small { display: block; font-weight: 400; font-size: 12.5px; color: var(--muted); }
+.mio-ir > b { font-family: var(--f-data); font-weight: 500; font-size: 14px; white-space: nowrap; }
+.mio-ir > .mon-c { font-family: var(--f-data); font-size: 13.5px; text-align: right; }
+.mio-quitar { width: 34px; height: 34px; border: 0; border-radius: 8px; background: none; color: var(--muted); cursor: pointer; font-size: 15px; }
+.mio-quitar:hover { color: var(--bad); background: var(--bg); }
+.mio-vacio { display: block !important; color: var(--muted); font-size: 15px; line-height: 1.5; padding: 4px 2px; }
+.mio-vacio svg { width: 15px; height: 15px; vertical-align: -2px; fill: none; stroke: var(--warn); stroke-width: 2; }
+.mio-pref { display: grid; gap: 12px; }
+.mio-pref label { display: grid; gap: 6px; font-weight: 600; font-size: 15px; }
+.mio-pref label.mio-check { grid-template-columns: auto 1fr; align-items: center; font-weight: 500; }
+.mio-pref select { padding: 9px 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: inherit; }
+.mio-pref input[type=checkbox] { width: 18px; height: 18px; accent-color: var(--accent); }
+.mio-borrar { align-self: start; border: 1px solid var(--line); border-radius: 999px; background: none; color: var(--muted); padding: 7px 12px; font: inherit; font-size: 14px; cursor: pointer; }
+.mio-borrar:hover { color: var(--bad); border-color: var(--bad); }
+.mio-pie { margin: auto 0 0; font-size: 13.5px; color: var(--muted); line-height: 1.45; border-top: 1px solid var(--line); padding-top: 14px; }
+.mio-aviso { position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 95; padding: 10px 16px; border-radius: 999px; background: var(--ink); color: var(--bg); font-weight: 600; font-size: 14.5px; box-shadow: 0 10px 30px rgba(0,0,0,.3); max-width: calc(100vw - 32px); }
+.mio-tema { display: none; }
+@media (max-width: 560px) { .mio-caja { width: 100vw; border-left: 0; } #temaBtn { display: none; } .mio-tema { display: inline-block; } }
+.estrella.estrella-ficha { width: auto; height: auto; margin: 0 0 0 auto; padding: 7px 12px; color: var(--ink); }
+.estrella.estrella-ficha[aria-pressed="true"] { color: var(--warn); }
 </style>
 
 <header class="topbar">
@@ -971,6 +1029,10 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm2" data-pags="comparacion comparador laboratorio glosario">Herramientas</button><div class="tab-menu" id="tm2" hidden><a href="#comparacion" data-pag="comparacion">Comparar países</a><a href="#comparador" data-pag="comparador">Comparador de series</a><a href="#laboratorio" data-pag="laboratorio">Laboratorio</a><a href="#glosario" data-pag="glosario">Glosario</a></div></div>
     <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm3" data-pags="juego masrico dondequeda">Juegos</button><div class="tab-menu" id="tm3" hidden><a href="#juego" data-pag="juego">País del día</a><a href="#dondequeda" data-pag="dondequeda">¿Dónde queda?</a><a href="#masrico" data-pag="masrico">¿Más rico o más pobre?</a></div></div>
   </nav>
+  <button class="tema mio-btn" id="mioBtn" type="button" aria-label="Tu lista y preferencias" title="Tu lista y preferencias">
+    <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3.2l2.6 5.5 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.5l6-.8z"/></svg>
+    <span class="mio-n" id="mioN" hidden>0</span>
+  </button>
   <button class="tema" id="temaBtn" type="button" aria-label="Cambiar a modo claro" title="Modo claro / oscuro">
     <svg class="t-sol" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
     <svg class="t-luna" aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
@@ -1027,6 +1089,29 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   <p class="nav-pie" id="conteo">Cargando datos…</p>
 </nav>
 
+<div class="mio" id="mio" role="dialog" aria-modal="true" aria-labelledby="mioTit" hidden>
+  <div class="mio-caja">
+    <div class="mio-top"><h2 id="mioTit">Tu lista</h2><button type="button" class="hv-btn" id="mioCerrar" aria-label="Cerrar">✕</button></div>
+    <ul class="mio-lista" id="mioLista"></ul>
+    <button type="button" class="mio-borrar" id="mioBorrar">Vaciar la lista</button>
+    <h3>Preferencias</h3>
+    <div class="mio-pref">
+      <label>Al entrar a Atlas Macro, abrir
+        <select id="mioInicio">
+          <option value="inicio">La portada</option>
+          <option value="mercados">Mercados</option>
+          <option value="bcra">Dólar y BCRA</option>
+          <option value="argentina">Panorama de Argentina</option>
+          <option value="paises">Explorar países (el mapa)</option>
+        </select>
+      </label>
+      <label class="mio-check"><input type="checkbox" id="mioStories"> Mostrar el resumen del día en la portada</label>
+      <button type="button" class="mio-borrar mio-tema" id="mioTema">Cambiar a modo claro</button>
+    </div>
+    <p class="mio-pie">Tu lista y tus preferencias se guardan en este navegador: no hace falta registrarse. Si borrás los datos del navegador o entrás desde otro dispositivo, no van a estar.</p>
+  </div>
+</div>
+<p class="mio-aviso" id="mioAviso" role="status" aria-live="polite" hidden></p>
 <div class="hv" id="hv" role="dialog" aria-modal="true" aria-label="Resumen del día" hidden>
   <div class="hv-marco">
     <button type="button" class="hv-flecha" id="hvAnt" aria-label="Anterior">‹</button>
@@ -1050,6 +1135,8 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   </header>
 
   <section class="historias" id="historias" aria-label="Resumen del día" hidden></section>
+
+  <section class="mio-home" id="mioHome" aria-label="Tu lista" hidden></section>
 
   <section class="home-cols" aria-label="Finanzas y economía">
     <article class="home-col home-fin">
@@ -2772,7 +2859,7 @@ function renderHome() {
   const bt = m("btc"); if (bt) F.push(homeFila("mercados", "Bitcoin", "En dólares", "US$ " + nf(precioMerc(bt), 0), pctC(diaMerc(bt))));
   document.getElementById("homeFin").innerHTML = F.join("");
   const fm = MERCADOS && MERCADOS.generado ? new Date(MERCADOS.generado) : null;
-  document.getElementById("homeFinFecha").textContent = fm ? `Actualizado ${fm.toLocaleString("es-AR", { weekday: "long", hour: "2-digit", minute: "2-digit" })}` : "";
+  document.getElementById("homeFinFecha").textContent = fm ? `Actualizado el ${fm.toLocaleString("es-AR", { timeZone: "America/Argentina/Buenos_Aires", weekday: "long" })} a las ${horaAR(fm / 1000)}` : "";
 
   // Economía
   const E = [];
@@ -2795,6 +2882,7 @@ function renderHome() {
   document.getElementById("homeEco").innerHTML = E.join("");
   if (!FINANZAS) cargarFinanzas().then(() => paginaActual === "inicio" && FINANZAS && renderHome());
   if (!SAR) cargarSeriesAr().then(() => paginaActual === "inicio" && SAR && renderHome());
+  renderMioHome();
 }
 const renderArHoy = renderHome;
 /* ---------- ARGENTINA HOY: dólar, inflación y calculadoras (argentina.json) ---------- */
@@ -3211,19 +3299,19 @@ function bloquesByma() {
       <p class="note">La TIR es cuánto rinde por año un bono si lo comprás hoy y lo tenés hasta el final, cobrando todos los pagos. La duración es cuántos años, en promedio, tarda en devolverte la plata. Los Bonares (AL, AE) son de ley argentina; los Globales (GD), de ley de Nueva York, y suelen rendir menos porque se consideran más seguros ante un problema.</p>
       <div id="mercCurva" class="ag-chart"></div>
       ${tabla(`<th>Bono</th><th class="m-ley">Ley</th><th class="n">Precio</th><th class="n">TIR</th><th class="n">Duración</th><th class="n">Paridad</th><th class="n">Hoy</th><th class="n">Próximo pago</th>`,
-        B.bonos.map(b => `<tr><td><b>${b.ticker}</b></td><td class="m-ley">${b.ley}</td><td class="n">US$ ${nf(b.precio, 2)}</td><td class="n"><b>${nf(b.tir, 1)}%</b></td><td class="n">${nf(b.duracion, 1)} años</td><td class="n">${nf(b.paridad, 0)}%</td><td class="n">${pill(b.dia)}</td>
+        B.bonos.map(b => `<tr><td>${estrella("b:" + b.ticker, b.ticker)}<b>${b.ticker}</b></td><td class="m-ley">${b.ley}</td><td class="n">US$ ${nf(b.precio, 2)}</td><td class="n"><b>${nf(b.tir, 1)}%</b></td><td class="n">${nf(b.duracion, 1)} años</td><td class="n">${nf(b.paridad, 0)}%</td><td class="n">${pill(b.dia)}</td>
           <td class="n">${b.proximo.fecha.slice(8)}/${b.proximo.fecha.slice(5, 7)}/${b.proximo.fecha.slice(2, 4)}: US$ ${nf(b.proximo.interes + b.proximo.amort, 2)}</td></tr>`).join(""))}
       <p class="note">Precio cada 100 dólares de valor nominal original. Paridad: el precio sobre lo que "vale" el bono según sus condiciones (lo que falta amortizar más los intereses corridos). TIR y duración calculadas por Atlas Macro con el cronograma de pagos de cada bono; pueden diferir un poco de las de cada broker. No es una recomendación de inversión.</p></section>`;
   }
-  const fila = (x, cols) => `<tr><td>${x.nombre}<span class="mon-tk">${x.ticker}</span></td>${cols}</tr>`;
+  const fila = (x, cols, t) => `<tr><td>${estrella(t + ":" + x.ticker, x.nombre)}${x.nombre}<span class="mon-tk">${x.ticker}</span></td>${cols}</tr>`;
   const pan = (tit, sub, cab, cuerpo, nota) => `<section class="mon-panel"><h2>${tit}<small>${sub}</small></h2><table><thead><tr>${cab}</tr></thead><tbody>${cuerpo}</tbody></table><p class="note" style="padding:10px 14px">${nota}</p></section>`;
   const secFila = (s, n) => `<tr class="mon-sec"><td colspan="${n}">${s}</td></tr>`;
   h += `<div class="mon-grid">`;
   if (B.panel && B.panel.length) h += pan("Panel líder · BYMA", `En pesos · ${hora}`, `<th>Empresa</th><th>Último</th><th>Hoy</th>`,
-    porSector(B.panel, SECTORES_AR, (s, xs) => secFila(s, 3) + xs.map(x => fila(x, `<td>${pesosMerc(x.precio)}</td><td>${pill(x.dia)}</td>`)).join("")),
+    porSector(B.panel, SECTORES_AR, (s, xs) => secFila(s, 3) + xs.map(x => fila(x, `<td>${pesosMerc(x.precio)}</td><td>${pill(x.dia)}</td>`, "p")).join("")),
     "Las acciones del índice S&P Merval, en pesos. Con unos 20 minutos de demora.");
   if (B.cedears && B.cedears.length) h += pan("CEDEARs más operados", `En pesos · ${hora}`, `<th>Empresa o fondo</th><th>Último</th><th class="mon-oc">En US$ MEP</th><th>Hoy</th>`,
-    porSector(B.cedears, SECTORES_CED, (s, xs) => secFila(s, 4) + xs.map(x => fila(x, `<td>${pesosMerc(x.precio)}</td><td class="mon-oc">${x.usd ? nf(x.usd, 2) : "—"}</td><td>${pill(x.dia)}</td>`)).join("")),
+    porSector(B.cedears, SECTORES_CED, (s, xs) => secFila(s, 4) + xs.map(x => fila(x, `<td>${pesosMerc(x.precio)}</td><td class="mon-oc">${x.usd ? nf(x.usd, 2) : "—"}</td><td>${pill(x.dia)}</td>`, "c")).join("")),
     "Certificados en pesos que representan acciones o fondos del exterior: siguen al precio en Nueva York y al dólar contado con liquidación. No es una recomendación de inversión.");
   return h + `</div>`;
 }
@@ -3271,7 +3359,7 @@ function sparkMon(x) {
 }
 /* tabla de cotizaciones: una fila por instrumento, se toca para ver el gráfico */
 function monPanel(g, titulo, sub, items, sectores) {
-  const filaM = x => `<tr class="mon-fila${x.clave === mercSel ? " sel" : ""}" data-k="${x.clave}"><td><button class="mon-nom" type="button" data-k="${x.clave}">${x.nombre}</button><span class="mon-tk">${x.ticker.replace("=F", "").replace("^", "").replace("=X", "")}</span>${x.fecha < ultimaFechaMerc() && !(criptoVivo && criptoVivo[x.clave]) ? ` <small class="ytag">dato del ${x.fecha.slice(8)}/${x.fecha.slice(5, 7)}</small>` : ""}</td>
+  const filaM = x => `<tr class="mon-fila${x.clave === mercSel ? " sel" : ""}" data-k="${x.clave}"><td>${estrella("m:" + x.clave, x.nombre)}<button class="mon-nom" type="button" data-k="${x.clave}">${x.nombre}</button><span class="mon-tk">${x.ticker.replace("=F", "").replace("^", "").replace("=X", "")}</span>${x.fecha < ultimaFechaMerc() && !(criptoVivo && criptoVivo[x.clave]) ? ` <small class="ytag">dato del ${x.fecha.slice(8)}/${x.fecha.slice(5, 7)}</small>` : ""}</td>
     <td>${fmtMerc(x, precioMerc(x))}</td><td>${x.unidad === "tasa" ? pillPb(x.dia) : pill(diaMerc(x))}</td><td class="mon-oc">${x.unidad === "tasa" ? pbC(x.mes) : pctC(x.mes)}</td><td class="mon-oc">${x.unidad === "tasa" ? pbC(x.anio) : pctC(x.anio)}</td><td class="mon-oc">${sparkMon(x)}</td></tr>`;
   const cuerpo = sectores ? porSector(items, sectores, (s, xs) => `<tr class="mon-sec"><td colspan="6">${s}</td></tr>` + xs.map(filaM).join("")) : items.map(filaM).join("");
   return `<section class="mon-panel"><h2>${titulo}<small>${sub}</small></h2><table><thead><tr><th>${g === "monedas" ? "Moneda" : "Nombre"}</th><th>Último</th><th>Hoy</th><th class="mon-oc">Mes</th><th class="mon-oc">Año</th><th class="mon-oc">3 meses</th></tr></thead><tbody>${cuerpo}</tbody></table></section>`;
@@ -5432,6 +5520,7 @@ function renderPanel() {
         <div class="eyebrow">${d.region ? d.region + " · " : ""}datos ${ANIO}</div>
         <h2>${d.nombre}</h2>
       </div>
+      <button type="button" class="estrella estrella-ficha" data-sigo="pais:${seleccion}" aria-pressed="${sigo("pais:" + seleccion)}" aria-label="${sigo("pais:" + seleccion) ? "Dejar de seguir" : "Seguir"} ${d.nombre}">${ICO_ESTRELLA}<span class="ef-no">Seguir</span><span class="ef-si">Siguiendo</span></button>
     </div>
     <div class="meta">${d.capital ? `<span>Capital <b>${d.capital}</b></span>` : ""}${d.poblacion != null ? `<span>Población <b>${d.poblacion >= 1 ? nf(d.poblacion, 1) + " millones" : nf(d.poblacion * 1e6) + " habitantes"}</b>${anioTag(d, "poblacion")}</span>` : ""}</div>
     ${bloqueCrisis(seleccion)}
@@ -5696,7 +5785,7 @@ function textoFuentes() {
 function redrawCharts() { if (DATOS) { renderPanel(); drawTL(); renderLab(); if (paginaActual === "argentina") renderAgCharts(); if (paginaActual === "comercio" && PRODUCTOS) renderComercio(); if (paginaActual === "bcra" && FINANZAS) renderFinanzas(); if (paginaActual === "mercados" && GLOBAL) renderGlobal(); if (paginaActual === "bcra" && BCRA) renderBCRA(); if (paginaActual === "actividad" && SAR) renderActividad(); if (paginaActual === "comparador" && SAR && cmpListo) renderComparador(); } }
 
 /* ---------- RESUMEN DEL DÍA en formato stories (resumen.json, lo arma armar_resumen.py) ---------- */
-let RESUMEN = null;
+let RESUMEN = null, HS_DIA = [];
 const HV = { lista: [], i: 0, t0: 0, dur: 7000, pausa: false, transcurrido: 0, raf: null, origen: null, grupo: "dia" };
 const HS_COLOR = { hoy: "var(--accent)", acciones: "var(--good)", bonos: "var(--b)", dolar: "var(--warn)", mundo: "var(--cder)", dato: "var(--accent)",
   sem: "var(--accent)", "sem-acc": "var(--good)", "sem-bonos": "var(--b)", "sem-mundo": "var(--cder)" };
@@ -5716,6 +5805,9 @@ function hsMarcar(id) {
 function renderHistorias() {
   const el = document.getElementById("historias");
   if (!RESUMEN || !RESUMEN.dia || !RESUMEN.dia.length) return;
+  if (MIO.prefs.stories === false) { el.hidden = true; return; }
+  let mia = null; try { mia = placaMia(); } catch (e) { console.error(e); }
+  HS_DIA = mia ? [mia, ...RESUMEN.dia] : RESUMEN.dia;
   if ((Date.now() - new Date(RESUMEN.fecha + "T12:00:00-03:00")) / 864e5 > 5) return;   // si quedó viejo, mejor no mostrarlo
   const vistos = new Set(hsVistos()[RESUMEN.fecha] || []);
   const circ = (s, grupo, i) => {
@@ -5724,7 +5816,7 @@ function renderHistorias() {
     return `<button type="button" class="hs-c${vistos.has(s.id) ? " visto" : ""}" data-grupo="${grupo}" data-i="${i}" aria-label="${s.circulo}: ${s.titulo}">
       <div class="hs-aro"><div class="hs-in">${adentro}</div></div><span>${grupo === "semana" ? "La semana" : s.circulo}</span></button>`;
   };
-  const dia = RESUMEN.dia.map((s, i) => circ(s, "dia", i)).join("");
+  const dia = HS_DIA.map((s, i) => circ(s, "dia", i)).join("");
   const sem = RESUMEN.semana && RESUMEN.semana.length ? circ(RESUMEN.semana[0], "semana", 0) : "";
   const finde = hsEsFinde();
   const fecha = new Date(RESUMEN.fecha + "T12:00:00-03:00");
@@ -5770,7 +5862,7 @@ function hvPausar(si) {
   document.getElementById("hvCaja").classList.toggle("hv-pausa", si);
 }
 function abrirHistoria(grupo, i, origen) {
-  HV.lista = RESUMEN[grupo]; HV.i = i; HV.grupo = grupo; HV.origen = origen; HV.pausa = false;
+  HV.lista = grupo === "dia" ? HS_DIA : RESUMEN[grupo]; HV.i = i; HV.grupo = grupo; HV.origen = origen; HV.pausa = false;
   document.getElementById("hv").hidden = false;
   document.body.style.overflow = "hidden";
   hvPintar();
@@ -5812,6 +5904,133 @@ function armarHistorias() {
 }
 armarHistorias();
 
+/* ---------- TU LISTA: lo que sigue cada visitante y sus preferencias ----------
+   Por ahora se guarda en su navegador (localStorage "atlas-mio"). El formato está pensado para que,
+   cuando haya cuentas, se sincronice tal cual: { v, sigo: [ids], prefs: {...}, actualizado }.
+   Los ids: "m:clave" (índices, tasas, ADRs, monedas, materias, cripto), "p:TICKER" (panel líder),
+   "c:TICKER" (CEDEARs), "b:TICKER" (bonos), "pais:ISO" (países). */
+const MIO_CLAVE = "atlas-mio";
+let MIO = (() => { const x = leerLocal(MIO_CLAVE, null); return x && Array.isArray(x.sigo) ? { v: 1, prefs: {}, ...x } : { v: 1, sigo: [], prefs: {}, actualizado: null }; })();
+const mioGuardar = () => { MIO.actualizado = new Date().toISOString(); guardarLocal(MIO_CLAVE, MIO); };
+const sigo = id => MIO.sigo.includes(id);
+const ICO_ESTRELLA = `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2l2.6 5.5 6 .8-4.4 4.2 1.1 6-5.3-2.9-5.3 2.9 1.1-6L3.4 9.5l6-.8z"/></svg>`;
+function estrella(id, nombre) {
+  const s = sigo(id);
+  return `<button type="button" class="estrella" data-sigo="${id}" aria-pressed="${s}" aria-label="${s ? "Dejar de seguir" : "Seguir"} ${nombre}" title="${s ? "En tu lista" : "Agregar a tu lista"}">${ICO_ESTRELLA}</button>`;
+}
+/* qué mostrar de cada cosa que se sigue: nombre, valor de hoy, cambio y adónde lleva */
+function itemDe(id) {
+  const [t, k] = [id.slice(0, id.indexOf(":")), id.slice(id.indexOf(":") + 1)];
+  const B = (MERCADOS && MERCADOS.byma) || {};
+  if (t === "m") {
+    const x = MERCADOS && mercDe(k); if (!x) return null;
+    const tasa = x.unidad === "tasa", c = tasa ? x.dia : diaMerc(x);
+    return { id, nombre: x.nombre, sub: x.ticker.replace("=F", "").replace("^", "").replace("=X", ""), valor: fmtMerc(x, precioMerc(x)), cambio: c, tipo: tasa ? "pb" : "pct", ir: () => { mercSel = k; location.hash = "mercados"; } };
+  }
+  if (t === "p" || t === "c") {
+    const x = (B[t === "p" ? "panel" : "cedears"] || []).find(y => y.ticker === k); if (!x) return null;
+    return { id, nombre: x.nombre, sub: `${k} · ${t === "p" ? "BYMA" : "CEDEAR"}`, valor: pesosMerc(x.precio), cambio: x.dia, tipo: "pct", ir: () => { location.hash = "mercados"; } };
+  }
+  if (t === "b") {
+    const x = (B.bonos || []).find(y => y.ticker === k); if (!x) return null;
+    return { id, nombre: k, sub: `Bono · TIR ${nf(x.tir, 1)}%`, valor: `US$ ${nf(x.precio, 2)}`, cambio: x.dia, tipo: "pct", ir: () => { location.hash = "mercados"; } };
+  }
+  if (t === "pais") {
+    const d = PAISES && PAISES[k]; if (!d) return null;
+    const infl = uv(d, "infl");
+    return { id, nombre: d.nombre, sub: d.region || "País", valor: infl != null ? `Inflación ${nf(infl, 1)}%` : "Ver ficha", cambio: null, tipo: "pais", ir: () => irAPaisDesdeLista(k), bandera: flag(k) };
+  }
+  return null;
+}
+const mioCambio = it => it.cambio == null ? "" : it.tipo === "pb" ? pbC(it.cambio) : pctC(it.cambio);
+function mioAviso(txt) {
+  const el = document.getElementById("mioAviso"); el.textContent = txt; el.hidden = false;
+  clearTimeout(mioAviso.t); mioAviso.t = setTimeout(() => { el.hidden = true; }, 2600);
+}
+function alternarSigo(id, nombre) {
+  const s = sigo(id);
+  MIO.sigo = s ? MIO.sigo.filter(x => x !== id) : [...MIO.sigo, id];
+  mioGuardar();
+  document.querySelectorAll(`.estrella[data-sigo="${CSS.escape(id)}"]`).forEach(b => {
+    b.setAttribute("aria-pressed", !s); b.setAttribute("aria-label", `${s ? "Seguir" : "Dejar de seguir"} ${nombre}`); b.title = s ? "Agregar a tu lista" : "En tu lista"; });
+  mioAviso(s ? `${nombre} salió de tu lista` : `${nombre} está en tu lista`);
+  mioActualizar();
+}
+/* la placa "Tu lista" de las stories, armada acá con los datos del momento */
+function placaMia() {
+  const its = MIO.sigo.map(itemDe).filter(it => it && it.tipo !== "pais");
+  if (!its.length) return null;
+  const suben = its.filter(i => i.cambio > 0).length, bajan = its.filter(i => i.cambio < 0).length;
+  const orden = [...its].sort((a, b) => Math.abs(b.cambio || 0) - Math.abs(a.cambio || 0)).slice(0, 7);
+  const valorTxt = v => String(v).replace(/<[^>]+>/g, "");
+  return { id: "mia", circulo: "Tu lista", kicker: "Lo que seguís", titulo: its.length === 1 ? orden[0].nombre : `${suben} suben y ${bajan} bajan`,
+    filas: orden.map(i => ({ nombre: i.nombre, sub: i.sub, valor: valorTxt(i.valor), cambio: i.cambio, tipo: i.tipo === "pb" ? "pb" : "pct", inverso: i.tipo === "pb" })),
+    nota: its.length > 7 ? `Las ${orden.length} que más se movieron de las ${its.length} que seguís.` : null, link: "#mercados", link_txt: "Ver en Mercados" };
+}
+function renderMioHome() {
+  const el = document.getElementById("mioHome"); if (!el) return;
+  const its = MIO.sigo.map(itemDe).filter(Boolean);
+  if (!its.length) { el.hidden = true; return; }
+  el.innerHTML = `<div class="mio-cab"><h2>${ICO_ESTRELLA} Tu lista</h2><button type="button" class="mio-editar">Editar</button></div>
+    <div class="mio-chips">${its.map((it, i) => `<button type="button" class="mio-chip" data-i="${i}">${it.bandera || ""}<span>${it.nombre}<small>${it.sub}</small></span><b>${it.valor}</b>${mioCambio(it)}</button>`).join("")}</div>`;
+  el.querySelectorAll(".mio-chip").forEach(b => b.onclick = () => its[+b.dataset.i].ir());
+  el.querySelector(".mio-editar").onclick = abrirMio;
+  el.hidden = false;
+}
+function renderMioPanel() {
+  const its = MIO.sigo.map(id => itemDe(id) || { id, nombre: id.split(":")[1], sub: "Sin datos por ahora", valor: "", cambio: null });
+  document.getElementById("mioLista").innerHTML = its.length
+    ? its.map((it, i) => `<li><button type="button" class="mio-ir" data-i="${i}">${it.bandera || ""}<span>${it.nombre}<small>${it.sub}</small></span><b>${it.valor}</b>${mioCambio(it)}</button><button type="button" class="mio-quitar" data-id="${it.id}" aria-label="Quitar ${it.nombre} de tu lista">✕</button></li>`).join("")
+    : `<li class="mio-vacio">Todavía no seguís nada. Tocá la ${ICO_ESTRELLA} al lado de cualquier acción, bono, moneda o índice en <a href="#mercados">Mercados</a>, o en la ficha de un país, y aparece acá, en la portada y en el resumen del día.</li>`;
+  document.querySelectorAll("#mioLista .mio-ir").forEach(b => b.onclick = () => { cerrarMio(); its[+b.dataset.i].ir && its[+b.dataset.i].ir(); });
+  document.querySelectorAll("#mioLista .mio-quitar").forEach(b => b.onclick = () => { const it = its.find(x => x.id === b.dataset.id); alternarSigo(b.dataset.id, it ? it.nombre : ""); });
+  document.getElementById("mioInicio").value = MIO.prefs.inicio || "inicio";
+  document.getElementById("mioStories").checked = MIO.prefs.stories !== false;
+  document.getElementById("mioBorrar").hidden = !its.length;
+  mioTemaTxt();
+}
+const mioTemaTxt = () => { document.getElementById("mioTema").textContent = document.documentElement.dataset.theme === "light" ? "Cambiar a modo oscuro" : "Cambiar a modo claro"; };
+function mioActualizar() {
+  const n = MIO.sigo.length, badge = document.getElementById("mioN");
+  badge.textContent = n; badge.hidden = !n;
+  try { renderMioHome(); } catch (e) { console.error(e); }
+  if (!document.getElementById("mio").hidden) renderMioPanel();
+  if (RESUMEN) try { renderHistorias(); } catch (e) { console.error(e); }
+}
+let mioOrigen = null;
+function abrirMio() {
+  mioOrigen = document.activeElement;
+  renderMioPanel();
+  document.getElementById("mio").hidden = false;
+  document.body.style.overflow = "hidden";
+  document.getElementById("mioCerrar").focus();
+}
+function cerrarMio() {
+  document.getElementById("mio").hidden = true;
+  document.body.style.overflow = "";
+  if (mioOrigen && mioOrigen.focus) mioOrigen.focus();
+}
+function armarMio() {
+  // la estrella está adentro de filas que también se tocan: la atajamos antes de que llegue a la fila
+  document.addEventListener("click", e => {
+    const b = e.target.closest(".estrella"); if (!b) return;
+    e.stopPropagation(); e.preventDefault();
+    alternarSigo(b.dataset.sigo, (b.getAttribute("aria-label") || "").replace(/^(Dejar de seguir|Seguir) /, ""));
+  }, true);
+  document.getElementById("mioBtn").addEventListener("click", abrirMio);
+  document.getElementById("mioCerrar").addEventListener("click", cerrarMio);
+  document.getElementById("mio").addEventListener("click", e => { if (e.target.id === "mio") cerrarMio(); });
+  document.addEventListener("keydown", e => { if (e.key === "Escape" && !document.getElementById("mio").hidden) cerrarMio(); });
+  document.getElementById("mioInicio").addEventListener("change", e => { MIO.prefs.inicio = e.target.value; mioGuardar(); mioAviso("Listo: la próxima vez que entres arranca ahí"); });
+  document.getElementById("mioStories").addEventListener("change", e => { MIO.prefs.stories = e.target.checked; mioGuardar(); mioActualizar(); });
+  document.getElementById("mioTema").addEventListener("click", () => { document.getElementById("temaBtn").click(); mioTemaTxt(); });
+  document.getElementById("mioBorrar").addEventListener("click", () => { MIO.sigo = []; mioGuardar(); mioActualizar(); renderMioPanel(); mioAviso("Vaciaste tu lista"); });
+  // si alguien cambia la lista en otra pestaña, la seguimos acá también
+  window.addEventListener("storage", e => { if (e.key === MIO_CLAVE) { MIO = leerLocal(MIO_CLAVE, MIO); mioActualizar(); } });
+  mioActualizar();
+}
+armarMio();
+
 const leer = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: error ${r.status}`); return r.json(); });
 Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null), leer("riesgo.json").catch(() => null), leer("calendario.json").catch(() => null), leer("mercados.json").catch(() => null), leer("socios.json").catch(() => null), leer("senales.json").catch(() => null)])
   .then(([datos, curado, topo, argentina, noticias, riesgo, calendario, mercados, socios, senales]) => {
@@ -5848,7 +6067,9 @@ Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json")
     cargarProvincias();   // es chico: así el buscador ya encuentra las provincias
     cargarLab().then(() => { Object.keys(RANKS).forEach(k => delete RANKS[k]); renderPanel(); });   // las secciones nuevas de la ficha usan lab.json
     armarNav();
-    mostrarPagina(location.hash.slice(1) || "inicio");   // si entraron con #elecciones, por ejemplo
+    const ini = location.hash.slice(1) || MIO.prefs.inicio || "inicio";   // si entraron con #elecciones, por ejemplo; si no, la que eligió cada uno
+    if (!location.hash && ini !== "inicio") history.replaceState(null, "", "#" + ini);
+    mostrarPagina(ini);
   })
   .catch(err => {
     console.error(err);
