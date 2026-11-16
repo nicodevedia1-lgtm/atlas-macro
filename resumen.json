@@ -1,14 +1,14 @@
 {
- "generado": "2026-11-16T15:52:06+00:00",
+ "generado": "2026-11-16T17:15:45+00:00",
  "fecha": "2026-11-16",
- "hora": "12:52",
+ "hora": "14:15",
  "dia": [
   {
    "id": "hoy",
    "circulo": "Hoy",
    "kicker": "Lunes 16 de noviembre",
    "titulo": "El día en 30 segundos",
-   "texto": "Lo más llamativo: Yuan bajó 0,3%, 2,2 veces lo que se mueve en un día normal.",
+   "texto": "Lo más llamativo: Loma Negra bajó 4,0%, 2,2 veces lo que se mueve en un día normal.",
    "grandes": [
     {
      "nombre": "Dólar CCL",
@@ -37,12 +37,12 @@
    "circulo": "Acciones",
    "kicker": "Panel líder en BYMA",
    "titulo": "Día rojo en la bolsa",
-   "texto": "2 de 22 acciones del panel líder subieron y 19 bajaron.",
+   "texto": "1 de 22 acciones del panel líder subieron y 20 bajaron.",
    "filas": [
     {
      "nombre": "Aluar",
-     "valor": "$ 778",
-     "cambio": 0.51,
+     "valor": "$ 794",
+     "cambio": 2.64,
      "tipo": "pct",
      "sub": "ALUA",
      "destacado": false,
@@ -50,51 +50,51 @@
     },
     {
      "nombre": "Cablevisión Holding",
-     "valor": "$ 8.640",
-     "cambio": 0.11,
+     "valor": "$ 8.630",
+     "cambio": 0.0,
      "tipo": "pct",
      "sub": "CVH",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "BYMA",
-     "valor": "$ 198",
-     "cambio": 0.0,
+     "nombre": "Grupo Valores",
+     "valor": "$ 524",
+     "cambio": -0.19,
      "tipo": "pct",
-     "sub": "BYMA",
+     "sub": "VALO",
      "destacado": false,
      "inverso": false
     },
     {
      "nombre": "YPF",
-     "valor": "$ 6.100",
-     "cambio": -3.78,
+     "valor": "$ 6.095",
+     "cambio": -3.86,
      "tipo": "pct",
      "sub": "YPFD",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Cresud",
-     "valor": "$ 1.574",
-     "cambio": -3.49,
-     "tipo": "pct",
-     "sub": "CRES",
-     "destacado": false,
-     "inverso": false
-    },
-    {
      "nombre": "Edenor",
-     "valor": "$ 1.149",
-     "cambio": -3.11,
+     "valor": "$ 1.143",
+     "cambio": -3.62,
      "tipo": "pct",
      "sub": "EDN",
      "destacado": false,
      "inverso": false
+    },
+    {
+     "nombre": "Loma Negra",
+     "valor": "$ 2.795",
+     "cambio": -3.53,
+     "tipo": "pct",
+     "sub": "LOMA",
+     "destacado": false,
+     "inverso": false
     }
    ],
-   "nota": "En Nueva York, YPF bajó 4,4%.",
+   "nota": "En Nueva York, Loma Negra bajó 4,0%, su mayor baja desde el 24 de julio.",
    "link": "#mercados",
    "link_txt": "Ver el mapa del mercado"
   },
@@ -102,8 +102,8 @@
    "id": "bonos",
    "circulo": "Bonos",
    "kicker": "Bonos en dólares (Globales)",
-   "titulo": "La curva se empinó",
-   "texto": "El GD30 rinde 12,8% y el GD46 12,0%: la curva está invertida, los bonos cortos rinden 0,9 puntos más que los largos.",
+   "titulo": "La curva se aplanó",
+   "texto": "El GD30 rinde 12,9% y el GD46 11,6%: la curva está invertida, los bonos cortos rinden 1,2 puntos más que los largos.",
    "grandes": [
     {
      "nombre": "Riesgo país",
@@ -118,8 +118,8 @@
    "filas": [
     {
      "nombre": "GD30",
-     "valor": "12,8%",
-     "cambio": 18.0,
+     "valor": "12,9%",
+     "cambio": 19.0,
      "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
@@ -128,7 +128,7 @@
     {
      "nombre": "GD35",
      "valor": "12,4%",
-     "cambio": 14.0,
+     "cambio": 16.0,
      "tipo": "pb",
      "sub": "vence 2035",
      "destacado": false,
@@ -136,8 +136,8 @@
     },
     {
      "nombre": "GD38",
-     "valor": "12,2%",
-     "cambio": 1.0,
+     "valor": "12,3%",
+     "cambio": 10.0,
      "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
@@ -146,7 +146,7 @@
     {
      "nombre": "GD41",
      "valor": "12,1%",
-     "cambio": 16.0,
+     "cambio": 19.0,
      "tipo": "pb",
      "sub": "vence 2041",
      "destacado": false,
@@ -154,8 +154,8 @@
     },
     {
      "nombre": "GD46",
-     "valor": "12,0%",
-     "cambio": 39.0,
+     "valor": "11,6%",
+     "cambio": 2.0,
      "tipo": "pb",
      "sub": "vence 2046",
      "destacado": false,
@@ -237,7 +237,7 @@
    "circulo": "Mundo",
    "kicker": "Mercados del mundo",
    "titulo": "Afuera, lo que más se movió: Yuan",
-   "texto": "El S&P 500 bajó 1,1%.",
+   "texto": "El S&P 500 bajó 1,3%.",
    "filas": [
     {
      "nombre": "Yuan",
@@ -249,27 +249,9 @@
      "inverso": false
     },
     {
-     "nombre": "Soja",
-     "valor": "US$ 449,65",
-     "cambio": -1.55,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
      "nombre": "MSCI Emergentes (ETF EEM)",
-     "valor": "US$ 59,30",
-     "cambio": -2.66,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Euro",
-     "valor": "1,10",
-     "cambio": -0.4,
+     "valor": "US$ 59,34",
+     "cambio": -2.59,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -277,8 +259,26 @@
     },
     {
      "nombre": "Real brasileño",
-     "valor": "5,76",
-     "cambio": 2.06,
+     "valor": "5,78",
+     "cambio": 2.45,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Soja",
+     "valor": "US$ 450,66",
+     "cambio": -1.33,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Trigo",
+     "valor": "US$ 220,65",
+     "cambio": 1.22,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -286,8 +286,8 @@
     },
     {
      "nombre": "Nasdaq",
-     "valor": "24.698",
-     "cambio": -1.74,
+     "valor": "24.688",
+     "cambio": -1.78,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -305,7 +305,7 @@
    "circulo": "Semana",
    "kicker": "Semana del 16 de noviembre",
    "titulo": "La semana en 30 segundos",
-   "texto": "Lo que más se salió de lo normal: Yuan, que bajó 0,3% en la semana.",
+   "texto": "Lo que más se salió de lo normal: Loma Negra, que bajó 4,0% en la semana.",
    "grandes": [
     {
      "nombre": "Dólar CCL",
@@ -335,8 +335,8 @@
    "filas": [
     {
      "nombre": "Globant",
-     "valor": "US$ 45,63",
-     "cambio": 0.46,
+     "valor": "US$ 45,77",
+     "cambio": 0.77,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -344,8 +344,8 @@
     },
     {
      "nombre": "Mercado Libre",
-     "valor": "US$ 1.479",
-     "cambio": -0.83,
+     "valor": "US$ 1.468",
+     "cambio": -1.61,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -353,8 +353,8 @@
     },
     {
      "nombre": "Corporación América",
-     "valor": "US$ 24,77",
-     "cambio": -0.86,
+     "valor": "US$ 24,53",
+     "cambio": -1.84,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -362,8 +362,8 @@
     },
     {
      "nombre": "YPF",
-     "valor": "US$ 36,22",
-     "cambio": -4.43,
+     "valor": "US$ 36,19",
+     "cambio": -4.51,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -371,17 +371,17 @@
     },
     {
      "nombre": "Cresud",
-     "valor": "US$ 9,38",
-     "cambio": -3.7,
+     "valor": "US$ 9,33",
+     "cambio": -4.21,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Vista Energy",
-     "valor": "US$ 53,95",
-     "cambio": -3.38,
+     "nombre": "Transportadora Gas del Sur",
+     "valor": "US$ 20,65",
+     "cambio": -4.09,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -399,8 +399,8 @@
    "filas": [
     {
      "nombre": "GD30",
-     "valor": "12,8%",
-     "cambio": 18.0,
+     "valor": "12,9%",
+     "cambio": 19.0,
      "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
@@ -409,7 +409,7 @@
     {
      "nombre": "GD35",
      "valor": "12,4%",
-     "cambio": 14.0,
+     "cambio": 16.0,
      "tipo": "pb",
      "sub": "vence 2035",
      "destacado": false,
@@ -417,8 +417,8 @@
     },
     {
      "nombre": "GD38",
-     "valor": "12,2%",
-     "cambio": 1.0,
+     "valor": "12,3%",
+     "cambio": 10.0,
      "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
@@ -427,7 +427,7 @@
     {
      "nombre": "GD41",
      "valor": "12,1%",
-     "cambio": 16.0,
+     "cambio": 19.0,
      "tipo": "pb",
      "sub": "vence 2041",
      "destacado": false,
@@ -435,8 +435,8 @@
     },
     {
      "nombre": "GD46",
-     "valor": "12,0%",
-     "cambio": 39.0,
+     "valor": "11,6%",
+     "cambio": 2.0,
      "tipo": "pb",
      "sub": "vence 2046",
      "destacado": false,
@@ -462,27 +462,9 @@
      "inverso": false
     },
     {
-     "nombre": "Soja",
-     "valor": "US$ 449,65",
-     "cambio": -1.55,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
      "nombre": "MSCI Emergentes (ETF EEM)",
-     "valor": "US$ 59,30",
-     "cambio": -2.66,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Euro",
-     "valor": "1,10",
-     "cambio": -0.4,
+     "valor": "US$ 59,34",
+     "cambio": -2.59,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -490,8 +472,26 @@
     },
     {
      "nombre": "Real brasileño",
-     "valor": "5,76",
-     "cambio": 2.06,
+     "valor": "5,78",
+     "cambio": 2.45,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Soja",
+     "valor": "US$ 450,66",
+     "cambio": -1.33,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Trigo",
+     "valor": "US$ 220,65",
+     "cambio": 1.22,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -499,8 +499,8 @@
     },
     {
      "nombre": "Nasdaq",
-     "valor": "24.698",
-     "cambio": -1.74,
+     "valor": "24.688",
+     "cambio": -1.78,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
