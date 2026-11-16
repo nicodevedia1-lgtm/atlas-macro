@@ -1,7 +1,7 @@
 {
- "generado": "2026-11-16T21:52:28+00:00",
+ "generado": "2026-11-16T22:51:14+00:00",
  "fecha": "2026-11-16",
- "hora": "18:52",
+ "hora": "19:51",
  "dia": [
   {
    "id": "hoy",
@@ -41,8 +41,8 @@
    "grandes": [
     {
      "nombre": "S&P 500 (futuro)",
-     "valor": "7.442",
-     "cambio": -1.86,
+     "valor": "7.438",
+     "cambio": -0.01,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -50,8 +50,8 @@
     },
     {
      "nombre": "Nasdaq 100 (futuro)",
-     "valor": "27.296",
-     "cambio": -2.63,
+     "valor": "27.285",
+     "cambio": 0.0,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -59,8 +59,8 @@
     },
     {
      "nombre": "Dow Jones (futuro)",
-     "valor": "51.684",
-     "cambio": -1.4,
+     "valor": "51.666",
+     "cambio": -1.43,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -78,45 +78,45 @@
      "inverso": false
     },
     {
-     "nombre": "Vista Energy",
-     "valor": "US$ 55,36",
-     "cambio": 3.52,
-     "tipo": "pct",
-     "sub": "VIST",
-     "destacado": false,
-     "inverso": false
-    },
-    {
      "nombre": "Supervielle",
-     "valor": "US$ 5,65",
-     "cambio": 3.1,
+     "valor": "US$ 5,60",
+     "cambio": 2.26,
      "tipo": "pct",
      "sub": "SUPV",
      "destacado": false,
      "inverso": false
     },
     {
+     "nombre": "Edenor",
+     "valor": "US$ 13,23",
+     "cambio": 1.61,
+     "tipo": "pct",
+     "sub": "EDN",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Globant",
+     "valor": "US$ 44,34",
+     "cambio": -0.95,
+     "tipo": "pct",
+     "sub": "GLOB",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Vista Energy",
+     "valor": "US$ 53,01",
+     "cambio": -0.88,
+     "tipo": "pct",
+     "sub": "VIST",
+     "destacado": false,
+     "inverso": false
+    },
+    {
      "nombre": "Mercado Libre",
-     "valor": "US$ 1.461,80",
-     "cambio": -0.02,
-     "tipo": "pct",
-     "sub": "poco volumen",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Corporación América",
-     "valor": "US$ 24,39",
-     "cambio": 0.0,
-     "tipo": "pct",
-     "sub": "CAAP",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Cresud",
-     "valor": "US$ 9,17",
-     "cambio": 0.0,
+     "valor": "US$ 1.456,01",
+     "cambio": -0.42,
      "tipo": "pct",
      "sub": "poco volumen",
      "destacado": false,
@@ -371,18 +371,18 @@
      "inverso": false
     },
     {
-     "nombre": "Nasdaq",
-     "valor": "24.510",
-     "cambio": -2.49,
+     "nombre": "Euro",
+     "valor": "1,10",
+     "cambio": -0.49,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Real brasileño",
-     "valor": "5,78",
-     "cambio": 2.53,
+     "nombre": "Nasdaq",
+     "valor": "24.510",
+     "cambio": -2.49,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -584,18 +584,18 @@
      "inverso": false
     },
     {
-     "nombre": "Nasdaq",
-     "valor": "24.510",
-     "cambio": -2.49,
+     "nombre": "Euro",
+     "valor": "1,10",
+     "cambio": -0.49,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Real brasileño",
-     "valor": "5,78",
-     "cambio": 2.53,
+     "nombre": "Nasdaq",
+     "valor": "24.510",
+     "cambio": -2.49,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
