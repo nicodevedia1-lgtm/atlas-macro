@@ -1,19 +1,19 @@
 {
- "generado": "2026-11-17T13:06:41+00:00",
+ "generado": "2026-11-17T14:25:26+00:00",
  "fecha": "2026-11-17",
- "hora": "10:06",
+ "hora": "11:25",
  "dia": [
   {
    "id": "apertura",
    "circulo": "Apertura",
    "kicker": "Antes de que abra Nueva York",
    "titulo": "Wall Street viene estable",
-   "texto": "Los futuros del S&P 500 marcan −0,0%. Nueva York abre a las 11:30.",
+   "texto": "Los futuros del S&P 500 marcan −0,1%. Nueva York abre a las 11:30.",
    "grandes": [
     {
      "nombre": "S&P 500 (futuro)",
-     "valor": "7.437",
-     "cambio": -0.03,
+     "valor": "7.432",
+     "cambio": -0.1,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -21,8 +21,8 @@
     },
     {
      "nombre": "Nasdaq 100 (futuro)",
-     "valor": "27.381",
-     "cambio": 0.36,
+     "valor": "27.377",
+     "cambio": 0.34,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -30,8 +30,8 @@
     },
     {
      "nombre": "Dow Jones (futuro)",
-     "valor": "51.361",
-     "cambio": -0.6,
+     "valor": "51.259",
+     "cambio": -0.8,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -40,9 +40,9 @@
    ],
    "filas": [
     {
-     "nombre": "Central Puerto",
-     "valor": "US$ 10,43",
-     "cambio": 1.36,
+     "nombre": "BBVA Argentina",
+     "valor": "US$ 10,09",
+     "cambio": 2.64,
      "tipo": "pct",
      "sub": "poco volumen",
      "destacado": false,
@@ -50,8 +50,8 @@
     },
     {
      "nombre": "YPF",
-     "valor": "US$ 36,07",
-     "cambio": 1.21,
+     "valor": "US$ 36,20",
+     "cambio": 1.57,
      "tipo": "pct",
      "sub": "poco volumen",
      "destacado": false,
@@ -67,9 +67,18 @@
      "inverso": false
     },
     {
-     "nombre": "BBVA Argentina",
-     "valor": "US$ 9,70",
-     "cambio": -1.32,
+     "nombre": "Globant",
+     "valor": "US$ 43,52",
+     "cambio": -2.79,
+     "tipo": "pct",
+     "sub": "poco volumen",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Supervielle",
+     "valor": "US$ 5,39",
+     "cambio": -1.64,
      "tipo": "pct",
      "sub": "poco volumen",
      "destacado": false,
@@ -79,15 +88,6 @@
      "nombre": "IRSA",
      "valor": "US$ 11,82",
      "cambio": -0.92,
-     "tipo": "pct",
-     "sub": "poco volumen",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Globant",
-     "valor": "US$ 44,50",
-     "cambio": -0.6,
      "tipo": "pct",
      "sub": "poco volumen",
      "destacado": false,
@@ -131,60 +131,60 @@
    "id": "acciones",
    "circulo": "Acciones",
    "kicker": "Panel líder en BYMA",
-   "titulo": "Día rojo en la bolsa",
-   "texto": "1 de 20 acciones del panel líder subieron y 19 bajaron.",
+   "titulo": "Día verde en la bolsa",
+   "texto": "16 de 22 acciones del panel líder subieron y 6 bajaron.",
    "filas": [
     {
-     "nombre": "Cablevisión Holding",
-     "valor": "$ 8.640",
-     "cambio": 0.12,
+     "nombre": "BBVA Argentina",
+     "valor": "$ 5.630",
+     "cambio": 2.27,
      "tipo": "pct",
-     "sub": "CVH",
+     "sub": "BBAR",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Grupo Valores",
-     "valor": "$ 523",
-     "cambio": -0.29,
+     "nombre": "YPF",
+     "valor": "$ 6.110",
+     "cambio": 1.74,
      "tipo": "pct",
-     "sub": "VALO",
+     "sub": "YPFD",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Transportadora Gas del Norte",
+     "valor": "$ 2.449",
+     "cambio": 1.57,
+     "tipo": "pct",
+     "sub": "TGNO4",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Supervielle",
+     "valor": "$ 1.830",
+     "cambio": -1.45,
+     "tipo": "pct",
+     "sub": "SUPV",
      "destacado": false,
      "inverso": false
     },
     {
      "nombre": "Telecom",
-     "valor": "$ 3.442",
-     "cambio": -2.55,
+     "valor": "$ 3.412",
+     "cambio": -0.87,
      "tipo": "pct",
      "sub": "TECO2",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Metrogas",
-     "valor": "$ 2.226",
-     "cambio": -7.1,
+     "nombre": "IRSA",
+     "valor": "$ 1.990",
+     "cambio": -0.5,
      "tipo": "pct",
-     "sub": "METR",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Edenor",
-     "valor": "$ 1.103",
-     "cambio": -7.0,
-     "tipo": "pct",
-     "sub": "EDN",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Loma Negra",
-     "valor": "$ 2.702",
-     "cambio": -6.73,
-     "tipo": "pct",
-     "sub": "LOMA",
+     "sub": "IRSA",
      "destacado": false,
      "inverso": false
     }
@@ -197,8 +197,8 @@
    "id": "bonos",
    "circulo": "Bonos",
    "kicker": "Bonos en dólares (Globales)",
-   "titulo": "La curva, sin cambios grandes",
-   "texto": "El GD30 rinde 12,9% y el GD46 11,7%: la curva está invertida, los bonos cortos rinden 1,3 puntos más que los largos.",
+   "titulo": "La curva se aplanó",
+   "texto": "El GD30 rinde 12,9% y el GD46 11,6%: la curva está invertida, los bonos cortos rinden 1,3 puntos más que los largos.",
    "grandes": [
     {
      "nombre": "Riesgo país",
@@ -214,7 +214,7 @@
     {
      "nombre": "GD30",
      "valor": "12,9%",
-     "cambio": 2.0,
+     "cambio": -2.0,
      "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
@@ -222,8 +222,8 @@
     },
     {
      "nombre": "GD35",
-     "valor": "12,5%",
-     "cambio": 0.0,
+     "valor": "12,4%",
+     "cambio": -3.0,
      "tipo": "pb",
      "sub": "vence 2035",
      "destacado": false,
@@ -231,8 +231,8 @@
     },
     {
      "nombre": "GD38",
-     "valor": "12,3%",
-     "cambio": 1.0,
+     "valor": "12,4%",
+     "cambio": 9.0,
      "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
@@ -240,8 +240,8 @@
     },
     {
      "nombre": "GD41",
-     "valor": "12,1%",
-     "cambio": 0.0,
+     "valor": "12,2%",
+     "cambio": 5.0,
      "tipo": "pb",
      "sub": "vence 2041",
      "destacado": false,
@@ -249,8 +249,8 @@
     },
     {
      "nombre": "GD46",
-     "valor": "11,7%",
-     "cambio": 0.0,
+     "valor": "11,6%",
+     "cambio": -11.0,
      "tipo": "pb",
      "sub": "vence 2046",
      "destacado": false,
@@ -331,31 +331,22 @@
    "id": "mundo",
    "circulo": "Mundo",
    "kicker": "Mercados del mundo",
-   "titulo": "Afuera, lo que más se movió: Trigo",
+   "titulo": "Afuera, lo que más se movió: MSCI Emergentes (ETF EEM)",
    "texto": "El S&P 500 bajó 1,9%.",
    "filas": [
-    {
-     "nombre": "Trigo",
-     "valor": "US$ 224,32",
-     "cambio": 4.0,
-     "tipo": "pct",
-     "sub": "fuera de lo normal",
-     "destacado": true,
-     "inverso": false
-    },
-    {
-     "nombre": "Yuan",
-     "valor": "6,65",
-     "cambio": -0.25,
-     "tipo": "pct",
-     "sub": "fuera de lo normal",
-     "destacado": true,
-     "inverso": false
-    },
     {
      "nombre": "MSCI Emergentes (ETF EEM)",
      "valor": "US$ 58,89",
      "cambio": -3.33,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Peso chileno",
+     "valor": "997,7",
+     "cambio": 2.32,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -380,9 +371,18 @@
      "inverso": false
     },
     {
-     "nombre": "Peso chileno",
-     "valor": "993,7",
-     "cambio": 1.91,
+     "nombre": "Nasdaq",
+     "valor": "24.510",
+     "cambio": -2.49,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Trigo",
+     "valor": "US$ 218,90",
+     "cambio": 1.49,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -495,7 +495,7 @@
     {
      "nombre": "GD30",
      "valor": "12,9%",
-     "cambio": 28.0,
+     "cambio": 24.0,
      "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
@@ -503,8 +503,8 @@
     },
     {
      "nombre": "GD35",
-     "valor": "12,5%",
-     "cambio": 18.0,
+     "valor": "12,4%",
+     "cambio": 15.0,
      "tipo": "pb",
      "sub": "vence 2035",
      "destacado": false,
@@ -512,8 +512,8 @@
     },
     {
      "nombre": "GD38",
-     "valor": "12,3%",
-     "cambio": 13.0,
+     "valor": "12,4%",
+     "cambio": 21.0,
      "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
@@ -521,8 +521,8 @@
     },
     {
      "nombre": "GD41",
-     "valor": "12,1%",
-     "cambio": 18.0,
+     "valor": "12,2%",
+     "cambio": 23.0,
      "tipo": "pb",
      "sub": "vence 2041",
      "destacado": false,
@@ -530,8 +530,8 @@
     },
     {
      "nombre": "GD46",
-     "valor": "11,7%",
-     "cambio": 7.0,
+     "valor": "11,6%",
+     "cambio": -4.0,
      "tipo": "pb",
      "sub": "vence 2046",
      "destacado": false,
@@ -547,15 +547,6 @@
    "kicker": "Mercados del mundo",
    "titulo": "Lo que más se movió en la semana",
    "filas": [
-    {
-     "nombre": "Trigo",
-     "valor": "US$ 224,32",
-     "cambio": 2.91,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
     {
      "nombre": "MSCI Emergentes (ETF EEM)",
      "valor": "US$ 58,89",
@@ -584,18 +575,27 @@
      "inverso": false
     },
     {
-     "nombre": "Yuan",
-     "valor": "6,65",
-     "cambio": -0.24,
+     "nombre": "Nasdaq",
+     "valor": "24.510",
+     "cambio": -2.49,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Nasdaq",
-     "valor": "24.510",
-     "cambio": -2.49,
+     "nombre": "Nikkei 225",
+     "valor": "58.860",
+     "cambio": -3.73,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Euro Stoxx 50",
+     "valor": "6.272",
+     "cambio": -1.79,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
