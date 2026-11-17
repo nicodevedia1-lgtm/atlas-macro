@@ -1,109 +1,14 @@
 {
- "generado": "2026-11-17T14:25:26+00:00",
+ "generado": "2026-11-17T15:58:32+00:00",
  "fecha": "2026-11-17",
- "hora": "11:25",
+ "hora": "12:58",
  "dia": [
-  {
-   "id": "apertura",
-   "circulo": "Apertura",
-   "kicker": "Antes de que abra Nueva York",
-   "titulo": "Wall Street viene estable",
-   "texto": "Los futuros del S&P 500 marcan −0,1%. Nueva York abre a las 11:30.",
-   "grandes": [
-    {
-     "nombre": "S&P 500 (futuro)",
-     "valor": "7.432",
-     "cambio": -0.1,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Nasdaq 100 (futuro)",
-     "valor": "27.377",
-     "cambio": 0.34,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Dow Jones (futuro)",
-     "valor": "51.259",
-     "cambio": -0.8,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    }
-   ],
-   "filas": [
-    {
-     "nombre": "BBVA Argentina",
-     "valor": "US$ 10,09",
-     "cambio": 2.64,
-     "tipo": "pct",
-     "sub": "poco volumen",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "YPF",
-     "valor": "US$ 36,20",
-     "cambio": 1.57,
-     "tipo": "pct",
-     "sub": "poco volumen",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Loma Negra",
-     "valor": "US$ 8,16",
-     "cambio": 1.12,
-     "tipo": "pct",
-     "sub": "poco volumen",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Globant",
-     "valor": "US$ 43,52",
-     "cambio": -2.79,
-     "tipo": "pct",
-     "sub": "poco volumen",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Supervielle",
-     "valor": "US$ 5,39",
-     "cambio": -1.64,
-     "tipo": "pct",
-     "sub": "poco volumen",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "IRSA",
-     "valor": "US$ 11,82",
-     "cambio": -0.92,
-     "tipo": "pct",
-     "sub": "poco volumen",
-     "destacado": false,
-     "inverso": false
-    }
-   ],
-   "nota": "Fuera de horario se opera poco: con poco volumen el precio puede moverse mucho.",
-   "link": "#mercados",
-   "link_txt": "Ver en Mercados"
-  },
   {
    "id": "hoy",
    "circulo": "Hoy",
    "kicker": "Martes 17 de noviembre",
-   "titulo": "Un día movido",
-   "texto": "Lo más llamativo: Loma Negra bajó 7,1%, 4,0 veces lo que se mueve en un día normal.",
+   "titulo": "El día en 30 segundos",
+   "texto": "Lo más llamativo: Yuan bajó 0,2%, 2,0 veces lo que se mueve en un día normal.",
    "grandes": [
     {
      "nombre": "Dólar CCL",
@@ -131,65 +36,65 @@
    "id": "acciones",
    "circulo": "Acciones",
    "kicker": "Panel líder en BYMA",
-   "titulo": "Día verde en la bolsa",
-   "texto": "16 de 22 acciones del panel líder subieron y 6 bajaron.",
+   "titulo": "Bolsa mixta",
+   "texto": "12 de 22 acciones del panel líder subieron y 10 bajaron.",
    "filas": [
     {
-     "nombre": "BBVA Argentina",
-     "valor": "$ 5.630",
-     "cambio": 2.27,
+     "nombre": "Pampa Energía",
+     "valor": "$ 4.220",
+     "cambio": 2.86,
      "tipo": "pct",
-     "sub": "BBAR",
+     "sub": "PAMP",
      "destacado": false,
      "inverso": false
     },
     {
      "nombre": "YPF",
-     "valor": "$ 6.110",
-     "cambio": 1.74,
+     "valor": "$ 6.170",
+     "cambio": 2.74,
      "tipo": "pct",
      "sub": "YPFD",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Transportadora Gas del Norte",
-     "valor": "$ 2.449",
-     "cambio": 1.57,
+     "nombre": "TGS",
+     "valor": "$ 6.910",
+     "cambio": 2.21,
      "tipo": "pct",
-     "sub": "TGNO4",
+     "sub": "TGSU2",
      "destacado": false,
      "inverso": false
     },
     {
      "nombre": "Supervielle",
-     "valor": "$ 1.830",
-     "cambio": -1.45,
+     "valor": "$ 1.731",
+     "cambio": -6.78,
      "tipo": "pct",
      "sub": "SUPV",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Telecom",
-     "valor": "$ 3.412",
-     "cambio": -0.87,
-     "tipo": "pct",
-     "sub": "TECO2",
-     "destacado": false,
-     "inverso": false
-    },
-    {
      "nombre": "IRSA",
-     "valor": "$ 1.990",
-     "cambio": -0.5,
+     "valor": "$ 1.920",
+     "cambio": -4.0,
      "tipo": "pct",
      "sub": "IRSA",
      "destacado": false,
      "inverso": false
+    },
+    {
+     "nombre": "Loma Negra",
+     "valor": "$ 2.630",
+     "cambio": -2.68,
+     "tipo": "pct",
+     "sub": "LOMA",
+     "destacado": false,
+     "inverso": false
     }
    ],
-   "nota": "En Nueva York, Loma Negra bajó 7,1%, su mayor baja del último año.",
+   "nota": "En Nueva York, Supervielle bajó 6,9%.",
    "link": "#mercados",
    "link_txt": "Ver el mapa del mercado"
   },
@@ -197,8 +102,8 @@
    "id": "bonos",
    "circulo": "Bonos",
    "kicker": "Bonos en dólares (Globales)",
-   "titulo": "La curva se aplanó",
-   "texto": "El GD30 rinde 12,9% y el GD46 11,6%: la curva está invertida, los bonos cortos rinden 1,3 puntos más que los largos.",
+   "titulo": "La curva se empinó",
+   "texto": "El GD30 rinde 13,1% y el GD46 11,9%: la curva está invertida, los bonos cortos rinden 1,1 puntos más que los largos.",
    "grandes": [
     {
      "nombre": "Riesgo país",
@@ -213,8 +118,8 @@
    "filas": [
     {
      "nombre": "GD30",
-     "valor": "12,9%",
-     "cambio": -2.0,
+     "valor": "13,1%",
+     "cambio": 13.0,
      "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
@@ -222,8 +127,8 @@
     },
     {
      "nombre": "GD35",
-     "valor": "12,4%",
-     "cambio": -3.0,
+     "valor": "12,5%",
+     "cambio": 8.0,
      "tipo": "pb",
      "sub": "vence 2035",
      "destacado": false,
@@ -231,8 +136,8 @@
     },
     {
      "nombre": "GD38",
-     "valor": "12,4%",
-     "cambio": 9.0,
+     "valor": "12,5%",
+     "cambio": 13.0,
      "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
@@ -241,7 +146,7 @@
     {
      "nombre": "GD41",
      "valor": "12,2%",
-     "cambio": 5.0,
+     "cambio": 7.0,
      "tipo": "pb",
      "sub": "vence 2041",
      "destacado": false,
@@ -249,8 +154,8 @@
     },
     {
      "nombre": "GD46",
-     "valor": "11,6%",
-     "cambio": -11.0,
+     "valor": "11,9%",
+     "cambio": 27.0,
      "tipo": "pb",
      "sub": "vence 2046",
      "destacado": false,
@@ -331,49 +236,22 @@
    "id": "mundo",
    "circulo": "Mundo",
    "kicker": "Mercados del mundo",
-   "titulo": "Afuera, lo que más se movió: MSCI Emergentes (ETF EEM)",
-   "texto": "El S&P 500 bajó 1,9%.",
+   "titulo": "Afuera, lo que más se movió: Yuan",
+   "texto": "El S&P 500 bajó 1,6%.",
    "filas": [
     {
-     "nombre": "MSCI Emergentes (ETF EEM)",
-     "valor": "US$ 58,89",
-     "cambio": -3.33,
+     "nombre": "Yuan",
+     "valor": "6,65",
+     "cambio": -0.25,
      "tipo": "pct",
-     "sub": null,
-     "destacado": false,
+     "sub": "fuera de lo normal",
+     "destacado": true,
      "inverso": false
     },
     {
-     "nombre": "Peso chileno",
-     "valor": "997,7",
-     "cambio": 2.32,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "S&P 500",
-     "valor": "7.417",
-     "cambio": -1.92,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "MSCI Mundo (ETF URTH)",
-     "valor": "US$ 200,86",
-     "cambio": -1.81,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Nasdaq",
-     "valor": "24.510",
-     "cambio": -2.49,
+     "nombre": "Euro Stoxx 50",
+     "valor": "6.240",
+     "cambio": -1.7,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -381,8 +259,35 @@
     },
     {
      "nombre": "Trigo",
-     "valor": "US$ 218,90",
-     "cambio": 1.49,
+     "valor": "US$ 219,82",
+     "cambio": 1.92,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Peso chileno",
+     "valor": "995,0",
+     "cambio": 2.04,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Nikkei 225",
+     "valor": "59.662",
+     "cambio": -2.42,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Real brasileño",
+     "valor": "5,79",
+     "cambio": 2.29,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -400,7 +305,7 @@
    "circulo": "Semana",
    "kicker": "Semana del 16 de noviembre",
    "titulo": "La semana en 30 segundos",
-   "texto": "Lo que más se salió de lo normal: Loma Negra, que bajó 7,1% en la semana.",
+   "texto": "Lo que más se salió de lo normal: Loma Negra, que bajó 10,2% en la semana.",
    "grandes": [
     {
      "nombre": "Dólar CCL",
@@ -429,9 +334,18 @@
    "titulo": "Las que más subieron y bajaron",
    "filas": [
     {
-     "nombre": "Globant",
-     "valor": "US$ 44,77",
-     "cambio": -1.43,
+     "nombre": "Vista Energy",
+     "valor": "US$ 55,05",
+     "cambio": -1.41,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Telecom Argentina",
+     "valor": "US$ 10,28",
+     "cambio": -2.74,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -439,17 +353,8 @@
     },
     {
      "nombre": "Mercado Libre",
-     "valor": "US$ 1.462",
-     "cambio": -1.97,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Corporación América",
-     "valor": "US$ 24,39",
-     "cambio": -2.4,
+     "valor": "US$ 1.441",
+     "cambio": -3.39,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -457,26 +362,26 @@
     },
     {
      "nombre": "Supervielle",
-     "valor": "US$ 5,48",
-     "cambio": -7.74,
+     "valor": "US$ 5,10",
+     "cambio": -14.14,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "BBVA Argentina",
-     "valor": "US$ 9,83",
-     "cambio": -7.35,
+     "nombre": "Loma Negra",
+     "valor": "US$ 7,80",
+     "cambio": -10.24,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Edenor",
-     "valor": "US$ 13,02",
-     "cambio": -7.33,
+     "nombre": "IRSA",
+     "valor": "US$ 11,44",
+     "cambio": -8.81,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -494,8 +399,8 @@
    "filas": [
     {
      "nombre": "GD30",
-     "valor": "12,9%",
-     "cambio": 24.0,
+     "valor": "13,1%",
+     "cambio": 39.0,
      "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
@@ -503,8 +408,8 @@
     },
     {
      "nombre": "GD35",
-     "valor": "12,4%",
-     "cambio": 15.0,
+     "valor": "12,5%",
+     "cambio": 26.0,
      "tipo": "pb",
      "sub": "vence 2035",
      "destacado": false,
@@ -512,8 +417,8 @@
     },
     {
      "nombre": "GD38",
-     "valor": "12,4%",
-     "cambio": 21.0,
+     "valor": "12,5%",
+     "cambio": 25.0,
      "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
@@ -522,7 +427,7 @@
     {
      "nombre": "GD41",
      "valor": "12,2%",
-     "cambio": 23.0,
+     "cambio": 25.0,
      "tipo": "pb",
      "sub": "vence 2041",
      "destacado": false,
@@ -530,8 +435,8 @@
     },
     {
      "nombre": "GD46",
-     "valor": "11,6%",
-     "cambio": -4.0,
+     "valor": "11,9%",
+     "cambio": 34.0,
      "tipo": "pb",
      "sub": "vence 2046",
      "destacado": false,
@@ -548,18 +453,18 @@
    "titulo": "Lo que más se movió en la semana",
    "filas": [
     {
-     "nombre": "MSCI Emergentes (ETF EEM)",
-     "valor": "US$ 58,89",
-     "cambio": -3.33,
+     "nombre": "S&P 500",
+     "valor": "7.300",
+     "cambio": -3.46,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "S&P 500",
-     "valor": "7.417",
-     "cambio": -1.92,
+     "nombre": "MSCI Emergentes (ETF EEM)",
+     "valor": "US$ 57,83",
+     "cambio": -5.08,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -567,8 +472,8 @@
     },
     {
      "nombre": "MSCI Mundo (ETF URTH)",
-     "valor": "US$ 200,86",
-     "cambio": -1.81,
+     "valor": "US$ 198,31",
+     "cambio": -3.06,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -576,17 +481,8 @@
     },
     {
      "nombre": "Nasdaq",
-     "valor": "24.510",
-     "cambio": -2.49,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Nikkei 225",
-     "valor": "58.860",
-     "cambio": -3.73,
+     "valor": "24.048",
+     "cambio": -4.33,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -594,8 +490,17 @@
     },
     {
      "nombre": "Euro Stoxx 50",
-     "valor": "6.272",
-     "cambio": -1.79,
+     "valor": "6.240",
+     "cambio": -2.29,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Yuan",
+     "valor": "6,65",
+     "cambio": -0.24,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
