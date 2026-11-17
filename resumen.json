@@ -1,7 +1,7 @@
 {
- "generado": "2026-11-17T21:57:35+00:00",
+ "generado": "2026-11-17T22:57:48+00:00",
  "fecha": "2026-11-17",
- "hora": "18:57",
+ "hora": "19:57",
  "dia": [
   {
    "id": "hoy",
@@ -41,8 +41,8 @@
    "grandes": [
     {
      "nombre": "S&P 500 (futuro)",
-     "valor": "7.370",
-     "cambio": -0.92,
+     "valor": "7.366",
+     "cambio": 0.1,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -50,8 +50,8 @@
     },
     {
      "nombre": "Nasdaq 100 (futuro)",
-     "valor": "27.162",
-     "cambio": -0.45,
+     "valor": "27.126",
+     "cambio": 0.19,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -59,8 +59,8 @@
     },
     {
      "nombre": "Dow Jones (futuro)",
-     "valor": "50.814",
-     "cambio": -1.66,
+     "valor": "50.827",
+     "cambio": 0.02,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -69,36 +69,36 @@
    ],
    "filas": [
     {
+     "nombre": "Vista Energy",
+     "valor": "US$ 55,03",
+     "cambio": 1.98,
+     "tipo": "pct",
+     "sub": "VIST",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "YPF",
+     "valor": "US$ 36,84",
+     "cambio": 1.18,
+     "tipo": "pct",
+     "sub": "YPF",
+     "destacado": false,
+     "inverso": false
+    },
+    {
      "nombre": "Cresud",
-     "valor": "US$ 9,15",
-     "cambio": 1.89,
+     "valor": "US$ 9,05",
+     "cambio": 0.76,
      "tipo": "pct",
      "sub": "CRESY",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Edenor",
-     "valor": "US$ 13,05",
-     "cambio": 0.48,
-     "tipo": "pct",
-     "sub": "EDN",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Mercado Libre",
-     "valor": "US$ 1.441,75",
-     "cambio": 0.34,
-     "tipo": "pct",
-     "sub": "MELI",
-     "destacado": false,
-     "inverso": false
-    },
-    {
      "nombre": "Corporación América",
-     "valor": "US$ 24,08",
-     "cambio": 0.0,
+     "valor": "US$ 24,00",
+     "cambio": -0.33,
      "tipo": "pct",
      "sub": "CAAP",
      "destacado": false,
@@ -381,8 +381,8 @@
     },
     {
      "nombre": "Real brasileño",
-     "valor": "5,78",
-     "cambio": 2.01,
+     "valor": "5,77",
+     "cambio": 1.78,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
