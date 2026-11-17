@@ -1,48 +1,19 @@
 {
- "generado": "2026-11-16T23:47:13+00:00",
- "fecha": "2026-11-16",
- "hora": "20:47",
+ "generado": "2026-11-17T11:54:04+00:00",
+ "fecha": "2026-11-17",
+ "hora": "08:54",
  "dia": [
   {
-   "id": "hoy",
-   "circulo": "Hoy",
-   "kicker": "Lunes 16 de noviembre",
-   "titulo": "Un día movido",
-   "texto": "Lo más llamativo: Loma Negra bajó 7,1%, 4,0 veces lo que se mueve en un día normal.",
-   "grandes": [
-    {
-     "nombre": "Dólar CCL",
-     "valor": "$ 1.672",
-     "cambio": 0.0,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Riesgo país",
-     "valor": "830",
-     "cambio": 1,
-     "tipo": "pb",
-     "sub": null,
-     "destacado": false,
-     "inverso": true
-    }
-   ],
-   "link": "#mercados",
-   "link_txt": "Ver Mercados"
-  },
-  {
-   "id": "after",
-   "circulo": "After hours",
-   "kicker": "Después del cierre en Nueva York",
-   "titulo": "Después del cierre",
-   "texto": "Lo que se sigue operando en Nueva York después de la campana.",
+   "id": "apertura",
+   "circulo": "Apertura",
+   "kicker": "Antes de que abra Nueva York",
+   "titulo": "Wall Street viene estable",
+   "texto": "Los futuros del S&P 500 marcan +0,1%. Nueva York abre a las 11:30.",
    "grandes": [
     {
      "nombre": "S&P 500 (futuro)",
-     "valor": "7.434",
-     "cambio": -0.06,
+     "valor": "7.448",
+     "cambio": 0.12,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -50,8 +21,8 @@
     },
     {
      "nombre": "Nasdaq 100 (futuro)",
-     "valor": "27.236",
-     "cambio": -0.18,
+     "valor": "27.435",
+     "cambio": 0.55,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -59,8 +30,8 @@
     },
     {
      "nombre": "Dow Jones (futuro)",
-     "valor": "51.650",
-     "cambio": -0.04,
+     "valor": "51.510",
+     "cambio": -0.31,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -70,55 +41,46 @@
    "filas": [
     {
      "nombre": "Loma Negra",
-     "valor": "US$ 8,58",
-     "cambio": 6.32,
-     "tipo": "pct",
-     "sub": "LOMA",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Edenor",
-     "valor": "US$ 13,23",
-     "cambio": 1.61,
-     "tipo": "pct",
-     "sub": "EDN",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Transportadora Gas del Sur",
-     "valor": "US$ 20,34",
-     "cambio": 0.88,
+     "valor": "US$ 8,16",
+     "cambio": 1.12,
      "tipo": "pct",
      "sub": "poco volumen",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Supervielle",
-     "valor": "US$ 5,37",
-     "cambio": -2.01,
+     "nombre": "Mercado Libre",
+     "valor": "US$ 1.465,00",
+     "cambio": 0.2,
      "tipo": "pct",
-     "sub": "SUPV",
+     "sub": "poco volumen",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Globant",
-     "valor": "US$ 44,34",
-     "cambio": -0.95,
+     "nombre": "YPF",
+     "valor": "US$ 35,67",
+     "cambio": 0.08,
      "tipo": "pct",
-     "sub": "GLOB",
+     "sub": "poco volumen",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Vista Energy",
-     "valor": "US$ 53,01",
-     "cambio": -0.88,
+     "nombre": "BBVA Argentina",
+     "valor": "US$ 9,70",
+     "cambio": -1.32,
      "tipo": "pct",
-     "sub": "VIST",
+     "sub": "poco volumen",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "IRSA",
+     "valor": "US$ 11,82",
+     "cambio": -0.92,
+     "tipo": "pct",
+     "sub": "poco volumen",
      "destacado": false,
      "inverso": false
     }
@@ -126,6 +88,35 @@
    "nota": "Fuera de horario se opera poco: con poco volumen el precio puede moverse mucho.",
    "link": "#mercados",
    "link_txt": "Ver en Mercados"
+  },
+  {
+   "id": "hoy",
+   "circulo": "Hoy",
+   "kicker": "Martes 17 de noviembre",
+   "titulo": "Un día movido",
+   "texto": "Lo más llamativo: Loma Negra bajó 7,1%, 4,0 veces lo que se mueve en un día normal.",
+   "grandes": [
+    {
+     "nombre": "Dólar CCL",
+     "valor": "$ 1.683",
+     "cambio": 0.66,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Riesgo país",
+     "valor": "855",
+     "cambio": 25,
+     "tipo": "pb",
+     "sub": null,
+     "destacado": false,
+     "inverso": true
+    }
+   ],
+   "link": "#mercados",
+   "link_txt": "Ver Mercados"
   },
   {
    "id": "acciones",
@@ -197,13 +188,13 @@
    "id": "bonos",
    "circulo": "Bonos",
    "kicker": "Bonos en dólares (Globales)",
-   "titulo": "La curva se aplanó",
+   "titulo": "La curva, sin cambios grandes",
    "texto": "El GD30 rinde 12,9% y el GD46 11,7%: la curva está invertida, los bonos cortos rinden 1,3 puntos más que los largos.",
    "grandes": [
     {
      "nombre": "Riesgo país",
-     "valor": "830",
-     "cambio": 1,
+     "valor": "855",
+     "cambio": 25,
      "tipo": "pb",
      "sub": null,
      "destacado": false,
@@ -214,7 +205,7 @@
     {
      "nombre": "GD30",
      "valor": "12,9%",
-     "cambio": 26.0,
+     "cambio": 2.0,
      "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
@@ -223,7 +214,7 @@
     {
      "nombre": "GD35",
      "valor": "12,5%",
-     "cambio": 18.0,
+     "cambio": 0.0,
      "tipo": "pb",
      "sub": "vence 2035",
      "destacado": false,
@@ -232,7 +223,7 @@
     {
      "nombre": "GD38",
      "valor": "12,3%",
-     "cambio": 12.0,
+     "cambio": 1.0,
      "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
@@ -241,7 +232,7 @@
     {
      "nombre": "GD41",
      "valor": "12,1%",
-     "cambio": 18.0,
+     "cambio": 0.0,
      "tipo": "pb",
      "sub": "vence 2041",
      "destacado": false,
@@ -250,7 +241,7 @@
     {
      "nombre": "GD46",
      "valor": "11,7%",
-     "cambio": 7.0,
+     "cambio": 0.0,
      "tipo": "pb",
      "sub": "vence 2046",
      "destacado": false,
@@ -265,12 +256,12 @@
    "id": "dolar",
    "circulo": "Dólar",
    "kicker": "Dólar y BCRA",
-   "titulo": "Dólar quieto",
+   "titulo": "El dólar blue subió 1,6%",
    "grandes": [
     {
      "nombre": "Oficial",
-     "valor": "$ 1.570",
-     "cambio": 0.0,
+     "valor": "$ 1.575",
+     "cambio": 0.32,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -278,8 +269,8 @@
     },
     {
      "nombre": "MEP",
-     "valor": "$ 1.581",
-     "cambio": 0.0,
+     "valor": "$ 1.589",
+     "cambio": 0.51,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -287,8 +278,8 @@
     },
     {
      "nombre": "CCL",
-     "valor": "$ 1.672",
-     "cambio": 0.0,
+     "valor": "$ 1.683",
+     "cambio": 0.66,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -296,8 +287,8 @@
     },
     {
      "nombre": "Blue",
-     "valor": "$ 1.575",
-     "cambio": 0.0,
+     "valor": "$ 1.600",
+     "cambio": 1.59,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -307,7 +298,7 @@
    "filas": [
     {
      "nombre": "Brecha CCL vs. oficial",
-     "valor": "6,5%",
+     "valor": "6,9%",
      "cambio": null,
      "tipo": "pct",
      "sub": null,
@@ -331,9 +322,18 @@
    "id": "mundo",
    "circulo": "Mundo",
    "kicker": "Mercados del mundo",
-   "titulo": "Afuera, lo que más se movió: Yuan",
+   "titulo": "Afuera, lo que más se movió: Trigo",
    "texto": "El S&P 500 bajó 1,9%.",
    "filas": [
+    {
+     "nombre": "Trigo",
+     "valor": "US$ 223,77",
+     "cambio": 3.75,
+     "tipo": "pct",
+     "sub": "fuera de lo normal",
+     "destacado": true,
+     "inverso": false
+    },
     {
      "nombre": "Yuan",
      "valor": "6,65",
@@ -347,6 +347,15 @@
      "nombre": "MSCI Emergentes (ETF EEM)",
      "valor": "US$ 58,89",
      "cambio": -3.33,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Peso chileno",
+     "valor": "996,6",
+     "cambio": 2.21,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -369,24 +378,6 @@
      "sub": null,
      "destacado": false,
      "inverso": false
-    },
-    {
-     "nombre": "Nasdaq",
-     "valor": "24.510",
-     "cambio": -2.49,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Real brasileño",
-     "valor": "5,79",
-     "cambio": 2.57,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
     }
    ],
    "nota": "Ordenados por cuánto se salieron de lo normal, no por el tamaño del movimiento.",
@@ -404,8 +395,8 @@
    "grandes": [
     {
      "nombre": "Dólar CCL",
-     "valor": "$ 1.672",
-     "cambio": 0.42,
+     "valor": "$ 1.683",
+     "cambio": 1.08,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -413,8 +404,8 @@
     },
     {
      "nombre": "Riesgo país",
-     "valor": "830",
-     "cambio": 0,
+     "valor": "855",
+     "cambio": 25,
      "tipo": "pb",
      "sub": null,
      "destacado": false,
@@ -495,7 +486,7 @@
     {
      "nombre": "GD30",
      "valor": "12,9%",
-     "cambio": 26.0,
+     "cambio": 28.0,
      "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
@@ -513,7 +504,7 @@
     {
      "nombre": "GD38",
      "valor": "12,3%",
-     "cambio": 12.0,
+     "cambio": 13.0,
      "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
@@ -548,18 +539,18 @@
    "titulo": "Lo que más se movió en la semana",
    "filas": [
     {
-     "nombre": "Yuan",
-     "valor": "6,65",
-     "cambio": -0.25,
-     "tipo": "pct",
-     "sub": "fuera de lo normal",
-     "destacado": true,
-     "inverso": false
-    },
-    {
      "nombre": "MSCI Emergentes (ETF EEM)",
      "valor": "US$ 58,89",
      "cambio": -3.33,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Trigo",
+     "valor": "US$ 223,77",
+     "cambio": 2.65,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -584,18 +575,18 @@
      "inverso": false
     },
     {
-     "nombre": "Nasdaq",
-     "valor": "24.510",
-     "cambio": -2.49,
+     "nombre": "Yuan",
+     "valor": "6,65",
+     "cambio": -0.24,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Real brasileño",
-     "valor": "5,79",
-     "cambio": 2.57,
+     "nombre": "Nasdaq",
+     "valor": "24.510",
+     "cambio": -2.49,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
