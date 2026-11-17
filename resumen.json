@@ -1,14 +1,14 @@
 {
- "generado": "2026-11-17T17:05:04+00:00",
+ "generado": "2026-11-17T18:02:19+00:00",
  "fecha": "2026-11-17",
- "hora": "14:05",
+ "hora": "15:02",
  "dia": [
   {
    "id": "hoy",
    "circulo": "Hoy",
    "kicker": "Martes 17 de noviembre",
    "titulo": "Un día movido",
-   "texto": "Lo más llamativo: Trigo subió 3,9%, 3,4 veces lo que se mueve en un día normal.",
+   "texto": "Lo más llamativo: Trigo subió 4,2%, 3,7 veces lo que se mueve en un día normal.",
    "grandes": [
     {
      "nombre": "Dólar CCL",
@@ -37,64 +37,64 @@
    "circulo": "Acciones",
    "kicker": "Panel líder en BYMA",
    "titulo": "Bolsa mixta",
-   "texto": "10 de 22 acciones del panel líder subieron y 11 bajaron.",
+   "texto": "9 de 22 acciones del panel líder subieron y 12 bajaron.",
    "filas": [
     {
+     "nombre": "Aluar",
+     "valor": "$ 790",
+     "cambio": 3.33,
+     "tipo": "pct",
+     "sub": "ALUA",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Telecom",
+     "valor": "$ 3.540",
+     "cambio": 2.83,
+     "tipo": "pct",
+     "sub": "TECO2",
+     "destacado": false,
+     "inverso": false
+    },
+    {
      "nombre": "Pampa Energía",
-     "valor": "$ 4.215",
-     "cambio": 2.74,
+     "valor": "$ 4.202",
+     "cambio": 2.43,
      "tipo": "pct",
      "sub": "PAMP",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "TGS",
-     "valor": "$ 6.890",
-     "cambio": 1.92,
+     "nombre": "Metrogas",
+     "valor": "$ 2.135",
+     "cambio": -4.08,
      "tipo": "pct",
-     "sub": "TGSU2",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Ternium Argentina",
-     "valor": "$ 698",
-     "cambio": 1.75,
-     "tipo": "pct",
-     "sub": "TXAR",
+     "sub": "METR",
      "destacado": false,
      "inverso": false
     },
     {
      "nombre": "Supervielle",
-     "valor": "$ 1.762",
-     "cambio": -5.11,
+     "valor": "$ 1.785",
+     "cambio": -3.87,
      "tipo": "pct",
      "sub": "SUPV",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "IRSA",
-     "valor": "$ 1.915",
-     "cambio": -4.25,
-     "tipo": "pct",
-     "sub": "IRSA",
-     "destacado": false,
-     "inverso": false
-    },
-    {
      "nombre": "Sociedad Comercial del Plata",
-     "valor": "$ 29,65",
-     "cambio": -2.3,
+     "valor": "$ 29,18",
+     "cambio": -3.85,
      "tipo": "pct",
      "sub": "COME",
      "destacado": false,
      "inverso": false
     }
    ],
-   "nota": "En Nueva York, Supervielle bajó 5,8%.",
+   "nota": "En Nueva York, Supervielle bajó 4,7%.",
    "link": "#mercados",
    "link_txt": "Ver el mapa del mercado"
   },
@@ -102,8 +102,8 @@
    "id": "bonos",
    "circulo": "Bonos",
    "kicker": "Bonos en dólares (Globales)",
-   "titulo": "La curva, sin cambios grandes",
-   "texto": "El GD30 rinde 13,2% y el GD46 11,9%: la curva está invertida, los bonos cortos rinden 1,3 puntos más que los largos.",
+   "titulo": "La curva se empinó",
+   "texto": "El GD30 rinde 13,2% y el GD46 12,0%: la curva está invertida, los bonos cortos rinden 1,2 puntos más que los largos.",
    "grandes": [
     {
      "nombre": "Riesgo país",
@@ -119,7 +119,7 @@
     {
      "nombre": "GD30",
      "valor": "13,2%",
-     "cambio": 22.0,
+     "cambio": 24.0,
      "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
@@ -128,7 +128,7 @@
     {
      "nombre": "GD35",
      "valor": "12,5%",
-     "cambio": 5.0,
+     "cambio": 4.0,
      "tipo": "pb",
      "sub": "vence 2035",
      "destacado": false,
@@ -137,7 +137,7 @@
     {
      "nombre": "GD38",
      "valor": "12,4%",
-     "cambio": 10.0,
+     "cambio": 3.0,
      "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
@@ -146,7 +146,7 @@
     {
      "nombre": "GD41",
      "valor": "12,2%",
-     "cambio": 7.0,
+     "cambio": 5.0,
      "tipo": "pb",
      "sub": "vence 2041",
      "destacado": false,
@@ -154,8 +154,8 @@
     },
     {
      "nombre": "GD46",
-     "valor": "11,9%",
-     "cambio": 20.0,
+     "valor": "12,0%",
+     "cambio": 34.0,
      "tipo": "pb",
      "sub": "vence 2046",
      "destacado": false,
@@ -237,12 +237,12 @@
    "circulo": "Mundo",
    "kicker": "Mercados del mundo",
    "titulo": "Afuera, lo que más se movió: Trigo",
-   "texto": "El S&P 500 bajó 1,3%.",
+   "texto": "El S&P 500 bajó 1,1%.",
    "filas": [
     {
      "nombre": "Trigo",
-     "valor": "US$ 224,05",
-     "cambio": 3.88,
+     "valor": "US$ 224,78",
+     "cambio": 4.22,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -267,15 +267,6 @@
      "inverso": false
     },
     {
-     "nombre": "Peso chileno",
-     "valor": "992,0",
-     "cambio": 1.74,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
      "nombre": "Nikkei 225",
      "valor": "59.662",
      "cambio": -2.42,
@@ -285,9 +276,18 @@
      "inverso": false
     },
     {
+     "nombre": "Peso chileno",
+     "valor": "990,8",
+     "cambio": 1.61,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
      "nombre": "Real brasileño",
-     "valor": "5,79",
-     "cambio": 2.25,
+     "valor": "5,78",
+     "cambio": 1.96,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -305,7 +305,7 @@
    "circulo": "Semana",
    "kicker": "Semana del 16 de noviembre",
    "titulo": "La semana en 30 segundos",
-   "texto": "Lo que más se salió de lo normal: Loma Negra, que bajó 7,7% en la semana.",
+   "texto": "Lo que más se salió de lo normal: Loma Negra, que bajó 7,6% en la semana.",
    "grandes": [
     {
      "nombre": "Dólar CCL",
@@ -335,8 +335,8 @@
    "filas": [
     {
      "nombre": "Telecom Argentina",
-     "valor": "US$ 10,31",
-     "cambio": -2.46,
+     "valor": "US$ 10,47",
+     "cambio": -0.9,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -344,17 +344,17 @@
     },
     {
      "nombre": "Vista Energy",
-     "valor": "US$ 54,26",
-     "cambio": -2.84,
+     "valor": "US$ 54,06",
+     "cambio": -3.18,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Mercado Libre",
-     "valor": "US$ 1.431",
-     "cambio": -4.06,
+     "nombre": "Corporación América",
+     "valor": "US$ 24,11",
+     "cambio": -3.52,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -362,8 +362,8 @@
     },
     {
      "nombre": "Supervielle",
-     "valor": "US$ 5,16",
-     "cambio": -13.12,
+     "valor": "US$ 5,22",
+     "cambio": -12.12,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -371,17 +371,17 @@
     },
     {
      "nombre": "IRSA",
-     "valor": "US$ 11,31",
-     "cambio": -9.81,
+     "valor": "US$ 11,52",
+     "cambio": -8.13,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Loma Negra",
-     "valor": "US$ 8,02",
-     "cambio": -7.71,
+     "nombre": "BBVA Argentina",
+     "valor": "US$ 9,77",
+     "cambio": -7.92,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -400,7 +400,7 @@
     {
      "nombre": "GD30",
      "valor": "13,2%",
-     "cambio": 48.0,
+     "cambio": 50.0,
      "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
@@ -409,7 +409,7 @@
     {
      "nombre": "GD35",
      "valor": "12,5%",
-     "cambio": 23.0,
+     "cambio": 22.0,
      "tipo": "pb",
      "sub": "vence 2035",
      "destacado": false,
@@ -418,7 +418,7 @@
     {
      "nombre": "GD38",
      "valor": "12,4%",
-     "cambio": 22.0,
+     "cambio": 15.0,
      "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
@@ -427,7 +427,7 @@
     {
      "nombre": "GD41",
      "valor": "12,2%",
-     "cambio": 25.0,
+     "cambio": 23.0,
      "tipo": "pb",
      "sub": "vence 2041",
      "destacado": false,
@@ -435,8 +435,8 @@
     },
     {
      "nombre": "GD46",
-     "valor": "11,9%",
-     "cambio": 27.0,
+     "valor": "12,0%",
+     "cambio": 41.0,
      "tipo": "pb",
      "sub": "vence 2046",
      "destacado": false,
@@ -453,6 +453,15 @@
    "titulo": "Lo que más se movió en la semana",
    "filas": [
     {
+     "nombre": "Trigo",
+     "valor": "US$ 224,78",
+     "cambio": 3.12,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
      "nombre": "Euro Stoxx 50",
      "valor": "6.212",
      "cambio": -2.74,
@@ -462,9 +471,9 @@
      "inverso": false
     },
     {
-     "nombre": "Trigo",
-     "valor": "US$ 224,05",
-     "cambio": 2.78,
+     "nombre": "MSCI Mundo (ETF URTH)",
+     "valor": "US$ 198,56",
+     "cambio": -2.93,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -472,17 +481,8 @@
     },
     {
      "nombre": "MSCI Emergentes (ETF EEM)",
-     "valor": "US$ 57,91",
-     "cambio": -4.95,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "MSCI Mundo (ETF URTH)",
-     "valor": "US$ 198,34",
-     "cambio": -3.04,
+     "valor": "US$ 58,16",
+     "cambio": -4.52,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -490,17 +490,17 @@
     },
     {
      "nombre": "S&P 500",
-     "valor": "7.322",
-     "cambio": -3.17,
+     "valor": "7.334",
+     "cambio": -3.01,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "VIX (índice del miedo)",
-     "valor": "27,01",
-     "cambio": 39.95,
+     "nombre": "Yuan",
+     "valor": "6,65",
+     "cambio": -0.24,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
