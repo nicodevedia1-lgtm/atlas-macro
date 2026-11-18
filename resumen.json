@@ -1,14 +1,14 @@
 {
- "generado": "2026-11-18T20:57:20+00:00",
+ "generado": "2026-11-18T21:57:02+00:00",
  "fecha": "2026-11-18",
- "hora": "17:57",
+ "hora": "18:57",
  "dia": [
   {
    "id": "hoy",
    "circulo": "Hoy",
    "kicker": "Miércoles 18 de noviembre",
    "titulo": "Un día movido",
-   "texto": "Lo más llamativo: Cobre bajó 5,1%, 3,5 veces lo que se mueve en un día normal.",
+   "texto": "Lo más llamativo: Cobre bajó 5,0%, 3,5 veces lo que se mueve en un día normal.",
    "grandes": [
     {
      "nombre": "Dólar CCL",
@@ -33,6 +33,101 @@
    "link_txt": "Ver Mercados"
   },
   {
+   "id": "after",
+   "circulo": "After hours",
+   "kicker": "Después del cierre en Nueva York",
+   "titulo": "Después del cierre",
+   "texto": "Lo que se sigue operando en Nueva York después de la campana.",
+   "grandes": [
+    {
+     "nombre": "S&P 500 (futuro)",
+     "valor": "7.342",
+     "cambio": -0.24,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Nasdaq 100 (futuro)",
+     "valor": "27.197",
+     "cambio": 0.45,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Dow Jones (futuro)",
+     "valor": "50.261",
+     "cambio": -1.09,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    }
+   ],
+   "filas": [
+    {
+     "nombre": "YPF",
+     "valor": "US$ 36,54",
+     "cambio": 4.1,
+     "tipo": "pct",
+     "sub": "YPF",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Vista Energy",
+     "valor": "US$ 51,93",
+     "cambio": 0.0,
+     "tipo": "pct",
+     "sub": "VIST",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Transportadora Gas del Sur",
+     "valor": "US$ 20,27",
+     "cambio": 0.0,
+     "tipo": "pct",
+     "sub": "TGS",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Cresud",
+     "valor": "US$ 8,32",
+     "cambio": -0.72,
+     "tipo": "pct",
+     "sub": "poco volumen",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Corporación América",
+     "valor": "US$ 23,65",
+     "cambio": 0.0,
+     "tipo": "pct",
+     "sub": "CAAP",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "IRSA",
+     "valor": "US$ 11,43",
+     "cambio": 0.0,
+     "tipo": "pct",
+     "sub": "IRS",
+     "destacado": false,
+     "inverso": false
+    }
+   ],
+   "nota": "Fuera de horario se opera poco: con poco volumen el precio puede moverse mucho.",
+   "link": "#mercados",
+   "link_txt": "Ver en Mercados"
+  },
+  {
    "id": "acciones",
    "circulo": "Acciones",
    "kicker": "Panel líder en BYMA",
@@ -41,8 +136,8 @@
    "filas": [
     {
      "nombre": "Aluar",
-     "valor": "$ 839",
-     "cambio": 5.07,
+     "valor": "$ 838",
+     "cambio": 4.94,
      "tipo": "pct",
      "sub": "ALUA",
      "destacado": false,
@@ -50,8 +145,8 @@
     },
     {
      "nombre": "Transener",
-     "valor": "$ 1.946",
-     "cambio": 4.73,
+     "valor": "$ 1.947",
+     "cambio": 4.79,
      "tipo": "pct",
      "sub": "TRAN",
      "destacado": false,
@@ -68,8 +163,8 @@
     },
     {
      "nombre": "Cresud",
-     "valor": "$ 1.454",
-     "cambio": -4.84,
+     "valor": "$ 1.456",
+     "cambio": -4.71,
      "tipo": "pct",
      "sub": "CRES",
      "destacado": false,
@@ -86,15 +181,15 @@
     },
     {
      "nombre": "YPF",
-     "valor": "$ 6.035",
-     "cambio": -2.1,
+     "valor": "$ 6.040",
+     "cambio": -2.02,
      "tipo": "pct",
      "sub": "YPFD",
      "destacado": false,
      "inverso": false
     }
    ],
-   "nota": "En Nueva York, Cresud bajó 6,4%.",
+   "nota": "En Nueva York, Cresud bajó 6,7%.",
    "link": "#mercados",
    "link_txt": "Ver el mapa del mercado"
   },
@@ -237,12 +332,12 @@
    "circulo": "Mundo",
    "kicker": "Mercados del mundo",
    "titulo": "Afuera, lo que más se movió: Cobre",
-   "texto": "El S&P 500 bajó 0,1%.",
+   "texto": "El S&P 500 bajó 0,2%.",
    "filas": [
     {
      "nombre": "Cobre",
      "valor": "US$ 5,67",
-     "cambio": -5.12,
+     "cambio": -5.05,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -250,8 +345,8 @@
     },
     {
      "nombre": "Peso mexicano",
-     "valor": "18,90",
-     "cambio": 2.05,
+     "valor": "18,86",
+     "cambio": 1.85,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -259,8 +354,8 @@
     },
     {
      "nombre": "Oro",
-     "valor": "US$ 3.734",
-     "cambio": -3.38,
+     "valor": "US$ 3.727",
+     "cambio": -3.55,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -268,8 +363,8 @@
     },
     {
      "nombre": "Bitcoin",
-     "valor": "US$ 62.483",
-     "cambio": -3.72,
+     "valor": "US$ 62.224",
+     "cambio": -4.11,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -286,8 +381,8 @@
     },
     {
      "nombre": "Petróleo Brent",
-     "valor": "US$ 88,92",
-     "cambio": -4.53,
+     "valor": "US$ 88,82",
+     "cambio": -4.64,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -335,8 +430,8 @@
    "filas": [
     {
      "nombre": "Telecom Argentina",
-     "valor": "US$ 10,30",
-     "cambio": -2.55,
+     "valor": "US$ 10,29",
+     "cambio": -2.65,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -353,8 +448,8 @@
     },
     {
      "nombre": "Pampa Energía",
-     "valor": "US$ 62,44",
-     "cambio": -4.25,
+     "valor": "US$ 62,42",
+     "cambio": -4.28,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -362,8 +457,8 @@
     },
     {
      "nombre": "Cresud",
-     "valor": "US$ 8,40",
-     "cambio": -13.71,
+     "valor": "US$ 8,38",
+     "cambio": -13.96,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -371,8 +466,8 @@
     },
     {
      "nombre": "Supervielle",
-     "valor": "US$ 5,33",
-     "cambio": -10.27,
+     "valor": "US$ 5,31",
+     "cambio": -10.61,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -380,8 +475,8 @@
     },
     {
      "nombre": "IRSA",
-     "valor": "US$ 11,46",
-     "cambio": -8.61,
+     "valor": "US$ 11,43",
+     "cambio": -8.85,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -455,7 +550,7 @@
     {
      "nombre": "Cobre",
      "valor": "US$ 5,67",
-     "cambio": -6.74,
+     "cambio": -6.66,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -472,8 +567,8 @@
     },
     {
      "nombre": "Oro",
-     "valor": "US$ 3.734",
-     "cambio": -3.93,
+     "valor": "US$ 3.727",
+     "cambio": -4.1,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -481,8 +576,8 @@
     },
     {
      "nombre": "MSCI Mundo (ETF URTH)",
-     "valor": "US$ 197,96",
-     "cambio": -3.23,
+     "valor": "US$ 197,72",
+     "cambio": -3.34,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -491,7 +586,7 @@
     {
      "nombre": "MSCI Emergentes (ETF EEM)",
      "valor": "US$ 57,88",
-     "cambio": -4.98,
+     "cambio": -4.99,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
