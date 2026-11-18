@@ -1,19 +1,19 @@
 {
- "generado": "2026-11-18T12:01:39+00:00",
+ "generado": "2026-11-18T13:13:09+00:00",
  "fecha": "2026-11-18",
- "hora": "09:01",
+ "hora": "10:13",
  "dia": [
   {
    "id": "apertura",
    "circulo": "Apertura",
    "kicker": "Antes de que abra Nueva York",
-   "titulo": "Wall Street viene en alza",
-   "texto": "Los futuros del S&P 500 marcan +0,4%. Nueva York abre a las 11:30.",
+   "titulo": "Wall Street viene estable",
+   "texto": "Los futuros del S&P 500 marcan +0,2%. Nueva York abre a las 11:30.",
    "grandes": [
     {
      "nombre": "S&P 500 (futuro)",
-     "valor": "7.389",
-     "cambio": 0.4,
+     "valor": "7.371",
+     "cambio": 0.17,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -21,8 +21,8 @@
     },
     {
      "nombre": "Nasdaq 100 (futuro)",
-     "valor": "27.316",
-     "cambio": 0.89,
+     "valor": "27.227",
+     "cambio": 0.56,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -30,8 +30,8 @@
     },
     {
      "nombre": "Dow Jones (futuro)",
-     "valor": "50.852",
-     "cambio": 0.07,
+     "valor": "50.730",
+     "cambio": -0.17,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -39,6 +39,15 @@
     }
    ],
    "filas": [
+    {
+     "nombre": "Central Puerto",
+     "valor": "US$ 10,58",
+     "cambio": 1.5,
+     "tipo": "pct",
+     "sub": "poco volumen",
+     "destacado": false,
+     "inverso": false
+    },
     {
      "nombre": "Loma Negra",
      "valor": "US$ 8,28",
@@ -50,17 +59,8 @@
     },
     {
      "nombre": "Mercado Libre",
-     "valor": "US$ 1.441,70",
-     "cambio": 0.34,
-     "tipo": "pct",
-     "sub": "poco volumen",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "IRSA",
-     "valor": "US$ 11,74",
-     "cambio": 0.26,
+     "valor": "US$ 1.441,12",
+     "cambio": 0.3,
      "tipo": "pct",
      "sub": "poco volumen",
      "destacado": false,
@@ -86,8 +86,8 @@
     },
     {
      "nombre": "Vista Energy",
-     "valor": "US$ 53,92",
-     "cambio": -0.07,
+     "valor": "US$ 53,60",
+     "cambio": -0.67,
      "tipo": "pct",
      "sub": "poco volumen",
      "destacado": false,
@@ -103,7 +103,7 @@
    "circulo": "Hoy",
    "kicker": "Miércoles 18 de noviembre",
    "titulo": "El día en 30 segundos",
-   "texto": "Lo más llamativo: Cobre bajó 3,7%, 2,6 veces lo que se mueve en un día normal.",
+   "texto": "Lo más llamativo: Cobre bajó 4,0%, 2,7 veces lo que se mueve en un día normal.",
    "grandes": [
     {
      "nombre": "Dólar CCL",
@@ -132,12 +132,12 @@
    "circulo": "Acciones",
    "kicker": "Panel líder en BYMA",
    "titulo": "Día verde en la bolsa",
-   "texto": "14 de 22 acciones del panel líder subieron y 8 bajaron.",
+   "texto": "14 de 22 acciones del panel líder subieron y 7 bajaron.",
    "filas": [
     {
      "nombre": "Aluar",
-     "valor": "$ 796",
-     "cambio": 4.12,
+     "valor": "$ 798",
+     "cambio": 4.45,
      "tipo": "pct",
      "sub": "ALUA",
      "destacado": false,
@@ -145,8 +145,8 @@
     },
     {
      "nombre": "TGS",
-     "valor": "$ 6.985",
-     "cambio": 3.32,
+     "valor": "$ 6.990",
+     "cambio": 3.4,
      "tipo": "pct",
      "sub": "TGSU2",
      "destacado": false,
@@ -155,7 +155,7 @@
     {
      "nombre": "Telecom",
      "valor": "$ 3.555",
-     "cambio": 3.26,
+     "cambio": 3.27,
      "tipo": "pct",
      "sub": "TECO2",
      "destacado": false,
@@ -163,8 +163,8 @@
     },
     {
      "nombre": "Metrogas",
-     "valor": "$ 2.055",
-     "cambio": -7.68,
+     "valor": "$ 2.051",
+     "cambio": -7.86,
      "tipo": "pct",
      "sub": "METR",
      "destacado": false,
@@ -172,8 +172,8 @@
     },
     {
      "nombre": "Sociedad Comercial del Plata",
-     "valor": "$ 29,40",
-     "cambio": -3.13,
+     "valor": "$ 29,22",
+     "cambio": -3.72,
      "tipo": "pct",
      "sub": "COME",
      "destacado": false,
@@ -181,8 +181,8 @@
     },
     {
      "nombre": "Transportadora Gas del Norte",
-     "valor": "$ 2.355",
-     "cambio": -2.32,
+     "valor": "$ 2.354",
+     "cambio": -2.36,
      "tipo": "pct",
      "sub": "TGNO4",
      "destacado": false,
@@ -336,8 +336,8 @@
    "filas": [
     {
      "nombre": "Cobre",
-     "valor": "US$ 5,75",
-     "cambio": -3.72,
+     "valor": "US$ 5,74",
+     "cambio": -3.96,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -345,35 +345,8 @@
     },
     {
      "nombre": "Oro",
-     "valor": "US$ 3.763",
-     "cambio": -2.63,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Yuan",
-     "valor": "6,65",
-     "cambio": -0.15,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Índice dólar (DXY)",
-     "valor": "103,82",
-     "cambio": 0.32,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Petróleo Brent",
-     "valor": "US$ 89,99",
-     "cambio": -3.38,
+     "valor": "US$ 3.755",
+     "cambio": -2.82,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -381,8 +354,35 @@
     },
     {
      "nombre": "Trigo",
-     "valor": "US$ 220,92",
-     "cambio": 1.01,
+     "valor": "US$ 221,56",
+     "cambio": 1.3,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Índice dólar (DXY)",
+     "valor": "103,81",
+     "cambio": 0.31,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "MSCI Mundo (ETF URTH)",
+     "valor": "US$ 198,73",
+     "cambio": -1.06,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Petróleo Brent",
+     "valor": "US$ 90,30",
+     "cambio": -3.05,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -400,7 +400,7 @@
    "circulo": "Semana",
    "kicker": "Semana del 16 de noviembre",
    "titulo": "La semana en 30 segundos",
-   "texto": "Lo que más se salió de lo normal: Cobre, que bajó 5,4% en la semana.",
+   "texto": "Lo que más se salió de lo normal: Cobre, que bajó 5,6% en la semana.",
    "grandes": [
     {
      "nombre": "Dólar CCL",
@@ -549,8 +549,8 @@
    "filas": [
     {
      "nombre": "Cobre",
-     "valor": "US$ 5,75",
-     "cambio": -5.36,
+     "valor": "US$ 5,74",
+     "cambio": -5.59,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -560,6 +560,15 @@
      "nombre": "MSCI Mundo (ETF URTH)",
      "valor": "US$ 198,73",
      "cambio": -2.85,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Euro Stoxx 50",
+     "valor": "6.203",
+     "cambio": -2.88,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -584,18 +593,9 @@
      "inverso": false
     },
     {
-     "nombre": "Euro Stoxx 50",
-     "valor": "6.225",
-     "cambio": -2.53,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Euro",
-     "valor": "1,10",
-     "cambio": -0.76,
+     "nombre": "Oro",
+     "valor": "US$ 3.755",
+     "cambio": -3.37,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
