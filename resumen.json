@@ -1,14 +1,14 @@
 {
- "generado": "2026-11-18T21:57:02+00:00",
+ "generado": "2026-11-18T22:54:59+00:00",
  "fecha": "2026-11-18",
- "hora": "18:57",
+ "hora": "19:54",
  "dia": [
   {
    "id": "hoy",
    "circulo": "Hoy",
    "kicker": "Miércoles 18 de noviembre",
    "titulo": "Un día movido",
-   "texto": "Lo más llamativo: Cobre bajó 5,0%, 3,5 veces lo que se mueve en un día normal.",
+   "texto": "Lo más llamativo: Cobre bajó 5,2%, 3,6 veces lo que se mueve en un día normal.",
    "grandes": [
     {
      "nombre": "Dólar CCL",
@@ -41,8 +41,8 @@
    "grandes": [
     {
      "nombre": "S&P 500 (futuro)",
-     "valor": "7.342",
-     "cambio": -0.24,
+     "valor": "7.340",
+     "cambio": -0.0,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -50,8 +50,8 @@
     },
     {
      "nombre": "Nasdaq 100 (futuro)",
-     "valor": "27.197",
-     "cambio": 0.45,
+     "valor": "27.175",
+     "cambio": -0.04,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -59,8 +59,8 @@
     },
     {
      "nombre": "Dow Jones (futuro)",
-     "valor": "50.261",
-     "cambio": -1.09,
+     "valor": "50.258",
+     "cambio": -0.03,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -70,8 +70,8 @@
    "filas": [
     {
      "nombre": "YPF",
-     "valor": "US$ 36,54",
-     "cambio": 4.1,
+     "valor": "US$ 35,78",
+     "cambio": 1.94,
      "tipo": "pct",
      "sub": "YPF",
      "destacado": false,
@@ -79,8 +79,8 @@
     },
     {
      "nombre": "Vista Energy",
-     "valor": "US$ 51,93",
-     "cambio": 0.0,
+     "valor": "US$ 52,71",
+     "cambio": 1.5,
      "tipo": "pct",
      "sub": "VIST",
      "destacado": false,
@@ -336,8 +336,8 @@
    "filas": [
     {
      "nombre": "Cobre",
-     "valor": "US$ 5,67",
-     "cambio": -5.05,
+     "valor": "US$ 5,66",
+     "cambio": -5.25,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -345,8 +345,8 @@
     },
     {
      "nombre": "Peso mexicano",
-     "valor": "18,86",
-     "cambio": 1.85,
+     "valor": "18,88",
+     "cambio": 1.97,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -354,8 +354,8 @@
     },
     {
      "nombre": "Oro",
-     "valor": "US$ 3.727",
-     "cambio": -3.55,
+     "valor": "US$ 3.728",
+     "cambio": -3.53,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -363,8 +363,17 @@
     },
     {
      "nombre": "Bitcoin",
-     "valor": "US$ 62.224",
-     "cambio": -4.11,
+     "valor": "US$ 62.232",
+     "cambio": -4.1,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Petróleo Brent",
+     "valor": "US$ 88,68",
+     "cambio": -4.79,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -374,15 +383,6 @@
      "nombre": "Trigo",
      "valor": "US$ 215,59",
      "cambio": -1.43,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Petróleo Brent",
-     "valor": "US$ 88,82",
-     "cambio": -4.64,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -400,7 +400,7 @@
    "circulo": "Semana",
    "kicker": "Semana del 16 de noviembre",
    "titulo": "La semana en 30 segundos",
-   "texto": "Lo que más se salió de lo normal: Cobre, que bajó 6,7% en la semana.",
+   "texto": "Lo que más se salió de lo normal: Cobre, que bajó 6,9% en la semana.",
    "grandes": [
     {
      "nombre": "Dólar CCL",
@@ -549,8 +549,8 @@
    "filas": [
     {
      "nombre": "Cobre",
-     "valor": "US$ 5,67",
-     "cambio": -6.66,
+     "valor": "US$ 5,66",
+     "cambio": -6.86,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -567,8 +567,8 @@
     },
     {
      "nombre": "Oro",
-     "valor": "US$ 3.727",
-     "cambio": -4.1,
+     "valor": "US$ 3.728",
+     "cambio": -4.08,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
