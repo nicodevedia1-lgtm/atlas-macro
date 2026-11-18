@@ -1,14 +1,14 @@
 {
- "generado": "2026-11-18T16:03:19+00:00",
+ "generado": "2026-11-18T17:06:59+00:00",
  "fecha": "2026-11-18",
- "hora": "13:03",
+ "hora": "14:06",
  "dia": [
   {
    "id": "hoy",
    "circulo": "Hoy",
    "kicker": "Miércoles 18 de noviembre",
    "titulo": "El día en 30 segundos",
-   "texto": "Lo más llamativo: Cobre bajó 5,4%, 3,7 veces lo que se mueve en un día normal.",
+   "texto": "Lo más llamativo: Cobre bajó 5,9%, 4,1 veces lo que se mueve en un día normal.",
    "grandes": [
     {
      "nombre": "Dólar CCL",
@@ -37,64 +37,64 @@
    "circulo": "Acciones",
    "kicker": "Panel líder en BYMA",
    "titulo": "Bolsa mixta",
-   "texto": "10 de 22 acciones del panel líder subieron y 11 bajaron.",
+   "texto": "12 de 22 acciones del panel líder subieron y 10 bajaron.",
    "filas": [
     {
      "nombre": "Aluar",
-     "valor": "$ 825",
-     "cambio": 3.31,
+     "valor": "$ 842",
+     "cambio": 5.44,
      "tipo": "pct",
      "sub": "ALUA",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "BYMA",
-     "valor": "$ 196",
-     "cambio": 2.35,
+     "nombre": "Transener",
+     "valor": "$ 1.938",
+     "cambio": 4.3,
      "tipo": "pct",
-     "sub": "BYMA",
+     "sub": "TRAN",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Transportadora Gas del Norte",
-     "valor": "$ 2.400",
-     "cambio": 1.95,
+     "nombre": "Ternium Argentina",
+     "valor": "$ 714",
+     "cambio": 4.15,
      "tipo": "pct",
-     "sub": "TGNO4",
+     "sub": "TXAR",
      "destacado": false,
      "inverso": false
     },
     {
      "nombre": "Cresud",
-     "valor": "$ 1.467",
-     "cambio": -3.99,
+     "valor": "$ 1.483",
+     "cambio": -2.94,
      "tipo": "pct",
      "sub": "CRES",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Telecom",
-     "valor": "$ 3.450",
-     "cambio": -2.95,
-     "tipo": "pct",
-     "sub": "TECO2",
-     "destacado": false,
-     "inverso": false
-    },
-    {
      "nombre": "Grupo Galicia",
-     "valor": "$ 4.730",
-     "cambio": -2.62,
+     "valor": "$ 4.722",
+     "cambio": -2.77,
      "tipo": "pct",
      "sub": "GGAL",
      "destacado": false,
      "inverso": false
+    },
+    {
+     "nombre": "Supervielle",
+     "valor": "$ 1.818",
+     "cambio": -2.15,
+     "tipo": "pct",
+     "sub": "SUPV",
+     "destacado": false,
+     "inverso": false
     }
    ],
-   "nota": "En Nueva York, Cresud bajó 5,3%.",
+   "nota": "En Nueva York, Corporación América bajó 3,0%.",
    "link": "#mercados",
    "link_txt": "Ver el mapa del mercado"
   },
@@ -102,8 +102,8 @@
    "id": "bonos",
    "circulo": "Bonos",
    "kicker": "Bonos en dólares (Globales)",
-   "titulo": "La curva, sin cambios grandes",
-   "texto": "El GD30 rinde 13,2% y el GD46 11,8%: la curva está invertida, los bonos cortos rinden 1,3 puntos más que los largos.",
+   "titulo": "La curva se empinó",
+   "texto": "El GD30 rinde 13,0% y el GD46 12,0%: la curva está invertida, los bonos cortos rinden 1,0 puntos más que los largos.",
    "grandes": [
     {
      "nombre": "Riesgo país",
@@ -118,8 +118,8 @@
    "filas": [
     {
      "nombre": "GD30",
-     "valor": "13,2%",
-     "cambio": -7.0,
+     "valor": "13,0%",
+     "cambio": -19.0,
      "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
@@ -128,7 +128,7 @@
     {
      "nombre": "GD35",
      "valor": "12,5%",
-     "cambio": 12.0,
+     "cambio": 7.0,
      "tipo": "pb",
      "sub": "vence 2035",
      "destacado": false,
@@ -136,8 +136,8 @@
     },
     {
      "nombre": "GD38",
-     "valor": "12,5%",
-     "cambio": 25.0,
+     "valor": "12,3%",
+     "cambio": 12.0,
      "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
@@ -146,7 +146,7 @@
     {
      "nombre": "GD41",
      "valor": "12,2%",
-     "cambio": -3.0,
+     "cambio": -7.0,
      "tipo": "pb",
      "sub": "vence 2041",
      "destacado": false,
@@ -154,8 +154,8 @@
     },
     {
      "nombre": "GD46",
-     "valor": "11,8%",
-     "cambio": -5.0,
+     "valor": "12,0%",
+     "cambio": 18.0,
      "tipo": "pb",
      "sub": "vence 2046",
      "destacado": false,
@@ -241,8 +241,8 @@
    "filas": [
     {
      "nombre": "Cobre",
-     "valor": "US$ 5,65",
-     "cambio": -5.43,
+     "valor": "US$ 5,62",
+     "cambio": -5.92,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -250,26 +250,17 @@
     },
     {
      "nombre": "Oro",
-     "valor": "US$ 3.756",
-     "cambio": -2.81,
+     "valor": "US$ 3.741",
+     "cambio": -3.19,
      "tipo": "pct",
-     "sub": null,
-     "destacado": false,
+     "sub": "fuera de lo normal",
+     "destacado": true,
      "inverso": false
     },
     {
-     "nombre": "Maíz",
-     "valor": "US$ 173,52",
-     "cambio": -1.34,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Bitcoin",
-     "valor": "US$ 63.016",
-     "cambio": -2.89,
+     "nombre": "Petróleo Brent",
+     "valor": "US$ 88,42",
+     "cambio": -5.07,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -277,17 +268,26 @@
     },
     {
      "nombre": "Peso mexicano",
-     "valor": "18,66",
-     "cambio": 0.79,
+     "valor": "18,70",
+     "cambio": 0.97,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Petróleo Brent",
-     "valor": "US$ 89,37",
-     "cambio": -4.05,
+     "nombre": "Bitcoin",
+     "valor": "US$ 62.783",
+     "cambio": -3.25,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Ether",
+     "valor": "US$ 1.754",
+     "cambio": -3.8,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -305,7 +305,7 @@
    "circulo": "Semana",
    "kicker": "Semana del 16 de noviembre",
    "titulo": "La semana en 30 segundos",
-   "texto": "Lo que más se salió de lo normal: Cobre, que bajó 7,0% en la semana.",
+   "texto": "Lo que más se salió de lo normal: Cobre, que bajó 7,5% en la semana.",
    "grandes": [
     {
      "nombre": "Dólar CCL",
@@ -334,18 +334,18 @@
    "titulo": "Las que más subieron y bajaron",
    "filas": [
     {
-     "nombre": "Telecom Argentina",
-     "valor": "US$ 10,14",
-     "cambio": -4.07,
+     "nombre": "Mercado Libre",
+     "valor": "US$ 1.435",
+     "cambio": -3.79,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Mercado Libre",
-     "valor": "US$ 1.429",
-     "cambio": -4.21,
+     "nombre": "Telecom Argentina",
+     "valor": "US$ 10,16",
+     "cambio": -3.88,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -353,8 +353,8 @@
     },
     {
      "nombre": "Central Puerto",
-     "valor": "US$ 10,36",
-     "cambio": -4.6,
+     "valor": "US$ 10,40",
+     "cambio": -4.19,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -362,8 +362,8 @@
     },
     {
      "nombre": "Cresud",
-     "valor": "US$ 8,50",
-     "cambio": -12.73,
+     "valor": "US$ 8,55",
+     "cambio": -12.22,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -371,8 +371,8 @@
     },
     {
      "nombre": "Supervielle",
-     "valor": "US$ 5,26",
-     "cambio": -11.45,
+     "valor": "US$ 5,28",
+     "cambio": -11.2,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -380,8 +380,8 @@
     },
     {
      "nombre": "Edenor",
-     "valor": "US$ 12,83",
-     "cambio": -8.68,
+     "valor": "US$ 12,74",
+     "cambio": -9.32,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -399,8 +399,8 @@
    "filas": [
     {
      "nombre": "GD30",
-     "valor": "13,2%",
-     "cambio": 49.0,
+     "valor": "13,0%",
+     "cambio": 37.0,
      "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
@@ -409,7 +409,7 @@
     {
      "nombre": "GD35",
      "valor": "12,5%",
-     "cambio": 24.0,
+     "cambio": 19.0,
      "tipo": "pb",
      "sub": "vence 2035",
      "destacado": false,
@@ -417,8 +417,8 @@
     },
     {
      "nombre": "GD38",
-     "valor": "12,5%",
-     "cambio": 26.0,
+     "valor": "12,3%",
+     "cambio": 13.0,
      "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
@@ -427,7 +427,7 @@
     {
      "nombre": "GD41",
      "valor": "12,2%",
-     "cambio": 27.0,
+     "cambio": 23.0,
      "tipo": "pb",
      "sub": "vence 2041",
      "destacado": false,
@@ -435,8 +435,8 @@
     },
     {
      "nombre": "GD46",
-     "valor": "11,8%",
-     "cambio": 21.0,
+     "valor": "12,0%",
+     "cambio": 44.0,
      "tipo": "pb",
      "sub": "vence 2046",
      "destacado": false,
@@ -454,8 +454,8 @@
    "filas": [
     {
      "nombre": "Cobre",
-     "valor": "US$ 5,65",
-     "cambio": -7.04,
+     "valor": "US$ 5,62",
+     "cambio": -7.53,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -463,8 +463,8 @@
     },
     {
      "nombre": "Euro Stoxx 50",
-     "valor": "6.171",
-     "cambio": -3.39,
+     "valor": "6.154",
+     "cambio": -3.64,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -472,8 +472,17 @@
     },
     {
      "nombre": "MSCI Mundo (ETF URTH)",
-     "valor": "US$ 197,76",
-     "cambio": -3.32,
+     "valor": "US$ 197,79",
+     "cambio": -3.31,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Oro",
+     "valor": "US$ 3.741",
+     "cambio": -3.74,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -481,17 +490,8 @@
     },
     {
      "nombre": "MSCI Emergentes (ETF EEM)",
-     "valor": "US$ 57,89",
-     "cambio": -4.97,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "S&P 500",
-     "valor": "7.317",
-     "cambio": -3.23,
+     "valor": "US$ 57,88",
+     "cambio": -4.98,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
