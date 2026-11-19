@@ -1,14 +1,14 @@
 {
- "generado": "2026-11-19T21:55:34+00:00",
+ "generado": "2026-11-19T22:52:34+00:00",
  "fecha": "2026-11-19",
- "hora": "18:55",
+ "hora": "19:52",
  "dia": [
   {
    "id": "hoy",
    "circulo": "Hoy",
    "kicker": "Jueves 19 de noviembre",
    "titulo": "Un día movido",
-   "texto": "Lo más llamativo: Peso mexicano subió 3,6%, 4,7 veces lo que se mueve en un día normal.",
+   "texto": "Lo más llamativo: Peso mexicano subió 3,5%, 4,6 veces lo que se mueve en un día normal.",
    "grandes": [
     {
      "nombre": "Dólar CCL",
@@ -41,8 +41,8 @@
    "grandes": [
     {
      "nombre": "S&P 500 (futuro)",
-     "valor": "7.174",
-     "cambio": -2.26,
+     "valor": "7.182",
+     "cambio": -0.2,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -50,8 +50,8 @@
     },
     {
      "nombre": "Nasdaq 100 (futuro)",
-     "valor": "26.466",
-     "cambio": -2.65,
+     "valor": "26.506",
+     "cambio": -0.36,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -59,8 +59,8 @@
     },
     {
      "nombre": "Dow Jones (futuro)",
-     "valor": "49.084",
-     "cambio": -2.37,
+     "valor": "49.097",
+     "cambio": -0.17,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -69,27 +69,27 @@
    ],
    "filas": [
     {
-     "nombre": "Globant",
-     "valor": "US$ 41,45",
-     "cambio": 3.68,
-     "tipo": "pct",
-     "sub": "GLOB",
-     "destacado": false,
-     "inverso": false
-    },
-    {
      "nombre": "Vista Energy",
-     "valor": "US$ 50,40",
-     "cambio": 0.44,
+     "valor": "US$ 51,61",
+     "cambio": 2.85,
      "tipo": "pct",
      "sub": "VIST",
      "destacado": false,
      "inverso": false
     },
     {
+     "nombre": "Globant",
+     "valor": "US$ 40,50",
+     "cambio": 1.3,
+     "tipo": "pct",
+     "sub": "GLOB",
+     "destacado": false,
+     "inverso": false
+    },
+    {
      "nombre": "YPF",
-     "valor": "US$ 33,28",
-     "cambio": 0.0,
+     "valor": "US$ 33,39",
+     "cambio": 0.33,
      "tipo": "pct",
      "sub": "YPF",
      "destacado": false,
@@ -97,8 +97,8 @@
     },
     {
      "nombre": "Mercado Libre",
-     "valor": "US$ 1.353,01",
-     "cambio": -0.18,
+     "valor": "US$ 1.351,38",
+     "cambio": -0.3,
      "tipo": "pct",
      "sub": "MELI",
      "destacado": false,
@@ -345,8 +345,8 @@
    "filas": [
     {
      "nombre": "Peso mexicano",
-     "valor": "19,08",
-     "cambio": 3.61,
+     "valor": "19,07",
+     "cambio": 3.55,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -373,7 +373,7 @@
     {
      "nombre": "Libra esterlina",
      "valor": "1,31",
-     "cambio": -0.89,
+     "cambio": -0.86,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -381,8 +381,8 @@
     },
     {
      "nombre": "Oro",
-     "valor": "US$ 3.629",
-     "cambio": -3.03,
+     "valor": "US$ 3.628",
+     "cambio": -3.05,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -390,8 +390,8 @@
     },
     {
      "nombre": "Peso chileno",
-     "valor": "1.016,0",
-     "cambio": 2.23,
+     "valor": "1.015,5",
+     "cambio": 2.18,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -579,7 +579,7 @@
     {
      "nombre": "Cobre",
      "valor": "US$ 5,59",
-     "cambio": -8.05,
+     "cambio": -8.02,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -587,8 +587,8 @@
     },
     {
      "nombre": "Oro",
-     "valor": "US$ 3.629",
-     "cambio": -6.63,
+     "valor": "US$ 3.628",
+     "cambio": -6.65,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -623,8 +623,8 @@
     },
     {
      "nombre": "Peso mexicano",
-     "valor": "19,08",
-     "cambio": 2.63,
+     "valor": "19,07",
+     "cambio": 2.57,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
