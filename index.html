@@ -1050,12 +1050,12 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
 .tec-chip button:hover { background: var(--bg); color: var(--ink); }
 .tec-chart-w { position: relative; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
 .tec-chart { width: 100%; height: 470px; }
-.tec-ley { position: absolute; z-index: 3; top: 8px; left: 10px; right: 70px; display: flex; flex-wrap: wrap; gap: 2px 10px; font-family: var(--f-data); font-size: 12.5px; color: var(--muted); pointer-events: none; }
+.tec-ley { position: absolute; z-index: 6; top: 8px; left: 10px; right: 70px; display: flex; flex-wrap: wrap; gap: 2px 10px; font-family: var(--f-data); font-size: 12.5px; color: var(--muted); pointer-events: none; }
 .tec-ley b { color: var(--ink); font-weight: 500; }
 .tec-ley .pos { color: var(--good); } .tec-ley .neg { color: var(--bad); }
 .tec-l-f { color: var(--ink); }
 .tec-l-ind { flex-basis: 100%; display: flex; gap: 8px; }
-.tec-aviso { position: absolute; inset: 0; z-index: 4; margin: 0; display: grid; place-items: center; padding: 20px; text-align: center; background: var(--surface); color: var(--muted); }
+.tec-aviso { position: absolute; inset: 0; z-index: 7; margin: 0; display: grid; place-items: center; padding: 20px; text-align: center; background: var(--surface); color: var(--muted); }
 .tec-pop { position: absolute; z-index: 40; width: min(400px, calc(100vw - 40px)); max-height: 70vh; overflow-y: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; box-shadow: 0 20px 50px rgba(0,0,0,.4); display: grid; gap: 6px; }
 .tec-pop h3 { margin: 0 0 4px; font-size: 16px; }
 .tec-op { display: grid; gap: 2px; text-align: left; padding: 9px 10px; border: 0; border-radius: 10px; background: none; color: var(--ink); font: inherit; cursor: pointer; }
@@ -1085,6 +1085,25 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   .tec-ley { font-size: 11.5px; right: 56px; }
   .tec-l-ind { display: none; }
 }
+/* ---------- Herramientas de dibujo ---------- */
+.tec-dib { display: flex; flex-wrap: wrap; align-items: center; gap: 4px; }
+.tec-dh { width: 36px; height: 34px; display: inline-grid; place-items: center; border: 1px solid var(--line); border-radius: 9px; background: var(--surface); color: var(--muted); cursor: pointer; padding: 0; }
+.tec-dh svg { width: 18px; height: 18px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.tec-dh:hover:not(:disabled) { color: var(--ink); }
+.tec-dh[aria-pressed="true"] { background: var(--ink); color: var(--surface); border-color: var(--ink); }
+.tec-dh:disabled { opacity: .35; cursor: default; }
+.tec-dsep { width: 1px; height: 22px; background: var(--line); margin: 0 4px; }
+.tec-dcol { display: inline-flex; gap: 4px; margin: 0 4px; }
+.tec-dcol button { width: 22px; height: 22px; border-radius: 50%; border: 2px solid var(--surface); background: var(--c); cursor: pointer; padding: 0; box-shadow: 0 0 0 1px var(--line); }
+.tec-dcol button[aria-pressed="true"] { box-shadow: 0 0 0 2px var(--ink); }
+.btn.tec-dtodo { font-size: 13px; padding: 5px 10px; }
+.tec-dayuda { font-size: 13.5px; color: var(--accent); margin-left: 6px; }
+.tec-svg { position: absolute; left: 0; top: 0; z-index: 5; pointer-events: none; overflow: hidden; }
+.tec-svg.dibujando { pointer-events: all; cursor: crosshair; touch-action: none; }
+.tec-svg .dib-asa { pointer-events: all; cursor: grab; touch-action: none; }
+.tec-svg .dib-et text { fill: #0B0D12; font: 600 11px var(--f-data); }
+.tec-svg .dib-fibo { font: 11px var(--f-data); }
+@media (max-width: 640px) { .tec-dh { width: 34px; height: 32px; } .tec-dayuda { flex-basis: 100%; margin: 2px 0 0; min-height: 19px; } }
 </style>
 
 <header class="topbar">
@@ -1298,8 +1317,10 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
     </div>
     <div class="tec-herr" id="tecHerr"></div>
     <div class="tec-ind" id="tecInd"></div>
+    <div class="tec-dib" id="tecDib" role="toolbar" aria-label="Herramientas de dibujo"></div>
     <div class="tec-chart-w">
       <div class="tec-ley" id="tecLey" aria-live="off"></div>
+      <svg class="tec-svg" id="tecSvg" aria-label="Dibujos sobre el gráfico"></svg>
       <div class="tec-chart" id="tecChart"></div>
       <p class="tec-aviso" id="tecAviso" hidden></p>
     </div>
@@ -6298,7 +6319,7 @@ function tecSugerencias(q) {
   ul.querySelectorAll("li").forEach(li => li.onmousedown = e => { e.preventDefault(); tecElegir(li.dataset.id); });
 }
 function tecElegir(id) {
-  TEC.id = id; const inp = document.getElementById("tecBuscar"); inp.value = ""; document.getElementById("tecSug").hidden = true; inp.setAttribute("aria-expanded", "false");
+  TEC.id = id; tecSel = -1; tecPend = null; const inp = document.getElementById("tecBuscar"); inp.value = ""; document.getElementById("tecSug").hidden = true; inp.setAttribute("aria-expanded", "false");
   history.replaceState(null, "", "#tecnico/" + id); tecAplicar();
 }
 
@@ -6380,6 +6401,7 @@ async function tecAplicar(mantenerZoom) {
   };
   pintar();
   chart.subscribeCrosshairMove(prm => pintar(prm && prm.logical != null ? Math.round(prm.logical) : null));
+  try { tecConectarDibujo(chart, principal, v, C.fondo); } catch (e) { console.error(e); }
 }
 function abrirTecnico() {
   if (tecPendiente) { TEC.id = tecPendiente; tecPendiente = null; }
@@ -6405,6 +6427,192 @@ function armarTecnico() {
   document.getElementById("temaBtn").addEventListener("click", () => setTimeout(() => { if (paginaActual === "tecnico" && tecChart) tecAplicar(true); }, 60));
 }
 armarTecnico();
+
+/* ---------- HERRAMIENTAS DE DIBUJO del análisis técnico ----------
+   Una capa SVG arriba del panel del precio. Cada dibujo guarda fechas y precios (no píxeles), así se queda en su lugar
+   al hacer zoom, al moverse o al pasar de velas diarias a semanales. Se guardan por activo en MIO.dibujos. */
+let TECV = null, tecHerrDib = null, tecSel = -1, tecPend = null, tecRaf = 0;
+const DIB_COLORES = ["#F5A524", "#6EA8FE", "#E5484D", "#1EA65A", "#C084FC", "#EDEDF0"];
+const FIBO = [0, 0.236, 0.382, 0.5, 0.618, 0.786, 1];
+const DIB_HERR = [
+  ["cursor", "Mover y elegir", '<path d="M5 3l14 8-6 2-2 6z"/>'],
+  ["tend", "Línea de tendencia", '<path d="M4 19L20 5"/><circle cx="4" cy="19" r="1.6"/><circle cx="20" cy="5" r="1.6"/>'],
+  ["rayo", "Rayo (línea que sigue hacia adelante)", '<path d="M4 19L22 3" stroke-dasharray="0"/><circle cx="4" cy="19" r="1.6"/>'],
+  ["hor", "Línea horizontal (soporte o resistencia)", '<path d="M2 12h20"/><circle cx="12" cy="12" r="1.6"/>'],
+  ["rect", "Rectángulo (zona)", '<rect x="4" y="6" width="16" height="12" rx="1"/>'],
+  ["fibo", "Retroceso de Fibonacci", '<path d="M3 5h18M3 9.5h18M3 13h18M3 19h18"/>'],
+  ["medir", "Medir: variación y cantidad de velas", '<path d="M4 20L20 4M4 20h6M4 20v-6"/>'],
+];
+const dibujosDe = id => (MIO.dibujos && MIO.dibujos[id]) || [];
+function tecGuardarDib(lista) { MIO.dibujos = MIO.dibujos || {}; if (lista.length) MIO.dibujos[TEC.id] = lista; else delete MIO.dibujos[TEC.id]; mioGuardar(); }
+
+/* --- de fecha y precio a píxeles, y al revés --- */
+function tecSumarPeriodos(fecha, n) {   // para los dibujos que se estiran a la derecha de la última vela
+  const d = new Date(fecha + "T12:00:00Z");
+  if (TEC.intervalo === "M") d.setUTCMonth(d.getUTCMonth() + n);
+  else if (TEC.intervalo === "S") d.setUTCDate(d.getUTCDate() + 7 * n);
+  else { let k = 0; while (k < n) { d.setUTCDate(d.getUTCDate() + 1); if (d.getUTCDay() % 6) k++; } }
+  return d.toISOString().slice(0, 10);
+}
+function tecLogico(t) {
+  const ts = TECV.v.t, u = ts.length - 1;
+  if (t <= ts[0]) return 0;
+  if (t > ts[u]) {
+    const a = new Date(ts[u] + "T12:00:00Z"), b = new Date(t + "T12:00:00Z"), dias = (b - a) / 864e5;
+    return u + (TEC.intervalo === "M" ? dias / 30.44 : TEC.intervalo === "S" ? dias / 7 : dias * 5 / 7);
+  }
+  let lo = 0, hi = u; while (lo < hi) { const m = (lo + hi) >> 1; if (ts[m] < t) lo = m + 1; else hi = m; }
+  return lo;
+}
+const tecXY = pt => ({ x: TECV.chart.timeScale().logicalToCoordinate(tecLogico(pt.t)), y: TECV.serie.priceToCoordinate(pt.p) });
+function tecPunto(x, y) {
+  const ts = TECV.v.t, u = ts.length - 1, L = Math.round(TECV.chart.timeScale().coordinateToLogical(x));
+  const t = L <= 0 ? ts[0] : L <= u ? ts[L] : tecSumarPeriodos(ts[u], L - u);
+  let p = TECV.serie.coordinateToPrice(y);
+  if (MIO.prefs.tecIman && L >= 0 && L <= u) {   // imán: se pega al máximo, mínimo, apertura o cierre más cercano
+    const v = TECV.v, cand = [v.h[L], v.l[L], v.o[L], v.c[L]];
+    const mejor = cand.reduce((a, b) => Math.abs(TECV.serie.priceToCoordinate(b) - y) < Math.abs(TECV.serie.priceToCoordinate(a) - y) ? b : a);
+    if (Math.abs(TECV.serie.priceToCoordinate(mejor) - y) < 28) p = mejor;
+  }
+  return { t, p };
+}
+
+/* --- dibujar --- */
+function tecDibujar() {
+  tecRaf = 0;
+  const svg = document.getElementById("tecSvg"); if (!svg || !TECV) return;
+  const ch = TECV.chart, pane = ch.panes()[0];
+  const W = Math.max(0, document.getElementById("tecChart").clientWidth - ch.priceScale("right").width()), H = pane.getHeight();
+  svg.setAttribute("width", W); svg.setAttribute("height", H); svg.style.width = W + "px"; svg.style.height = H + "px";
+  const lista = dibujosDe(TEC.id).map((d, i) => ({ ...d, i }));
+  if (tecPend && tecPend.b) lista.push({ ...tecPend, i: -2, prov: true });
+  const fmt = p => tecFmt(p, TECV.v.c[TECV.v.c.length - 1]);
+  const etiqueta = (x, y, txt, color, der) => `<g class="dib-et"><rect x="${der ? x - 8 - txt.length * 6.6 : x + 6}" y="${y - 17}" width="${txt.length * 6.6 + 8}" height="16" rx="3" fill="${color}"/><text x="${der ? x - 4 - txt.length * 6.6 : x + 10}" y="${y - 5}">${txt}</text></g>`;
+  let h = "";
+  lista.forEach(d => {
+    const A = tecXY(d.a), B = d.b ? tecXY(d.b) : null, c = d.color || DIB_COLORES[0], sel = d.i === tecSel;
+    if (A.x == null || A.y == null) return;
+    const ancho = sel ? 2.5 : 1.6;
+    if (d.tipo === "hor") {
+      h += `<line x1="0" x2="${W}" y1="${A.y}" y2="${A.y}" stroke="${c}" stroke-width="${ancho}"/>` + etiqueta(W, A.y, fmt(d.a.p), c, true);
+    } else if (B && B.x != null && B.y != null) {
+      if (d.tipo === "tend") h += `<line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" stroke="${c}" stroke-width="${ancho}"/>`;
+      if (d.tipo === "rayo") { const dx = B.x - A.x, dy = B.y - A.y, k = dx > 0 ? (W - A.x) / dx : dx < 0 ? -A.x / dx : 1e4; h += `<line x1="${A.x}" y1="${A.y}" x2="${A.x + dx * Math.max(k, 1)}" y2="${A.y + dy * Math.max(k, 1)}" stroke="${c}" stroke-width="${ancho}"/>`; }
+      if (d.tipo === "rect") h += `<rect x="${Math.min(A.x, B.x)}" y="${Math.min(A.y, B.y)}" width="${Math.abs(B.x - A.x)}" height="${Math.abs(B.y - A.y)}" fill="${c}" fill-opacity=".14" stroke="${c}" stroke-width="${ancho}"/>`;
+      if (d.tipo === "fibo") {
+        const x0 = Math.min(A.x, B.x);
+        h += `<line x1="${A.x}" y1="${A.y}" x2="${B.x}" y2="${B.y}" stroke="${c}" stroke-width="1" stroke-dasharray="4 4"/>`;
+        FIBO.forEach(r => { const p = d.b.p + (d.a.p - d.b.p) * r, y = TECV.serie.priceToCoordinate(p); if (y == null) return;
+          h += `<line x1="${x0}" x2="${W}" y1="${y}" y2="${y}" stroke="${c}" stroke-width="${r === 0.5 || r === 0.618 ? ancho : 1}" stroke-opacity="${r === 0 || r === 1 ? 1 : .8}"/><text class="dib-fibo" x="${x0 + 4}" y="${y - 4}" fill="${c}">${nf(r * 100, r * 1000 % 10 ? 1 : 0)}% · ${fmt(p)}</text>`; });
+      }
+      if (d.tipo === "medir") {
+        const pct = (d.b.p / d.a.p - 1) * 100, velas = Math.round(tecLogico(d.b.t) - tecLogico(d.a.t)), col = pct >= 0 ? "#1EA65A" : "#E5484D";
+        h += `<rect x="${Math.min(A.x, B.x)}" y="${Math.min(A.y, B.y)}" width="${Math.abs(B.x - A.x)}" height="${Math.abs(B.y - A.y)}" fill="${col}" fill-opacity=".16" stroke="${col}" stroke-width="1"/>`
+          + etiqueta((A.x + B.x) / 2 - 60, Math.min(A.y, B.y) - 2, `${pct >= 0 ? "+" : ""}${nf(pct, 2)}% · ${Math.abs(velas)} velas`, col, false);
+      }
+    }
+    if (sel || d.prov) [A, B].forEach((P, k) => { if (P && P.x != null && P.y != null && !(d.tipo === "hor" && k)) h += `<circle class="${d.prov ? "dib-prov" : "dib-asa"}" data-i="${d.i}" data-k="${k ? "b" : "a"}" cx="${d.tipo === "hor" ? Math.min(W - 60, Math.max(20, W / 2)) : P.x}" cy="${P.y}" r="6" fill="${TECV.fondo}" stroke="${c}" stroke-width="2"/>`; });
+  });
+  svg.innerHTML = h;
+  svg.querySelectorAll(".dib-asa").forEach(a => a.addEventListener("pointerdown", tecArrastrarAsa));
+}
+const tecRedibujar = () => { if (!tecRaf) tecRaf = requestAnimationFrame(tecDibujar); };
+
+/* --- tocar el gráfico: dibujar, elegir, arrastrar --- */
+function tecCoord(e) { const r = document.getElementById("tecSvg").getBoundingClientRect(); return [e.clientX - r.left, e.clientY - r.top]; }
+function tecDist(px, py, ax, ay, bx, by) { const dx = bx - ax, dy = by - ay, l = dx * dx + dy * dy; let t = l ? ((px - ax) * dx + (py - ay) * dy) / l : 0; t = Math.max(0, Math.min(1, t)); return Math.hypot(px - ax - t * dx, py - ay - t * dy); }
+function tecTocado(x, y) {
+  const W = +document.getElementById("tecSvg").getAttribute("width");
+  let mejor = -1, dmin = 9;
+  dibujosDe(TEC.id).forEach((d, i) => {
+    const A = tecXY(d.a), B = d.b && tecXY(d.b); if (A.y == null) return;
+    let dd = Infinity;
+    if (d.tipo === "hor") dd = Math.abs(y - A.y);
+    else if (B && B.x != null) {
+      if (d.tipo === "tend" || d.tipo === "medir") dd = tecDist(x, y, A.x, A.y, B.x, B.y);
+      if (d.tipo === "rayo") { const k = B.x - A.x ? Math.max((W - A.x) / (B.x - A.x), 1) : 1; dd = tecDist(x, y, A.x, A.y, A.x + (B.x - A.x) * k, A.y + (B.y - A.y) * k); }
+      if (d.tipo === "rect") { const x0 = Math.min(A.x, B.x), x1 = Math.max(A.x, B.x), y0 = Math.min(A.y, B.y), y1 = Math.max(A.y, B.y); dd = x >= x0 && x <= x1 && y >= y0 && y <= y1 ? 0 : Infinity; }
+      if (d.tipo === "fibo" && x >= Math.min(A.x, B.x) - 4) FIBO.forEach(r => { const yy = TECV.serie.priceToCoordinate(d.b.p + (d.a.p - d.b.p) * r); if (yy != null) dd = Math.min(dd, Math.abs(y - yy)); });
+    }
+    if (dd < dmin) { dmin = dd; mejor = i; }
+  });
+  return mejor;
+}
+function tecElegirHerr(h) {
+  tecHerrDib = h === "cursor" ? null : h; tecPend = null;
+  const svg = document.getElementById("tecSvg");
+  svg.classList.toggle("dibujando", !!tecHerrDib);
+  document.querySelectorAll("#tecDib [data-h]").forEach(b => b.setAttribute("aria-pressed", String((b.dataset.h === "cursor" && !tecHerrDib) || b.dataset.h === tecHerrDib)));
+  document.getElementById("tecDibAyuda").textContent = !tecHerrDib ? "" : tecHerrDib === "hor" ? "Tocá el precio donde va la línea." : "Tocá el primer punto y después el segundo. Esc para cancelar.";
+  tecRedibujar();
+}
+function tecPintarBarraDib() {
+  const lista = dibujosDe(TEC.id), sel = lista[tecSel];
+  document.getElementById("tecDib").innerHTML = DIB_HERR.map(([k, t, ico]) => `<button type="button" class="tec-dh" data-h="${k}" aria-pressed="${(k === "cursor" && !tecHerrDib) || k === tecHerrDib}" aria-label="${t}" title="${t}"><svg viewBox="0 0 24 24" aria-hidden="true">${ico}</svg></button>`).join("")
+    + `<span class="tec-dsep"></span><button type="button" class="tec-dh" id="tecIman" aria-pressed="${!!MIO.prefs.tecIman}" aria-label="Imán: pegar los puntos al máximo, mínimo, apertura o cierre de la vela" title="Imán: pega los puntos a la vela más cercana"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3v8a6 6 0 0012 0V3h-4v8a2 2 0 01-4 0V3z"/><path d="M6 7h4M14 7h4"/></svg></button>`
+    + `<span class="tec-dcol" role="group" aria-label="Color">${DIB_COLORES.map(c => `<button type="button" data-col="${c}" style="--c:${c}" aria-label="Color ${c}" aria-pressed="${(sel ? sel.color : MIO.prefs.tecColor || DIB_COLORES[0]) === c}"></button>`).join("")}</span>`
+    + `<button type="button" class="tec-dh" id="tecBorrarDib" ${sel ? "" : "disabled"} aria-label="Borrar el dibujo elegido" title="Borrar el dibujo elegido (tecla Supr)"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/></svg></button>`
+    + (lista.length ? `<button type="button" class="btn tec-dtodo" id="tecBorrarTodo">Borrar todos (${lista.length})</button>` : "")
+    + `<span class="tec-dayuda" id="tecDibAyuda" aria-live="polite"></span>`;
+  document.querySelectorAll("#tecDib [data-h]").forEach(b => b.onclick = () => tecElegirHerr(b.dataset.h));
+  document.getElementById("tecIman").onclick = e => { MIO.prefs.tecIman = !MIO.prefs.tecIman; mioGuardar(); e.currentTarget.setAttribute("aria-pressed", String(MIO.prefs.tecIman)); };
+  document.querySelectorAll("#tecDib [data-col]").forEach(b => b.onclick = () => {
+    MIO.prefs.tecColor = b.dataset.col;
+    const l = dibujosDe(TEC.id); if (l[tecSel]) { l[tecSel].color = b.dataset.col; tecGuardarDib(l); } else mioGuardar();
+    tecPintarBarraDib(); tecRedibujar(); });
+  document.getElementById("tecBorrarDib").onclick = tecBorrarSel;
+  const bt = document.getElementById("tecBorrarTodo"); if (bt) bt.onclick = () => { tecGuardarDib([]); tecSel = -1; tecPintarBarraDib(); tecRedibujar(); mioAviso("Borraste los dibujos de este gráfico"); };
+  if (tecHerrDib) tecElegirHerr(tecHerrDib);
+}
+function tecBorrarSel() { const l = dibujosDe(TEC.id); if (!l[tecSel]) return; l.splice(tecSel, 1); tecGuardarDib(l); tecSel = -1; tecPintarBarraDib(); tecRedibujar(); }
+function tecArrastrarAsa(e) {
+  e.preventDefault(); e.stopPropagation();
+  const asa = e.currentTarget, i = +asa.dataset.i, k = asa.dataset.k; if (i < 0) return;
+  const l = dibujosDe(TEC.id), d = l[i]; if (!d) return;
+  TECV.chart.applyOptions({ handleScroll: false, handleScale: false });
+  const mover = ev => { const [x, y] = tecCoord(ev); d[k] = tecPunto(x, y); tecRedibujar(); };
+  const soltar = () => { window.removeEventListener("pointermove", mover); window.removeEventListener("pointerup", soltar); TECV.chart.applyOptions({ handleScroll: true, handleScale: true }); tecGuardarDib(l); };
+  window.addEventListener("pointermove", mover); window.addEventListener("pointerup", soltar);
+}
+function armarDibujo() {
+  const svg = document.getElementById("tecSvg"), w = document.getElementById("tecChart");
+  // con una herramienta puesta, la capa recibe los toques
+  svg.addEventListener("pointerdown", e => {
+    if (!tecHerrDib || !TECV || e.target.classList.contains("dib-asa")) return;
+    e.preventDefault();
+    const [x, y] = tecCoord(e), pt = tecPunto(x, y), color = MIO.prefs.tecColor || DIB_COLORES[0];
+    if (tecHerrDib === "hor") { const l = dibujosDe(TEC.id); l.push({ tipo: "hor", a: pt, color }); tecGuardarDib(l); tecSel = l.length - 1; tecElegirHerr("cursor"); tecPintarBarraDib(); return; }
+    if (!tecPend) { tecPend = { tipo: tecHerrDib, a: pt, b: pt, color }; tecRedibujar(); return; }
+    const l = dibujosDe(TEC.id); l.push({ tipo: tecPend.tipo, a: tecPend.a, b: pt, color: tecPend.color }); tecGuardarDib(l);
+    tecSel = l.length - 1; tecPend = null; tecElegirHerr("cursor"); tecPintarBarraDib();
+  });
+  svg.addEventListener("pointermove", e => { if (tecPend) { const [x, y] = tecCoord(e); tecPend.b = tecPunto(x, y); tecRedibujar(); } });
+  // sin herramienta: tocar un dibujo lo elige (para moverlo de las puntas, cambiarle el color o borrarlo)
+  let down = null;
+  w.addEventListener("pointerdown", e => { down = [e.clientX, e.clientY]; }, true);
+  w.addEventListener("pointerup", e => {
+    if (tecHerrDib || !down || !TECV || Math.hypot(e.clientX - down[0], e.clientY - down[1]) > 4) return;
+    const [x, y] = tecCoord(e), i = tecTocado(x, y);
+    if (i !== tecSel) { tecSel = i; tecPintarBarraDib(); tecRedibujar(); }
+  }, true);
+  ["wheel", "pointermove", "pointerup"].forEach(ev => w.addEventListener(ev, tecRedibujar, { passive: true }));
+  window.addEventListener("resize", tecRedibujar);
+  document.addEventListener("keydown", e => {
+    if (paginaActual !== "tecnico" || /INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)) return;
+    if (e.key === "Escape" && (tecHerrDib || tecPend)) { tecElegirHerr("cursor"); }
+    else if ((e.key === "Delete" || e.key === "Backspace") && tecSel >= 0) { e.preventDefault(); tecBorrarSel(); }
+  });
+}
+/* lo llama tecAplicar cada vez que rearma el gráfico */
+function tecConectarDibujo(chart, serie, v, fondo) {
+  TECV = { chart, serie, v, fondo };
+  chart.timeScale().subscribeVisibleLogicalRangeChange(tecRedibujar);
+  chart.timeScale().subscribeSizeChange(tecRedibujar);
+  if (tecSel >= dibujosDe(TEC.id).length) tecSel = -1;
+  tecPintarBarraDib();
+  setTimeout(tecDibujar, 0); setTimeout(tecDibujar, 120);   // después de que el gráfico toma su tamaño
+}
+armarDibujo();
 
 const leer = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: error ${r.status}`); return r.json(); });
 Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null), leer("riesgo.json").catch(() => null), leer("calendario.json").catch(() => null), leer("mercados.json").catch(() => null), leer("socios.json").catch(() => null), leer("senales.json").catch(() => null)])
