@@ -2851,7 +2851,9 @@ function renderHome() {
   if (casa("contadoconliqui")) F.push(homeFila("bcra", "Dólar CCL", `Oficial ${pesos(cotiz("oficial").venta)} · MEP ${pesos(cotiz("bolsa").venta)}`, pesos(cotiz("contadoconliqui").venta), pctC(varCasa("contadoconliqui"))));
   const rp = ARGENTINA.riesgo_pais.ultimo;
   const rpRes = RESUMEN && RESUMEN.dia && RESUMEN.dia[0] && (RESUMEN.dia[0].grandes || []).find(g => g.nombre === "Riesgo país");
-  F.push(homeFila("mercados", "Riesgo país", "Puntos básicos sobre los bonos de EE. UU.", nf(rpRes ? +rpRes.valor.replace(/\./g, "") : rp.valor), rpRes && rpRes.cambio != null ? pbC(rpRes.cambio) : undefined));
+  // durante la rueda, argentina.json trae el valor del momento (Ámbito) y el cierre anterior para comparar
+  const rpAnt = ARGENTINA.riesgo_pais.anterior, rpCambio = rpAnt ? rp.valor - rpAnt.valor : rpRes && rpRes.cambio;
+  F.push(homeFila("mercados", "Riesgo país", rp.vivo ? `Puntos básicos · en vivo, ${rp.hora}` : "Puntos básicos sobre los bonos de EE. UU.", nf(rp.valor), rpCambio != null ? pbC(rpCambio) : undefined));
   const gd = MERCADOS && MERCADOS.byma && (MERCADOS.byma.bonos || []).find(b => b.ticker === "GD30");
   if (gd) F.push(homeFila("mercados", "Bono GD30", `Precio US$ ${nf(gd.precio, 2)} · TIR`, nf(gd.tir, 1) + "%", pctC(gd.dia)));
   const sp = m("sp500"); if (sp) F.push(homeFila("mercados", "S&P 500", "Bolsa de Nueva York", nf(sp.precio, 0), pctC(sp.dia)));
@@ -4442,7 +4444,7 @@ function bloqueArgentina() {
   return `<div class="ar-dia">
     <div class="metrics">
       <div class="metric">
-        <span class="lbl">Riesgo país</span><span class="val">${nf(rp.valor)} puntos <small class="ytag">${fecha(rp.fecha)}</small></span>
+        <span class="lbl">Riesgo país</span><span class="val">${nf(rp.valor)} puntos <small class="ytag">${rp.vivo ? `hoy, ${rp.hora}` : fecha(rp.fecha)}</small></span>
         <p class="exp">Cuánto más interés que EE.UU. le piden los inversores a la Argentina para prestarle. ${nf(rp.valor)} puntos son ${nf(rp.valor / 100, 2)} puntos porcentuales más por año.</p>
         ${caja("rp", "Promedio de cada mes, desde 1999. Es el índice EMBI de JP Morgan: llegó a casi 7.000 puntos en la crisis de 2002. La línea punteada marca el promedio de cada gobierno. Describe lo que pasó durante cada mandato, no cuánto se debió a sus decisiones: también pesan la herencia recibida y el contexto internacional.")}
       </div>

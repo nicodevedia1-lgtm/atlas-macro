@@ -172,6 +172,9 @@ def main():
             riesgo = [(x["fecha"], x["valor"]) for x in json.load(r)][-40:]
     except Exception as e:
         print(f"⚠️  riesgo país diario: {e}")
+    u_vivo = (ar.get("riesgo_pais") or {}).get("ultimo") or {}
+    if riesgo and u_vivo.get("fecha", "") > riesgo[-1][0]:      # durante la rueda: el valor del momento (Ámbito)
+        riesgo.append((u_vivo["fecha"], u_vivo["valor"]))
     if not riesgo:
         u = (ar.get("riesgo_pais") or {}).get("ultimo")
         riesgo = sorted({**{f: h["riesgo"] for f, h in hist.items() if h.get("riesgo")}, **({u["fecha"]: u["valor"]} if u else {})}.items())

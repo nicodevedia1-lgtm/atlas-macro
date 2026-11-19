@@ -20,6 +20,7 @@ Uso:
 import json
 import re
 from datetime import datetime, timezone
+from zoneinfo import ZoneInfo
 from pathlib import Path
 
 from curl_cffi import requests
@@ -29,6 +30,8 @@ ARCHIVO_SALIDA = CARPETA / "argentina.json"
 
 BASE = "https://raw.githubusercontent.com/enzonotario/esjs-argentina-datos-api/main/datos/v1"
 URL_RIESGO = f"{BASE}/finanzas/indices/riesgo-pais/index.json"
+# argentinadatos publica un valor por día, al cierre. Durante la rueda tomamos el de Ámbito, que se mueve en el momento.
+URL_RIESGO_VIVO = "https://mercados.ambito.com//riesgopais/variacion"
 URL_DOLAR = f"{BASE}/cotizaciones/dolares/{{casa}}/index.json"
 URL_INFLACION = f"{BASE}/finanzas/indices/inflacion/index.json"
 URL_INTERANUAL = f"{BASE}/finanzas/indices/inflacionInteranual/index.json"
@@ -55,6 +58,25 @@ def bajar(url):
     if respuesta.status_code != 200:
         raise SystemExit(f"❌ No pude bajar {url} (error {respuesta.status_code})")
     return respuesta.json()
+
+
+def riesgo_en_vivo():
+    """Riesgo país durante la rueda (Ámbito): {"fecha": "2026-11-19", "hora": "16:28", "valor": 910} o None si falla."""
+    try:
+        r = requests.get(URL_RIESGO_VIVO, timeout=30, impersonate="chrome", headers={"Referer": "https://www.ambito.com/"})
+        d = r.json()
+        valor = int(round(float(str(d["ultimo"]).replace(".", "").replace(",", "."))))
+        # la fecha viene como "19-11-2026" (a veces "19/11/2026 - 16:28"); si no trae hora, va la de la consulta
+        dia, _, hora = str(d.get("fecha", "")).partition(" - ")
+        dd, mm, aa = re.split(r"[-/]", dia.strip())
+        if not hora.strip():
+            hora = datetime.now(timezone.utc).astimezone(ZoneInfo("America/Argentina/Buenos_Aires")).strftime("%H:%M")
+        if not 100 <= valor <= 10000:
+            raise ValueError(f"valor raro: {valor}")
+        return {"fecha": f"{aa}-{mm}-{dd}", "hora": hora.strip()[:5], "valor": valor}
+    except Exception as e:
+        print(f"   ⚠️  riesgo país en vivo (Ámbito): {str(e)[:100]}")
+        return None
 
 
 def promedio_mensual(filas, campo):
@@ -112,6 +134,12 @@ def main():
     riesgo = bajar(URL_RIESGO)
     riesgo_mes = promedio_mensual(riesgo, "valor")
     ultimo_riesgo = riesgo[-1]                  # la lista viene ordenada por fecha
+    anterior_riesgo = riesgo[-2] if len(riesgo) > 1 else None
+    vivo = riesgo_en_vivo()
+    if vivo and vivo["fecha"] > ultimo_riesgo["fecha"]:      # hoy todavía no hay cierre: va el valor del momento
+        anterior_riesgo = ultimo_riesgo
+        ultimo_riesgo = {**vivo, "vivo": True}
+        print(f"   · en vivo: {vivo['valor']} ({vivo['hora']}), cierre anterior {anterior_riesgo['valor']}")
 
     # --- Dólares ---
     casas = {}
@@ -171,7 +199,9 @@ def main():
         "generado": datetime.now(timezone.utc).isoformat(timespec="seconds"),
         "fuente": "ArgentinaDatos (argentinadatos.com), proyecto abierto y no oficial",
         "riesgo_pais": {
-            "ultimo": {"fecha": ultimo_riesgo["fecha"], "valor": ultimo_riesgo["valor"]},
+            "ultimo": {"fecha": ultimo_riesgo["fecha"], "valor": ultimo_riesgo["valor"],
+                       **({"hora": ultimo_riesgo["hora"], "vivo": True} if ultimo_riesgo.get("vivo") else {})},
+            "anterior": anterior_riesgo and {"fecha": anterior_riesgo["fecha"], "valor": anterior_riesgo["valor"]},
             "mensual": [[mes, round(riesgo_mes[mes])] for mes in sorted(riesgo_mes)],
         },
         # Lo que ya usaba la ficha de Argentina (blue, oficial y brecha)
