@@ -1,82 +1,14 @@
 {
- "generado": "2026-11-19T12:00:32+00:00",
+ "generado": "2026-11-19T14:58:32+00:00",
  "fecha": "2026-11-19",
- "hora": "09:00",
+ "hora": "11:58",
  "dia": [
-  {
-   "id": "apertura",
-   "circulo": "Apertura",
-   "kicker": "Antes de que abra Nueva York",
-   "titulo": "Wall Street viene en alza",
-   "texto": "Los futuros del S&P 500 marcan +1,3%. Nueva York abre a las 11:30.",
-   "grandes": [
-    {
-     "nombre": "S&P 500 (futuro)",
-     "valor": "7.436",
-     "cambio": 1.3,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Nasdaq 100 (futuro)",
-     "valor": "27.818",
-     "cambio": 2.32,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Dow Jones (futuro)",
-     "valor": "50.630",
-     "cambio": 0.71,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    }
-   ],
-   "filas": [
-    {
-     "nombre": "Mercado Libre",
-     "valor": "US$ 1.447,00",
-     "cambio": 1.68,
-     "tipo": "pct",
-     "sub": "poco volumen",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "YPF",
-     "valor": "US$ 35,25",
-     "cambio": 0.43,
-     "tipo": "pct",
-     "sub": "poco volumen",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "IRSA",
-     "valor": "US$ 11,43",
-     "cambio": 0.0,
-     "tipo": "pct",
-     "sub": "poco volumen",
-     "destacado": false,
-     "inverso": false
-    }
-   ],
-   "nota": "Fuera de horario se opera poco: con poco volumen el precio puede moverse mucho.",
-   "link": "#mercados",
-   "link_txt": "Ver en Mercados"
-  },
   {
    "id": "hoy",
    "circulo": "Hoy",
    "kicker": "Jueves 19 de noviembre",
    "titulo": "Un día movido",
-   "texto": "Lo más llamativo: Maíz subió 3,2%, 3,2 veces lo que se mueve en un día normal.",
+   "texto": "Lo más llamativo: Maíz subió 4,3%, 4,4 veces lo que se mueve en un día normal.",
    "grandes": [
     {
      "nombre": "Dólar CCL",
@@ -104,40 +36,40 @@
    "id": "acciones",
    "circulo": "Acciones",
    "kicker": "Panel líder en BYMA",
-   "titulo": "Bolsa mixta",
-   "texto": "11 de 22 acciones del panel líder subieron y 11 bajaron.",
+   "titulo": "Día rojo en la bolsa",
+   "texto": "6 de 22 acciones del panel líder subieron y 16 bajaron.",
    "filas": [
     {
-     "nombre": "Aluar",
-     "valor": "$ 838",
-     "cambio": 4.94,
-     "tipo": "pct",
-     "sub": "ALUA",
-     "destacado": false,
-     "inverso": false
-    },
-    {
      "nombre": "Transener",
-     "valor": "$ 1.947",
-     "cambio": 4.79,
+     "valor": "$ 2.015",
+     "cambio": 2.96,
      "tipo": "pct",
      "sub": "TRAN",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "BYMA",
-     "valor": "$ 200",
-     "cambio": 4.71,
+     "nombre": "YPF",
+     "valor": "$ 6.115",
+     "cambio": 1.24,
      "tipo": "pct",
-     "sub": "BYMA",
+     "sub": "YPFD",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Sociedad Comercial del Plata",
+     "valor": "$ 28,94",
+     "cambio": 0.62,
+     "tipo": "pct",
+     "sub": "COME",
      "destacado": false,
      "inverso": false
     },
     {
      "nombre": "Cresud",
-     "valor": "$ 1.456",
-     "cambio": -4.71,
+     "valor": "$ 1.418",
+     "cambio": -2.2,
      "tipo": "pct",
      "sub": "CRES",
      "destacado": false,
@@ -145,24 +77,24 @@
     },
     {
      "nombre": "Supervielle",
-     "valor": "$ 1.815",
-     "cambio": -2.31,
+     "valor": "$ 1.791",
+     "cambio": -1.97,
      "tipo": "pct",
      "sub": "SUPV",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "YPF",
-     "valor": "$ 6.040",
-     "cambio": -2.02,
+     "nombre": "TGS",
+     "valor": "$ 6.925",
+     "cambio": -1.35,
      "tipo": "pct",
-     "sub": "YPFD",
+     "sub": "TGSU2",
      "destacado": false,
      "inverso": false
     }
    ],
-   "nota": "En Nueva York, Cresud bajó 6,7%.",
+   "nota": "En Nueva York, Globant bajó 3,1%.",
    "link": "#mercados",
    "link_txt": "Ver el mapa del mercado"
   },
@@ -170,8 +102,8 @@
    "id": "bonos",
    "circulo": "Bonos",
    "kicker": "Bonos en dólares (Globales)",
-   "titulo": "La curva, sin cambios grandes",
-   "texto": "El GD30 rinde 12,7% y el GD46 11,9%: la curva está invertida, los bonos cortos rinden 0,8 puntos más que los largos.",
+   "titulo": "La curva se aplanó",
+   "texto": "El GD30 rinde 13,2% y el GD46 11,7%: la curva está invertida, los bonos cortos rinden 1,5 puntos más que los largos.",
    "grandes": [
     {
      "nombre": "Riesgo país",
@@ -186,8 +118,8 @@
    "filas": [
     {
      "nombre": "GD30",
-     "valor": "12,7%",
-     "cambio": 2.0,
+     "valor": "13,2%",
+     "cambio": 45.0,
      "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
@@ -196,7 +128,7 @@
     {
      "nombre": "GD35",
      "valor": "12,6%",
-     "cambio": 0.0,
+     "cambio": 8.0,
      "tipo": "pb",
      "sub": "vence 2035",
      "destacado": false,
@@ -204,8 +136,8 @@
     },
     {
      "nombre": "GD38",
-     "valor": "12,4%",
-     "cambio": 1.0,
+     "valor": "12,5%",
+     "cambio": 10.0,
      "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
@@ -213,8 +145,8 @@
     },
     {
      "nombre": "GD41",
-     "valor": "12,3%",
-     "cambio": 0.0,
+     "valor": "12,2%",
+     "cambio": -10.0,
      "tipo": "pb",
      "sub": "vence 2041",
      "destacado": false,
@@ -222,8 +154,8 @@
     },
     {
      "nombre": "GD46",
-     "valor": "11,9%",
-     "cambio": 0.0,
+     "valor": "11,7%",
+     "cambio": -24.0,
      "tipo": "pb",
      "sub": "vence 2046",
      "destacado": false,
@@ -305,12 +237,12 @@
    "circulo": "Mundo",
    "kicker": "Mercados del mundo",
    "titulo": "Afuera, lo que más se movió: Maíz",
-   "texto": "El S&P 500 bajó 0,2%.",
+   "texto": "El S&P 500 subió 0,8%.",
    "filas": [
     {
      "nombre": "Maíz",
-     "valor": "US$ 176,96",
-     "cambio": 3.21,
+     "valor": "US$ 178,83",
+     "cambio": 4.31,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -318,8 +250,8 @@
     },
     {
      "nombre": "Peso mexicano",
-     "valor": "18,81",
-     "cambio": 2.17,
+     "valor": "18,97",
+     "cambio": 3.03,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -327,35 +259,35 @@
     },
     {
      "nombre": "Trigo",
-     "valor": "US$ 217,16",
-     "cambio": 3.68,
+     "valor": "US$ 219,91",
+     "cambio": 5.0,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
      "inverso": false
     },
     {
-     "nombre": "Yuan",
-     "valor": "6,66",
-     "cambio": -0.15,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
      "nombre": "Libra esterlina",
-     "valor": "1,32",
-     "cambio": -0.38,
+     "valor": "1,31",
+     "cambio": -0.5,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Peso chileno",
-     "valor": "1.008,3",
-     "cambio": 1.45,
+     "nombre": "Real brasileño",
+     "valor": "5,92",
+     "cambio": 2.56,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Peso colombiano",
+     "valor": "3.392,1",
+     "cambio": 2.57,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -393,7 +325,7 @@
    "circulo": "Semana",
    "kicker": "Semana del 16 de noviembre",
    "titulo": "La semana en 30 segundos",
-   "texto": "Lo que más se salió de lo normal: Cresud, que bajó 14,0% en la semana.",
+   "texto": "Lo que más se salió de lo normal: Cresud, que bajó 15,4% en la semana.",
    "grandes": [
     {
      "nombre": "Dólar CCL",
@@ -423,17 +355,8 @@
    "filas": [
     {
      "nombre": "Telecom Argentina",
-     "valor": "US$ 10,29",
-     "cambio": -2.65,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Central Puerto",
-     "valor": "US$ 10,47",
-     "cambio": -3.59,
+     "valor": "US$ 10,31",
+     "cambio": -2.46,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -441,8 +364,17 @@
     },
     {
      "nombre": "Pampa Energía",
-     "valor": "US$ 62,42",
-     "cambio": -4.28,
+     "valor": "US$ 62,46",
+     "cambio": -4.22,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Central Puerto",
+     "valor": "US$ 10,40",
+     "cambio": -4.24,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -450,8 +382,8 @@
     },
     {
      "nombre": "Cresud",
-     "valor": "US$ 8,38",
-     "cambio": -13.96,
+     "valor": "US$ 8,24",
+     "cambio": -15.4,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -459,8 +391,8 @@
     },
     {
      "nombre": "Supervielle",
-     "valor": "US$ 5,31",
-     "cambio": -10.61,
+     "valor": "US$ 5,22",
+     "cambio": -12.12,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -468,8 +400,8 @@
     },
     {
      "nombre": "IRSA",
-     "valor": "US$ 11,43",
-     "cambio": -8.85,
+     "valor": "US$ 11,32",
+     "cambio": -9.73,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -487,8 +419,8 @@
    "filas": [
     {
      "nombre": "GD30",
-     "valor": "12,7%",
-     "cambio": 7.0,
+     "valor": "13,2%",
+     "cambio": 50.0,
      "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
@@ -497,7 +429,7 @@
     {
      "nombre": "GD35",
      "valor": "12,6%",
-     "cambio": 28.0,
+     "cambio": 36.0,
      "tipo": "pb",
      "sub": "vence 2035",
      "destacado": false,
@@ -505,8 +437,8 @@
     },
     {
      "nombre": "GD38",
-     "valor": "12,4%",
-     "cambio": 21.0,
+     "valor": "12,5%",
+     "cambio": 30.0,
      "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
@@ -514,8 +446,8 @@
     },
     {
      "nombre": "GD41",
-     "valor": "12,3%",
-     "cambio": 32.0,
+     "valor": "12,2%",
+     "cambio": 22.0,
      "tipo": "pb",
      "sub": "vence 2041",
      "destacado": false,
@@ -523,8 +455,8 @@
     },
     {
      "nombre": "GD46",
-     "valor": "11,9%",
-     "cambio": 34.0,
+     "valor": "11,7%",
+     "cambio": 10.0,
      "tipo": "pb",
      "sub": "vence 2046",
      "destacado": false,
@@ -542,17 +474,8 @@
    "filas": [
     {
      "nombre": "Cobre",
-     "valor": "US$ 5,66",
-     "cambio": -6.88,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "MSCI Mundo (ETF URTH)",
-     "valor": "US$ 197,72",
-     "cambio": -3.34,
+     "valor": "US$ 5,65",
+     "cambio": -7.05,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -560,26 +483,8 @@
     },
     {
      "nombre": "Euro Stoxx 50",
-     "valor": "6.192",
-     "cambio": -3.04,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "MSCI Emergentes (ETF EEM)",
-     "valor": "US$ 57,88",
-     "cambio": -4.99,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "S&P 500",
-     "valor": "7.324",
-     "cambio": -3.15,
+     "valor": "6.163",
+     "cambio": -3.51,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -587,8 +492,35 @@
     },
     {
      "nombre": "Oro",
-     "valor": "US$ 3.727",
-     "cambio": -4.11,
+     "valor": "US$ 3.711",
+     "cambio": -4.51,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Peso mexicano",
+     "valor": "18,97",
+     "cambio": 2.05,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Real brasileño",
+     "valor": "5,92",
+     "cambio": 5.03,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "MSCI Emergentes (ETF EEM)",
+     "valor": "US$ 58,14",
+     "cambio": -4.56,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
