@@ -1016,6 +1016,75 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
 @media (max-width: 560px) { .mio-caja { width: 100vw; border-left: 0; } #temaBtn { display: none; } .mio-tema { display: inline-block; } }
 .estrella.estrella-ficha { width: auto; height: auto; margin: 0 0 0 auto; padding: 7px 12px; color: var(--ink); }
 .estrella.estrella-ficha[aria-pressed="true"] { color: var(--warn); }
+/* ---------- Análisis técnico ---------- */
+.tec { position: relative; gap: 12px; }
+.tec-barra { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.tec-buscar { position: relative; flex: 0 1 340px; min-width: 220px; }
+.tec-buscar > svg { position: absolute; left: 12px; top: 50%; width: 17px; height: 17px; transform: translateY(-50%); color: var(--muted); pointer-events: none; }
+.tec-buscar input { width: 100%; box-sizing: border-box; padding: 10px 12px 10px 38px; border-radius: 12px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: inherit; font-size: 15.5px; }
+.tec-buscar input:focus { outline: 2px solid var(--accent); outline-offset: 0; }
+.tec-sug { position: absolute; z-index: 30; top: calc(100% + 6px); left: 0; right: 0; margin: 0; padding: 6px; list-style: none; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 16px 40px rgba(0,0,0,.35); max-height: 380px; overflow-y: auto; }
+.tec-sug li { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 10px; border-radius: 8px; cursor: pointer; }
+.tec-sug li:hover, .tec-sug li.act { background: var(--bg); }
+.tec-sug li span { min-width: 0; }
+.tec-sug b { display: block; font-size: 15px; }
+.tec-sug small { color: var(--muted); font-size: 12.5px; }
+.tec-sug .mon-c { font-family: var(--f-data); font-size: 13.5px; }
+.tec-tit { flex: 1 1 360px; display: flex; align-items: center; gap: 14px; min-width: 0; }
+.tec-tit h2 { margin: 0; font-size: 22px; line-height: 1.15; }
+.tec-tit small { color: var(--muted); font-size: 13.5px; }
+.tec-precio { margin-left: auto; display: flex; align-items: baseline; gap: 10px; white-space: nowrap; }
+.tec-precio b { font-family: var(--f-data); font-weight: 500; font-size: 24px; }
+.tec-precio .mon-c { font-family: var(--f-data); font-size: 15px; }
+.tec-herr { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.tec-seg { display: inline-flex; gap: 0; }
+.tec-seg .btn { border-radius: 0; margin-left: -1px; }
+.tec-seg .btn:first-child { border-radius: 999px 0 0 999px; margin-left: 0; }
+.tec-seg .btn:last-child { border-radius: 0 999px 999px 0; }
+.tec-sep { flex: 1; }
+.btn.tec-prin { background: var(--accent); border-color: var(--accent); color: #0B0D12; font-weight: 700; }
+.tec-ind { display: flex; flex-wrap: wrap; gap: 6px; min-height: 30px; align-items: center; }
+.tec-chip { display: inline-flex; align-items: center; gap: 6px; padding: 3px 4px 3px 10px; border-radius: 999px; border: 1px solid var(--line); font-family: var(--f-data); font-size: 13px; }
+.tec-chip i { width: 10px; height: 10px; border-radius: 50%; background: var(--c); }
+.tec-chip button { width: 24px; height: 24px; border: 0; border-radius: 50%; background: none; color: var(--muted); cursor: pointer; font-size: 13px; }
+.tec-chip button:hover { background: var(--bg); color: var(--ink); }
+.tec-chart-w { position: relative; border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+.tec-chart { width: 100%; height: 470px; }
+.tec-ley { position: absolute; z-index: 3; top: 8px; left: 10px; right: 70px; display: flex; flex-wrap: wrap; gap: 2px 10px; font-family: var(--f-data); font-size: 12.5px; color: var(--muted); pointer-events: none; }
+.tec-ley b { color: var(--ink); font-weight: 500; }
+.tec-ley .pos { color: var(--good); } .tec-ley .neg { color: var(--bad); }
+.tec-l-f { color: var(--ink); }
+.tec-l-ind { flex-basis: 100%; display: flex; gap: 8px; }
+.tec-aviso { position: absolute; inset: 0; z-index: 4; margin: 0; display: grid; place-items: center; padding: 20px; text-align: center; background: var(--surface); color: var(--muted); }
+.tec-pop { position: absolute; z-index: 40; width: min(400px, calc(100vw - 40px)); max-height: 70vh; overflow-y: auto; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 14px; box-shadow: 0 20px 50px rgba(0,0,0,.4); display: grid; gap: 6px; }
+.tec-pop h3 { margin: 0 0 4px; font-size: 16px; }
+.tec-op { display: grid; gap: 2px; text-align: left; padding: 9px 10px; border: 0; border-radius: 10px; background: none; color: var(--ink); font: inherit; cursor: pointer; }
+.tec-op:hover, .tec-op:focus-visible { background: var(--bg); }
+.tec-op span { color: var(--muted); font-size: 13.5px; line-height: 1.35; }
+.tec-op em { font-style: normal; font-size: 12px; font-weight: 600; color: var(--accent); }
+.tec-form { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 10px; }
+.tec-form label { display: grid; gap: 4px; font-size: 13.5px; font-weight: 600; }
+.tec-form input { padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); font: inherit; font-family: var(--f-data); min-width: 0; }
+.tec-form input[type=color] { padding: 2px; height: 38px; }
+.tec-form-b { grid-column: 1 / -1; }
+.tec-form-fila { grid-template-columns: minmax(0, 1fr) auto; }
+.tec-guard { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 2px; }
+.tec-guard li { display: flex; align-items: center; gap: 4px; }
+.tec-abrir { flex: 1; display: grid; text-align: left; padding: 8px 10px; border: 0; border-radius: 8px; background: none; color: var(--ink); font: inherit; cursor: pointer; }
+.tec-abrir:hover { background: var(--bg); }
+.tec-abrir span { color: var(--muted); font-size: 13px; }
+.tec-ir { display: inline-grid; place-items: center; width: 26px; height: 26px; margin-left: 4px; border-radius: 7px; color: var(--muted); vertical-align: middle; }
+.tec-ir:hover { color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, transparent); }
+.tec-ir svg { width: 15px; height: 15px; }
+@media (max-width: 640px) {
+  .tec-buscar { flex-basis: 100%; }
+  .tec-tit { flex-basis: 100%; flex-wrap: wrap; gap: 8px; }
+  .tec-tit h2 { font-size: 19px; }
+  .tec-precio { margin-left: 0; }
+  .tec-sep { display: none; }
+  .tec-ley { font-size: 11.5px; right: 56px; }
+  .tec-l-ind { display: none; }
+}
 </style>
 
 <header class="topbar">
@@ -1024,7 +1093,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   </button>
   <a class="logo" href="#inicio">Atlas <span>Macro</span></a>
   <nav class="tabs" aria-label="Secciones">
-    <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm0" data-pags="mercados bcra calendario">Finanzas</button><div class="tab-menu" id="tm0" hidden><a href="#mercados" data-pag="mercados">Mercados<small>Acciones, bonos, CEDEARs y el mundo</small></a><a href="#bcra" data-pag="bcra">Dólar y BCRA<small>Bandas, reservas, tasas y liquidez</small></a><a href="#calendario" data-pag="calendario">Calendario<small>Próximos datos y feriados</small></a></div></div>
+    <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm0" data-pags="mercados tecnico bcra calendario">Finanzas</button><div class="tab-menu" id="tm0" hidden><a href="#mercados" data-pag="mercados">Mercados<small>Acciones, bonos, CEDEARs y el mundo</small></a><a href="#tecnico" data-pag="tecnico">Análisis técnico<small>Velas e indicadores, como en TradingView</small></a><a href="#bcra" data-pag="bcra">Dólar y BCRA<small>Bandas, reservas, tasas y liquidez</small></a><a href="#calendario" data-pag="calendario">Calendario<small>Próximos datos y feriados</small></a></div></div>
     <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm1" data-pags="argentina actividad provincias gobiernos paises rankings comercio elecciones conflictos">Economía</button><div class="tab-menu tab-menu-2" id="tm1" hidden><div><span class="tm-sub">Argentina</span><a href="#argentina" data-pag="argentina">Panorama<small>Dólar, inflación y calculadoras</small></a><a href="#actividad" data-pag="actividad">Economía real<small>Actividad, precios, empleo</small></a><a href="#provincias" data-pag="provincias">Provincias</a><a href="#gobiernos" data-pag="gobiernos">Gobiernos comparados</a></div><div><span class="tm-sub">Mundo</span><a href="#paises" data-pag="paises">Explorar países<small>Mapa y fichas de 200 países</small></a><a href="#rankings" data-pag="rankings">Rankings</a><a href="#comercio" data-pag="comercio">Comercio mundial</a><a href="#elecciones" data-pag="elecciones">Elecciones</a><a href="#conflictos" data-pag="conflictos">Conflictos y crisis</a></div></div></div>
     <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm2" data-pags="comparacion comparador laboratorio glosario">Herramientas</button><div class="tab-menu" id="tm2" hidden><a href="#comparacion" data-pag="comparacion">Comparar países</a><a href="#comparador" data-pag="comparador">Comparador de series</a><a href="#laboratorio" data-pag="laboratorio">Laboratorio</a><a href="#glosario" data-pag="glosario">Glosario</a></div></div>
     <div class="tab-grupo"><button type="button" class="tab-btn" aria-expanded="false" aria-controls="tm3" data-pags="juego masrico dondequeda">Juegos</button><div class="tab-menu" id="tm3" hidden><a href="#juego" data-pag="juego">País del día</a><a href="#dondequeda" data-pag="dondequeda">¿Dónde queda?</a><a href="#masrico" data-pag="masrico">¿Más rico o más pobre?</a></div></div>
@@ -1054,6 +1123,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   <p class="nav-grupo">Finanzas</p>
   <ul>
     <li><a href="#mercados" data-pag="mercados"><span class="nav-ico" aria-hidden="true">📈</span><span>Mercados<small>Acciones, bonos, CEDEARs y el mundo</small></span></a></li>
+    <li><a href="#tecnico" data-pag="tecnico"><span class="nav-ico" aria-hidden="true">🕯️</span><span>Análisis técnico<small>Velas e indicadores, como en TradingView</small></span></a></li>
     <li><a href="#bcra" data-pag="bcra"><span class="nav-ico" aria-hidden="true">🏛️</span><span>Dólar y BCRA<small>Bandas, reservas, tasas y liquidez</small></span></a></li>
     <li><a href="#calendario" data-pag="calendario"><span class="nav-ico" aria-hidden="true">📅</span><span>Calendario<small>Próximos datos del INDEC y feriados</small></span></a></li>
   </ul>
@@ -1211,6 +1281,33 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
   </section>
   </div>
 
+  <div class="pagina" id="pag-tecnico" hidden>
+  <header class="top">
+    <div class="eyebrow">Finanzas</div>
+    <h1>Análisis técnico</h1>
+    <p class="lede">Velas japonesas de acciones argentinas, CEDEARs, acciones de EE. UU., ADRs, índices, monedas, materias primas y cripto, con los indicadores que quieras. Queda como lo dejaste y podés guardar tus gráficos.</p>
+  </header>
+  <section class="ag-bloque tec" id="tecCaja" aria-label="Gráfico de análisis técnico">
+    <div class="tec-barra">
+      <div class="tec-buscar">
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+        <input id="tecBuscar" type="search" placeholder="Buscar: GGAL, Apple, oro, bitcoin…" autocomplete="off" spellcheck="false" aria-label="Buscar un activo" role="combobox" aria-expanded="false" aria-controls="tecSug" aria-autocomplete="list">
+        <ul id="tecSug" class="tec-sug" role="listbox" hidden></ul>
+      </div>
+      <div class="tec-tit" id="tecTit"></div>
+    </div>
+    <div class="tec-herr" id="tecHerr"></div>
+    <div class="tec-ind" id="tecInd"></div>
+    <div class="tec-chart-w">
+      <div class="tec-ley" id="tecLey" aria-live="off"></div>
+      <div class="tec-chart" id="tecChart"></div>
+      <p class="tec-aviso" id="tecAviso" hidden></p>
+    </div>
+    <div class="tec-pop" id="tecPop" hidden></div>
+    <p class="note">Velas diarias de Yahoo Finance, de los últimos 5 años; las semanales y mensuales se arman con las diarias. Se actualizan dos veces por día. Las acciones y CEDEARs de BYMA están en pesos. Gráfico hecho con <a href="https://www.tradingview.com/lightweight-charts/" target="_blank" rel="noopener">Lightweight Charts de TradingView</a>. Es una herramienta para aprender y analizar: no es una recomendación de inversión.</p>
+  </section>
+  </div>
+
   <div class="pagina" id="pag-argentina" hidden>
     <header class="top">
       <div class="eyebrow" id="agFecha">Argentina hoy</div>
@@ -1295,7 +1392,7 @@ footer { font-size: 13px; color: var(--muted); display: grid; gap: 4px; }
       <div class="mon-escala" aria-hidden="true"><span>−4%</span><i style="background:#B3261E"></i><i style="background:#7A2620"></i><i style="background:#3A1F1D"></i><i style="background:#2A2E35"></i><i style="background:#1B3A28"></i><i style="background:#1D6B3F"></i><i style="background:#1E9E55"></i><span>+4%</span></div>
     </section>
     <section class="ag-bloque" id="mercDetalle">
-      <div class="ag-tit"><h2 id="mercDetT">—</h2><div class="lab-chips" id="mercRangos"></div></div>
+      <div class="ag-tit"><h2 id="mercDetT">—</h2><div class="lab-chips" id="mercRangos"></div><a class="btn" id="mercTec" href="#tecnico">Velas e indicadores →</a></div>
       <div id="mercChart" class="ag-chart"></div>
       <p class="note" id="mercDetNota"></p>
     </section>
@@ -2235,12 +2332,13 @@ const sinTildes = t => t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowe
 /* ---------- PÁGINAS Y PANEL LATERAL ----------
    Cada sección es una "página": #inicio, #comparacion, #elecciones, #conflictos.
    Se cambia con el link (la dirección cambia, así funciona el botón "atrás" del navegador). */
-const PAGINAS = ["inicio", "paises", "argentina", "bcra", "actividad", "comparador", "mercados", "comercio", "provincias", "glosario", "gobiernos", "calendario", "comparacion", "rankings", "laboratorio", "juego", "masrico", "dondequeda", "elecciones", "conflictos", "acerca"];
+const PAGINAS = ["inicio", "paises", "tecnico", "argentina", "bcra", "actividad", "comparador", "mercados", "comercio", "provincias", "glosario", "gobiernos", "calendario", "comparacion", "rankings", "laboratorio", "juego", "masrico", "dondequeda", "elecciones", "conflictos", "acerca"];
 let paginaActual = "inicio";
 const versusAbierto = () => paginaActual === "comparacion";
 /* páginas que se juntaron con otra: el link viejo abre la nueva y baja hasta esa parte */
-const ALIAS = { finanzas: ["bcra", "bcraSeries"] };
+const ALIAS = { finanzas: ["bcra", "bcraSeries"], analisis: ["tecnico"], velas: ["tecnico"] };
 function mostrarPagina(nombre) {
+  if (nombre && nombre.startsWith("tecnico/")) { tecPendiente = decodeURIComponent(nombre.slice(8)); nombre = "tecnico"; }   // #tecnico/panel-GGAL abre ese activo
   const alias = ALIAS[nombre];
   if (alias) nombre = alias[0];
   if (!PAGINAS.includes(nombre)) nombre = "inicio";
@@ -2259,6 +2357,7 @@ function mostrarPagina(nombre) {
   if (nombre === "gobiernos") renderGobiernos();
   if (nombre === "provincias") abrirProvincias();
   if (nombre === "mercados") { try { abrirMercados(); } catch (e) { console.error(e); } }
+  if (nombre === "tecnico") { try { abrirTecnico(); } catch (e) { console.error(e); } }
   if (nombre === "comercio") abrirComercio();
   if (nombre === "bcra") { abrirBCRA(); abrirFinanzas(); }
   if (nombre === "actividad") abrirActividad();
@@ -2306,7 +2405,7 @@ function cerrarNav() {
 }
 /* Pestañas internas: las páginas de cada grupo se recorren con una barra arriba */
 const SUBTABS = [
-  ["Finanzas", [["mercados", "Mercados"], ["bcra", "Dólar y BCRA"], ["calendario", "Calendario"]]],
+  ["Finanzas", [["mercados", "Mercados"], ["tecnico", "Análisis técnico"], ["bcra", "Dólar y BCRA"], ["calendario", "Calendario"]]],
   ["Argentina", [["argentina", "Panorama"], ["actividad", "Economía real"], ["provincias", "Provincias"], ["gobiernos", "Gobiernos"]]],
   ["Mundo", [["paises", "Países"], ["rankings", "Rankings"], ["comercio", "Comercio"], ["elecciones", "Elecciones"], ["conflictos", "Conflictos"]]]];
 function armarArTabs() {
@@ -3305,7 +3404,7 @@ function bloquesByma() {
           <td class="n">${b.proximo.fecha.slice(8)}/${b.proximo.fecha.slice(5, 7)}/${b.proximo.fecha.slice(2, 4)}: US$ ${nf(b.proximo.interes + b.proximo.amort, 2)}</td></tr>`).join(""))}
       <p class="note">Precio cada 100 dólares de valor nominal original. Paridad: el precio sobre lo que "vale" el bono según sus condiciones (lo que falta amortizar más los intereses corridos). TIR y duración calculadas por Atlas Macro con el cronograma de pagos de cada bono; pueden diferir un poco de las de cada broker. No es una recomendación de inversión.</p></section>`;
   }
-  const fila = (x, cols, t) => `<tr><td>${estrella(t + ":" + x.ticker, x.nombre)}${x.nombre}<span class="mon-tk">${x.ticker}</span></td>${cols}</tr>`;
+  const fila = (x, cols, t) => `<tr><td>${estrella(t + ":" + x.ticker, x.nombre)}${x.nombre}<span class="mon-tk">${x.ticker}</span><a class="tec-ir" href="#tecnico/${t === "p" ? "panel" : "cedear"}-${x.ticker}" aria-label="Análisis técnico de ${x.nombre}" title="Análisis técnico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 3v4M7 15v6M17 3v8M17 17v4"/><rect x="4.5" y="7" width="5" height="8" rx="1"/><rect x="14.5" y="11" width="5" height="6" rx="1"/></svg></a></td>${cols}</tr>`;
   const pan = (tit, sub, cab, cuerpo, nota) => `<section class="mon-panel"><h2>${tit}<small>${sub}</small></h2><table><thead><tr>${cab}</tr></thead><tbody>${cuerpo}</tbody></table><p class="note" style="padding:10px 14px">${nota}</p></section>`;
   const secFila = (s, n) => `<tr class="mon-sec"><td colspan="${n}">${s}</td></tr>`;
   h += `<div class="mon-grid">`;
@@ -3451,6 +3550,7 @@ function renderMercDetalle() {
   const desde = new Date(new Date(x.fecha).getTime() - mercRango * 864e5).toISOString().slice(0, 10);
   const s = x.serie.filter(p => p[0] >= desde);
   const v0 = s[0][1], v1 = s[s.length - 1][1], ch = (v1 / v0 - 1) * 100;
+  { const mt = document.getElementById("mercTec"); mt.href = "#tecnico/m-" + x.clave; mt.hidden = x.clave === "merval" || x.clave === "merval_ccl"; }
   document.getElementById("mercDetT").innerHTML = `${x.nombre} <small>${fmtMerc(x, precioMerc(x))} · ${varMerc(ch, ` en ${mercRango === 30 ? "un mes" : mercRango === 182 ? "6 meses" : "un año"}`)}</small>`;
   document.getElementById("mercRangos").innerHTML = [[30, "1 mes"], [182, "6 meses"], [365, "1 año"]].map(([d, t]) => `<button class="btn" type="button" data-d="${d}" aria-pressed="${mercRango === d}">${t}</button>`).join("");
   document.querySelectorAll("#mercRangos .btn").forEach(b => b.onclick = () => { mercRango = +b.dataset.d; renderMercDetalle(); });
@@ -6032,6 +6132,279 @@ function armarMio() {
   mioActualizar();
 }
 armarMio();
+
+/* ---------- ANÁLISIS TÉCNICO: velas japonesas con indicadores (velas/*.json lo arma actualizar_velas.py) ----------
+   El gráfico usa Lightweight Charts, la librería abierta de TradingView. Se carga recién cuando alguien entra a esta página.
+   Cada cambio (activo, intervalo, indicadores) rearma el gráfico entero: son pocas velas y así no quedan paneles colgados. */
+const URL_LWC = "https://cdn.jsdelivr.net/npm/lightweight-charts@5.0.9/dist/lightweight-charts.standalone.production.js";
+let LWC_PROMESA = null, TEC_INDICE = null, tecChart = null, tecPendiente = null;
+const TEC_CACHE = {};
+const cargarLWC = () => LWC_PROMESA || (LWC_PROMESA = new Promise((ok, mal) => {
+  const s = document.createElement("script"); s.src = URL_LWC; s.onload = ok; s.onerror = () => { LWC_PROMESA = null; mal(new Error("no cargó la librería de gráficos")); }; document.head.appendChild(s);
+}));
+const TEC_DEF = { id: "panel-GGAL", intervalo: "D", rango: "1A", tipo: "velas", log: false, vol: true,
+  inds: [{ tipo: "sma", p: { n: 20 } }, { tipo: "sma", p: { n: 50 } }, { tipo: "rsi", p: { n: 14 } }] };
+let TEC = JSON.parse(JSON.stringify((MIO.prefs && MIO.prefs.tecnico) || TEC_DEF));
+const COLORES_IND = ["#F5A524", "#6EA8FE", "#C084FC", "#2DD4BF", "#F472B6", "#A3E635"];
+
+/* --- las fórmulas --- */
+const tecSMA = (xs, n) => { const o = Array(xs.length).fill(null); let s = 0; for (let i = 0; i < xs.length; i++) { s += xs[i]; if (i >= n) s -= xs[i - n]; if (i >= n - 1) o[i] = s / n; } return o; };
+function tecEMA(xs, n) {   // arranca con el promedio simple de las primeras n, después suaviza con 2/(n+1)
+  const o = Array(xs.length).fill(null), a = 2 / (n + 1); let prev = null, s = 0, c = 0;
+  for (let i = 0; i < xs.length; i++) {
+    if (xs[i] == null) continue;
+    if (prev == null) { s += xs[i]; c++; if (c === n) { prev = s / n; o[i] = prev; } continue; }
+    prev = xs[i] * a + prev * (1 - a); o[i] = prev;
+  }
+  return o;
+}
+function tecRMA(xs, n) {   // el promedio "suavizado" de Wilder, el que usan el RSI y el ATR
+  const o = Array(xs.length).fill(null); let prev = null, s = 0, c = 0;
+  for (let i = 0; i < xs.length; i++) {
+    if (xs[i] == null) continue;
+    if (prev == null) { s += xs[i]; c++; if (c === n) { prev = s / n; o[i] = prev; } continue; }
+    prev = (prev * (n - 1) + xs[i]) / n; o[i] = prev;
+  }
+  return o;
+}
+const tecSD = (xs, n, m) => xs.map((_, i) => { if (m[i] == null) return null; let s = 0; for (let j = i - n + 1; j <= i; j++) s += (xs[j] - m[i]) ** 2; return Math.sqrt(s / n); });
+const TEC_IND = {
+  sma: { nombre: "Media móvil simple", desc: "El promedio de los últimos n cierres. Cuando el precio la cruza, suele leerse como cambio de tendencia.", panel: false,
+    params: [["n", "Períodos", 20, 2, 400]], corto: p => `MA ${p.n}`,
+    calc: (v, p) => [{ nombre: `MA ${p.n}`, datos: tecSMA(v.c, p.n) }] },
+  ema: { nombre: "Media móvil exponencial", desc: "Como la simple, pero les da más peso a los últimos días: reacciona más rápido.", panel: false,
+    params: [["n", "Períodos", 21, 2, 400]], corto: p => `EMA ${p.n}`,
+    calc: (v, p) => [{ nombre: `EMA ${p.n}`, datos: tecEMA(v.c, p.n) }] },
+  bb: { nombre: "Bandas de Bollinger", desc: "Una media móvil con dos bandas a k desvíos estándar. Se abren cuando hay más volatilidad.", panel: false,
+    params: [["n", "Períodos", 20, 2, 200], ["k", "Desvíos", 2, 0.5, 5, 0.5]], corto: p => `BB ${p.n} ${p.k}`,
+    calc: (v, p) => { const m = tecSMA(v.c, p.n), sd = tecSD(v.c, p.n, m);
+      return [{ nombre: "Media", datos: m, punteada: true }, { nombre: "Superior", datos: m.map((x, i) => x == null ? null : x + p.k * sd[i]) }, { nombre: "Inferior", datos: m.map((x, i) => x == null ? null : x - p.k * sd[i]) }]; } },
+  rsi: { nombre: "RSI (índice de fuerza relativa)", desc: "De 0 a 100. Arriba de 70 se dice que está sobrecomprado; abajo de 30, sobrevendido.", panel: true, niveles: [70, 30], rango: [0, 100],
+    params: [["n", "Períodos", 14, 2, 100]], corto: p => `RSI ${p.n}`,
+    calc: (v, p) => { const g = v.c.map((x, i) => i ? Math.max(x - v.c[i - 1], 0) : null), l = v.c.map((x, i) => i ? Math.max(v.c[i - 1] - x, 0) : null);
+      const ag = tecRMA(g, p.n), al = tecRMA(l, p.n);
+      return [{ nombre: `RSI ${p.n}`, datos: ag.map((x, i) => x == null || al[i] == null ? null : al[i] === 0 ? 100 : 100 - 100 / (1 + x / al[i])) }]; } },
+  macd: { nombre: "MACD", desc: "La diferencia entre una media exponencial rápida y una lenta, con su línea de señal. El histograma muestra la distancia entre las dos.", panel: true, niveles: [0],
+    params: [["r", "Rápida", 12, 2, 100], ["l", "Lenta", 26, 3, 200], ["s", "Señal", 9, 2, 100]], corto: p => `MACD ${p.r} ${p.l} ${p.s}`,
+    calc: (v, p) => { const a = tecEMA(v.c, p.r), b = tecEMA(v.c, p.l), m = a.map((x, i) => x == null || b[i] == null ? null : x - b[i]), s = tecEMA(m, p.s);
+      return [{ nombre: "Histograma", datos: m.map((x, i) => x == null || s[i] == null ? null : x - s[i]), histo: true }, { nombre: "MACD", datos: m }, { nombre: "Señal", datos: s, color2: true }]; } },
+  esto: { nombre: "Estocástico", desc: "Dónde cerró el precio dentro del rango de los últimos n días, de 0 a 100. Arriba de 80, sobrecomprado; abajo de 20, sobrevendido.", panel: true, niveles: [80, 20], rango: [0, 100],
+    params: [["k", "%K", 14, 2, 100], ["s", "Suavizado", 3, 1, 20], ["d", "%D", 3, 1, 20]], corto: p => `Esto ${p.k} ${p.s} ${p.d}`,
+    calc: (v, p) => { const raw = v.c.map((x, i) => { if (i < p.k - 1) return null; let hh = -Infinity, ll = Infinity; for (let j = i - p.k + 1; j <= i; j++) { hh = Math.max(hh, v.h[j]); ll = Math.min(ll, v.l[j]); } return hh === ll ? 50 : (x - ll) / (hh - ll) * 100; });
+      const sm = (xs, n) => { const o = Array(xs.length).fill(null); for (let i = 0; i < xs.length; i++) { let s = 0, c = 0; for (let j = i - n + 1; j <= i; j++) if (j >= 0 && xs[j] != null) { s += xs[j]; c++; } if (c === n) o[i] = s / n; } return o; };
+      const k = sm(raw, p.s); return [{ nombre: "%K", datos: k }, { nombre: "%D", datos: sm(k, p.d), color2: true }]; } },
+  atr: { nombre: "ATR (rango verdadero promedio)", desc: "Cuánto se mueve el precio por vela, en promedio. Sirve para medir la volatilidad y poner stops.", panel: true,
+    params: [["n", "Períodos", 14, 2, 100]], corto: p => `ATR ${p.n}`,
+    calc: (v, p) => [{ nombre: `ATR ${p.n}`, datos: tecRMA(v.c.map((x, i) => i ? Math.max(v.h[i] - v.l[i], Math.abs(v.h[i] - v.c[i - 1]), Math.abs(v.l[i] - v.c[i - 1])) : v.h[i] - v.l[i]), p.n) }] },
+};
+
+/* --- velas: diarias del archivo; semanales y mensuales armadas acá --- */
+function tecAgrupar(velas, intervalo) {
+  if (intervalo === "D") return velas;
+  const clave = f => { if (intervalo === "M") return f.slice(0, 7); const d = new Date(f + "T12:00:00Z"), dia = (d.getUTCDay() + 6) % 7; d.setUTCDate(d.getUTCDate() - dia); return d.toISOString().slice(0, 10); };
+  const out = [];
+  velas.forEach(([f, o, h, l, c, vol]) => {
+    const k = clave(f), u = out[out.length - 1];
+    if (u && u.k === k) { u.v[2] = Math.max(u.v[2], h); u.v[3] = Math.min(u.v[3], l); u.v[4] = c; u.v[5] += vol; }
+    else out.push({ k, v: [f, o, h, l, c, vol] });
+  });
+  return out.map(x => x.v);
+}
+const tecCargarIndice = () => TEC_INDICE ? Promise.resolve(TEC_INDICE) : fetch("velas/indice.json").then(r => { if (!r.ok) throw new Error("sin índice"); return r.json(); }).then(j => (TEC_INDICE = j));
+const tecCargarVelas = id => TEC_CACHE[id] ? Promise.resolve(TEC_CACHE[id]) : fetch(`velas/${id}.json`).then(r => { if (!r.ok) throw new Error("sin velas"); return r.json(); }).then(j => (TEC_CACHE[id] = j));
+const tecGuardarEstado = () => { MIO.prefs.tecnico = TEC; mioGuardar(); };
+const tecFmt = (x, ref) => x == null ? "—" : nf(x, Math.abs(ref ?? x) < 10 ? 4 : 2);
+const tecVar = (a, b) => b ? (a / b - 1) * 100 : null;
+function tecColores() {
+  const cs = getComputedStyle(document.documentElement), v = n => cs.getPropertyValue(n).trim();
+  return { fondo: v("--surface"), texto: v("--muted"), linea: v("--line"), tinta: v("--ink"), sube: "#1EA65A", baja: "#E5484D" };
+}
+
+/* --- la cabecera, el buscador y las herramientas --- */
+function tecTitulo(dat) {
+  const it = TEC_INDICE && TEC_INDICE.find(x => x.id === TEC.id), vs = dat.velas, u = vs[vs.length - 1], a = vs[vs.length - 2];
+  const mon = dat.moneda === "ARS" ? "$ " : dat.moneda === "USD" ? "US$ " : "";
+  const sigoId = TEC.id.startsWith("panel-") ? "p:" + TEC.id.slice(6) : TEC.id.startsWith("cedear-") ? "c:" + TEC.id.slice(7) : TEC.id.startsWith("m-") ? "m:" + TEC.id.slice(2) : null;
+  document.getElementById("tecTit").innerHTML = `<div><h2>${dat.nombre} <span class="mon-tk">${dat.ticker.replace(".BA", "")}</span></h2><small>${dat.grupo} · ${dat.moneda} · velas hasta el ${u[0].split("-").reverse().join("/")}</small></div>
+    <div class="tec-precio"><b>${mon}${tecFmt(u[4])}</b>${pctC(tecVar(u[4], a[4]))}</div>${sigoId ? estrella(sigoId, dat.nombre) : ""}`;
+}
+function tecHerramientas() {
+  const seg = (nombre, clave, ops) => `<div class="tec-seg" role="group" aria-label="${nombre}">${ops.map(([v, t, tit]) => `<button type="button" class="btn" data-${clave}="${v}" aria-pressed="${TEC[clave] === v}"${tit ? ` title="${tit}"` : ""}>${t}</button>`).join("")}</div>`;
+  document.getElementById("tecHerr").innerHTML =
+    seg("Intervalo", "intervalo", [["D", "Diario", "Una vela por día"], ["S", "Semanal", "Una vela por semana"], ["M", "Mensual", "Una vela por mes"]]) +
+    seg("Período", "rango", [["3M", "3M"], ["6M", "6M"], ["1A", "1A"], ["3A", "3A"], ["5A", "5A"]]) +
+    seg("Tipo", "tipo", [["velas", "Velas"], ["linea", "Línea"]]) +
+    `<button type="button" class="btn" id="tecLog" aria-pressed="${TEC.log}" title="Escala logarítmica: la misma suba porcentual ocupa el mismo alto">Log</button>
+     <button type="button" class="btn" id="tecVol" aria-pressed="${TEC.vol}">Volumen</button>
+     <span class="tec-sep"></span>
+     <button type="button" class="btn tec-prin" id="tecMasInd" aria-haspopup="true">+ Indicadores</button>
+     <button type="button" class="btn" id="tecGuardBtn" aria-haspopup="true">Mis gráficos</button>`;
+  document.querySelectorAll("#tecHerr [data-intervalo]").forEach(b => b.onclick = () => { TEC.intervalo = b.dataset.intervalo; tecAplicar(); });
+  document.querySelectorAll("#tecHerr [data-rango]").forEach(b => b.onclick = () => { TEC.rango = b.dataset.rango; tecAplicar(); });
+  document.querySelectorAll("#tecHerr [data-tipo]").forEach(b => b.onclick = () => { TEC.tipo = b.dataset.tipo; tecAplicar(true); });
+  document.getElementById("tecLog").onclick = () => { TEC.log = !TEC.log; tecAplicar(true); };
+  document.getElementById("tecVol").onclick = () => { TEC.vol = !TEC.vol; tecAplicar(true); };
+  document.getElementById("tecMasInd").onclick = e => tecPop("ind", e.currentTarget);
+  document.getElementById("tecGuardBtn").onclick = e => tecPop("guard", e.currentTarget);
+  // los indicadores puestos, como chips que se editan o se sacan
+  document.getElementById("tecInd").innerHTML = TEC.inds.map((x, i) => {
+    const d = TEC_IND[x.tipo]; if (!d) return "";
+    return `<span class="tec-chip" style="--c:${x.color || COLORES_IND[i % COLORES_IND.length]}"><i aria-hidden="true"></i>${d.corto(x.p)}<button type="button" data-ed="${i}" aria-label="Cambiar ${d.nombre}" title="Cambiar parámetros">⚙</button><button type="button" data-sa="${i}" aria-label="Sacar ${d.nombre}" title="Sacar">✕</button></span>`;
+  }).join("") || `<span class="note">Sin indicadores. Sumá uno con "+ Indicadores".</span>`;
+  document.querySelectorAll("#tecInd [data-sa]").forEach(b => b.onclick = () => { TEC.inds.splice(+b.dataset.sa, 1); tecAplicar(true); });
+  document.querySelectorAll("#tecInd [data-ed]").forEach(b => b.onclick = () => tecPop("edit", b, +b.dataset.ed));
+}
+function tecPop(cual, ancla, i) {
+  const el = document.getElementById("tecPop");
+  if (!el.hidden && el.dataset.cual === cual + (i ?? "")) { el.hidden = true; return; }
+  el.dataset.cual = cual + (i ?? "");
+  if (cual === "ind") {
+    el.innerHTML = `<h3>Sumar un indicador</h3>${Object.entries(TEC_IND).map(([k, d]) => `<button type="button" class="tec-op" data-t="${k}"><b>${d.nombre}</b><span>${d.desc}</span><em>${d.panel ? "En un panel abajo" : "Sobre el precio"}</em></button>`).join("")}`;
+    el.querySelectorAll(".tec-op").forEach(b => b.onclick = () => {
+      const d = TEC_IND[b.dataset.t], usados = TEC.inds.map((x, j) => x.color || COLORES_IND[j % COLORES_IND.length]);
+      TEC.inds.push({ tipo: b.dataset.t, p: Object.fromEntries(d.params.map(([k, , def]) => [k, def])), color: COLORES_IND.find(c => !usados.includes(c)) || COLORES_IND[TEC.inds.length % COLORES_IND.length] });
+      el.hidden = true; tecAplicar(true);
+    });
+  } else if (cual === "edit") {
+    const x = TEC.inds[i], d = TEC_IND[x.tipo];
+    el.innerHTML = `<h3>${d.nombre}</h3><p class="note">${d.desc}</p><form class="tec-form">${d.params.map(([k, t, , mn, mx, paso]) => `<label>${t}<input type="number" name="${k}" value="${x.p[k]}" min="${mn}" max="${mx}" step="${paso || 1}" required></label>`).join("")}
+      <label>Color<input type="color" name="color" value="${x.color || COLORES_IND[i % COLORES_IND.length]}"></label><div class="tec-form-b"><button type="submit" class="btn tec-prin">Aplicar</button></div></form>`;
+    el.querySelector("form").onsubmit = e => { e.preventDefault(); const f = new FormData(e.target);
+      d.params.forEach(([k, , , mn, mx]) => { const v = +f.get(k); if (isFinite(v)) x.p[k] = Math.min(mx, Math.max(mn, v)); });
+      x.color = f.get("color"); el.hidden = true; tecAplicar(true); };
+  } else {
+    const gs = MIO.graficos || [];
+    el.innerHTML = `<h3>Mis gráficos</h3><form class="tec-form tec-form-fila"><input name="n" maxlength="40" placeholder="Nombre, por ejemplo: GGAL con RSI" aria-label="Nombre del gráfico" required><button type="submit" class="btn tec-prin">Guardar este</button></form>
+      <ul class="tec-guard">${gs.map((g, j) => `<li><button type="button" class="tec-abrir" data-j="${j}"><b>${g.nombre}</b><span>${(TEC_INDICE && (TEC_INDICE.find(x => x.id === g.estado.id) || {}).nombre) || g.estado.id} · ${{ D: "diario", S: "semanal", M: "mensual" }[g.estado.intervalo]} · ${g.estado.inds.length} indicadores</span></button><button type="button" class="mio-quitar" data-b="${j}" aria-label="Borrar ${g.nombre}">✕</button></li>`).join("") || `<li class="note">Todavía no guardaste ninguno. Se guardan en este navegador, junto con tu lista.</li>`}</ul>`;
+    el.querySelector("form").onsubmit = e => { e.preventDefault(); const n = new FormData(e.target).get("n").trim(); if (!n) return;
+      MIO.graficos = [...(MIO.graficos || []).filter(g => g.nombre !== n), { nombre: n, estado: JSON.parse(JSON.stringify(TEC)) }]; mioGuardar(); mioAviso(`Guardaste "${n}"`); el.hidden = true; };
+    el.querySelectorAll(".tec-abrir").forEach(b => b.onclick = () => { TEC = JSON.parse(JSON.stringify(MIO.graficos[+b.dataset.j].estado)); el.hidden = true; tecAplicar(); });
+    el.querySelectorAll("[data-b]").forEach(b => b.onclick = () => { MIO.graficos.splice(+b.dataset.b, 1); mioGuardar(); el.hidden = true; tecPop("guard", ancla); });
+  }
+  el.hidden = false;
+  const r = ancla.getBoundingClientRect(), caja = document.getElementById("tecCaja").getBoundingClientRect();
+  el.style.top = `${r.bottom - caja.top + 6}px`;
+  el.style.left = `${Math.max(0, Math.min(r.left - caja.left, caja.width - el.offsetWidth))}px`;
+  const f = el.querySelector("input, button"); if (f) f.focus();
+}
+function tecSugerencias(q) {
+  const ul = document.getElementById("tecSug"), inp = document.getElementById("tecBuscar");
+  const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  const t = norm(q.trim());
+  const res = !t || !TEC_INDICE ? [] : TEC_INDICE.filter(x => norm(x.nombre).includes(t) || norm(x.ticker).includes(t) || norm(x.grupo).includes(t))
+    .sort((a, b) => (norm(b.ticker) === t) - (norm(a.ticker) === t) || (norm(b.ticker).startsWith(t)) - (norm(a.ticker).startsWith(t))).slice(0, 12);
+  ul.innerHTML = res.map((x, i) => `<li role="option" id="tecO${i}" data-id="${x.id}"><span><b>${x.nombre}</b><small>${x.ticker} · ${x.grupo}</small></span>${pctC(x.cambio)}</li>`).join("");
+  ul.hidden = !res.length; inp.setAttribute("aria-expanded", String(!!res.length));
+  ul.querySelectorAll("li").forEach(li => li.onmousedown = e => { e.preventDefault(); tecElegir(li.dataset.id); });
+}
+function tecElegir(id) {
+  TEC.id = id; const inp = document.getElementById("tecBuscar"); inp.value = ""; document.getElementById("tecSug").hidden = true; inp.setAttribute("aria-expanded", "false");
+  history.replaceState(null, "", "#tecnico/" + id); tecAplicar();
+}
+
+/* --- el gráfico --- */
+async function tecAplicar(mantenerZoom) {
+  tecGuardarEstado();
+  try { tecHerramientas(); } catch (e) { console.error(e); }
+  const caja = document.getElementById("tecChart"), aviso = document.getElementById("tecAviso");
+  let dat;
+  try { await cargarLWC(); dat = await tecCargarVelas(TEC.id); }
+  catch (e) { aviso.textContent = e.message.includes("librería") ? "No se pudo cargar el gráfico. Revisá tu conexión y recargá la página." : "Todavía no hay velas para este activo: se bajan con la próxima actualización."; aviso.hidden = false; return; }
+  aviso.hidden = true;
+  tecTitulo(dat);
+  const L = window.LightweightCharts, C = tecColores();
+  const rangoPrevio = mantenerZoom && tecChart ? tecChart.timeScale().getVisibleLogicalRange() : null;
+  if (tecChart) { tecChart.remove(); tecChart = null; }
+  const vs = tecAgrupar(dat.velas, TEC.intervalo);
+  const v = { t: vs.map(x => x[0]), o: vs.map(x => x[1]), h: vs.map(x => x[2]), l: vs.map(x => x[3]), c: vs.map(x => x[4]), vol: vs.map(x => x[5]) };
+  const paneles = TEC.inds.filter(x => TEC_IND[x.tipo] && TEC_IND[x.tipo].panel).length, cel = innerWidth < 640;
+  caja.style.height = `${(cel ? 360 : 470) + paneles * (cel ? 110 : 140)}px`;
+  const chart = tecChart = L.createChart(caja, { autoSize: true,
+    layout: { background: { type: "solid", color: C.fondo }, textColor: C.texto, fontFamily: getComputedStyle(document.body).fontFamily, panes: { separatorColor: C.linea, separatorHoverColor: C.linea } },
+    grid: { vertLines: { color: C.linea + "55" }, horzLines: { color: C.linea + "55" } },
+    rightPriceScale: { borderColor: C.linea, mode: TEC.log ? 1 : 0 }, timeScale: { borderColor: C.linea, rightOffset: 4 },
+    crosshair: { mode: 0 }, localization: { locale: "es-AR", priceFormatter: p => tecFmt(p, v.c[v.c.length - 1]) } });
+  const fmtPrecio = { type: "price", precision: v.c[v.c.length - 1] < 10 ? 4 : 2, minMove: v.c[v.c.length - 1] < 10 ? 0.0001 : 0.01 };
+  const principal = TEC.tipo === "velas"
+    ? chart.addSeries(L.CandlestickSeries, { upColor: C.sube, downColor: C.baja, borderVisible: false, wickUpColor: C.sube, wickDownColor: C.baja, priceFormat: fmtPrecio })
+    : chart.addSeries(L.LineSeries, { color: C.tinta, lineWidth: 2, priceFormat: fmtPrecio });
+  principal.setData(TEC.tipo === "velas" ? vs.map((x, i) => ({ time: v.t[i], open: v.o[i], high: v.h[i], low: v.l[i], close: v.c[i] })) : vs.map((x, i) => ({ time: v.t[i], value: v.c[i] })));
+  const conVol = TEC.vol && v.vol.some(x => x > 0);
+  let volS = null;
+  if (conVol) {
+    volS = chart.addSeries(L.HistogramSeries, { priceFormat: { type: "volume" }, priceScaleId: "vol", lastValueVisible: false, priceLineVisible: false });
+    volS.priceScale().applyOptions({ scaleMargins: { top: 0.82, bottom: 0 } });
+    volS.setData(vs.map((x, i) => ({ time: v.t[i], value: v.vol[i], color: (v.c[i] >= v.o[i] ? C.sube : C.baja) + "66" })));
+  }
+  // indicadores
+  const leyInd = [];
+  let pane = 0;
+  TEC.inds.forEach((x, i) => {
+    const d = TEC_IND[x.tipo]; if (!d) return;
+    const color = x.color || COLORES_IND[i % COLORES_IND.length];
+    const p = d.panel ? ++pane : 0;
+    const lineas = d.calc(v, x.p);
+    lineas.forEach(ln => {
+      const datos = ln.datos.map((y, j) => y == null || !isFinite(y) ? { time: v.t[j] } : { time: v.t[j], value: y });
+      const s = ln.histo
+        ? chart.addSeries(L.HistogramSeries, { lastValueVisible: false, priceLineVisible: false }, p)
+        : chart.addSeries(L.LineSeries, { color: ln.color2 ? C.texto : color, lineWidth: ln.punteada ? 1 : 2, lineStyle: ln.punteada ? 2 : 0, priceLineVisible: false, lastValueVisible: !ln.punteada, crosshairMarkerVisible: false }, p);
+      s.setData(ln.histo ? datos.map(z => z.value == null ? z : { ...z, color: (z.value >= 0 ? C.sube : C.baja) + "AA" }) : datos);
+      leyInd.push({ serie: s, vals: ln.datos, nombre: ln.nombre, color: ln.color2 ? C.texto : color, grupo: d.corto(x.p), pane: p });
+    });
+    if (d.panel) {
+      const s0 = leyInd[leyInd.length - lineas.length].serie;
+      (d.niveles || []).forEach(n => s0.createPriceLine({ price: n, color: C.texto, lineWidth: 1, lineStyle: 2, axisLabelVisible: false }));
+      if (d.rango) s0.applyOptions({ autoscaleInfoProvider: () => ({ priceRange: { minValue: d.rango[0], maxValue: d.rango[1] } }) });
+    }
+  });
+  const ps = chart.panes();
+  ps.forEach((pn, j) => pn.setStretchFactor(j === 0 ? (cel ? 3.3 : 3.4) : 1));   // proporciones: el precio ocupa más, cada indicador un panel igual
+  // período visible
+  if (rangoPrevio) chart.timeScale().setVisibleLogicalRange(rangoPrevio);
+  else {
+    const meses = { "3M": 3, "6M": 6, "1A": 12, "3A": 36, "5A": 60 }[TEC.rango] || 12, desde = new Date(v.t[v.t.length - 1] + "T12:00:00Z");
+    desde.setUTCMonth(desde.getUTCMonth() - meses);
+    const f = desde.toISOString().slice(0, 10), i0 = Math.max(0, v.t.findIndex(t => t >= f));
+    chart.timeScale().setVisibleLogicalRange({ from: i0, to: v.t.length - 1 + 4 });
+  }
+  // la leyenda: apertura, máximo, mínimo, cierre y los valores de cada indicador donde está el cursor
+  const ley = document.getElementById("tecLey");
+  const pintar = j => {
+    if (j == null || j < 0 || j >= v.t.length) j = v.t.length - 1;
+    const ch = tecVar(v.c[j], v.c[j - 1]);
+    const grupos = {};
+    leyInd.forEach(li => { const val = li.vals[j]; (grupos[li.grupo] = grupos[li.grupo] || []).push(`<span style="color:${li.color}">${val == null ? "—" : nf(val, Math.abs(val) < 10 ? 2 : 1)}</span>`); });
+    ley.innerHTML = `<span class="tec-l-f">${v.t[j].split("-").reverse().join("/")}</span> <span>A <b>${tecFmt(v.o[j])}</b></span> <span>Máx <b>${tecFmt(v.h[j])}</b></span> <span>Mín <b>${tecFmt(v.l[j])}</b></span> <span>C <b>${tecFmt(v.c[j])}</b></span> ${ch == null ? "" : `<span class="${ch >= 0 ? "pos" : "neg"}">${ch >= 0 ? "+" : ""}${nf(ch, 2)}%</span>`}${conVol ? ` <span>Vol <b>${nf(v.vol[j])}</b></span>` : ""}
+      ${Object.entries(grupos).map(([g, xs]) => `<span class="tec-l-ind">${g} ${xs.join(" ")}</span>`).join("")}`;
+  };
+  pintar();
+  chart.subscribeCrosshairMove(prm => pintar(prm && prm.logical != null ? Math.round(prm.logical) : null));
+}
+function abrirTecnico() {
+  if (tecPendiente) { TEC.id = tecPendiente; tecPendiente = null; }
+  tecCargarIndice().catch(() => null).then(() => {
+    if (TEC_INDICE && TEC_INDICE.length && !TEC_INDICE.some(x => x.id === TEC.id)) TEC.id = TEC_INDICE.some(x => x.id === TEC_DEF.id) ? TEC_DEF.id : TEC_INDICE[0].id;
+    tecAplicar();
+  });
+}
+function armarTecnico() {
+  const inp = document.getElementById("tecBuscar"), ul = document.getElementById("tecSug");
+  let act = -1;
+  inp.addEventListener("input", () => { act = -1; tecCargarIndice().then(() => tecSugerencias(inp.value)).catch(() => {}); });
+  inp.addEventListener("keydown", e => {
+    const lis = [...ul.querySelectorAll("li")]; if (!lis.length) return;
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") { e.preventDefault(); act = (act + (e.key === "ArrowDown" ? 1 : -1) + lis.length) % lis.length; lis.forEach((l, i) => l.classList.toggle("act", i === act)); inp.setAttribute("aria-activedescendant", lis[act].id); }
+    else if (e.key === "Enter") { e.preventDefault(); tecElegir((lis[act] || lis[0]).dataset.id); }
+    else if (e.key === "Escape") { ul.hidden = true; }
+  });
+  inp.addEventListener("blur", () => setTimeout(() => { ul.hidden = true; inp.setAttribute("aria-expanded", "false"); }, 150));
+  document.addEventListener("click", e => { const p = document.getElementById("tecPop"); if (!p.hidden && !p.contains(e.target) && !e.target.closest("#tecMasInd, #tecGuardBtn, [data-ed]")) p.hidden = true; });
+  document.addEventListener("keydown", e => { if (e.key === "Escape") document.getElementById("tecPop").hidden = true; });
+  // al cambiar el tema, el gráfico toma los colores nuevos
+  document.getElementById("temaBtn").addEventListener("click", () => setTimeout(() => { if (paginaActual === "tecnico" && tecChart) tecAplicar(true); }, 60));
+}
+armarTecnico();
 
 const leer = url => fetch(url).then(r => { if (!r.ok) throw new Error(`${url}: error ${r.status}`); return r.json(); });
 Promise.all([leer("datos.json"), leer("curado.json"), leer("countries-50m.json"), leer("argentina.json").catch(() => null), leer("noticias.json").catch(() => null), leer("riesgo.json").catch(() => null), leer("calendario.json").catch(() => null), leer("mercados.json").catch(() => null), leer("socios.json").catch(() => null), leer("senales.json").catch(() => null)])
