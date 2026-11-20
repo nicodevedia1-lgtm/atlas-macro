@@ -1,14 +1,14 @@
 {
- "generado": "2026-11-20T20:02:04+00:00",
+ "generado": "2026-11-20T20:53:24+00:00",
  "fecha": "2026-11-20",
- "hora": "17:02",
+ "hora": "17:53",
  "dia": [
   {
    "id": "hoy",
    "circulo": "Hoy",
    "kicker": "Viernes 20 de noviembre",
    "titulo": "Un día movido",
-   "texto": "Lo más llamativo: Euro Stoxx 50 bajó 2,8%, 2,8 veces lo que se mueve en un día normal.",
+   "texto": "Lo más llamativo: Oro bajó 4,7%, 2,9 veces lo que se mueve en un día normal.",
    "grandes": [
     {
      "nombre": "Dólar CCL",
@@ -21,8 +21,8 @@
     },
     {
      "nombre": "Riesgo país",
-     "valor": "1.065",
-     "cambio": 134,
+     "valor": "1.071",
+     "cambio": 140,
      "tipo": "pb",
      "sub": null,
      "destacado": false,
@@ -37,12 +37,12 @@
    "circulo": "Acciones",
    "kicker": "Panel líder en BYMA",
    "titulo": "Bolsa mixta",
-   "texto": "13 de 22 acciones del panel líder subieron y 9 bajaron.",
+   "texto": "10 de 22 acciones del panel líder subieron y 12 bajaron.",
    "filas": [
     {
      "nombre": "Transportadora Gas del Norte",
-     "valor": "$ 2.410",
-     "cambio": 3.7,
+     "valor": "$ 2.408",
+     "cambio": 3.61,
      "tipo": "pct",
      "sub": "TGNO4",
      "destacado": false,
@@ -50,37 +50,28 @@
     },
     {
      "nombre": "Transener",
-     "valor": "$ 2.060",
-     "cambio": 2.79,
+     "valor": "$ 2.058",
+     "cambio": 2.69,
      "tipo": "pct",
      "sub": "TRAN",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "IRSA",
-     "valor": "$ 1.945",
-     "cambio": 2.36,
+     "nombre": "Loma Negra",
+     "valor": "$ 2.850",
+     "cambio": 1.69,
      "tipo": "pct",
-     "sub": "IRSA",
+     "sub": "LOMA",
      "destacado": false,
      "inverso": false
     },
     {
      "nombre": "Metrogas",
-     "valor": "$ 1.865",
-     "cambio": -5.04,
+     "valor": "$ 1.866",
+     "cambio": -4.98,
      "tipo": "pct",
      "sub": "METR",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "BYMA",
-     "valor": "$ 200",
-     "cambio": -4.07,
-     "tipo": "pct",
-     "sub": "BYMA",
      "destacado": false,
      "inverso": false
     },
@@ -92,9 +83,18 @@
      "sub": "TXAR",
      "destacado": false,
      "inverso": false
+    },
+    {
+     "nombre": "BYMA",
+     "valor": "$ 202",
+     "cambio": -3.23,
+     "tipo": "pct",
+     "sub": "BYMA",
+     "destacado": false,
+     "inverso": false
     }
    ],
-   "nota": "En Nueva York, Telecom Argentina bajó 4,3%.",
+   "nota": "En Nueva York, Edenor bajó 5,9%.",
    "link": "#mercados",
    "link_txt": "Ver el mapa del mercado"
   },
@@ -107,8 +107,8 @@
    "grandes": [
     {
      "nombre": "Riesgo país",
-     "valor": "1.065",
-     "cambio": 134,
+     "valor": "1.071",
+     "cambio": 140,
      "tipo": "pb",
      "sub": null,
      "destacado": false,
@@ -221,19 +221,19 @@
     },
     {
      "nombre": "Compras del BCRA",
-     "valor": "US$ 33 M",
+     "valor": "US$ 74 M",
      "cambio": null,
      "tipo": "pct",
-     "sub": "16 de noviembre",
+     "sub": "17 de noviembre",
      "destacado": false,
      "inverso": false
     },
     {
      "nombre": "Reservas brutas",
-     "valor": "US$ 49.741 M",
+     "valor": "US$ 49.553 M",
      "cambio": null,
      "tipo": "pct",
-     "sub": "+US$ 267 M en el día",
+     "sub": "−US$ 188 M en el día",
      "destacado": false,
      "inverso": false
     }
@@ -245,9 +245,27 @@
    "id": "mundo",
    "circulo": "Mundo",
    "kicker": "Mercados del mundo",
-   "titulo": "Afuera, lo que más se movió: Euro Stoxx 50",
-   "texto": "El S&P 500 bajó 2,9%.",
+   "titulo": "Afuera, lo que más se movió: Oro",
+   "texto": "El S&P 500 bajó 3,3%.",
    "filas": [
+    {
+     "nombre": "Oro",
+     "valor": "US$ 3.512",
+     "cambio": -4.72,
+     "tipo": "pct",
+     "sub": "fuera de lo normal",
+     "destacado": true,
+     "inverso": false
+    },
+    {
+     "nombre": "EE.UU. 5 años",
+     "valor": "4,70%",
+     "cambio": -16.5,
+     "tipo": "pb",
+     "sub": "fuera de lo normal",
+     "destacado": true,
+     "inverso": true
+    },
     {
      "nombre": "Euro Stoxx 50",
      "valor": "5.942",
@@ -258,49 +276,31 @@
      "inverso": false
     },
     {
-     "nombre": "EE.UU. 5 años",
-     "valor": "4,71%",
-     "cambio": -16.0,
+     "nombre": "EE.UU. 10 años",
+     "valor": "4,91%",
+     "cambio": -14.0,
      "tipo": "pb",
      "sub": "fuera de lo normal",
      "destacado": true,
      "inverso": true
     },
     {
-     "nombre": "Oro",
-     "valor": "US$ 3.522",
-     "cambio": -4.42,
+     "nombre": "Nasdaq",
+     "valor": "22.710",
+     "cambio": -4.9,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
      "inverso": false
-    },
-    {
-     "nombre": "EE.UU. 10 años",
-     "valor": "4,91%",
-     "cambio": -13.8,
-     "tipo": "pb",
-     "sub": "fuera de lo normal",
-     "destacado": true,
-     "inverso": true
     },
     {
      "nombre": "Ether",
-     "valor": "US$ 1.604",
-     "cambio": -8.63,
+     "valor": "US$ 1.600",
+     "cambio": -8.86,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
      "inverso": false
-    },
-    {
-     "nombre": "EE.UU. 30 años",
-     "valor": "5,30%",
-     "cambio": -10.0,
-     "tipo": "pb",
-     "sub": "fuera de lo normal",
-     "destacado": true,
-     "inverso": true
     }
    ],
    "nota": "Ordenados por cuánto se salieron de lo normal, no por el tamaño del movimiento.",
@@ -327,8 +327,8 @@
     },
     {
      "nombre": "Riesgo país",
-     "valor": "1.065",
-     "cambio": 235,
+     "valor": "1.071",
+     "cambio": 241,
      "tipo": "pb",
      "sub": null,
      "destacado": false,
@@ -344,8 +344,17 @@
    "filas": [
     {
      "nombre": "Pampa Energía",
-     "valor": "US$ 61,15",
-     "cambio": -6.23,
+     "valor": "US$ 61,16",
+     "cambio": -6.22,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Globant",
+     "valor": "US$ 41,63",
+     "cambio": -8.34,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -353,17 +362,8 @@
     },
     {
      "nombre": "Loma Negra",
-     "valor": "US$ 7,95",
-     "cambio": -8.52,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Telecom Argentina",
-     "valor": "US$ 9,62",
-     "cambio": -9.04,
+     "valor": "US$ 7,93",
+     "cambio": -8.69,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -372,7 +372,7 @@
     {
      "nombre": "Supervielle",
      "valor": "US$ 4,54",
-     "cambio": -23.57,
+     "cambio": -23.56,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -380,17 +380,17 @@
     },
     {
      "nombre": "Cresud",
-     "valor": "US$ 7,83",
-     "cambio": -19.61,
+     "valor": "US$ 7,85",
+     "cambio": -19.41,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "BBVA Argentina",
-     "valor": "US$ 8,79",
-     "cambio": -17.15,
+     "nombre": "Edenor",
+     "valor": "US$ 11,50",
+     "cambio": -18.15,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -471,18 +471,18 @@
      "inverso": false
     },
     {
-     "nombre": "Cobre",
-     "valor": "US$ 5,46",
-     "cambio": -10.13,
+     "nombre": "MSCI Mundo (ETF URTH)",
+     "valor": "US$ 187,76",
+     "cambio": -8.21,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
      "inverso": false
     },
     {
-     "nombre": "MSCI Mundo (ETF URTH)",
-     "valor": "US$ 188,63",
-     "cambio": -7.79,
+     "nombre": "Cobre",
+     "valor": "US$ 5,46",
+     "cambio": -10.24,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -490,17 +490,8 @@
     },
     {
      "nombre": "Oro",
-     "valor": "US$ 3.522",
-     "cambio": -9.36,
-     "tipo": "pct",
-     "sub": "fuera de lo normal",
-     "destacado": true,
-     "inverso": false
-    },
-    {
-     "nombre": "MSCI Emergentes (ETF EEM)",
-     "valor": "US$ 54,02",
-     "cambio": -11.33,
+     "valor": "US$ 3.512",
+     "cambio": -9.64,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -508,8 +499,17 @@
     },
     {
      "nombre": "S&P 500",
-     "valor": "6.968",
-     "cambio": -7.86,
+     "valor": "6.937",
+     "cambio": -8.26,
+     "tipo": "pct",
+     "sub": "fuera de lo normal",
+     "destacado": true,
+     "inverso": false
+    },
+    {
+     "nombre": "MSCI Emergentes (ETF EEM)",
+     "valor": "US$ 53,89",
+     "cambio": -11.54,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
