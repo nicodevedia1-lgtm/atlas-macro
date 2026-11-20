@@ -1,7 +1,7 @@
 {
- "generado": "2026-11-20T22:49:29+00:00",
+ "generado": "2026-11-20T23:53:00+00:00",
  "fecha": "2026-11-20",
- "hora": "19:49",
+ "hora": "20:53",
  "dia": [
   {
    "id": "hoy",
@@ -70,37 +70,28 @@
    "filas": [
     {
      "nombre": "Vista Energy",
-     "valor": "US$ 51,40",
-     "cambio": 3.66,
+     "valor": "US$ 52,00",
+     "cambio": 4.88,
      "tipo": "pct",
      "sub": "VIST",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Mercado Libre",
-     "valor": "US$ 1.364,07",
-     "cambio": 0.67,
-     "tipo": "pct",
-     "sub": "poco volumen",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Transportadora Gas del Sur",
-     "valor": "US$ 19,23",
-     "cambio": 0.0,
-     "tipo": "pct",
-     "sub": "TGS",
-     "destacado": false,
-     "inverso": false
-    },
-    {
      "nombre": "YPF",
-     "valor": "US$ 32,01",
-     "cambio": -0.96,
+     "valor": "US$ 33,33",
+     "cambio": 3.12,
      "tipo": "pct",
      "sub": "YPF",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Mercado Libre",
+     "valor": "US$ 1.367,00",
+     "cambio": 0.89,
+     "tipo": "pct",
+     "sub": "poco volumen",
      "destacado": false,
      "inverso": false
     },
@@ -114,11 +105,20 @@
      "inverso": false
     },
     {
-     "nombre": "Cresud",
-     "valor": "US$ 7,79",
+     "nombre": "IRSA",
+     "valor": "US$ 10,67",
      "cambio": 0.0,
      "tipo": "pct",
-     "sub": "poco volumen",
+     "sub": "IRS",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Loma Negra",
+     "valor": "US$ 7,93",
+     "cambio": 0.0,
+     "tipo": "pct",
+     "sub": "LOMA",
      "destacado": false,
      "inverso": false
     }
@@ -362,15 +362,6 @@
      "inverso": true
     },
     {
-     "nombre": "Euro Stoxx 50",
-     "valor": "5.942",
-     "cambio": -2.81,
-     "tipo": "pct",
-     "sub": "fuera de lo normal",
-     "destacado": true,
-     "inverso": false
-    },
-    {
      "nombre": "EE.UU. 10 años",
      "valor": "4,91%",
      "cambio": -14.0,
@@ -396,6 +387,15 @@
      "sub": "fuera de lo normal",
      "destacado": true,
      "inverso": false
+    },
+    {
+     "nombre": "EE.UU. 30 años",
+     "valor": "5,30%",
+     "cambio": -9.8,
+     "tipo": "pb",
+     "sub": "fuera de lo normal",
+     "destacado": true,
+     "inverso": true
     }
    ],
    "nota": "Ordenados por cuánto se salieron de lo normal, no por el tamaño del movimiento.",
@@ -409,7 +409,7 @@
    "circulo": "Semana",
    "kicker": "Semana del 16 de noviembre",
    "titulo": "La semana en 30 segundos",
-   "texto": "Lo que más se salió de lo normal: Euro Stoxx 50, que bajó 7,0% en la semana.",
+   "texto": "Lo que más se salió de lo normal: Edenor, que bajó 18,1% en la semana.",
    "grandes": [
     {
      "nombre": "Dólar CCL",
@@ -557,15 +557,6 @@
    "titulo": "Lo que más se movió en la semana",
    "filas": [
     {
-     "nombre": "Euro Stoxx 50",
-     "valor": "5.942",
-     "cambio": -6.97,
-     "tipo": "pct",
-     "sub": "fuera de lo normal",
-     "destacado": true,
-     "inverso": false
-    },
-    {
      "nombre": "MSCI Mundo (ETF URTH)",
      "valor": "US$ 187,43",
      "cambio": -8.37,
@@ -605,6 +596,15 @@
      "nombre": "Oro",
      "valor": "US$ 3.539",
      "cambio": -8.94,
+     "tipo": "pct",
+     "sub": "fuera de lo normal",
+     "destacado": true,
+     "inverso": false
+    },
+    {
+     "nombre": "Nasdaq",
+     "valor": "22.618",
+     "cambio": -10.02,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
