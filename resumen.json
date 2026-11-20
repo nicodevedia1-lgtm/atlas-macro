@@ -1,7 +1,7 @@
 {
- "generado": "2026-11-20T21:52:13+00:00",
+ "generado": "2026-11-20T22:49:29+00:00",
  "fecha": "2026-11-20",
- "hora": "18:52",
+ "hora": "19:49",
  "dia": [
   {
    "id": "hoy",
@@ -41,8 +41,8 @@
    "grandes": [
     {
      "nombre": "S&P 500 (futuro)",
-     "valor": "6.971",
-     "cambio": -3.15,
+     "valor": "6.967",
+     "cambio": -3.2,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -50,8 +50,8 @@
     },
     {
      "nombre": "Nasdaq 100 (futuro)",
-     "valor": "25.302",
-     "cambio": -4.88,
+     "valor": "25.291",
+     "cambio": -4.92,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -59,8 +59,8 @@
     },
     {
      "nombre": "Dow Jones (futuro)",
-     "valor": "48.416",
-     "cambio": -1.55,
+     "valor": "48.391",
+     "cambio": -1.6,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -78,20 +78,29 @@
      "inverso": false
     },
     {
-     "nombre": "Cresud",
-     "valor": "US$ 7,90",
-     "cambio": 1.48,
+     "nombre": "Mercado Libre",
+     "valor": "US$ 1.364,07",
+     "cambio": 0.67,
      "tipo": "pct",
      "sub": "poco volumen",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Mercado Libre",
-     "valor": "US$ 1.370,00",
-     "cambio": 1.11,
+     "nombre": "Transportadora Gas del Sur",
+     "valor": "US$ 19,23",
+     "cambio": 0.0,
      "tipo": "pct",
-     "sub": "poco volumen",
+     "sub": "TGS",
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "YPF",
+     "valor": "US$ 32,01",
+     "cambio": -0.96,
+     "tipo": "pct",
+     "sub": "YPF",
      "destacado": false,
      "inverso": false
     },
@@ -105,20 +114,11 @@
      "inverso": false
     },
     {
-     "nombre": "IRSA",
-     "valor": "US$ 10,67",
+     "nombre": "Cresud",
+     "valor": "US$ 7,79",
      "cambio": 0.0,
      "tipo": "pct",
-     "sub": "IRS",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Loma Negra",
-     "valor": "US$ 7,93",
-     "cambio": 0.0,
-     "tipo": "pct",
-     "sub": "LOMA",
+     "sub": "poco volumen",
      "destacado": false,
      "inverso": false
     }
@@ -380,18 +380,18 @@
      "inverso": true
     },
     {
-     "nombre": "Oro",
-     "valor": "US$ 3.527",
-     "cambio": -4.3,
+     "nombre": "S&P 500",
+     "valor": "6.910",
+     "cambio": -3.7,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
      "inverso": false
     },
     {
-     "nombre": "S&P 500",
-     "valor": "6.910",
-     "cambio": -3.7,
+     "nombre": "MSCI Emergentes (ETF EEM)",
+     "valor": "US$ 53,84",
+     "cambio": -5.13,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -586,7 +586,7 @@
     {
      "nombre": "Cobre",
      "valor": "US$ 5,46",
-     "cambio": -10.16,
+     "cambio": -10.11,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -603,8 +603,8 @@
     },
     {
      "nombre": "Oro",
-     "valor": "US$ 3.527",
-     "cambio": -9.24,
+     "valor": "US$ 3.539",
+     "cambio": -8.94,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
