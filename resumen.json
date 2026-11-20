@@ -1,14 +1,14 @@
 {
- "generado": "2026-11-20T17:59:44+00:00",
+ "generado": "2026-11-20T19:02:19+00:00",
  "fecha": "2026-11-20",
- "hora": "14:59",
+ "hora": "16:02",
  "dia": [
   {
    "id": "hoy",
    "circulo": "Hoy",
    "kicker": "Viernes 20 de noviembre",
    "titulo": "Un día movido",
-   "texto": "Lo más llamativo: Euro Stoxx 50 bajó 2,8%, 2,8 veces lo que se mueve en un día normal.",
+   "texto": "Lo más llamativo: Oro bajó 4,8%, 2,9 veces lo que se mueve en un día normal.",
    "grandes": [
     {
      "nombre": "Dólar CCL",
@@ -37,64 +37,64 @@
    "circulo": "Acciones",
    "kicker": "Panel líder en BYMA",
    "titulo": "Bolsa mixta",
-   "texto": "12 de 22 acciones del panel líder subieron y 10 bajaron.",
+   "texto": "12 de 22 acciones del panel líder subieron y 9 bajaron.",
    "filas": [
     {
-     "nombre": "BYMA",
-     "valor": "$ 216",
-     "cambio": 3.47,
+     "nombre": "Cresud",
+     "valor": "$ 1.442",
+     "cambio": 2.56,
      "tipo": "pct",
-     "sub": "BYMA",
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "Transener",
-     "valor": "$ 2.063",
-     "cambio": 2.94,
-     "tipo": "pct",
-     "sub": "TRAN",
+     "sub": "CRES",
      "destacado": false,
      "inverso": false
     },
     {
      "nombre": "Transportadora Gas del Norte",
-     "valor": "$ 2.378",
-     "cambio": 2.32,
+     "valor": "$ 2.380",
+     "cambio": 2.4,
      "tipo": "pct",
      "sub": "TGNO4",
      "destacado": false,
      "inverso": false
     },
     {
+     "nombre": "Transener",
+     "valor": "$ 2.050",
+     "cambio": 2.29,
+     "tipo": "pct",
+     "sub": "TRAN",
+     "destacado": false,
+     "inverso": false
+    },
+    {
      "nombre": "Metrogas",
-     "valor": "$ 1.873",
-     "cambio": -4.63,
+     "valor": "$ 1.871",
+     "cambio": -4.73,
      "tipo": "pct",
      "sub": "METR",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "BBVA Argentina",
-     "valor": "$ 5.145",
-     "cambio": -3.19,
-     "tipo": "pct",
-     "sub": "BBAR",
-     "destacado": false,
-     "inverso": false
-    },
-    {
      "nombre": "Ternium Argentina",
-     "valor": "$ 710",
-     "cambio": -2.27,
+     "valor": "$ 707",
+     "cambio": -2.68,
      "tipo": "pct",
      "sub": "TXAR",
      "destacado": false,
      "inverso": false
+    },
+    {
+     "nombre": "Grupo Valores",
+     "valor": "$ 512",
+     "cambio": -2.1,
+     "tipo": "pct",
+     "sub": "VALO",
+     "destacado": false,
+     "inverso": false
     }
    ],
-   "nota": "En Nueva York, BBVA Argentina bajó 5,1%.",
+   "nota": "En Nueva York, Telecom Argentina bajó 3,7%.",
    "link": "#mercados",
    "link_txt": "Ver el mapa del mercado"
   },
@@ -103,7 +103,7 @@
    "circulo": "Bonos",
    "kicker": "Bonos en dólares (Globales)",
    "titulo": "La curva se aplanó",
-   "texto": "El GD30 rinde 16,5% y el GD46 13,2%: la curva está invertida, los bonos cortos rinden 3,3 puntos más que los largos.",
+   "texto": "El GD30 rinde 17,0% y el GD46 13,1%: la curva está invertida, los bonos cortos rinden 3,8 puntos más que los largos.",
    "grandes": [
     {
      "nombre": "Riesgo país",
@@ -118,8 +118,8 @@
    "filas": [
     {
      "nombre": "GD30",
-     "valor": "16,5%",
-     "cambio": 158.0,
+     "valor": "17,0%",
+     "cambio": 210.0,
      "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
@@ -127,8 +127,8 @@
     },
     {
      "nombre": "GD35",
-     "valor": "14,0%",
-     "cambio": 70.0,
+     "valor": "14,1%",
+     "cambio": 77.0,
      "tipo": "pb",
      "sub": "vence 2035",
      "destacado": false,
@@ -136,8 +136,8 @@
     },
     {
      "nombre": "GD38",
-     "valor": "14,1%",
-     "cambio": 121.0,
+     "valor": "14,3%",
+     "cambio": 137.0,
      "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
@@ -145,8 +145,8 @@
     },
     {
      "nombre": "GD41",
-     "valor": "13,7%",
-     "cambio": 70.0,
+     "valor": "13,8%",
+     "cambio": 83.0,
      "tipo": "pb",
      "sub": "vence 2041",
      "destacado": false,
@@ -154,8 +154,8 @@
     },
     {
      "nombre": "GD46",
-     "valor": "13,2%",
-     "cambio": 112.0,
+     "valor": "13,1%",
+     "cambio": 107.0,
      "tipo": "pb",
      "sub": "vence 2046",
      "destacado": false,
@@ -245,9 +245,18 @@
    "id": "mundo",
    "circulo": "Mundo",
    "kicker": "Mercados del mundo",
-   "titulo": "Afuera, lo que más se movió: Euro Stoxx 50",
-   "texto": "El S&P 500 bajó 2,2%.",
+   "titulo": "Afuera, lo que más se movió: Oro",
+   "texto": "El S&P 500 bajó 1,9%.",
    "filas": [
+    {
+     "nombre": "Oro",
+     "valor": "US$ 3.507",
+     "cambio": -4.84,
+     "tipo": "pct",
+     "sub": "fuera de lo normal",
+     "destacado": true,
+     "inverso": false
+    },
     {
      "nombre": "Euro Stoxx 50",
      "valor": "5.942",
@@ -258,18 +267,18 @@
      "inverso": false
     },
     {
-     "nombre": "Oro",
-     "valor": "US$ 3.524",
-     "cambio": -4.4,
+     "nombre": "Bitcoin",
+     "valor": "US$ 58.339",
+     "cambio": -5.75,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
      "inverso": false
     },
     {
-     "nombre": "Maíz",
-     "valor": "US$ 177,35",
-     "cambio": 2.62,
+     "nombre": "Ether",
+     "valor": "US$ 1.615",
+     "cambio": -8.01,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -277,8 +286,8 @@
     },
     {
      "nombre": "EE.UU. 5 años",
-     "valor": "4,73%",
-     "cambio": -13.3,
+     "valor": "4,74%",
+     "cambio": -12.4,
      "tipo": "pb",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -287,20 +296,11 @@
     {
      "nombre": "EE.UU. 10 años",
      "valor": "4,94%",
-     "cambio": -11.2,
+     "cambio": -10.8,
      "tipo": "pb",
      "sub": "fuera de lo normal",
      "destacado": true,
      "inverso": true
-    },
-    {
-     "nombre": "Ether",
-     "valor": "US$ 1.629",
-     "cambio": -7.21,
-     "tipo": "pct",
-     "sub": "fuera de lo normal",
-     "destacado": true,
-     "inverso": false
     }
    ],
    "nota": "Ordenados por cuánto se salieron de lo normal, no por el tamaño del movimiento.",
@@ -344,8 +344,8 @@
    "filas": [
     {
      "nombre": "Pampa Energía",
-     "valor": "US$ 61,49",
-     "cambio": -5.7,
+     "valor": "US$ 61,75",
+     "cambio": -5.31,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -353,17 +353,17 @@
     },
     {
      "nombre": "Mercado Libre",
-     "valor": "US$ 1.373",
-     "cambio": -7.93,
+     "valor": "US$ 1.376",
+     "cambio": -7.72,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Telecom Argentina",
-     "valor": "US$ 9,68",
-     "cambio": -8.42,
+     "nombre": "Loma Negra",
+     "valor": "US$ 8,01",
+     "cambio": -7.83,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -371,17 +371,8 @@
     },
     {
      "nombre": "Supervielle",
-     "valor": "US$ 4,58",
-     "cambio": -22.81,
-     "tipo": "pct",
-     "sub": null,
-     "destacado": false,
-     "inverso": false
-    },
-    {
-     "nombre": "BBVA Argentina",
-     "valor": "US$ 8,67",
-     "cambio": -18.28,
+     "valor": "US$ 4,60",
+     "cambio": -22.56,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -389,8 +380,17 @@
     },
     {
      "nombre": "Cresud",
-     "valor": "US$ 7,97",
-     "cambio": -18.18,
+     "valor": "US$ 7,96",
+     "cambio": -18.22,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "BBVA Argentina",
+     "valor": "US$ 8,82",
+     "cambio": -16.88,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -408,8 +408,8 @@
    "filas": [
     {
      "nombre": "GD30",
-     "valor": "16,5%",
-     "cambio": 379.0,
+     "valor": "17,0%",
+     "cambio": 431.0,
      "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
@@ -417,8 +417,8 @@
     },
     {
      "nombre": "GD35",
-     "valor": "14,0%",
-     "cambio": 171.0,
+     "valor": "14,1%",
+     "cambio": 178.0,
      "tipo": "pb",
      "sub": "vence 2035",
      "destacado": false,
@@ -426,8 +426,8 @@
     },
     {
      "nombre": "GD38",
-     "valor": "14,1%",
-     "cambio": 192.0,
+     "valor": "14,3%",
+     "cambio": 208.0,
      "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
@@ -435,8 +435,8 @@
     },
     {
      "nombre": "GD41",
-     "valor": "13,7%",
-     "cambio": 170.0,
+     "valor": "13,8%",
+     "cambio": 183.0,
      "tipo": "pb",
      "sub": "vence 2041",
      "destacado": false,
@@ -444,8 +444,8 @@
     },
     {
      "nombre": "GD46",
-     "valor": "13,2%",
-     "cambio": 158.0,
+     "valor": "13,1%",
+     "cambio": 153.0,
      "tipo": "pb",
      "sub": "vence 2046",
      "destacado": false,
@@ -471,18 +471,18 @@
      "inverso": false
     },
     {
-     "nombre": "Cobre",
-     "valor": "US$ 5,47",
-     "cambio": -10.08,
+     "nombre": "Oro",
+     "valor": "US$ 3.507",
+     "cambio": -9.76,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
      "inverso": false
     },
     {
-     "nombre": "Oro",
-     "valor": "US$ 3.524",
-     "cambio": -9.34,
+     "nombre": "Cobre",
+     "valor": "US$ 5,48",
+     "cambio": -9.87,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -490,8 +490,8 @@
     },
     {
      "nombre": "MSCI Emergentes (ETF EEM)",
-     "valor": "US$ 54,44",
-     "cambio": -10.64,
+     "valor": "US$ 54,51",
+     "cambio": -10.52,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -499,8 +499,8 @@
     },
     {
      "nombre": "MSCI Mundo (ETF URTH)",
-     "valor": "US$ 190,05",
-     "cambio": -7.09,
+     "valor": "US$ 190,32",
+     "cambio": -6.96,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
@@ -508,8 +508,8 @@
     },
     {
      "nombre": "S&P 500",
-     "valor": "7.017",
-     "cambio": -7.2,
+     "valor": "7.042",
+     "cambio": -6.87,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
