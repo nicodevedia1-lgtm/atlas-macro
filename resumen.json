@@ -1,14 +1,14 @@
 {
- "generado": "2026-11-26T20:06:47+00:00",
- "fecha": "2026-11-26",
- "hora": "17:06",
+ "generado": "2026-11-27T02:49:03+00:00",
+ "fecha": "2026-11-27",
+ "hora": "23:49",
  "dia": [
   {
    "id": "hoy",
    "circulo": "Hoy",
-   "kicker": "Jueves 26 de noviembre",
+   "kicker": "Viernes 27 de noviembre",
    "titulo": "Un día movido",
-   "texto": "Lo más llamativo: Real brasileño bajó 2,8%, 3,9 veces lo que se mueve en un día normal.",
+   "texto": "Lo más llamativo: Bovespa subió 6,1%, 5,0 veces lo que se mueve en un día normal.",
    "grandes": [
     {
      "nombre": "Merval",
@@ -46,59 +46,59 @@
    "circulo": "Acciones",
    "kicker": "Panel líder en BYMA",
    "titulo": "Día verde en la bolsa",
-   "texto": "21 de 22 acciones del panel líder subieron y 1 bajaron.",
+   "texto": "19 de 22 acciones del panel líder subieron y 3 bajaron.",
    "filas": [
     {
      "nombre": "YPF",
-     "valor": "$ 5.970",
-     "cambio": 6.22,
+     "valor": "$ 5.940",
+     "cambio": 5.69,
      "tipo": "pct",
      "sub": "YPFD",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Edenor",
-     "valor": "$ 1.118",
-     "cambio": 5.07,
+     "nombre": "Transener",
+     "valor": "$ 2.354",
+     "cambio": 5.46,
      "tipo": "pct",
-     "sub": "EDN",
+     "sub": "TRAN",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Loma Negra",
-     "valor": "$ 3.165",
-     "cambio": 4.28,
+     "nombre": "TGS",
+     "valor": "$ 7.490",
+     "cambio": 5.34,
      "tipo": "pct",
-     "sub": "LOMA",
+     "sub": "TGSU2",
      "destacado": false,
      "inverso": false
     },
     {
      "nombre": "Cablevisión Holding",
-     "valor": "$ 8.440",
-     "cambio": -0.11,
+     "valor": "$ 8.400",
+     "cambio": -0.59,
      "tipo": "pct",
      "sub": "CVH",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Aluar",
-     "valor": "$ 845",
-     "cambio": 0.11,
+     "nombre": "Ternium Argentina",
+     "valor": "$ 706",
+     "cambio": -0.42,
      "tipo": "pct",
-     "sub": "ALUA",
+     "sub": "TXAR",
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "IRSA",
-     "valor": "$ 1.980",
-     "cambio": 0.5,
+     "nombre": "Aluar",
+     "valor": "$ 843",
+     "cambio": -0.11,
      "tipo": "pct",
-     "sub": "IRSA",
+     "sub": "ALUA",
      "destacado": false,
      "inverso": false
     }
@@ -111,8 +111,8 @@
    "id": "bonos",
    "circulo": "Bonos",
    "kicker": "Bonos en dólares (Globales)",
-   "titulo": "La curva se empinó",
-   "texto": "El GD30 rinde 15,6% y el GD46 12,8%: la curva está invertida, los bonos cortos rinden 2,8 puntos más que los largos.",
+   "titulo": "La curva, sin cambios grandes",
+   "texto": "El GD30 rinde 15,7% y el GD46 12,8%: la curva está invertida, los bonos cortos rinden 2,8 puntos más que los largos.",
    "grandes": [
     {
      "nombre": "Riesgo país",
@@ -127,8 +127,8 @@
    "filas": [
     {
      "nombre": "GD30",
-     "valor": "15,6%",
-     "cambio": -118.0,
+     "valor": "15,7%",
+     "cambio": 2.0,
      "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
@@ -137,7 +137,7 @@
     {
      "nombre": "GD35",
      "valor": "13,7%",
-     "cambio": -23.0,
+     "cambio": 1.0,
      "tipo": "pb",
      "sub": "vence 2035",
      "destacado": false,
@@ -146,7 +146,7 @@
     {
      "nombre": "GD38",
      "valor": "13,8%",
-     "cambio": -47.0,
+     "cambio": 1.0,
      "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
@@ -155,7 +155,7 @@
     {
      "nombre": "GD41",
      "valor": "13,2%",
-     "cambio": -41.0,
+     "cambio": 1.0,
      "tipo": "pb",
      "sub": "vence 2041",
      "destacado": false,
@@ -164,7 +164,7 @@
     {
      "nombre": "GD46",
      "valor": "12,8%",
-     "cambio": -27.0,
+     "cambio": 0.0,
      "tipo": "pb",
      "sub": "vence 2046",
      "destacado": false,
@@ -230,10 +230,10 @@
     },
     {
      "nombre": "Reservas brutas",
-     "valor": "US$ 49.367 M",
+     "valor": "US$ 48.819 M",
      "cambio": null,
      "tipo": "pct",
-     "sub": "−US$ 75 M en el día",
+     "sub": "−US$ 548 M en el día",
      "destacado": false,
      "inverso": false
     }
@@ -245,40 +245,49 @@
    "id": "mundo",
    "circulo": "Mundo",
    "kicker": "Mercados del mundo",
-   "titulo": "Afuera, lo que más se movió: Real brasileño",
+   "titulo": "Afuera, lo que más se movió: Bovespa",
    "texto": "El S&P 500 bajó 0,3%.",
    "filas": [
     {
-     "nombre": "Real brasileño",
-     "valor": "5,74",
-     "cambio": -2.76,
-     "tipo": "pct",
-     "sub": "fuera de lo normal",
-     "destacado": true,
-     "inverso": false
-    },
-    {
      "nombre": "Bovespa",
-     "valor": "173.662",
-     "cambio": 4.19,
+     "valor": "176.800",
+     "cambio": 6.07,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
      "inverso": false
     },
     {
-     "nombre": "Euro Stoxx 50",
-     "valor": "6.015",
-     "cambio": 2.04,
+     "nombre": "Cobre",
+     "valor": "US$ 5,67",
+     "cambio": 6.41,
+     "tipo": "pct",
+     "sub": "fuera de lo normal",
+     "destacado": true,
+     "inverso": false
+    },
+    {
+     "nombre": "Real brasileño",
+     "valor": "5,82",
+     "cambio": -1.39,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Peso mexicano",
-     "valor": "19,72",
-     "cambio": 1.39,
+     "nombre": "Oro",
+     "valor": "US$ 3.657",
+     "cambio": 3.44,
+     "tipo": "pct",
+     "sub": null,
+     "destacado": false,
+     "inverso": false
+    },
+    {
+     "nombre": "Euro Stoxx 50",
+     "valor": "6.015",
+     "cambio": 2.04,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
@@ -292,15 +301,6 @@
      "sub": null,
      "destacado": false,
      "inverso": false
-    },
-    {
-     "nombre": "EE.UU. 30 años",
-     "valor": "5,24%",
-     "cambio": -5.7,
-     "tipo": "pb",
-     "sub": null,
-     "destacado": false,
-     "inverso": true
     }
    ],
    "nota": "Ordenados por cuánto se salieron de lo normal, no por el tamaño del movimiento.",
@@ -417,8 +417,8 @@
    "filas": [
     {
      "nombre": "GD30",
-     "valor": "15,6%",
-     "cambio": -223.0,
+     "valor": "15,7%",
+     "cambio": -221.0,
      "tipo": "pb",
      "sub": "vence 2030",
      "destacado": false,
@@ -427,7 +427,7 @@
     {
      "nombre": "GD35",
      "valor": "13,7%",
-     "cambio": -51.0,
+     "cambio": -50.0,
      "tipo": "pb",
      "sub": "vence 2035",
      "destacado": false,
@@ -436,7 +436,7 @@
     {
      "nombre": "GD38",
      "valor": "13,8%",
-     "cambio": -89.0,
+     "cambio": -88.0,
      "tipo": "pb",
      "sub": "vence 2038",
      "destacado": false,
@@ -445,7 +445,7 @@
     {
      "nombre": "GD41",
      "valor": "13,2%",
-     "cambio": -109.0,
+     "cambio": -108.0,
      "tipo": "pb",
      "sub": "vence 2041",
      "destacado": false,
@@ -471,27 +471,27 @@
    "titulo": "Lo que más se movió en la semana",
    "filas": [
     {
-     "nombre": "Real brasileño",
-     "valor": "5,74",
-     "cambio": -3.24,
+     "nombre": "Bovespa",
+     "valor": "176.800",
+     "cambio": 6.27,
      "tipo": "pct",
      "sub": "fuera de lo normal",
      "destacado": true,
      "inverso": false
     },
     {
-     "nombre": "Bovespa",
-     "valor": "173.662",
-     "cambio": 4.38,
+     "nombre": "Peso mexicano",
+     "valor": "19,63",
+     "cambio": 2.81,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
      "inverso": false
     },
     {
-     "nombre": "Peso mexicano",
-     "valor": "19,72",
-     "cambio": 3.27,
+     "nombre": "Real brasileño",
+     "valor": "5,82",
+     "cambio": -1.88,
      "tipo": "pct",
      "sub": null,
      "destacado": false,
